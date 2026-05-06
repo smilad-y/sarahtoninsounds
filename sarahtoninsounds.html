@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarahtonin Sounds — music · culture · community</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background-color:#1a0a2e;
+  background-image:radial-gradient(ellipse at 20% 10%,rgba(180,80,120,0.25) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(90,40,120,0.3) 0%,transparent 50%),radial-gradient(ellipse at 60% 20%,rgba(220,120,60,0.15) 0%,transparent 40%);
+  font-family:'IM Fell English',serif;
+  color:#f5e6d0;
+  min-height:100vh;
+  padding-bottom:60px;
+  position:relative;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* CURSOR */
+#cursor{position:fixed;pointer-events:none;z-index:99999;font-size:20px;transform:translate(-50%,-50%);color:#e8a87c;line-height:1;transition:left 0.04s,top 0.04s;}
+.trail{position:fixed;pointer-events:none;z-index:99998;font-size:10px;color:#c45c7a;opacity:0;transform:translate(-50%,-50%);transition:opacity 0.4s;}
+
+/* PETALS */
+.petal{position:fixed;pointer-events:none;z-index:9;font-size:14px;opacity:0;animation:petalfall linear infinite;}
+@keyframes petalfall{0%{opacity:0;transform:translateY(-30px) rotate(0deg);}10%{opacity:0.55;}80%{opacity:0.35;}100%{opacity:0;transform:translateY(100vh) rotate(360deg);}}
+
+/* EASTER EGG */
+.egg-note{position:fixed;pointer-events:none;z-index:9997;font-size:16px;color:#e8a87c;opacity:0;animation:notepop 1.2s ease-out forwards;}
+@keyframes notepop{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-50px) scale(0.4);}}
+
+/* FLOATING DOODLES */
+.float-doodle{position:absolute;pointer-events:none;opacity:0.15;font-size:26px;animation:floatdrift 8s ease-in-out infinite;user-select:none;}
+@keyframes floatdrift{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;background:linear-gradient(90deg,#7b2d5e,#c45c2a,#7b2d5e);border-top:2px solid #e8a87c;border-bottom:2px solid #e8a87c;padding:7px 0;}
+.marquee-inner{display:inline-block;white-space:nowrap;animation:marquee 24s linear infinite;font-family:'Caveat',cursive;font-size:16px;color:#fde8c8;letter-spacing:2px;}
+@keyframes marquee{0%{transform:translateX(100vw);}100%{transform:translateX(-100%);}}
+
+/* HEADER */
+.header{text-align:center;padding:34px 16px 10px;position:relative;}
+.site-title{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,48px);font-weight:700;color:#f5c8a0;letter-spacing:3px;line-height:1.15;text-shadow:2px 2px 0 #7b2d5e,4px 4px 0 rgba(0,0,0,0.3);}
+.site-title em{font-style:italic;color:#e88fb0;}
+.subtitle{font-family:'Caveat',cursive;font-size:19px;color:#d4a0c8;letter-spacing:4px;margin-top:7px;}
+.decorative-rule{display:flex;align-items:center;justify-content:center;gap:14px;margin:10px auto;color:#e8a87c;font-size:18px;}
+.decorative-rule::before,.decorative-rule::after{content:'';display:block;height:1px;width:90px;background:linear-gradient(90deg,transparent,#e8a87c,transparent);}
+.now-playing-bar{display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Caveat',cursive;font-size:15px;color:#d4a0c8;margin:5px 0 10px;}
+.vinyl{animation:spin 4s linear infinite;display:inline-block;font-size:18px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.hit-counter{display:inline-block;border:1px solid #e8a87c;background:rgba(0,0,0,0.4);color:#e8a87c;font-family:'Caveat',cursive;font-size:14px;padding:3px 14px;border-radius:20px;margin-top:5px;letter-spacing:2px;}
+
+/* NAV */
+.nav-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:14px 10px;}
+.nav-btn{background:rgba(123,45,94,0.3);color:#f5c8a0;border:1px solid rgba(232,168,124,0.5);font-family:'Caveat',cursive;font-size:16px;padding:7px 18px;cursor:none;border-radius:30px;transition:all 0.2s;letter-spacing:1px;}
+.nav-btn:hover,.nav-btn.active{background:rgba(196,92,42,0.5);border-color:#e8a87c;color:#fde8c8;transform:translateY(-2px);}
+
+.petal-divider{text-align:center;font-size:20px;color:#c45c7a;margin:6px 0;letter-spacing:8px;opacity:0.7;}
+
+/* LAYOUT */
+.main-layout{display:flex;flex-wrap:wrap;gap:14px;padding:10px 16px;max-width:960px;margin:0 auto;}
+.sidebar{width:200px;flex-shrink:0;}
+.content-area{flex:1;min-width:280px;}
+
+/* CARDS */
+.parchment{background:linear-gradient(135deg,rgba(245,220,185,0.1),rgba(180,100,130,0.08));border:1px solid rgba(232,168,124,0.35);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+.card-title{font-family:'Caveat',cursive;font-size:13px;color:#e8a87c;letter-spacing:2px;text-transform:uppercase;padding:10px 12px 0;}
+.card-body{padding:8px 12px 12px;}
+
+/* MOOD WHEEL */
+.mood-wheel-wrap{text-align:center;padding:10px 12px 14px;}
+#mood-canvas{border-radius:50%;cursor:none;display:block;margin:0 auto 10px;}
+.mood-result{font-family:'Caveat',cursive;font-size:13px;color:#f5c8a0;line-height:1.6;min-height:64px;transition:all 0.3s;}
+.mood-result strong{color:#e8a87c;display:block;font-size:15px;margin-bottom:3px;}
+.spin-btn{background:linear-gradient(135deg,#7b2d5e,#c45c2a);color:#fde8c8;border:none;border-radius:20px;font-family:'Caveat',cursive;font-size:14px;padding:6px 18px;cursor:none;transition:opacity 0.2s,transform 0.1s;margin-top:6px;}
+.spin-btn:hover{opacity:0.85;transform:translateY(-1px);}
+
+/* MIXTAPE */
+.mixtape-btn{display:block;width:100%;background:linear-gradient(135deg,rgba(123,45,94,0.5),rgba(196,92,42,0.4));border:1px solid rgba(232,168,124,0.5);border-radius:12px;color:#f5c8a0;font-family:'Caveat',cursive;font-size:17px;padding:12px;cursor:none;letter-spacing:1px;transition:all 0.2s;margin-bottom:10px;text-align:center;}
+.mixtape-btn:hover{background:linear-gradient(135deg,rgba(196,92,42,0.6),rgba(123,45,94,0.6));transform:translateY(-2px);}
+.mixtape-result{display:none;border:1px dashed rgba(232,168,124,0.4);border-radius:10px;padding:12px;background:rgba(0,0,0,0.25);}
+.mixtape-result.visible{display:block;animation:fadein 0.4s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.mixtape-essay{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#f5c8a0;margin-bottom:6px;}
+.mixtape-song{font-family:'Caveat',cursive;font-size:13px;color:#e8a87c;}
+.mixtape-label{font-family:'Caveat',cursive;font-size:11px;color:#7a6070;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+
+/* BLOG */
+.blog-post{border-left:3px solid #c45c7a;padding:12px 36px 12px 14px;margin-bottom:10px;cursor:none;border-radius:0 10px 10px 0;background:rgba(180,80,120,0.07);transition:all 0.2s;position:relative;}
+.blog-post::after{content:'→';position:absolute;right:12px;top:50%;transform:translateY(-50%);font-family:'Caveat',cursive;font-size:20px;color:#c45c7a;opacity:0;transition:opacity 0.2s;}
+.blog-post:hover{background:rgba(180,80,120,0.16);transform:translateX(4px);}
+.blog-post:hover::after{opacity:1;}
+.post-meta{font-family:'Caveat',cursive;font-size:13px;color:#c45c7a;margin-bottom:4px;}
+.post-title{font-family:'Playfair Display',serif;font-size:17px;color:#f5c8a0;margin-bottom:5px;font-style:italic;}
+.post-excerpt{font-size:13px;color:#c8a8b8;line-height:1.65;}
+
+/* MAGIC WORDS */
+.magic-word{border-bottom:1px dotted rgba(232,168,124,0.5);cursor:none;transition:color 0.2s;}
+.magic-word:hover{color:#e8a87c;}
+
+/* ESSAY FULL */
+.blog-full{display:none;}
+.blog-full.active{display:block;}
+.essay-title{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:#f5c8a0;margin-bottom:8px;line-height:1.3;}
+.essay-meta{font-family:'Caveat',cursive;font-size:14px;color:#c45c7a;margin-bottom:14px;}
+.essay-body{font-size:13px;line-height:1.85;color:#ddc8c0;}
+.essay-body p{margin-bottom:14px;}
+.essay-body strong{color:#f5c8a0;font-style:italic;font-weight:normal;}
+.essay-body em{color:#e8a87c;}
+.back-btn{background:none;border:1px solid rgba(232,168,124,0.4);color:#e8a87c;font-family:'Caveat',cursive;font-size:16px;padding:5px 16px;border-radius:20px;cursor:none;margin-bottom:16px;display:inline-block;transition:all 0.2s;}
+.back-btn:hover{background:rgba(232,168,124,0.1);}
+
+/* MUSIC PICKS */
+.music-card{display:flex;gap:12px;padding:12px;margin-bottom:10px;border-radius:12px;background:rgba(100,40,90,0.2);border:1px solid rgba(196,92,122,0.25);transition:all 0.2s;}
+.music-card:hover{background:rgba(100,40,90,0.35);transform:translateY(-2px);}
+.music-num{font-family:'Playfair Display',serif;font-size:30px;color:rgba(232,168,124,0.4);font-style:italic;min-width:32px;line-height:1;}
+.music-info h4{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:#f5c8a0;margin-bottom:2px;}
+.music-artist{font-family:'Caveat',cursive;font-size:13px;color:#e8a87c;margin-bottom:5px;}
+.music-why{font-size:12px;color:#c0a0b0;line-height:1.65;}
+.genre-tag{display:inline-block;background:rgba(196,92,42,0.25);border:1px solid rgba(196,92,42,0.5);color:#e8a87c;font-family:'Caveat',cursive;font-size:11px;padding:1px 8px;border-radius:20px;margin-right:3px;margin-top:3px;}
+
+/* ABOUT */
+.about-body{font-size:13px;line-height:1.85;color:#ddc8c0;}
+.about-body p{margin-bottom:12px;}
+.about-body strong{color:#f5c8a0;font-style:italic;font-weight:normal;}
+.postcard{border:2px dashed rgba(232,168,124,0.4);border-radius:10px;padding:12px 16px;margin-top:14px;background:rgba(0,0,0,0.2);font-family:'Caveat',cursive;font-size:15px;color:#e8a87c;line-height:1.6;position:relative;}
+.postcard::before{content:'✉';position:absolute;top:-13px;right:16px;font-size:20px;background:#1a0a2e;padding:0 5px;}
+
+/* SUPERVISION */
+.supervision-intro{font-size:14px;line-height:1.85;color:#ddc8c0;margin-bottom:20px;}
+.sup-quote{border:1px solid rgba(232,168,124,0.3);border-radius:12px;padding:16px 22px;background:rgba(0,0,0,0.25);margin:20px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#f5c8a0;line-height:1.7;text-align:center;position:relative;}
+.sup-quote::before{content:'"';font-size:64px;color:rgba(196,92,122,0.18);position:absolute;top:-12px;left:12px;font-family:'Playfair Display',serif;line-height:1;}
+.sup-pillar{padding:16px;margin-bottom:12px;border-radius:12px;border-left:3px solid #e8a87c;background:rgba(180,80,120,0.07);transition:background 0.2s;}
+.sup-pillar:hover{background:rgba(180,80,120,0.14);}
+.sup-pillar-num{font-family:'Playfair Display',serif;font-style:italic;font-size:11px;color:#c45c7a;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.sup-pillar h3{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#f5c8a0;margin-bottom:8px;}
+.sup-pillar p{font-size:13px;color:#c8a8b8;line-height:1.75;}
+.sup-pillar p strong{color:#f5c8a0;font-style:italic;font-weight:normal;}
+.process-step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dotted rgba(232,168,124,0.2);}
+.process-step:last-child{border-bottom:none;}
+.step-num{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:rgba(232,168,124,0.5);min-width:28px;line-height:1.2;}
+.step-content h4{font-family:'Caveat',cursive;font-size:15px;color:#e8a87c;margin-bottom:3px;}
+.step-content p{font-size:12px;color:#c0a0b0;line-height:1.65;}
+
+/* GUESTBOOK */
+.gb-entry{padding:10px 12px;margin-bottom:8px;border-radius:10px;background:rgba(100,40,90,0.15);border:1px solid rgba(196,92,122,0.2);animation:fadein 0.4s ease;}
+.gb-handle{font-family:'Caveat',cursive;font-size:15px;color:#e8a87c;margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.gb-mood{display:inline-block;background:rgba(196,92,42,0.25);border:1px solid rgba(196,92,42,0.4);color:#e8a87c;font-family:'Caveat',cursive;font-size:11px;padding:1px 8px;border-radius:12px;}
+.gb-text{font-size:12px;color:#c8a8b8;line-height:1.65;}
+.gb-date{font-family:'Caveat',cursive;font-size:11px;color:#7a6070;margin-top:4px;}
+.gb-input,.gb-textarea{width:100%;background:rgba(0,0,0,0.35);border:1px solid rgba(232,168,124,0.3);border-radius:8px;color:#f5e6d0;font-family:'Caveat',cursive;font-size:15px;padding:8px 12px;margin-bottom:8px;display:block;outline:none;transition:border-color 0.2s;}
+.gb-input:focus,.gb-textarea:focus{border-color:#e8a87c;}
+.gb-textarea{height:80px;resize:vertical;}
+.gb-submit{background:linear-gradient(135deg,#7b2d5e,#c45c2a);color:#fde8c8;border:none;border-radius:24px;font-family:'Caveat',cursive;font-size:17px;padding:7px 22px;cursor:none;letter-spacing:1px;transition:opacity 0.2s,transform 0.1s;}
+.gb-submit:hover{opacity:0.88;transform:translateY(-1px);}
+
+/* LINKS */
+.link-badge{display:inline-block;background:linear-gradient(135deg,rgba(123,45,94,0.5),rgba(90,30,60,0.5));border:1px solid rgba(232,168,124,0.4);border-radius:10px;color:#f5c8a0;font-family:'Caveat',cursive;font-size:15px;padding:6px 14px;cursor:none;transition:all 0.15s;text-align:center;}
+.link-badge:hover{background:rgba(196,92,42,0.4);transform:translateY(-2px) rotate(-1deg);}
+.webring-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding:10px 14px;border:1px dashed rgba(232,168,124,0.35);border-radius:10px;background:rgba(0,0,0,0.2);}
+.webring-btn{background:rgba(123,45,94,0.4);border:1px solid rgba(232,168,124,0.4);color:#f5c8a0;font-family:'Caveat',cursive;font-size:14px;padding:4px 14px;border-radius:16px;cursor:none;}
+
+/* SECTIONS */
+.section{display:none;}
+.section.active{display:block;}
+.section-label{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:#c45c7a;margin-bottom:12px;letter-spacing:1px;}
+
+/* SIDEBAR */
+.sidebar-tag{display:inline-block;background:rgba(100,40,90,0.3);border:1px solid rgba(196,92,122,0.3);border-radius:16px;color:#c8a0b8;font-family:'Caveat',cursive;font-size:13px;padding:2px 10px;margin:2px 2px 2px 0;transition:all 0.2s;}
+.sidebar-tag:hover{background:rgba(196,92,42,0.3);color:#f5c8a0;}
+.newsletter-input{width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(232,168,124,0.3);border-radius:8px;color:#f5e6d0;font-family:'Caveat',cursive;font-size:14px;padding:6px 10px;margin-bottom:6px;display:block;outline:none;}
+.newsletter-input:focus{border-color:#e8a87c;}
+.newsletter-btn{width:100%;background:linear-gradient(135deg,#7b2d5e,#c45c2a);color:#fde8c8;border:none;border-radius:20px;font-family:'Caveat',cursive;font-size:15px;padding:6px;cursor:none;transition:opacity 0.2s;}
+.newsletter-btn:hover{opacity:0.85;}
+
+/* FOOTER */
+.footer{text-align:center;margin-top:30px;padding:14px 20px;font-family:'Caveat',cursive;font-size:15px;color:rgba(212,160,200,0.6);line-height:1.9;}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .sidebar{width:100%;}
+  .main-layout{padding:8px;}
+  .site-title{font-size:28px;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor">♪</div>
+<div id="petal-layer"></div>
+
+<span class="float-doodle" style="top:8%;left:3%;animation-delay:0s">✦</span>
+<span class="float-doodle" style="top:22%;right:4%;animation-delay:2s;font-size:22px">✿</span>
+<span class="float-doodle" style="top:55%;left:1%;animation-delay:4s;font-size:20px">♪</span>
+<span class="float-doodle" style="top:70%;right:2%;animation-delay:1s;font-size:16px">◈</span>
+<span class="float-doodle" style="top:40%;left:2%;animation-delay:3s;font-size:14px">❋</span>
+
+<div class="marquee-wrap">
+  <span class="marquee-inner">✦ sarahtonin sounds ✦ music is culture and culture is life ✦ what we don't preserve we lose forever ✦ currently listening ✦ always feeling ✦ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+</div>
+
+<div class="header">
+  <div style="font-size:13px;color:#c45c7a;font-family:'Caveat',cursive;letter-spacing:3px;margin-bottom:7px;">✦ welcome to ✦</div>
+  <div class="site-title">Sarahtonin <em>Sounds</em></div>
+  <div class="subtitle">music · culture · community</div>
+  <div class="decorative-rule">✿ ♪ ✦ ♪ ✿</div>
+  <div class="now-playing-bar">
+    <span class="vinyl">◉</span>
+    <span id="np-ticker">now playing: wherever the music takes us</span>
+    <span class="vinyl" style="animation-direction:reverse">◉</span>
+  </div>
+  <div class="hit-counter">✦ visitor no. <span id="counter">000420</span> ✦</div>
+</div>
+
+<div class="nav-bar">
+  <button class="nav-btn active" onclick="showSection('blog',this)">✦ essays</button>
+  <button class="nav-btn" onclick="showSection('music',this)">♪ music picks</button>
+  <button class="nav-btn" onclick="showSection('supervision',this)">✿ music supervision</button>
+  <button class="nav-btn" onclick="showSection('about',this)">◈ about me</button>
+  <button class="nav-btn" onclick="showSection('guestbook',this)">❋ guestbook</button>
+  <button class="nav-btn" onclick="showSection('links',this)">→ links</button>
+</div>
+
+<div class="petal-divider">✦ ✿ ◈ ✿ ✦</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+
+    <div class="parchment">
+      <div class="card-title">✦ about this place</div>
+      <div class="card-body" style="font-size:12px;color:#c8a8b8;line-height:1.7;">A corner of the internet for people who believe <span class="magic-word" data-note="♫">music</span> matters — really matters. Essays, picks, and feelings.</div>
+    </div>
+
+    <div class="parchment">
+      <div class="card-title">✦ mood wheel</div>
+      <div class="mood-wheel-wrap">
+        <canvas id="mood-canvas" width="150" height="150"></canvas>
+        <div class="mood-result" id="mood-result">
+          <span style="color:#7a6070;font-family:'Caveat',cursive;font-size:13px;">spin for a song that fits your mood ✦</span>
+        </div>
+        <button class="spin-btn" onclick="spinWheel()">spin it ✦</button>
+      </div>
+    </div>
+
+    <div class="parchment">
+      <div class="card-title">✦ mixtape shuffle</div>
+      <div class="card-body">
+        <button class="mixtape-btn" onclick="shuffleMixtape()">✦ surprise me ✦</button>
+        <div class="mixtape-result" id="mixtape-result">
+          <div class="mixtape-label">tonight's pairing</div>
+          <div class="mixtape-essay" id="mt-essay"></div>
+          <div style="font-family:'Caveat',cursive;font-size:11px;color:#7a6070;margin:4px 0 2px;">paired with</div>
+          <div class="mixtape-song" id="mt-song"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="parchment">
+      <div class="card-title">✦ themes</div>
+      <div class="card-body">
+        <span class="magic-word sidebar-tag" data-note="♪">soul</span>
+        <span class="magic-word sidebar-tag" data-note="♫">hip-hop</span>
+        <span class="sidebar-tag">R&B</span>
+        <span class="sidebar-tag">diaspora</span>
+        <span class="magic-word sidebar-tag" data-note="♩">sync</span>
+        <span class="sidebar-tag">jazz</span>
+        <span class="sidebar-tag">world</span>
+        <span class="sidebar-tag">culture</span>
+        <span class="sidebar-tag">community</span>
+      </div>
+    </div>
+
+    <div class="parchment">
+      <div class="card-title">✦ stay in touch</div>
+      <div class="card-body">
+        <input class="newsletter-input" type="email" placeholder="your@email.com">
+        <button class="newsletter-btn">subscribe ✦</button>
+        <div style="font-family:'Caveat',cursive;font-size:11px;color:#7a6070;margin-top:5px;text-align:center;">weekly · no spam · just feels</div>
+      </div>
+    </div>
+
+    <div class="parchment">
+      <div class="card-title">✦ site stats</div>
+      <div class="card-body" style="font-family:'Caveat',cursive;font-size:13px;color:#c8a8b8;">
+        <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dotted rgba(232,168,124,0.2);">essays<span style="color:#e8a87c;">∞</span></div>
+        <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dotted rgba(232,168,124,0.2);">vibe<span style="color:#e8a87c;">immaculate</span></div>
+        <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dotted rgba(232,168,124,0.2);">location<span style="color:#e8a87c;">LA, CA</span></div>
+        <div style="display:flex;justify-content:space-between;padding:3px 0;">est.<span style="color:#e8a87c;">2025</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="content-area">
+
+    <!-- ESSAYS -->
+    <div id="section-blog" class="section active">
+      <div id="blog-list">
+        <div class="section-label">recent essays ✦</div>
+        <div class="blog-post" onclick="openPost(0)">
+          <div class="post-meta">May 1, 2026 · essay · 6 min</div>
+          <div class="post-title">The Sound of a People: Why <span class="magic-word" data-note="♫">Music</span> IS the Archive</div>
+          <div class="post-excerpt">When a community loses its music — to algorithm, to obscurity, to neglect — it loses something that no library can replace.</div>
+        </div>
+        <div class="blog-post" onclick="openPost(1)">
+          <div class="post-meta">April 20, 2026 · culture · 4 min</div>
+          <div class="post-title">What Gets Lost When <span class="magic-word" data-note="♩">Songs</span> Can't Travel Anymore</div>
+          <div class="post-excerpt">Sync licensing was supposed to bring underground music to the masses. Instead, it's gatekeeping culture in ways nobody predicted.</div>
+        </div>
+        <div class="blog-post" onclick="openPost(2)">
+          <div class="post-meta">April 8, 2026 · memory · 5 min</div>
+          <div class="post-title"><span class="magic-word" data-note="♪">Dopamine</span>, Rhythm, and Why Some Songs Feel Like Home</div>
+          <div class="post-excerpt">There's neuroscience behind why certain music reaches you in ways words can't. And what happens when that connection gets disrupted.</div>
+        </div>
+        <div class="blog-post" onclick="openPost(3)">
+          <div class="post-meta">March 22, 2026 · essay · 7 min</div>
+          <div class="post-title">African <span class="magic-word" data-note="♬">Music</span> and the Western Gaze: A Love Story Nobody Asked For</div>
+          <div class="post-excerpt">From Afrobeats to Amapiano — global Black music is having a "moment." But who controls the narrative, and who gets paid?</div>
+        </div>
+      </div>
+
+      <div id="blog-full-0" class="blog-full">
+        <button class="back-btn" onclick="closePost()">← back to essays</button>
+        <div class="essay-meta">May 1, 2026 · essay</div>
+        <div class="essay-title">The Sound of a People: Why Music IS the Archive</div>
+        <div class="essay-body">
+          <p>There is a reason that enslaved people were forbidden from <span class="magic-word" data-note="♫">drumming</span>. Not because drums were loud — though they were — but because the people who controlled them understood something we have systematically failed to teach: <strong>music carries information that cannot be written down, and cannot be taken.</strong></p>
+          <p>Rhythm is memory. Melody is migration. Harmony is the record of who came together and how. When you hear a song, you're not just hearing sound — you're hearing the accumulated choices of a people about what mattered, what hurt, what was worth celebrating, and what was worth surviving for.</p>
+          <p>In the age of streaming, we've become very good at <em>accessing</em> music and very bad at understanding it. The algorithm serves you a track from the Niger Delta next to one from Oslo and calls both "chill vibes." Nothing is wrong with either song. Everything is wrong with the framework.</p>
+          <p>The archive isn't just academic. It's alive. It lives in the musicians who still know the old ways, in the grandmothers who hum songs they never learned the words to, in the communities who carry something in their chests they can't quite name. <strong>When we lose the context, we lose the key.</strong></p>
+          <p>This site is my small, chaotic, sincere attempt to push back against the flattening. To say: this song came from somewhere specific. These people made something. Here is why it matters.</p>
+        </div>
+      </div>
+
+      <div id="blog-full-1" class="blog-full">
+        <button class="back-btn" onclick="closePost()">← back to essays</button>
+        <div class="essay-meta">April 20, 2026 · culture</div>
+        <div class="essay-title">What Gets Lost When Songs Can't Travel Anymore</div>
+        <div class="essay-body">
+          <p>Sync licensing was — in theory — one of the most democratic developments in music history. A song from a bedroom in Lagos could end up soundtracking a scene watched by 40 million people. That happened. It still happens. But the infrastructure built around it has introduced a new kind of filter that most people never see.</p>
+          <p>Rights. Clearances. Publisher relationships. PRO registrations. Without those, your song doesn't travel — not through film, not through TV, not through the cultural corridors that turn "regional artist" into "iconic sound." <strong>The artists who need exposure most are often the ones least equipped to navigate the system designed to give it to them.</strong></p>
+          <p>I've spent years inside this system. It's not evil — it's just not neutral. And the gap between the music that deserves to be heard and the music that actually gets placed is not a gap in quality. It's a gap in access, in infrastructure, in who has a publisher with the right relationships.</p>
+          <p>I don't have a clean answer for this. I just want more people to see the system for what it is — so we can start asking better questions about how to change it.</p>
+        </div>
+      </div>
+
+      <div id="blog-full-2" class="blog-full">
+        <button class="back-btn" onclick="closePost()">← back to essays</button>
+        <div class="essay-meta">April 8, 2026 · memory</div>
+        <div class="essay-title">Dopamine, Rhythm, and Why Some Songs Feel Like Home</div>
+        <div class="essay-body">
+          <p>There's a reason you can hear four bars of a song you haven't thought about in fifteen years and suddenly be completely somewhere else. Your body was there before your brain caught up. That's not nostalgia — that's neuroscience. Music encodes memory differently than almost any other stimulus, which is why it can unlock places in you that words and images can't reach.</p>
+          <p>Dopamine is part of it. Rhythm entrainment — the way your nervous system literally synchronizes with a beat — is part of it. But there's something else too: <strong>the way a particular sound can carry the emotional signature of a whole community, a whole era, a whole way of being in the world.</strong></p>
+          <p>That's why the loss is more than aesthetic when a musical tradition disappears. You're not just losing songs. You're losing a technology of feeling — a shared language for processing grief and joy and everything in between that a specific group of people built, over time, together.</p>
+          <p>This is what I mean when I say music is the archive. The body knows before the mind does.</p>
+        </div>
+      </div>
+
+      <div id="blog-full-3" class="blog-full">
+        <button class="back-btn" onclick="closePost()">← back to essays</button>
+        <div class="essay-meta">March 22, 2026 · essay</div>
+        <div class="essay-title">African Music and the Western Gaze: A Love Story Nobody Asked For</div>
+        <div class="essay-body">
+          <p>Every few years, Western media "discovers" a genre that has been thriving on its own terms for decades. Right now it's Amapiano. Before that, Afrobeats. The cycle is predictable: first the feature, then the festival booking, then the collab with the American artist who lends "credibility," then the Grammy nomination that frames a living tradition as an exotic novelty — and then, often, the quiet fading once the moment passes.</p>
+          <p><strong>When a genre is discovered rather than encountered, the narrative belongs to the discoverer.</strong> The history drops away. The community drops away. What remains is a sound, stripped of its origins, available for use.</p>
+          <p>I love that Tems is on a world stage. I love that Burna Boy has a Grammy. But I also want to hold the tension: there is a way of loving a music that respects it, and a way that consumes it. The question isn't "is this music good?" The question is: <strong>who tells the story, and who gets to keep it?</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MUSIC PICKS -->
+    <div id="section-music" class="section">
+      <div class="section-label">current rotation ✦ songs that mean something</div>
+      <div class="music-card"><div class="music-num">i</div><div class="music-info"><h4>"Water" — Tyla</h4><div class="music-artist">2023 · South Africa</div><span class="genre-tag">Afropop</span><span class="genre-tag">Amapiano</span><div class="music-why">Before the Grammy, before the virality — this was already a cultural document. The culture produced this. The world caught up.</div></div></div>
+      <div class="music-card"><div class="music-num">ii</div><div class="music-info"><h4>"The Sweetest Taboo" — Sade</h4><div class="music-artist">1985 · UK/Nigeria</div><span class="genre-tag">Soul</span><span class="genre-tag">Jazz Pop</span><div class="music-why">You have to arrive at Sade. She represents music that requires stillness — which is itself a form of cultural resistance in 2026.</div></div></div>
+      <div class="music-card"><div class="music-num">iii</div><div class="music-info"><h4>"Alright" — Kendrick Lamar</h4><div class="music-artist">2015 · Compton, CA</div><span class="genre-tag">Hip-Hop</span><div class="music-why">A protest song that became an anthem became a prayer. People chanted this in the streets. That's a song doing exactly what songs are for.</div></div></div>
+      <div class="music-card"><div class="music-num">iv</div><div class="music-info"><h4>"Yeye" — Moonchild Sanelly</h4><div class="music-artist">2022 · Durban, South Africa</div><span class="genre-tag">Gqom</span><span class="genre-tag">Electronic</span><div class="music-why">Sounds like the future and is completely rooted in Durban. Proof that you don't have to abandon where you're from to be heard everywhere.</div></div></div>
+      <div class="music-card"><div class="music-num">v</div><div class="music-info"><h4>"Back To Life" — Soul II Soul ft. Caron Wheeler</h4><div class="music-artist">1989 · London</div><span class="genre-tag">UK Soul</span><span class="genre-tag">Dance</span><div class="music-why">Black British identity, African diaspora, and the dancefloor as community space — all in one groove. More cultural work than most dissertations.</div></div></div>
+    </div>
+
+    <!-- MUSIC SUPERVISION -->
+    <div id="section-supervision" class="section">
+      <div class="section-label">music supervision ✦ what it is & why it matters</div>
+      <div class="supervision-intro"><p>You've felt it before — a scene comes on screen and a <span class="magic-word" data-note="♫">song</span> hits and everything <strong>opens up.</strong> That's not an accident. That's music supervision.</p></div>
+      <div class="sup-quote">Music supervision is the art of finding the right song for the right moment — and the craft of making sure it can legally live there.</div>
+      <div class="sup-pillar">
+        <div class="sup-pillar-num">what it actually is</div>
+        <h3>The Bridge Between Music and Storytelling</h3>
+        <p>A music supervisor works at the intersection of creative vision and industry infrastructure. We source music for film, TV, advertising, and games — finding tracks that don't just <em>fit</em> a scene, but <em>deepen</em> it. The best placement doesn't call attention to itself. It makes you feel something you couldn't articulate why. It demands <strong>an enormous library in your head, genuine emotional intelligence, and a working knowledge of music law</strong> — all at once.</p>
+      </div>
+      <div class="sup-pillar">
+        <div class="sup-pillar-num">the art + craft</div>
+        <h3>How Songs Find Their Scenes</h3>
+        <div class="process-step"><div class="step-num">1</div><div class="step-content"><h4>Creative Brief</h4><p>Understanding the story — the tone, the era, the character's emotional state, what the director wants the audience to feel.</p></div></div>
+        <div class="process-step"><div class="step-num">2</div><div class="step-content"><h4>Search & Discovery</h4><p>Digging through catalogs, reaching out to publishers and indie artists, pulling from years of deep listening. This is where taste lives.</p></div></div>
+        <div class="process-step"><div class="step-num">3</div><div class="step-content"><h4>Clearance & Licensing</h4><p>Every song has two copyrights — master and composition. Both need clearing. Negotiating with labels, publishers, and sometimes the artists themselves.</p></div></div>
+        <div class="process-step"><div class="step-num">4</div><div class="step-content"><h4>Cue Sheets & Administration</h4><p>After the show airs, cue sheets are filed with PROs so that everyone who made the music actually gets paid.</p></div></div>
+      </div>
+      <div class="sup-pillar">
+        <div class="sup-pillar-num">why it matters culturally</div>
+        <h3>Music Supervision as an Act of Preservation</h3>
+        <p>Music supervisors are <strong>cultural gatekeepers</strong>, whether we like it or not. The songs placed in major productions are the ones preserved in cultural memory. A placement in a beloved show can resurrect a forgotten artist, introduce a genre to millions, or cement a song's place in the cultural record forever. Done thoughtfully, <strong>it's one of the most powerful tools we have for keeping musical cultures alive and in conversation with each other.</strong></p>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div id="section-about" class="section">
+      <div class="section-label">who is behind this ✦</div>
+      <div class="about-body">
+        <p>Hi. I'm <strong>Sarah Milad</strong> — music industry professional, sync licensing obsessive, and founder of <strong>Sarahtonin Sounds</strong> and <strong>Music Soup</strong>.</p>
+        <p>I've spent years inside the machine: coordinating <span class="magic-word" data-note="♪">music</span> for live broadcast television, clearing rights, building libraries, processing cue sheets at volumes that would make a librarian weep. I know how music travels through the industry. And that knowledge has made me increasingly preoccupied with what <em>doesn't</em> travel — and why.</p>
+        <p>The intersection of music and culture isn't a niche interest for me. It's the whole thing. Music is how communities encode identity, process trauma, celebrate survival, and pass down what matters. <strong>When we lose musical traditions, we lose archives that cannot be reconstructed.</strong></p>
+        <p>This site is my corner of the internet to push back against the flattening. Based in <strong>Los Angeles</strong>. Guild of Music Supervisors member. UCLA Extension cert. in Music Supervision. Perpetually listening.</p>
+      </div>
+      <div class="postcard">say hello → sarahtoninsounds [at] gmail [dot] com</div>
+    </div>
+
+    <!-- GUESTBOOK -->
+    <div id="section-guestbook" class="section">
+      <div class="section-label">leave your mark ✦ let me know you were here</div>
+      <div id="gb-entries">
+        <div class="gb-entry"><div class="gb-handle">✦ musichead_LA <span class="gb-mood">wistful</span></div><div class="gb-text">The essay about music as archive hit different. Been thinking about it for weeks.</div><div class="gb-date">May 3, 2026</div></div>
+        <div class="gb-entry"><div class="gb-handle">✦ ndiaye_sounds <span class="gb-mood">moved</span></div><div class="gb-text">Finally someone talking about African music without the "discovery" narrative. Please keep going.</div><div class="gb-date">April 28, 2026</div></div>
+        <div class="gb-entry"><div class="gb-handle">✦ syncnerdjr <span class="gb-mood">hyped</span></div><div class="gb-text">The sync licensing piece is required reading. Sharing this everywhere.</div><div class="gb-date">April 22, 2026</div></div>
+      </div>
+      <div style="margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#e8a87c;margin-bottom:8px;">sign the guestbook</div>
+      <input class="gb-input" id="gb-name" type="text" placeholder="your name or handle" maxlength="30">
+      <textarea class="gb-textarea" id="gb-msg" placeholder="what's on your mind..."></textarea>
+      <button class="gb-submit" onclick="addEntry()">sign it ✦</button>
+    </div>
+
+    <!-- LINKS -->
+    <div id="section-links" class="section">
+      <div class="section-label">places worth visiting ✦</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+        <span class="link-badge">OkayAfrica</span><span class="link-badge">Pitchfork</span><span class="link-badge">Red Bull Music Archive</span><span class="link-badge">FACT Magazine</span><span class="link-badge">Bandcamp</span><span class="link-badge">Music Soup</span><span class="link-badge">Guild of Music Supervisors</span><span class="link-badge">Afropunk</span><span class="link-badge">NPR Tiny Desk</span><span class="link-badge">Wax Poetics</span>
+      </div>
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#e8a87c;margin-bottom:8px;">newsletter archive</div>
+      <div style="font-family:'Caveat',cursive;font-size:14px;color:#c8a8b8;line-height:2;">
+        <div style="border-bottom:1px dotted rgba(232,168,124,0.2);padding:3px 0;">Issue #12 — When the Beat Drops Out of Culture</div>
+        <div style="border-bottom:1px dotted rgba(232,168,124,0.2);padding:3px 0;">Issue #11 — Five Songs That Changed How I Work</div>
+        <div style="border-bottom:1px dotted rgba(232,168,124,0.2);padding:3px 0;">Issue #10 — The Amapiano Question</div>
+        <div style="border-bottom:1px dotted rgba(232,168,124,0.2);padding:3px 0;">Issue #09 — On Sync, Access, and Who Gets a Seat</div>
+        <div style="padding:3px 0;">Issue #08 — Love Letters to Dead Genres</div>
+      </div>
+      <div class="webring-bar">
+        <button class="webring-btn">◄ prev</button>
+        <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#d4a0c8;">✦ music culture web ring ✦</span>
+        <button class="webring-btn">next ►</button>
+        <span style="font-family:'Caveat',cursive;font-size:12px;color:#7a6070;">want to join? email me.</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <div>✦</div>
+  <div>© 2026 sarahtonin sounds · all rights vibed · made with too many feelings about music</div>
+  <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;margin-top:4px;color:rgba(196,92,122,0.5);">founder of sarahtonin sounds & music soup · sarah milad</div>
+</div>
+
+<script>
+// CURSOR + TRAIL
+const cursor=document.getElementById('cursor');
+const noteChars=['♪','♫','♩','♬'];
+const trails=[];
+for(let i=0;i<8;i++){const t=document.createElement('div');t.className='trail';t.textContent='✦';document.body.appendChild(t);trails.push(t);}
+let mx=0,my=0,tIdx=0,frame=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+  frame++;
+  if(frame%4===0){
+    const t=trails[tIdx%trails.length];
+    t.style.left=mx+'px';t.style.top=my+'px';
+    t.style.opacity='0.5';
+    t.textContent=noteChars[tIdx%4];
+    t.style.fontSize=(8+Math.random()*6)+'px';
+    const tc=t;setTimeout(()=>{tc.style.opacity='0';},420);
+    tIdx++;
+  }
+});
+
+// PETALS
+const petalChars=['✿','✦','❋','♪','✽','◈'];
+const petalColors=['#e88fb0','#e8a87c','#d4a0c8','#f5c8a0','#c45c7a'];
+const pl=document.getElementById('petal-layer');
+for(let i=0;i<20;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  p.textContent=petalChars[i%petalChars.length];
+  p.style.color=petalColors[i%petalColors.length];
+  p.style.left=(Math.random()*100)+'%';
+  p.style.fontSize=(10+Math.random()*12)+'px';
+  const dur=9+Math.random()*14;
+  p.style.animationDuration=dur+'s';
+  p.style.animationDelay=(-Math.random()*dur)+'s';
+  pl.appendChild(p);
+}
+
+// EASTER EGG NOTES
+document.querySelectorAll('.magic-word').forEach(el=>{
+  el.addEventListener('mouseenter',e=>{
+    const n=document.createElement('div');
+    n.className='egg-note';
+    n.textContent=el.dataset.note||'♪';
+    n.style.left=(e.clientX+Math.random()*20-10)+'px';
+    n.style.top=(e.clientY-10)+'px';
+    document.body.appendChild(n);
+    setTimeout(()=>n.remove(),1300);
+  });
+});
+
+// MOOD WHEEL
+const moods=[
+  {label:'nostalgic',color:'#7b4a8c',song:'"The Sweetest Taboo" — Sade',why:'for when you need to feel everything slowly'},
+  {label:'euphoric',color:'#c45c2a',song:'"Water" — Tyla',why:'pure joy, no explanations needed'},
+  {label:'defiant',color:'#8c2a4a',song:'"Alright" — Kendrick',why:'for when you need to believe it'},
+  {label:'searching',color:'#2a6c8c',song:'"Back To Life" — Soul II Soul',why:'for questions without answers yet'},
+  {label:'electric',color:'#4a7a2a',song:'"Yeye" — Moonchild Sanelly',why:'when you need to move and feel alive'},
+  {label:'tender',color:'#8c6a2a',song:'"The Sweetest Taboo" — Sade',why:'soft and still and present'},
+];
+const canvas=document.getElementById('mood-canvas');
+const ctx=canvas.getContext('2d');
+const CX=75,CY=75,R=68;
+let spinAngle=0,spinning=false,spinVel=0;
+
+function drawWheel(angle){
+  ctx.clearRect(0,0,150,150);
+  const slice=(Math.PI*2)/moods.length;
+  moods.forEach((m,i)=>{
+    ctx.beginPath();ctx.moveTo(CX,CY);
+    ctx.arc(CX,CY,R,angle+i*slice,angle+(i+1)*slice);
+    ctx.closePath();ctx.fillStyle=m.color;ctx.fill();
+    ctx.strokeStyle='rgba(245,200,160,0.3)';ctx.lineWidth=1;ctx.stroke();
+    ctx.save();ctx.translate(CX,CY);ctx.rotate(angle+i*slice+slice/2);
+    ctx.textAlign='center';ctx.fillStyle='#f5e6d0';
+    ctx.font="bold 10px 'Caveat',cursive";ctx.fillText(m.label,R*0.62,4);
+    ctx.restore();
+  });
+  ctx.beginPath();ctx.moveTo(CX+R+4,CY);ctx.lineTo(CX+R+13,CY-5);ctx.lineTo(CX+R+13,CY+5);
+  ctx.closePath();ctx.fillStyle='#e8a87c';ctx.fill();
+}
+drawWheel(0);
+
+function spinWheel(){
+  if(spinning)return;
+  spinning=true;spinVel=0.25+Math.random()*0.2;
+  document.getElementById('mood-result').innerHTML='<span style="color:#7a6070;font-family:Caveat,cursive;font-size:13px;">spinning...</span>';
+  let totalSpin=Math.PI*2*(4+Math.random()*4),spun=0;
+  function step(){
+    spinAngle+=spinVel;spun+=spinVel;spinVel*=0.985;drawWheel(spinAngle);
+    if(spun<totalSpin&&spinVel>0.003){requestAnimationFrame(step);}
+    else{
+      spinning=false;
+      const norm=((spinAngle%(Math.PI*2))+(Math.PI*2))%(Math.PI*2);
+      const slice=(Math.PI*2)/moods.length;
+      const idx=Math.floor(((Math.PI*2-norm)%(Math.PI*2))/slice)%moods.length;
+      const m=moods[idx];
+      document.getElementById('mood-result').innerHTML='<strong>'+m.label+'</strong>'+m.song+'<br><span style="font-size:11px;color:#7a6070;">'+m.why+'</span>';
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+// MIXTAPE
+const essays=["The Sound of a People: Why Music IS the Archive","What Gets Lost When Songs Can't Travel Anymore","Dopamine, Rhythm, and Why Some Songs Feel Like Home","African Music and the Western Gaze"];
+const songs=['"Water" — Tyla','"The Sweetest Taboo" — Sade','"Alright" — Kendrick Lamar','"Yeye" — Moonchild Sanelly','"Back To Life" — Soul II Soul'];
+function shuffleMixtape(){
+  document.getElementById('mt-essay').textContent=essays[Math.floor(Math.random()*essays.length)];
+  document.getElementById('mt-song').textContent=songs[Math.floor(Math.random()*songs.length)];
+  const r=document.getElementById('mixtape-result');
+  r.classList.remove('visible');setTimeout(()=>r.classList.add('visible'),50);
+}
+
+// GUESTBOOK
+const gbMoods=['wistful','nostalgic','hyped','moved','tender','electric','searching','defiant','grateful','soft','lit','reflective'];
+function addEntry(){
+  const name=document.getElementById('gb-name').value.trim();
+  const msg=document.getElementById('gb-msg').value.trim();
+  if(!name||!msg)return;
+  const date=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const mood=gbMoods[Math.floor(Math.random()*gbMoods.length)];
+  const el=document.createElement('div');el.className='gb-entry';
+  el.innerHTML='<div class="gb-handle">✦ '+name+' <span class="gb-mood">'+mood+'</span></div><div class="gb-text">'+msg+'</div><div class="gb-date">'+date+'</div>';
+  document.getElementById('gb-entries').prepend(el);
+  document.getElementById('gb-name').value='';document.getElementById('gb-msg').value='';
+}
+
+// SECTIONS
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('section-'+id).classList.add('active');btn.classList.add('active');
+  if(id==='blog'){document.getElementById('blog-list').style.display='block';document.querySelectorAll('.blog-full').forEach(bf=>bf.classList.remove('active'));}
+}
+function openPost(i){
+  document.getElementById('blog-list').style.display='none';
+  document.querySelectorAll('.blog-full').forEach(bf=>bf.classList.remove('active'));
+  document.getElementById('blog-full-'+i).classList.add('active');
+}
+function closePost(){
+  document.getElementById('blog-list').style.display='block';
+  document.querySelectorAll('.blog-full').forEach(bf=>bf.classList.remove('active'));
+}
+
+// NOW PLAYING TICKER
+const tracks=['"Water" — Tyla','Sarahtonin Sounds: where music lives','"Alright" — Kendrick Lamar','"The Sweetest Taboo" — Sade','"Yeye" — Moonchild Sanelly','"Back To Life" — Soul II Soul'];
+let npIdx=0;
+setInterval(()=>{
+  npIdx=(npIdx+1)%tracks.length;
+  const el=document.getElementById('np-ticker');
+  if(el){el.style.opacity='0';setTimeout(()=>{el.textContent=tracks[npIdx];el.style.opacity='1';el.style.transition='opacity 0.6s';},400);}
+},5000);
+
+// HIT COUNTER
+let c=420;
+setInterval(()=>{c++;const el=document.getElementById('counter');if(el)el.textContent=String(c).padStart(6,'0');},9000);
+</script>
+</body>
+</html>
