@@ -3,16 +3,31 @@ backend:
   branch: main
 
 media_folder: "images"
+public_folder: "/images"
 
 collections:
   - name: "essays"
     label: "Essays"
     folder: "essays"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Category", name: "category", widget: "string"}
-      - {label: "Excerpt", name: "excerpt", widget: "string"}
+      - {label: "Category", name: "category", widget: "select", options: ["essay", "culture", "memory", "music supervision", "diaspora"]}
+      - {label: "Excerpt", name: "excerpt", widget: "string", hint: "A short teaser that appears on the homepage"}
       - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "music-picks"
+    label: "Music Picks"
+    folder: "music-picks"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Song Title", name: "title", widget: "string"}
+      - {label: "Artist", name: "artist", widget: "string"}
+      - {label: "Year", name: "year", widget: "string"}
+      - {label: "Origin", name: "origin", widget: "string", hint: "e.g. Lagos, Nigeria or Compton, CA"}
+      - {label: "Genre Tags", name: "genre", widget: "list", hint: "Add genre tags one at a time"}
+      - {label: "Why This Song", name: "why", widget: "text", hint: "Your take on why this song matters"}
+      - {label: "Spotify Link", name: "spotify", widget: "string", required: false}
