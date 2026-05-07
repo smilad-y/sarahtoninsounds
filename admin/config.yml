@@ -31,3 +31,16 @@ collections:
       - {label: "Genre Tags", name: "genre", widget: "list", hint: "Add genre tags one at a time"}
       - {label: "Why This Song", name: "why", widget: "text", hint: "Your take on why this song matters"}
       - {label: "Spotify Link", name: "spotify", widget: "string", required: false}
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "about"
+        label: "About Me"
+        file: "settings/about.json"
+        fields:
+          - {label: "Your Name", name: "name", widget: "string"}
+          - {label: "Bio", name: "bio", widget: "markdown", hint: "Your full about me text"}
+          - {label: "Location", name: "location", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Credentials", name: "credentials", widget: "string", hint: "e.g. Guild of Music Supervisors member · UCLA Extension cert."}
