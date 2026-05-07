@@ -39,4 +39,13 @@ collections:
         label: "About Me"
         file: "settings/about.json"
         fields:
-          - {label: "Your Name", name:
+          - {label: "Your Name", name: "name", widget: "string"}
+          - {label: "Bio", name: "bio", widget: "markdown", hint: "Your full about me text"}
+          - {label: "Location", name: "location", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Credentials", name: "credentials", widget: "string", hint: "e.g. Guild of Music Supervisors member · UCLA Extension cert."}
+      - name: "sidebar"
+        label: "About This Place"
+        file: "settings/sidebar.json"
+        fields:
+          - {label: "Sidebar Blurb", name: "blurb", widget: "text", hint: "The short description in the sidebar that describes what this site is"}
