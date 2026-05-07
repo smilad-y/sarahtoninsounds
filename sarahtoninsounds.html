@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sarahtonin Sounds — music · culture · community</title>
+<title>Sarahtonin Sounds — music · culture · community</title> 
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -621,6 +622,17 @@ setInterval(()=>{
 // HIT COUNTER
 let c=420;
 setInterval(()=>{c++;const el=document.getElementById('counter');if(el)el.textContent=String(c).padStart(6,'0');},9000);
+</script>
+  <script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
 </script>
 </body>
 </html>
