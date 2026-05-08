@@ -1,0 +1,39 @@
+{
+  "moods": [
+    {
+      "label": "chill",
+      "color": "#C55C2A",
+      "why": "think sunny park hangs"
+    },
+    {
+      "label": "moody",
+      "color": "#8D2B4A",
+      "why": "noir"
+    },
+    {
+      "label": "nostalgic",
+      "color": "d5b272",
+      "why": "it's old. but could be new to you. "
+    },
+    {
+      "label": "cinematic",
+      "color": "008afc",
+      "why": "dramatic for no reason besides wanting to be dramatic"
+    },
+    {
+      "label": "tender",
+      "color": "fdb1c9",
+      "why": "loving. sweet. soft. "
+    },
+    {
+      "label": "electric",
+      "color": "#FFE32A",
+      "why": "energy up. bpm up. vibes up. "
+    },
+    {
+      "label": "defiant",
+      "color": "AE0101",
+      "why": "tap into the rage"
+    }
+  ]
+}
