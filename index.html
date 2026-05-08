@@ -29,6 +29,12 @@ body{
 @keyframes notepop{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-50px) scale(0.4);}}
 .float-doodle{position:absolute;pointer-events:none;opacity:0.15;font-size:26px;animation:floatdrift 8s ease-in-out infinite;user-select:none;}
 @keyframes floatdrift{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+
+/* BANNER */
+#site-banner{display:none;width:100%;padding:8px 20px;text-align:center;font-family:'Caveat',cursive;font-size:15px;letter-spacing:1px;position:relative;z-index:20;}
+#site-banner a{color:inherit;text-decoration:underline;}
+#site-banner.visible{display:block;}
+
 .marquee-wrap{overflow:hidden;background:linear-gradient(90deg,#7b2d5e,#c45c2a,#7b2d5e);border-top:2px solid #e8a87c;border-bottom:2px solid #e8a87c;padding:7px 0;}
 .marquee-inner{display:inline-block;white-space:nowrap;animation:marquee 24s linear infinite;font-family:'Caveat',cursive;font-size:16px;color:#fde8c8;letter-spacing:2px;}
 @keyframes marquee{0%{transform:translateX(100vw);}100%{transform:translateX(-100%);}}
@@ -75,8 +81,6 @@ body{
 .post-excerpt{font-size:13px;color:#c8a8b8;line-height:1.65;}
 .magic-word{border-bottom:1px dotted rgba(232,168,124,0.5);cursor:none;transition:color 0.2s;}
 .magic-word:hover{color:#e8a87c;}
-.blog-full{display:none;}
-.blog-full.active{display:block;}
 .essay-title{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:#f5c8a0;margin-bottom:8px;line-height:1.3;}
 .essay-meta{font-family:'Caveat',cursive;font-size:14px;color:#c45c7a;margin-bottom:14px;}
 .essay-body{font-size:13px;line-height:1.85;color:#ddc8c0;}
@@ -124,7 +128,7 @@ body{
 .gb-textarea{height:80px;resize:vertical;}
 .gb-submit{background:linear-gradient(135deg,#7b2d5e,#c45c2a);color:#fde8c8;border:none;border-radius:24px;font-family:'Caveat',cursive;font-size:17px;padding:7px 22px;cursor:none;letter-spacing:1px;transition:opacity 0.2s,transform 0.1s;}
 .gb-submit:hover{opacity:0.88;transform:translateY(-1px);}
-.link-badge{display:inline-block;background:linear-gradient(135deg,rgba(123,45,94,0.5),rgba(90,30,60,0.5));border:1px solid rgba(232,168,124,0.4);border-radius:10px;color:#f5c8a0;font-family:'Caveat',cursive;font-size:15px;padding:6px 14px;cursor:none;transition:all 0.15s;text-align:center;}
+.link-badge{display:inline-block;background:linear-gradient(135deg,rgba(123,45,94,0.5),rgba(90,30,60,0.5));border:1px solid rgba(232,168,124,0.4);border-radius:10px;color:#f5c8a0;font-family:'Caveat',cursive;font-size:15px;padding:6px 14px;cursor:none;transition:all 0.15s;text-align:center;text-decoration:none;}
 .link-badge:hover{background:rgba(196,92,42,0.4);transform:translateY(-2px) rotate(-1deg);}
 .webring-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding:10px 14px;border:1px dashed rgba(232,168,124,0.35);border-radius:10px;background:rgba(0,0,0,0.2);}
 .webring-btn{background:rgba(123,45,94,0.4);border:1px solid rgba(232,168,124,0.4);color:#f5c8a0;font-family:'Caveat',cursive;font-size:14px;padding:4px 14px;border-radius:16px;cursor:none;}
@@ -147,6 +151,9 @@ body{
 
 <div id="cursor">♪</div>
 <div id="petal-layer"></div>
+
+<!-- BANNER (from settings/banner.json) -->
+<div id="site-banner"></div>
 
 <span class="float-doodle" style="top:8%;left:3%;animation-delay:0s">✦</span>
 <span class="float-doodle" style="top:22%;right:4%;animation-delay:2s;font-size:22px">✿</span>
@@ -221,7 +228,7 @@ body{
       <div class="card-body">
         <span class="magic-word sidebar-tag" data-note="♪">soul</span>
         <span class="magic-word sidebar-tag" data-note="♫">hip-hop</span>
-        <span class="sidebar-tag">R&B</span>
+        <span class="sidebar-tag">R&amp;B</span>
         <span class="sidebar-tag">diaspora</span>
         <span class="magic-word sidebar-tag" data-note="♩">sync</span>
         <span class="sidebar-tag">jazz</span>
@@ -266,28 +273,31 @@ body{
       </div>
     </div>
 
-    <!-- SUPERVISION -->
+    <!-- SUPERVISION (from settings/supervision.json) -->
     <div id="section-supervision" class="section">
-      <div class="section-label">music supervision ✦ what it is & why it matters</div>
-      <div class="supervision-intro"><p>You've felt it before — a scene comes on screen and a <span class="magic-word" data-note="♫">song</span> hits and everything <strong>opens up.</strong> That's not an accident. That's music supervision.</p></div>
-      <div class="sup-quote">Music supervision is the art of finding the right song for the right moment — and the craft of making sure it can legally live there.</div>
-      <div class="sup-pillar">
-        <div class="sup-pillar-num">what it actually is</div>
-        <h3>The Bridge Between Music and Storytelling</h3>
-        <p>A music supervisor works at the intersection of creative vision and industry infrastructure. We source music for film, TV, advertising, and games — finding tracks that don't just <em>fit</em> a scene, but <em>deepen</em> it. It demands <strong>an enormous library in your head, genuine emotional intelligence, and a working knowledge of music law</strong> — all at once.</p>
-      </div>
-      <div class="sup-pillar">
-        <div class="sup-pillar-num">the art + craft</div>
-        <h3>How Songs Find Their Scenes</h3>
-        <div class="process-step"><div class="step-num">1</div><div class="step-content"><h4>Creative Brief</h4><p>Understanding the story — the tone, the era, the character's emotional state, what the director wants the audience to feel.</p></div></div>
-        <div class="process-step"><div class="step-num">2</div><div class="step-content"><h4>Search & Discovery</h4><p>Digging through catalogs, reaching out to publishers and indie artists, pulling from years of deep listening. This is where taste lives.</p></div></div>
-        <div class="process-step"><div class="step-num">3</div><div class="step-content"><h4>Clearance & Licensing</h4><p>Every song has two copyrights — master and composition. Both need clearing. Negotiating with labels, publishers, and sometimes the artists themselves.</p></div></div>
-        <div class="process-step"><div class="step-num">4</div><div class="step-content"><h4>Cue Sheets & Administration</h4><p>After the show airs, cue sheets are filed with PROs so that everyone who made the music actually gets paid.</p></div></div>
-      </div>
-      <div class="sup-pillar">
-        <div class="sup-pillar-num">why it matters culturally</div>
-        <h3>Music Supervision as an Act of Preservation</h3>
-        <p>Music supervisors are <strong>cultural gatekeepers</strong>, whether we like it or not. Done thoughtfully, <strong>it's one of the most powerful tools we have for keeping musical cultures alive and in conversation with each other.</strong></p>
+      <div class="section-label">music supervision ✦ what it is &amp; why it matters</div>
+      <div id="supervision-container">
+        <!-- filled by loadSupervision() -->
+        <div class="supervision-intro"><p>You've felt it before — a scene comes on screen and a <span class="magic-word" data-note="♫">song</span> hits and everything <strong>opens up.</strong> That's not an accident. That's music supervision.</p></div>
+        <div class="sup-quote">Music supervision is the art of finding the right song for the right moment — and the craft of making sure it can legally live there.</div>
+        <div class="sup-pillar">
+          <div class="sup-pillar-num">what it actually is</div>
+          <h3>The Bridge Between Music and Storytelling</h3>
+          <p>A music supervisor works at the intersection of creative vision and industry infrastructure. We source music for film, TV, advertising, and games — finding tracks that don't just <em>fit</em> a scene, but <em>deepen</em> it. It demands <strong>an enormous library in your head, genuine emotional intelligence, and a working knowledge of music law</strong> — all at once.</p>
+        </div>
+        <div class="sup-pillar">
+          <div class="sup-pillar-num">the art + craft</div>
+          <h3>How Songs Find Their Scenes</h3>
+          <div class="process-step"><div class="step-num">1</div><div class="step-content"><h4>Creative Brief</h4><p>Understanding the story — the tone, the era, the character's emotional state, what the director wants the audience to feel.</p></div></div>
+          <div class="process-step"><div class="step-num">2</div><div class="step-content"><h4>Search &amp; Discovery</h4><p>Digging through catalogs, reaching out to publishers and indie artists, pulling from years of deep listening. This is where taste lives.</p></div></div>
+          <div class="process-step"><div class="step-num">3</div><div class="step-content"><h4>Clearance &amp; Licensing</h4><p>Every song has two copyrights — master and composition. Both need clearing. Negotiating with labels, publishers, and sometimes the artists themselves.</p></div></div>
+          <div class="process-step"><div class="step-num">4</div><div class="step-content"><h4>Cue Sheets &amp; Administration</h4><p>After the show airs, cue sheets are filed with PROs so that everyone who made the music actually gets paid.</p></div></div>
+        </div>
+        <div class="sup-pillar">
+          <div class="sup-pillar-num">why it matters culturally</div>
+          <h3>Music Supervision as an Act of Preservation</h3>
+          <p>Music supervisors are <strong>cultural gatekeepers</strong>, whether we like it or not. Done thoughtfully, <strong>it's one of the most powerful tools we have for keeping musical cultures alive and in conversation with each other.</strong></p>
+        </div>
       </div>
     </div>
 
@@ -310,17 +320,18 @@ body{
       <button class="gb-submit" onclick="addEntry()">sign it ✦</button>
     </div>
 
-    <!-- LINKS -->
+    <!-- LINKS (from settings/links.json) -->
     <div id="section-links" class="section">
       <div class="section-label">places worth visiting ✦</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+      <div id="links-container" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+        <!-- filled by loadLinks() -->
         <span class="link-badge">OkayAfrica</span><span class="link-badge">Pitchfork</span><span class="link-badge">Red Bull Music Archive</span><span class="link-badge">FACT Magazine</span><span class="link-badge">Bandcamp</span><span class="link-badge">Music Soup</span><span class="link-badge">Guild of Music Supervisors</span><span class="link-badge">Afropunk</span><span class="link-badge">NPR Tiny Desk</span><span class="link-badge">Wax Poetics</span>
       </div>
-      <div class="webring-bar">
+      <div class="webring-bar" id="webring-bar">
         <button class="webring-btn">◄ prev</button>
-        <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#d4a0c8;">✦ music culture web ring ✦</span>
+        <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#d4a0c8;" id="webring-label">✦ music culture web ring ✦</span>
         <button class="webring-btn">next ►</button>
-        <span style="font-family:'Caveat',cursive;font-size:12px;color:#7a6070;">want to join? email me.</span>
+        <span style="font-family:'Caveat',cursive;font-size:12px;color:#7a6070;" id="webring-email">want to join? email me.</span>
       </div>
     </div>
 
@@ -330,7 +341,7 @@ body{
 <div class="footer">
   <div>✦</div>
   <div>© 2026 sarahtonin sounds · all rights vibed · made with too many feelings about music</div>
-  <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;margin-top:4px;color:rgba(196,92,122,0.5);">founder of sarahtonin sounds & music soup · sarah milad</div>
+  <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;margin-top:4px;color:rgba(196,92,122,0.5);">founder of sarahtonin sounds &amp; music soup · sarah milad</div>
 </div>
 
 <script>
@@ -338,14 +349,12 @@ body{
 if (window.netlifyIdentity) {
   window.netlifyIdentity.on("init", user => {
     if (!user) {
-      window.netlifyIdentity.on("login", () => {
-        document.location.href = "/admin/";
-      });
+      window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
     }
   });
 }
 
-// simple markdown to html
+// MARKDOWN → HTML
 function mdToHtml(md) {
   if (!md) return '';
   return md
@@ -359,44 +368,61 @@ function mdToHtml(md) {
     .replace(/^(?!<[hbeiuol])(.+)/gm,'<p>$1</p>');
 }
 
-// CMS STATE
 let allEssays = [];
 let allSongs = [];
+let wheelMoods = [];
 
-// LOAD SIDEBAR BLURB
+// ── BANNER ──
+async function loadBanner() {
+  try {
+    const res = await fetch('/settings/banner.json?v=' + Date.now());
+    if (!res.ok) return;
+    const d = await res.json();
+    if (!d.enabled || !d.text) return;
+    const el = document.getElementById('site-banner');
+    el.style.backgroundColor = d.bg_color || '#7b2d5e';
+    el.style.color = d.text_color || '#fde8c8';
+    el.innerHTML = d.link
+      ? `<a href="${d.link}">${d.text}</a>`
+      : d.text;
+    el.classList.add('visible');
+  } catch(e) {}
+}
+
+// ── SIDEBAR ──
 async function loadSidebar() {
   try {
     const res = await fetch('/settings/sidebar.json?v=' + Date.now());
     if (res.ok) {
-      const data = await res.json();
-      if (data.blurb) document.getElementById('sidebar-blurb').textContent = data.blurb;
+      const d = await res.json();
+      if (d.blurb) document.getElementById('sidebar-blurb').textContent = d.blurb;
     }
   } catch(e) {}
 }
 
-// LOAD ABOUT ME
+// ── ABOUT ──
 async function loadAbout() {
   try {
     const res = await fetch('/settings/about.json?v=' + Date.now());
     if (res.ok) {
-      const data = await res.json();
+      const d = await res.json();
       const body = document.getElementById('about-body');
-      const email = document.getElementById('about-email');
-      if (data.bio) {
-        let html = mdToHtml(data.bio);
-        if (data.location || data.credentials) {
+      const emailEl = document.getElementById('about-email');
+      if (d.bio) {
+        let html = mdToHtml(d.bio);
+        if (d.location || d.credentials) {
           html += `<p style="margin-top:14px;font-family:'Caveat',cursive;font-size:13px;color:#d4a0c8;">`;
-          if (data.location) html += `Based in <strong>${data.location}</strong>. `;
-          if (data.credentials) html += data.credentials;
+          if (d.location) html += `Based in <strong>${d.location}</strong>. `;
+          if (d.credentials) html += d.credentials;
           html += `</p>`;
         }
         body.innerHTML = html;
       } else {
         body.innerHTML = '<p>Coming soon...</p>';
       }
-      if (data.email) {
-        email.style.display = 'block';
-        email.textContent = 'say hello → ' + data.email;
+      if (d.email) {
+        emailEl.style.display = 'block';
+        emailEl.textContent = 'say hello → ' + d.email;
       }
     } else {
       document.getElementById('about-body').innerHTML = '<p>Coming soon...</p>';
@@ -406,14 +432,56 @@ async function loadAbout() {
   }
 }
 
-// LOAD ESSAYS
+// ── SUPERVISION ──
+async function loadSupervision() {
+  try {
+    const res = await fetch('/settings/supervision.json?v=' + Date.now());
+    if (!res.ok) return; // falls back to hardcoded HTML already in the DOM
+    const d = await res.json();
+    const container = document.getElementById('supervision-container');
+    let html = '';
+    if (d.intro) html += `<div class="supervision-intro"><p>${d.intro}</p></div>`;
+    if (d.quote) html += `<div class="sup-quote">${d.quote}</div>`;
+    if (d.steps && d.steps.length) {
+      html += `<div class="sup-pillar"><div class="sup-pillar-num">the art + craft</div><h3>How Songs Find Their Scenes</h3>`;
+      d.steps.forEach((s, i) => {
+        html += `<div class="process-step"><div class="step-num">${i+1}</div><div class="step-content"><h4>${s.title}</h4><p>${s.body}</p></div></div>`;
+      });
+      html += `</div>`;
+    }
+    if (d.pillars && d.pillars.length) {
+      d.pillars.forEach(p => {
+        html += `<div class="sup-pillar"><div class="sup-pillar-num">${p.label}</div><h3>${p.title}</h3><p>${mdToHtml(p.body)}</p></div>`;
+      });
+    }
+    if (html) container.innerHTML = html;
+  } catch(e) {}
+}
+
+// ── LINKS ──
+async function loadLinks() {
+  try {
+    const res = await fetch('/settings/links.json?v=' + Date.now());
+    if (!res.ok) return; // falls back to hardcoded badges already in the DOM
+    const d = await res.json();
+    if (d.links && d.links.length) {
+      const container = document.getElementById('links-container');
+      container.innerHTML = d.links.map(l =>
+        l.url
+          ? `<a class="link-badge" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`
+          : `<span class="link-badge">${l.label}</span>`
+      ).join('');
+    }
+    if (d.webring_label) document.getElementById('webring-label').textContent = d.webring_label;
+    if (d.webring_email) document.getElementById('webring-email').textContent = d.webring_email;
+  } catch(e) {}
+}
+
+// ── ESSAYS ──
 async function loadEssays() {
   try {
     const res = await fetch('/essays/index.json?v=' + Date.now());
-    if (res.ok) {
-      allEssays = await res.json();
-      renderEssays(allEssays);
-    }
+    if (res.ok) { allEssays = await res.json(); renderEssays(allEssays); }
   } catch(e) {}
 }
 
@@ -448,12 +516,14 @@ function closeEssay() {
   document.getElementById('essay-full').style.display = 'none';
 }
 
-// LOAD MUSIC PICKS
+// ── MUSIC PICKS ──
 async function loadMusicPicks() {
   try {
     const res = await fetch('/music-picks/index.json?v=' + Date.now());
     if (res.ok) {
-      allSongs = await res.json();
+      const data = await res.json();
+      // support both array root and {entries:[]} shape
+      allSongs = Array.isArray(data) ? data : (data.entries || []);
       renderMusicPicks(allSongs);
       startNowPlayingTicker(allSongs);
     }
@@ -480,14 +550,14 @@ function renderMusicPicks(picks) {
         <h4>"${pick.title}" — ${pick.artist}</h4>
         <div class="music-artist">${pick.year||''} · ${pick.origin||''}</div>
         ${genreTags}
-        <div class="music-why">${pick.why||''}</div>
+        <div class="music-why">${pick.why||pick.note||''}</div>
         ${pick.spotify?`<a href="${pick.spotify}" target="_blank" style="font-family:'Caveat',cursive;font-size:12px;color:#e8a87c;text-decoration:none;display:inline-block;margin-top:4px;">▶ listen on spotify</a>`:''}
       </div>`;
     container.appendChild(div);
   });
 }
 
-// MIXTAPE — uses real CMS content
+// ── MIXTAPE ──
 function shuffleMixtape() {
   const essays = allEssays.length > 0 ? allEssays : [{title:'your first essay (coming soon)'}];
   const songs = allSongs.length > 0 ? allSongs : [{title:'your first pick', artist:'coming soon'}];
@@ -500,7 +570,7 @@ function shuffleMixtape() {
   setTimeout(()=>r.classList.add('visible'), 50);
 }
 
-// NOW PLAYING — cycles through real music picks
+// ── NOW PLAYING TICKER ──
 function startNowPlayingTicker(picks) {
   if (!picks || picks.length === 0) return;
   const tracks = ['now playing: wherever the music takes us', ...picks.map(p=>`"${p.title}" — ${p.artist}`)];
@@ -510,72 +580,14 @@ function startNowPlayingTicker(picks) {
     const el = document.getElementById('np-ticker');
     if (el) {
       el.style.opacity = '0';
-      setTimeout(()=>{
-        el.textContent = tracks[idx];
-        el.style.opacity = '1';
-        el.style.transition = 'opacity 0.6s';
-      }, 400);
+      setTimeout(()=>{ el.textContent = tracks[idx]; el.style.opacity='1'; el.style.transition='opacity 0.6s'; }, 400);
     }
   }, 5000);
 }
 
-// init
-loadSidebar();
-loadAbout();
-loadEssays();
-loadMusicPicks();
-
-// CURSOR
-const cursor = document.getElementById('cursor');
-const noteChars = ['♪','♫','♩','♬'];
-const trails = [];
-for(let i=0;i<8;i++){const t=document.createElement('div');t.className='trail';t.textContent='✦';document.body.appendChild(t);trails.push(t);}
-let mx=0,my=0,tIdx=0,frame=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  cursor.style.left=mx+'px';cursor.style.top=my+'px';
-  frame++;
-  if(frame%4===0){
-    const t=trails[tIdx%trails.length];
-    t.style.left=mx+'px';t.style.top=my+'px';
-    t.style.opacity='0.5';
-    t.textContent=noteChars[tIdx%4];
-    t.style.fontSize=(8+Math.random()*6)+'px';
-    const tc=t;setTimeout(()=>{tc.style.opacity='0';},420);
-    tIdx++;
-  }
-});
-
-// PETALS
-const petalChars=['✿','✦','❋','♪','✽','◈'];
-const petalColors=['#e88fb0','#e8a87c','#d4a0c8','#f5c8a0','#c45c7a'];
-const pl=document.getElementById('petal-layer');
-for(let i=0;i<20;i++){
-  const p=document.createElement('div');p.className='petal';
-  p.textContent=petalChars[i%petalChars.length];
-  p.style.color=petalColors[i%petalColors.length];
-  p.style.left=(Math.random()*100)+'%';
-  p.style.fontSize=(10+Math.random()*12)+'px';
-  const dur=9+Math.random()*14;
-  p.style.animationDuration=dur+'s';
-  p.style.animationDelay=(-Math.random()*dur)+'s';
-  pl.appendChild(p);
-}
-
-// EASTER EGG
-document.querySelectorAll('.magic-word').forEach(el=>{
-  el.addEventListener('mouseenter',e=>{
-    const n=document.createElement('div');n.className='egg-note';
-    n.textContent=el.dataset.note||'♪';
-    n.style.left=(e.clientX+Math.random()*20-10)+'px';
-    n.style.top=(e.clientY-10)+'px';
-    document.body.appendChild(n);
-    setTimeout(()=>n.remove(),1300);
-  });
-});
-
-// MOOD WHEEL
-const moods=[
+// ── MOOD WHEEL ──
+// Default moods (overridden by settings/wheel.json if it exists)
+let moods=[
   {label:'nostalgic',color:'#7b4a8c',why:'for when you need to feel everything slowly'},
   {label:'euphoric',color:'#c45c2a',why:'pure joy, no explanations needed'},
   {label:'defiant',color:'#8c2a4a',why:'for when you need to believe it'},
@@ -583,11 +595,24 @@ const moods=[
   {label:'electric',color:'#4a7a2a',why:'when you need to move and feel alive'},
   {label:'tender',color:'#8c6a2a',why:'soft and still and present'},
 ];
-const canvas=document.getElementById('mood-canvas');
-const ctx=canvas.getContext('2d');
+
+async function loadWheelSettings() {
+  try {
+    const res = await fetch('/settings/wheel.json?v=' + Date.now());
+    if (res.ok) {
+      const d = await res.json();
+      if (d.moods && d.moods.length) moods = d.moods;
+    }
+  } catch(e) {}
+  drawWheel(0);
+}
+
+const canvas = document.getElementById('mood-canvas');
+const ctx = canvas.getContext('2d');
 const CX=75,CY=75,R=68;
-let spinAngle=0,spinning=false,spinVel=0;
-function drawWheel(angle){
+let spinAngle=0,spinning=false;
+
+function drawWheel(angle) {
   ctx.clearRect(0,0,150,150);
   const slice=(Math.PI*2)/moods.length;
   moods.forEach((m,i)=>{
@@ -600,13 +625,14 @@ function drawWheel(angle){
     ctx.font="bold 10px 'Caveat',cursive";ctx.fillText(m.label,R*0.62,4);
     ctx.restore();
   });
+  // pointer
   ctx.beginPath();ctx.moveTo(CX+R+4,CY);ctx.lineTo(CX+R+13,CY-5);ctx.lineTo(CX+R+13,CY+5);
   ctx.closePath();ctx.fillStyle='#e8a87c';ctx.fill();
 }
-drawWheel(0);
+
 function spinWheel(){
   if(spinning)return;
-  spinning=true;spinVel=0.25+Math.random()*0.2;
+  spinning=true;let spinVel=0.25+Math.random()*0.2;
   document.getElementById('mood-result').innerHTML='<span style="color:#7a6070;font-family:Caveat,cursive;font-size:13px;">spinning...</span>';
   let totalSpin=Math.PI*2*(4+Math.random()*4),spun=0;
   function step(){
@@ -629,7 +655,7 @@ function spinWheel(){
   requestAnimationFrame(step);
 }
 
-// GUESTBOOK
+// ── GUESTBOOK ──
 const gbMoods=['wistful','nostalgic','hyped','moved','tender','electric','searching','defiant','grateful','soft','lit','reflective'];
 function addEntry(){
   const name=document.getElementById('gb-name').value.trim();
@@ -643,7 +669,7 @@ function addEntry(){
   document.getElementById('gb-name').value='';document.getElementById('gb-msg').value='';
 }
 
-// SECTIONS
+// ── SECTIONS ──
 function showSection(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -654,9 +680,65 @@ function showSection(id,btn){
   }
 }
 
-// HIT COUNTER
+// ── CURSOR ──
+const cursor=document.getElementById('cursor');
+const noteChars=['♪','♫','♩','♬'];
+const trails=[];
+for(let i=0;i<8;i++){const t=document.createElement('div');t.className='trail';t.textContent='✦';document.body.appendChild(t);trails.push(t);}
+let mx=0,my=0,tIdx=0,frame=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+  frame++;
+  if(frame%4===0){
+    const t=trails[tIdx%trails.length];
+    t.style.left=mx+'px';t.style.top=my+'px';t.style.opacity='0.5';
+    t.textContent=noteChars[tIdx%4];t.style.fontSize=(8+Math.random()*6)+'px';
+    const tc=t;setTimeout(()=>{tc.style.opacity='0';},420);tIdx++;
+  }
+});
+
+// ── PETALS ──
+const petalChars=['✿','✦','❋','♪','✽','◈'];
+const petalColors=['#e88fb0','#e8a87c','#d4a0c8','#f5c8a0','#c45c7a'];
+const pl=document.getElementById('petal-layer');
+for(let i=0;i<20;i++){
+  const p=document.createElement('div');p.className='petal';
+  p.textContent=petalChars[i%petalChars.length];
+  p.style.color=petalColors[i%petalColors.length];
+  p.style.left=(Math.random()*100)+'%';
+  p.style.fontSize=(10+Math.random()*12)+'px';
+  const dur=9+Math.random()*14;
+  p.style.animationDuration=dur+'s';
+  p.style.animationDelay=(-Math.random()*dur)+'s';
+  pl.appendChild(p);
+}
+
+// ── EASTER EGGS ──
+document.querySelectorAll('.magic-word').forEach(el=>{
+  el.addEventListener('mouseenter',e=>{
+    const n=document.createElement('div');n.className='egg-note';
+    n.textContent=el.dataset.note||'♪';
+    n.style.left=(e.clientX+Math.random()*20-10)+'px';
+    n.style.top=(e.clientY-10)+'px';
+    document.body.appendChild(n);
+    setTimeout(()=>n.remove(),1300);
+  });
+});
+
+// ── HIT COUNTER ──
 let c=420;
 setInterval(()=>{c++;const el=document.getElementById('counter');if(el)el.textContent=String(c).padStart(6,'0');},9000);
+
+// ── INIT ──
+loadBanner();
+loadSidebar();
+loadAbout();
+loadSupervision();
+loadLinks();
+loadEssays();
+loadMusicPicks();
+loadWheelSettings();
 </script>
 </body>
 </html>
