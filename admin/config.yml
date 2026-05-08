@@ -2,88 +2,135 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images"
-public_folder: "/images"
+media_folder: public/uploads
+public_folder: /public/uploads
 
 collections:
-  - name: "essays"
-    label: "Essays"
-    folder: "essays"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - label: "Title"
-        name: "title"
-        widget: "string"
-      - label: "Date"
-        name: "date"
-        widget: "datetime"
-      - label: "Category"
-        name: "category"
-        widget: "select"
-        options: ["essay", "culture", "memory", "music supervision", "diaspora"]
-      - label: "Excerpt"
-        name: "excerpt"
-        widget: "string"
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
 
-  - name: "music-picks"
-    label: "Music Picks"
-    folder: "music-picks"
+  # ── SITE SETTINGS ──
+  - name: settings
+    label: "⚙️ Site Settings"
+    files:
+
+      - name: banner
+        label: "🔔 Banner"
+        file: settings/banner.json
+        format: json
+        fields:
+          - { label: "Show Banner?", name: enabled, widget: boolean, default: false, hint: "Toggle the announcement bar at the top of the site" }
+          - { label: "Banner Text", name: text, widget: string, hint: "The message shown in the banner" }
+          - { label: "Link URL (optional)", name: link, widget: string, required: false, hint: "Leave blank for no link" }
+          - { label: "Background Color", name: bg_color, widget: string, default: "#7b2d5e", hint: "Hex color, e.g. #7b2d5e" }
+          - { label: "Text Color", name: text_color, widget: string, default: "#fde8c8", hint: "Hex color, e.g. #fde8c8" }
+
+      - name: sidebar
+        label: "📌 About This Place (Sidebar)"
+        file: settings/sidebar.json
+        format: json
+        fields:
+          - { label: "Sidebar Blurb", name: blurb, widget: text, hint: "Short text shown in the left sidebar under 'about this place'" }
+
+      - name: about
+        label: "👤 About Me"
+        file: settings/about.json
+        format: json
+        fields:
+          - { label: "Bio", name: bio, widget: markdown, hint: "Supports **bold**, *italic*, paragraphs" }
+          - { label: "Location", name: location, widget: string, required: false }
+          - { label: "Credentials / extra line", name: credentials, widget: string, required: false, hint: "e.g. Guild of Music Supervisors member · UCLA Extension cert" }
+          - { label: "Email (shown as postcard)", name: email, widget: string, required: false }
+
+      - name: wheel
+        label: "🎡 Mood Wheel"
+        file: settings/wheel.json
+        format: json
+        fields:
+          - label: "Moods"
+            name: moods
+            widget: list
+            hint: "Each mood becomes a wheel segment. Keep to 6–8 for best look."
+            fields:
+              - { label: "Mood Label", name: label, widget: string, hint: "e.g. nostalgic, euphoric, tender" }
+              - { label: "Color", name: color, widget: string, hint: "Hex color for this segment, e.g. #7b4a8c" }
+              - { label: "Why text", name: why, widget: string, hint: "Short description shown when wheel lands here" }
+
+  # ── MUSIC SUPERVISION ──
+  - name: supervision
+    label: "🎬 Music Supervision"
+    files:
+      - name: supervision_content
+        label: "Music Supervision Page"
+        file: settings/supervision.json
+        format: json
+        fields:
+          - { label: "Intro Paragraph", name: intro, widget: text }
+          - { label: "Pull Quote", name: quote, widget: text }
+          - label: "Pillars (key concepts)"
+            name: pillars
+            widget: list
+            fields:
+              - { label: "Label (small text above title)", name: label, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Body", name: body, widget: markdown }
+          - label: "How It Works (steps)"
+            name: steps
+            widget: list
+            fields:
+              - { label: "Step Title", name: title, widget: string }
+              - { label: "Step Description", name: body, widget: text }
+
+  # ── LINKS ──
+  - name: links_page
+    label: "🔗 Links Page"
+    files:
+      - name: links_content
+        label: "Links & Web Ring"
+        file: settings/links.json
+        format: json
+        fields:
+          - label: "Links"
+            name: links
+            widget: list
+            fields:
+              - { label: "Label", name: label, widget: string }
+              - { label: "URL", name: url, widget: string, required: false, hint: "Leave blank to show as non-linked badge" }
+          - { label: "Web Ring Label", name: webring_label, widget: string }
+          - { label: "Web Ring Join Text", name: webring_email, widget: string }
+
+  # ── ESSAYS ──
+  - name: essays
+    label: "✦ Essays"
+    folder: essays
     create: true
+    format: json
     slug: "{{slug}}"
     fields:
-      - label: "Song Title"
-        name: "title"
-        widget: "string"
-      - label: "Artist"
-        name: "artist"
-        widget: "string"
-      - label: "Year"
-        name: "year"
-        widget: "string"
-      - label: "Origin"
-        name: "origin"
-        widget: "string"
-      - label: "Genre Tags"
-        name: "genre"
-        widget: "list"
-      - label: "Why This Song"
-        name: "why"
-        widget: "text"
-      - label: "Spotify Link"
-        name: "spotify"
-        widget: "string"
-        required: false
+      - { label: "Title", name: title, widget: string }
+      - { label: "Date", name: date, widget: date, format: YYYY-MM-DD }
+      - { label: "Category", name: category, widget: string, default: essay }
+      - { label: "Excerpt", name: excerpt, widget: text }
+      - { label: "Body", name: body, widget: markdown }
 
-  - name: "settings"
-    label: "Site Settings"
+  # ── MUSIC PICKS ──
+  - name: music_picks
+    label: "♪ Music Picks"
     files:
-      - name: "about"
-        label: "About Me"
-        file: "settings/about.json"
+      - name: picks_index
+        label: "All Music Picks"
+        file: music-picks/index.json
+        format: json
         fields:
-          - label: "Your Name"
-            name: "name"
-            widget: "string"
-          - label: "Bio"
-            name: "bio"
-            widget: "markdown"
-          - label: "Location"
-            name: "location"
-            widget: "string"
-          - label: "Email"
-            name: "email"
-            widget: "string"
-          - label: "Credentials"
-            name: "credentials"
-            widget: "string"
-      - name: "sidebar"
-        label: "About This Place"
-        file: "settings/sidebar.json"
-        fields:
-          - label: "Sidebar Blurb"
-            name: "blurb"
-            widget: "text"
+          - label: "Picks"
+            name: entries
+            widget: list
+            fields:
+              - { label: "Song Title", name: title, widget: string }
+              - { label: "Artist", name: artist, widget: string }
+              - { label: "Year", name: year, widget: string, required: false }
+              - { label: "Origin / Country", name: origin, widget: string, required: false }
+              - label: "Genre Tags"
+                name: genre
+                widget: list
+                field: { label: Genre, name: genre, widget: string }
+              - { label: "Why this track?", name: why, widget: text }
+              - { label: "Spotify URL", name: spotify, widget: string, required: false }
