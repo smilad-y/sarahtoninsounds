@@ -517,17 +517,33 @@ function closeEssay() {
 }
 
 // ── MUSIC PICKS ──
-async function loadMusicPicks() {
+// Loads songs for a specific mood on demand, caches them
+const songCache = {};
+
+async function getSongsForMood(mood) {
+  if (songCache[mood]) return songCache[mood];
   try {
-    const res = await fetch('/music-picks/index.json?v=' + Date.now());
+    const res = await fetch(`/music-picks/${mood}.json?v=` + Date.now());
     if (res.ok) {
       const data = await res.json();
-      // support both array root and {entries:[]} shape
-      allSongs = Array.isArray(data) ? data : (data.entries || []);
-      renderMusicPicks(allSongs);
-      startNowPlayingTicker(allSongs);
+      songCache[mood] = Array.isArray(data) ? data : [];
+      return songCache[mood];
     }
   } catch(e) {}
+  return [];
+}
+
+async function loadMusicPicks() {
+  // Load a random sample across all moods for the ticker + picks display
+  const moods = ["chill","moody","nostalgic","euphoric","tender","defiant","cinematic","electric"];
+  const samples = await Promise.all(moods.map(m => getSongsForMood(m)));
+  // grab up to 3 random songs per mood for display + ticker
+  allSongs = samples.flatMap(arr => {
+    const shuffled = arr.sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 3);
+  });
+  renderMusicPicks(allSongs);
+  startNowPlayingTicker(allSongs);
 }
 
 const romans = ['i','ii','iii','iv','v','vi','vii','viii','ix','x'];
@@ -644,12 +660,15 @@ function spinWheel(){
       const slice=(Math.PI*2)/moods.length;
       const idx=Math.floor(((Math.PI*2-norm)%(Math.PI*2))/slice)%moods.length;
       const m=moods[idx];
-      let songDisplay='something that matches the feeling';
-      if(allSongs.length>0){
-        const pick=allSongs[Math.floor(Math.random()*allSongs.length)];
-        songDisplay=`"${pick.title}" — ${pick.artist}`;
-      }
-      document.getElementById('mood-result').innerHTML='<strong>'+m.label+'</strong>'+songDisplay+'<br><span style="font-size:11px;color:#7a6070;">'+m.why+'</span>';
+      document.getElementById('mood-result').innerHTML='<strong>'+m.label+'</strong><span style="color:#7a6070;font-size:12px;">finding a track...</span><br><span style="font-size:11px;color:#7a6070;">'+m.why+'</span>';
+      getSongsForMood(m.label).then(songs => {
+        let songDisplay='something that matches the feeling';
+        if(songs.length>0){
+          const pick=songs[Math.floor(Math.random()*songs.length)];
+          songDisplay=`"${pick.title}" — ${pick.artist}`;
+        }
+        document.getElementById('mood-result').innerHTML='<strong>'+m.label+'</strong>'+songDisplay+'<br><span style="font-size:11px;color:#7a6070;">'+m.why+'</span>';
+      });
     }
   }
   requestAnimationFrame(step);
