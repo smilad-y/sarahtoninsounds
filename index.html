@@ -162,7 +162,7 @@ body{
 <span class="float-doodle" style="top:40%;left:2%;animation-delay:3s;font-size:14px">❋</span>
 
 <div class="marquee-wrap">
-  <span class="marquee-inner">✦ ✦ sarahtonin sounds ✦ discover something new ✦ say hi! ✦ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span class="marquee-inner" id="marquee-text">✦ sarahtonin sounds ✦ discover something new ✦ say hi! ✦ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 </div>
 
 <div class="header">
@@ -225,7 +225,7 @@ body{
 
     <div class="parchment">
       <div class="card-title">✦ themes</div>
-      <div class="card-body">
+      <div class="card-body" id="themes-container">
         <span class="magic-word sidebar-tag" data-note="♪">soul</span>
         <span class="magic-word sidebar-tag" data-note="♫">hip-hop</span>
         <span class="sidebar-tag">R&amp;B</span>
@@ -371,6 +371,38 @@ function mdToHtml(md) {
 let allEssays = [];
 let allSongs = [];
 let wheelMoods = [];
+
+// ── MARQUEE ──
+async function loadMarquee() {
+  try {
+    const res = await fetch('/settings/general.json?v=' + Date.now());
+    if (!res.ok) return;
+    const d = await res.json();
+    if (d.marquee_text) {
+      const el = document.getElementById('marquee-text');
+      if (el) el.textContent = d.marquee_text + '      ';
+    }
+    if (d.themes && d.themes.length) {
+      const container = document.getElementById('themes-container');
+      if (container) {
+        container.innerHTML = d.themes.map(t =>
+          `<span class="magic-word sidebar-tag" data-note="♪">${t}</span>`
+        ).join('');
+        // re-attach easter egg listeners
+        container.querySelectorAll('.magic-word').forEach(el => {
+          el.addEventListener('mouseenter', e => {
+            const n = document.createElement('div'); n.className = 'egg-note';
+            n.textContent = el.dataset.note || '♪';
+            n.style.left = (e.clientX + Math.random()*20-10) + 'px';
+            n.style.top = (e.clientY - 10) + 'px';
+            document.body.appendChild(n);
+            setTimeout(() => n.remove(), 1300);
+          });
+        });
+      }
+    }
+  } catch(e) {}
+}
 
 // ── BANNER ──
 async function loadBanner() {
@@ -750,6 +782,7 @@ let c=420;
 setInterval(()=>{c++;const el=document.getElementById('counter');if(el)el.textContent=String(c).padStart(6,'0');},9000);
 
 // ── INIT ──
+loadMarquee();
 loadBanner();
 loadSidebar();
 loadAbout();
