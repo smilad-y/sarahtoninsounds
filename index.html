@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,6 +83,8 @@ body{
 .essay-body p{margin-bottom:14px;}
 .essay-body strong{color:#f5c8a0;font-style:italic;font-weight:normal;}
 .essay-body em{color:#e8a87c;}
+.essay-body h1,.essay-body h2,.essay-body h3{font-family:'Playfair Display',serif;font-style:italic;color:#f5c8a0;margin:16px 0 8px;}
+.essay-body blockquote{border-left:3px solid #c45c7a;padding-left:12px;margin:12px 0;font-style:italic;color:#c8a8b8;}
 .back-btn{background:none;border:1px solid rgba(232,168,124,0.4);color:#e8a87c;font-family:'Caveat',cursive;font-size:16px;padding:5px 16px;border-radius:20px;cursor:none;margin-bottom:16px;display:inline-block;transition:all 0.2s;}
 .back-btn:hover{background:rgba(232,168,124,0.1);}
 .music-card{display:flex;gap:12px;padding:12px;margin-bottom:10px;border-radius:12px;background:rgba(100,40,90,0.2);border:1px solid rgba(196,92,122,0.25);transition:all 0.2s;}
@@ -96,6 +97,7 @@ body{
 .about-body{font-size:13px;line-height:1.85;color:#ddc8c0;}
 .about-body p{margin-bottom:12px;}
 .about-body strong{color:#f5c8a0;font-style:italic;font-weight:normal;}
+.about-body h1,.about-body h2,.about-body h3{font-family:'Playfair Display',serif;font-style:italic;color:#f5c8a0;margin:16px 0 8px;}
 .postcard{border:2px dashed rgba(232,168,124,0.4);border-radius:10px;padding:12px 16px;margin-top:14px;background:rgba(0,0,0,0.2);font-family:'Caveat',cursive;font-size:15px;color:#e8a87c;line-height:1.6;position:relative;}
 .postcard::before{content:'✉';position:absolute;top:-13px;right:16px;font-size:20px;background:#1a0a2e;padding:0 5px;}
 .supervision-intro{font-size:14px;line-height:1.85;color:#ddc8c0;margin-bottom:20px;}
@@ -185,7 +187,9 @@ body{
 
     <div class="parchment">
       <div class="card-title">✦ about this place</div>
-      <div class="card-body" style="font-size:12px;color:#c8a8b8;line-height:1.7;">A corner of the internet for people who believe <span class="magic-word" data-note="♫">music</span> matters — really matters.</div>
+      <div class="card-body" style="font-size:12px;color:#c8a8b8;line-height:1.7;" id="sidebar-blurb">
+        A corner of the internet for people who believe music matters — really matters.
+      </div>
     </div>
 
     <div class="parchment">
@@ -244,10 +248,7 @@ body{
     <div id="section-blog" class="section active">
       <div class="section-label">essays ✦</div>
       <div id="essays-container">
-        <div class="empty-state">
-          <span>✦</span>
-          essays coming soon — check back shortly
-        </div>
+        <div class="empty-state"><span>✦</span>essays coming soon — check back shortly</div>
       </div>
       <div id="essay-full" style="display:none;">
         <button class="back-btn" onclick="closeEssay()">← back to essays</button>
@@ -261,10 +262,7 @@ body{
     <div id="section-music" class="section">
       <div class="section-label">music picks ✦ songs that mean something</div>
       <div id="music-container">
-        <div class="empty-state">
-          <span>♪</span>
-          music picks coming soon
-        </div>
+        <div class="empty-state"><span>♪</span>music picks coming soon</div>
       </div>
     </div>
 
@@ -296,20 +294,16 @@ body{
     <!-- ABOUT -->
     <div id="section-about" class="section">
       <div class="section-label">who is behind this ✦</div>
-      <div class="about-body">
-        <p>Hi. I'm <strong>Sarah Milad</strong> — music industry professional, sync licensing obsessive, and founder of <strong>Sarahtonin Sounds</strong> and <strong>Music Soup</strong>.</p>
-        <p>I've spent years inside the machine: coordinating <span class="magic-word" data-note="♪">music</span> for live broadcast television, clearing rights, building libraries, processing cue sheets at volumes that would make a librarian weep.</p>
-        <p>The intersection of music and culture isn't a niche interest for me. It's the whole thing. <strong>When we lose musical traditions, we lose archives that cannot be reconstructed.</strong></p>
-        <p>Based in <strong>Los Angeles</strong>. Guild of Music Supervisors member. UCLA Extension cert. in Music Supervision. Perpetually listening.</p>
+      <div class="about-body" id="about-body">
+        <p style="color:#7a6070;font-family:'Caveat',cursive;">loading...</p>
       </div>
-      <div class="postcard">say hello → sarahtoninsounds [at] gmail [dot] com</div>
+      <div class="postcard" id="about-email" style="display:none;"></div>
     </div>
 
     <!-- GUESTBOOK -->
     <div id="section-guestbook" class="section">
       <div class="section-label">leave your mark ✦ let me know you were here</div>
-      <div id="gb-entries">
-      </div>
+      <div id="gb-entries"></div>
       <div style="margin-top:16px;font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#e8a87c;margin-bottom:8px;">sign the guestbook</div>
       <input class="gb-input" id="gb-name" type="text" placeholder="your name or handle" maxlength="30">
       <textarea class="gb-textarea" id="gb-msg" placeholder="what's on your mind..."></textarea>
@@ -340,7 +334,7 @@ body{
 </div>
 
 <script>
-// NETLIFY IDENTITY REDIRECT
+// NETLIFY IDENTITY
 if (window.netlifyIdentity) {
   window.netlifyIdentity.on("init", user => {
     if (!user) {
@@ -351,27 +345,91 @@ if (window.netlifyIdentity) {
   });
 }
 
-// LOAD ESSAYS FROM CMS FILES
-async function loadEssays() {
+// simple markdown to html
+function mdToHtml(md) {
+  if (!md) return '';
+  return md
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/^### (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^## (.+)$/gm,'<h2>$1</h2>')
+    .replace(/^# (.+)$/gm,'<h1>$1</h1>')
+    .replace(/^> (.+)$/gm,'<blockquote>$1</blockquote>')
+    .replace(/\n\n/g,'</p><p>')
+    .replace(/^(?!<[hbeiuol])(.+)/gm,'<p>$1</p>');
+}
+
+// CMS STATE
+let allEssays = [];
+let allSongs = [];
+
+// LOAD SIDEBAR BLURB
+async function loadSidebar() {
   try {
-    const response = await fetch('/essays/index.json');
-    if (!response.ok) return;
-    const essays = await response.json();
-    renderEssays(essays);
+    const res = await fetch('/settings/sidebar.json?v=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      if (data.blurb) document.getElementById('sidebar-blurb').textContent = data.blurb;
+    }
+  } catch(e) {}
+}
+
+// LOAD ABOUT ME
+async function loadAbout() {
+  try {
+    const res = await fetch('/settings/about.json?v=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      const body = document.getElementById('about-body');
+      const email = document.getElementById('about-email');
+      if (data.bio) {
+        let html = mdToHtml(data.bio);
+        if (data.location || data.credentials) {
+          html += `<p style="margin-top:14px;font-family:'Caveat',cursive;font-size:13px;color:#d4a0c8;">`;
+          if (data.location) html += `Based in <strong>${data.location}</strong>. `;
+          if (data.credentials) html += data.credentials;
+          html += `</p>`;
+        }
+        body.innerHTML = html;
+      } else {
+        body.innerHTML = '<p>Coming soon...</p>';
+      }
+      if (data.email) {
+        email.style.display = 'block';
+        email.textContent = 'say hello → ' + data.email;
+      }
+    } else {
+      document.getElementById('about-body').innerHTML = '<p>Coming soon...</p>';
+    }
   } catch(e) {
-    // no essays yet, empty state shows
+    document.getElementById('about-body').innerHTML = '<p>Coming soon...</p>';
   }
 }
 
+// LOAD ESSAYS
+async function loadEssays() {
+  try {
+    const res = await fetch('/essays/index.json?v=' + Date.now());
+    if (res.ok) {
+      allEssays = await res.json();
+      renderEssays(allEssays);
+    }
+  } catch(e) {}
+}
+
 function renderEssays(essays) {
-  if (!essays || essays.length === 0) return;
   const container = document.getElementById('essays-container');
+  if (!essays || essays.length === 0) {
+    container.innerHTML = '<div class="empty-state"><span>✦</span>essays coming soon — check back shortly</div>';
+    return;
+  }
   container.innerHTML = '';
-  essays.forEach((essay, i) => {
-    const date = new Date(essay.date).toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+  essays.sort((a,b) => new Date(b.date) - new Date(a.date));
+  essays.forEach(essay => {
+    const date = new Date(essay.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
     const div = document.createElement('div');
     div.className = 'blog-post';
-    div.innerHTML = `<div class="post-meta">${date} · ${essay.category || 'essay'}</div><div class="post-title">${essay.title}</div><div class="post-excerpt">${essay.excerpt || ''}</div>`;
+    div.innerHTML = `<div class="post-meta">${date} · ${essay.category||'essay'}</div><div class="post-title">${essay.title}</div><div class="post-excerpt">${essay.excerpt||''}</div>`;
     div.onclick = () => openEssay(essay, date);
     container.appendChild(div);
   });
@@ -380,9 +438,9 @@ function renderEssays(essays) {
 function openEssay(essay, date) {
   document.getElementById('essays-container').style.display = 'none';
   document.getElementById('essay-full').style.display = 'block';
-  document.getElementById('ef-meta').textContent = `${date} · ${essay.category || 'essay'}`;
+  document.getElementById('ef-meta').textContent = `${date} · ${essay.category||'essay'}`;
   document.getElementById('ef-title').textContent = essay.title;
-  document.getElementById('ef-body').innerHTML = essay.body || '';
+  document.getElementById('ef-body').innerHTML = mdToHtml(essay.body||'');
 }
 
 function closeEssay() {
@@ -390,9 +448,84 @@ function closeEssay() {
   document.getElementById('essay-full').style.display = 'none';
 }
 
-loadEssays();
+// LOAD MUSIC PICKS
+async function loadMusicPicks() {
+  try {
+    const res = await fetch('/music-picks/index.json?v=' + Date.now());
+    if (res.ok) {
+      allSongs = await res.json();
+      renderMusicPicks(allSongs);
+      startNowPlayingTicker(allSongs);
+    }
+  } catch(e) {}
+}
 
-// CURSOR + TRAIL
+const romans = ['i','ii','iii','iv','v','vi','vii','viii','ix','x'];
+
+function renderMusicPicks(picks) {
+  const container = document.getElementById('music-container');
+  if (!picks || picks.length === 0) {
+    container.innerHTML = '<div class="empty-state"><span>♪</span>music picks coming soon</div>';
+    return;
+  }
+  container.innerHTML = '';
+  picks.forEach((pick, i) => {
+    const genres = Array.isArray(pick.genre) ? pick.genre : (pick.genre ? [pick.genre] : []);
+    const genreTags = genres.map(g=>`<span class="genre-tag">${g}</span>`).join('');
+    const div = document.createElement('div');
+    div.className = 'music-card';
+    div.innerHTML = `
+      <div class="music-num">${romans[i]||i+1}</div>
+      <div class="music-info">
+        <h4>"${pick.title}" — ${pick.artist}</h4>
+        <div class="music-artist">${pick.year||''} · ${pick.origin||''}</div>
+        ${genreTags}
+        <div class="music-why">${pick.why||''}</div>
+        ${pick.spotify?`<a href="${pick.spotify}" target="_blank" style="font-family:'Caveat',cursive;font-size:12px;color:#e8a87c;text-decoration:none;display:inline-block;margin-top:4px;">▶ listen on spotify</a>`:''}
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+// MIXTAPE — uses real CMS content
+function shuffleMixtape() {
+  const essays = allEssays.length > 0 ? allEssays : [{title:'your first essay (coming soon)'}];
+  const songs = allSongs.length > 0 ? allSongs : [{title:'your first pick', artist:'coming soon'}];
+  const e = essays[Math.floor(Math.random()*essays.length)];
+  const s = songs[Math.floor(Math.random()*songs.length)];
+  document.getElementById('mt-essay').textContent = e.title;
+  document.getElementById('mt-song').textContent = `"${s.title}" — ${s.artist}`;
+  const r = document.getElementById('mixtape-result');
+  r.classList.remove('visible');
+  setTimeout(()=>r.classList.add('visible'), 50);
+}
+
+// NOW PLAYING — cycles through real music picks
+function startNowPlayingTicker(picks) {
+  if (!picks || picks.length === 0) return;
+  const tracks = ['now playing: wherever the music takes us', ...picks.map(p=>`"${p.title}" — ${p.artist}`)];
+  let idx = 0;
+  setInterval(()=>{
+    idx = (idx+1) % tracks.length;
+    const el = document.getElementById('np-ticker');
+    if (el) {
+      el.style.opacity = '0';
+      setTimeout(()=>{
+        el.textContent = tracks[idx];
+        el.style.opacity = '1';
+        el.style.transition = 'opacity 0.6s';
+      }, 400);
+    }
+  }, 5000);
+}
+
+// init
+loadSidebar();
+loadAbout();
+loadEssays();
+loadMusicPicks();
+
+// CURSOR
 const cursor = document.getElementById('cursor');
 const noteChars = ['♪','♫','♩','♬'];
 const trails = [];
@@ -429,7 +562,7 @@ for(let i=0;i<20;i++){
   pl.appendChild(p);
 }
 
-// EASTER EGG NOTES
+// EASTER EGG
 document.querySelectorAll('.magic-word').forEach(el=>{
   el.addEventListener('mouseenter',e=>{
     const n=document.createElement('div');n.className='egg-note';
@@ -443,12 +576,12 @@ document.querySelectorAll('.magic-word').forEach(el=>{
 
 // MOOD WHEEL
 const moods=[
-  {label:'nostalgic',color:'#7b4a8c',song:'something slow and warm',why:'for when you need to feel everything slowly'},
-  {label:'euphoric',color:'#c45c2a',song:'something that makes you move',why:'pure joy, no explanations needed'},
-  {label:'defiant',color:'#8c2a4a',song:'something with conviction',why:'for when you need to believe it'},
-  {label:'searching',color:'#2a6c8c',song:'something patient and open',why:'for questions without answers yet'},
-  {label:'electric',color:'#4a7a2a',song:'something that crackles',why:'when you need to move and feel alive'},
-  {label:'tender',color:'#8c6a2a',song:'something soft',why:'soft and still and present'},
+  {label:'nostalgic',color:'#7b4a8c',why:'for when you need to feel everything slowly'},
+  {label:'euphoric',color:'#c45c2a',why:'pure joy, no explanations needed'},
+  {label:'defiant',color:'#8c2a4a',why:'for when you need to believe it'},
+  {label:'searching',color:'#2a6c8c',why:'for questions without answers yet'},
+  {label:'electric',color:'#4a7a2a',why:'when you need to move and feel alive'},
+  {label:'tender',color:'#8c6a2a',why:'soft and still and present'},
 ];
 const canvas=document.getElementById('mood-canvas');
 const ctx=canvas.getContext('2d');
@@ -485,20 +618,15 @@ function spinWheel(){
       const slice=(Math.PI*2)/moods.length;
       const idx=Math.floor(((Math.PI*2-norm)%(Math.PI*2))/slice)%moods.length;
       const m=moods[idx];
-      document.getElementById('mood-result').innerHTML='<strong>'+m.label+'</strong>'+m.song+'<br><span style="font-size:11px;color:#7a6070;">'+m.why+'</span>';
+      let songDisplay='something that matches the feeling';
+      if(allSongs.length>0){
+        const pick=allSongs[Math.floor(Math.random()*allSongs.length)];
+        songDisplay=`"${pick.title}" — ${pick.artist}`;
+      }
+      document.getElementById('mood-result').innerHTML='<strong>'+m.label+'</strong>'+songDisplay+'<br><span style="font-size:11px;color:#7a6070;">'+m.why+'</span>';
     }
   }
   requestAnimationFrame(step);
-}
-
-// MIXTAPE
-const essayTitles=["add your first essay to see it here"];
-const songTitles=["add your first music pick to see it here"];
-function shuffleMixtape(){
-  document.getElementById('mt-essay').textContent=essayTitles[Math.floor(Math.random()*essayTitles.length)];
-  document.getElementById('mt-song').textContent=songTitles[Math.floor(Math.random()*songTitles.length)];
-  const r=document.getElementById('mixtape-result');
-  r.classList.remove('visible');setTimeout(()=>r.classList.add('visible'),50);
 }
 
 // GUESTBOOK
@@ -520,16 +648,11 @@ function showSection(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('section-'+id).classList.add('active');btn.classList.add('active');
+  if(id==='blog'){
+    document.getElementById('essays-container').style.display='block';
+    document.getElementById('essay-full').style.display='none';
+  }
 }
-
-// NOW PLAYING TICKER
-const tracks=['now playing: wherever the music takes us','sarahtonin sounds: where music lives','music · culture · community'];
-let npIdx=0;
-setInterval(()=>{
-  npIdx=(npIdx+1)%tracks.length;
-  const el=document.getElementById('np-ticker');
-  if(el){el.style.opacity='0';setTimeout(()=>{el.textContent=tracks[npIdx];el.style.opacity='1';el.style.transition='opacity 0.6s';},400);}
-},5000);
 
 // HIT COUNTER
 let c=420;
