@@ -12,6 +12,18 @@ collections:
     label: "⚙️ Site Settings"
     files:
 
+      - name: general
+        label: "📢 Marquee & Themes"
+        file: settings/general.json
+        format: json
+        fields:
+          - { label: "Marquee Text", name: marquee_text, widget: string, hint: "The scrolling text at the top of the site. Use ✦ between phrases." }
+          - label: "Theme Tags (sidebar)"
+            name: themes
+            widget: list
+            field: { label: Tag, name: tag, widget: string }
+            hint: "The clickable tags shown in the sidebar under Themes"
+
       - name: banner
         label: "🔔 Banner"
         file: settings/banner.json
