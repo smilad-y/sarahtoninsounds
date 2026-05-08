@@ -1,0 +1,16 @@
+{
+  "links": [
+    { "label": "OkayAfrica", "url": "https://okayafrica.com" },
+    { "label": "Pitchfork", "url": "https://pitchfork.com" },
+    { "label": "Red Bull Music Archive", "url": "https://www.redbullmusicacademy.com" },
+    { "label": "FACT Magazine", "url": "https://factmag.com" },
+    { "label": "Bandcamp", "url": "https://bandcamp.com" },
+    { "label": "Music Soup", "url": "" },
+    { "label": "Guild of Music Supervisors", "url": "https://guildofmusicsupervisors.com" },
+    { "label": "Afropunk", "url": "https://afropunk.com" },
+    { "label": "NPR Tiny Desk", "url": "https://www.npr.org/series/tiny-desk-concerts/" },
+    { "label": "Wax Poetics", "url": "https://waxpoetics.com" }
+  ],
+  "webring_label": "✦ music culture web ring ✦",
+  "webring_email": "want to join? email me."
+}
