@@ -1,0 +1,22 @@
+{
+  "intro": "You've felt it before — a scene comes on screen and a song hits and everything opens up. That's not an accident. That's music supervision.",
+  "quote": "Music supervision is the art of finding the right song for the right moment — and the craft of making sure it can legally live there.",
+  "pillars": [
+    {
+      "label": "what it actually is",
+      "title": "The Bridge Between Music and Storytelling",
+      "body": "A music supervisor works at the intersection of creative vision and industry infrastructure. We source music for film, TV, advertising, and games — finding tracks that don't just *fit* a scene, but *deepen* it. It demands **an enormous library in your head, genuine emotional intelligence, and a working knowledge of music law** — all at once."
+    },
+    {
+      "label": "why it matters culturally",
+      "title": "Music Supervision as an Act of Preservation",
+      "body": "Music supervisors are **cultural gatekeepers**, whether we like it or not. Done thoughtfully, **it's one of the most powerful tools we have for keeping musical cultures alive and in conversation with each other.**"
+    }
+  ],
+  "steps": [
+    { "title": "Creative Brief", "body": "Understanding the story — the tone, the era, the character's emotional state, what the director wants the audience to feel." },
+    { "title": "Search & Discovery", "body": "Digging through catalogs, reaching out to publishers and indie artists, pulling from years of deep listening. This is where taste lives." },
+    { "title": "Clearance & Licensing", "body": "Every song has two copyrights — master and composition. Both need clearing. Negotiating with labels, publishers, and sometimes the artists themselves." },
+    { "title": "Cue Sheets & Administration", "body": "After the show airs, cue sheets are filed with PROs so that everyone who made the music actually gets paid." }
+  ]
+}
