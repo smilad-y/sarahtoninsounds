@@ -12,17 +12,17 @@
     },
     {
       "label": "nostalgic",
-      "color": "d5b272",
+      "color": "#d5b272",
       "why": "it's old. but could be new to you. "
     },
     {
       "label": "cinematic",
-      "color": "008afc",
+      "color": "#008afc",
       "why": "dramatic for no reason besides wanting to be dramatic"
     },
     {
       "label": "tender",
-      "color": "fdb1c9",
+      "color": "#fdb1c9",
       "why": "loving. sweet. soft. "
     },
     {
@@ -32,7 +32,7 @@
     },
     {
       "label": "defiant",
-      "color": "AE0101",
+      "color": "#AE0101",
       "why": "tap into the rage"
     }
   ]
