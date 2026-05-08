@@ -1,6 +1,6 @@
 {
-  "enabled": false,
-  "text": "✦ new music picks just dropped — come listen",
+  "enabled": true,
+  "text": "✦ new music picks just dropped — come listen ",
   "link": "",
   "bg_color": "#7b2d5e",
   "text_color": "#fde8c8"
