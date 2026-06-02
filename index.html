@@ -704,13 +704,15 @@ function spinWheel(){
       const idx=Math.floor(((Math.PI*2-norm)%(Math.PI*2))/slice)%moods.length;
       const m=moods[idx];
       document.getElementById('mood-result').innerHTML='<strong>'+m.label+'</strong><span style="color:#7a6070;font-size:12px;">finding a track...</span><br><span style="font-size:11px;color:#7a6070;">'+m.why+'</span>';
-      getSongsForMood(m.label).then(songs => {
+      const realMoods=['dreamy','whimsical','rage','sensual','heartache','electric','tender','euphoric','swagger','baddie'];
+      const moodToLoad = m.label==='wildcard' ? realMoods[Math.floor(Math.random()*realMoods.length)] : m.label;
+      getSongsForMood(moodToLoad).then(songs => {
         let songDisplay='something that matches the feeling';
         if(songs.length>0){
           const pick=songs[Math.floor(Math.random()*songs.length)];
           songDisplay=`"${pick.title}" — ${pick.artist}`;
         }
-        document.getElementById('mood-result').innerHTML='<strong>'+m.label+'</strong>'+songDisplay+'<br><span style="font-size:11px;color:#7a6070;">'+m.why+'</span>';
+        document.getElementById('mood-result').innerHTML='<strong>'+m.label+'</strong> <span style="font-size:13px;color:#f5c8a0;">'+songDisplay+'</span><br><span style="font-size:11px;color:#7a6070;">'+m.why+'</span>';
       });
     }
   }
