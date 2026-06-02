@@ -661,6 +661,13 @@ async function loadWheelSettings() {
 
 const canvas = document.getElementById('mood-canvas');
 const ctx = canvas.getContext('2d');
+const DPR = window.devicePixelRatio || 1;
+const SIZE = 150;
+canvas.width = SIZE * DPR;
+canvas.height = SIZE * DPR;
+canvas.style.width = SIZE + 'px';
+canvas.style.height = SIZE + 'px';
+ctx.scale(DPR, DPR);
 const CX=75,CY=75,R=68;
 let spinAngle=0,spinning=false;
 
