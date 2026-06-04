@@ -511,8 +511,17 @@ async function loadLinks() {
 // ── ESSAYS ──
 async function loadEssays() {
   try {
-    const res = await fetch('/essays/index.json?v=' + Date.now());
-    if (res.ok) { allEssays = await res.json(); renderEssays(allEssays); }
+    const indexRes = await fetch('/essays/index.json?v=' + Date.now());
+    if (!indexRes.ok) return;
+    const slugs = await indexRes.json();
+    const essays = await Promise.all(
+      slugs.map(slug =>
+        fetch(`/essays/${slug}.json?v=` + Date.now())
+          .then(r => r.ok ? r.json() : null)
+      )
+    );
+    allEssays = essays.filter(Boolean);
+    renderEssays(allEssays);
   } catch(e) {}
 }
 
