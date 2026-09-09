@@ -19,13 +19,13 @@
 
 <main id="main" class="hero">
   <!--
-    Home video background pending final asset: Sarah's edited
-    "video option 1" vinyl/turntable footage (ASSET-MANIFEST.md §1).
-    The <source> below is commented out until the file is supplied;
-    the near-black background in css/home.css is the fallback until then.
+    Home video background: Sarah's edited "video option 1" vinyl/
+    turntable footage (ASSET-MANIFEST.md §1). No poster attribute yet —
+    no approved poster asset exists; the near-black background in
+    css/home.css covers the load-in gap.
   -->
   <video class="hero-video" muted loop playsinline autoplay aria-hidden="true">
-    <!-- <source src="/assets/video/home-loop.mp4" type="video/mp4"> -->
+    <source src="/assets/video/home-loop.mp4" type="video/mp4">
   </video>
 
   <header class="site-header">
@@ -41,9 +41,9 @@
   </header>
 
   <h1 class="wordmark-heading">
-    <!-- Never redesign/reconstruct the wordmark — image asset only,
-         pending Sarah's exact supplied file (ASSET-MANIFEST.md §1). -->
-    <img class="wordmark" src="/assets/images/wordmark-gold.svg" alt="Sarahtonin Sounds" width="420" height="140">
+    <!-- Never redesign/reconstruct the wordmark — real supplied asset,
+         used as-is (ASSET-MANIFEST.md §1). -->
+    <img class="wordmark" src="/assets/images/wordmark-gold.svg" alt="Sarahtonin Sounds" width="1371" height="510">
   </h1>
 
   <p class="hero-note hero-note--discover">discover music!</p>
