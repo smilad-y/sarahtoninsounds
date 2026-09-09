@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal · Sarahtonin Sounds</title>
+<meta name="description" content="Essays and Monthly Favorites from Sarahtonin Sounds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout.css">
+<link rel="stylesheet" href="/css/journal.css">
+</head>
+<body class="page-journal">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="primary-nav" aria-label="Primary">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/listen.html">Listen</a></li>
+      <li><a href="/journal.html" aria-current="page">Journal</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main" class="journal-page">
+  <h1>Journal</h1>
+  <!-- Small handwritten-style line beneath the heading is pending
+       finalized copy (PROJECT-SPEC.md §8) — not invented here. -->
+
+  <div class="journal-filters" role="group" aria-label="Filter journal entries">
+    <!-- Filtering logic is a later phase (BUILD-ROADMAP.md Phase 7);
+         buttons are structural only for now, not wired to any behavior. -->
+    <button type="button" aria-pressed="true">All</button>
+    <button type="button" aria-pressed="false">Essays</button>
+    <button type="button" aria-pressed="false">Monthly Favs</button>
+  </div>
+
+  <div class="journal-entries">
+    <!-- Legacy essays/ JSON content is PRESERVE-only per the fresh-start
+         rule and is not migrated here without explicit approval. -->
+    <p>New essays and Monthly Favorites are on the way.</p>
+  </div>
+</main>
+
+<script src="/js/site.js" defer></script>
+</body>
+</html>

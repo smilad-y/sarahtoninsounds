@@ -1,0 +1,74 @@
+/* Shared site chrome (header/nav) + generic page layout/responsive
+   container. Nav markup is duplicated per page — there's no build
+   step/templating in this plain HTML/CSS/JS site — but it's styled and
+   behaves identically everywhere via this shared file. */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-4);
+  min-height: var(--nav-height);
+}
+
+.primary-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-5);
+}
+
+.primary-nav a {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+}
+
+.primary-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.primary-nav a:hover {
+  text-decoration: underline;
+}
+
+/* Generic content container + responsive rhythm for every page except
+   Home, which opts out via body.page-home / main.hero overrides in
+   css/home.css (single-viewport, no-scroll cover). */
+main {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+}
+
+main.hero {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+main section + section {
+  margin-top: var(--space-7);
+}
+
+@media (max-width: 600px) {
+  main:not(.hero) {
+    padding: var(--space-5) var(--space-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .primary-nav ul {
+    gap: var(--space-1) var(--space-3);
+  }
+  .primary-nav a {
+    font-size: var(--text-xs);
+    padding: var(--space-1) var(--space-2);
+  }
+}

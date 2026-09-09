@@ -1,0 +1,86 @@
+/* Home — single-viewport, no-scroll cinematic cover (PROJECT-SPEC.md §6).
+   This is structural foundation only; full visual polish is Phase 2. */
+
+html:has(body.page-home),
+body.page-home {
+  height: 100%;
+}
+
+body.page-home {
+  margin: 0;
+  overflow: hidden;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-near-black); /* fallback until the video asset is supplied */
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero .site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.hero .site-header a {
+  color: var(--color-cream);
+}
+
+.wordmark-heading {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.wordmark {
+  max-width: min(80vw, 420px);
+  height: auto;
+}
+
+.hero-note {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--font-marginalia);
+  color: var(--color-cream);
+  font-size: var(--text-lg);
+}
+
+.hero-note--discover {
+  top: calc(var(--nav-height) + var(--space-5));
+  left: var(--space-5);
+}
+
+.hero-note--credit {
+  bottom: var(--space-5);
+  right: var(--space-5);
+}
+
+@media (max-width: 600px) {
+  .hero-note--discover {
+    top: calc(var(--nav-height) + var(--space-3));
+    left: var(--space-3);
+    font-size: var(--text-base);
+  }
+  .hero-note--credit {
+    bottom: var(--space-3);
+    right: var(--space-3);
+    font-size: var(--text-base);
+  }
+}

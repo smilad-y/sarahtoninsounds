@@ -1,0 +1,68 @@
+/* Design tokens — Sarahtonin Sounds
+   Source: PROJECT-SPEC.md §3-5, ASSET-MANIFEST.md §11
+
+   IMPORTANT: only --color-cream has a confirmed hex value in the spec
+   docs. Near-black, gold, crimson, and the secondary accents below are
+   PROVISIONAL placeholders so the foundation renders coherently — they
+   are not approved brand colors. Replace with Sarah's confirmed values
+   (ideally sourced from the actual gold wordmark asset once supplied)
+   before any visual-polish phase ships. */
+
+:root {
+  /* Color — core palette */
+  --color-cream: #ded7c1;         /* confirmed: PROJECT-SPEC.md §4 Journal background direction */
+  --color-near-black: #1c1a16;    /* provisional */
+  --color-gold: #c9a227;          /* provisional — confirm against wordmark asset */
+  --color-crimson: #9e1b32;       /* provisional */
+
+  /* Color — secondary accents (use selectively, not all at once) */
+  --color-dusty-pink: #d9a7a0;    /* provisional */
+  --color-powder-blue: #a9c4d1;   /* provisional */
+  --color-olive: #7c7a4a;         /* provisional */
+  --color-lavender: #b7a8c9;      /* provisional */
+
+  /* Color — semantic aliases */
+  --color-bg: var(--color-cream);
+  --color-text: var(--color-near-black);
+  --color-accent: var(--color-gold);
+  --color-focus-ring: var(--color-gold);
+
+  /* Typography — families
+     Fallback stacks are generic placeholders until licensed font files
+     and hosting rights are confirmed (ASSET-MANIFEST.md §11). IM Fell
+     English is the exception: it's openly licensed (SIL OFL) and is
+     actually loaded via Google Fonts in every page <head>. */
+  --font-display: 'Perandory Semi-Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'IM Fell English', Georgia, serif;
+  --font-marginalia: 'Sue Ellen Francisco', cursive;
+  --font-logo-script: 'Amoresa', 'Luxurious Script', cursive; /* reserved — see note in assets/fonts/README.md; never used to reconstruct the wordmark itself */
+
+  /* Typography — scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+  --text-3xl: 3.5rem;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Radius / borders — generic, not tied to a specific tactile treatment yet */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --border-thin: 1px solid currentColor;
+
+  /* Layout */
+  --content-max-width: 72rem;
+  --nav-height: 4rem;
+}
