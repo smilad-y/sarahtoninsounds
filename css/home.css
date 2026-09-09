@@ -1,7 +1,6 @@
 /* Home — single-viewport, no-scroll cinematic cover (PROJECT-SPEC.md §6).
    This is structural foundation only; full visual polish is Phase 2. */
 
-html:has(body.page-home),
 body.page-home {
   height: 100%;
 }

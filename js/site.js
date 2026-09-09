@@ -16,6 +16,10 @@
       heroVideo.pause();
     } else {
       heroVideo.loop = true;
+      var playPromise = heroVideo.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function () {});
+      }
     }
   }
 
