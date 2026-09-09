@@ -1,6 +1,13 @@
 # Sarahtonin Sounds — Asset & Data Manifest
 **Version:** v2
 
+## 0. Content Philosophy — Fresh Start by Default
+The new site starts fresh on content (see `PROJECT-SPEC.md` §2 for the full statement). Two statuses apply throughout this manifest:
+- **PRESERVE** — default for all legacy content/data. Kept safely in the legacy/archive location; not used on the current site.
+- **MIGRATE** — only for a specific item Sarah has explicitly approved. Quality or reusability alone never qualifies something for migration.
+
+Unless a manifest entry below is explicitly marked as approved/current, treat it as PRESERVE only.
+
 ## 1. Signature / Must Preserve
 ### Sarahtonin Sounds gold wordmark
 **Status:** Existing asset; use exact supplied version.  
@@ -87,9 +94,9 @@ The old repo may include:
 - `settings/wheel.json`
 - `essays/` JSON files
 
-These may contain valuable real copy/content. Inspect them before replacing old architecture.
+**PRESERVE only by default.** These stay safely in the legacy/archive location. None of this content moves onto the current site automatically, however usable or well-written it is — it migrates only if Sarah explicitly approves a specific item.
 
-**Important:** The old Netlify CMS setup is not automatically approved for the rebuilt site. Reuse content first; retain or replace the CMS only after evaluating the current editing needs.
+**Important:** The old Netlify CMS setup is not automatically approved for the rebuilt site. Preserve its content by default; retain, replace, or simplify the CMS itself only after evaluating the current editing needs — independent of whether any of its content is ever migrated.
 
 ## 6. Playlist / Track Data
 **Source of truth: Sarah's manually curated Spotify playlists.** The legacy library (Section 4) is not a data source for this — do not pull from it, migrate it, or use it to seed or fill in playlists.
@@ -102,9 +109,7 @@ Expect a relatively small, hand-maintained set of curated playlists. Each entry 
 - Spotify playlist URL or ID
 - optional track/display metadata as needed for the turntable/player experience
 
-The two curated single-song picks worth preserving into whatever this structure becomes:
-- The Turnstile entry in `music-picks/index.json`
-- The orphaned Zappa "Watermelon in Easter Hay" entry in `music-picks/watermelon-in-easter-hay.md`
+The two legacy curated single-song picks — the Turnstile entry in `music-picks/index.json` and the orphaned Zappa "Watermelon in Easter Hay" entry in `music-picks/watermelon-in-easter-hay.md` — are **PRESERVE only**. Sarah does not recognize them as current content; they stay archived and do not migrate into this structure unless she explicitly approves them.
 
 Do not invent final playlist descriptions before mood taxonomy is stable.
 
@@ -113,9 +118,9 @@ Do not invent final playlist descriptions before mood taxonomy is stable.
 Keep separate from mood playlists.
 
 ## 8. Journal Assets
-- Real essay titles, dates, excerpts, and article copy.
+- Real essay titles, dates, excerpts, and article copy — from content Sarah explicitly finalizes for the current site.
 - Monthly Favorites content and associated artwork/images.
-- Legacy `essays/` JSON files may contain reusable editorial content.
+- Legacy `essays/` JSON files (including the existing "My 12 Song Submission" essay) are **PRESERVE only** by default; none of it migrates into the current Journal unless Sarah explicitly approves a specific piece.
 - Optional halftone/editorial imagery per article where meaningful.
 - Mockup placeholder titles/images are not final unless Sarah explicitly adopts them.
 

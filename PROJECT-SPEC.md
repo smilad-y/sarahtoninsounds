@@ -69,14 +69,20 @@ A Spotify-derived music library of **8,653 verified songs** (not the earlier ~10
 
 The live Listen experience is instead sourced from Sarah's manually curated Spotify playlists — see §7.
 
-### Migration rule
-Treat the legacy site as a **source of reusable content, data, implementation ideas, and assets — not as the current product specification**.
+### Content philosophy: fresh start by default
+**The new site starts fresh on content.** It is built from `PROJECT-SPEC.md` / `ASSET-MANIFEST.md` / `BUILD-ROADMAP.md`, assets Sarah provides, the Spotify playlists Sarah is currently curating, and copy that has been explicitly finalized in this process. The legacy site is not a content source by default — it is a reference for architecture/implementation ideas only, not the current product specification.
+
+Two distinct statuses apply to every piece of legacy code/data/content:
+- **PRESERVE** — the default status for all legacy material (essays, song picks, copy, links, playlist content, CMS fields, implementation code, and any other editorial material). It stays safely in the legacy/archive location so nothing is lost. Preservation alone does not put it on the current site.
+- **MIGRATE** — reserved for a specific legacy item Sarah has explicitly approved for the current site. Being usable, well-written, or otherwise good is not sufficient justification on its own; approval must be explicit and item-specific.
+
+This applies even to previously-flagged high-quality content: for example, the Turnstile and Zappa "Watermelon in Easter Hay" picks are PRESERVE-only (archived) — Sarah does not recognize them as current content, so they do not migrate unless and until she explicitly approves them.
 
 Before deleting or replacing legacy code/data:
 1. inspect it;
-2. identify reusable content/data;
-3. preserve anything valuable;
-4. migrate intentionally into the current structure.
+2. preserve it (archive location, untouched);
+3. do not migrate it unless Sarah has explicitly approved that specific item;
+4. if migration is approved, bring it in deliberately into the current structure.
 
 ## 3. Core Design Principle
 **Clean structure + weird/tactile decoration.**
@@ -364,5 +370,5 @@ When proposing or implementing anything:
 6. Use real content and Sarah-specific annotations rather than generic decorative copy.
 7. Do not redesign the wordmark.
 8. Do not introduce a framework without a concrete justification.
-9. Treat legacy implementation details as migration inputs, not current requirements.
-10. Preserve legacy content/data before replacing old architecture.
+9. Treat legacy implementation details as reference/preservation inputs, not automatic migration candidates or current requirements.
+10. Preserve legacy content/data by default; migrate a specific item into the current site only when Sarah has explicitly approved it — usability or quality alone is not approval.

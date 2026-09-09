@@ -3,7 +3,13 @@
 Read `PROJECT-SPEC.md` before making design, content, architecture, or implementation decisions. Treat it as the current source of truth.
 
 ## Core role
-You are continuing an already-developed Sarahtonin Sounds project. Your job is to implement and refine the current approved direction, while safely migrating any useful content/data from an older site implementation.
+You are continuing an already-developed Sarahtonin Sounds project. Your job is to implement and refine the current approved direction.
+
+**Content philosophy: fresh start by default.** The new site's content comes from `PROJECT-SPEC.md` / `ASSET-MANIFEST.md` / `BUILD-ROADMAP.md`, assets Sarah provides, the Spotify playlists she is currently curating, and copy explicitly finalized in this process — not from the legacy site. Legacy content/data is safely preserved, never migrated by default.
+
+Two distinct statuses apply to every piece of legacy code/data/content:
+- **PRESERVE** — the default for all legacy material (essays, song picks, copy, links, playlist content, CMS fields, implementation code, anything else). Kept safely in the legacy/archive location so nothing is lost. Preservation alone does not put it on the current site.
+- **MIGRATE** — only for a specific legacy item Sarah has explicitly approved for the current site. Being usable, well-written, or otherwise good is not sufficient justification by itself.
 
 ## Critical distinction: CURRENT vs LEGACY
 There is an older Sarahtonin Sounds site/codebase. It may contain valuable music data, essays, CMS content, and implementation logic.
@@ -23,11 +29,11 @@ The current project uses a different site structure, visual system, typography, 
 
 Before removing legacy code/data:
 1. inspect it;
-2. identify reusable content/data;
-3. preserve anything valuable;
-4. migrate deliberately.
+2. preserve it in the legacy/archive location, untouched;
+3. do not migrate it into the current site unless Sarah has explicitly approved that specific item;
+4. if approved, migrate it deliberately into the current structure.
 
-A Spotify-derived library of about **10,047 songs** may exist in the legacy project. Treat this as potentially important source data. Do not discard it and do not assume its old mood tags map cleanly to the new mood system.
+A Spotify-derived library of **8,653 verified songs** (the earlier ~10,047 estimate is unconfirmed and should not be treated as a gap to fill) exists in the legacy project. It is PRESERVE-only, archive/reference data — it does not feed the current Listen experience, is not remapped into the current mood taxonomy, and is not used to generate or seed playlists.
 
 ## Non-negotiables
 - Preserve Sarah's established Sarahtonin Sounds gold wordmark. Never redesign, reconstruct, or substitute it.
@@ -75,11 +81,11 @@ Use:
 ## Migration behavior
 If the existing GitHub repo contains the legacy site:
 - audit before rewriting;
-- preserve reusable JSON/content;
+- preserve all legacy JSON/content in the archive by default — this is not conditional on quality;
 - identify CMS dependencies;
-- identify which content can migrate cleanly;
+- do not migrate content merely because it *could* migrate cleanly — migrate only items Sarah has explicitly approved for the current site;
 - document any destructive change before making it;
-- prefer incremental migration over wiping data blindly.
+- never wipe legacy data; preservation is the default outcome, not migration.
 
 The old Netlify CMS setup is not automatically part of the new architecture. Keep, replace, or simplify it only after evaluating whether it still serves the current site.
 

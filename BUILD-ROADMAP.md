@@ -6,6 +6,14 @@
 
 Guestbook is Phase 2 and must not block launch.
 
+## Content Philosophy — Fresh Start by Default
+The new site is built from `PROJECT-SPEC.md` / `ASSET-MANIFEST.md` / `BUILD-ROADMAP.md`, assets Sarah provides, the Spotify playlists she is currently curating, and copy explicitly finalized in this process — not from the legacy site.
+
+- **PRESERVE** = default status for all legacy content (essays, song picks, copy, links, playlist content, CMS fields, other editorial material). Kept safely in the legacy/archive location so nothing is lost. This is not conditional on quality.
+- **MIGRATE** = only for a specific legacy item Sarah has explicitly approved for the current site. Being usable or well-written is not approval.
+
+This includes the Turnstile and Zappa "Watermelon in Easter Hay" picks: Sarah does not recognize them as current content, so they remain PRESERVE-only/archived unless she explicitly says otherwise.
+
 ## Phase 0 — Legacy Audit / Preservation
 ### Must have
 Before rebuilding or deleting anything in the existing repo:
@@ -89,7 +97,7 @@ Possible outcomes:
 - Decide where this data lives (a new location, separate from legacy `music-picks/`).
 - Build the schema so mood/category is config-driven, not hardcoded — the taxonomy must be able to change without rewriting the page (see `PROJECT-SPEC.md` §7).
 - Populate initial entries only from Sarah's actual curated Spotify playlists, as they exist.
-- Migrate in the two existing genuinely-curated legacy picks (Turnstile; the orphaned Zappa "Watermelon in Easter Hay" entry) into this new structure, since they contain real written curation.
+- Do not migrate the legacy Turnstile or Zappa "Watermelon in Easter Hay" picks, or any other legacy content, into this structure by default — they remain PRESERVE-only/archived unless Sarah explicitly approves a specific item for the current site.
 - Decide and document the Spotify integration method for playback/tracklist display (embed vs. Web API vs. Web Playback SDK) before building Phase 5 UI on top of it.
 
 ### Goal
@@ -122,7 +130,7 @@ Final labels/descriptors and some artwork depend on continued sorting/remapping 
 
 ## Phase 7 — Journal
 ### Must have
-- Inspect/migrate any useful legacy essay JSON.
+- Inspect legacy essay JSON for reference; do not migrate any of it into the current Journal unless Sarah explicitly approves a specific essay.
 - Journal landing page.
 - Reverse chronological content.
 - All / Essays / Monthly Favs filters.
@@ -189,6 +197,7 @@ These are intentionally not finalized and should not be guessed:
 - Spotify integration method for playback/tracklist display (embed vs. Web API vs. Web Playback SDK)
 - exact playlist playback/data integration
 - curated-playlist metadata file location/structure
+- which specific legacy items, if any, Sarah explicitly approves for migration (none are approved by default)
 - whether legacy Netlify CMS is kept, changed, or retired
 - final Crash Course topics
 - final Journal production content
