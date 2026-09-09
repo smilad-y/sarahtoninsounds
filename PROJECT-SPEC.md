@@ -58,13 +58,16 @@ The older site used:
 
 These are **legacy design decisions, not current requirements**. Do not reintroduce them automatically.
 
-### Legacy data worth preserving
-A Spotify-derived music library of approximately **10,047 songs** exists or existed in the prior implementation, with songs tagged/split by the older mood system.
+### Legacy data — archive/reference only, not a Listen data source
+A Spotify-derived music library of **8,653 verified songs** (not the earlier ~10,047 estimate) exists in the prior implementation, tagged/split by the older mood system.
 
-**Important:** Preserve and inspect this library if it is available. The source data may be extremely valuable for the current Listen experience. However:
-- do not assume the old eight-mood assignments map cleanly to the current mood taxonomy;
-- do not discard the library just because the taxonomy changed;
-- migrate or remap real songs deliberately.
+**Decision:** This library is preserved as archive/source data only. It is **not** used to populate, seed, or remap the live Listen experience:
+- preserve the library and its original legacy mood tags exactly as-is, untouched;
+- do not migrate, remap, or retag it into the current taxonomy;
+- do not use it to generate or fill in playlists;
+- keep it available purely for future reference if Sarah wants to draw on it later.
+
+The live Listen experience is instead sourced from Sarah's manually curated Spotify playlists — see §7.
 
 ### Migration rule
 Treat the legacy site as a **source of reusable content, data, implementation ideas, and assets — not as the current product specification**.
@@ -162,6 +165,19 @@ A single-viewport, no-scroll cinematic cover for the site.
 ## 7. Listen
 ### Role
 The main interactive music-curation experience and signature functional page.
+
+### Data source
+**Sarah's manually curated Spotify playlists are the sole source of truth for the live Listen experience.** The legacy 8,653-track library is archive-only (see §2) and does not feed this page — no migration, remapping, or auto-population from it.
+
+Expect a relatively small, hand-maintained set of curated playlists. Each needs metadata such as:
+- mood/category
+- display name
+- short descriptor
+- artwork/icon
+- Spotify playlist URL or ID
+- optional track/display metadata as needed for the turntable/player experience
+
+This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (§ below) can keep evolving without rewriting the page. Crash Courses are a separate curated playlist/content system — do not fold them into mood playlist data.
 
 ### Desktop flow
 1. Pick Your Mood

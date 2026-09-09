@@ -81,17 +81,19 @@ Possible outcomes:
 - Old full dark bio card.
 - Professional credits list unless Sarah reactivates it.
 
-## Phase 4 — Listen Data Migration
+## Phase 4 — Listen Playlist Data Setup
+**Note:** This phase no longer involves the legacy song library. The legacy library (Section 4 of `ASSET-MANIFEST.md`) is archive/reference only — it is not migrated, remapped, or otherwise pulled into the live Listen experience. No mood-mapping work is needed or wanted.
+
 ### Must have
-- Inspect legacy song JSON structure.
-- Preserve original legacy mood assignments.
-- Define a reversible mapping/remapping process.
-- Identify fields needed for current player/tracklist.
-- Determine what data is missing for the new UI.
-- Avoid forcing old eight-mood taxonomy into the new system.
+- Define the curated-playlist metadata schema: mood/category, display name, short descriptor, artwork/icon, Spotify playlist URL or ID, optional track/display metadata for the turntable/player.
+- Decide where this data lives (a new location, separate from legacy `music-picks/`).
+- Build the schema so mood/category is config-driven, not hardcoded — the taxonomy must be able to change without rewriting the page (see `PROJECT-SPEC.md` §7).
+- Populate initial entries only from Sarah's actual curated Spotify playlists, as they exist.
+- Migrate in the two existing genuinely-curated legacy picks (Turnstile; the orphaned Zappa "Watermelon in Easter Hay" entry) into this new structure, since they contain real written curation.
+- Decide and document the Spotify integration method for playback/tracklist display (embed vs. Web API vs. Web Playback SDK) before building Phase 5 UI on top of it.
 
 ### Goal
-Make the existing library usable by the new Listen experience without losing source information.
+Give the new Listen experience a small, hand-maintained, taxonomy-agnostic data layer sourced entirely from Sarah's manually curated Spotify playlists — independent of the legacy library.
 
 ## Phase 5 — Listen UI Foundation
 ### Must have
@@ -110,7 +112,7 @@ Final labels/descriptors and some artwork depend on continued sorting/remapping 
 
 ## Phase 6 — Listen Content + Crash Courses
 ### Must have
-- Populate active mood playlists from real curated/migrated data.
+- Populate active mood playlists from Sarah's manually curated Spotify playlists (not legacy library data).
 - Finalize descriptors only after taxonomy stabilizes.
 - Add Crash Courses as a clearly separate section.
 - Confirm playback/data integration approach.
@@ -184,8 +186,9 @@ Before implementation, decide:
 These are intentionally not finalized and should not be guessed:
 - final mood count and final public-facing mood names
 - remaining mood icons/descriptors
-- mapping from legacy eight-mood tags to current mood system
+- Spotify integration method for playback/tracklist display (embed vs. Web API vs. Web Playback SDK)
 - exact playlist playback/data integration
+- curated-playlist metadata file location/structure
 - whether legacy Netlify CMS is kept, changed, or retired
 - final Crash Course topics
 - final Journal production content

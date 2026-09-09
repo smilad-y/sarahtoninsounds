@@ -48,31 +48,32 @@ Confirmed icon directions:
 
 Other working moods still require finalized icon/label treatment as taxonomy stabilizes.
 
-## 4. Legacy Music Library — High Priority Migration Asset
-A Spotify-derived music library of approximately **10,047 songs** exists or existed in the previous implementation.
+## 4. Legacy Music Library — Archive / Reference Only (Not Production Source)
+**Update (decision):** A verified repository count of **8,653 songs** exists across the legacy `music-picks/<mood>.json` files (not the earlier ~10,047 estimate — that figure is unconfirmed and the gap should not be invented or reconstructed).
+
+This library is **archive/source data only**. It is explicitly **not** the data source for the live Listen experience.
 
 ### Known legacy organization
-Songs were tagged/split across an older eight-mood system:
+Songs were tagged/split across an older eight-mood system (only 7 of the 8 have files; `defiant.json` does not exist):
 - chill
 - moody
 - nostalgic
 - euphoric
 - tender
-- defiant
+- defiant *(referenced by legacy UI, no corresponding data file)*
 - cinematic
 - electric
 
-Files may include:
-- `music-picks/chill.json`
-- other `music-picks/<mood>.json` files
-- related metadata in legacy JSON/config files
+Files:
+- `music-picks/chill.json`, `cinematic.json`, `electric.json`, `euphoric.json`, `moody.json`, `nostalgic.json`, `tender.json`
+- `music-picks/index.json` (single curated entry) and `music-picks/watermelon-in-easter-hay.md` (orphaned curated entry) — see Section 6.
 
-### Migration rules
-- Preserve the raw source data.
-- Do not overwrite or destroy old mood tagging until migration is verified.
-- Do not assume one-to-one mapping from old to new moods.
-- Build migration/remapping tools/scripts if useful, rather than manually damaging the only source copy.
-- Treat the library as a major reusable asset for the new Listen page.
+### Preservation rules
+- Preserve the raw source data and its original legacy mood tags exactly as-is; do not overwrite, retag, or remap them.
+- Do not migrate, remap, or import this library into the new Listen taxonomy or playlists.
+- Do not use it to generate, seed, or backfill any live playlist.
+- No mood-mapping/remapping tooling is needed for this library — that work is explicitly out of scope.
+- Keep it available for future reference only, in case Sarah wants to draw on it later. Until then it has no production role.
 
 ## 5. Legacy CMS / Content Assets
 The old repo may include:
@@ -91,7 +92,19 @@ These may contain valuable real copy/content. Inspect them before replacing old 
 **Important:** The old Netlify CMS setup is not automatically approved for the rebuilt site. Reuse content first; retain or replace the CMS only after evaluating the current editing needs.
 
 ## 6. Playlist / Track Data
-Populate from real Sarah-curated playlists and/or migrated legacy song data.
+**Source of truth: Sarah's manually curated Spotify playlists.** The legacy library (Section 4) is not a data source for this — do not pull from it, migrate it, or use it to seed or fill in playlists.
+
+Expect a relatively small, hand-maintained set of curated playlists. Each entry needs metadata such as:
+- mood/category (key into the current working taxonomy — see `PROJECT-SPEC.md` §7; not fixed/hardcoded)
+- display name
+- short descriptor
+- artwork/icon
+- Spotify playlist URL or ID
+- optional track/display metadata as needed for the turntable/player experience
+
+The two curated single-song picks worth preserving into whatever this structure becomes:
+- The Turnstile entry in `music-picks/index.json`
+- The orphaned Zappa "Watermelon in Easter Hay" entry in `music-picks/watermelon-in-easter-hay.md`
 
 Do not invent final playlist descriptions before mood taxonomy is stable.
 
@@ -142,7 +155,8 @@ Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Pres
 - Optimized Home video exports/poster.
 - Final active mood count/names/descriptors.
 - Icons for active moods not covered above.
-- Mapping strategy from legacy song tags to current moods.
+- Curated-playlist metadata file structure/location (proposed as a new location separate from legacy `music-picks/`).
+- Spotify integration method for playback/tracklist display (embed player vs. Web API vs. Web Playback SDK) — has real tradeoffs (auth, backend needs, Premium requirements) and needs a decision, not a default.
 - Exact playlist playback/data integration.
 - Whether any part of legacy Netlify CMS remains useful.
 - Crash Course topics/art.
