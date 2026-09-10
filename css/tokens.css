@@ -8,6 +8,19 @@
    (ideally sourced from the actual gold wordmark asset once supplied)
    before any visual-polish phase ships. */
 
+/* Licensed webfont — locally hosted, not a Google Fonts family.
+   Only the Semi-Condensed style was chosen for --font-display, matching
+   PROJECT-SPEC.md §5's approved display treatment. A second file,
+   assets/fonts/Perandory-Condensed.woff2, was also supplied but is not
+   wired up here since Semi-Condensed is the approved style. */
+@font-face {
+  font-family: 'Perandory Semi-Condensed';
+  src: url('/assets/fonts/Perandory-SemiCondensed.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Color — core palette */
   --color-cream: #ded7c1;         /* confirmed: PROJECT-SPEC.md §4 Journal background direction */
@@ -28,10 +41,12 @@
   --color-focus-ring: var(--color-gold);
 
   /* Typography — families
-     Fallback stacks are generic placeholders until licensed font files
-     and hosting rights are confirmed (ASSET-MANIFEST.md §11). IM Fell
-     English is the exception: it's openly licensed (SIL OFL) and is
-     actually loaded via Google Fonts in every page <head>. */
+     Perandory Semi-Condensed is now a locally-hosted licensed webfont
+     (see @font-face above). IM Fell English and Sue Ellen Francisco are
+     loaded via Google Fonts where actually used (Sue Ellen Francisco
+     currently only on index.html's annotations). Amoresa and Luxurious
+     Script remain unloaded/fallback-only — see assets/fonts/README.md —
+     and are never used to reconstruct the wordmark itself. */
   --font-display: 'Perandory Semi-Condensed', 'Arial Narrow', sans-serif;
   --font-body: 'IM Fell English', Georgia, serif;
   --font-marginalia: 'Sue Ellen Francisco', cursive;

@@ -1,32 +1,89 @@
 /* Home — single-viewport, no-scroll cinematic cover (PROJECT-SPEC.md §6).
-   This is structural foundation only; full visual polish is Phase 2. */
+   Phase 2B (revised pass): colored nav pills, real Sue Ellen Francisco
+   annotations, and a paper/tape credit scrap, per the approved Home
+   reference. */
 
-body.page-home {
-  height: 100%;
+:root {
+  /*
+    Approved Home nav pill colors. These are specific to this component
+    only — deliberately NOT written into the global provisional
+    secondary-accent tokens in tokens.css, since those remain unconfirmed
+    for site-wide use and these exact values were approved for the Home
+    nav specifically.
+  */
+  --home-nav-home-bg: #a61e2d;
+  --home-nav-home-text: #ded7c1;
+  --home-nav-about-bg: #d88f9a;
+  --home-nav-about-text: #1c1a16;
+  --home-nav-listen-bg: #d9a928;
+  --home-nav-listen-text: #1c1a16;
+  --home-nav-journal-bg: #91b7c7;
+  --home-nav-journal-text: #1c1a16;
+  --home-nav-contact-bg: #7e8b52;
+  --home-nav-contact-text: #ded7c1;
+
+  /* Paper/tape credit scrap colors — same reasoning as above. */
+  --home-paper-bg: #ede6d6;
+  --home-paper-text: #1c1a16;
+  --home-tape: rgba(166, 30, 45, 0.85);
 }
 
 body.page-home {
   margin: 0;
   overflow: hidden;
+  height: 100vh;    /* legacy fallback */
+  height: 100dvh;   /* modern mobile viewport (accounts for browser chrome) */
 }
 
 .hero {
   position: relative;
-  height: 100vh;
+  height: 100vh;    /* legacy fallback */
+  height: 100dvh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--color-near-black); /* fallback until the video asset is supplied */
+  background: var(--color-near-black); /* fallback while video loads */
 }
 
 .hero-video {
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 60% center; /* keeps the tonearm/label detail in frame on narrow crops */
+}
+
+/*
+  Contrast scrim: the footage loops through a bright cream-colored vinyl
+  label passing through the upper-left/top area (checked across the full
+  40s loop). Text/pills would be unreadable against it without this. A
+  legibility treatment, not content — fades to nothing within the
+  top/bottom ~30-40% of the viewport.
+*/
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero::before {
+  top: 0;
+  height: 38%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+.hero::after {
+  bottom: 0;
+  height: 30%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
 }
 
 .hero .site-header {
@@ -34,52 +91,179 @@ body.page-home {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 3;
 }
 
-.hero .site-header a {
-  color: var(--color-cream);
+/* ── Nav pills (Home only — About/Listen/Journal/Contact keep the plain
+     shared nav style in css/layout.css) ── */
+.hero .primary-nav a {
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 0.3em 0.9em;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
+.hero .primary-nav a:hover {
+  text-decoration: none;
+  filter: brightness(1.08);
+}
+
+.nav-pill--home {
+  background: var(--home-nav-home-bg);
+  color: var(--home-nav-home-text);
+}
+
+.nav-pill--about {
+  background: var(--home-nav-about-bg);
+  color: var(--home-nav-about-text);
+}
+
+.nav-pill--listen {
+  background: var(--home-nav-listen-bg);
+  color: var(--home-nav-listen-text);
+}
+
+.nav-pill--journal {
+  background: var(--home-nav-journal-bg);
+  color: var(--home-nav-journal-text);
+}
+
+.nav-pill--contact {
+  background: var(--home-nav-contact-bg);
+  color: var(--home-nav-contact-text);
+}
+
+/* Hand-drawn-style underline on the active (Home) pill only. */
+.nav-pill--home[aria-current="page"] {
+  position: relative;
+}
+
+.nav-pill--home[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: -5px;
+  height: 5px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 10'%3E%3Cpath d='M1 5 Q9 0 17 5 T33 5 T49 5 T59 5' fill='none' stroke='%23DED7C1' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* ── Wordmark ── */
 .wordmark-heading {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   margin: 0;
 }
 
 .wordmark {
-  max-width: min(80vw, 420px);
+  width: clamp(240px, 42vw, 560px);
+  max-width: 90vw;
   height: auto;
+  /* Legibility only — never alters the artwork's own colors/shape. */
+  filter: drop-shadow(0 2px 18px rgba(0, 0, 0, 0.55));
 }
 
+/* ── "discover new music!" annotation ── */
 .hero-note {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   margin: 0;
   font-family: var(--font-marginalia);
   color: var(--color-cream);
-  font-size: var(--text-lg);
 }
 
 .hero-note--discover {
-  top: calc(var(--nav-height) + var(--space-5));
+  top: calc(var(--nav-height) + var(--space-6));
   left: var(--space-5);
+  max-width: 11ch;
+  color: var(--color-gold);
+  font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+  line-height: 1.2;
+  transform: rotate(-3deg);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
 }
 
-.hero-note--credit {
-  bottom: var(--space-5);
+/* ── "made by: Sarah Milad" paper/tape credit scrap ── */
+.paper-credit {
+  position: absolute;
+  z-index: 2;
+  bottom: var(--space-6);
   right: var(--space-5);
+  width: 172px;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  background: var(--home-paper-bg);
+  color: var(--home-paper-text);
+  transform: rotate(-3deg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  clip-path: polygon(
+    3% 9%, 16% 2%, 34% 6%, 53% 1%, 74% 5%, 94% 0%,
+    100% 19%, 96% 42%, 100% 68%, 95% 90%, 72% 99%, 47% 94%,
+    22% 100%, 5% 89%, 8% 58%, 1% 32%
+  );
+}
+
+.paper-credit__tape {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 60px;
+  height: 22px;
+  transform: translateX(-50%) rotate(5deg);
+  background: var(--home-tape);
+}
+
+.paper-credit__label {
+  margin: 0;
+  font-family: var(--font-marginalia);
+  font-size: var(--text-sm);
+}
+
+.paper-credit__name {
+  margin: 0.1em 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  font-family: var(--font-marginalia);
+  font-size: var(--text-xl);
+}
+
+.paper-credit__heart {
+  flex-shrink: 0;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 600px) {
-  .hero-note--discover {
-    top: calc(var(--nav-height) + var(--space-3));
-    left: var(--space-3);
-    font-size: var(--text-base);
+  .wordmark {
+    width: clamp(200px, 62vw, 340px);
   }
-  .hero-note--credit {
+
+  .hero .primary-nav a {
+    font-size: 0.65rem;
+    padding: 0.28em 0.7em;
+  }
+
+  .hero-note--discover {
+    top: calc(var(--nav-height) + var(--space-4));
+    left: var(--space-3);
+    max-width: 9ch;
+    font-size: clamp(1.4rem, 7vw, 1.9rem);
+  }
+
+  .paper-credit {
     bottom: var(--space-3);
     right: var(--space-3);
-    font-size: var(--text-base);
+    width: 136px;
+    padding: var(--space-3) var(--space-3) var(--space-2);
+  }
+
+  .paper-credit__name {
+    font-size: var(--text-lg);
   }
 }

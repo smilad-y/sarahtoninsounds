@@ -22,24 +22,28 @@ Unless a manifest entry below is explicitly marked as approved/current, treat it
 
 ## 2. Photography
 ### Primary About portrait
-**Status:** Approved.  
+**Status:** Direction approved; candidate files now supplied, exact pick not yet decided.
 **Description:** Black-and-white cutout/halftone portrait; arms up / hand near face.  
 **Use:** Oversized About editorial hero.
+**Available candidates:** `assets/images/about/selfie-bw.png` and 8 more portrait/selfie photos in `assets/images/shared/portraits/` (see that folder's inventory in the asset-integration chat report). Which specific photo fulfills this role is not decided — do not assume a mapping.
 
 ### Secondary About candid
-**Status:** Approved as secondary.  
+**Status:** Direction approved; candidate files now supplied, exact pick not yet decided.
 **Description:** Restaurant-table photo of Sarah.  
 **Treatment:** Orange/gold halftone version is appropriate.  
 **Use:** Smaller snapshot/collage moment, not primary portrait.
+**Available candidates:** `assets/images/shared/portraits/me-at-dinner.png` looks like a plausible match by filename, but this is not a confirmed assignment — decide explicitly rather than assuming.
 
 ## 3. Listen Assets
 ### Turntable / record-player graphic
-**Status:** Signature component; approved source asset exists in project history.  
+**Status:** Signature component; asset now supplied at `assets/images/listen/record-player.png`.
 **Use:** Selected mood/player interaction.  
 **Rule:** Full vinyl appears after selection; mood selector itself remains colored record-label-style buttons.
 
 ### Mood label artwork
 Need/maintain one illustrated circular label per active mood. Preserve original collage colors/textures.
+
+**Status:** 13 colored circle images now supplied in `assets/images/listen/` (berry, black, dark-blue, dark-green, lavendar, light-blue, light-green, orange, peach, pink, purple, red, yellow). Which color maps to which of the 12 working moods is **not decided** — do not assume a mapping; that's a future visual-pass decision. `assets/images/listen/paper.png` (a paper texture) was also supplied, use not yet assigned.
 
 Confirmed icon directions:
 - Dreamy / Daydream — cloud
@@ -130,7 +134,7 @@ Keep separate from mood playlists.
 - Any small decorative elements should come from the established visual library.
 
 ## 10. Visual Texture Library
-Useful reusable assets:
+Useful reusable assets (vocabulary, not a checklist — every page does not need every treatment):
 - warm paper / cream texture
 - kraft paper texture
 - torn-paper edges
@@ -141,14 +145,20 @@ Useful reusable assets:
 - Polaroid/photo scraps
 - halftone treatments
 
-**Rule:** These are a vocabulary, not a checklist. Every page does not need every treatment.
+**Now supplied**, none yet assigned to specific layouts:
+- `assets/images/shared/doodles/` — 15 general doodles (records, stars, sun/moon, cassette).
+- `assets/images/shared/scrapbook-images/` — 15 decorative elements (flowers, sparkles, hearts, constellations).
+- `assets/images/shared/tape/` — 3 tape-strip textures (beige, green, pink).
+- `assets/images/home/`, `assets/images/journal/` — page-specific picks (paper/tape/star textures) already pulled from the shared pools above; see the asset-integration chat report for the full inventory.
+
+Treat these as raw material for the next visual pass — nothing here has been placed on any page yet.
 
 ## 11. Fonts / Licensing
-- Perandory Semi-Condensed
-- IM Fell English Regular + Italic
-- Sue Ellen Francisco
-- Amoresa for logo S, subject to suitable license
-- Luxurious Script only as fallback for logo S if needed
+- **Perandory Semi-Condensed** — licensed webfont, now locally hosted at `assets/fonts/Perandory-SemiCondensed.woff2` and wired to `--font-display` via `@font-face` in `css/tokens.css`. A second file, `Perandory-Condensed.woff2`, was also supplied but is unused/unassigned (Semi-Condensed is the approved style per §5).
+- IM Fell English Regular + Italic — loaded via Google Fonts.
+- Sue Ellen Francisco — loaded via Google Fonts (Home annotations only).
+- Amoresa for logo S — not yet supplied/licensed; never used to reconstruct the wordmark itself.
+- Luxurious Script only as fallback for logo S if needed — not yet supplied.
 
 Before production deployment, verify webfont licensing/hosting rights for any non-open font. Never redistribute font files in handoff documents.
 
@@ -156,10 +166,11 @@ Before production deployment, verify webfont licensing/hosting rights for any no
 Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Preserve them if they have archival value, but **do not treat them as part of the current visual system** unless Sarah explicitly brings one back.
 
 ## 13. Still To Resolve
-- Exact production filenames and `/assets/` directory organization.
-- Optimized Home video exports/poster.
+- Home poster/fallback image (video itself is resolved — see §1).
 - Final active mood count/names/descriptors.
-- Icons for active moods not covered above.
+- Which of the 13 supplied Listen circle-label images (§3) maps to which working mood.
+- Which supplied About portrait photo (§2) fulfills the primary/secondary roles.
+- How the newly supplied home/journal/shared image pools (§10) get placed into actual page layouts — nothing is assigned yet.
 - Curated-playlist metadata file structure/location (proposed as a new location separate from legacy `music-picks/`).
 - Spotify integration method for playback/tracklist display (embed player vs. Web API vs. Web Playback SDK) — has real tradeoffs (auth, backend needs, Premium requirements) and needs a decision, not a default.
 - Exact playlist playback/data integration.
@@ -168,3 +179,4 @@ Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Pres
 - Journal production content/art.
 - Final contact/social URLs and form handling.
 - Favicon/social-share image set.
+- Whether `assets/fonts/Perandory-Condensed.woff2` (the non-Semi-Condensed style) ever gets a use.
