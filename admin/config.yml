@@ -1,6 +1,15 @@
+# ⚠️ TEMPORARY DEVELOPMENT SETTING — DO NOT SHIP AS-IS ⚠️
+# backend.branch below is pointed at the in-progress Journal rebuild
+# branch (claude/add-claude-md-file-3fgnk0) so that any CMS use during
+# development writes only to this branch — never to `main`, which still
+# serves the legacy site and must not receive Journal dev content.
+# Before this rebuild becomes production, this value MUST be changed to
+# the real production branch, and the corresponding Netlify site must
+# have Identity + Git Gateway enabled for that branch. Production-branch
+# cutover is a separate launch task, not assumed to be this branch.
 backend:
   name: git-gateway
-  branch: main
+  branch: claude/add-claude-md-file-3fgnk0
 
 media_folder: public/uploads
 public_folder: /public/uploads
@@ -146,3 +155,82 @@ collections:
                 field: { label: Genre, name: genre, widget: string }
               - { label: "Why this track?", name: why, widget: text }
               - { label: "Spotify URL", name: spotify, widget: string, required: false }
+
+  # ── JOURNAL: ESSAYS ──
+  # New Journal publishing system (PROJECT-SPEC.md §8). Distinct from the
+  # legacy `essays` collection above, which remains PRESERVE-only and is
+  # untouched. Single-file/list-widget pattern (matches music_picks above)
+  # so publishing never requires a manually-maintained index file.
+  - name: journal_essays
+    label: "📓 Journal — Essays"
+    files:
+      - name: essays_list
+        label: "All Essays"
+        file: content/journal/essays.json
+        format: json
+        fields:
+          - label: "Essays"
+            name: entries
+            widget: list
+            summary: "{{title}} — {{date}}"
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
+              - { label: "Date", name: date, widget: date, format: "YYYY-MM-DD" }
+              - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
+              - { label: "Featured Image", name: featured_image, widget: image, required: false }
+              - { label: "Body", name: body, widget: markdown }
+
+  # ── JOURNAL: MONTHLY FAVORITES ──
+  # Same publishing system as Journal Essays above, but keeps its own
+  # structured sections rather than a single markdown body.
+  - name: journal_monthly_favorites
+    label: "📓 Journal — Monthly Favorites"
+    files:
+      - name: monthly_favorites_list
+        label: "All Monthly Favorites"
+        file: content/journal/monthly-favorites.json
+        format: json
+        fields:
+          - label: "Monthly Favorites Entries"
+            name: entries
+            widget: list
+            summary: "{{title}} — {{date}}"
+            fields:
+              - { label: "Title", name: title, widget: string, hint: "e.g. August Favorites" }
+              - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
+              - { label: "Date", name: date, widget: date, format: "YYYY-MM-DD" }
+              - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
+              - { label: "Featured Image", name: featured_image, widget: image, required: false }
+              - label: "New Releases I Loved"
+                name: new_releases
+                widget: list
+                required: false
+                fields:
+                  - { label: "Song Title", name: title, widget: string }
+                  - { label: "Artist", name: artist, widget: string }
+                  - { label: "Note", name: note, widget: text, required: false }
+              - label: "Favorite Songs"
+                name: favorite_songs
+                widget: list
+                required: false
+                fields:
+                  - { label: "Song Title", name: title, widget: string }
+                  - { label: "Artist", name: artist, widget: string }
+                  - { label: "Note", name: note, widget: text, required: false }
+              - label: "Favorite Discoveries"
+                name: favorite_discoveries
+                widget: list
+                required: false
+                fields:
+                  - { label: "Song Title", name: title, widget: string }
+                  - { label: "Artist", name: artist, widget: string }
+                  - { label: "Note", name: note, widget: text, required: false }
+              - label: "Favorite Needledrops"
+                name: favorite_needledrops
+                widget: list
+                required: false
+                fields:
+                  - { label: "Song Title", name: title, widget: string }
+                  - { label: "Artist", name: artist, widget: string }
+                  - { label: "Note", name: note, widget: text, required: false }

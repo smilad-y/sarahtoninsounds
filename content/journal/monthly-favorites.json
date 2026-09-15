@@ -1,0 +1,23 @@
+{
+  "entries": [
+    {
+      "title": "[DEV PLACEHOLDER] Sample Monthly Favorites for Testing",
+      "slug": "dev-placeholder-monthly-favorites",
+      "date": "2026-09-12",
+      "excerpt": "[DEV PLACEHOLDER] Temporary fixture used only to test the Monthly Favorites content structure end-to-end. Replace via the CMS before publishing.",
+      "featured_image": "/assets/images/journal/article-photo-sky-clouds.png",
+      "new_releases": [
+        { "title": "[Placeholder Track]", "artist": "[Placeholder Artist]", "note": "[DEV PLACEHOLDER note — replace via CMS]" }
+      ],
+      "favorite_songs": [
+        { "title": "[Placeholder Track]", "artist": "[Placeholder Artist]", "note": "[DEV PLACEHOLDER note — replace via CMS]" }
+      ],
+      "favorite_discoveries": [
+        { "title": "[Placeholder Track]", "artist": "[Placeholder Artist]", "note": "[DEV PLACEHOLDER note — replace via CMS]" }
+      ],
+      "favorite_needledrops": [
+        { "title": "[Placeholder Track]", "artist": "[Placeholder Artist]", "note": "[DEV PLACEHOLDER note — replace via CMS]" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "entries": [
+    {
+      "title": "[DEV PLACEHOLDER] Sample Essay for Testing",
+      "slug": "dev-placeholder-essay",
+      "date": "2026-09-10",
+      "excerpt": "[DEV PLACEHOLDER] Temporary fixture text used only to test the Essay content structure end-to-end. Replace via the CMS before this entry is ever published.",
+      "featured_image": "/assets/images/journal/article-cheers-to-this.png",
+      "body": "[DEV PLACEHOLDER] This paragraph exists only to verify that the Journal data layer can fetch, parse, and render Essay content end-to-end.\n\nIt is not real writing and must be replaced through the CMS before publishing.\n\nThis line checks **bold text**, *italic text*, and a [placeholder link](https://example.com) all render correctly.\n\n> This line checks blockquote rendering.\n\nReplace this entire entry through the CMS before it is ever shown to a real visitor."
+    }
+  ]
+}
