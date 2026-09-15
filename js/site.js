@@ -29,3 +29,47 @@
     reduceMotion.addEventListener('change', applyMotionPreference);
   }
 })();
+
+// Home V2 mobile menu trigger (inside the pink cloud). No-ops on any page
+// without a .hv2-menu-btn element.
+(function () {
+  var btn = document.querySelector('.hv2-menu-btn');
+  var menu = document.getElementById('hv2-mobile-nav');
+  if (!btn || !menu) return;
+
+  var label = btn.querySelector('.hv2-menu-btn__label');
+
+  function openMenu() {
+    menu.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    if (label) label.textContent = 'Close';
+  }
+
+  function closeMenu() {
+    menu.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+    if (label) label.textContent = 'Menu';
+  }
+
+  btn.addEventListener('click', function () {
+    if (btn.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      btn.focus();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (btn.getAttribute('aria-expanded') === 'true' &&
+        !menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+})();

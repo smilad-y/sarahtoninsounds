@@ -14,11 +14,20 @@ Unless a manifest entry below is explicitly marked as approved/current, treat it
 **Use:** Home hero and other approved brand placements.  
 **Rule:** Never redraw/retype/reconstruct it. Calligraphic S = Amoresa; remainder = Perandory Semicondensed.
 
-### Home background video
-**Status:** Direction approved.  
-**Asset:** Sarah's edited **"video option 1" vinyl/turntable footage**.  
-**Use:** Full-screen looping Home background.  
-**Build note:** Evaluate brightness/contrast in-browser before making further grading changes. Prepare web-optimized formats/poster image as needed.
+### Home background video — SUPERSEDED
+**Status:** No longer the Home direction. Replaced by the illustrated-collage Home built from Sarah's Figma-exported layers (see PROJECT-SPEC.md §6 and the Home V2 collage asset list below).  
+**Asset:** Sarah's edited "video option 1" vinyl/turntable footage.  
+**Disposition:** PRESERVE only — untouched at `assets/video/home-loop.mp4`, not loaded or referenced by the live Home page.
+
+### Home V2 collage — desktop nav tab asset
+**Status:** Approved and in production use.  
+**Asset:** `assets/images/shared/nav-paper-tab.png` — a blank, transparent torn cream-paper scrap exported from Figma (no label baked in).  
+**Use:** Background for each of the five desktop Home nav links (Home/About/Listen/Journal/Contact). Reused five times via CSS `background-image`, stretched per-tab to that tab's own auto-sized box; the visible label is real HTML text layered on top in Henny Penny. Not cropped, recolored, or approximated with CSS — the PNG is the tab's entire visual treatment.  
+**Rule:** Do not add a `box-shadow`/`filter: drop-shadow()`/duplicate background behind it — the asset's torn silhouette only fills part of its bounding box, so a box-shadow renders as a rectangular ghost behind the visible shape.
+
+### Home V2 collage — remaining layers
+**Status:** Approved and in production use, at `assets/images/home-v2/`: `home-paper-red.png` (background), `home-spiral-4.png` (sunburst), `home-logo-cloud.png` (desktop-only tan cloud), `home-top-scallop-hires.png` (nav-cloud shelf, desktop + mobile), `home-blue-background.png` (scalloped band), `home-logo-sharp.png` (title card), `home-moon-stars.png` (desktop-only), `home-girl-carpet-v2.png` (Sarah on the carpet), `home-record-crate.png`, `home-leopard-highres.png`. Positioned per the authoritative Figma geometry described in PROJECT-SPEC.md §6 (separate 1440×900 desktop / 393×852 mobile reference frames).  
+**Superseded/unused variants** (uploaded during iteration, PRESERVE only, not referenced by the page): `home-girl-carpet.png`, `home-girl-records.png`, `home-girl-records-1.png`, `home-girl-records-2.png`, `home-spiral.png`, `home-spiral-3.png`, `home-leopard.png`, `home-logo.png`, `home-logo-alt.png`, `home-top-scallop.png`, `home-dragonfly.png`, `home-pink-paper.png` (the bottom-right paper-scrap accent — explicitly removed from the composition; do not restore without new direction), `home-full-image.png`, `home-full-no-logo.png`.
 
 ## 2. Photography
 ### Primary About portrait
@@ -166,11 +175,10 @@ Before production deployment, verify webfont licensing/hosting rights for any no
 Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Preserve them if they have archival value, but **do not treat them as part of the current visual system** unless Sarah explicitly brings one back.
 
 ## 13. Still To Resolve
-- Home poster/fallback image (video itself is resolved — see §1).
 - Final active mood count/names/descriptors.
 - Which of the 13 supplied Listen circle-label images (§3) maps to which working mood.
 - Which supplied About portrait photo (§2) fulfills the primary/secondary roles.
-- How the newly supplied home/journal/shared image pools (§10) get placed into actual page layouts — nothing is assigned yet.
+- How the newly supplied journal/shared image pools (§10) get placed into actual page layouts — nothing is assigned yet (Home's own pool is resolved — see §1).
 - Curated-playlist metadata file structure/location (proposed as a new location separate from legacy `music-picks/`).
 - Spotify integration method for playback/tracklist display (embed player vs. Web API vs. Web Playback SDK) — has real tradeoffs (auth, backend needs, Premium requirements) and needs a decision, not a default.
 - Exact playlist playback/data integration.

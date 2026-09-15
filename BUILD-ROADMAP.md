@@ -60,7 +60,19 @@ Possible outcomes:
 - replace;
 - remove after migration.
 
-## Phase 2 — Home
+## Phase 2 — Home — **Complete, approved**
+The earlier video-hero plan below was superseded during the build by an illustrated-collage direction reconstructed from Sarah's own Figma geometry (see PROJECT-SPEC.md §6, ASSET-MANIFEST.md §1). What actually shipped:
+- Single viewport/no scroll, `100dvh` desktop / `100svh` mobile.
+- Desktop (1440×900 reference) and mobile (393×852 reference) as separately art-directed layouts, not one scaled from the other.
+- Illustrated layers (Sarah on the carpet, leopard, record crate, moon/stars, spiral, torn-paper title card, scalloped nav cloud, navy band) positioned from Figma px values.
+- Desktop nav: five real `<a>` links styled as torn-paper tabs (`assets/images/shared/nav-paper-tab.png`).
+- Mobile: real accessible `<button>` MENU trigger with full keyboard/focus behavior.
+- No "discover music!" note, no "made by: Sarah Milad" credit — both belonged to the retired video plan and were explicitly excluded.
+- Reduced-motion: moot for the current build (no video/animation on Home); the site-wide `prefers-reduced-motion` rule in `css/base.css` still applies globally.
+
+<details>
+<summary>Original (superseded) video-hero plan, kept for history</summary>
+
 ### Must have
 - Single viewport/no scroll.
 - Optimized looping "video option 1" background.
@@ -76,6 +88,8 @@ Possible outcomes:
 ### Polish
 - Minor video brightness/contrast adjustment only after browser review.
 - Very restrained doodle/star accents if they genuinely improve composition.
+
+</details>
 
 ## Phase 3 — About
 ### Must have

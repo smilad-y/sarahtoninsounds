@@ -39,7 +39,7 @@
 }
 
 /* Generic content container + responsive rhythm for every page except
-   Home, which opts out via body.page-home / main.hero overrides in
+   Home, which opts out via body.page-home / main.home-v2 overrides in
    css/home.css (single-viewport, no-scroll cover). */
 main {
   max-width: var(--content-max-width);
@@ -47,7 +47,8 @@ main {
   padding: var(--space-6) var(--space-4);
 }
 
-main.hero {
+main.hero,
+main.home-v2 {
   max-width: none;
   margin: 0;
   padding: 0;
