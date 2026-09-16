@@ -7,7 +7,7 @@
 <meta name="description" content="Essays and Monthly Favorites from Sarahtonin Sounds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/layout.css">
@@ -16,38 +16,119 @@
 <body class="page-journal">
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header">
-  <nav class="primary-nav" aria-label="Primary">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about.html">About</a></li>
-      <li><a href="/listen.html">Listen</a></li>
-      <li><a href="/journal.html" aria-current="page">Journal</a></li>
-      <li><a href="/contact.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
 <main id="main" class="journal-page">
-  <h1>Journal</h1>
-  <!-- Small handwritten-style line beneath the heading is pending
-       finalized copy (PROJECT-SPEC.md §8) — not invented here. -->
+  <div class="journal-v2__stage" id="journal-stage">
 
-  <div class="journal-filters" role="group" aria-label="Filter journal entries">
-    <!-- Filtering logic is a later phase (BUILD-ROADMAP.md Phase 7);
-         buttons are structural only for now, not wired to any behavior. -->
-    <button type="button" aria-pressed="true">All</button>
-    <button type="button" aria-pressed="false">Essays</button>
-    <button type="button" aria-pressed="false">Monthly Favs</button>
-  </div>
+    <!-- Background — three real Figma-exported textures, stacked in
+         Figma's own documented paint order (red stripe, then green
+         paper, then foreground paper on top). No CSS approximation. -->
+    <img class="jv2-bg-stripe" src="/assets/images/journal/texture-red-stripe.png" alt="">
+    <img class="jv2-bg-green" src="/assets/images/journal/texture-green-paper.png" alt="">
+    <img class="jv2-bg-foreground" src="/assets/images/journal/texture-foreground-paper.png" alt="">
 
-  <div class="journal-entries">
-    <!-- Legacy essays/ JSON content is PRESERVE-only per the fresh-start
-         rule and is not migrated here without explicit approval. -->
-    <p>New essays and Monthly Favorites are on the way.</p>
+    <div class="jv2-logo">
+      <img src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+    </div>
+
+    <nav class="jv2-nav" aria-label="Primary">
+      <ul>
+        <li><a href="/" class="jv2-nav__tab jv2-nav__tab--home">Home</a></li>
+        <li><a href="/about.html" class="jv2-nav__tab jv2-nav__tab--about">About</a></li>
+        <li><a href="/listen.html" class="jv2-nav__tab jv2-nav__tab--listen">Listen</a></li>
+        <li><a href="/journal.html" class="jv2-nav__tab jv2-nav__tab--journal" aria-current="page">Journal</a></li>
+        <li><a href="/contact.html" class="jv2-nav__tab jv2-nav__tab--contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero comes before Featured Post in Figma's own layer order, so
+         by that documented order Featured Post's backdrop paints on
+         top wherever their boxes overlap. But the finalized Figma
+         rendered design clearly shows the subtitle fully visible above
+         the featured card — that occlusion does not occur in the real
+         design. Per explicit instruction, this is corrected with the
+         minimum necessary stacking adjustment (z-index) rather than
+         reproduced as a visible defect: this is treating Figma's
+         rendered appearance as authoritative over a discrepancy in its
+         generated structural paint order, not a design change. -->
+    <div class="jv2-hero">
+      <h1 class="jv2-hero__title">Journal</h1>
+      <div class="jv2-hero__divider" aria-hidden="true"></div>
+      <p class="jv2-hero__subtitle">essays, monthly favs, and random thoughts</p>
+    </div>
+
+    <section class="jv2-featured" id="journal-featured" aria-label="Featured Journal entry">
+      <p class="journal-empty">Loading the latest from the Journal&hellip;</p>
+    </section>
+
+    <!-- Four fixed slots at their exact individual Figma coordinates
+         (the four card positions are not perfectly uniformly spaced in
+         the source file, so a flexible equal-gap grid would not match
+         them exactly). js/journal.js fills each slot with a real entry
+         via the same reusable renderJournalCard() used everywhere else,
+         and hides any slot beyond the number of entries available. -->
+    <section class="jv2-recent" id="journal-recent" aria-label="More from the Journal">
+      <div class="jv2-card-slot jv2-card-slot--1" id="journal-card-1"></div>
+      <div class="jv2-card-slot jv2-card-slot--2" id="journal-card-2"></div>
+      <div class="jv2-card-slot jv2-card-slot--3" id="journal-card-3"></div>
+      <div class="jv2-card-slot jv2-card-slot--4" id="journal-card-4"></div>
+    </section>
+
+    <!-- Visual treatment only — the reusable Journal Post page doesn't
+         exist yet, so this stays a decorative note rather than a link
+         to nowhere. -->
+    <div class="jv2-footer-note" aria-hidden="true">
+      <img src="/assets/images/journal/blue-paper.png" alt="">
+      <span>Read something new!</span>
+    </div>
+
   </div>
 </main>
 
+<script src="/js/journal.js" defer></script>
 <script src="/js/site.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Note: `defer` has no effect on an inline script (only on scripts
+  // with `src`), so this waits for DOMContentLoaded explicitly to run
+  // after the deferred /js/journal.js and /js/site.js have executed.
+  var featuredEl = document.getElementById('journal-featured');
+  var recentSection = document.getElementById('journal-recent');
+  var slots = [
+    document.getElementById('journal-card-1'),
+    document.getElementById('journal-card-2'),
+    document.getElementById('journal-card-3'),
+    document.getElementById('journal-card-4')
+  ];
+  if (!window.Journal || !featuredEl) return;
+
+  function showEmptyState() {
+    featuredEl.innerHTML = '<p class="journal-empty">New essays and Monthly Favorites are on the way.</p>';
+    if (recentSection) recentSection.hidden = true;
+  }
+
+  window.Journal.loadJournalEntries().then(function (entries) {
+    if (!entries.length) {
+      showEmptyState();
+      return;
+    }
+
+    var featured = window.Journal.getFeaturedEntry(entries);
+    var rest = entries.slice(1, 5);
+
+    featuredEl.innerHTML = window.Journal.renderFeaturedEntry(featured);
+
+    slots.forEach(function (slot, i) {
+      if (!slot) return;
+      var entry = rest[i];
+      if (entry) {
+        slot.innerHTML = window.Journal.renderJournalCard(entry);
+        slot.hidden = false;
+      } else {
+        slot.hidden = true;
+      }
+    });
+  }).catch(showEmptyState);
+});
+</script>
 </body>
 </html>

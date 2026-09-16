@@ -1,12 +1,28 @@
 {
   "entries": [
     {
-      "title": "[DEV PLACEHOLDER] Sample Essay for Testing",
+      "title": "Title goes here",
       "slug": "dev-placeholder-essay",
       "date": "2026-09-10",
-      "excerpt": "[DEV PLACEHOLDER] Temporary fixture text used only to test the Essay content structure end-to-end. Replace via the CMS before this entry is ever published.",
+      "excerpt": "Favorite new releases, needle drops, earworm, and much more.",
       "featured_image": "/assets/images/journal/article-cheers-to-this.png",
       "body": "[DEV PLACEHOLDER] This paragraph exists only to verify that the Journal data layer can fetch, parse, and render Essay content end-to-end.\n\nIt is not real writing and must be replaced through the CMS before publishing.\n\nThis line checks **bold text**, *italic text*, and a [placeholder link](https://example.com) all render correctly.\n\n> This line checks blockquote rendering.\n\nReplace this entire entry through the CMS before it is ever shown to a real visitor."
+    },
+    {
+      "title": "Title goes here",
+      "slug": "dev-placeholder-essay-2",
+      "date": "2026-09-08",
+      "excerpt": "Favorite new releases, needle drops, earworm, and much more.",
+      "featured_image": "/assets/images/journal/article-cheers-to-this.png",
+      "body": "[DEV PLACEHOLDER] Replace this entry through the CMS before it is ever shown to a real visitor."
+    },
+    {
+      "title": "Title goes here",
+      "slug": "dev-placeholder-essay-3",
+      "date": "2026-09-06",
+      "excerpt": "Favorite new releases, needle drops, earworm, and much more.",
+      "featured_image": "/assets/images/journal/article-cheers-to-this.png",
+      "body": "[DEV PLACEHOLDER] Replace this entry through the CMS before it is ever shown to a real visitor."
     }
   ]
 }

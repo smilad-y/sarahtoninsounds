@@ -164,8 +164,40 @@
       imageHtml +
       '<div class="journal-card__meta">' + categoryLabel + ' &middot; ' + displayDate + '</div>' +
       '<h3 class="journal-card__title">' + escapeHtml(entry.title) + '</h3>' +
+      '<div class="journal-card__divider"></div>' +
       '<p class="journal-card__excerpt">' + escapeHtml(entry.excerpt) + '</p>' +
+      '<span class="journal-card__link">Read</span>' +
       '</a>'
+    );
+  }
+
+  // Larger single-entry treatment for the automatic featured/latest
+  // slot (Journal Landing only), matching the "Featured Post" node
+  // geometry from the authoritative Figma file. Kept separate from
+  // renderJournalCard because its DOM shape genuinely differs (a
+  // separate paper-backdrop layer, photo layer, and text body layer,
+  // per the Figma layer structure) — not because the two content types
+  // need different markup; both render through this same function.
+  function renderFeaturedEntry(entry) {
+    var categoryLabel = entry.type === 'essay' ? 'Essay' : 'Monthly Favs';
+    var displayDate = entry.dateObj.toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric'
+    });
+    var imageHtml = entry.image
+      ? '<div class="journal-featured__photo"><img src="' + escapeHtml(entry.image) + '" alt=""></div>'
+      : '';
+
+    return (
+      '<div class="journal-featured__backdrop"></div>' +
+      imageHtml +
+      '<div class="journal-featured__body">' +
+      '<div class="journal-featured__meta">' + categoryLabel + ' &middot; ' + displayDate + '</div>' +
+      '<h2 class="journal-featured__title">' + escapeHtml(entry.title) + '</h2>' +
+      '<div class="journal-featured__divider"></div>' +
+      '<p class="journal-featured__excerpt">' + escapeHtml(entry.excerpt) + '</p>' +
+      '<a class="journal-featured__link" href="/journal/' + encodeURIComponent(entry.slug) + '">Read</a>' +
+      '</div>'
     );
   }
 
@@ -178,7 +210,8 @@
     getFeaturedEntry: getFeaturedEntry,
     mergeJournalData: mergeJournalData,
     loadJournalEntries: loadJournalEntries,
-    renderJournalCard: renderJournalCard
+    renderJournalCard: renderJournalCard,
+    renderFeaturedEntry: renderFeaturedEntry
   };
 
   if (typeof module !== 'undefined' && module.exports) {

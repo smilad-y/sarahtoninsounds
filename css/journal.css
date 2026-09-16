@@ -1,4 +1,486 @@
-/* Journal page — page-specific styles.
-   Structural foundation only; article cards, filtering, and full
-   editorial layout are Phase 7 (PROJECT-SPEC.md §8, BUILD-ROADMAP.md
-   Phase 7). */
+/* Journal Landing (desktop) — reproduces the authoritative Figma node
+   "Blog / Journal Landing — Desktop"
+   (figma.com/design/NmseLluZJR0NqBKcwIq02A, node 2:53, confirmed 1429×900
+   reference frame). All positions/sizes are percentages of that
+   reference frame, taken directly from the audited Figma geometry
+   (FIGMA EXACT values, or DERIVED FROM FIGMA values resolved from
+   calc()+translate centering and cross-validated against metadata).
+
+   Three coordinate conflicts between Figma's own two data sources were
+   resolved against the finalized rendered reference (not estimated):
+   green paper x=-546 (not 256.39), logo y=-25 (not 115.72), footer
+   message y=755 (not 832.30). See the geometry audit for the reasoning.
+
+   All raster artwork uses object-fit: cover, matching Figma's own
+   generated code exactly (it uses object-cover throughout) — nothing
+   here is non-uniformly stretched. Rotations are Figma's exact values
+   with default (center) transform-origin, matching Figma's own
+   flex-center-then-rotate technique for the logo, green paper, and
+   footer blue paper.
+
+   Typography stays inside the established Sarahtonin Sounds system
+   (PROJECT-SPEC.md §5) rather than Figma's generated font metadata
+   (Crimson Text / Playfair Display / "Figma Hand"): Perandory
+   Semi-Condensed for headings/editorial display (including card titles,
+   which Figma itself specifies as "Perandory:Semi-Condensed" — an exact
+   match to what we have), IM Fell English for readable body copy, Sue
+   Ellen Francisco only for the hero subtitle and footer note.
+
+   Card/featured images, titles, dates, excerpts, and category labels
+   are populated entirely from CMS content via js/journal.js — none of
+   the Figma sample copy is hard-coded here. */
+
+.page-journal {
+  background-color: var(--color-cream);
+}
+
+.page-journal main.journal-page {
+  max-width: none;
+  padding: 0;
+}
+
+/* ── Stage: the 1429×900 reference frame, scaled responsively ── */
+.journal-v2__stage {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  aspect-ratio: 1429 / 900;
+  overflow: hidden;
+  background-color: var(--color-cream);
+}
+
+/* ── Background textures — real exported assets, stacked in Figma's
+   own documented paint order (red stripe → green paper → foreground
+   paper, foreground on top). Percentages from the audited geometry. ── */
+.jv2-bg-stripe {
+  position: absolute;
+  left: -10.077%;
+  top: -104.6667%;
+  width: 129.881%;
+  height: 250%;
+  max-width: none;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Figma centers this texture (pre-rotation 726×1082) inside a larger
+   bounding wrapper at left=-546 (resolved conflict), top=-482, then
+   rotates 47.87deg around its own center — expressed here as a
+   translate+rotate from the wrapper's own center point, matching
+   Figma's flex-center-then-rotate technique. */
+.jv2-bg-green {
+  position: absolute;
+  left: 6.8291%;
+  top: 16.6111%;
+  width: 50.804%;
+  height: 120.2222%;
+  max-width: none;
+  object-fit: cover;
+  transform: translate(-50%, -50%) rotate(47.87deg);
+  z-index: 2;
+}
+
+.jv2-bg-foreground {
+  position: absolute;
+  left: -14.2757%;
+  top: 6.6667%;
+  width: 128.5514%;
+  height: 128.5556%;
+  max-width: none;
+  object-fit: cover;
+  z-index: 3;
+}
+
+/* ── Brand logo — flex-center-then-rotate, matching Figma exactly. ── */
+.jv2-logo {
+  position: absolute;
+  left: -1.6095%;
+  top: -2.7778%;
+  width: 25.1512%;
+  height: 29.4287%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* home-logo.png has substantial transparent padding around the visible
+   ticket artwork (measured: 824×365 canvas, visible content 673×295).
+   Sized so the VISIBLE content matches Figma's 332.689×136.998 target,
+   not the full padded canvas — width scaled by 332.689/673, height
+   follows the asset's own natural aspect ratio (no distortion). */
+/* width/height are % of the parent .jv2-logo box (25.1512%/29.4287% of
+   stage), scaled so the rendered size equals 23.2813%/15.2222% of the
+   stage — i.e. Figma's exact 332.69×137px at this 1429-wide frame. */
+.jv2-logo img {
+  display: block;
+  width: 92.56%;
+  height: 51.72%;
+  max-width: none;
+  object-fit: cover;
+  transform: rotate(-25deg);
+}
+
+/* ── Primary nav — reuses the approved nav-paper-tab asset with real
+   HTML text (ASSET-MANIFEST.md §1). Henny Penny + Home's rotated-tab
+   treatment is documented Home-specific and intentionally not reused
+   here. Nav labels use the established display face (Perandory
+   Semi-Condensed), not Figma's generated Crimson Text. ── */
+.jv2-nav {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.jv2-nav ul {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.jv2-nav__tab {
+  position: absolute;
+  pointer-events: auto;
+  top: 1.6667%;
+  width: 9.937%;
+  height: 6.3333%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/assets/images/shared/nav-paper-tab.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 1.2vw, 1.1rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.jv2-nav__tab--home { left: 42.9671%; }
+.jv2-nav__tab--about { left: 54.6536%; }
+.jv2-nav__tab--listen { left: 66.3401%; }
+.jv2-nav__tab--journal { left: 78.2365%; }
+.jv2-nav__tab--contact { left: 90.063%; }
+
+.jv2-nav__tab[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 3px;
+}
+
+.jv2-nav__tab:hover {
+  text-decoration: underline;
+}
+
+/* ── Hero heading ──
+   z-index raised above .jv2-featured deliberately — see the HTML
+   comment above this block's markup for why. */
+.jv2-hero {
+  position: absolute;
+  left: 37.7887%;
+  top: 11.2222%;
+  width: 24.9825%;
+  z-index: 8;
+  text-align: center;
+}
+
+.jv2-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.6vw, 5.25rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.jv2-hero__divider {
+  width: 82%;
+  height: 2px;
+  margin: 0.5em auto 0;
+  background-color: var(--color-crimson);
+}
+
+.jv2-hero__subtitle {
+  font-family: var(--font-marginalia);
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  letter-spacing: 0.03em;
+  color: var(--color-near-black);
+  margin: 0.5em 0 0;
+}
+
+/* ── Featured entry (automatic newest-dated entry) ──
+   #journal-featured is a full-stage, non-visual positioning context
+   (like .jv2-nav) — every child below is positioned with flat
+   percentages of the same 1429×900 reference frame. */
+.jv2-featured {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.journal-featured__backdrop {
+  position: absolute;
+  left: 14.5556%;
+  top: 18.4444%;
+  width: 66.9699%;
+  height: 45.3333%;
+  background-image: url('/assets/images/journal/featured-paper-backdrop.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Figma's Featured Image layer is 887×547 (62.07%×60.78% of the
+   stage) — used exactly as specified. Object-fit: cover preserves the
+   CMS image's own aspect ratio (crop, not stretch). */
+.journal-featured__photo {
+  position: absolute;
+  left: 20.014%;
+  top: 26.2222%;
+  width: 24.4927%;
+  height: 33%;
+  z-index: 2;
+}
+
+.journal-featured__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Featured text fields — each positioned at its own exact Figma box
+   (x/y/w converted to % of the 1429×900 stage), not a shared flow
+   container. */
+.journal-featured__meta {
+  position: absolute;
+  left: 39.6781%;
+  top: 30.7778%;
+  width: 17.1449%;
+  pointer-events: auto;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--color-near-black);
+  margin: 0;
+  z-index: 3;
+}
+
+.journal-featured__title {
+  position: absolute;
+  left: 42.0574%;
+  top: 34.1111%;
+  width: 33.5899%;
+  pointer-events: auto;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.9vw, 4.4rem);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.05;
+  color: var(--color-near-black);
+  margin: 0;
+  z-index: 3;
+}
+
+.journal-featured__divider {
+  position: absolute;
+  left: 43.1071%;
+  top: 42.6667%;
+  width: 31.4906%;
+  height: 2px;
+  pointer-events: auto;
+  background-color: var(--color-crimson);
+  z-index: 3;
+}
+
+.journal-featured__excerpt {
+  position: absolute;
+  left: 44.6466%;
+  top: 44.6667%;
+  width: 29.951%;
+  pointer-events: auto;
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.4vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--color-near-black);
+  margin: 0;
+  z-index: 3;
+}
+
+.journal-featured__link {
+  position: absolute;
+  left: 45.6263%;
+  top: 52.7778%;
+  pointer-events: auto;
+  display: inline-block;
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: clamp(0.85rem, 1.4vw, 1.25rem);
+  color: var(--color-near-black);
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-crimson);
+  padding-bottom: 2px;
+  z-index: 3;
+}
+
+/* ── Recent entries: four fixed slots at their exact individual Figma
+   coordinates (see journal.html comment on why these are fixed slots
+   rather than an equal-gap grid). Each slot is filled with the same
+   .journal-card markup used by renderJournalCard() everywhere. ── */
+.jv2-recent {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.jv2-card-slot {
+  position: absolute;
+  top: 64.1667%;
+  width: 18.8244%;
+  height: 36.2222%;
+  pointer-events: auto;
+}
+
+.jv2-card-slot--1 { left: 5.7383%; }
+.jv2-card-slot--2 { left: 26.802%; }
+.jv2-card-slot--3 { left: 46.8859%; }
+.jv2-card-slot--4 { left: 66.9699%; }
+
+.journal-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  background-color: rgba(246, 231, 154, 0.55);
+}
+
+.journal-card__image {
+  display: block;
+  width: 100%;
+  height: 48.773%;
+  object-fit: cover;
+}
+
+.journal-card__meta {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(0.65rem, 0.75vw, 0.75rem);
+  letter-spacing: 0.05em;
+  color: var(--color-near-black);
+  padding: 0.9em 5.2% 0;
+}
+
+.journal-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.1vw, 1.6rem);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-near-black);
+  padding: 0.3em 5.2% 0;
+  margin: 0;
+}
+
+.journal-card__divider {
+  width: 63.94%;
+  height: 1px;
+  margin: 0.6em auto 0;
+  background-color: var(--color-crimson);
+}
+
+.journal-card__excerpt {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 0.85vw, 0.85rem);
+  line-height: 1.55;
+  color: var(--color-near-black);
+  padding: 0.6em 5.2% 0;
+  margin: 0;
+}
+
+.journal-card__link {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(0.7rem, 0.85vw, 0.85rem);
+  color: var(--color-near-black);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-crimson);
+  margin: 0.9em 5.2% 1em;
+  padding-bottom: 1px;
+}
+
+.journal-empty {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--text-lg);
+  text-align: center;
+  padding: var(--space-6) 0;
+}
+
+/* ── "Read something new!" footer note ──
+   Visual treatment only per the Figma reference — kept non-interactive
+   since the destination Journal Post page doesn't exist until the next
+   phase. */
+.jv2-footer-note {
+  position: absolute;
+  left: 82.1439%;
+  top: 77.4444%;
+  width: 14.8561%;
+  height: 22.272%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jv2-footer-note img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: rotate(-26.93deg);
+}
+
+.jv2-footer-note span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 70%;
+  font-family: var(--font-marginalia);
+  font-size: clamp(0.8rem, 1.05vw, 1.05rem);
+  text-align: center;
+  color: var(--color-near-black);
+  transform: rotate(-37.15deg);
+}
+
+@media (max-width: 900px) {
+  .journal-v2__stage {
+    aspect-ratio: auto;
+    min-height: 700px;
+  }
+}
