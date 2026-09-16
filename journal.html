@@ -82,6 +82,63 @@
     </div>
 
   </div>
+
+  <!-- Mobile Journal Landing (390px reference) — a genuine stacked flow
+       layout per the finalized Figma mobile frame, NOT a scaled copy of
+       the desktop stage above. Hidden above the mobile breakpoint (see
+       css/journal.css). Reuses the exact same renderFeaturedEntry() /
+       renderJournalCard() markup as desktop — only the surrounding
+       layout/CSS differs. Figma's "DISCOVER" tape is relabeled LISTEN
+       to match production nav; the sample REVIEW category and Figma's
+       sample article copy are not used. -->
+  <div class="jv2m-page" id="journal-mobile-stage">
+
+    <header class="jv2m-header">
+      <img class="jv2m-logo" src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+    </header>
+
+    <nav class="jv2m-nav" aria-label="Primary">
+      <div class="jv2m-nav__row">
+        <a href="/" class="jv2m-tab jv2m-tab--home">Home</a>
+        <a href="/about.html" class="jv2m-tab jv2m-tab--about">About</a>
+        <a href="/listen.html" class="jv2m-tab jv2m-tab--listen">Listen</a>
+      </div>
+      <div class="jv2m-nav__row">
+        <a href="/journal.html" class="jv2m-tab jv2m-tab--journal" aria-current="page">Journal</a>
+        <a href="/contact.html" class="jv2m-tab jv2m-tab--contact">Contact</a>
+      </div>
+    </nav>
+
+    <div class="jv2m-hero">
+      <h1 class="jv2m-hero__title">Journal</h1>
+      <div class="jv2m-hero__divider" aria-hidden="true"></div>
+      <p class="jv2m-hero__subtitle">essays, monthly favs, and random thoughts</p>
+    </div>
+
+    <section class="jv2m-featured-section" aria-label="Featured Journal entry">
+      <div class="jv2m-featured-card" id="journal-mobile-featured">
+        <p class="journal-empty">Loading the latest from the Journal&hellip;</p>
+      </div>
+    </section>
+
+    <section class="jv2m-recent" id="journal-mobile-recent" aria-label="More from the Journal">
+      <h2 class="jv2m-recent__title">Recent Pages</h2>
+      <div class="jv2m-card-slot" id="journal-mobile-card-1"></div>
+      <div class="jv2m-card-slot" id="journal-mobile-card-2"></div>
+      <div class="jv2m-card-slot" id="journal-mobile-card-3"></div>
+      <div class="jv2m-card-slot" id="journal-mobile-card-4"></div>
+    </section>
+
+    <!-- Visual treatment only, matching desktop's footer note — see
+         comment on .jv2-footer-note in journal.html above. -->
+    <div class="jv2m-footer" aria-hidden="true">
+      <div class="jv2m-footer__frame">
+        <img class="jv2m-footer__paper" src="/assets/images/journal/blue-paper.png" alt="">
+        <span class="jv2m-footer__text">Happy Reading :)</span>
+      </div>
+    </div>
+
+  </div>
 </main>
 
 <script src="/js/journal.js" defer></script>
@@ -99,11 +156,39 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('journal-card-3'),
     document.getElementById('journal-card-4')
   ];
+
+  // Mobile targets — same feed, same renderers, just a different
+  // (flow-layout) destination in the DOM. Not a second data layer.
+  var mobileFeaturedEl = document.getElementById('journal-mobile-featured');
+  var mobileRecentSection = document.getElementById('journal-mobile-recent');
+  var mobileSlots = [
+    document.getElementById('journal-mobile-card-1'),
+    document.getElementById('journal-mobile-card-2'),
+    document.getElementById('journal-mobile-card-3'),
+    document.getElementById('journal-mobile-card-4')
+  ];
+
   if (!window.Journal || !featuredEl) return;
 
   function showEmptyState() {
-    featuredEl.innerHTML = '<p class="journal-empty">New essays and Monthly Favorites are on the way.</p>';
+    var emptyMarkup = '<p class="journal-empty">New essays and Monthly Favorites are on the way.</p>';
+    featuredEl.innerHTML = emptyMarkup;
     if (recentSection) recentSection.hidden = true;
+    if (mobileFeaturedEl) mobileFeaturedEl.innerHTML = emptyMarkup;
+    if (mobileRecentSection) mobileRecentSection.hidden = true;
+  }
+
+  function fillSlots(slotList, rest) {
+    slotList.forEach(function (slot, i) {
+      if (!slot) return;
+      var entry = rest[i];
+      if (entry) {
+        slot.innerHTML = window.Journal.renderJournalCard(entry);
+        slot.hidden = false;
+      } else {
+        slot.hidden = true;
+      }
+    });
   }
 
   window.Journal.loadJournalEntries().then(function (entries) {
@@ -114,19 +199,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var featured = window.Journal.getFeaturedEntry(entries);
     var rest = entries.slice(1, 5);
+    var featuredHtml = window.Journal.renderFeaturedEntry(featured);
 
-    featuredEl.innerHTML = window.Journal.renderFeaturedEntry(featured);
+    featuredEl.innerHTML = featuredHtml;
+    if (mobileFeaturedEl) mobileFeaturedEl.innerHTML = featuredHtml;
 
-    slots.forEach(function (slot, i) {
-      if (!slot) return;
-      var entry = rest[i];
-      if (entry) {
-        slot.innerHTML = window.Journal.renderJournalCard(entry);
-        slot.hidden = false;
-      } else {
-        slot.hidden = true;
-      }
-    });
+    fillSlots(slots, rest);
+    fillSlots(mobileSlots, rest);
   }).catch(showEmptyState);
 });
 </script>
