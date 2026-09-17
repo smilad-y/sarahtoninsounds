@@ -18,132 +18,137 @@
 
 <main id="main" class="about-page">
 
-  <!-- Desktop — reproduces the authoritative Figma frame
-       (figma.com/design/FP1ZWOSEAtNuI8w2OG2E7x, node 68:99, "About
-       Me-Desktop", 1440x1280). Only the visible red-striped nav strip
-       (the foreground paper texture covers the rest of the red stripe
-       within ~134px, matching the source layer order) is built as a
-       clipped percentage band, the same technique already used for
-       Contact/Journal; the logo and green-paper corner accent bleed
-       across that band into the page below rather than being clipped by
-       it, since clipping a bleeding decoration at a hard edge is exactly
-       the moon/stars bug already fixed once on the Contact page. Nav
-       reuses the site's shared paper-tab asset (not About's own
-       per-label tape PNGs) for the same nav look already established on
-       every other page, and Figma's "DISCOVER" tape is relabeled Listen
-       to match production nav (same fix already applied on
-       journal.html/contact.html). -->
-  <div class="av2-navband">
-    <nav class="av2-nav" aria-label="Primary">
-      <ul>
-        <li><a href="/" class="av2-nav__tab av2-nav__tab--home">Home</a></li>
-        <li><a href="/about.html" class="av2-nav__tab av2-nav__tab--about" aria-current="page">About</a></li>
-        <li><a href="/listen.html" class="av2-nav__tab av2-nav__tab--listen">Listen</a></li>
-        <li><a href="/journal.html" class="av2-nav__tab av2-nav__tab--journal">Journal</a></li>
-        <li><a href="/contact.html" class="av2-nav__tab av2-nav__tab--contact">Contact</a></li>
-      </ul>
+  <!-- Desktop — rebuilt from the authoritative Figma frame
+       (figma.com/design/YetSGHlPxrcnuSRZ3shfip, node 1:3,
+       "About Me-Desktop-duplicate"), pulled directly via
+       get_design_context, not a plugin export or screenshot-guess.
+       Per explicit instruction this build is a literal, FIXED 1440px
+       stage (.ab3-stage) — no percentage/rem conversion, no
+       responsive scaling — so every position below is Figma's own
+       px value, verbatim. Figma frames clip their own contents by
+       default at the frame boundary, which is why the stage uses
+       overflow:hidden at its own exact 1440x1304 size rather than
+       staying unclipped like Contact/Journal's percentage "stage"
+       technique: it isn't the same situation as those pages' bleeding
+       decorations needing to escape a shorter clipped band, it's
+       reproducing Figma's own default frame-clip so bleed (e.g. the
+       green paper corner, which goes to top:-751px) gets cropped the
+       same way Figma itself crops it.
+
+       Paint order matters here and is preserved by literal DOM order
+       (all children are position:absolute with z-index:auto, so later
+       = on top, exactly matching Figma's own layer order) — the
+       Decorative Ephemera Cluster (logo, polaroid, green + blue paper,
+       flowers) sits AFTER content/resume/title in the source, so it
+       paints above them, and "Get in touch" is last/topmost of all.
+
+       The cluster's four rotating/mirrored elements (blue corner
+       paper, green paper, logo, polaroid) each rotate around their own
+       TOP-LEFT corner in Figma, not center — get_design_context's
+       generated flex-center-wrapper code obscures this (it rotates an
+       inner element around ITS OWN center within an oversized
+       wrapper). Converting that back to a real top-left-pivot box:
+       since the wrapper is sized to exactly bound the rotated image,
+       the wrapper's own center equals the rotated shape's true center,
+       so left/top below = wrapper_center − rotate((w/2, h/2), angle) —
+       computed once and used directly, not the wrapper's literal
+       left/top (which would double an already-applied centering
+       offset if reused here). Blue corner paper's rotate(180deg)
+       scaleY(-1) has zero net rotation (it's a pure horizontal mirror,
+       verified by that same math resolving to angle 0), so it uses the
+       wrapper's box directly with a center-origin mirror instead.
+
+       Fonts substitute per the established system rather than Figma's
+       generated Crimson Text/Caveat: Perandory Semi-Condensed for
+       "About", the hero greeting, and "Selected Credits & Resume";
+       IM Fell English for body copy and the Resume/Get-in-touch links
+       (both bold, same treatment — Figma has them both as
+       Crimson Text:Bold already); Sue Ellen Francisco only for
+       "Let's Work Together!" and the polaroid's "Me! Sarah Milad!"
+       caption. Figma's "DISCOVER" tape is relabeled Listen to match
+       the locked launch nav. -->
+  <div class="ab3-stage">
+
+    <img class="ab3-bg-stripe" src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Red_Stripe.png" alt="">
+
+    <div class="ab3-bg-paper1">
+      <img src="/assets/images/about/About Me-Desktop-Final Assets/about_me_paper__1.png" alt="">
+    </div>
+
+    <nav class="ab3-nav" aria-label="Primary">
+      <a href="/" class="ab3-nav__tab" style="left:614px">Home</a>
+      <a href="/about.html" class="ab3-nav__tab" style="left:781px" aria-current="page">About</a>
+      <a href="/listen.html" class="ab3-nav__tab" style="left:948px">Listen</a>
+      <a href="/journal.html" class="ab3-nav__tab" style="left:1118px">Journal</a>
+      <a href="/contact.html" class="ab3-nav__tab" style="left:1287px">Contact</a>
     </nav>
-  </div>
 
-  <div class="about-content">
+    <img class="ab3-bg-foreground" src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Foreground_Paper.png" alt="">
 
-    <!-- The Figma export (checked directly, see git history) shows the
-         logo, polaroid, title, and content block as flat siblings under
-         one shared coordinate frame — NOT the polaroid/logo nested
-         inside content with their own separate local origins, which is
-         what this used to be and why they could drift out of sync with
-         each other. .about-inner is now that shared origin: it sits at
-         the same point Figma's own ".content" frame does (x=360 in the
-         1440px reference, via the padding-left below), and every
-         absolutely-positioned child's left/top is that same element's
-         literal Figma value minus (360, 169) — .content's own origin —
-         converted to rem. Logo and polaroid also carry real rotation,
-         which Figma pivots around each element's own top-left corner;
-         our existing crop/rotate technique pivots around center instead
-         (kept as-is since it's already proven correct — see the
-         .av2-logo-wrap comment), so their positions below are the
-         center-pivot equivalent of Figma's literal box (computed from
-         its 4 rotated corners), not its literal left/top directly. -->
-    <div class="about-inner">
-
-      <div class="av2-green-corner" aria-hidden="true">
-        <img src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Green_Paper.png" alt="">
-      </div>
-
-      <div class="av2-logo-wrap">
-        <img src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
-      </div>
-
-      <figure class="about-polaroid">
-        <img src="/assets/images/about/About Me-Desktop-Final Assets/sarah green background polaroid  1.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
-        <figcaption>Me! Sarah Milad!</figcaption>
-      </figure>
-
-      <div class="about-title">
-        <h1>About</h1>
-        <hr class="about-title__rule">
-        <p class="about-title__tag">me&hellip;more or less</p>
-      </div>
-
-      <div class="about-hero-text">
-        <h2>Hi! I&rsquo;m Sarah,<br>the girl behind Sarahtonin Sounds</h2>
-      </div>
-
-      <div class="about-columns">
-        <div class="about-col">
-          <p>Music has been a constant in my life for as long as I can remember. Being the youngest of three meant I was always absorbing whatever was playing around me, from my sisters&rsquo; pop punk and Jesse McCartney phases to the Arabic music and old standards my parents loved. Then came LimeWire, burned CDs, and trips to Tower Records, where I bought my first CD, AFI&rsquo;s Decemberunderground, when I was around ten. Growing up in San Pedro, CA and around the South Bay&rsquo;s punk history only added to it. I never really developed one musical lane. If something caught my ear, that was enough for me.</p>
-          <p>What took me longer to figure out was that music could actually be my job. I&rsquo;d gotten into law school and assumed that was the plan, but when the pandemic hit right as I got in, suddenly none of it felt right. I kept coming back to the thing that had always felt natural to me: music. Not just listening to it, but really knowing it. Researching artists, digging through catalogs, reading their stories, figuring out where a sound came from. I&rsquo;d been doing some version of that my whole life. I&rsquo;d just never thought of it as something I could build a career around.</p>
-          <!-- Kept in its original left-column position rather than moved
-               to the right column: the paragraph breaks added for the
-               "My taste is all over the place." emphasis and the "But
-               Sarahtonin Sounds..." breathing room already lengthen the
-               right column enough on their own (measured: moving this
-               paragraph too overshot to ~2.5x the left column's height).
-               Left as originally placed achieves the actual goal — both
-               columns reading evenly — better than the literal move. -->
-          <p>Once I realized I could, music supervision was what I wanted to pursue. It brought together so much of what I already loved about music: discovery, research, curation, and finding the right song for the right moment. I started looking for ways into the industry, and a few early opportunities eventually led me to TMZ Productions, where I got to actually do it alongside my boss and mentor, Tony. Somewhere along the way, I stopped wondering whether skipping law school had been the wrong decision. Music wasn&rsquo;t just the thing I loved anymore. It was my career.</p>
-        </div>
-        <div class="about-col">
-          <p>But Sarahtonin Sounds had been there before any of it.</p>
-          <p>I started it as my own little curation project before I ever worked professionally in music. Sarahtonin was a dumb little Sarah + serotonin joke that somehow became the perfect name. Music has always been one of the things that makes me happiest, and sharing it with people makes it even better. Apparently I couldn&rsquo;t resist a pun.</p>
-          <p>Then I got distracted by work, and Sarahtonin Sounds got put on the shelf for a while. After being laid off, resurrecting it and actually giving it the time and space to grow felt like the natural move. I don&rsquo;t know exactly what it&rsquo;ll turn into yet, and I kind of like that. This is where I get to keep music personal: the playlists, discoveries, writing, and all the things I can&rsquo;t stop telling people about.</p>
-          <p>Music gets me in touch with emotion, sparks creativity, and makes me invent entire little scenes in my head when a song hits right. It connects me to people, too.</p>
-          <p class="about-taste-line">My taste is all over the place.</p>
-          <p>Being Egyptian and growing up with Arabic music is a big part of my musical foundation, and it&rsquo;s something I still love digging into. I love finding hidden gems, whether it&rsquo;s an artist about to break or a song from sixty years ago that&rsquo;s criminally slept on. There&rsquo;s something really fun about finding a song I love and getting to share it with someone else.</p>
-        </div>
-      </div>
-
+    <div class="ab3-bg-torn">
+      <img src="/assets/images/about/About Me-Desktop-Final Assets/torn_paper_1.png" alt="">
     </div>
 
-    <div class="about-lower">
-      <!-- Rotated 180deg, same technique Figma itself uses for this
-           asset (its "torn edge" detail sits in the bottom ~15% of the
-           source file — confirmed by sampling its alpha channel — so
-           the unrotated image only ever showed its plain top). Rotating
-           puts the torn edge at the top of this section, i.e. right at
-           the boundary with the content above it, matching the
-           authoritative Figma render. -->
-      <img class="about-lower__torn" src="/assets/images/about/About Me-Desktop-Final Assets/torn_paper_1.png" alt="">
-      <img class="about-lower__flowers" src="/assets/images/about/About Me-Desktop-Final Assets/orange_flowers_scrapbook_1.png" alt="">
+    <div class="ab3-bg-pink-strip">
+      <img src="/assets/images/about/About Me-Desktop-Final Assets/pink_strip_1.png" alt="">
+    </div>
 
-      <div class="about-cta">
-        <h3>Let&rsquo;s Work Together!</h3>
-        <p>I work across music supervision, licensing, curation, and music discovery, and I love collaborating with people on a good idea. If you think I could be a fit for something you&rsquo;re working on, I&rsquo;d love to hear about it.</p>
-      </div>
-
-      <div class="about-resume">
-        <h3>Selected Credits &amp; Resume</h3>
-        <hr class="about-resume__rule">
-        <div class="about-resume__entry">
-          <p class="about-resume__title">TMZ Productions</p>
-          <p class="about-resume__role">Senior Music Coordinator</p>
-          <p class="about-resume__dates">2023-2026</p>
+    <div class="ab3-content">
+      <h2 class="ab3-hero">Hi! I&rsquo;m Sarah,<br>the girl behind Sarahtonin Sounds.</h2>
+      <div class="ab3-intro-row">
+        <div class="ab3-intro-copy">
+          <p>Music has been a constant in my life for as long as I can remember. Being the youngest of three meant I was always absorbing whatever was playing around me, from my sisters&rsquo; pop punk and Jesse McCartney phases to the Arabic music and old standards my parents loved. Then came LimeWire, burned CDs, and trips to Tower Records, where I bought my first CD, AFI&rsquo;s Decemberunderground, when I was around ten. Growing up near San Pedro and around the South Bay&rsquo;s punk history only added to it. I never really developed one musical lane. If something caught my ear, I was into it.</p>
+          <p>For a long time, I didn&rsquo;t realize music could actually be my job. I got into law school right as the pandemic hit, and suddenly the plan I&rsquo;d assumed I was following didn&rsquo;t feel right anymore. Music was the thing I kept coming back to. Once I realized I could actually build a career around it, music supervision was what I wanted to pursue. It brought together everything I already loved about music: discovery, research, curation, and finding the right song for the right moment.</p>
+          <p>A few early opportunities eventually led me to TMZ Productions, where I got to do exactly that alongside my boss and mentor, Tony. Somewhere along the way, I stopped wondering whether skipping law school had been the wrong decision.</p>
         </div>
-        <!-- href="#" — final resume file/link not yet supplied
-             (ASSET-MANIFEST.md); not guessed here. -->
-        <a href="#" class="about-resume__link">Resume <span aria-hidden="true">&rarr;</span></a>
+        <div class="ab3-sarahhtonin-column">
+          <p>But Sarahtonin Sounds had been there before any of it.<br>I started it as my own little curation project before I ever worked professionally in music. Sarahtonin was a dumb little Sarah + serotonin joke that somehow became the perfect name. Music has always been one of the things that makes me happiest, and sharing it with people makes it even better. Apparently I couldn&rsquo;t resist a pun.</p>
+          <p>Then I got distracted by work, and Sarahtonin Sounds got put on the shelf. After being laid off, bringing it back and actually giving it room to grow felt like the natural move. I don&rsquo;t know exactly what it&rsquo;ll turn into yet, and I kind of like that. I just know I want a place to share the playlists, discoveries, writing, and music I can&rsquo;t stop talking about.</p>
+          <p>My taste is all over the place. Being Egyptian and growing up with Arabic music is a big part of my musical foundation, but really, if something moves me, I&rsquo;m into it. I love finding hidden gems, whether it&rsquo;s an artist about to break or a song from sixty years ago that&rsquo;s criminally slept on. Music sparks my creativity, makes me invent entire scenes in my head, and gives me something to share with other people. That&rsquo;s a huge part of why I love it.</p>
+        </div>
       </div>
     </div>
+
+    <div class="ab3-cta">
+      <h2>Let&rsquo;s Work Together!</h2>
+      <p>I work across music supervision, licensing, curation, and music discovery, and I love collaborating with people on a good idea. If you think I could be a fit for something you&rsquo;re working on, I&rsquo;d love to hear about it.</p>
+    </div>
+
+    <div class="ab3-resume-card">
+      <h2>Selected Credits &amp; Resume</h2>
+      <hr>
+      <div class="ab3-resume-entry">
+        <p class="ab3-resume-entry__title">TMZ Productions</p>
+        <p class="ab3-resume-entry__role">Senior Music Coordinator</p>
+        <p class="ab3-resume-entry__dates">2023-2026</p>
+      </div>
+    </div>
+    <!-- href="#" — final resume file/link not yet supplied
+         (ASSET-MANIFEST.md); not guessed here. -->
+    <a href="#" class="ab3-link ab3-resume-link">Resume <span aria-hidden="true">&rarr;</span></a>
+
+    <div class="ab3-title-block">
+      <h1>About</h1>
+      <hr>
+      <p>me&hellip;more or less</p>
+    </div>
+
+    <div class="ab3-vert-line" aria-hidden="true"></div>
+
+    <p class="ab3-caption">Me! Sarah Milad!</p>
+
+    <!-- Decorative Ephemera Cluster — see the stage comment above for
+         why these use top-left rotation pivots instead of center. -->
+    <img class="ab3-deco ab3-deco--blue-corner" src="/assets/images/about/About Me-Desktop-Final Assets/torn_blue_corner_paper_1.png" alt="">
+    <img class="ab3-deco ab3-deco--green-paper" src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Green_Paper.png" alt="">
+    <img class="ab3-deco ab3-deco--logo" src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+    <img class="ab3-deco ab3-deco--polaroid" src="/assets/images/about/About Me-Desktop-Final Assets/sarah green background polaroid  1.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
+    <img class="ab3-deco ab3-deco--flowers" src="/assets/images/about/About Me-Desktop-Final Assets/orange_flowers_scrapbook_1.png" alt="">
+
+    <!-- contact-link — Figma's last-painted node, on top of the cluster.
+         href="/contact.html" is the site's real contact route; Figma
+         doesn't specify a destination for this link. -->
+    <a href="/contact.html" class="ab3-link ab3-get-in-touch">Get in touch <span aria-hidden="true">&rarr;</span></a>
 
   </div>
 

@@ -1,52 +1,22 @@
-/* About page — reproduces the authoritative Figma frame
-   (figma.com/design/FP1ZWOSEAtNuI8w2OG2E7x, node 68:99, "About
-   Me-Desktop", 1440x1280 reference) per BUILD-ROADMAP.md Phase 3.
+/* About page — rebuilt from the authoritative Figma frame
+   (figma.com/design/YetSGHlPxrcnuSRZ3shfip, node 1:3,
+   "About Me-Desktop-duplicate"), pulled directly via get_design_context
+   per BUILD-ROADMAP.md Phase 3. See the HTML comment on .ab3-stage for
+   the full reasoning on the fixed-1440px approach, paint order, and
+   the top-left rotation pivots on the Decorative Ephemera Cluster.
 
-   Unlike Contact/Journal's full percentage "stage" technique, only the
-   thin red-striped nav strip is built as a dedicated band here — the
-   rest of the page (title, hero, bio, credits) is normal accessible
-   document flow. Two reasons: (1) in the source file the foreground
-   paper texture covers the red stripe everywhere below ~134px, so
-   there's no full-bleed "stage" to reproduce past the nav; (2) this is
-   a long-form editorial/bio page — PROJECT-SPEC.md's own stated layout
-   rhythm for it is "readable bio/story", so real paragraph flow matters
-   more than pixel-locked boxes, the same trade-off already made for
-   Contact's form. The logo and green-paper corner accent are
-   deliberately NOT clipped by the nav band's overflow:hidden — they're
-   positioned against the unclipped wrapper below it instead, because
-   clipping a bleeding decoration at a hard band edge is exactly the
-   moon/stars bug already found and fixed once on the Contact page.
-
-   Fixes applied to the real Figma copy while implementing (not
-   editorial changes made independently):
-   - Removed a duplicated "If something caught my ear," clause in the
-     first bio paragraph.
-   - Moved the "Once I realized I could... TMZ... Tony..." paragraph
-     from the end of the left column to the end of the right column,
-     to balance the two columns' visual length (the left column ran
-     noticeably longer). Right-column-only; the same content stays in
-     its original position for mobile, which has no column-balance
-     problem to solve.
-   - Gave "My taste is all over the place." its own paragraph/line
-     break and bold emphasis instead of sitting flush inside a
-     paragraph.
-   - Added a paragraph break after "But Sarahtonin Sounds had been
-     there before any of it." for breathing room.
-
-   Typography stays inside the established system rather than Figma's
-   generated fonts (Crimson Text / Playfair Display / "Figma Hand", the
-   last being Figma's own internal placeholder font, never a real
-   choice): Perandory Semi-Condensed for the "About" display heading,
-   IM Fell English for all readable copy, Sue Ellen Francisco for the
-   handwritten marginalia (the polaroid caption, "Let's Work Together!",
-   and the mobile footer tagline). Colors use the established design
-   tokens rather than Figma's literal hex values, matching the
-   substitution already made on Contact/Journal. */
+   Fonts substitute per the established system rather than Figma's
+   generated Crimson Text/Caveat: Perandory Semi-Condensed for "About",
+   the hero greeting, and "Selected Credits & Resume"; IM Fell English
+   for body copy and the Resume/Get-in-touch links; Sue Ellen Francisco
+   only for "Let's Work Together!" and the polaroid caption. Colors use
+   the established design tokens rather than Figma's literal hex
+   values. Figma's own literal px values are used verbatim throughout
+   (not rem/percentage) since this stage is deliberately fixed-width,
+   not responsive. */
 
 .page-about {
   background-color: var(--color-cream);
-  background-image: url('/assets/Foreground%20Paper.png');
-  background-repeat: repeat;
 }
 
 .page-about main.about-page {
@@ -54,37 +24,121 @@
   padding: 0;
 }
 
-/* ── Desktop nav band ── */
-.av2-navband {
+.ab3-stage {
   position: relative;
-  z-index: 0;
+  width: 1440px;
+  height: 1304px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #fff;
+  font-family: var(--font-body);
+}
+
+/* ── Background textures ── */
+.ab3-bg-stripe {
+  position: absolute;
+  left: -173px;
+  top: -594px;
+  width: 1856px;
+  height: 2250px;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.ab3-bg-paper1 {
+  position: absolute;
+  left: 195px;
+  top: 62px;
+  width: 1314px;
+  height: 1038px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-4);
-  background-image: url('/assets/images/about/About Me-Desktop-Final Assets/Texture___Red_Stripe.png');
-  background-size: cover;
-  background-position: center;
+  pointer-events: none;
 }
 
-.av2-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-2) var(--space-4);
+.ab3-bg-paper1 img {
+  width: 1038px;
+  height: 1314px;
+  max-width: none;
+  object-fit: cover;
+  transform: rotate(90deg);
 }
 
-.av2-nav__tab {
+.ab3-bg-foreground {
+  position: absolute;
+  left: -492px;
+  top: 134px;
+  width: 3382px;
+  height: 2130px;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* 180deg rotation doesn't change the bounding footprint, so the image
+   can just fill its wrapper 1:1 — no oversized-wrapper math needed. */
+.ab3-bg-torn {
+  position: absolute;
+  left: -23px;
+  top: 598px;
+  width: 1595px;
+  height: 471px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ab3-bg-torn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotate(180deg);
+}
+
+.ab3-bg-pink-strip {
+  position: absolute;
+  left: -748px;
+  top: 478px;
+  width: 2429px;
+  height: 474px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 8.9rem;
-  height: 3.6rem;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ab3-bg-pink-strip img {
+  width: 474px;
+  height: 2429px;
+  max-width: none;
+  object-fit: cover;
+  transform: rotate(-90deg);
+}
+
+/* ── Nav ── */
+.ab3-nav {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 0;
+}
+
+.ab3-nav__tab {
+  position: absolute;
+  top: 15px;
+  width: 142px;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-image: url('/assets/images/shared/nav-paper-tab.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   font-family: var(--font-display);
-  font-size: clamp(0.75rem, 1.1vw, 1.05rem);
+  font-size: 20px;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   text-decoration: none;
@@ -92,379 +146,332 @@
   color: var(--color-near-black);
 }
 
-.av2-nav__tab[aria-current="page"] {
+.ab3-nav__tab[aria-current="page"] {
   color: var(--color-crimson);
   text-decoration: underline;
   text-decoration-color: var(--color-crimson);
   text-underline-offset: 3px;
 }
 
-.av2-nav__tab:hover {
+.ab3-nav__tab:hover {
   text-decoration: underline;
 }
 
-/* ── Content ── */
-/* Figma's 1440px frame positions this content flush against the
-   frame's right edge, with all its margin reserved on the left (for
-   the logo/polaroid cluster) — x=360 to x=1440, no right margin at
-   all. max-width is set to exactly 90rem (1440px) — the Figma
-   reference's own width, confirmed against the plugin's literal
-   export rather than left looser — and padding-left uses clamp() to
-   track Figma's 25%-of-frame left margin (360/1440) up to a cap at
-   that exact value, rather than a fixed px margin that would either
-   crowd narrower desktop widths or fail to scale up. */
-.about-content {
-  position: relative;
-  z-index: 1;
-  max-width: 90rem;
-  margin: 0 auto;
-  /* padding-top is deliberately much bigger than the other pages'
-     var(--space-6): .about-inner's origin (see below) has to sit far
-     enough past the nav band that title's own -6.062rem offset from
-     it doesn't land back inside the nav band and collide with the nav
-     tab text — tuned against the render, since this flexbox nav band
-     doesn't have a fixed height to compute it from exactly (unlike
-     Figma's literal 72px nav). The logo (a more negative offset) still
-     bleeds a little into the band above this — that's intended, the
-     same "ticket stub peeking out" look already used for the logo on
-     Contact/Journal. */
-  padding: 7rem var(--space-4) var(--space-8);
-  /* The decorative cluster below intentionally bleeds a little past
-     the left edge at the 1440px reference, AND bleeds upward above
-     .about-content's own top edge (logo, green corner, title) —
-     confirmed against Figma's own literal coordinates, where these
-     elements extend past both x=0 and their frame's own top in
-     Figma's file too (the same off-canvas-bleed pattern already used
-     for the logo/moon-stars/green-paper elsewhere on this site).
-     overflow-x:hidden was tried here to trim the resulting horizontal
-     scrollbar, but CSS doesn't actually support clipping one axis
-     while leaving the other visible: per spec, whenever either axis
-     is non-visible, the other is silently forced from visible to
-     auto too — which clipped every upward-bleeding element (auto's
-     initial scroll position can't reach content above y=0) and is
-     exactly why the title/logo/green-corner went missing while
-     building this. No overflow rule here at all, same as
-     Contact/Journal/Home's equivalent bleeding decorations. */
-}
-
-/* .about-inner is the single shared coordinate origin every
-   absolutely-positioned element below (logo, polaroid, green corner,
-   title) is measured against — see the HTML comment above it for why:
-   the Figma plugin's own export shows all of these as flat siblings
-   positioned against one page-frame origin, not the polaroid/logo
-   nested inside the content block with their own separate local
-   origins (which is what this used to be, and how they could drift
-   out of sync with each other). This wrapper's own left edge lands at
-   exactly x=360 of the 1440px reference — Figma's own ".content"
-   frame origin — via the same clamp() as before, so every child's
-   left/top below is that element's literal Figma value minus
-   (360, 169) converted to rem. */
-.about-inner {
-  position: relative;
-  margin-left: clamp(2rem, 25vw, 22.5rem);
-}
-
-.av2-green-corner {
+/* ── content: Auto Layout Vertical → real flex column, not absolute
+   positioning internally (only the block itself is placed on the
+   page at Figma's literal x=360/y=169). ── */
+.ab3-content {
   position: absolute;
-  top: -8rem;
-  left: -21rem;
-  width: 14rem;
-  height: 14rem;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
+  left: 360px;
+  top: 169px;
+  width: 1080px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
 }
 
-.av2-green-corner img {
-  position: absolute;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  max-width: none;
-  object-fit: cover;
-  transform: rotate(47.87deg);
+.ab3-hero {
+  font-family: var(--font-display);
+  font-size: 40px;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  color: var(--color-near-black);
+  margin: 0;
 }
 
-/* home-logo.png has transparent padding around the visible ticket
-   artwork — sized so the visible content matches Figma's own ~332x137
-   target, same crop technique as .jv2-logo / .cv2-logo (proven
-   correct there, kept as-is here rather than reworked). Figma rotates
-   this element around its own top-left corner; this technique instead
-   flex-centers a slightly oversized wrapper and rotates the image
-   around ITS center, so the position below is the center-pivot
-   equivalent of Figma's literal box — computed from that box's 4
-   rotated corners, not copied from its literal left/top (see the HTML
-   comment; rotate(-25.02deg) itself is unchanged, only matched — it
-   was already Figma's literal angle). */
-.av2-logo-wrap {
+.ab3-intro-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 1080px;
+}
+
+.ab3-intro-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 592px;
+  flex-shrink: 0;
+}
+
+.ab3-intro-copy p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 26px;
+  letter-spacing: 0.2px;
+  color: var(--color-near-black);
+}
+
+.ab3-sarahhtonin-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 452px;
+  flex-shrink: 0;
+}
+
+.ab3-sarahhtonin-column p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
+}
+
+/* ── Let's Work Together + Get in touch ── */
+.ab3-cta {
   position: absolute;
-  top: -8.998rem;
-  left: -19.706rem;
-  width: 14rem;
-  height: 10.3rem;
-  z-index: 5;
+  left: 335px;
+  top: 1039px;
+  width: 484px;
+}
+
+.ab3-cta h2 {
+  font-family: var(--font-marginalia);
+  font-size: 50px;
+  letter-spacing: 1px;
+  text-align: center;
+  color: var(--color-near-black);
+  margin: 0 0 12px;
+}
+
+.ab3-cta p {
+  font-size: 20px;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.ab3-link {
   display: flex;
   align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.av2-logo-wrap img {
-  display: block;
-  width: 92.56%;
-  height: 51.72%;
-  max-width: none;
-  object-fit: cover;
-  transform: rotate(-25.02deg);
-}
-
-.about-title {
-  position: absolute;
-  top: -6.062rem;
-  left: -1.729rem;
-  z-index: 6;
-  width: max-content;
-  max-width: 22rem;
-}
-
-.about-title h1 {
-  font-size: clamp(2.5rem, 5.2vw, 4.6rem);
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.about-title__rule {
-  width: 14rem;
-  height: 3px;
-  margin: 0.4em 0 0;
-  border: 0;
-  background-color: var(--color-crimson);
-}
-
-.about-title__tag {
+  gap: 8px;
   font-family: var(--font-body);
-  font-style: italic;
-  font-size: var(--text-sm);
+  font-weight: 700;
+  font-size: 23px;
+  letter-spacing: 1px;
   color: var(--color-near-black);
-  opacity: 0.75;
-  margin: 0.3em 0 0;
-}
-
-/* Same center-pivot conversion as the logo above: Figma's literal
-   polaroid box (left 29.85px, top 107px, 389.93x545.18px, rotated
-   10.874deg around its own top-left corner) is used here at its
-   literal size — no separate crop-padding problem like the logo has,
-   so object-fit:cover on the raw asset is enough — but positioned so
-   ITS rotated center lands where Figma's does (computed from its 4
-   rotated corners), since rotating a differently-anchored box around
-   its own center instead reproduces the identical final rectangle
-   once the centers match. */
-.about-polaroid {
-  position: absolute;
-  top: -1.882rem;
-  left: -24.067rem;
-  width: 24.371rem;
-  margin: 0;
-  transform: rotate(10.874deg);
-  z-index: 4;
-}
-
-.about-polaroid img {
-  display: block;
-  width: 100%;
-  height: 34.074rem;
-  object-fit: cover;
-}
-
-.about-polaroid figcaption {
-  position: absolute;
-  left: 50%;
-  bottom: 13%;
-  /* Figma's caption is an independent sibling rotated 3deg in the
-     page frame, not nested inside the polaroid. Nesting it here for
-     simplicity means its own rotation has to cancel the parent's
-     10.874deg first: 3 - 10.874 = -7.874deg net. */
-  transform: translateX(-50%) rotate(-7.874deg);
-  font-family: var(--font-marginalia);
-  color: var(--color-crimson);
-  font-size: 1.8rem;
+  text-decoration: none;
   white-space: nowrap;
 }
 
-.about-hero-text {
-  position: relative;
-  z-index: 3;
-  /* Clears the polaroid's rotated bounding box, which extends to
-     about +3.3rem past .about-inner's own left edge (computed from
-     its 4 rotated corners — its unrotated box alone would undersell
-     how far right the rotated shape actually reaches). */
-  margin-left: 5rem;
-  padding-top: 2.5rem;
-  max-width: 40rem;
+.ab3-link:hover {
+  color: var(--color-crimson);
 }
 
-.about-hero-text h2 {
+.ab3-get-in-touch {
+  position: absolute;
+  left: 340px;
+  top: 1254px;
+}
+
+/* ── Selected Credits & Resume ── */
+.ab3-resume-card {
+  position: absolute;
+  left: 827px;
+  top: 1021px;
+  width: 526px;
+  height: 178px;
+  padding: 20px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.ab3-resume-card h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
-  text-transform: uppercase;
-  line-height: 1.2;
-  margin: 0;
-}
-
-.about-columns {
-  position: relative;
-  z-index: 2;
-  /* .about-hero-text above is normal flow and only a couple of lines
-     tall, nowhere near enough to clear the polaroid on its own (its
-     rotated bounding box reaches to about 34.2rem below .about-inner's
-     top). This margin makes up the difference so the columns start
-     below it rather than running underneath. */
-  margin-top: 14rem;
-  display: grid;
-  grid-template-columns: minmax(0, 592fr) minmax(0, 452fr);
-  gap: var(--space-6) clamp(2rem, 4vw, 3.5rem);
-  align-items: start;
-}
-
-.about-col p {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  line-height: 1.6;
+  font-size: 30px;
+  letter-spacing: 1px;
   color: var(--color-near-black);
-  margin: 0 0 var(--space-5);
-}
-
-.about-col p:last-child {
-  margin-bottom: 0;
-}
-
-.about-taste-line {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: var(--text-xl);
-  color: var(--color-crimson);
-}
-
-/* ── Let's Work Together + Selected Credits & Resume ── */
-.about-lower {
-  position: relative;
-  overflow: hidden;
-  margin-top: var(--space-8);
-  padding-top: calc(var(--space-7) + 2.5rem);
-  /* Sampled from torn_paper_1.png's own plain paper area — continues
-     seamlessly below the torn-edge image for whatever height the
-     content needs, since a raster image can't stretch its ragged edge
-     independently of its flat body. */
-  background-color: #dac4a0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-7);
-}
-
-.about-lower__torn {
-  position: absolute;
-  top: 0;
-  left: 0;
+  margin: 0;
   width: 100%;
-  height: auto;
-  max-width: none;
-  transform: rotate(180deg);
-  transform-origin: center;
-  pointer-events: none;
-  z-index: 0;
 }
 
-.about-lower__flowers {
-  position: absolute;
-  left: -0.5rem;
-  top: 1.5rem;
-  width: 5.5rem;
-  height: auto;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.about-cta,
-.about-resume {
-  position: relative;
-  z-index: 1;
-}
-
-.about-cta h3 {
-  font-family: var(--font-marginalia);
-  font-size: clamp(2rem, 4vw, 3rem);
-  color: var(--color-near-black);
-  margin: 0 0 0.4em;
-}
-
-.about-cta p {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  line-height: 1.6;
-  max-width: 32rem;
+.ab3-resume-card hr {
+  width: 100%;
+  height: 0;
   margin: 0;
-}
-
-.about-resume {
-  border-left: 1px solid rgba(28, 26, 22, 0.2);
-  padding-left: var(--space-6);
-}
-
-.about-resume h3 {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: var(--text-xl);
-  margin: 0 0 0.5em;
-}
-
-.about-resume__rule {
   border: 0;
-  height: 2px;
-  background-color: var(--color-crimson);
-  margin: 0 0 var(--space-4);
+  border-top: 4px solid var(--color-crimson);
 }
 
-.about-resume__entry {
-  margin-bottom: var(--space-4);
+.ab3-resume-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.about-resume__title {
-  font-family: var(--font-body);
+.ab3-resume-entry p {
+  margin: 0;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
+}
+
+.ab3-resume-entry__title {
   font-weight: 700;
-  font-size: var(--text-lg);
-  margin: 0 0 0.2em;
+  font-size: 18px;
 }
 
-.about-resume__role {
-  font-family: var(--font-body);
+.ab3-resume-entry__role {
   font-weight: 600;
-  font-size: var(--text-sm);
-  margin: 0 0 0.2em;
+  font-size: 15px;
 }
 
-.about-resume__dates {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  opacity: 0.75;
+.ab3-resume-entry__dates {
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.ab3-resume-link {
+  position: absolute;
+  left: 1090px;
+  top: 1095px;
+}
+
+.ab3-vert-line {
+  position: absolute;
+  left: 827px;
+  top: 1041px;
+  width: 1px;
+  height: 215px;
+  background-color: var(--color-crimson);
+}
+
+/* ── "About" title block — positioned directly at stage-absolute
+   coordinates (Figma's own calc(50% - Npx) values resolved against
+   the fixed 1440px stage width), no separate positioning wrapper
+   needed since every value below is already stage-relative. ── */
+.ab3-title-block {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ab3-title-block h1 {
+  position: absolute;
+  left: 332.33px;
+  top: 72px;
+  width: 324px;
+  font-size: 75px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
+  margin: 0;
+  text-transform: none;
+}
+
+.ab3-title-block hr {
+  position: absolute;
+  left: 441.58px;
+  top: 146.7px;
+  width: 263.83px;
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: 7px solid var(--color-crimson);
+}
+
+.ab3-title-block p {
+  position: absolute;
+  left: 285px;
+  top: 147.7px;
+  width: 289.216px;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
   margin: 0;
 }
 
-.about-resume__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  font-family: var(--font-body);
-  font-size: var(--text-lg);
-  color: var(--color-near-black);
-  text-decoration: none;
-  border-bottom: 1px solid var(--color-near-black);
-  padding-bottom: 2px;
+.ab3-caption {
+  position: absolute;
+  left: 29px;
+  top: 530px;
+  font-family: var(--font-marginalia);
+  color: var(--color-crimson);
+  font-size: 30px;
+  transform: rotate(3deg);
+  margin: 0;
+  white-space: nowrap;
 }
 
-.about-resume__link:hover {
-  color: var(--color-crimson);
-  border-color: var(--color-crimson);
+/* ── Decorative Ephemera Cluster — logo, polaroid, green + blue paper,
+   flowers. Positions are the top-left-pivot conversion described in
+   the HTML comment on .ab3-stage, not Figma's generated wrapper
+   left/top (which centers around a DIFFERENT, oversized box and would
+   double-apply the centering offset if reused directly here). Each
+   uses object-fit:cover directly on the raw asset at Figma's literal
+   target box — the same technique Figma's own export uses for these
+   — rather than a custom crop-percentage trick, which is what
+   previously split the logo into two visually disconnected pieces. */
+.ab3-deco {
+  position: absolute;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* left is nudged left from the computed -58.26px: at that position the
+   asset's opaque paper edge (this local export has no transparent
+   margin there) oversteps the CTA text column's left edge by ~9px,
+   clipping the leading character of every line — confirmed by
+   screenshot pixel-sampling, not visible in the Figma reference render.
+   Same width/height/rotation, only shifted left to clear the text. */
+.ab3-deco--blue-corner {
+  left: -97px;
+  top: 1044.53px;
+  width: 402.271px;
+  height: 259.473px;
+  transform: rotate(180deg) scaleY(-1);
+  transform-origin: center;
+}
+
+.ab3-deco--green-paper {
+  left: 197.526px;
+  top: -750.99px;
+  width: 735.639px;
+  height: 1096.366px;
+  transform-origin: top left;
+  transform: rotate(47.87deg);
+}
+
+.ab3-deco--logo {
+  left: -23.811px;
+  top: 127.219px;
+  width: 337.107px;
+  height: 138.816px;
+  transform-origin: top left;
+  transform: rotate(-25.02deg);
+}
+
+/* left is nudged ~43px further left than the computed top-left-pivot
+   conversion (29.722px) gives: at that computed position the flower's
+   actual petals (not just the theoretical rotated bounding box)
+   visibly overlapped the hero heading's "T" — confirmed by cropping
+   the render, not by re-deriving the math — which the reference
+   screenshot does not show. Same width/height/rotation, only shifted
+   left to clear the heading, per the instruction to fix what direct
+   pixel comparison finds rather than trust the computed value alone. */
+.ab3-deco--polaroid {
+  left: -43px;
+  top: 118.399px;
+  width: 395.103px;
+  height: 552.423px;
+  transform-origin: top left;
+  transform: rotate(10.87deg);
+}
+
+.ab3-deco--flowers {
+  left: 25.84px;
+  top: 1112.42px;
+  width: 145.912px;
+  height: 143.733px;
 }
 
 /* ── Mobile page — hidden by default ── */
@@ -473,8 +480,7 @@
 }
 
 @media (max-width: 900px) {
-  .av2-navband,
-  .about-content {
+  .ab3-stage {
     display: none;
   }
 
