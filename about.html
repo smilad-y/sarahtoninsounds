@@ -97,6 +97,14 @@
     </div>
 
     <div class="about-lower">
+      <!-- Rotated 180deg, same technique Figma itself uses for this
+           asset (its "torn edge" detail sits in the bottom ~15% of the
+           source file — confirmed by sampling its alpha channel — so
+           the unrotated image only ever showed its plain top). Rotating
+           puts the torn edge at the top of this section, i.e. right at
+           the boundary with the content above it, matching the
+           authoritative Figma render. -->
+      <img class="about-lower__torn" src="/assets/images/about/About Me-Desktop-Final Assets/torn_paper_1.png" alt="">
       <img class="about-lower__flowers" src="/assets/images/about/About Me-Desktop-Final Assets/orange_flowers_scrapbook_1.png" alt="">
 
       <div class="about-cta">

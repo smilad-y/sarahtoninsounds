@@ -187,10 +187,21 @@
 }
 
 /* ── Content ── */
+/* Figma's 1440px frame positions this content flush against the
+   frame's right edge, with all its margin reserved on the left (for
+   the logo/polaroid cluster) — x=360 to x=1440, no right margin at
+   all. A symmetric centered 1200px box (the previous version here)
+   doesn't match that: it's both narrower than the 1440px reference and
+   wrong-shaped (equal margins instead of left-loaded). max-width is
+   widened to comfortably match/exceed 1440px, and padding-left uses
+   clamp() to track Figma's 25%-of-frame left margin (360/1440) up to
+   a cap at that exact value, rather than a fixed px margin that would
+   either crowd narrower desktop widths or fail to scale up. */
 .about-content {
-  max-width: 75rem;
+  position: relative;
+  max-width: 96rem;
   margin: 0 auto;
-  padding: var(--space-6) var(--space-4) var(--space-8);
+  padding: var(--space-6) var(--space-4) var(--space-8) clamp(2rem, 25vw, 22.5rem);
 }
 
 .about-hero-row {
@@ -268,15 +279,30 @@
 /* ── Let's Work Together + Selected Credits & Resume ── */
 .about-lower {
   position: relative;
+  overflow: hidden;
   margin-top: var(--space-8);
   padding-top: calc(var(--space-7) + 2.5rem);
-  background-image: url('/assets/images/about/About Me-Desktop-Final Assets/torn_paper_1.png');
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: 100% auto;
+  /* Sampled from torn_paper_1.png's own plain paper area — continues
+     seamlessly below the torn-edge image for whatever height the
+     content needs, since a raster image can't stretch its ragged edge
+     independently of its flat body. */
+  background-color: #dac4a0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-7);
+}
+
+.about-lower__torn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  transform: rotate(180deg);
+  transform-origin: center;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .about-lower__flowers {
@@ -286,6 +312,13 @@
   width: 5.5rem;
   height: auto;
   pointer-events: none;
+  z-index: 1;
+}
+
+.about-cta,
+.about-resume {
+  position: relative;
+  z-index: 1;
 }
 
 .about-cta h3 {
