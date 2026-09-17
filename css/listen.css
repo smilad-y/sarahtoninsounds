@@ -1,4 +1,857 @@
-/* Listen page — page-specific styles.
-   Structural foundation only; mood selector, turntable/player, and
-   Crash Courses UI are later phases (PROJECT-SPEC.md §7,
-   BUILD-ROADMAP.md Phase 4/5/6). */
+/* Listen page — reproduces the authoritative Figma frame "Desktop - Listen"
+   (figma.com/design/iBbuaxPtkTyuJ9FwenUBMy, node 1:3, 1440x2428 reference
+   frame). All positions/sizes below are percentages of that reference
+   frame (left/width as %/1440, top/height as %/2428), taken directly from
+   the Figma geometry — same technique already established on this project
+   by css/home.css and css/journal.css.
+
+   Typography stays inside the established Sarahtonin Sounds system
+   (PROJECT-SPEC.md §5) rather than Figma's generated font metadata
+   (Crimson Text / Playfair Display / "Figma Hand") — same substitution
+   journal.css already documents doing on this same Figma workspace:
+   Perandory Semi-Condensed for display/UI labels and headings, IM Fell
+   English for readable body copy, Sue Ellen Francisco only for short
+   annotations (track titles, "(more to come)"). The Figma file's "Figma
+   Hand" treatment on the two longer mood-descriptor paragraphs is NOT
+   carried over as handwriting — CLAUDE.md's non-negotiables reserve
+   casual handwriting for short annotations/marginalia, not body copy, so
+   those two paragraphs use the body font instead.
+
+   Nav: reuses assets/images/shared/nav-paper-tab.png (Journal's interior-
+   page nav treatment), not a new tape asset, for cross-page consistency.
+   Figma's nav labels this tab "DISCOVER"; production nav is Home · About ·
+   Listen · Journal · Contact (CLAUDE.md non-negotiable) — relabeled
+   LISTEN, same resolution journal.html's mobile nav already documents.
+
+   Two Figma illustrations (the 1950s-ad decorative collage, and the
+   giant diagonal background paper strip behind the hero) are omitted:
+   this session could not download them (Figma asset host is blocked by
+   this environment's egress policy — see build note) and they read as
+   subtle/background-level in the reference screenshot, not load-bearing
+   content. The Arabic Music collage photo IS load-bearing content, so it
+   keeps a clearly-marked placeholder (see listen.html) instead of being
+   silently dropped.
+
+   No mobile Figma frame was supplied for Listen (unlike Home/Journal,
+   which each have an authoritative separate mobile frame) — this stage
+   scales the one desktop frame proportionally at every width rather than
+   inventing mobile-specific art direction. A dedicated mobile pass needs
+   its own Figma frame first. */
+
+.page-listen {
+  background-color: var(--color-cream);
+}
+
+.page-listen main.listen-page {
+  max-width: none;
+  padding: 0;
+}
+
+/* ── Stage ── */
+.listen-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  aspect-ratio: 1440 / 2428;
+  overflow: hidden;
+  background-color: var(--color-cream);
+}
+
+/* ── Brand logo — flex-center-then-rotate, matching Home/Journal's own
+   technique for this exact asset. ── */
+.lst-logo {
+  position: absolute;
+  left: -2.0139%;
+  top: -1.6064%;
+  width: 26.6866%;
+  height: 11.551%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.lst-logo img {
+  display: block;
+  width: 91.448%;
+  height: 55.51%;
+  max-width: none;
+  object-fit: contain;
+  transform: rotate(-22.96deg);
+}
+
+/* ── Primary nav ── */
+.lst-nav {
+  position: absolute;
+  z-index: 15;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.lst-nav ul {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lst-nav__tab {
+  position: absolute;
+  pointer-events: auto;
+  top: 1.1119%;
+  width: 9.8611%;
+  height: 2.3477%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/assets/images/shared/nav-paper-tab.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 1.1vw, 1.05rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.lst-nav__tab--home { left: 43.125%; }
+.lst-nav__tab--about { left: 54.7222%; }
+.lst-nav__tab--listen { left: 66.3194%; }
+.lst-nav__tab--journal { left: 78.125%; }
+.lst-nav__tab--contact { left: 89.8611%; }
+
+.lst-nav__tab[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 3px;
+}
+
+.lst-nav__tab:hover {
+  text-decoration: underline;
+}
+
+/* ── Hero ── */
+.lst-hero {
+  position: absolute;
+  left: -11.5972%;
+  top: 7.826%;
+  width: 59.1667%;
+  z-index: 5;
+  text-align: center;
+}
+
+.lst-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6.94vw, 6.25rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--color-near-black);
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.35);
+  margin: 0;
+}
+
+.lst-hero__tagline {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.4vw, 1.25rem);
+  color: var(--color-near-black);
+  margin: 0.6em auto 0;
+  max-width: 90%;
+}
+
+.lst-hero__rule {
+  width: 38%;
+  max-width: 320px;
+  height: 2px;
+  margin: 0.5em auto 0;
+  background-color: var(--color-crimson);
+}
+
+/* ── Pick Your Mood ── */
+.lst-moods {
+  position: absolute;
+  left: 1.8056%;
+  top: 15.0329%;
+  width: 95.5526%;
+  height: 11.0159%;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.lst-moods__panel {
+  position: absolute;
+  inset: 0;
+  background-color: #ede4cd;
+  border-radius: 18px;
+  box-shadow: 0 6px 14px rgba(67, 51, 28, 0.18);
+  clip-path: polygon(
+    0% 4%, 3% 0%, 30% 2%, 55% 0%, 78% 3%, 100% 1%,
+    100% 96%, 96% 100%, 68% 97%, 42% 100%, 18% 98%, 0% 100%
+  );
+  z-index: 1;
+}
+
+.lst-moods__heading {
+  position: absolute;
+  left: 1.43%;
+  top: 6.495%;
+  width: 18.77%;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.3vw, 1.25rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.lst-moods__arrow {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  border: none;
+  background: none;
+  padding: 0.25em;
+  font-size: clamp(0.8rem, 1.1vw, 1.1rem);
+  color: var(--color-near-black);
+  cursor: pointer;
+}
+
+.lst-moods__track {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1%;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 0 1%;
+  scrollbar-width: none;
+}
+
+.lst-moods__track::-webkit-scrollbar {
+  display: none;
+}
+
+.lst-moods__circle {
+  flex: 0 0 auto;
+  width: 7.7%;
+  aspect-ratio: 1 / 1;
+  min-width: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lst-moods__circle:hover {
+  transform: translateY(-3px);
+}
+
+.lst-moods__circle[aria-pressed="true"] {
+  box-shadow: 0 0 0 4px var(--color-cream), 0 0 0 7px var(--color-crimson);
+}
+
+/* ── Selected mood / player panel ── */
+.lst-player {
+  position: absolute;
+  left: 0%;
+  top: 26.6063%;
+  width: 100%;
+  height: 22.2239%;
+  z-index: 3;
+}
+
+.lst-player__tape {
+  position: absolute;
+  left: 0.5396%;
+  top: 0%;
+  width: 30.502%;
+  height: 18.72%;
+  background-color: var(--color-powder-blue);
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(67, 51, 28, 0.25);
+  clip-path: polygon(1% 8%, 6% 0%, 94% 3%, 99% 10%, 98% 92%, 92% 100%, 4% 97%, 0% 88%);
+  transition: background-color 0.2s ease;
+}
+
+.lst-player--curated .lst-player__tape {
+  background-color: #d8d2c2;
+}
+
+.lst-player__mood-name {
+  position: absolute;
+  left: -0.0694%;
+  top: 4.95%;
+  width: 31.1111%;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.1vw, 3.75rem);
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.lst-player__hook {
+  position: absolute;
+  left: 0.0694%;
+  top: 24.07%;
+  width: 30.9028%;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  text-align: center;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.lst-player__desc {
+  position: absolute;
+  left: -0.0694%;
+  top: 54.26%;
+  width: 31.0417%;
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.35vw, 1.35rem);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.lst-player--curated .lst-player__desc {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.lst-player__record {
+  position: absolute;
+  left: 31.5278%;
+  top: 12.59%;
+  width: 42.4306%;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.4));
+}
+
+.lst-player__record img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lst-player__note {
+  position: absolute;
+  left: 74.2361%;
+  top: 0%;
+  width: 26.5278%;
+  height: 73.7%;
+  background-image: url('/assets/images/listen/paper.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 8% 8% 0;
+  box-sizing: border-box;
+  filter: drop-shadow(0 4px 6px rgba(67, 51, 28, 0.4));
+}
+
+.lst-player__note-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  text-align: center;
+  color: var(--color-near-black);
+  transform: rotate(-4deg);
+  margin: 0;
+}
+
+.lst-player__note-rule {
+  width: 70%;
+  height: 2px;
+  margin: 0.4em auto;
+  background-color: var(--color-crimson);
+  transform: rotate(-4deg);
+}
+
+.lst-player__tracklist {
+  list-style: none;
+  margin: 0.5em 0 0;
+  padding: 0;
+  font-family: var(--font-marginalia);
+  font-size: clamp(0.9rem, 1.3vw, 1.15rem);
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.lst-player__tracklist li {
+  margin-bottom: 0.6em;
+  transform: rotate(-3deg);
+}
+
+.lst-player__tracklist li:nth-child(2n) {
+  transform: rotate(2deg);
+}
+
+.lst-decor-photo {
+  position: absolute;
+  left: 65.74%;
+  top: 51.19%;
+  width: 47.76%;
+  height: 28.33%;
+  z-index: 2;
+  border-radius: 50%;
+  background-color: #ddd5c1;
+  border: 2px dashed rgba(28, 26, 22, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ── An Introduction To... / Crash Courses ── */
+.lst-intro {
+  position: absolute;
+  left: 0%;
+  top: 69.8106%;
+  width: 100%;
+  height: 30.19%;
+  z-index: 2;
+}
+
+.lst-intro__panel {
+  position: absolute;
+  left: 50%;
+  top: 3%;
+  width: 100vw;
+  max-width: 1600px;
+  height: 94%;
+  transform: translateX(-50%);
+  background-color: #e9e0c8;
+  clip-path: polygon(0% 2%, 100% 0%, 100% 98%, 0% 100%);
+  z-index: 1;
+}
+
+.lst-intro__heading {
+  position: absolute;
+  left: 14.0278%;
+  top: 6.86%;
+  width: 53.1944%;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.86vw, 4.375rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.lst-intro__rule {
+  position: absolute;
+  left: 20.9313%;
+  top: 17.57%;
+  width: 37.9762%;
+  height: 2px;
+  z-index: 2;
+  background-color: var(--color-crimson);
+}
+
+.lst-intro__subheading {
+  position: absolute;
+  left: 23.4081%;
+  top: 19.98%;
+  width: 31.4232%;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.lst-intro__note {
+  position: absolute;
+  left: 27.3611%;
+  top: 35.66%;
+  width: 18.8194%;
+  z-index: 2;
+  font-family: var(--font-marginalia);
+  font-size: clamp(1rem, 1.4vw, 1.35rem);
+  text-align: center;
+  color: var(--color-crimson);
+  margin: 0;
+}
+
+.lst-crash-course {
+  position: absolute;
+  left: 26.4583%;
+  top: 50.07%;
+  width: 67.0139%;
+  height: 40.92%;
+  z-index: 2;
+}
+
+.lst-crash-course__panel {
+  position: absolute;
+  inset: 0;
+  background-color: #f4ede0;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(67, 51, 28, 0.2);
+  z-index: 1;
+}
+
+.lst-crash-course__photo {
+  position: absolute;
+  left: -45.49%;
+  top: -37.83%;
+  width: 56.13%;
+  height: 142.79%;
+  z-index: 2;
+  background-color: #ddd5c1;
+  border: 2px dashed rgba(28, 26, 22, 0.35);
+  border-radius: 4px;
+  transform: rotate(6.62deg);
+  box-shadow: 0 4px 10px rgba(54, 24, 6, 0.3);
+}
+
+.lst-crash-course__title {
+  position: absolute;
+  left: 7.56%;
+  top: 4.93%;
+  width: 26.94%;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.1vw, 1.9rem);
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.lst-crash-course__rule {
+  position: absolute;
+  left: 7.05%;
+  top: 19.78%;
+  width: 27.87%;
+  height: 1px;
+  z-index: 2;
+  background-color: var(--color-near-black);
+  opacity: 0.4;
+}
+
+.lst-crash-course__desc {
+  position: absolute;
+  left: 6.63%;
+  top: 24.01%;
+  width: 86.11%;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.3vw, 1.25rem);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.lst-crash-course__explore {
+  position: absolute;
+  left: 33.16%;
+  top: 87.17%;
+  width: 32.02%;
+  height: 23.36%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  box-sizing: border-box;
+  background-image: url('/assets/images/home/red-tape.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 1.1vw, 1rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fffccc;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.35);
+}
+
+.lst-crash-course__arrow {
+  font-size: 1.1em;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   No dedicated mobile Figma frame exists for Listen (unlike Home and
+   Journal, which each have an authoritative separate mobile frame from
+   Sarah). Scaling the locked-aspect-ratio desktop stage down works fine
+   for the large collage art down to tablet width, but below that the
+   fixed absolute text boxes stop having room for their own text and
+   start overlapping neighboring sections — not just "smaller," genuinely
+   broken and illegible, which fails this project's accessibility/
+   performance requirements even with a caveat comment.
+
+   So below 700px this abandons absolute positioning for a plain,
+   honest stacked flow of the SAME real content (no invented copy, no
+   different moods/tracklist) — a functional placeholder, not a final
+   art-directed mobile design. Swap this block out once Sarah supplies
+   a mobile Figma frame for Listen, the same way Journal's real mobile
+   frame replaced an earlier scaled-down pass. Purely decorative pieces
+   that have no mobile Figma direction of their own (rotated corner
+   logo, the two pending-asset collage placeholders) are hidden rather
+   than guessed at, matching Home's own precedent of dropping desktop-
+   only decorative accents at its mobile breakpoint. ══════════════════ */
+@media (max-width: 700px) {
+  /* Desktop's left/top/right/bottom offsets still apply once position
+     changes to relative/static below (only `position` itself stops them
+     applying under `static`, not `relative`) — reset them all up front
+     so each element goes back to plain, unshifted document flow before
+     the per-element flow rules below set real flow spacing. */
+  .listen-stage * {
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    transform: none;
+  }
+
+  .listen-stage {
+    aspect-ratio: auto;
+    max-width: 560px;
+  }
+
+  .lst-logo,
+  .lst-decor-photo,
+  .lst-crash-course__photo,
+  .lst-player__tape {
+    display: none;
+  }
+
+  .lst-nav,
+  .lst-hero,
+  .lst-moods,
+  .lst-player,
+  .lst-intro {
+    position: static;
+    inset: auto;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+  }
+
+  .lst-nav ul {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 1em 0.75em 0;
+  }
+
+  .lst-nav__tab {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.9em 1.1em 0.7em;
+    font-size: 0.75rem;
+  }
+
+  .lst-hero {
+    text-align: center;
+    padding: 1.25em 1em 0;
+  }
+
+  .lst-hero__title {
+    font-size: 3rem;
+  }
+
+  .lst-hero__tagline {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .lst-moods {
+    position: relative;
+    display: block;
+    padding: 1.5em 1em;
+  }
+
+  .lst-moods__panel {
+    position: absolute;
+    inset: 0;
+  }
+
+  .lst-moods__heading {
+    position: static;
+    display: block;
+    width: auto;
+    margin: 0 0 0.75em;
+    font-size: 1rem;
+  }
+
+  .lst-moods__track {
+    position: relative;
+    justify-content: flex-start;
+    padding: 0.5em 2.25em;
+  }
+
+  .lst-moods__circle {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .lst-moods__arrow {
+    position: absolute;
+    top: 55%;
+    z-index: 3;
+    font-size: 1.4rem;
+  }
+
+  .lst-moods__arrow--prev { left: 0.25em; }
+  .lst-moods__arrow--next { right: 0.25em; }
+
+  .lst-player {
+    padding: 2em 1.25em 1.5em;
+    text-align: center;
+  }
+
+  .lst-player__mood-name {
+    position: static;
+    width: auto;
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  .lst-player__hook {
+    position: static;
+    width: auto;
+    font-size: 1.15rem;
+    margin: 0.9em 0 0;
+  }
+
+  .lst-player__desc {
+    position: static;
+    width: auto;
+    font-size: 1.05rem;
+    margin: 0.75em 0 0;
+  }
+
+  .lst-player__record {
+    position: static;
+    width: 100%;
+    max-width: 360px;
+    margin: 1.5em auto 0;
+  }
+
+  .lst-player__note {
+    position: static;
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    margin: 1.5em auto 0;
+    padding: 1.5em 1.5em 1.75em;
+    background-size: cover;
+  }
+
+  .lst-player__note-heading {
+    font-size: 1.35rem;
+  }
+
+  .lst-player__tracklist {
+    font-size: 1.1rem;
+  }
+
+  .lst-intro {
+    position: relative;
+    padding: 2em 1.25em 3em;
+    text-align: center;
+  }
+
+  .lst-intro__panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    transform: none;
+  }
+
+  .lst-intro__heading {
+    position: relative;
+    width: auto;
+    font-size: 2.25rem;
+  }
+
+  .lst-intro__rule {
+    position: relative;
+    width: 60%;
+    margin: 0.5em auto 0;
+  }
+
+  .lst-intro__subheading {
+    position: relative;
+    width: auto;
+    font-size: 1.15rem;
+    margin: 0.9em 0 0;
+  }
+
+  .lst-intro__note {
+    position: relative;
+    width: auto;
+    font-size: 1.05rem;
+    margin: 0.6em 0 0;
+  }
+
+  .lst-crash-course {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 1.5em 0 0;
+    padding: 1.5em 1.25em 4em;
+  }
+
+  .lst-crash-course__title {
+    position: relative;
+    width: auto;
+    font-size: 1.4rem;
+  }
+
+  .lst-crash-course__rule {
+    position: relative;
+    width: 40%;
+    margin: 0.5em auto 0;
+  }
+
+  .lst-crash-course__desc {
+    position: relative;
+    width: auto;
+    font-size: 1rem;
+    margin: 0.9em 0 0;
+  }
+
+  .lst-crash-course__explore {
+    position: absolute;
+    left: 50%;
+    bottom: 1em;
+    top: auto;
+    width: 60%;
+    max-width: 220px;
+    height: auto;
+    padding: 0.9em 0;
+    transform: translateX(-50%);
+  }
+}
