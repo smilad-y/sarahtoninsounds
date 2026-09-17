@@ -37,6 +37,8 @@
 
 .page-contact {
   background-color: var(--color-cream);
+  background-image: url('/assets/Foreground%20Paper.png');
+  background-repeat: repeat;
 }
 
 .page-contact main.contact-page {
@@ -109,7 +111,7 @@
 
 .cv2-deco--moon {
   left: 30.5493%;
-  top: -6.3475%;
+  top: 3.5%;
   width: 16.3117%;
   height: 78.3016%;
   transform: rotate(36.05deg);
@@ -350,34 +352,38 @@
 /* ── Right column: social ── */
 .contact-col--social {
   position: relative;
-  padding-top: var(--space-7);
+  padding-top: 8rem;
 }
 
+/* Sized/structured the same reliable way as .contact-tape below (a
+   normal-flow image establishes the real box size; the label overlays
+   it with inset:0) rather than a flex box with no intrinsic height,
+   which was rendering the paper scrap too thin to read as a label. */
 .contact-note {
   position: absolute;
-  top: -1.5rem;
-  right: 2.5rem;
-  width: 9.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: -1rem;
+  right: 0.5rem;
+  width: 12rem;
   transform: rotate(-9deg);
   pointer-events: none;
 }
 
 .contact-note img {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
 }
 
 .contact-note span {
-  position: relative;
-  transform: rotate(-16deg);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
+  transform: rotate(-7deg);
   font-family: var(--font-marginalia);
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   text-align: center;
   color: var(--color-near-black);
 }
