@@ -428,13 +428,11 @@
   top: 1044.53px;
   width: 402.271px;
   height: 259.473px;
-  transform: rotate(180deg) scaleY(-1);
-  transform-origin: center;
 }
 
 .ab3-deco--green-paper {
-  left: 197.526px;
-  top: -750.99px;
+  left: -20px;
+  top: -20px;
   width: 735.639px;
   height: 1096.366px;
   transform-origin: top left;
