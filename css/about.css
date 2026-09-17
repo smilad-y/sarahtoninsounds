@@ -1,3 +1,654 @@
-/* About page — page-specific styles.
-   Structural foundation only; full editorial/scrapbook design is
-   Phase 3 (PROJECT-SPEC.md §9, BUILD-ROADMAP.md Phase 3). */
+/* About page — reproduces the authoritative Figma frame
+   (figma.com/design/FP1ZWOSEAtNuI8w2OG2E7x, node 68:99, "About
+   Me-Desktop", 1440x1280 reference) per BUILD-ROADMAP.md Phase 3.
+
+   Unlike Contact/Journal's full percentage "stage" technique, only the
+   thin red-striped nav strip is built as a dedicated band here — the
+   rest of the page (title, hero, bio, credits) is normal accessible
+   document flow. Two reasons: (1) in the source file the foreground
+   paper texture covers the red stripe everywhere below ~134px, so
+   there's no full-bleed "stage" to reproduce past the nav; (2) this is
+   a long-form editorial/bio page — PROJECT-SPEC.md's own stated layout
+   rhythm for it is "readable bio/story", so real paragraph flow matters
+   more than pixel-locked boxes, the same trade-off already made for
+   Contact's form. The logo and green-paper corner accent are
+   deliberately NOT clipped by the nav band's overflow:hidden — they're
+   positioned against the unclipped wrapper below it instead, because
+   clipping a bleeding decoration at a hard band edge is exactly the
+   moon/stars bug already found and fixed once on the Contact page.
+
+   Fixes applied to the real Figma copy while implementing (not
+   editorial changes made independently):
+   - Removed a duplicated "If something caught my ear," clause in the
+     first bio paragraph.
+   - Moved the "Once I realized I could... TMZ... Tony..." paragraph
+     from the end of the left column to the end of the right column,
+     to balance the two columns' visual length (the left column ran
+     noticeably longer). Right-column-only; the same content stays in
+     its original position for mobile, which has no column-balance
+     problem to solve.
+   - Gave "My taste is all over the place." its own paragraph/line
+     break and bold emphasis instead of sitting flush inside a
+     paragraph.
+   - Added a paragraph break after "But Sarahtonin Sounds had been
+     there before any of it." for breathing room.
+
+   Typography stays inside the established system rather than Figma's
+   generated fonts (Crimson Text / Playfair Display / "Figma Hand", the
+   last being Figma's own internal placeholder font, never a real
+   choice): Perandory Semi-Condensed for the "About" display heading,
+   IM Fell English for all readable copy, Sue Ellen Francisco for the
+   handwritten marginalia (the polaroid caption, "Let's Work Together!",
+   and the mobile footer tagline). Colors use the established design
+   tokens rather than Figma's literal hex values, matching the
+   substitution already made on Contact/Journal. */
+
+.page-about {
+  background-color: var(--color-cream);
+  background-image: url('/assets/Foreground%20Paper.png');
+  background-repeat: repeat;
+}
+
+.page-about main.about-page {
+  max-width: none;
+  padding: 0;
+}
+
+/* ── Desktop nav band ── */
+.av2-navband {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background-image: url('/assets/images/about/About Me-Desktop-Final Assets/Texture___Red_Stripe.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.av2-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-4);
+}
+
+.av2-nav__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8.9rem;
+  height: 3.6rem;
+  background-image: url('/assets/images/shared/nav-paper-tab.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 1.1vw, 1.05rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.av2-nav__tab[aria-current="page"] {
+  color: var(--color-crimson);
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 3px;
+}
+
+.av2-nav__tab:hover {
+  text-decoration: underline;
+}
+
+/* ── Logo + green-paper corner + title, unclipped ── */
+.about-topwrap {
+  position: relative;
+  min-height: 9rem;
+  padding: var(--space-6) var(--space-4) 0;
+}
+
+.av2-green-corner {
+  position: absolute;
+  top: -2rem;
+  left: -2rem;
+  width: 14rem;
+  height: 14rem;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.av2-green-corner img {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  max-width: none;
+  object-fit: cover;
+  transform: rotate(47.87deg);
+}
+
+/* home-logo.png has transparent padding around the visible ticket
+   artwork — sized so the visible content matches Figma's own ~332x137
+   target, same technique/ratio as .jv2-logo / .cv2-logo. */
+.av2-logo-wrap {
+  position: absolute;
+  top: -3.5rem;
+  left: 0.5rem;
+  width: 14rem;
+  height: 10.3rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.av2-logo-wrap img {
+  display: block;
+  width: 92.56%;
+  height: 51.72%;
+  max-width: none;
+  object-fit: cover;
+  transform: rotate(-25.02deg);
+}
+
+.about-title {
+  position: relative;
+  z-index: 6;
+  margin-left: 9rem;
+  padding-top: 1rem;
+}
+
+.about-title h1 {
+  font-size: clamp(2.5rem, 5.2vw, 4.6rem);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.about-title__rule {
+  width: min(20rem, 50%);
+  height: 3px;
+  margin: 0.4em 0 0;
+  border: 0;
+  background-color: var(--color-crimson);
+}
+
+.about-title__tag {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--color-near-black);
+  opacity: 0.75;
+  margin: 0.3em 0 0;
+}
+
+/* ── Content ── */
+.about-content {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-8);
+}
+
+.about-hero-row {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-7);
+  margin-bottom: var(--space-7);
+}
+
+.about-polaroid {
+  flex: 0 0 auto;
+  width: 19rem;
+  margin: 0;
+  position: relative;
+  transform: rotate(-3deg);
+}
+
+.about-polaroid img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-polaroid figcaption {
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  transform: translateX(-50%) rotate(-3deg);
+  font-family: var(--font-marginalia);
+  color: var(--color-crimson);
+  font-size: 1.6rem;
+  white-space: nowrap;
+}
+
+.about-hero-text {
+  flex: 1 1 22rem;
+  padding-top: var(--space-5);
+}
+
+.about-hero-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.about-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 592fr) minmax(0, 452fr);
+  gap: var(--space-6) clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.about-col p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-near-black);
+  margin: 0 0 var(--space-5);
+}
+
+.about-col p:last-child {
+  margin-bottom: 0;
+}
+
+.about-taste-line {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  color: var(--color-crimson);
+}
+
+/* ── Let's Work Together + Selected Credits & Resume ── */
+.about-lower {
+  position: relative;
+  margin-top: var(--space-8);
+  padding-top: calc(var(--space-7) + 2.5rem);
+  background-image: url('/assets/images/about/About Me-Desktop-Final Assets/torn_paper_1.png');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+}
+
+.about-lower__flowers {
+  position: absolute;
+  left: -0.5rem;
+  top: 1.5rem;
+  width: 5.5rem;
+  height: auto;
+  pointer-events: none;
+}
+
+.about-cta h3 {
+  font-family: var(--font-marginalia);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-near-black);
+  margin: 0 0 0.4em;
+}
+
+.about-cta p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  max-width: 32rem;
+  margin: 0;
+}
+
+.about-resume {
+  border-left: 1px solid rgba(28, 26, 22, 0.2);
+  padding-left: var(--space-6);
+}
+
+.about-resume h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  margin: 0 0 0.5em;
+}
+
+.about-resume__rule {
+  border: 0;
+  height: 2px;
+  background-color: var(--color-crimson);
+  margin: 0 0 var(--space-4);
+}
+
+.about-resume__entry {
+  margin-bottom: var(--space-4);
+}
+
+.about-resume__title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  margin: 0 0 0.2em;
+}
+
+.about-resume__role {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin: 0 0 0.2em;
+}
+
+.about-resume__dates {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  opacity: 0.75;
+  margin: 0;
+}
+
+.about-resume__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  color: var(--color-near-black);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-near-black);
+  padding-bottom: 2px;
+}
+
+.about-resume__link:hover {
+  color: var(--color-crimson);
+  border-color: var(--color-crimson);
+}
+
+/* ── Mobile page — hidden by default ── */
+.av2m-page {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .av2-navband,
+  .about-topwrap,
+  .about-content {
+    display: none;
+  }
+
+  .av2m-page {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: var(--color-cream);
+    background-image: url('/assets/images/about/About Me-Mobile-Final Assets/Texture___Foreground_Paper.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .av2m-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-4) var(--space-3);
+  }
+
+  .av2m-logo {
+    width: 11rem;
+    height: auto;
+    transform: rotate(-3deg);
+  }
+
+  .av2m-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .av2m-nav__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  .av2m-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.7rem;
+    height: 2.4rem;
+    background-image: url('/assets/images/shared/nav-paper-tab.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    color: var(--color-near-black);
+  }
+
+  .av2m-tab[aria-current="page"] {
+    color: var(--color-crimson);
+    text-decoration: underline;
+    text-decoration-color: var(--color-crimson);
+    text-underline-offset: 3px;
+  }
+
+  .av2m-hero {
+    text-align: center;
+    padding: var(--space-5) var(--space-4) var(--space-4);
+  }
+
+  .av2m-hero h1 {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .av2m-hero__sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--color-crimson);
+    font-size: 1.1rem;
+    margin: 0.3em 0 0;
+  }
+
+  .av2m-polaroid {
+    position: relative;
+    width: 14rem;
+    margin: var(--space-5) auto 0;
+    transform: rotate(2deg);
+  }
+
+  .av2m-polaroid > img:first-child {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .av2m-polaroid__stamp {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 3rem;
+    height: auto;
+  }
+
+  .av2m-polaroid figcaption {
+    position: absolute;
+    left: 50%;
+    bottom: 11%;
+    transform: translateX(-50%);
+    font-family: var(--font-marginalia);
+    color: var(--color-crimson);
+    font-size: 1.3rem;
+    white-space: nowrap;
+  }
+
+  .av2m-bio,
+  .av2m-taste {
+    padding: var(--space-5) var(--space-4);
+    text-align: center;
+  }
+
+  .av2m-bio p,
+  .av2m-taste p {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    text-align: left;
+    margin: 0 0 var(--space-4);
+  }
+
+  .av2m-bio p:last-child,
+  .av2m-taste p:last-child {
+    margin-bottom: 0;
+  }
+
+  .av2m-divider {
+    border: 0;
+    height: 1px;
+    width: 60%;
+    background-color: rgba(28, 26, 22, 0.25);
+    margin: var(--space-4) auto;
+  }
+
+  .av2m-taste__badge {
+    display: block;
+    width: fit-content;
+    margin: 0 auto var(--space-4);
+    font-family: var(--font-marginalia);
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    color: var(--color-crimson);
+    background: rgba(246, 231, 154, 0.4);
+    border: 1px solid var(--color-crimson);
+    border-radius: var(--radius-sm);
+    padding: 0.3em 0.9em;
+  }
+
+  .av2m-credits {
+    padding: var(--space-5) var(--space-4);
+    text-align: center;
+  }
+
+  .av2m-credits__title h2 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin: 0 0 0.4em;
+  }
+
+  .av2m-credits__title hr {
+    border: 0;
+    height: 2px;
+    width: 8rem;
+    background-color: var(--color-crimson);
+    margin: 0 auto var(--space-4);
+  }
+
+  .av2m-credits__card {
+    border: 1px solid var(--color-crimson);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.5);
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .av2m-credits__role-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    margin: 0 0 0.3em;
+  }
+
+  .av2m-credits__role {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-near-black);
+    margin: 0 0 0.2em;
+  }
+
+  .av2m-credits__dates {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--text-sm);
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .av2m-credits__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    text-decoration: underline;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-base);
+    color: var(--color-near-black);
+  }
+
+  .av2m-credits__link img {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .av2m-credits__link img:last-child {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .av2m-footer {
+    position: relative;
+    text-align: center;
+    padding: var(--space-6) var(--space-4);
+    overflow: hidden;
+  }
+
+  .av2m-footer__green {
+    position: absolute;
+    top: -1rem;
+    right: 0.5rem;
+    width: 5.5rem;
+    height: auto;
+    opacity: 0.7;
+    transform: rotate(20deg);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .av2m-footer__flower {
+    position: absolute;
+    top: 0;
+    left: 0.5rem;
+    width: 3rem;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .av2m-footer__tagline {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-marginalia);
+    font-size: 1.2rem;
+    color: var(--color-crimson);
+    margin: 0 0 0.4em;
+  }
+
+  .av2m-footer__copyright {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin: 0;
+  }
+}

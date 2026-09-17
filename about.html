@@ -7,7 +7,7 @@
 <meta name="description" content="About Sarah Milad, the curator behind Sarahtonin Sounds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/layout.css">
@@ -16,40 +16,189 @@
 <body class="page-about">
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header">
-  <nav class="primary-nav" aria-label="Primary">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about.html" aria-current="page">About</a></li>
-      <li><a href="/listen.html">Listen</a></li>
-      <li><a href="/journal.html">Journal</a></li>
-      <li><a href="/contact.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
 <main id="main" class="about-page">
-  <section class="about-hero">
-    <!-- Primary portrait pending final asset: black-and-white cutout/
-         halftone, arms up / hand near face (ASSET-MANIFEST.md §2). -->
-    <h1>About Me</h1>
-  </section>
 
-  <section class="about-bio">
-    <p>Hi! I'm Sarah, the girl behind Sarahtonin Sounds.</p>
-    <!-- Full bio/story body copy is not yet finalized (PROJECT-SPEC.md
-         §9/§12) — not invented here. Legacy about.json text is PRESERVE-
-         only per the fresh-start rule and is not used as a substitute. -->
-  </section>
+  <!-- Desktop — reproduces the authoritative Figma frame
+       (figma.com/design/FP1ZWOSEAtNuI8w2OG2E7x, node 68:99, "About
+       Me-Desktop", 1440x1280). Only the visible red-striped nav strip
+       (the foreground paper texture covers the rest of the red stripe
+       within ~134px, matching the source layer order) is built as a
+       clipped percentage band, the same technique already used for
+       Contact/Journal; the logo and green-paper corner accent bleed
+       across that band into the page below rather than being clipped by
+       it, since clipping a bleeding decoration at a hard edge is exactly
+       the moon/stars bug already fixed once on the Contact page. Nav
+       reuses the site's shared paper-tab asset (not About's own
+       per-label tape PNGs) for the same nav look already established on
+       every other page, and Figma's "DISCOVER" tape is relabeled Listen
+       to match production nav (same fix already applied on
+       journal.html/contact.html). -->
+  <div class="av2-navband">
+    <nav class="av2-nav" aria-label="Primary">
+      <ul>
+        <li><a href="/" class="av2-nav__tab av2-nav__tab--home">Home</a></li>
+        <li><a href="/about.html" class="av2-nav__tab av2-nav__tab--about" aria-current="page">About</a></li>
+        <li><a href="/listen.html" class="av2-nav__tab av2-nav__tab--listen">Listen</a></li>
+        <li><a href="/journal.html" class="av2-nav__tab av2-nav__tab--journal">Journal</a></li>
+        <li><a href="/contact.html" class="av2-nav__tab av2-nav__tab--contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
 
-  <section class="about-taste">
-    <h2>my taste is all over the place.</h2>
-    <!-- Taste-section body copy is not yet finalized. -->
-  </section>
+  <div class="about-topwrap">
+    <div class="av2-green-corner" aria-hidden="true">
+      <img src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Green_Paper.png" alt="">
+    </div>
+    <div class="av2-logo-wrap">
+      <img src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+    </div>
 
-  <!-- Secondary candid photo, professional context, and personal
-       sign-off sections are pending finalized copy/assets
-       (PROJECT-SPEC.md §9 layout rhythm). -->
+    <div class="about-title">
+      <h1>About</h1>
+      <hr class="about-title__rule">
+      <p class="about-title__tag">me&hellip;more or less</p>
+    </div>
+  </div>
+
+  <div class="about-content">
+
+    <div class="about-hero-row">
+      <figure class="about-polaroid">
+        <img src="/assets/images/about/About Me-Desktop-Final Assets/sarah green background polaroid  1.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
+        <figcaption>Me! Sarah Milad!</figcaption>
+      </figure>
+      <div class="about-hero-text">
+        <h2>Hi! I&rsquo;m Sarah,<br>the girl behind Sarahtonin Sounds</h2>
+      </div>
+    </div>
+
+    <div class="about-columns">
+      <div class="about-col">
+        <p>Music has been a constant in my life for as long as I can remember. Being the youngest of three meant I was always absorbing whatever was playing around me, from my sisters&rsquo; pop punk and Jesse McCartney phases to the Arabic music and old standards my parents loved. Then came LimeWire, burned CDs, and trips to Tower Records, where I bought my first CD, AFI&rsquo;s Decemberunderground, when I was around ten. Growing up in San Pedro, CA and around the South Bay&rsquo;s punk history only added to it. I never really developed one musical lane. If something caught my ear, that was enough for me.</p>
+        <p>What took me longer to figure out was that music could actually be my job. I&rsquo;d gotten into law school and assumed that was the plan, but when the pandemic hit right as I got in, suddenly none of it felt right. I kept coming back to the thing that had always felt natural to me: music. Not just listening to it, but really knowing it. Researching artists, digging through catalogs, reading their stories, figuring out where a sound came from. I&rsquo;d been doing some version of that my whole life. I&rsquo;d just never thought of it as something I could build a career around.</p>
+        <!-- Kept in its original left-column position rather than moved
+             to the right column: the paragraph breaks added for the
+             "My taste is all over the place." emphasis and the "But
+             Sarahtonin Sounds..." breathing room already lengthen the
+             right column enough on their own (measured: moving this
+             paragraph too overshot to ~2.5x the left column's height).
+             Left as originally placed achieves the actual goal — both
+             columns reading evenly — better than the literal move. -->
+        <p>Once I realized I could, music supervision was what I wanted to pursue. It brought together so much of what I already loved about music: discovery, research, curation, and finding the right song for the right moment. I started looking for ways into the industry, and a few early opportunities eventually led me to TMZ Productions, where I got to actually do it alongside my boss and mentor, Tony. Somewhere along the way, I stopped wondering whether skipping law school had been the wrong decision. Music wasn&rsquo;t just the thing I loved anymore. It was my career.</p>
+      </div>
+      <div class="about-col">
+        <p>But Sarahtonin Sounds had been there before any of it.</p>
+        <p>I started it as my own little curation project before I ever worked professionally in music. Sarahtonin was a dumb little Sarah + serotonin joke that somehow became the perfect name. Music has always been one of the things that makes me happiest, and sharing it with people makes it even better. Apparently I couldn&rsquo;t resist a pun.</p>
+        <p>Then I got distracted by work, and Sarahtonin Sounds got put on the shelf for a while. After being laid off, resurrecting it and actually giving it the time and space to grow felt like the natural move. I don&rsquo;t know exactly what it&rsquo;ll turn into yet, and I kind of like that. This is where I get to keep music personal: the playlists, discoveries, writing, and all the things I can&rsquo;t stop telling people about.</p>
+        <p>Music gets me in touch with emotion, sparks creativity, and makes me invent entire little scenes in my head when a song hits right. It connects me to people, too.</p>
+        <p class="about-taste-line">My taste is all over the place.</p>
+        <p>Being Egyptian and growing up with Arabic music is a big part of my musical foundation, and it&rsquo;s something I still love digging into. I love finding hidden gems, whether it&rsquo;s an artist about to break or a song from sixty years ago that&rsquo;s criminally slept on. There&rsquo;s something really fun about finding a song I love and getting to share it with someone else.</p>
+      </div>
+    </div>
+
+    <div class="about-lower">
+      <img class="about-lower__flowers" src="/assets/images/about/About Me-Desktop-Final Assets/orange_flowers_scrapbook_1.png" alt="">
+
+      <div class="about-cta">
+        <h3>Let&rsquo;s Work Together!</h3>
+        <p>I work across music supervision, licensing, curation, and music discovery, and I love collaborating with people on a good idea. If you think I could be a fit for something you&rsquo;re working on, I&rsquo;d love to hear about it.</p>
+      </div>
+
+      <div class="about-resume">
+        <h3>Selected Credits &amp; Resume</h3>
+        <hr class="about-resume__rule">
+        <div class="about-resume__entry">
+          <p class="about-resume__title">TMZ Productions</p>
+          <p class="about-resume__role">Senior Music Coordinator</p>
+          <p class="about-resume__dates">2023-2026</p>
+        </div>
+        <!-- href="#" — final resume file/link not yet supplied
+             (ASSET-MANIFEST.md); not guessed here. -->
+        <a href="#" class="about-resume__link">Resume <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mobile — hand-reflowed from the authoritative Figma frame
+       (node 11:4, "mobile-about-page") for section order and structure
+       (header → hero → bio → taste → credits → footer). That frame's
+       own text layers are still its own mockup copy (a generic
+       "creative director" bio, Lorem ipsum in the taste paragraph) —
+       not the real, approved bio — so every section below uses the same
+       real copy as desktop, reflowed into single-column paragraphs,
+       with the same duplicate-phrase fix and taste-line emphasis
+       applied. No mobile equivalent of the "Let's Work Together" CTA
+       exists in the mobile frame, so it isn't added here. -->
+  <div class="av2m-page">
+
+    <header class="av2m-header">
+      <img class="av2m-logo" src="/assets/images/about/About Me-Mobile-Final Assets/Brand___Sarahtonin_Sounds_Logo.png" alt="Sarahtonin Sounds">
+      <nav class="av2m-nav" aria-label="Primary">
+        <div class="av2m-nav__row">
+          <a href="/" class="av2m-tab">Home</a>
+          <a href="/about.html" class="av2m-tab" aria-current="page">About</a>
+          <a href="/listen.html" class="av2m-tab">Listen</a>
+        </div>
+        <div class="av2m-nav__row">
+          <a href="/journal.html" class="av2m-tab">Journal</a>
+          <a href="/contact.html" class="av2m-tab">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="av2m-hero">
+      <h1>Hi! I&rsquo;m Sarah,</h1>
+      <p class="av2m-hero__sub">the girl behind Sarahtonin Sounds</p>
+      <figure class="av2m-polaroid">
+        <img src="/assets/images/about/About Me-Mobile-Final Assets/Sarah_green_background_polaroid.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
+        <img class="av2m-polaroid__stamp" src="/assets/images/about/About Me-Mobile-Final Assets/sun_stamp.png" alt="">
+        <figcaption>Me! Sarah Milad!</figcaption>
+      </figure>
+    </section>
+
+    <section class="av2m-bio">
+      <p>Music has been a constant in my life for as long as I can remember. Being the youngest of three meant I was always absorbing whatever was playing around me, from my sisters&rsquo; pop punk and Jesse McCartney phases to the Arabic music and old standards my parents loved. Then came LimeWire, burned CDs, and trips to Tower Records, where I bought my first CD, AFI&rsquo;s Decemberunderground, when I was around ten. Growing up in San Pedro, CA and around the South Bay&rsquo;s punk history only added to it. I never really developed one musical lane. If something caught my ear, that was enough for me.</p>
+      <hr class="av2m-divider">
+      <p>What took me longer to figure out was that music could actually be my job. I&rsquo;d gotten into law school and assumed that was the plan, but when the pandemic hit right as I got in, suddenly none of it felt right. I kept coming back to the thing that had always felt natural to me: music. Not just listening to it, but really knowing it. Researching artists, digging through catalogs, reading their stories, figuring out where a sound came from. I&rsquo;d been doing some version of that my whole life. I&rsquo;d just never thought of it as something I could build a career around.</p>
+      <p>Once I realized I could, music supervision was what I wanted to pursue. It brought together so much of what I already loved about music: discovery, research, curation, and finding the right song for the right moment. I started looking for ways into the industry, and a few early opportunities eventually led me to TMZ Productions, where I got to actually do it alongside my boss and mentor, Tony. Somewhere along the way, I stopped wondering whether skipping law school had been the wrong decision. Music wasn&rsquo;t just the thing I loved anymore. It was my career.</p>
+      <p>But Sarahtonin Sounds had been there before any of it.</p>
+      <p>I started it as my own little curation project before I ever worked professionally in music. Sarahtonin was a dumb little Sarah + serotonin joke that somehow became the perfect name. Music has always been one of the things that makes me happiest, and sharing it with people makes it even better. Apparently I couldn&rsquo;t resist a pun.</p>
+      <p>Then I got distracted by work, and Sarahtonin Sounds got put on the shelf for a while. After being laid off, resurrecting it and actually giving it the time and space to grow felt like the natural move. I don&rsquo;t know exactly what it&rsquo;ll turn into yet, and I kind of like that. This is where I get to keep music personal: the playlists, discoveries, writing, and all the things I can&rsquo;t stop telling people about.</p>
+      <p>Music gets me in touch with emotion, sparks creativity, and makes me invent entire little scenes in my head when a song hits right. It connects me to people, too.</p>
+    </section>
+
+    <section class="av2m-taste">
+      <p class="av2m-taste__badge">My taste is all over the place.</p>
+      <p>Being Egyptian and growing up with Arabic music is a big part of my musical foundation, and it&rsquo;s something I still love digging into. I love finding hidden gems, whether it&rsquo;s an artist about to break or a song from sixty years ago that&rsquo;s criminally slept on. There&rsquo;s something really fun about finding a song I love and getting to share it with someone else.</p>
+    </section>
+
+    <section class="av2m-credits">
+      <div class="av2m-credits__title">
+        <h2>Selected Credits &amp; Resum&eacute;</h2>
+        <hr>
+      </div>
+      <div class="av2m-credits__card">
+        <p class="av2m-credits__role-title">TMZ Productions</p>
+        <p class="av2m-credits__role">Senior Music Coordinator</p>
+        <p class="av2m-credits__dates">2023 - 2026</p>
+      </div>
+      <a href="#" class="av2m-credits__link">
+        <img src="/assets/images/about/About Me-Mobile-Final Assets/imdb-icon.png" alt="">
+        Full Resum&eacute;
+        <img src="/assets/images/about/About Me-Mobile-Final Assets/arrow-right.svg" alt="">
+      </a>
+    </section>
+
+    <footer class="av2m-footer">
+      <img class="av2m-footer__green" src="/assets/images/about/About Me-Mobile-Final Assets/Texture___Green_Paper.png" alt="">
+      <img class="av2m-footer__flower" src="/assets/images/about/About Me-Mobile-Final Assets/orange_flowers_scrapbook.png" alt="">
+      <p class="av2m-footer__tagline">anything for a little extra Sarahtonin :)</p>
+      <p class="av2m-footer__copyright">&copy; 2026 Sarahtonin Sounds. All rights reserved.</p>
+    </footer>
+
+  </div>
+
 </main>
 
 <script src="/js/site.js" defer></script>
