@@ -7,7 +7,7 @@
 <meta name="description" content="Curated mood playlists and crash courses from Sarahtonin Sounds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/layout.css">
@@ -33,13 +33,71 @@
 
   <section class="listen-moods" aria-labelledby="listen-moods-heading">
     <h2 id="listen-moods-heading">Pick Your Mood</h2>
-    <!--
-      Mood selector (record-label-style buttons), turntable/player, and
-      tracklist are a later phase (BUILD-ROADMAP.md Phase 4/5), sourced
-      from Sarah's manually curated Spotify playlists once that data
-      exists. Not built yet — this section is structural only.
-    -->
-    <p>Mood playlists are being curated — check back soon.</p>
+    <div class="mood-selector__wrap">
+      <button type="button" class="mood-selector__arrow mood-selector__arrow--prev" aria-label="Scroll moods left" data-scroll-prev>
+        <svg viewBox="0 0 15 21" aria-hidden="true" focusable="false">
+          <polygon points="15,0 0,10.5 15,21" fill="currentColor" />
+        </svg>
+      </button>
+
+      <ul class="mood-selector__track" data-mood-track tabindex="0" aria-label="Mood options, scrollable">
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-01" style="background-image: url('/assets/images/listen/light-blue-cirle.png');" aria-pressed="true"><span class="visually-hidden">Mood 1 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-02" style="background-image: url('/assets/images/listen/yellow-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 2 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-03" style="background-image: url('/assets/images/listen/red-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 3 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-04" style="background-image: url('/assets/images/listen/pink-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 4 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-05" style="background-image: url('/assets/images/listen/orange-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 5 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-06" style="background-image: url('/assets/images/listen/light-green-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 6 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-07" style="background-image: url('/assets/images/listen/lavendar-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 7 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-08" style="background-image: url('/assets/images/listen/dark-blue-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 8 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-09" style="background-image: url('/assets/images/listen/black-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 9 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-10" style="background-image: url('/assets/images/listen/berry-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 10 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-11" style="background-image: url('/assets/images/listen/dark-green-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 11 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-12" style="background-image: url('/assets/images/listen/purple-circle.png');" aria-pressed="false"><span class="visually-hidden">Mood 12 — name and icon coming soon</span></button></li>
+        <li class="mood-selector__item"><button type="button" class="mood-circle" data-mood-id="mood-13" style="background-image: url('/assets/images/listen/peach-cirlcle.png');" aria-pressed="false"><span class="visually-hidden">Mood 13 — name and icon coming soon</span></button></li>
+      </ul>
+
+      <button type="button" class="mood-selector__arrow mood-selector__arrow--next" aria-label="Scroll moods right" data-scroll-next>
+        <svg viewBox="0 0 15 21" aria-hidden="true" focusable="false">
+          <polygon points="0,0 15,10.5 0,21" fill="currentColor" />
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="listen-turntable" data-mood-panel data-mood-id="mood-01" aria-live="polite">
+    <div class="turntable-panel__text" data-mood-content>
+      <div class="turntable-panel__tape">
+        <h3 class="turntable-panel__mood-name" data-mood-name>DREAMY</h3>
+      </div>
+      <p class="turntable-panel__tagline" data-mood-tagline>
+        For when your mind needs some room to wonder
+      </p>
+      <p class="turntable-panel__description" data-mood-description>
+        Floaty, atmospheric, ans transportive. These are the songs for late
+        nights, daydreaming, and everywhere in between.
+      </p>
+    </div>
+
+    <p class="turntable-panel__empty-note" data-mood-empty-note hidden>
+      Still curating this playlist &mdash; check back soon.
+    </p>
+
+    <div class="turntable-panel__record">
+      <img
+        src="/assets/images/listen/sarahtonin%20sounds-listen-record-light_blue.png"
+        alt="Turntable playing a light blue record labeled Sarahtonin Sounds, for the Dreamy mood"
+        data-turntable-image
+      />
+    </div>
+
+    <aside class="turntable-panel__tracklist" aria-label="Sarah's picks for this mood" data-mood-content>
+      <h4 class="turntable-panel__tracklist-heading">Sarah's Picks</h4>
+      <ul class="turntable-panel__tracklist-items" data-tracklist>
+        <li>Falling &ndash; Julee Cruise</li>
+        <li>Closer &ndash; You'll Never Get to Heaven</li>
+        <li>Kisses &ndash; Slowdive</li>
+      </ul>
+    </aside>
   </section>
 
   <section class="listen-crash-courses" aria-labelledby="listen-crash-heading">
@@ -52,6 +110,7 @@
   <!-- Persistent Now Playing mini player is a Phase 5 deliverable. -->
 </main>
 
+<script src="/js/listen.js" defer></script>
 <script src="/js/site.js" defer></script>
 </body>
 </html>

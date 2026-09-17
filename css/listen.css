@@ -1,4 +1,215 @@
 /* Listen page — page-specific styles.
-   Structural foundation only; mood selector, turntable/player, and
-   Crash Courses UI are later phases (PROJECT-SPEC.md §7,
-   BUILD-ROADMAP.md Phase 4/5/6). */
+   Mood selector and turntable/tracklist panel below (PROJECT-SPEC.md §7,
+   BUILD-ROADMAP.md Phase 4/5). Crash Courses UI is still a later phase
+   (Phase 6). */
+
+/* ---- Mood selector ---- */
+.mood-selector__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mood-selector__track {
+  --mood-circle-size: 111px;
+  --mood-circle-gap: 28px;
+  display: flex;
+  align-items: center;
+  gap: var(--mood-circle-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+.mood-selector__track:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+.mood-selector__item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.mood-circle {
+  width: var(--mood-circle-size);
+  height: var(--mood-circle-size);
+  border-radius: 50%;
+  border: none;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mood-circle:hover {
+  transform: scale(1.05);
+}
+
+.mood-circle:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.mood-circle[aria-pressed="true"] {
+  box-shadow: 0 0 0 4px var(--color-near-black);
+}
+
+.mood-selector__arrow {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 32px;
+  border: none;
+  background: none;
+  color: var(--color-near-black);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mood-selector__arrow svg {
+  width: 15px;
+  height: 21px;
+}
+
+.mood-selector__arrow:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.mood-selector__arrow[disabled] {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .mood-selector__track {
+    --mood-circle-size: 84px;
+    --mood-circle-gap: 18px;
+  }
+}
+
+/* ---- Turntable + tracklist ---- */
+.listen-turntable {
+  display: grid;
+  grid-template-columns: 3fr 4fr 3fr;
+  gap: 2rem;
+  align-items: start;
+  padding: 3rem clamp(1.5rem, 4vw, 3rem);
+}
+
+.listen-turntable [hidden] {
+  display: none !important;
+}
+
+.turntable-panel__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.turntable-panel__mood-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 400;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.turntable-panel__tagline {
+  margin: 0;
+  font-family: var(--font-marginalia);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  line-height: 1.3;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.turntable-panel__description {
+  margin: 0;
+  font-family: var(--font-marginalia);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.turntable-panel__empty-note {
+  grid-column: 1;
+  margin: 0;
+  align-self: center;
+  text-align: center;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-near-black);
+  opacity: 0.7;
+}
+
+.turntable-panel__record {
+  display: flex;
+  justify-content: center;
+}
+
+.turntable-panel__record img {
+  width: 100%;
+  max-width: 611px;
+  height: auto;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.6));
+}
+
+.turntable-panel__tracklist {
+  padding: 3.5rem 1.75rem 1.75rem;
+  min-height: 398px;
+  filter: drop-shadow(0px 4px 4px #43331c);
+}
+
+.turntable-panel__tracklist-heading {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  border-bottom: 2px solid var(--color-crimson);
+  padding-bottom: 0.5rem;
+}
+
+.turntable-panel__tracklist-items {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: var(--font-marginalia);
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+@media (max-width: 900px) {
+  .listen-turntable {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
