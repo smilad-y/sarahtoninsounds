@@ -57,6 +57,7 @@
 /* ── Desktop nav band ── */
 .av2-navband {
   position: relative;
+  z-index: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,17 +103,71 @@
   text-decoration: underline;
 }
 
-/* ── Logo + green-paper corner + title, unclipped ── */
-.about-topwrap {
+/* ── Content ── */
+/* Figma's 1440px frame positions this content flush against the
+   frame's right edge, with all its margin reserved on the left (for
+   the logo/polaroid cluster) — x=360 to x=1440, no right margin at
+   all. max-width is set to exactly 90rem (1440px) — the Figma
+   reference's own width, confirmed against the plugin's literal
+   export rather than left looser — and padding-left uses clamp() to
+   track Figma's 25%-of-frame left margin (360/1440) up to a cap at
+   that exact value, rather than a fixed px margin that would either
+   crowd narrower desktop widths or fail to scale up. */
+.about-content {
   position: relative;
-  min-height: 9rem;
-  padding: var(--space-6) var(--space-4) 0;
+  z-index: 1;
+  max-width: 90rem;
+  margin: 0 auto;
+  /* padding-top is deliberately much bigger than the other pages'
+     var(--space-6): .about-inner's origin (see below) has to sit far
+     enough past the nav band that title's own -6.062rem offset from
+     it doesn't land back inside the nav band and collide with the nav
+     tab text — tuned against the render, since this flexbox nav band
+     doesn't have a fixed height to compute it from exactly (unlike
+     Figma's literal 72px nav). The logo (a more negative offset) still
+     bleeds a little into the band above this — that's intended, the
+     same "ticket stub peeking out" look already used for the logo on
+     Contact/Journal. */
+  padding: 7rem var(--space-4) var(--space-8);
+  /* The decorative cluster below intentionally bleeds a little past
+     the left edge at the 1440px reference, AND bleeds upward above
+     .about-content's own top edge (logo, green corner, title) —
+     confirmed against Figma's own literal coordinates, where these
+     elements extend past both x=0 and their frame's own top in
+     Figma's file too (the same off-canvas-bleed pattern already used
+     for the logo/moon-stars/green-paper elsewhere on this site).
+     overflow-x:hidden was tried here to trim the resulting horizontal
+     scrollbar, but CSS doesn't actually support clipping one axis
+     while leaving the other visible: per spec, whenever either axis
+     is non-visible, the other is silently forced from visible to
+     auto too — which clipped every upward-bleeding element (auto's
+     initial scroll position can't reach content above y=0) and is
+     exactly why the title/logo/green-corner went missing while
+     building this. No overflow rule here at all, same as
+     Contact/Journal/Home's equivalent bleeding decorations. */
+}
+
+/* .about-inner is the single shared coordinate origin every
+   absolutely-positioned element below (logo, polaroid, green corner,
+   title) is measured against — see the HTML comment above it for why:
+   the Figma plugin's own export shows all of these as flat siblings
+   positioned against one page-frame origin, not the polaroid/logo
+   nested inside the content block with their own separate local
+   origins (which is what this used to be, and how they could drift
+   out of sync with each other). This wrapper's own left edge lands at
+   exactly x=360 of the 1440px reference — Figma's own ".content"
+   frame origin — via the same clamp() as before, so every child's
+   left/top below is that element's literal Figma value minus
+   (360, 169) converted to rem. */
+.about-inner {
+  position: relative;
+  margin-left: clamp(2rem, 25vw, 22.5rem);
 }
 
 .av2-green-corner {
   position: absolute;
-  top: -2rem;
-  left: -2rem;
+  top: -8rem;
+  left: -21rem;
   width: 14rem;
   height: 14rem;
   overflow: hidden;
@@ -133,11 +188,19 @@
 
 /* home-logo.png has transparent padding around the visible ticket
    artwork — sized so the visible content matches Figma's own ~332x137
-   target, same technique/ratio as .jv2-logo / .cv2-logo. */
+   target, same crop technique as .jv2-logo / .cv2-logo (proven
+   correct there, kept as-is here rather than reworked). Figma rotates
+   this element around its own top-left corner; this technique instead
+   flex-centers a slightly oversized wrapper and rotates the image
+   around ITS center, so the position below is the center-pivot
+   equivalent of Figma's literal box — computed from that box's 4
+   rotated corners, not copied from its literal left/top (see the HTML
+   comment; rotate(-25.02deg) itself is unchanged, only matched — it
+   was already Figma's literal angle). */
 .av2-logo-wrap {
   position: absolute;
-  top: -3.5rem;
-  left: 0.5rem;
+  top: -8.998rem;
+  left: -19.706rem;
   width: 14rem;
   height: 10.3rem;
   z-index: 5;
@@ -157,10 +220,12 @@
 }
 
 .about-title {
-  position: relative;
+  position: absolute;
+  top: -6.062rem;
+  left: -1.729rem;
   z-index: 6;
-  margin-left: 9rem;
-  padding-top: 1rem;
+  width: max-content;
+  max-width: 22rem;
 }
 
 .about-title h1 {
@@ -170,7 +235,7 @@
 }
 
 .about-title__rule {
-  width: min(20rem, 50%);
+  width: 14rem;
   height: 3px;
   margin: 0.4em 0 0;
   border: 0;
@@ -186,60 +251,57 @@
   margin: 0.3em 0 0;
 }
 
-/* ── Content ── */
-/* Figma's 1440px frame positions this content flush against the
-   frame's right edge, with all its margin reserved on the left (for
-   the logo/polaroid cluster) — x=360 to x=1440, no right margin at
-   all. A symmetric centered 1200px box (the previous version here)
-   doesn't match that: it's both narrower than the 1440px reference and
-   wrong-shaped (equal margins instead of left-loaded). max-width is
-   widened to comfortably match/exceed 1440px, and padding-left uses
-   clamp() to track Figma's 25%-of-frame left margin (360/1440) up to
-   a cap at that exact value, rather than a fixed px margin that would
-   either crowd narrower desktop widths or fail to scale up. */
-.about-content {
-  position: relative;
-  max-width: 96rem;
-  margin: 0 auto;
-  padding: var(--space-6) var(--space-4) var(--space-8) clamp(2rem, 25vw, 22.5rem);
-}
-
-.about-hero-row {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: var(--space-7);
-  margin-bottom: var(--space-7);
-}
-
+/* Same center-pivot conversion as the logo above: Figma's literal
+   polaroid box (left 29.85px, top 107px, 389.93x545.18px, rotated
+   10.874deg around its own top-left corner) is used here at its
+   literal size — no separate crop-padding problem like the logo has,
+   so object-fit:cover on the raw asset is enough — but positioned so
+   ITS rotated center lands where Figma's does (computed from its 4
+   rotated corners), since rotating a differently-anchored box around
+   its own center instead reproduces the identical final rectangle
+   once the centers match. */
 .about-polaroid {
-  flex: 0 0 auto;
-  width: 19rem;
+  position: absolute;
+  top: -1.882rem;
+  left: -24.067rem;
+  width: 24.371rem;
   margin: 0;
-  position: relative;
-  transform: rotate(-3deg);
+  transform: rotate(10.874deg);
+  z-index: 4;
 }
 
 .about-polaroid img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 34.074rem;
+  object-fit: cover;
 }
 
 .about-polaroid figcaption {
   position: absolute;
   left: 50%;
-  bottom: 15%;
-  transform: translateX(-50%) rotate(-3deg);
+  bottom: 13%;
+  /* Figma's caption is an independent sibling rotated 3deg in the
+     page frame, not nested inside the polaroid. Nesting it here for
+     simplicity means its own rotation has to cancel the parent's
+     10.874deg first: 3 - 10.874 = -7.874deg net. */
+  transform: translateX(-50%) rotate(-7.874deg);
   font-family: var(--font-marginalia);
   color: var(--color-crimson);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   white-space: nowrap;
 }
 
 .about-hero-text {
-  flex: 1 1 22rem;
-  padding-top: var(--space-5);
+  position: relative;
+  z-index: 3;
+  /* Clears the polaroid's rotated bounding box, which extends to
+     about +3.3rem past .about-inner's own left edge (computed from
+     its 4 rotated corners — its unrotated box alone would undersell
+     how far right the rotated shape actually reaches). */
+  margin-left: 5rem;
+  padding-top: 2.5rem;
+  max-width: 40rem;
 }
 
 .about-hero-text h2 {
@@ -251,6 +313,14 @@
 }
 
 .about-columns {
+  position: relative;
+  z-index: 2;
+  /* .about-hero-text above is normal flow and only a couple of lines
+     tall, nowhere near enough to clear the polaroid on its own (its
+     rotated bounding box reaches to about 34.2rem below .about-inner's
+     top). This margin makes up the difference so the columns start
+     below it rather than running underneath. */
+  margin-top: 14rem;
   display: grid;
   grid-template-columns: minmax(0, 592fr) minmax(0, 452fr);
   gap: var(--space-6) clamp(2rem, 4vw, 3.5rem);
@@ -404,7 +474,6 @@
 
 @media (max-width: 900px) {
   .av2-navband,
-  .about-topwrap,
   .about-content {
     display: none;
   }

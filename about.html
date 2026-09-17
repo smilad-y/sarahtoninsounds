@@ -45,55 +45,74 @@
     </nav>
   </div>
 
-  <div class="about-topwrap">
-    <div class="av2-green-corner" aria-hidden="true">
-      <img src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Green_Paper.png" alt="">
-    </div>
-    <div class="av2-logo-wrap">
-      <img src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
-    </div>
-
-    <div class="about-title">
-      <h1>About</h1>
-      <hr class="about-title__rule">
-      <p class="about-title__tag">me&hellip;more or less</p>
-    </div>
-  </div>
-
   <div class="about-content">
 
-    <div class="about-hero-row">
+    <!-- The Figma export (checked directly, see git history) shows the
+         logo, polaroid, title, and content block as flat siblings under
+         one shared coordinate frame — NOT the polaroid/logo nested
+         inside content with their own separate local origins, which is
+         what this used to be and why they could drift out of sync with
+         each other. .about-inner is now that shared origin: it sits at
+         the same point Figma's own ".content" frame does (x=360 in the
+         1440px reference, via the padding-left below), and every
+         absolutely-positioned child's left/top is that same element's
+         literal Figma value minus (360, 169) — .content's own origin —
+         converted to rem. Logo and polaroid also carry real rotation,
+         which Figma pivots around each element's own top-left corner;
+         our existing crop/rotate technique pivots around center instead
+         (kept as-is since it's already proven correct — see the
+         .av2-logo-wrap comment), so their positions below are the
+         center-pivot equivalent of Figma's literal box (computed from
+         its 4 rotated corners), not its literal left/top directly. -->
+    <div class="about-inner">
+
+      <div class="av2-green-corner" aria-hidden="true">
+        <img src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Green_Paper.png" alt="">
+      </div>
+
+      <div class="av2-logo-wrap">
+        <img src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+      </div>
+
       <figure class="about-polaroid">
         <img src="/assets/images/about/About Me-Desktop-Final Assets/sarah green background polaroid  1.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
         <figcaption>Me! Sarah Milad!</figcaption>
       </figure>
+
+      <div class="about-title">
+        <h1>About</h1>
+        <hr class="about-title__rule">
+        <p class="about-title__tag">me&hellip;more or less</p>
+      </div>
+
       <div class="about-hero-text">
         <h2>Hi! I&rsquo;m Sarah,<br>the girl behind Sarahtonin Sounds</h2>
       </div>
-    </div>
 
-    <div class="about-columns">
-      <div class="about-col">
-        <p>Music has been a constant in my life for as long as I can remember. Being the youngest of three meant I was always absorbing whatever was playing around me, from my sisters&rsquo; pop punk and Jesse McCartney phases to the Arabic music and old standards my parents loved. Then came LimeWire, burned CDs, and trips to Tower Records, where I bought my first CD, AFI&rsquo;s Decemberunderground, when I was around ten. Growing up in San Pedro, CA and around the South Bay&rsquo;s punk history only added to it. I never really developed one musical lane. If something caught my ear, that was enough for me.</p>
-        <p>What took me longer to figure out was that music could actually be my job. I&rsquo;d gotten into law school and assumed that was the plan, but when the pandemic hit right as I got in, suddenly none of it felt right. I kept coming back to the thing that had always felt natural to me: music. Not just listening to it, but really knowing it. Researching artists, digging through catalogs, reading their stories, figuring out where a sound came from. I&rsquo;d been doing some version of that my whole life. I&rsquo;d just never thought of it as something I could build a career around.</p>
-        <!-- Kept in its original left-column position rather than moved
-             to the right column: the paragraph breaks added for the
-             "My taste is all over the place." emphasis and the "But
-             Sarahtonin Sounds..." breathing room already lengthen the
-             right column enough on their own (measured: moving this
-             paragraph too overshot to ~2.5x the left column's height).
-             Left as originally placed achieves the actual goal — both
-             columns reading evenly — better than the literal move. -->
-        <p>Once I realized I could, music supervision was what I wanted to pursue. It brought together so much of what I already loved about music: discovery, research, curation, and finding the right song for the right moment. I started looking for ways into the industry, and a few early opportunities eventually led me to TMZ Productions, where I got to actually do it alongside my boss and mentor, Tony. Somewhere along the way, I stopped wondering whether skipping law school had been the wrong decision. Music wasn&rsquo;t just the thing I loved anymore. It was my career.</p>
+      <div class="about-columns">
+        <div class="about-col">
+          <p>Music has been a constant in my life for as long as I can remember. Being the youngest of three meant I was always absorbing whatever was playing around me, from my sisters&rsquo; pop punk and Jesse McCartney phases to the Arabic music and old standards my parents loved. Then came LimeWire, burned CDs, and trips to Tower Records, where I bought my first CD, AFI&rsquo;s Decemberunderground, when I was around ten. Growing up in San Pedro, CA and around the South Bay&rsquo;s punk history only added to it. I never really developed one musical lane. If something caught my ear, that was enough for me.</p>
+          <p>What took me longer to figure out was that music could actually be my job. I&rsquo;d gotten into law school and assumed that was the plan, but when the pandemic hit right as I got in, suddenly none of it felt right. I kept coming back to the thing that had always felt natural to me: music. Not just listening to it, but really knowing it. Researching artists, digging through catalogs, reading their stories, figuring out where a sound came from. I&rsquo;d been doing some version of that my whole life. I&rsquo;d just never thought of it as something I could build a career around.</p>
+          <!-- Kept in its original left-column position rather than moved
+               to the right column: the paragraph breaks added for the
+               "My taste is all over the place." emphasis and the "But
+               Sarahtonin Sounds..." breathing room already lengthen the
+               right column enough on their own (measured: moving this
+               paragraph too overshot to ~2.5x the left column's height).
+               Left as originally placed achieves the actual goal — both
+               columns reading evenly — better than the literal move. -->
+          <p>Once I realized I could, music supervision was what I wanted to pursue. It brought together so much of what I already loved about music: discovery, research, curation, and finding the right song for the right moment. I started looking for ways into the industry, and a few early opportunities eventually led me to TMZ Productions, where I got to actually do it alongside my boss and mentor, Tony. Somewhere along the way, I stopped wondering whether skipping law school had been the wrong decision. Music wasn&rsquo;t just the thing I loved anymore. It was my career.</p>
+        </div>
+        <div class="about-col">
+          <p>But Sarahtonin Sounds had been there before any of it.</p>
+          <p>I started it as my own little curation project before I ever worked professionally in music. Sarahtonin was a dumb little Sarah + serotonin joke that somehow became the perfect name. Music has always been one of the things that makes me happiest, and sharing it with people makes it even better. Apparently I couldn&rsquo;t resist a pun.</p>
+          <p>Then I got distracted by work, and Sarahtonin Sounds got put on the shelf for a while. After being laid off, resurrecting it and actually giving it the time and space to grow felt like the natural move. I don&rsquo;t know exactly what it&rsquo;ll turn into yet, and I kind of like that. This is where I get to keep music personal: the playlists, discoveries, writing, and all the things I can&rsquo;t stop telling people about.</p>
+          <p>Music gets me in touch with emotion, sparks creativity, and makes me invent entire little scenes in my head when a song hits right. It connects me to people, too.</p>
+          <p class="about-taste-line">My taste is all over the place.</p>
+          <p>Being Egyptian and growing up with Arabic music is a big part of my musical foundation, and it&rsquo;s something I still love digging into. I love finding hidden gems, whether it&rsquo;s an artist about to break or a song from sixty years ago that&rsquo;s criminally slept on. There&rsquo;s something really fun about finding a song I love and getting to share it with someone else.</p>
+        </div>
       </div>
-      <div class="about-col">
-        <p>But Sarahtonin Sounds had been there before any of it.</p>
-        <p>I started it as my own little curation project before I ever worked professionally in music. Sarahtonin was a dumb little Sarah + serotonin joke that somehow became the perfect name. Music has always been one of the things that makes me happiest, and sharing it with people makes it even better. Apparently I couldn&rsquo;t resist a pun.</p>
-        <p>Then I got distracted by work, and Sarahtonin Sounds got put on the shelf for a while. After being laid off, resurrecting it and actually giving it the time and space to grow felt like the natural move. I don&rsquo;t know exactly what it&rsquo;ll turn into yet, and I kind of like that. This is where I get to keep music personal: the playlists, discoveries, writing, and all the things I can&rsquo;t stop telling people about.</p>
-        <p>Music gets me in touch with emotion, sparks creativity, and makes me invent entire little scenes in my head when a song hits right. It connects me to people, too.</p>
-        <p class="about-taste-line">My taste is all over the place.</p>
-        <p>Being Egyptian and growing up with Arabic music is a big part of my musical foundation, and it&rsquo;s something I still love digging into. I love finding hidden gems, whether it&rsquo;s an artist about to break or a song from sixty years ago that&rsquo;s criminally slept on. There&rsquo;s something really fun about finding a song I love and getting to share it with someone else.</p>
-      </div>
+
     </div>
 
     <div class="about-lower">
