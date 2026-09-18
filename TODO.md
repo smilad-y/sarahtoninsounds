@@ -16,3 +16,8 @@
 - [ ] A background paper texture is missing somewhere on the page (likely "about me paper 1", node 1:5, a large rotated texture element on the right side of the frame in Figma).
 - [ ] "Selected Credits & Resume" heading is missing its underline (should have a red horizontal line beneath it, matching node 1:45 "Line 3" in Figma).
 - [ ] 6 duplicate/unreferenced asset files were uploaded during troubleshooting, worth confirming they were actually cleaned up.
+
+## Listen Page — Follow-ups
+- [ ] Only "Dreamy" has real mood content (playlist, description, Sarah's Picks). The other 8 mood circles are clickable and functional but show placeholder "not yet curated" copy, pending final mood taxonomy/content decisions.
+- [ ] 1950sMusicAD decorative element was simplified from Figma's literal edge-bleed treatment to a smaller fully-on-page circular photo, due to a rendering limitation in this environment. Revisit only if the literal bleed effect matters enough to be worth another pass.
+- [ ] Consider switching the background paper texture from a stretched single image to a small seamless tileable texture with `background-repeat`, would scale to any page length without needing a large export each time. Not urgent, current version works fine.
