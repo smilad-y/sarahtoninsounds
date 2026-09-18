@@ -12,7 +12,15 @@
    page intentionally uses Crimson Text rather than the sitewide IM Fell
    English body direction from PROJECT-SPEC.md §5. This is a deliberate,
    page-specific font choice for Listen, not a silent replacement of the
-   sitewide body font elsewhere. */
+   sitewide body font elsewhere.
+
+   Asset note: a parallel session uploaded the real Figma exports for
+   this page (assets/images/listen/) after this file's first pass, which
+   originally had to approximate several backgrounds/tapes/photos in flat
+   CSS color because this session's own network access to the Figma
+   asset host was blocked. Those placeholders have since been swapped for
+   the real exports below; see individual section comments for which
+   asset backs which element. */
 
 .page-listen {
   overflow-x: hidden;
@@ -57,7 +65,7 @@
   justify-content: center;
   width: 142px;
   height: 57px;
-  background-image: url('/assets/images/shared/nav-paper-tab.png');
+  background-image: url('/assets/images/listen/sarahtonin_sounds-listen-Menu-tape_2_1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   font-family: 'Crimson Text', Georgia, serif;
@@ -191,13 +199,8 @@
    A genuine Auto Layout row in Figma (mood-circle-row, 11:2): built as
    a flexbox row with a gap, per the task brief, not nine individually
    positioned circles. The nine circle images are the exact confirmed
-   ASSET-MANIFEST.md §3 swatches, reused locally rather than
-   re-downloaded. The card backdrop ("Menu-tape_3") has no local
-   equivalent and could not be downloaded in this session — the Figma
-   MCP asset host is network-blocked from this sandbox. It's approximated
-   here as a plain paper-colored card (flagged to Sarah) rather than
-   invented as something it isn't; swap in the real export when this
-   session (or a networked one) can fetch it.
+   ASSET-MANIFEST.md §3 swatches. The card backdrop uses the real
+   "Menu-tape_3" export.
 
    Mood content: only "dreamy" (js/listen.js) has Figma-confirmed copy —
    PROJECT-SPEC.md §7 leaves the other 8 circles' color→mood mapping
@@ -215,10 +218,9 @@
   margin-left: 1.806%;
   width: 95.69%;
   aspect-ratio: 1377.94 / 267.466;
-  background-color: #efe9d8; /* placeholder paper tone — see note above */
-  border-radius: 14px;
-  box-shadow: 0 2px 6px rgba(28, 26, 22, 0.12);
-  overflow: hidden;
+  background-image: url('/assets/images/listen/sarahtonin_sounds-listen-Menu-tape_3_1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .listen-moods__heading {
@@ -345,17 +347,13 @@
    genuinely drives this section's content, per the task's functional
    requirement.
 
-   Asset gaps (flagged, not silently substituted): Figma exports a
-   distinct pre-composited "record-dreamy" turntable+blue-vinyl image and
-   a light-blue "Tape-Light_Blue"/cream "paper note with sticker" asset
-   for this frame. None have a local equivalent, and this session's
-   network access to the Figma asset host is blocked (see the Mood
-   Picker Bar comment above) — so the turntable reuses the existing
-   generic ASSET-MANIFEST.md §3 record-player.png (same graphic for
-   every mood, not recolored per mood) and the tape/note are approximated
-   with plain color + the existing beige-tape.png accent rather than the
-   real exports. Swap these for the actual Figma renders once this or a
-   networked session can fetch them. */
+   The turntable uses the real per-mood pre-composited record exports
+   (record-dreamy for the default state; the other 8 "Colored Records"/
+   "record-COLOR" exports for the uncurated moods, matched by swatch
+   color only — not a content claim). Tape and note backgrounds use the
+   real Tape-Light_Blue and paper-note-with-sticker exports; the other 8
+   moods have no matching tape export, so they keep a plain provisional
+   color (js/listen.js TAPE_COLORS) until Sarah supplies one. */
 .listen-turntable {
   position: relative;
   width: 100%;
@@ -389,7 +387,8 @@
   align-items: center;
   justify-content: center;
   background-color: var(--color-powder-blue);
-  transform: rotate(-1.5deg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .tt-tape__label {
@@ -433,20 +432,9 @@
   top: 0;
   width: 26.53%;
   height: 73.7%;
-  background-color: var(--color-cream);
-  border: 1px solid rgba(28, 26, 22, 0.15);
-  box-shadow: 0 4px 4px rgba(67, 51, 28, 0.4);
-}
-
-.tt-picks__tape {
-  position: absolute;
-  left: 41%;
-  top: -5%;
-  width: 20%;
-  height: 10%;
-  background-image: url('/assets/images/shared/tape/beige-tape.png');
-  background-size: cover;
-  transform: rotate(-2deg);
+  background-image: url('/assets/images/listen/paper_note_with_sticker_1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .tt-picks__heading {
@@ -542,13 +530,9 @@
 }
 
 /* ── Intro / Crash Courses (Figma node 15:9) ──
-   Same 1440px-reference technique as the sections above. Figma's own
-   frame bleeds far past 1440 (background paper sized 2356px wide,
-   clipped by the page) — reproduced here as a plain background-color
-   fill instead of an oversized texture image, since there's no asset to
-   bleed in the first place (see asset-gap note on Mood Picker Bar; the
-   background paper, secondary card, tape, and Arabic collage photo all
-   lack local equivalents and couldn't be downloaded this session).
+   Same 1440px-reference technique as the sections above. Backgrounds use
+   the real paper_layer3/paper_layer2 exports; the Arabic collage is the
+   real photo asset.
 
    Copy: the "AN INTRODUCTION TO..." heading/subheading and the Arabic
    Music paragraph are Sarah's real Figma-sourced copy, used verbatim —
@@ -559,7 +543,9 @@
   max-width: 1440px;
   margin: 0 auto;
   aspect-ratio: 1440 / 743;
-  background-color: #ede6d3;
+  background-image: url('/assets/images/listen/paper_layer3_1.png');
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
 }
 
@@ -632,8 +618,9 @@
   top: 50.07%;
   width: 67.01%;
   height: 40.91%;
-  background-color: #d8c9a8;
-  box-shadow: 0 2px 6px rgba(28, 26, 22, 0.15);
+  background-image: url('/assets/images/listen/paper_layer2_1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .crash-course__collage {
@@ -642,9 +629,8 @@
   top: -37.84%;
   width: 56.15%;
   height: 142.8%;
-  background-color: #cbbfa0;
-  border: 1px solid rgba(28, 26, 22, 0.2);
-  box-shadow: 0 4px 10px rgba(54, 24, 6, 0.35);
+  object-fit: cover;
+  filter: drop-shadow(0 4px 4px rgba(54, 24, 6, 0.55));
   transform: rotate(6.62deg);
 }
 
@@ -685,9 +671,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: var(--color-crimson);
-  border-radius: 3px;
-  transform: rotate(-1deg);
+  background-image: url('/assets/images/listen/Tape-Red_3.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   text-decoration: none;
 }
 

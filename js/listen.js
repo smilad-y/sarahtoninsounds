@@ -15,9 +15,10 @@
       id: 'dreamy',
       label: 'Dreamy',
       circle: '/assets/images/listen/light-blue-cirle.png',
+      record: '/assets/images/listen/sarahtonin_sounds-listen-record-dreamy_2.png',
+      tape: '/assets/images/listen/Tape-Light_Blue_1.png',
       curated: true,
       tapeLabel: 'DREAMY',
-      tapeClass: 'is-light-blue',
       blurb: 'For when your mind needs some room to wonder',
       description: 'Floaty, atmospheric, and transportive. These are the songs for late nights, daydreaming, and everywhere in between.',
       picks: [
@@ -26,14 +27,14 @@
         { title: 'Kisses', artist: 'Slowdive' }
       ]
     },
-    { id: 'yellow', label: 'Yellow mood — not yet curated', circle: '/assets/images/listen/yellow-circle.png', curated: false, tapeClass: 'is-yellow' },
-    { id: 'red', label: 'Red mood — not yet curated', circle: '/assets/images/listen/red-circle.png', curated: false, tapeClass: 'is-red' },
-    { id: 'pink', label: 'Pink mood — not yet curated', circle: '/assets/images/listen/pink-circle.png', curated: false, tapeClass: 'is-pink' },
-    { id: 'orange', label: 'Orange mood — not yet curated', circle: '/assets/images/listen/orange-circle.png', curated: false, tapeClass: 'is-orange' },
-    { id: 'light-green', label: 'Light green mood — not yet curated', circle: '/assets/images/listen/light-green-circle.png', curated: false, tapeClass: 'is-light-green' },
-    { id: 'lavender', label: 'Lavender mood — not yet curated', circle: '/assets/images/listen/lavendar-circle.png', curated: false, tapeClass: 'is-lavender' },
-    { id: 'dark-blue', label: 'Dark blue mood — not yet curated', circle: '/assets/images/listen/dark-blue-circle.png', curated: false, tapeClass: 'is-dark-blue' },
-    { id: 'black', label: 'Black mood — not yet curated', circle: '/assets/images/listen/black-circle.png', curated: false, tapeClass: 'is-black' }
+    { id: 'yellow', label: 'Yellow mood — not yet curated', circle: '/assets/images/listen/yellow-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-yellow.png', curated: false },
+    { id: 'red', label: 'Red mood — not yet curated', circle: '/assets/images/listen/red-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-red.png', curated: false },
+    { id: 'pink', label: 'Pink mood — not yet curated', circle: '/assets/images/listen/pink-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-pink.png', curated: false },
+    { id: 'orange', label: 'Orange mood — not yet curated', circle: '/assets/images/listen/orange-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-orange.png', curated: false },
+    { id: 'light-green', label: 'Light green mood — not yet curated', circle: '/assets/images/listen/light-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-light green.png', curated: false },
+    { id: 'lavender', label: 'Lavender mood — not yet curated', circle: '/assets/images/listen/lavendar-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-lavendar.png', curated: false },
+    { id: 'dark-blue', label: 'Dark blue mood — not yet curated', circle: '/assets/images/listen/dark-blue-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-dark_blue.png', curated: false },
+    { id: 'black', label: 'Black mood — not yet curated', circle: '/assets/images/listen/black-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-black.png', curated: false }
   ];
 
   window.SarahtoninListenMoods = MOODS;
@@ -80,12 +81,12 @@
     }
   }
 
-  // Provisional swatch colors for the tape label on uncurated moods —
-  // same "provisional, not confirmed brand hex" status as the secondary
-  // accents in css/tokens.css, used only until Sarah assigns real
-  // per-mood color values.
+  // Provisional swatch colors for the tape label on moods with no real
+  // tape export (only "dreamy" has one — Tape-Light_Blue_1.png) — same
+  // "provisional, not confirmed brand hex" status as the secondary
+  // accents in css/tokens.css, used only until Sarah supplies real tape
+  // exports or per-mood color values for the rest.
   var TAPE_COLORS = {
-    dreamy: null, // uses the confirmed --color-powder-blue tape via CSS
     yellow: '#f0c93a',
     red: '#c0392b',
     pink: '#f0b8d0',
@@ -103,12 +104,22 @@
     var blurbEl = document.getElementById('tt-blurb');
     var descEl = document.getElementById('tt-description');
     var picksList = document.getElementById('tt-picks-list');
+    var recordImg = document.getElementById('tt-record-img');
     if (!mood || !tape || !nameEl) return;
 
     nameEl.textContent = mood.curated ? mood.label : mood.label.replace(/ — not yet curated$/, '');
 
-    var color = TAPE_COLORS[mood.id];
-    tape.style.backgroundColor = color || '';
+    if (recordImg && mood.record) {
+      recordImg.src = encodeURI(mood.record);
+    }
+
+    if (mood.tape) {
+      tape.style.backgroundImage = "url('" + encodeURI(mood.tape) + "')";
+      tape.style.backgroundColor = '';
+    } else {
+      tape.style.backgroundImage = 'none';
+      tape.style.backgroundColor = TAPE_COLORS[mood.id] || '';
+    }
 
     if (mood.curated) {
       blurbEl.textContent = mood.blurb;
