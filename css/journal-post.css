@@ -1,0 +1,107 @@
+/* Journal Post (desktop) — Nav section only, this pass.
+   Reproduces Figma node 94:8 ("Nav") from the Journal Post desktop
+   frame (figma.com/design/NmseLluZJR0NqBKcwIq02A, node 2:72
+   "Desktop-Journal Entry", confirmed 1492×1024 reference frame).
+   Nav frame geometry per Figma: x=592, y=29, w=814, h=57 (5 items ×
+   142px + 4 gaps × 26px = 814px, confirming the frame is a pure hug-
+   content auto-layout row — no full-width stretch). Percentages below
+   are that geometry expressed against the 1492×1024 reference frame,
+   the same technique used for the Journal Landing stage
+   (css/journal.css). Each Nav Item keeps its own 142:57 aspect ratio
+   so the tape art never stretches as the stage scales. 0° rotation
+   throughout, matching the source frame exactly.
+
+   Title block, body copy, and decorative collage elements from the
+   same frame (polaroid, megaphone, stars, corner papers) are not
+   built in this pass — see journal-post.html comment.
+
+   Typography: Figma's raw export specifies Crimson Text SemiBold,
+   20px, #000 for the nav labels. This instead uses the established
+   Sarahtonin Sounds system — var(--font-display) (Perandory
+   Semi-Condensed) and var(--color-near-black) — matching journal.css's
+   identical, already-documented decision for this same nav-tape
+   component: PROJECT-SPEC.md §8 ("Perandory Semi-Condensed direction
+   for major editorial headings"), CLAUDE.md's design hierarchy, and
+   the site style guide file's own Perandory heading example, which
+   lists "About / Listen / Journal" as the reference usage. Only a
+   Regular weight of Perandory Semi-Condensed is currently hosted
+   (assets/fonts — no Semibold cut supplied), so no synthetic/fake
+   bold is applied for the spec's "SemiBold" weight; flagged for Sarah
+   rather than approximated. */
+
+.page-journal-post main.journal-post-page {
+  max-width: none;
+  padding: 0;
+}
+
+.jp-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1492px;
+  margin: 0 auto;
+  aspect-ratio: 1492 / 1024;
+  background-color: var(--color-cream);
+}
+
+/* .jp-nav's own width is set explicitly (814/1492 of the stage) rather
+   than left to shrink-wrap: an absolutely-positioned box with no
+   declared width can't resolve percentage widths on its own flex
+   children (the container's width would depend on the children's
+   rendered width, which would depend on the container's width — a
+   circular reference browsers can't resolve, collapsing every tab to
+   its text's intrinsic width). This value hugs the same 814px Figma
+   totals precisely without a fixed px width. */
+.jp-nav {
+  position: absolute;
+  left: 39.6782%;
+  top: 2.832%;
+  width: 54.5576%;
+  z-index: 20;
+}
+
+.jp-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 3.1941%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* The <li> is the actual flex item (not the <a>.jp-nav__tab it wraps),
+   so the 142/814 width percentage is set here — sizing the <a> itself
+   would resolve against the <li>'s own auto (shrink-wrapped) width,
+   the same circular-reference problem noted above on .jp-nav. */
+.jp-nav li {
+  width: 17.4448%;
+  aspect-ratio: 142 / 57;
+}
+
+.jp-nav__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/shared/nav-paper-tab.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.34vw, 1.25rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.jp-nav__tab[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 3px;
+}
+
+.jp-nav__tab:hover {
+  text-decoration: underline;
+}
