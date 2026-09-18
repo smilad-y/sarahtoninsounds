@@ -17,26 +17,34 @@
    casual handwriting for short annotations/marginalia, not body copy, so
    those two paragraphs use the body font instead.
 
-   Nav: reuses assets/images/shared/nav-paper-tab.png (Journal's interior-
-   page nav treatment), not a new tape asset, for cross-page consistency.
-   Figma's nav labels this tab "DISCOVER"; production nav is Home · About ·
-   Listen · Journal · Contact (CLAUDE.md non-negotiable) — relabeled
-   LISTEN, same resolution journal.html's mobile nav already documents.
+   Nav: uses the page's own real exported tape asset (Menu-tape_2, reused
+   for all 5 tabs — the 5 Figma layers are byte-identical) rather than
+   Journal's shared nav-paper-tab.png, since Sarah's own export for this
+   page is now available. Figma's nav labels this tab "DISCOVER";
+   production nav is Home · About · Listen · Journal · Contact (CLAUDE.md
+   non-negotiable) — relabeled LISTEN, same resolution journal.html's
+   mobile nav already documents.
 
-   Two Figma illustrations (the 1950s-ad decorative collage, and the
-   giant diagonal background paper strip behind the hero) are omitted:
-   this session could not download them (Figma asset host is blocked by
-   this environment's egress policy — see build note) and they read as
-   subtle/background-level in the reference screenshot, not load-bearing
-   content. The Arabic Music collage photo IS load-bearing content, so it
-   keeps a clearly-marked placeholder (see listen.html) instead of being
-   silently dropped.
+   All raster art below (nav tape, mood-row tape, Dreamy tape, Sarah's
+   Picks note, both intro/crash-course paper cards, the Arabic Music
+   collage, the mid-page decorative collage, the 13 colored-vinyl record
+   photos, and the whole-page background paper texture) is Sarah's real
+   Figma export, supplied directly in assets/images/listen/ — nothing
+   here is a CSS-drawn approximation standing in for an asset.
+
+   One Figma element is still intentionally left out: the giant diagonal
+   background paper strip behind the hero/mood row (node "listen (1)paper").
+   Its own asset is available (sarahtonin_sounds-listen__1_paper_1.png) but
+   it reads as a barely-perceptible tonal shift in the reference screenshot
+   at this rotation/scale — adding it risked a visible seam for no real
+   fidelity gain. Revisit if a closer pixel diff calls for it.
 
    No mobile Figma frame was supplied for Listen (unlike Home/Journal,
    which each have an authoritative separate mobile frame) — this stage
-   scales the one desktop frame proportionally at every width rather than
-   inventing mobile-specific art direction. A dedicated mobile pass needs
-   its own Figma frame first. */
+   scales the one desktop frame proportionally down to tablet width, then
+   switches to a plain stacked flow below 700px (see that section) rather
+   than inventing mobile-specific art direction. A dedicated mobile pass
+   needs its own Figma frame first. */
 
 .page-listen {
   background-color: var(--color-cream);
@@ -56,6 +64,9 @@
   aspect-ratio: 1440 / 2428;
   overflow: hidden;
   background-color: var(--color-cream);
+  background-image: url('/assets/images/listen/sarahtonin_sounds-background_paper_2_1.png');
+  background-size: cover;
+  background-position: top center;
 }
 
 /* ── Brand logo — flex-center-then-rotate, matching Home/Journal's own
@@ -110,7 +121,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('/assets/images/shared/nav-paper-tab.png');
+  background-image: url('/assets/images/listen/sarahtonin_sounds-listen-Menu-tape_2_1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   font-family: var(--font-display);
@@ -190,13 +201,10 @@
 .lst-moods__panel {
   position: absolute;
   inset: 0;
-  background-color: #ede4cd;
-  border-radius: 18px;
-  box-shadow: 0 6px 14px rgba(67, 51, 28, 0.18);
-  clip-path: polygon(
-    0% 4%, 3% 0%, 30% 2%, 55% 0%, 78% 3%, 100% 1%,
-    100% 96%, 96% 100%, 68% 97%, 42% 100%, 18% 98%, 0% 100%
-  );
+  background-image: url('/assets/images/listen/sarahtonin_sounds-listen-Menu-tape_3_1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 6px 10px rgba(67, 51, 28, 0.18));
   z-index: 1;
 }
 
@@ -283,15 +291,15 @@
   top: 0%;
   width: 30.502%;
   height: 18.72%;
-  background-color: var(--color-powder-blue);
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(67, 51, 28, 0.25);
-  clip-path: polygon(1% 8%, 6% 0%, 94% 3%, 99% 10%, 98% 92%, 92% 100%, 4% 97%, 0% 88%);
-  transition: background-color 0.2s ease;
+  background-image: url('/assets/images/listen/Tape-Light_Blue_1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 4px 8px rgba(67, 51, 28, 0.25));
+  transition: filter 0.2s ease;
 }
 
 .lst-player--curated .lst-player__tape {
-  background-color: #d8d2c2;
+  filter: drop-shadow(0 4px 8px rgba(67, 51, 28, 0.25)) grayscale(0.7);
 }
 
 .lst-player__mood-name {
@@ -360,12 +368,11 @@
   top: 0%;
   width: 26.5278%;
   height: 73.7%;
-  background-image: url('/assets/images/listen/paper.png');
+  background-image: url('/assets/images/listen/paper_note_with_sticker_1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  padding: 8% 8% 0;
+  padding: 12% 8% 0;
   box-sizing: border-box;
-  filter: drop-shadow(0 4px 6px rgba(67, 51, 28, 0.4));
 }
 
 .lst-player__note-heading {
@@ -405,6 +412,7 @@
   transform: rotate(2deg);
 }
 
+/* ── Decorative mid-page collage (Figma node "1950sMusicAD") ── */
 .lst-decor-photo {
   position: absolute;
   left: 65.74%;
@@ -412,10 +420,9 @@
   width: 47.76%;
   height: 28.33%;
   z-index: 2;
-  border-radius: 50%;
-  background-color: #ddd5c1;
-  border: 2px dashed rgba(28, 26, 22, 0.3);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  max-width: none;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 /* ── An Introduction To... / Crash Courses ── */
@@ -436,8 +443,9 @@
   max-width: 1600px;
   height: 94%;
   transform: translateX(-50%);
-  background-color: #e9e0c8;
-  clip-path: polygon(0% 2%, 100% 0%, 100% 98%, 0% 100%);
+  background-image: url('/assets/images/listen/paper_layer3_1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   z-index: 1;
 }
 
@@ -505,9 +513,10 @@
 .lst-crash-course__panel {
   position: absolute;
   inset: 0;
-  background-color: #f4ede0;
-  border-radius: 6px;
-  box-shadow: 0 4px 10px rgba(67, 51, 28, 0.2);
+  background-image: url('/assets/images/listen/paper_layer2_1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 4px 10px rgba(67, 51, 28, 0.2));
   z-index: 1;
 }
 
@@ -518,11 +527,10 @@
   width: 56.13%;
   height: 142.79%;
   z-index: 2;
-  background-color: #ddd5c1;
-  border: 2px dashed rgba(28, 26, 22, 0.35);
-  border-radius: 4px;
+  max-width: none;
+  object-fit: contain;
   transform: rotate(6.62deg);
-  box-shadow: 0 4px 10px rgba(54, 24, 6, 0.3);
+  filter: drop-shadow(0 4px 10px rgba(54, 24, 6, 0.35));
 }
 
 .lst-crash-course__title {
@@ -576,7 +584,7 @@
   justify-content: center;
   gap: 0.4em;
   box-sizing: border-box;
-  background-image: url('/assets/images/home/red-tape.png');
+  background-image: url('/assets/images/listen/Tape-Red_3.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   font-family: var(--font-display);
@@ -609,9 +617,9 @@
    a mobile Figma frame for Listen, the same way Journal's real mobile
    frame replaced an earlier scaled-down pass. Purely decorative pieces
    that have no mobile Figma direction of their own (rotated corner
-   logo, the two pending-asset collage placeholders) are hidden rather
-   than guessed at, matching Home's own precedent of dropping desktop-
-   only decorative accents at its mobile breakpoint. ══════════════════ */
+   logo, the two collage photos) are hidden rather than guessed at,
+   matching Home's own precedent of dropping desktop-only decorative
+   accents at its mobile breakpoint. ══════════════════════════════════ */
 @media (max-width: 700px) {
   /* Desktop's left/top/right/bottom offsets still apply once position
      changes to relative/static below (only `position` itself stops them
@@ -629,6 +637,7 @@
   .listen-stage {
     aspect-ratio: auto;
     max-width: 560px;
+    background-size: cover;
   }
 
   .lst-logo,
