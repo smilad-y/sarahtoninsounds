@@ -27,8 +27,7 @@
          (assets/images/shared/nav-paper-tab.png, ASSET-MANIFEST.md
          §1) — not a new asset.
 
-         Only the Nav is built in this pass. The title block, body
-         copy, and decorative collage elements from the same frame
+         Body copy and decorative collage elements from the same frame
          (polaroid, megaphone, stars, corner papers) are intentionally
          not built yet.
 
@@ -47,6 +46,45 @@
         <li><a href="/contact.html" class="jp-nav__tab">Contact</a></li>
       </ul>
     </nav>
+
+    <!-- Title Block — reproduces Figma nodes 5:170 (metadata), 3:159
+         (title), 3:160 (underline rule), all direct children of the
+         same 2:72 "Desktop-Journal Entry" frame. Positions are exact
+         percentages of the 1492×1024 reference frame, same technique
+         as Nav. Placeholder text only (matches Figma's own sample
+         copy) — not real content; swap the text nodes when a real
+         entry is wired up. Body copy and decorative collage elements
+         are still not built — see comment above.
+
+         Two font substitutions, both flagged rather than silently
+         applied (same policy as the Nav pass):
+
+         - Title (3:159): Figma specifies "Perandory Regular" — only
+           Perandory Semi-Condensed and Condensed are hosted
+           (assets/fonts/), no plain Regular cut. Uses var(--font-display)
+           (Semi-Condensed), matching every other Perandory heading
+           already on this page family (journal.css).
+         - Metadata (5:170): Figma specifies "Playfair Regular".
+           Playfair Display is explicitly listed in CLAUDE.md as a
+           legacy typeface that is NOT a current requirement. Uses
+           var(--font-body) (IM Fell English) italic instead, matching
+           the established "ESSAY · ..." meta-line treatment already
+           used on Journal Landing (.journal-featured__meta /
+           .journal-card__meta in journal.css) — not a one-off choice.
+
+         Rule (3:160) is, in the real Figma file, a textured hand-drawn
+         crimson brush-stroke SVG/PNG asset (643×12px) — not a flat
+         line. That asset could not be downloaded in this build
+         session (this sandbox's egress policy blocks www.figma.com
+         asset URLs), so it's implemented here as a flat
+         var(--color-crimson) bar at the exact Figma geometry, per
+         explicit sign-off rather than a silent substitution. Swap in
+         the real exported asset when available — see TODO.md. -->
+    <div class="jp-title-block">
+      <p class="jp-title-block__meta">Essay · September 2026</p>
+      <h1 class="jp-title-block__title">Title Goes Here</h1>
+      <div class="jp-title-block__rule" aria-hidden="true"></div>
+    </div>
 
   </div>
 </main>

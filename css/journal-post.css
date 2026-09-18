@@ -106,3 +106,62 @@
 .jp-nav__tab:hover {
   text-decoration: underline;
 }
+
+/* ── Title Block ── Figma nodes 5:170 (metadata), 3:159 (title),
+   3:160 (underline rule) — exact percentages of the 1492×1024
+   reference frame (x/y/w straight from Figma's own geometry: metadata
+   1012,120,243; title 430,185,801; rule 498,295,643). Font
+   substitutions and the underline-asset placeholder are documented in
+   the HTML comment above this block's markup. 0° rotation throughout,
+   matching the source frame. */
+.jp-title-block {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.jp-title-block__meta {
+  position: absolute;
+  left: 67.8284%;
+  top: 11.7188%;
+  width: 16.2869%;
+  margin: 0;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(0.7rem, 0.87vw, 0.8125rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+/* Width constrains wrap only — height is intentionally not fixed so a
+   real (longer) title can grow without being clipped or truncated. */
+.jp-title-block__title {
+  position: absolute;
+  left: 28.8206%;
+  top: 18.0664%;
+  width: 53.6864%;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6.7vw, 6.25rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+/* Placeholder for the real textured brush-stroke asset (see comment
+   in journal-post.html) — flat var(--color-crimson) bar at the exact
+   Figma geometry so swapping in the real asset later only needs a
+   background-image added here, not a position/size rework. */
+.jp-title-block__rule {
+  position: absolute;
+  left: 33.378%;
+  top: 28.8086%;
+  width: 43.0965%;
+  height: 2px;
+  background-color: var(--color-crimson);
+}
