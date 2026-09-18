@@ -136,6 +136,23 @@
   color: var(--color-near-black);
 }
 
+/* Figma node 5:171 ("Line 5") — a plain flat 1px rule directly under
+   the metadata text (x=1009,y=142,w=246 of the 1492×1024 frame; no
+   named Figma variable and no texture, unlike 3:160's brush-stroke
+   asset, so this one is reproduced as pure CSS with no asset gap).
+   Pixel-exact fill sampling wasn't possible in this sandbox (same
+   www.figma.com download restriction as 3:160), but it reads as the
+   same accent red with no distinct token of its own, so it uses
+   var(--color-crimson) rather than a second hardcoded value. */
+.jp-title-block__meta-rule {
+  position: absolute;
+  left: 67.6273%;
+  top: 13.8672%;
+  width: 16.4879%;
+  height: 1px;
+  background-color: var(--color-crimson);
+}
+
 /* Width constrains wrap only — height is intentionally not fixed so a
    real (longer) title can grow without being clipped or truncated. */
 .jp-title-block__title {
