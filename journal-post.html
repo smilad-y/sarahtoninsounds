@@ -19,6 +19,124 @@
 <main id="main" class="journal-post-page">
   <div class="jp-stage" id="journal-post-stage">
 
+    <!-- Decorative / Collage Layer — every remaining element of Figma
+         node 2:72 "Desktop-Journal Entry": both full-bleed background
+         papers (2:73, 2:78), the two torn corner papers (3:154,
+         3:155), the angled logo badge (2:26), the yellow paper behind
+         the text column (2:150), two scribble stars (3:165, 3:164),
+         the edge-bleeding megaphone (3:167), and the Polaroid + Tape
+         unit (94:14). Purely decorative — aria-hidden, no informational
+         content. `home-spiral-4`, previously flagged as likely
+         leftover Home-page clutter outside the frame's visible bounds,
+         does not appear anywhere in this frame's current child list
+         (confirmed via get_metadata on 2:72) — already gone, nothing
+         to skip.
+
+         Position/rotation source-of-truth conflict, same pattern
+         already documented in css/journal.css for this exact page
+         family ("Three coordinate conflicts between Figma's own two
+         data sources were resolved against the finalized rendered
+         reference"): get_metadata's raw XML bounding boxes disagreed
+         with get_design_context's composed/rendered code for 6 of
+         these 11 elements (2:78, 3:154, 2:26, 2:150, 3:164, 3:167) —
+         in every case get_metadata's numbers would push the element
+         mostly or entirely outside the 1492×1024 frame (e.g. the
+         megaphone at metadata's x=1497 vs design-context's x=1255.58 —
+         confirmed against the full-frame screenshot, where the
+         megaphone is clearly still mostly on-canvas, just clipped at
+         the right edge) or onto the wrong side of the page (corner
+         paper 1 at metadata's x=859 vs design-context's x=-51 — the
+         screenshot clearly shows corner paper 1's dusty-pink color at
+         the BOTTOM-LEFT, not the right-center the task brief's
+         reference table suggested). get_design_context's numbers are
+         used throughout, cross-checked against the full-frame
+         screenshot rather than trusted blindly.
+
+         Asset reuse — every element below is a real exported asset
+         already sitting in this repo (no new asset created, per the
+         asset-handling instruction), matched by filename and/or
+         direct visual comparison against each node's own Figma
+         render:
+         - 2:73  → assets/images/listen/sarahtonin_sounds-background_paper_2_1.png
+                   (filename is a literal match for the Figma layer
+                   name "sarahtonin sounds-background paper_2 1")
+         - 2:78  → assets/images/journal/paper.png (plain cream torn
+                   paper texture; mostly hidden behind the yellow paper
+                   and corner papers painted after it, so exact-crop
+                   fidelity here is low-stakes)
+         - 3:154 → assets/images/journal/corner-paper-pink.png
+         - 3:155 → assets/images/journal/corner-paper-red.png
+         - 2:26  → assets/images/home-v2/home-logo-sharp.png (name and
+                   art both match "Sarahtonin Sounds logo sharp" —
+                   already used elsewhere on the site)
+         - 2:150 → assets/images/home/yellow-piece-of-paper.png
+         - 3:164, 3:165 → assets/images/shared/doodles/star-scribble.png
+         - 3:167 → assets/images/journal/megaphone.png
+
+         Two assets — the polaroid (94:14 → 3:156) and the tape
+         (94:14 → 3:162) — are used from
+         assets/images/journal/article-photo-sky-clouds.png (already
+         referenced elsewhere as a Journal "featured_image") and
+         assets/images/journal/tape-orange.png. Both are placed at
+         Figma's OUTER (post-rotation) bounding box with NO additional
+         CSS rotation, unlike every other rotated element here: their
+         pixel aspect ratios match Figma's post-rotation wrapper box
+         almost exactly (polaroid 608×733 = 0.829 vs Figma's
+         303.765×366.363 = 0.8291; tape 273×191 = 1.429 vs Figma's
+         136.409×95.043 = 1.435) and both visibly already contain a
+         baked-in tilt + drop shadow — they're pre-flattened exports,
+         not the "natural" pre-rotation source Figma's other assets
+         are. Applying Figma's stated rotate() on top of these would
+         double-rotate them. Verified by rendering and comparing
+         against the full-frame Figma screenshot, not assumed from the
+         ratio match alone.
+
+         Rotation pivot: every element below uses Figma's own
+         flex-center-then-rotate export technique (already established
+         in css/journal.css for the Journal Landing logo/green paper) —
+         an outer wrapper sized to the POST-rotation bounding box,
+         centering an inner element sized to the PRE-rotation natural
+         image dimensions, which then carries the rotate()/scaleY()
+         transform. This avoids the top-left-pivot bug CSS's default
+         transform-origin would otherwise cause on a naively-sized
+         single element, without needing a different transform-origin
+         value per element. -->
+    <div class="jp-decor" aria-hidden="true">
+      <img class="jp-decor__bg-base" src="/assets/images/listen/sarahtonin_sounds-background_paper_2_1.png" alt="">
+      <img class="jp-decor__bg-lower" src="/assets/images/journal/paper.png" alt="">
+
+      <div class="jp-decor__corner2">
+        <div class="jp-decor__corner2-inner">
+          <img src="/assets/images/journal/corner-paper-red.png" alt="">
+        </div>
+      </div>
+      <img class="jp-decor__corner1" src="/assets/images/journal/corner-paper-pink.png" alt="">
+
+      <div class="jp-decor__logo">
+        <div class="jp-decor__logo-inner">
+          <img src="/assets/images/home-v2/home-logo-sharp.png" alt="">
+        </div>
+      </div>
+
+      <div class="jp-decor__yellow-paper">
+        <div class="jp-decor__yellow-paper-inner">
+          <img src="/assets/images/home/yellow-piece-of-paper.png" alt="">
+        </div>
+      </div>
+
+      <img class="jp-decor__star2" src="/assets/images/shared/doodles/star-scribble.png" alt="">
+      <img class="jp-decor__star1" src="/assets/images/shared/doodles/star-scribble.png" alt="">
+
+      <div class="jp-decor__megaphone">
+        <div class="jp-decor__megaphone-inner">
+          <img src="/assets/images/journal/megaphone.png" alt="">
+        </div>
+      </div>
+
+      <img class="jp-decor__polaroid" src="/assets/images/journal/article-photo-sky-clouds.png" alt="">
+      <img class="jp-decor__tape" src="/assets/images/journal/tape-orange.png" alt="">
+    </div>
+
     <!-- Nav — reproduces Figma node 94:8 ("Nav") from the Journal Post
          desktop frame (figma.com/design/NmseLluZJR0NqBKcwIq02A, node
          2:72 "Desktop-Journal Entry", confirmed 1492×1024 reference
@@ -26,10 +144,6 @@
          established on Home/Journal Landing
          (assets/images/shared/nav-paper-tab.png, ASSET-MANIFEST.md
          §1) — not a new asset.
-
-         Body copy and decorative collage elements from the same frame
-         (polaroid, megaphone, stars, corner papers) are intentionally
-         not built yet.
 
          Figma's 4th tab is labeled "DISCOVER". Journal Landing's
          mobile nav already documents relabeling this exact tape to
@@ -54,8 +168,7 @@
          percentages of the 1492×1024 reference frame, same technique
          as Nav. Placeholder text only (matches Figma's own sample
          copy) — not real content; swap the text nodes when a real
-         entry is wired up. Body copy and decorative collage elements
-         are still not built — see comment above.
+         entry is wired up.
 
          Two font substitutions, both flagged rather than silently
          applied (same policy as the Nav pass):
@@ -109,8 +222,7 @@
          §5's body-copy direction. Line-height/color are not
          hardcoded here — they inherit the sitewide base.css values
          (1.6 / var(--color-near-black) via var(--color-text)) rather
-         than Figma's unspecified "normal" leading. Decorative collage
-         elements are still not built — see Nav comment above. -->
+         than Figma's unspecified "normal" leading. -->
     <div class="jp-body-copy">
       <p>Incididunt labore veniam consequat dolore eiusmod ex dolore eiusmod consectetur commodo. Quis lorem sed commodo lorem dolore dolore exercitation quis ut. Tempor quis ut et adipiscing incididunt ut dolore laboris amet lorem consectetur. Enim lorem laboris incididunt magna ut ullamco commodo ex incididunt adipiscing sit aliqua elit ad.</p>
       <p>Ea ipsum laboris exercitation quis et adipiscing elit quis enim minim exercitation ut consequat. Ipsum ex nostrud et laboris ut eiusmod veniam do nostrud commodo. Labore amet ullamco labore enim ad dolor sit adipiscing amet.</p>

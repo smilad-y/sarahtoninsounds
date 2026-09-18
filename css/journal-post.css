@@ -1,4 +1,5 @@
-/* Journal Post (desktop) — Nav section only, this pass.
+/* Journal Post (desktop) — Nav, Title Block, Body Copy, and the full
+   decorative/collage layer.
    Reproduces Figma node 94:8 ("Nav") from the Journal Post desktop
    frame (figma.com/design/NmseLluZJR0NqBKcwIq02A, node 2:72
    "Desktop-Journal Entry", confirmed 1492×1024 reference frame).
@@ -10,10 +11,6 @@
    (css/journal.css). Each Nav Item keeps its own 142:57 aspect ratio
    so the tape art never stretches as the stage scales. 0° rotation
    throughout, matching the source frame exactly.
-
-   Title block, body copy, and decorative collage elements from the
-   same frame (polaroid, megaphone, stars, corner papers) are not
-   built in this pass — see journal-post.html comment.
 
    Typography: Figma's raw export specifies Crimson Text SemiBold,
    20px, #000 for the nav labels. This instead uses the established
@@ -40,6 +37,7 @@
   max-width: 1492px;
   margin: 0 auto;
   aspect-ratio: 1492 / 1024;
+  overflow: hidden;
   background-color: var(--color-cream);
 }
 
@@ -207,4 +205,217 @@
 
 .jp-body-copy p:last-child {
   margin-bottom: 0;
+}
+
+/* ── Decorative / Collage Layer ── every remaining element of Figma
+   node 2:72 (asset choices, the metadata/design-context position
+   conflicts, and the polaroid/tape pre-flattened-asset reasoning are
+   documented in the HTML comment above this layer's markup).
+
+   z-index tiers replicate Figma's own paint order (bottom to top):
+   backgrounds(1-2) < corner papers(3-4) < logo(5) < yellow paper(6)
+   < stars(7) < megaphone(8) ... Body Copy(10) ... Title Block(15)
+   ... Polaroid+Tape(18) < Nav(20). Nav is deliberately kept topmost
+   overall (Figma's own order paints Polaroid+Tape last/above Nav) so
+   the real nav links stay clickable — the two units never overlap on
+   screen, so this reordering is invisible. */
+.jp-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.jp-decor__bg-base {
+  position: absolute;
+  left: 0%;
+  top: -7.8125%;
+  width: 101.6086%;
+  height: 122.7539%;
+  max-width: none;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.jp-decor__bg-lower {
+  position: absolute;
+  left: 2.1448%;
+  top: 2.6367%;
+  width: 102.9491%;
+  height: 115.918%;
+  max-width: none;
+  object-fit: cover;
+  transform: scaleY(-1);
+  z-index: 2;
+}
+
+.jp-decor__corner2 {
+  position: absolute;
+  left: 69.1689%;
+  top: 70.1172%;
+  width: 31.233%;
+  height: 36.7188%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jp-decor__corner2-inner {
+  width: 80.6867%;
+  height: 123.9362%;
+  transform: rotate(90deg) scaleY(-1);
+}
+
+.jp-decor__corner2-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.jp-decor__corner1 {
+  position: absolute;
+  left: -3.4182%;
+  top: 50%;
+  width: 60.992%;
+  height: 56.8359%;
+  max-width: none;
+  object-fit: cover;
+  transform: rotate(180deg) scaleY(-1);
+  z-index: 4;
+}
+
+.jp-decor__logo {
+  position: absolute;
+  left: -2.2788%;
+  top: -1.9531%;
+  width: 29.2317%;
+  height: 28.2358%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jp-decor__logo-inner {
+  width: 92.6449%;
+  height: 57.4074%;
+  transform: rotate(-19.11deg);
+}
+
+.jp-decor__logo-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.jp-decor__yellow-paper {
+  position: absolute;
+  left: 9.7783%;
+  top: -4.3555%;
+  width: 88.546%;
+  height: 138.4785%;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jp-decor__yellow-paper-inner {
+  width: 87.5645%;
+  height: 89.5983%;
+  transform: rotate(7.93deg);
+}
+
+.jp-decor__yellow-paper-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.jp-decor__star2 {
+  position: absolute;
+  left: 94.3029%;
+  top: 66.3086%;
+  width: 3.4853%;
+  height: 4.6875%;
+  max-width: none;
+  object-fit: cover;
+  transform: scaleY(-1);
+  z-index: 7;
+}
+
+.jp-decor__star1 {
+  position: absolute;
+  left: 3.0161%;
+  top: 88.1836%;
+  width: 3.3512%;
+  height: 4.1016%;
+  max-width: none;
+  object-fit: cover;
+  z-index: 7;
+}
+
+/* Megaphone (3:167) is allowed to bleed past .jp-stage's right edge —
+   confirmed intentional against the full-frame Figma screenshot
+   (clipped cleanly at the frame boundary, not spilling past it), which
+   is simply Figma's default frame-clip behavior; .jp-stage's own
+   overflow: hidden reproduces the same clip. */
+.jp-decor__megaphone {
+  position: absolute;
+  left: 84.1622%;
+  top: 20.6533%;
+  width: 16.2124%;
+  height: 23.0483%;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jp-decor__megaphone-inner {
+  width: 83.117%;
+  height: 81.7754%;
+  transform: rotate(-165.95deg) scaleY(-1);
+}
+
+.jp-decor__megaphone-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Polaroid + Tape (Figma group 94:14) — both assets are pre-flattened
+   exports that already bake in their own tilt + drop shadow (ratio
+   match verified in the HTML comment), so neither gets an additional
+   CSS rotation: each sits directly at Figma's post-rotation bounding
+   box. object-fit: contain (not cover) so the whole flattened graphic,
+   shadow included, stays uncropped. */
+.jp-decor__polaroid {
+  position: absolute;
+  left: 0.4021%;
+  top: 56.5401%;
+  width: 20.3596%;
+  height: 35.7776%;
+  max-width: none;
+  object-fit: contain;
+  z-index: 18;
+}
+
+.jp-decor__tape {
+  position: absolute;
+  left: 9.7855%;
+  top: 53.8086%;
+  width: 9.1425%;
+  height: 9.2816%;
+  max-width: none;
+  object-fit: contain;
+  z-index: 18;
 }
