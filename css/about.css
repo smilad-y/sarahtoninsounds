@@ -1,3 +1,760 @@
-/* About page — page-specific styles.
-   Structural foundation only; full editorial/scrapbook design is
-   Phase 3 (PROJECT-SPEC.md §9, BUILD-ROADMAP.md Phase 3). */
+/* About page — rebuilt from the authoritative Figma frame
+   (figma.com/design/YetSGHlPxrcnuSRZ3shfip, node 1:3,
+   "About Me-Desktop-duplicate"), pulled directly via get_design_context
+   per BUILD-ROADMAP.md Phase 3. See the HTML comment on .ab3-stage for
+   the full reasoning on the fixed-1440px approach, paint order, and
+   the top-left rotation pivots on the Decorative Ephemera Cluster.
+
+   Fonts substitute per the established system rather than Figma's
+   generated Crimson Text/Caveat: Perandory Semi-Condensed for "About",
+   the hero greeting, and "Selected Credits & Resume"; IM Fell English
+   for body copy and the Resume/Get-in-touch links; Sue Ellen Francisco
+   only for "Let's Work Together!" and the polaroid caption. Colors use
+   the established design tokens rather than Figma's literal hex
+   values. Figma's own literal px values are used verbatim throughout
+   (not rem/percentage) since this stage is deliberately fixed-width,
+   not responsive. */
+
+.page-about {
+  background-color: var(--color-cream);
+}
+
+.page-about main.about-page {
+  max-width: none;
+  padding: 0;
+}
+
+.ab3-stage {
+  position: relative;
+  width: 1440px;
+  height: 1304px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #fff;
+  font-family: var(--font-body);
+}
+
+/* ── Background textures ── */
+.ab3-bg-stripe {
+  position: absolute;
+  left: -173px;
+  top: -594px;
+  width: 1856px;
+  height: 2250px;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.ab3-bg-paper1 {
+  position: absolute;
+  left: 195px;
+  top: 62px;
+  width: 1314px;
+  height: 1038px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ab3-bg-paper1 img {
+  width: 1038px;
+  height: 1314px;
+  max-width: none;
+  object-fit: cover;
+  transform: rotate(90deg);
+}
+
+.ab3-bg-foreground {
+  position: absolute;
+  left: -492px;
+  top: 134px;
+  width: 3382px;
+  height: 2130px;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* 180deg rotation doesn't change the bounding footprint, so the image
+   can just fill its wrapper 1:1 — no oversized-wrapper math needed. */
+.ab3-bg-torn {
+  position: absolute;
+  left: -23px;
+  top: 598px;
+  width: 1595px;
+  height: 471px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ab3-bg-torn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotate(180deg);
+}
+
+.ab3-bg-pink-strip {
+  position: absolute;
+  left: -748px;
+  top: 478px;
+  width: 2429px;
+  height: 474px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ab3-bg-pink-strip img {
+  width: 474px;
+  height: 2429px;
+  max-width: none;
+  object-fit: cover;
+  transform: rotate(-90deg);
+}
+
+/* ── Nav ── */
+.ab3-nav {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 0;
+}
+
+.ab3-nav__tab {
+  position: absolute;
+  top: 15px;
+  width: 142px;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/assets/images/shared/nav-paper-tab.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.ab3-nav__tab[aria-current="page"] {
+  color: var(--color-crimson);
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 3px;
+}
+
+.ab3-nav__tab:hover {
+  text-decoration: underline;
+}
+
+/* ── content: Auto Layout Vertical → real flex column, not absolute
+   positioning internally (only the block itself is placed on the
+   page at Figma's literal x=360/y=169). ── */
+.ab3-content {
+  position: absolute;
+  left: 360px;
+  top: 169px;
+  width: 1080px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.ab3-hero {
+  font-family: var(--font-display);
+  font-size: 40px;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.ab3-intro-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 1080px;
+}
+
+.ab3-intro-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 592px;
+  flex-shrink: 0;
+}
+
+.ab3-intro-copy p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 26px;
+  letter-spacing: 0.2px;
+  color: var(--color-near-black);
+}
+
+.ab3-sarahhtonin-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 452px;
+  flex-shrink: 0;
+}
+
+.ab3-sarahhtonin-column p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
+}
+
+/* ── Let's Work Together + Get in touch ── */
+.ab3-cta {
+  position: absolute;
+  left: 335px;
+  top: 1039px;
+  width: 484px;
+}
+
+.ab3-cta h2 {
+  font-family: var(--font-marginalia);
+  font-size: 50px;
+  letter-spacing: 1px;
+  text-align: center;
+  color: var(--color-near-black);
+  margin: 0 0 12px;
+}
+
+.ab3-cta p {
+  font-size: 20px;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.ab3-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 23px;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ab3-link:hover {
+  color: var(--color-crimson);
+}
+
+.ab3-get-in-touch {
+  position: absolute;
+  left: 340px;
+  top: 1254px;
+}
+
+/* ── Selected Credits & Resume ── */
+.ab3-resume-card {
+  position: absolute;
+  left: 827px;
+  top: 1021px;
+  width: 526px;
+  height: 178px;
+  padding: 20px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.ab3-resume-card h2 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
+  margin: 0;
+  width: 100%;
+}
+
+.ab3-resume-card hr {
+  width: 100%;
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: 4px solid var(--color-crimson);
+}
+
+.ab3-resume-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ab3-resume-entry p {
+  margin: 0;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
+}
+
+.ab3-resume-entry__title {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.ab3-resume-entry__role {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.ab3-resume-entry__dates {
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.ab3-resume-link {
+  position: absolute;
+  left: 1090px;
+  top: 1095px;
+}
+
+.ab3-vert-line {
+  position: absolute;
+  left: 827px;
+  top: 1041px;
+  width: 1px;
+  height: 215px;
+  background-color: var(--color-crimson);
+}
+
+/* ── "About" title block — positioned directly at stage-absolute
+   coordinates (Figma's own calc(50% - Npx) values resolved against
+   the fixed 1440px stage width), no separate positioning wrapper
+   needed since every value below is already stage-relative. ── */
+.ab3-title-block {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ab3-title-block h1 {
+  position: absolute;
+  left: 332.33px;
+  top: 72px;
+  width: 324px;
+  font-size: 75px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
+  margin: 0;
+  text-transform: none;
+}
+
+.ab3-title-block hr {
+  position: absolute;
+  left: 441.58px;
+  top: 146.7px;
+  width: 263.83px;
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: 7px solid var(--color-crimson);
+}
+
+.ab3-title-block p {
+  position: absolute;
+  left: 285px;
+  top: 147.7px;
+  width: 289.216px;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--color-near-black);
+  margin: 0;
+}
+
+.ab3-caption {
+  position: absolute;
+  left: 29px;
+  top: 530px;
+  font-family: var(--font-marginalia);
+  color: var(--color-crimson);
+  font-size: 30px;
+  transform: rotate(3deg);
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ── Decorative Ephemera Cluster — logo, polaroid, green + blue paper,
+   flowers. Positions are the top-left-pivot conversion described in
+   the HTML comment on .ab3-stage, not Figma's generated wrapper
+   left/top (which centers around a DIFFERENT, oversized box and would
+   double-apply the centering offset if reused directly here). Each
+   uses object-fit:cover directly on the raw asset at Figma's literal
+   target box — the same technique Figma's own export uses for these
+   — rather than a custom crop-percentage trick, which is what
+   previously split the logo into two visually disconnected pieces. */
+.ab3-deco {
+  position: absolute;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* left is nudged left from the computed -58.26px: at that position the
+   asset's opaque paper edge (this local export has no transparent
+   margin there) oversteps the CTA text column's left edge by ~9px,
+   clipping the leading character of every line — confirmed by
+   screenshot pixel-sampling, not visible in the Figma reference render.
+   Same width/height/rotation, only shifted left to clear the text. */
+.ab3-deco--blue-corner {
+  left: -97px;
+  top: 1044.53px;
+  width: 402.271px;
+  height: 259.473px;
+}
+
+.ab3-deco--green-paper {
+  left: -20px;
+  top: -20px;
+  width: 735.639px;
+  height: 1096.366px;
+  transform-origin: top left;
+  transform: rotate(47.87deg);
+}
+
+.ab3-deco--logo {
+  left: -23.811px;
+  top: 127.219px;
+  width: 337.107px;
+  height: 138.816px;
+  transform-origin: top left;
+  transform: rotate(-25.02deg);
+}
+
+/* left is nudged ~43px further left than the computed top-left-pivot
+   conversion (29.722px) gives: at that computed position the flower's
+   actual petals (not just the theoretical rotated bounding box)
+   visibly overlapped the hero heading's "T" — confirmed by cropping
+   the render, not by re-deriving the math — which the reference
+   screenshot does not show. Same width/height/rotation, only shifted
+   left to clear the heading, per the instruction to fix what direct
+   pixel comparison finds rather than trust the computed value alone. */
+.ab3-deco--polaroid {
+  left: -43px;
+  top: 118.399px;
+  width: 395.103px;
+  height: 552.423px;
+  transform-origin: top left;
+  transform: rotate(10.87deg);
+}
+
+.ab3-deco--flowers {
+  left: 25.84px;
+  top: 1112.42px;
+  width: 145.912px;
+  height: 143.733px;
+}
+
+/* ── Mobile page — hidden by default ── */
+.av2m-page {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .ab3-stage {
+    display: none;
+  }
+
+  .av2m-page {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: var(--color-cream);
+    background-image: url('/assets/images/about/About Me-Mobile-Final Assets/Texture___Foreground_Paper.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .av2m-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-4) var(--space-3);
+  }
+
+  .av2m-logo {
+    width: 11rem;
+    height: auto;
+    transform: rotate(-3deg);
+  }
+
+  .av2m-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .av2m-nav__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  .av2m-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.7rem;
+    height: 2.4rem;
+    background-image: url('/assets/images/shared/nav-paper-tab.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    color: var(--color-near-black);
+  }
+
+  .av2m-tab[aria-current="page"] {
+    color: var(--color-crimson);
+    text-decoration: underline;
+    text-decoration-color: var(--color-crimson);
+    text-underline-offset: 3px;
+  }
+
+  .av2m-hero {
+    text-align: center;
+    padding: var(--space-5) var(--space-4) var(--space-4);
+  }
+
+  .av2m-hero h1 {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .av2m-hero__sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--color-crimson);
+    font-size: 1.1rem;
+    margin: 0.3em 0 0;
+  }
+
+  .av2m-polaroid {
+    position: relative;
+    width: 14rem;
+    margin: var(--space-5) auto 0;
+    transform: rotate(2deg);
+  }
+
+  .av2m-polaroid > img:first-child {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .av2m-polaroid__stamp {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 3rem;
+    height: auto;
+  }
+
+  .av2m-polaroid figcaption {
+    position: absolute;
+    left: 50%;
+    bottom: 11%;
+    transform: translateX(-50%);
+    font-family: var(--font-marginalia);
+    color: var(--color-crimson);
+    font-size: 1.3rem;
+    white-space: nowrap;
+  }
+
+  .av2m-bio,
+  .av2m-taste {
+    padding: var(--space-5) var(--space-4);
+    text-align: center;
+  }
+
+  .av2m-bio p,
+  .av2m-taste p {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    text-align: left;
+    margin: 0 0 var(--space-4);
+  }
+
+  .av2m-bio p:last-child,
+  .av2m-taste p:last-child {
+    margin-bottom: 0;
+  }
+
+  .av2m-divider {
+    border: 0;
+    height: 1px;
+    width: 60%;
+    background-color: rgba(28, 26, 22, 0.25);
+    margin: var(--space-4) auto;
+  }
+
+  .av2m-taste__badge {
+    display: block;
+    width: fit-content;
+    margin: 0 auto var(--space-4);
+    font-family: var(--font-marginalia);
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    color: var(--color-crimson);
+    background: rgba(246, 231, 154, 0.4);
+    border: 1px solid var(--color-crimson);
+    border-radius: var(--radius-sm);
+    padding: 0.3em 0.9em;
+  }
+
+  .av2m-credits {
+    padding: var(--space-5) var(--space-4);
+    text-align: center;
+  }
+
+  .av2m-credits__title h2 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin: 0 0 0.4em;
+  }
+
+  .av2m-credits__title hr {
+    border: 0;
+    height: 2px;
+    width: 8rem;
+    background-color: var(--color-crimson);
+    margin: 0 auto var(--space-4);
+  }
+
+  .av2m-credits__card {
+    border: 1px solid var(--color-crimson);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.5);
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .av2m-credits__role-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    margin: 0 0 0.3em;
+  }
+
+  .av2m-credits__role {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-near-black);
+    margin: 0 0 0.2em;
+  }
+
+  .av2m-credits__dates {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--text-sm);
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .av2m-credits__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    text-decoration: underline;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-base);
+    color: var(--color-near-black);
+  }
+
+  .av2m-credits__link img {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .av2m-credits__link img:last-child {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .av2m-footer {
+    position: relative;
+    text-align: center;
+    padding: var(--space-6) var(--space-4);
+    overflow: hidden;
+  }
+
+  .av2m-footer__green {
+    position: absolute;
+    top: -1rem;
+    right: 0.5rem;
+    width: 5.5rem;
+    height: auto;
+    opacity: 0.7;
+    transform: rotate(20deg);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .av2m-footer__flower {
+    position: absolute;
+    top: 0;
+    left: 0.5rem;
+    width: 3rem;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .av2m-footer__tagline {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-marginalia);
+    font-size: 1.2rem;
+    color: var(--color-crimson);
+    margin: 0 0 0.4em;
+  }
+
+  .av2m-footer__copyright {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin: 0;
+  }
+}
