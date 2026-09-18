@@ -274,10 +274,20 @@
   object-fit: cover;
 }
 
+/* top corrected from a naive 50% (=512/1024, Figma's raw pre-rotation
+   y, unrotated) to the true top-left-pivot result: Figma rotates
+   around a shape's top-left corner, not its center, and
+   get_design_context's composed output has a known quirk for this
+   ±180° case specifically — it returns the correct x but leaves y
+   unchanged from the raw pre-rotation metadata. Computed by hand from
+   the raw box (x=859, y=512, w=910, h=582): rotating 180° around its
+   own top-left corner (859,512) maps the far corner (859+910,512+582)
+   to (859-910, 512-582) = (-51,-70), so the new top-left is (-51,-70),
+   not (-51,512). -70/1024 = -6.8359%. */
 .jp-decor__corner1 {
   position: absolute;
   left: -3.4182%;
-  top: 50%;
+  top: -6.8359%;
   width: 60.992%;
   height: 56.8359%;
   max-width: none;
