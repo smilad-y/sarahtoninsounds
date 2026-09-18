@@ -31,11 +31,22 @@
   padding: 0;
 }
 
-.jp-stage {
+/* Shared 1492px cap/center for both .jp-stage (the fixed-aspect hero
+   area) and .jp-body-region (the content-driven area below it) — see
+   the HTML comment above .jp-body-region for why they're now two
+   separate boxes instead of one. Percentages on either box's own
+   children resolve against THIS shared width either way, so the two
+   stay in horizontal lock-step regardless of body copy's length. */
+.jp-page {
   position: relative;
   width: 100%;
   max-width: 1492px;
   margin: 0 auto;
+}
+
+.jp-stage {
+  position: relative;
+  width: 100%;
   aspect-ratio: 1492 / 1024;
   overflow: hidden;
   background-color: var(--color-cream);
@@ -181,44 +192,20 @@
   background-color: var(--color-crimson);
 }
 
-/* ── Body Copy ── Figma node 2:96 — exact percentages of the
-   1492×1024 reference frame (x=498,y=324,w=636). Width constrains
-   line-wrap only; no height is set so real essay copy of any length
-   can flow. font-family/font-size/color are set explicitly per the
-   node (font substitution documented in the HTML comment above this
-   block's markup); line-height and color intentionally fall through
-   to base.css's sitewide body defaults rather than repeating them
-   here. */
-.jp-body-copy {
-  position: absolute;
-  left: 33.378%;
-  top: 31.6406%;
-  width: 42.6273%;
-  z-index: 10;
-}
-
-.jp-body-copy p {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 1.34vw, 1.25rem);
-  margin: 0 0 1.5em;
-}
-
-.jp-body-copy p:last-child {
-  margin-bottom: 0;
-}
-
 /* ── Decorative / Collage Layer ── every remaining element of Figma
-   node 2:72 (asset choices, the metadata/design-context position
-   conflicts, and the polaroid/tape pre-flattened-asset reasoning are
-   documented in the HTML comment above this layer's markup).
+   node 2:72 that's within its fixed 1492×1024 crop (asset choices,
+   the metadata/design-context position conflicts, and the
+   polaroid/tape pre-flattened-asset reasoning are documented in the
+   HTML comment above this layer's markup; 2:78 and body copy are not
+   here — see .jp-body-region further below).
 
    z-index tiers replicate Figma's own paint order (bottom to top):
-   backgrounds(1-2) < corner papers(3-4) < logo(5) < yellow paper(6)
-   < stars(7) < megaphone(8) ... Body Copy(10) ... Title Block(15)
-   ... Polaroid+Tape(18) < Nav(20). Nav is deliberately kept topmost
-   overall (Figma's own order paints Polaroid+Tape last/above Nav) so
-   the real nav links stay clickable — the two units never overlap on
-   screen, so this reordering is invisible. */
+   background(1) < corner papers(3-4) < logo(5) < yellow paper(6)
+   < stars(7) < megaphone(8) ... Title Block(15) ... Polaroid+Tape(18)
+   < Nav(20). Nav is deliberately kept topmost overall (Figma's own
+   order paints Polaroid+Tape last/above Nav) so the real nav links
+   stay clickable — the two units never overlap on screen, so this
+   reordering is invisible. */
 .jp-decor {
   position: absolute;
   inset: 0;
@@ -234,18 +221,6 @@
   max-width: none;
   object-fit: cover;
   z-index: 1;
-}
-
-.jp-decor__bg-lower {
-  position: absolute;
-  left: 2.1448%;
-  top: 2.6367%;
-  width: 102.9491%;
-  height: 115.918%;
-  max-width: none;
-  object-fit: cover;
-  transform: scaleY(-1);
-  z-index: 2;
 }
 
 .jp-decor__corner2 {
@@ -274,10 +249,18 @@
   object-fit: cover;
 }
 
+/* top corrected from a naive 50% (=512/1024, Figma's raw pre-rotation
+   y, left unrotated) to the true top-left-pivot result: rotating
+   metadata's box (x=859,y=512,w=910,h=582) 180° around ITS OWN
+   top-left corner maps that corner to itself and the far corner
+   (859+910, 512+582) to (859-910, 512-582) = (-51,-70) — so the new
+   top-left is (-51,-70), not (-51,512). -70/1024 = -6.8359%. See the
+   full reasoning + screenshot cross-check in the HTML comment above
+   .jp-decor's markup. */
 .jp-decor__corner1 {
   position: absolute;
   left: -3.4182%;
-  top: 50%;
+  top: -6.8359%;
   width: 60.992%;
   height: 56.8359%;
   max-width: none;
@@ -418,4 +401,101 @@
   max-width: none;
   object-fit: contain;
   z-index: 18;
+}
+
+/* ── Body region ── Figma node 2:96 (body copy) + 2:78 ("background
+   paper section 1"). Full reasoning for why these two live outside
+   .jp-stage is in the HTML comment above .jp-body-region's markup —
+   short version: .jp-stage is aspect-ratio-locked and clips overflow,
+   so it can never grow to fit body copy longer than the Figma
+   placeholder, and 2:78's own Figma y (1214) is below the frame's
+   1024 height, meaning it was never meant to render inside that fixed
+   crop at all.
+
+   margin-top resolves against the CONTAINING BLOCK'S WIDTH for both
+   margin-top/-bottom specifically (a real, spec-defined CSS behavior,
+   not a hack) — unlike top/height, which resolve against height. That
+   quirk is exactly what's needed here: -46.9169% = -(1024-324)/1492,
+   pulling this region up so it starts at body copy's real Figma y
+   (324) relative to .jp-stage's top, while staying correct at any
+   viewport width regardless of how tall body copy's actual content
+   makes this region. */
+.jp-body-region {
+  position: relative;
+  margin-top: -46.9169%;
+  overflow-x: hidden;
+  background-color: var(--color-cream);
+  padding-bottom: 6%;
+}
+
+/* Same top:0 + margin-top + bottom:0 technique, so this stretches
+   from a fixed (width-relative) offset all the way to
+   .jp-body-region's real bottom edge — however tall body copy makes
+   it — instead of a guessed fixed height. margin-top = (1214-324)/1492
+   = 59.6514%: 1214 is 2:78's own Figma y, 324 is where this region's
+   top edge already sits (see .jp-body-region above), so this starts
+   exactly where Figma's own coordinates place it, below the
+   yellow-paper-covered area.
+
+   This is a plain div, not the <img> directly: an absolutely
+   positioned *replaced* element (an <img>) with height:auto ignores
+   `bottom` entirely and sizes itself from its own intrinsic aspect
+   ratio instead, regardless of how tall the container actually is —
+   confirmed empirically (bottom:0 on the img alone produced a fixed
+   height that didn't grow when the region did). A non-replaced div
+   correctly resolves top+bottom into a real, stretching height. */
+.jp-decor__bg-lower {
+  position: absolute;
+  left: 2.1448%;
+  top: 0;
+  margin-top: 59.6514%;
+  bottom: 0;
+  width: 102.9491%;
+  overflow: hidden;
+  transform: scaleY(-1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.jp-decor__bg-lower img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Figma node 2:96 — x/width are exact percentages of the 1492×1024
+   reference frame (498,636), same as every other element on this
+   page; the vertical offset is gone entirely (no top/margin-top here)
+   since this is now .jp-body-region's only normal-flow child and
+   therefore starts right at the region's own top edge, which is
+   already positioned at body copy's real Figma y via
+   .jp-body-region's own margin-top. position:relative (not the
+   default static) only so this participates in the same stacking
+   order as .jp-decor__bg-lower rather than being painted below it
+   regardless of z-index, which is how CSS treats a positioned element
+   next to a static one. Width constrains line-wrap only; no height is
+   set so real essay copy of any length can flow — that flow height is
+   exactly what now makes .jp-body-region, and therefore the page,
+   actually grow. font-family/font-size are set explicitly per the
+   node (font substitution documented in the HTML comment above this
+   block's markup); line-height and color intentionally fall through
+   to base.css's sitewide body defaults rather than repeating them
+   here. */
+.jp-body-copy {
+  position: relative;
+  margin-left: 33.378%;
+  width: 42.6273%;
+  z-index: 2;
+}
+
+.jp-body-copy p {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.34vw, 1.25rem);
+  margin: 0 0 1.5em;
+}
+
+.jp-body-copy p:last-child {
+  margin-bottom: 0;
 }

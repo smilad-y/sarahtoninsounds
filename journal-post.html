@@ -17,93 +17,62 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <main id="main" class="journal-post-page">
+  <div class="jp-page">
   <div class="jp-stage" id="journal-post-stage">
 
-    <!-- Decorative / Collage Layer — every remaining element of Figma
-         node 2:72 "Desktop-Journal Entry": both full-bleed background
-         papers (2:73, 2:78), the two torn corner papers (3:154,
-         3:155), the angled logo badge (2:26), the yellow paper behind
-         the text column (2:150), two scribble stars (3:165, 3:164),
-         the edge-bleeding megaphone (3:167), and the Polaroid + Tape
-         unit (94:14). Purely decorative — aria-hidden, no informational
-         content. `home-spiral-4`, previously flagged as likely
-         leftover Home-page clutter outside the frame's visible bounds,
-         does not appear anywhere in this frame's current child list
-         (confirmed via get_metadata on 2:72) — already gone, nothing
-         to skip.
+    <!-- Decorative / Collage Layer — every element of Figma node 2:72
+         "Desktop-Journal Entry" that's within its visible 1492×1024
+         crop: the base background paper (2:73), the two torn corner
+         papers (3:154, 3:155), the angled logo badge (2:26), the
+         yellow paper behind the text column (2:150), two scribble
+         stars (3:165, 3:164), the edge-bleeding megaphone (3:167), and
+         the Polaroid + Tape unit (94:14). Purely decorative —
+         aria-hidden, no informational content. `home-spiral-4`,
+         previously flagged as likely leftover Home-page clutter
+         outside the frame's visible bounds, does not appear anywhere
+         in this frame's current child list (confirmed via
+         get_metadata on 2:72) — already gone, nothing to skip.
+
+         2:78 ("background paper section 1") is NOT here — see the
+         comment on .jp-body-region below main for why it belongs in
+         the content-driven region instead of this fixed-height stage.
 
          Position/rotation source-of-truth conflict, same pattern
          already documented in css/journal.css for this exact page
          family ("Three coordinate conflicts between Figma's own two
          data sources were resolved against the finalized rendered
          reference"): get_metadata's raw XML bounding boxes disagreed
-         with get_design_context's composed/rendered code for 6 of
-         these 11 elements (2:78, 3:154, 2:26, 2:150, 3:164, 3:167) —
-         in every case get_metadata's numbers would push the element
-         mostly or entirely outside the 1492×1024 frame (e.g. the
-         megaphone at metadata's x=1497 vs design-context's x=1255.58 —
-         confirmed against the full-frame screenshot, where the
-         megaphone is clearly still mostly on-canvas, just clipped at
-         the right edge) or onto the wrong side of the page (corner
-         paper 1 at metadata's x=859 vs design-context's x=-51 — the
-         screenshot clearly shows corner paper 1's dusty-pink color at
-         the BOTTOM-LEFT, not the right-center the task brief's
-         reference table suggested). get_design_context's numbers are
-         used throughout, cross-checked against the full-frame
-         screenshot rather than trusted blindly.
+         with get_design_context's composed/rendered code for several
+         of these elements — in most cases (2:26, 2:150, 3:164, 3:167)
+         get_metadata's numbers would push the element mostly or
+         entirely outside the 1492×1024 frame (e.g. the megaphone at
+         metadata's x=1497 vs design-context's x=1255.58 — confirmed
+         against the full-frame screenshot, where the megaphone is
+         clearly still mostly on-canvas, just clipped at the right
+         edge), so design-context's numbers were used.
 
-         Asset reuse — every element below is a real exported asset
-         already sitting in this repo (no new asset created, per the
-         asset-handling instruction), matched by filename and/or
-         direct visual comparison against each node's own Figma
-         render:
-         - 2:73  → assets/images/listen/sarahtonin_sounds-background_paper_2_1.png
-                   (filename is a literal match for the Figma layer
-                   name "sarahtonin sounds-background paper_2 1")
-         - 2:78  → assets/images/journal/paper.png (plain cream torn
-                   paper texture; mostly hidden behind the yellow paper
-                   and corner papers painted after it, so exact-crop
-                   fidelity here is low-stakes)
-         - 3:154 → assets/images/journal/corner-paper-pink.png
-         - 3:155 → assets/images/journal/corner-paper-red.png
-         - 2:26  → assets/images/home-v2/home-logo-sharp.png (name and
-                   art both match "Sarahtonin Sounds logo sharp" —
-                   already used elsewhere on the site)
-         - 2:150 → assets/images/home/yellow-piece-of-paper.png
-         - 3:164, 3:165 → assets/images/shared/doodles/star-scribble.png
-         - 3:167 → assets/images/journal/megaphone.png
-
-         Two assets — the polaroid (94:14 → 3:156) and the tape
-         (94:14 → 3:162) — are used from
-         assets/images/journal/article-photo-sky-clouds.png (already
-         referenced elsewhere as a Journal "featured_image") and
-         assets/images/journal/tape-orange.png. Both are placed at
-         Figma's OUTER (post-rotation) bounding box with NO additional
-         CSS rotation, unlike every other rotated element here: their
-         pixel aspect ratios match Figma's post-rotation wrapper box
-         almost exactly (polaroid 608×733 = 0.829 vs Figma's
-         303.765×366.363 = 0.8291; tape 273×191 = 1.429 vs Figma's
-         136.409×95.043 = 1.435) and both visibly already contain a
-         baked-in tilt + drop shadow — they're pre-flattened exports,
-         not the "natural" pre-rotation source Figma's other assets
-         are. Applying Figma's stated rotate() on top of these would
-         double-rotate them. Verified by rendering and comparing
-         against the full-frame Figma screenshot, not assumed from the
-         ratio match alone.
-
-         Rotation pivot: every element below uses Figma's own
-         flex-center-then-rotate export technique (already established
-         in css/journal.css for the Journal Landing logo/green paper) —
-         an outer wrapper sized to the POST-rotation bounding box,
-         centering an inner element sized to the PRE-rotation natural
-         image dimensions, which then carries the rotate()/scaleY()
-         transform. This avoids the top-left-pivot bug CSS's default
-         transform-origin would otherwise cause on a naively-sized
-         single element, without needing a different transform-origin
-         value per element. -->
+         Corner paper 1 (3:154) is the one exception, and it's the one
+         this pass fixes: design-context's own composed "top" value
+         (512, unchanged from metadata) turned out to be wrong too — a
+         quirk in how Figma's composer handles this specific ±180°
+         rotation, not a real conflict to resolve in its favor. Figma
+         rotates around a shape's TOP-LEFT corner, not its center
+         (already-documented project history — same class of bug).
+         Rotating metadata's raw box (x=859, y=512, w=910, h=582) by
+         180° around ITS OWN top-left corner (859,512) maps every
+         point (x,y) → (2·859−x, 2·859−y)... i.e. the new top-left
+         becomes (859−910, 512−582) = (−51, −70). x=−51 happens to
+         match what design-context reported (so that part looked
+         "confirmed" last time), but y=−70 does not match
+         design-context's y=512 — and −70 is what actually matches the
+         full-frame Figma screenshot, where corner paper 1's dusty-pink
+         color is clearly in the UPPER-left (behind the logo/nav area,
+         peeking out from under the yellow paper), not down at y=512
+         where the polaroid already sits. Confirmed by re-rendering
+         with top=−70 and comparing against that screenshot directly,
+         not assumed from the formula alone. -->
     <div class="jp-decor" aria-hidden="true">
       <img class="jp-decor__bg-base" src="/assets/images/listen/sarahtonin_sounds-background_paper_2_1.png" alt="">
-      <img class="jp-decor__bg-lower" src="/assets/images/journal/paper.png" alt="">
 
       <div class="jp-decor__corner2">
         <div class="jp-decor__corner2-inner">
@@ -201,6 +170,67 @@
       <div class="jp-title-block__rule" aria-hidden="true"></div>
     </div>
 
+  </div>
+
+  <!-- Body region — Figma node 2:96 (body copy) plus 2:78
+       ("background paper section 1"). Deliberately NOT inside
+       .jp-stage above.
+
+       .jp-stage is aspect-ratio-locked to Figma's own 1492×1024 frame
+       and clips overflow (needed for the megaphone's intentional edge
+       bleed and to match Figma's own frame-crop default) — so any
+       absolutely-positioned content inside it can never make the
+       actual page taller than 1024px-equivalent, no matter how long
+       its content is: aspect-ratio computes that box's height from
+       width alone, and absolutely-positioned descendants never
+       contribute to a parent's auto-height. Body copy was previously
+       inside .jp-stage this way, and its last ~30px were being
+       silently clipped even by this pass's own 4-paragraph
+       placeholder (its box already reaches 1054px, past the 1024
+       clip line) — real essay copy varies in length and can overflow
+       far more than that.
+
+       2:78 itself is the clue this needed fixing: its Figma y (1214)
+       sits below the frame's own stated height (1024), which only
+       makes sense if this specific layer was never meant to render
+       inside the visible 1024-tall crop at all — it's Figma's own
+       background for whatever continues below the fold on the real,
+       uncropped page. A fixed-height stage can't represent "below the
+       fold" at all, let alone one sized to real, variable essay
+       length.
+
+       .jp-body-region is a normal, non-absolutely-positioned sibling
+       of .jp-stage instead, so its height is genuinely driven by body
+       copy's own content (real per-essay length, not the placeholder).
+       margin-top pulls it up to start at body copy's actual Figma
+       position (y=324 of the 1492×1024 frame) — CSS resolves
+       margin-top/-bottom percentages against the containing block's
+       WIDTH (not height, unlike top/height), which is exactly the
+       width-relative scaling already used everywhere else on this
+       page, so this stays correct at any viewport width regardless of
+       how tall body copy ends up being. .jp-page (wrapping both
+       .jp-stage and this region) carries the shared 1492px-cap/center
+       that .jp-stage used to carry alone, so that shared width is
+       exactly what these margin percentages resolve against. -->
+  <div class="jp-body-region">
+    <!-- 2:78, positioned the same width-relative way: top:0 +
+         margin-top (both computed from Figma's frame coordinates,
+         1214−324=890 of 1492) + bottom:0, so it starts below the
+         yellow-paper-covered area and stretches to whatever the
+         region's real (body-copy-driven) bottom edge is — never a
+         fixed guessed height. The img is wrapped in a plain div
+         carrying that top/margin-top/bottom positioning: a
+         *replaced* element (the <img> itself) with height:auto
+         ignores `bottom` entirely and sizes from its own intrinsic
+         aspect ratio instead (confirmed empirically — bottom:0 on the
+         img alone rendered a fixed height that never grew with a
+         taller region). A non-replaced wrapper div correctly resolves
+         top+bottom into a real, stretching height; the img inside
+         just fills it at 100%/100% with object-fit:cover. -->
+    <div class="jp-decor__bg-lower" aria-hidden="true">
+      <img src="/assets/images/journal/paper.png" alt="">
+    </div>
+
     <!-- Body Copy — reproduces Figma node 2:96, a single text node
          (not 4 separate layers) that this markup mirrors as one
          flowing block with real <p> paragraph breaks rather than
@@ -211,9 +241,12 @@
          Column width (636px of the 1492px frame) constrains line-wrap
          only — height is intentionally not fixed, since real essay
          copy will run longer or shorter than this 4-paragraph
-         placeholder. The lorem ipsum text itself, its paragraph count,
-         and paragraph lengths are not meaningful — only the "multiple
-         real paragraphs in one flowing block" structure is.
+         placeholder: it's a normal-flow block now (not
+         position:absolute) specifically so its real height determines
+         .jp-body-region's height, and therefore the page's actual
+         scrollable height. The lorem ipsum text itself, its paragraph
+         count, and paragraph lengths are not meaningful — only the
+         "multiple real paragraphs in one flowing block" structure is.
 
          Font substitution, same flagged policy as Nav/Title Block:
          Figma specifies "Playfair Display Regular" — Playfair Display
@@ -229,7 +262,7 @@
       <p>Minim minim amet dolor adipiscing nisi incididunt ad ut amet consectetur elit ullamco sed. Magna dolore dolor ad elit nostrud sed lorem adipiscing magna. Ullamco tempor laboris minim quis ut. Aliqua ad aliquip et ex laboris. Exercitation adipiscing ullamco ea aliqua ut commodo eiusmod ut sed ex ut ut tempor exercitation.</p>
       <p>Nostrud ipsum ea dolore lorem laboris elit minim. Dolore eiusmod ullamco et minim aliqua sit commodo ea ullamco laboris aliqua nisi nisi. Veniam quis magna ea labore ut ad sit consequat consectetur et ut ea dolore. Incididunt nisi commodo amet nisi aliqua elit nostrud amet nisi ad. Sit amet ut amet ut consequat ut lorem ut aliqua ut et dolor labore. Minim consectetur sit ipsum tempor ad commodo lorem incididunt tempor ad ut.</p>
     </div>
-
+  </div>
   </div>
 </main>
 
