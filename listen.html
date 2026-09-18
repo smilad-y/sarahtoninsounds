@@ -7,7 +7,7 @@
 <meta name="description" content="Curated mood playlists and crash courses from Sarahtonin Sounds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/layout.css">
@@ -16,42 +16,106 @@
 <body class="page-listen">
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header">
-  <nav class="primary-nav" aria-label="Primary">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about.html">About</a></li>
-      <li><a href="/listen.html" aria-current="page">Listen</a></li>
-      <li><a href="/journal.html">Journal</a></li>
-      <li><a href="/contact.html">Contact</a></li>
+<header class="listen-header">
+  <nav class="listen-nav" aria-label="Primary">
+    <ul class="listen-nav__list">
+      <li><a class="listen-nav__tab" href="/">Home</a></li>
+      <li><a class="listen-nav__tab" href="/about.html">About</a></li>
+      <li><a class="listen-nav__tab" href="/listen.html" aria-current="page">Listen</a></li>
+      <li><a class="listen-nav__tab" href="/journal.html">Journal</a></li>
+      <li><a class="listen-nav__tab" href="/contact.html">Contact</a></li>
     </ul>
   </nav>
 </header>
 
 <main id="main" class="listen-page">
-  <h1>Listen</h1>
-
-  <section class="listen-moods" aria-labelledby="listen-moods-heading">
-    <h2 id="listen-moods-heading">Pick Your Mood</h2>
-    <!--
-      Mood selector (record-label-style buttons), turntable/player, and
-      tracklist are a later phase (BUILD-ROADMAP.md Phase 4/5), sourced
-      from Sarah's manually curated Spotify playlists once that data
-      exists. Not built yet — this section is structural only.
-    -->
-    <p>Mood playlists are being curated — check back soon.</p>
+  <section class="listen-hero" aria-label="Listen">
+    <div class="listen-hero__logo">
+      <div class="listen-hero__logo-inner">
+        <img src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+      </div>
+    </div>
+    <h1 class="listen-hero__title">Listen</h1>
+    <div class="listen-hero__divider" aria-hidden="true"></div>
+    <p class="listen-hero__subtitle">Pick your mood, press play, and see where it takes you.</p>
   </section>
 
-  <section class="listen-crash-courses" aria-labelledby="listen-crash-heading">
-    <h2 id="listen-crash-heading">Crash Courses</h2>
-    <!-- Separate curated content system, kept apart from mood playlists
-         per PROJECT-SPEC.md §7. Not built yet (BUILD-ROADMAP.md Phase 6). -->
-    <p>Coming in a later phase.</p>
+  <section class="listen-moods" aria-labelledby="listen-moods-heading">
+    <div class="listen-moods__card">
+      <h2 id="listen-moods-heading" class="listen-moods__heading">Pick Your Mood</h2>
+      <div class="listen-moods__row-wrap">
+        <button type="button" class="listen-moods__arrow listen-moods__arrow--prev" aria-label="Scroll moods left">
+          <span aria-hidden="true"></span>
+        </button>
+        <ul class="listen-moods__row" id="mood-row">
+          <li><button type="button" class="mood-circle" data-mood-id="dreamy" aria-pressed="true" style="background-image:url('/assets/images/listen/light-blue-cirle.png')"><span class="visually-hidden">Dreamy</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="yellow" aria-pressed="false" style="background-image:url('/assets/images/listen/yellow-circle.png')"><span class="visually-hidden">Yellow mood &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="red" aria-pressed="false" style="background-image:url('/assets/images/listen/red-circle.png')"><span class="visually-hidden">Red mood &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="pink" aria-pressed="false" style="background-image:url('/assets/images/listen/pink-circle.png')"><span class="visually-hidden">Pink mood &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="orange" aria-pressed="false" style="background-image:url('/assets/images/listen/orange-circle.png')"><span class="visually-hidden">Orange mood &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="light-green" aria-pressed="false" style="background-image:url('/assets/images/listen/light-green-circle.png')"><span class="visually-hidden">Light green mood &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="lavender" aria-pressed="false" style="background-image:url('/assets/images/listen/lavendar-circle.png')"><span class="visually-hidden">Lavender mood &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="dark-blue" aria-pressed="false" style="background-image:url('/assets/images/listen/dark-blue-circle.png')"><span class="visually-hidden">Dark blue mood &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="black" aria-pressed="false" style="background-image:url('/assets/images/listen/black-circle.png')"><span class="visually-hidden">Black mood &mdash; not yet curated</span></button></li>
+        </ul>
+        <button type="button" class="listen-moods__arrow listen-moods__arrow--next" aria-label="Scroll moods right">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="listen-turntable" aria-labelledby="tt-mood-name">
+    <div class="tt-record">
+      <img src="/assets/images/listen/record-player.png" alt="" id="tt-record-img">
+    </div>
+
+    <div class="tt-tape" id="tt-tape">
+      <h2 class="tt-tape__label" id="tt-mood-name">Dreamy</h2>
+    </div>
+
+    <p class="tt-blurb" id="tt-blurb">For when your mind needs some room to wonder</p>
+    <p class="tt-description" id="tt-description">Floaty, atmospheric, and transportive. These are the songs for late nights, daydreaming, and everywhere in between.</p>
+
+    <div class="tt-picks">
+      <div class="tt-picks__tape" aria-hidden="true"></div>
+      <h3 class="tt-picks__heading">Sarah&rsquo;s Picks</h3>
+      <div class="tt-picks__divider" aria-hidden="true"></div>
+      <ul class="tt-picks__list" id="tt-picks-list">
+        <li class="tt-picks__item" style="--tt-rotate: -12.18deg;">Falling &mdash; Julee Cruise</li>
+        <li class="tt-picks__item" style="--tt-rotate: -6.99deg;">Closer &mdash; You&rsquo;ll Never Get To Heaven</li>
+        <li class="tt-picks__item" style="--tt-rotate: -6.99deg;">Kisses &mdash; Slowdive</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="listen-intro" aria-labelledby="listen-crash-heading">
+    <h2 id="listen-crash-heading" class="listen-intro__heading">An Introduction To&hellip;</h2>
+    <p class="listen-intro__subheading">A deeper dive into genres, artists, scenes, and sounds</p>
+    <p class="listen-intro__note">(more to come)</p>
+    <div class="listen-intro__divider listen-intro__divider--top" aria-hidden="true"></div>
+
+    <div class="crash-course">
+      <!-- sarahtonin sounds-listen_intro_arabic_collage — could not be
+           downloaded in this session (network-blocked, see the Mood
+           Picker Bar CSS note); placeholder box only, no invented image. -->
+      <div class="crash-course__collage" role="img" aria-label="Collage of Arabic album covers and artists (image pending)"></div>
+      <h3 class="crash-course__heading">Arabic Music:</h3>
+      <div class="listen-intro__divider listen-intro__divider--course" aria-hidden="true"></div>
+      <p class="crash-course__description">A starting point for exploring voices from across the Arab world&mdash;from Oum Kulthum and Fairuz to contemporary favorites, with a few familiar samples hiding along the way.</p>
+      <!-- Real destination is a future Crash Course detail page/route
+           (BUILD-ROADMAP.md Phase 6, not yet built) — placeholder href. -->
+      <a href="#" class="crash-course__explore">
+        <span class="crash-course__explore-label">Explore</span>
+        <span class="crash-course__explore-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
   </section>
 
   <!-- Persistent Now Playing mini player is a Phase 5 deliverable. -->
 </main>
 
 <script src="/js/site.js" defer></script>
+<script src="/js/listen.js" defer></script>
 </body>
 </html>

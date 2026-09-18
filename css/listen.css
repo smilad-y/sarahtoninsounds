@@ -1,4 +1,789 @@
 /* Listen page — page-specific styles.
-   Structural foundation only; mood selector, turntable/player, and
-   Crash Courses UI are later phases (PROJECT-SPEC.md §7,
-   BUILD-ROADMAP.md Phase 4/5/6). */
+   Reproduces the authoritative Figma file
+   figma.com/design/iBbuaxPtkTyuJ9FwenUBMy (node 1:3, "Desktop - Listen",
+   1440px reference frame). Built one named Figma frame at a time
+   (BUILD-ROADMAP.md Phase 5); sections not yet built keep the earlier
+   structural-only placeholder markup/styles until their turn.
+
+   Typography note: this Figma file explicitly corrects the page's type
+   to Perandory Semi-Condensed for display headings and Crimson Text for
+   body copy (confirmed instruction, not Figma's usual placeholder
+   Playfair Display/Crimson Text noise seen on other pages) — so this
+   page intentionally uses Crimson Text rather than the sitewide IM Fell
+   English body direction from PROJECT-SPEC.md §5. This is a deliberate,
+   page-specific font choice for Listen, not a silent replacement of the
+   sitewide body font elsewhere. */
+
+.page-listen {
+  overflow-x: hidden;
+}
+
+.page-listen main.listen-page {
+  max-width: none;
+  padding: 0;
+}
+
+/* ── Header / Navigation (Figma node 12:7) ──
+   A genuine Auto Layout row in Figma: 5 fixed 142×57 tabs with a
+   26.25px gap, right-aligned within the 1440px reference frame (tab row
+   spans x=621-1436, i.e. flush to the right edge). The reused torn-paper
+   tab asset (ASSET-MANIFEST.md §1) is the tab's entire visual
+   treatment; labels are real text layered on top in Crimson Text
+   SemiBold, matching this file's corrected type (not Home's
+   Henny Penny, which PROJECT-SPEC.md §6 scopes to Home only). */
+.listen-header {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1.6875rem 0.25rem 0 1rem; /* ~27px top, matching Figma y=27 */
+}
+
+.listen-nav__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 26.25px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listen-nav__tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 142px;
+  height: 57px;
+  background-image: url('/assets/images/shared/nav-paper-tab.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  color: var(--color-near-black);
+}
+
+.listen-nav__tab[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 3px;
+}
+
+.listen-nav__tab:hover,
+.listen-nav__tab:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .listen-header {
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .listen-nav__list {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .listen-nav__tab {
+    width: 108px;
+    height: 44px;
+    font-size: 15px;
+  }
+
+  .listen-nav__list {
+    gap: 12px;
+  }
+}
+
+/* ── Hero (Figma node 15:3) ──
+   Reference frame is 852×262.912, itself offset -167px from the page's
+   own left edge within the shared 1440px-wide canvas — LISTEN and the
+   subtitle sit left-of-center by design, not centered on the viewport.
+   Children are positioned as percentages of this same 1440px reference
+   (left/width) crossed with the Hero frame's own local height (top/
+   height), matching the geometry get_design_context returned directly.
+   overflow stays visible (not clipped) because the logo's rotated
+   bounding box bleeds above the Hero frame's own top edge into the
+   empty space beside the nav row above it — confirmed against the full
+   page screenshot, where the two never overlap horizontally. */
+.listen-hero {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  aspect-ratio: 1440 / 262.912;
+  overflow: visible;
+}
+
+.listen-hero__title {
+  position: absolute;
+  left: -11.597%;
+  top: 34.96%;
+  width: 59.167%;
+  height: 60.86%;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: clamp(2.5rem, 6.9444vw, 6.25rem);
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.7);
+  color: var(--color-near-black);
+}
+
+.listen-hero__divider {
+  position: absolute;
+  left: -0.0694%;
+  top: 86.685%;
+  width: 37.977%;
+  height: 2px;
+  background-color: var(--color-crimson);
+}
+
+.listen-hero__subtitle {
+  position: absolute;
+  left: -0.833%;
+  top: 88.6%;
+  width: 36.25%;
+  margin: 0;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 1.3889vw, 1.25rem);
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.listen-hero__logo {
+  position: absolute;
+  left: -2.014%;
+  top: -52.145%;
+  width: 26.686%;
+  height: 106.657%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.listen-hero__logo-inner {
+  flex: none;
+  width: 91.445%;
+  aspect-ratio: 351.406 / 155.659;
+  transform: rotate(-22.96deg);
+}
+
+.listen-hero__logo-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Mood Picker Bar (Figma node 15:5) ──
+   A genuine Auto Layout row in Figma (mood-circle-row, 11:2): built as
+   a flexbox row with a gap, per the task brief, not nine individually
+   positioned circles. The nine circle images are the exact confirmed
+   ASSET-MANIFEST.md §3 swatches, reused locally rather than
+   re-downloaded. The card backdrop ("Menu-tape_3") has no local
+   equivalent and could not be downloaded in this session — the Figma
+   MCP asset host is network-blocked from this sandbox. It's approximated
+   here as a plain paper-colored card (flagged to Sarah) rather than
+   invented as something it isn't; swap in the real export when this
+   session (or a networked one) can fetch it.
+
+   Mood content: only "dreamy" (js/listen.js) has Figma-confirmed copy —
+   PROJECT-SPEC.md §7 leaves the other 8 circles' color→mood mapping
+   undecided, so they stay genuinely clickable but uncurated rather than
+   inventing names/descriptions per CLAUDE.md. */
+.listen-moods {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.listen-moods__card {
+  position: relative;
+  margin-left: 1.806%;
+  width: 95.69%;
+  aspect-ratio: 1377.94 / 267.466;
+  background-color: #efe9d8; /* placeholder paper tone — see note above */
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(28, 26, 22, 0.12);
+  overflow: hidden;
+}
+
+.listen-moods__heading {
+  position: absolute;
+  left: 1.428%;
+  top: 6.494%;
+  width: 18.74%;
+  height: 11.687%;
+  margin: 0;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 1.3889vw, 1.25rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+}
+
+.listen-moods__row-wrap {
+  position: absolute;
+  left: 5.273%;
+  top: 29.01%;
+  width: 89.81%;
+  height: 41.99%;
+  display: flex;
+  align-items: center;
+}
+
+.listen-moods__row {
+  display: flex;
+  align-items: center;
+  gap: 2.383%;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.listen-moods__row li {
+  flex: none;
+  width: 8.981%;
+  scroll-snap-align: start;
+}
+
+.mood-circle {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.mood-circle:hover {
+  transform: translateY(-3px);
+}
+
+.mood-circle.is-active {
+  outline: 3px solid var(--color-crimson);
+  outline-offset: 3px;
+}
+
+.listen-moods__arrow {
+  flex: none;
+  width: 1.4rem;
+  height: 1.9rem;
+  border: none;
+  padding: 0;
+  margin: 0 0.5rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.listen-moods__arrow span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-near-black);
+}
+
+.listen-moods__arrow--prev span {
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+.listen-moods__arrow--next span {
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+@media (max-width: 760px) {
+  .listen-moods__card {
+    aspect-ratio: auto;
+    width: calc(100% - 1.5rem);
+    margin: 0 auto;
+    padding: 1.25rem 0.75rem;
+  }
+
+  .listen-moods__heading,
+  .listen-moods__row-wrap {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .listen-moods__row-wrap {
+    margin-top: 1rem;
+  }
+
+  .listen-moods__row li {
+    width: 4.5rem;
+  }
+}
+
+/* ── Turntable + Mood Detail (Figma node 15:7) ──
+   Same 1440px-reference technique as Hero: left/width as % of the page,
+   top/height as % of this frame's own local 540px height. Populated by
+   js/listen.js on 'listen:moodchange' so the mood picker (section 3)
+   genuinely drives this section's content, per the task's functional
+   requirement.
+
+   Asset gaps (flagged, not silently substituted): Figma exports a
+   distinct pre-composited "record-dreamy" turntable+blue-vinyl image and
+   a light-blue "Tape-Light_Blue"/cream "paper note with sticker" asset
+   for this frame. None have a local equivalent, and this session's
+   network access to the Figma asset host is blocked (see the Mood
+   Picker Bar comment above) — so the turntable reuses the existing
+   generic ASSET-MANIFEST.md §3 record-player.png (same graphic for
+   every mood, not recolored per mood) and the tape/note are approximated
+   with plain color + the existing beige-tape.png accent rather than the
+   real exports. Swap these for the actual Figma renders once this or a
+   networked session can fetch them. */
+.listen-turntable {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  aspect-ratio: 1440 / 540;
+}
+
+.tt-record {
+  position: absolute;
+  left: 31.53%;
+  top: 12.59%;
+  width: 42.43%;
+  height: 87.41%;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.6));
+}
+
+.tt-record img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tt-tape {
+  position: absolute;
+  left: 0.54%;
+  top: 0;
+  width: 30.5%;
+  height: 18.72%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-powder-blue);
+  transform: rotate(-1.5deg);
+}
+
+.tt-tape__label {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: clamp(1.75rem, 4.1667vw, 3.75rem);
+  text-transform: uppercase;
+  color: var(--color-near-black);
+}
+
+.tt-blurb {
+  position: absolute;
+  left: 0.07%;
+  top: 24.07%;
+  width: 30.9%;
+  margin: 0;
+  font-family: var(--font-marginalia);
+  font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+  line-height: 1.25;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.tt-description {
+  position: absolute;
+  left: -0.07%;
+  top: 54.26%;
+  width: 31.04%;
+  margin: 0;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: clamp(1rem, 2.0833vw, 1.5rem);
+  line-height: 1.35;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.tt-picks {
+  position: absolute;
+  left: 74.24%;
+  top: 0;
+  width: 26.53%;
+  height: 73.7%;
+  background-color: var(--color-cream);
+  border: 1px solid rgba(28, 26, 22, 0.15);
+  box-shadow: 0 4px 4px rgba(67, 51, 28, 0.4);
+}
+
+.tt-picks__tape {
+  position: absolute;
+  left: 41%;
+  top: -5%;
+  width: 20%;
+  height: 10%;
+  background-image: url('/assets/images/shared/tape/beige-tape.png');
+  background-size: cover;
+  transform: rotate(-2deg);
+}
+
+.tt-picks__heading {
+  position: absolute;
+  left: -1.05%;
+  top: 13.07%;
+  width: 88.48%;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: clamp(1.1rem, 2.0833vw, 1.875rem);
+  text-align: center;
+  color: var(--color-near-black);
+  transform: rotate(-5.19deg);
+}
+
+.tt-picks__divider {
+  position: absolute;
+  left: 12.57%;
+  top: 22.11%;
+  width: 65.67%;
+  height: 2px;
+  background-color: var(--color-crimson);
+  transform: rotate(-5.48deg);
+}
+
+.tt-picks__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tt-picks__item {
+  position: absolute;
+  left: 6.1%;
+  width: 73.72%;
+  font-family: var(--font-marginalia);
+  font-size: clamp(1.15rem, 1.9vw, 1.6rem);
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--color-near-black);
+  transform: rotate(var(--tt-rotate, 0deg));
+}
+
+.tt-picks__item:nth-child(1) { top: 27.2%; }
+.tt-picks__item:nth-child(2) { top: 50.28%; }
+.tt-picks__item:nth-child(3) { top: 75.71%; }
+
+@media (max-width: 760px) {
+  .listen-turntable {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+  }
+
+  .tt-record,
+  .tt-tape,
+  .tt-blurb,
+  .tt-description,
+  .tt-picks {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .tt-record {
+    max-width: 22rem;
+    margin: 0 auto;
+  }
+
+  .tt-picks {
+    max-width: 22rem;
+    min-height: 16rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .tt-picks__tape {
+    display: none;
+  }
+
+  .tt-picks__heading,
+  .tt-picks__divider,
+  .tt-picks__item {
+    position: static;
+    width: 100%;
+    transform: none;
+    margin: 0.5rem 0;
+  }
+}
+
+/* ── Intro / Crash Courses (Figma node 15:9) ──
+   Same 1440px-reference technique as the sections above. Figma's own
+   frame bleeds far past 1440 (background paper sized 2356px wide,
+   clipped by the page) — reproduced here as a plain background-color
+   fill instead of an oversized texture image, since there's no asset to
+   bleed in the first place (see asset-gap note on Mood Picker Bar; the
+   background paper, secondary card, tape, and Arabic collage photo all
+   lack local equivalents and couldn't be downloaded this session).
+
+   Copy: the "AN INTRODUCTION TO..." heading/subheading and the Arabic
+   Music paragraph are Sarah's real Figma-sourced copy, used verbatim —
+   not placeholder text. */
+.listen-intro {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  aspect-ratio: 1440 / 743;
+  background-color: #ede6d3;
+  overflow: hidden;
+}
+
+.listen-intro__heading {
+  position: absolute;
+  left: 14.03%;
+  top: 6.86%;
+  width: 53.19%;
+  height: 14.54%;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: clamp(2rem, 4.8611vw, 4.375rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.listen-intro__subheading {
+  position: absolute;
+  left: 23.41%;
+  top: 19.98%;
+  width: 31.42%;
+  margin: 0;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2.4306vw, 2.1875rem);
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.listen-intro__note {
+  position: absolute;
+  z-index: 2;
+  left: 27.36%;
+  top: 35.67%;
+  width: 18.82%;
+  margin: 0;
+  font-family: var(--font-marginalia);
+  font-size: clamp(1rem, 1.9vw, 1.5rem);
+  text-align: center;
+  color: #761e1e;
+}
+
+.listen-intro__divider {
+  position: absolute;
+  height: 2px;
+  background-color: var(--color-crimson);
+}
+
+.listen-intro__divider--top {
+  left: 20.93%;
+  top: 17.57%;
+  width: 37.98%;
+}
+
+.listen-intro__divider--course {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.crash-course {
+  position: absolute;
+  left: 26.46%;
+  top: 50.07%;
+  width: 67.01%;
+  height: 40.91%;
+  background-color: #d8c9a8;
+  box-shadow: 0 2px 6px rgba(28, 26, 22, 0.15);
+}
+
+.crash-course__collage {
+  position: absolute;
+  left: -45.51%;
+  top: -37.84%;
+  width: 56.15%;
+  height: 142.8%;
+  background-color: #cbbfa0;
+  border: 1px solid rgba(28, 26, 22, 0.2);
+  box-shadow: 0 4px 10px rgba(54, 24, 6, 0.35);
+  transform: rotate(6.62deg);
+}
+
+.crash-course__heading {
+  position: absolute;
+  left: 7.567%;
+  top: 4.938%;
+  width: 26.95%;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: clamp(1.1rem, 2.0833vw, 1.875rem);
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.crash-course__description {
+  position: absolute;
+  left: 6.626%;
+  top: 24%;
+  width: 86.12%;
+  margin: 0;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: clamp(0.9rem, 1.3889vw, 1.25rem);
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
+.crash-course__explore {
+  position: absolute;
+  left: 33.16%;
+  top: 63.82%;
+  width: 32.03%;
+  height: 23.37%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-crimson);
+  border-radius: 3px;
+  transform: rotate(-1deg);
+  text-decoration: none;
+}
+
+.crash-course__explore-label {
+  font-family: var(--font-display);
+  font-weight: normal;
+  font-size: clamp(0.85rem, 1.3889vw, 1.25rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fffccc;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.crash-course__explore-arrow {
+  color: #fffccc;
+  font-size: 1.1em;
+}
+
+@media (max-width: 760px) {
+  .listen-intro {
+    aspect-ratio: auto;
+    padding: 2.5rem 1rem;
+  }
+
+  .listen-intro__heading,
+  .listen-intro__subheading,
+  .listen-intro__note,
+  .listen-intro__divider--top {
+    position: static;
+    width: 100%;
+    margin: 0.5rem auto;
+  }
+
+  .listen-intro__divider--top {
+    width: 60%;
+  }
+
+  .crash-course {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin-top: 1.5rem;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .crash-course__collage {
+    position: static;
+    width: 12rem;
+    height: 9rem;
+  }
+
+  .crash-course__heading,
+  .crash-course__description,
+  .crash-course__explore,
+  .listen-intro__divider--course {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+    margin: 0.25rem auto;
+  }
+
+  .crash-course__explore {
+    width: auto;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .listen-hero {
+    aspect-ratio: auto;
+    min-height: 20rem;
+    padding: 4.5rem 1rem 2rem;
+  }
+
+  .listen-hero__logo {
+    position: static;
+    width: 12rem;
+    height: auto;
+    margin: 0 auto 1rem;
+  }
+
+  .listen-hero__title,
+  .listen-hero__divider,
+  .listen-hero__subtitle {
+    position: static;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .listen-hero__divider {
+    width: 80%;
+    margin: 0.75rem auto;
+  }
+}
