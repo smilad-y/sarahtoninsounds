@@ -165,3 +165,29 @@
   height: 2px;
   background-color: var(--color-crimson);
 }
+
+/* ── Body Copy ── Figma node 2:96 — exact percentages of the
+   1492×1024 reference frame (x=498,y=324,w=636). Width constrains
+   line-wrap only; no height is set so real essay copy of any length
+   can flow. font-family/font-size/color are set explicitly per the
+   node (font substitution documented in the HTML comment above this
+   block's markup); line-height and color intentionally fall through
+   to base.css's sitewide body defaults rather than repeating them
+   here. */
+.jp-body-copy {
+  position: absolute;
+  left: 33.378%;
+  top: 31.6406%;
+  width: 42.6273%;
+  z-index: 10;
+}
+
+.jp-body-copy p {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.34vw, 1.25rem);
+  margin: 0 0 1.5em;
+}
+
+.jp-body-copy p:last-child {
+  margin-bottom: 0;
+}
