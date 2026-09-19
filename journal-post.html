@@ -360,6 +360,66 @@
       <h1 class="jpm-title-block__title">Cheers to this</h1>
       <div class="jpm-title-block__rule" aria-hidden="true"></div>
     </div>
+
+    <!-- Polaroid Hero — Figma node 55:23 ("PolaroidHero"), child of
+         mobile-journal-entry (55:4). Outer container: flex column,
+         centered, 24px padding on all sides — matches get_design_context
+         exactly (`p-[24px]`).
+
+         Figma's raw structure is a live white "PolaroidFrame" div
+         (260×330px, 16px top/side padding, 40px bottom padding,
+         bg-white, drop-shadow-[2px_6px_6px_rgba(72,44,8,0.15)],
+         rotate(-4deg)) containing a photo, with an independently
+         rotate(12deg) "Orange-Tape" overlapping its top edge — all
+         confirmed directly via get_design_context on 55:23, matching
+         this task's stated numbers exactly.
+
+         Per this task's explicit instruction, this reuses the SAME two
+         already-flattened assets already used for desktop's Polaroid +
+         Tape (94:14): assets/images/journal/article-photo-sky-clouds.png
+         and assets/images/journal/tape-orange.png — no new exports.
+         Both assets already bake in their own white-frame/shadow (photo)
+         and torn-edge texture (tape) AND their own fixed tilt as pixels
+         (confirmed by inspecting each file directly: the photo's alpha
+         mask puts its top-right corner ~18px higher than its top-left
+         corner; the tape's long axis runs top-left-to-bottom-right at
+         roughly -16° from horizontal) — same established, verified
+         reasoning as desktop's CSS comment on .jp-decor__polaroid/
+         .jp-decor__tape. Neither element gets an additional CSS
+         rotate(): the photo's baked-in tilt already matches the
+         direction Figma's own -4° implies (verified by rotation-matrix
+         sign-check, not assumed — see the CSS comment on
+         .jpm-polaroid), and the tape's baked-in ~-16° tilt is in the
+         same descending direction Figma's nested -4°(frame)+12°(tape)
+         composition implies. Applying a further CSS rotate() on top of
+         either would double-rotate them, the same bug already
+         documented and avoided on desktop.
+
+         Shadow: 2px 6px 6px rgba(72,44,8,0.15), confirmed directly
+         against the node — already baked into article-photo-sky-clouds
+         .png's own pixels (visible drop shadow along its bottom-right
+         edge), so no separate CSS filter is added here either.
+
+         Tape position: Figma nests the tape inside the frame's own
+         rotated coordinate space (top:-14px, left:calc(50% - 3.8px),
+         both relative to the UNROTATED 260×330 frame). Since this frame
+         is a flattened image with no live rotation of its own, that
+         nested offset was composed through the frame's -4° rotation by
+         hand (rotate the tape's local center offset from the frame
+         center by -4°, then re-anchor to the frame's post-rotation
+         282.386×347.333 bounding box) to get its true position in this
+         box's coordinate space — see the exact values and math summary
+         in the CSS comment on .jpm-polaroid__tape.
+
+         Purely decorative, same as desktop's identical asset in
+         .jp-decor (aria-hidden, empty alt) — not the page's real
+         informational content. -->
+    <div class="jpm-polaroid-hero">
+      <div class="jpm-polaroid" aria-hidden="true">
+        <img class="jpm-polaroid__photo" src="/assets/images/journal/article-photo-sky-clouds.png" alt="">
+        <img class="jpm-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
+      </div>
+    </div>
   </div>
 </main>
 

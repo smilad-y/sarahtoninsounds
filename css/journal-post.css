@@ -672,4 +672,70 @@
     height: 2px;
     background-color: var(--color-crimson);
   }
+
+  /* ── Polaroid Hero ── Figma node 55:23 ("PolaroidHero"). See the HTML
+     comment above this section's markup for the full asset-reuse and
+     no-extra-rotation rationale (mirrors desktop's Polaroid + Tape,
+     94:14). Summary of the numbers used below:
+
+     .jpm-polaroid is Figma's PolaroidFrame (260×330, rotate(-4deg))
+     post-rotation bounding box: for a 260×330 rect rotated 4°,
+     width = 260·cos4° + 330·sin4° = 282.386, height = 260·sin4° +
+     330·cos4° = 347.333 — matches node 55:24's own stated wrapper size
+     exactly, confirming the 4° magnitude.
+
+     Rotation SIGN verified, not assumed: composing rotate(-4deg) on a
+     rect's corner offsets from center — (x'=x·cosθ-y·sinθ,
+     y'=x·sinθ+y·cosθ) — puts the top-right corner ~18px higher than the
+     top-left corner. That's exactly the geometry measured directly off
+     article-photo-sky-clouds.png's own alpha mask (topmost pixel at
+     x=432/608 ≈ 71% across; leftmost pixel at y=117, noticeably lower)
+     — so this file's already-baked tilt matches Figma's -4°, no flip
+     needed here (unlike the Nav section's tab rotations elsewhere on
+     this page, where the sign genuinely was flipped).
+
+     .jpm-polaroid__tape's box/position is Figma's Orange-Tape
+     (103.22×46.223, natural 100×26 rotated 12deg) composed through the
+     frame's own -4° rotation (since Figma nests the tape inside the
+     rotated PolaroidFrame, not as an independent sibling): the tape's
+     local center offset from the frame's center, (-3.8, -155.89),
+     rotated by -4° works out to (-14.67, -155.24) in the frame's
+     post-rotation box — added to that box's own center (141.193,
+     173.667) and re-anchored to a top-left origin gives left:74.916px;
+     top:-4.688px. Net rotation this implies, -4°+12°=+8°, is in the
+     same descending sense already measured in tape-orange.png's own
+     baked-in ~-16° tilt (its alpha mask's leftmost pixel sits ~120px
+     above its rightmost pixel), so — same reasoning as the photo above
+     — no separate CSS rotate() is layered on top of it. */
+  .jpm-polaroid-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+  }
+
+  .jpm-polaroid {
+    position: relative;
+    width: 282.386px;
+    height: 347.333px;
+  }
+
+  .jpm-polaroid__photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: contain;
+  }
+
+  .jpm-polaroid__tape {
+    position: absolute;
+    left: 74.916px;
+    top: -4.688px;
+    width: 103.22px;
+    height: 46.223px;
+    max-width: none;
+    object-fit: contain;
+    pointer-events: none;
+  }
 }
