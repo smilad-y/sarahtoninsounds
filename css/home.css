@@ -200,7 +200,7 @@ body.page-home {
   background-image: url('/assets/images/shared/nav-paper-tab.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  font-family: 'Henny Penny', var(--font-display), cursive;
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(0.95rem, 1.2vw, 1.3rem);
   letter-spacing: 0.02em;
@@ -232,6 +232,24 @@ body.page-home {
 
 .hv2-mobile-nav {
   display: none;
+}
+
+/* Small handwritten-style credit, reinstated per Sarah's request —
+   PROJECT-SPEC.md previously retired this alongside the video-hero
+   direction; this is a conscious revision, kept deliberately minor
+   (Sue Ellen Francisco is marginalia-only per the design hierarchy,
+   never essential UI) rather than a return to the old hero treatment. */
+.hv2-credit {
+  position: absolute;
+  z-index: 13;
+  bottom: 2%;
+  right: 2.5%;
+  margin: 0;
+  font-family: var(--font-marginalia);
+  font-size: clamp(0.9rem, 1.3vw, 1.15rem);
+  color: #fdf6e8;
+  transform: rotate(-3deg);
+  pointer-events: none;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -347,7 +365,7 @@ body.page-home {
   }
 
   .hv2-menu-btn__label {
-    font-family: 'Henny Penny', var(--font-display), cursive;
+    font-family: var(--font-display);
     font-weight: 400;
     font-size: 20px;
     line-height: 1;
@@ -413,7 +431,7 @@ body.page-home {
   }
 
   .hv2-mobile-nav a {
-    font-family: 'Henny Penny', var(--font-display), cursive;
+    font-family: var(--font-display);
     font-weight: 400;
     font-size: 1rem;
     letter-spacing: 0.02em;
@@ -423,5 +441,11 @@ body.page-home {
 
   .hv2-mobile-nav a[aria-current="page"] {
     text-decoration: underline;
+  }
+
+  .hv2-credit {
+    bottom: 1.5%;
+    right: 4%;
+    font-size: 0.9rem;
   }
 }

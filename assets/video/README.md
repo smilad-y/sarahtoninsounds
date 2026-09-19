@@ -1,10 +1,13 @@
 # Video
 
 Present: `home-loop.mp4` — Sarah's edited "video option 1" vinyl/
-turntable footage for the Home hero background (`ASSET-MANIFEST.md` §1).
-This is the permanent production filename, wired into the `<source>` in
-`index.html`.
+turntable footage, originally exported for an earlier video-hero
+Home direction (`ASSET-MANIFEST.md` §1).
 
-Evaluate brightness/contrast in the actual browser composition before
-any further color grading — don't judge the video in isolation
-(`PROJECT-SPEC.md` §6).
+**Retired, not in use.** PROJECT-SPEC.md §6 states the illustrated-collage
+direction "supersedes the earlier full-screen-video Home direction
+entirely" — that concept (background loop, "discover music!" note, the
+original "made by: Sarah Milad" credit) is retired, not on hold.
+`index.html` has no `<video>` element; this file and the rest of
+`assets/images/home/` are preserved untouched per the PRESERVE-by-default
+policy (CLAUDE.md), not wired into any current page.
