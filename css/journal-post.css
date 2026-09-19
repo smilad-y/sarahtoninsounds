@@ -208,7 +208,18 @@
    block's markup); line-height and color intentionally fall through
    to base.css's sitewide body defaults rather than repeating them
    here. */
+/* position:relative + z-index:1 (not the default static/auto) is
+   required here, not cosmetic: .jp-decor__bg-lower's wrapper below
+   must be position:absolute (to stretch top:0 to bottom:0 inside
+   .jp-body-region), and CSS's stacking rules put ANY positioned
+   element above ANY non-positioned flow content in the same stacking
+   context regardless of DOM order — z-index:auto on a positioned
+   element still outranks ordinary flow. Without this, .jp-decor__bg-
+   lower painted over every paragraph below where it starts (~y=1214),
+   even though it comes first in the DOM. See TODO.md. */
 .jp-body-copy {
+  position: relative;
+  z-index: 1;
   margin-left: 33.378%;
   width: 42.6273%;
 }
@@ -239,9 +250,14 @@
    copy's own y=324, both against the reference frame's WIDTH (the
    CSS-spec basis for percentage margins, holding correct at any
    viewport width): (1214-324)/1492 = 59.6514%. bottom:0 then
-   stretches it to .jp-body-region's real, content-driven bottom
-   edge — no z-index needed, since it's placed before .jp-body-copy
-   in the DOM and paints beneath it naturally. */
+   stretches it to .jp-body-region's real, content-driven bottom edge.
+   z-index:0 is explicit, not just omitted: this element must be
+   position:absolute (to stretch top:0/bottom:0), and a positioned
+   element with z-index:auto still outranks non-positioned flow
+   content regardless of DOM order — so a bare omission here would
+   silently paint over .jp-body-copy again the moment anyone edits
+   this rule. Pinning it to 0, below .jp-body-copy's explicit
+   z-index:1, keeps the paint order correct by rule, not by luck. */
 .jp-decor__bg-lower {
   position: absolute;
   left: 2.1448%;
@@ -250,6 +266,7 @@
   bottom: 0;
   width: 102.9491%;
   max-width: none;
+  z-index: 0;
 }
 
 .jp-decor__bg-lower img {
@@ -272,13 +289,18 @@
    < Nav(20). Nav is deliberately kept topmost overall (Figma's own
    order paints Polaroid+Tape last/above Nav) so the real nav links
    stay clickable — the two units never overlap on screen, so this
-   reordering is invisible. Neither Body Copy nor Background Paper
-   Section 1 (2:78, .jp-decor__bg-lower) need a z-index of their own
-   any more: both now live in .jp-body-region, a plain DOM sibling
-   painted after .jp-stage (which contains this entire tier range via
-   isolation:isolate — see .jp-stage/.jp-body-region above), with
-   bg-lower ordered before body-copy in the markup so it paints
-   beneath the text. */
+   reordering is invisible. Body Copy and Background Paper Section 1
+   (2:78, .jp-decor__bg-lower) are outside this tier range entirely:
+   both live in .jp-body-region, a plain DOM sibling painted after
+   .jp-stage (which contains 1-20 via isolation:isolate — see
+   .jp-stage/.jp-body-region above). Within .jp-body-region itself,
+   DOM order alone is NOT enough to keep bg-lower under the text:
+   bg-lower's wrapper must be position:absolute (to stretch top:0 to
+   bottom:0), and any positioned element with z-index:auto still
+   outranks non-positioned flow content regardless of DOM order — so
+   .jp-body-copy carries its own explicit position:relative;
+   z-index:1, one above bg-lower's explicit z-index:0, to force the
+   correct order. See the comment on .jp-body-copy above. */
 .jp-decor {
   position: absolute;
   inset: 0;
@@ -322,20 +344,20 @@
   object-fit: cover;
 }
 
-/* top corrected from a naive 50% (=512/1024, Figma's raw pre-rotation
-   y, unrotated) to the true top-left-pivot result: Figma rotates
-   around a shape's top-left corner, not its center, and
-   get_design_context's composed output has a known quirk for this
-   ±180° case specifically — it returns the correct x but leaves y
-   unchanged from the raw pre-rotation metadata. Computed by hand from
-   the raw box (x=859, y=512, w=910, h=582): rotating 180° around its
-   own top-left corner (859,512) maps the far corner (859+910,512+582)
-   to (859-910, 512-582) = (-51,-70), so the new top-left is (-51,-70),
-   not (-51,512). -70/1024 = -6.8359%. */
+/* top: 50% (=512/1024) is Figma's own composed output for this node
+   (3:154), taken directly rather than hand-derived. An earlier pass
+   assumed Figma rotates this ±180° node around its top-left corner
+   and hand-computed top as -70/1024 = -6.8359% from the raw
+   pre-rotation box — that hand-derived value was the actual mistake,
+   not Figma's own data: it placed the paper in the upper-left, tucked
+   behind the logo/nav, while Figma's full-frame screenshot clearly
+   shows it at the bottom-left near the polaroid, at its current real
+   size. left/width/height and the rotate(180deg) scaleY(-1) transform
+   were already correct and are unchanged. See TODO.md. */
 .jp-decor__corner1 {
   position: absolute;
   left: -3.4182%;
-  top: -6.8359%;
+  top: 50%;
   width: 60.992%;
   height: 56.8359%;
   max-width: none;
