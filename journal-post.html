@@ -274,6 +274,58 @@
         </div>
       </div>
     </header>
+
+    <!-- Nav — Figma node 55:8 ("TapesNavigation"). Already correctly
+         built in Figma as a HORIZONTAL auto-layout frame with
+         layoutWrap:WRAP, itemSpacing:8, counterAxisSpacing:8, padding
+         16px/12px — replicated here as plain flexbox with
+         flex-wrap:wrap + gap:8px, so the 3-top/2-bottom split happens
+         naturally from each tab's own (rotated) width not fitting a
+         4th item per row, not from two hardcoded row containers. See
+         the CSS comment on .jpm-nav__list for the exact math
+         confirming this.
+
+         Figma's raw layer name/label for the 3rd tab is "DISCOVER" —
+         relabeled to LISTEN here per the same established,
+         already-documented precedent used everywhere else on this
+         site (Journal Landing's mobile nav, Journal Post desktop nav)
+         to match the real production nav (Home · About · Listen ·
+         Journal · Contact — CLAUDE.md, PROJECT-SPEC.md).
+
+         Rotation: get_design_context on 55:8 gives the OPPOSITE sign
+         from this task's own reference table for every single tab
+         (e.g. HOME is -2deg, not +2deg) — confirmed directly against
+         the node rather than trusted, and independently cross-checked
+         by computing each tab's post-rotation bounding box from a
+         plain 110×44 rectangle at the confirmed angle: every result
+         matches get_design_context's stated per-item wrapper size
+         exactly (e.g. HOME: 110×44 at 2° → 111.469×47.812, matching
+         node 55:9's own stated size to the thousandth of a pixel).
+
+         Font: Figma's raw export again specifies Crimson Text (Bold,
+         15px, #1c1c1c here) — the same stale-font pattern hit on
+         every other text node in this file this session. Uses
+         var(--font-display) (Perandory Semi-Condensed) and
+         var(--color-near-black) instead, matching desktop's nav and
+         every other nav on the site.
+
+         Asset: reuses the same shared tape texture as every other nav
+         on the site (assets/images/shared/nav-paper-tab.png,
+         ASSET-MANIFEST.md §1) — not a new export; Figma's own code
+         also reuses one single image across all 5 tabs.
+
+         Active-page underline: JOURNAL carries aria-current="page"
+         since this is a Journal Post page, same mechanism as
+         desktop's nav. -->
+    <nav class="jpm-nav" aria-label="Primary">
+      <ul class="jpm-nav__list">
+        <li class="jpm-nav__item jpm-nav__item--home"><a href="/" class="jpm-nav__tab">Home</a></li>
+        <li class="jpm-nav__item jpm-nav__item--about"><a href="/about.html" class="jpm-nav__tab">About</a></li>
+        <li class="jpm-nav__item jpm-nav__item--listen"><a href="/listen.html" class="jpm-nav__tab">Listen</a></li>
+        <li class="jpm-nav__item jpm-nav__item--journal"><a href="/journal.html" class="jpm-nav__tab" aria-current="page">Journal</a></li>
+        <li class="jpm-nav__item jpm-nav__item--contact"><a href="/contact.html" class="jpm-nav__tab">Contact</a></li>
+      </ul>
+    </nav>
   </div>
 </main>
 

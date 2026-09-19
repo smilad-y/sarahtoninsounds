@@ -549,4 +549,84 @@
     max-width: none;
     object-fit: cover;
   }
+
+  /* ── Nav ── Figma node 55:8 ("TapesNavigation"), a HORIZONTAL
+     auto-layout frame with layoutWrap:WRAP, itemSpacing:8,
+     counterAxisSpacing:8, padding 16px horizontal/12px vertical —
+     replicated as plain flex-wrap, not two hardcoded row containers.
+     The 3-top/2-bottom split is a natural consequence of each tab's
+     own (rotated) width plus the 8px gaps not leaving room for a 4th
+     item per row inside the 390-32=358px available width, confirmed
+     by computing it directly: Home+About+Listen = 349.33px (fits in
+     358), adding Journal next would need 469.49px (doesn't fit, so it
+     wraps) — Journal+Contact then reflow onto their own row and get
+     centered there too, same justify-content:center Figma uses. */
+  .jpm-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    padding: 12px 16px;
+    list-style: none;
+  }
+
+  /* Each <li> is sized to its tab's own POST-rotation bounding box
+     (computed from a plain 110×44 rect at that tab's confirmed
+     angle — see the HTML comment above this nav's markup for the
+     exact math) so flex-wrap sees the same per-item footprint Figma's
+     auto-layout does, including the extra room rotation adds. The
+     <a> inside stays a plain, unrotated 110×44 box, flex-centered
+     within that larger footprint, then carries its own rotation —
+     the same flex-center-then-rotate technique used everywhere else
+     on this site, so each tab rotates around its own center rather
+     than a corner. */
+  .jpm-nav__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .jpm-nav__item--home { width: 111.469px; height: 47.812px; }
+  .jpm-nav__item--about { width: 111.114px; height: 46.864px; }
+  .jpm-nav__item--listen { width: 110.751px; height: 45.913px; }
+  .jpm-nav__item--journal { width: 112.152px; height: 49.697px; }
+  .jpm-nav__item--contact { width: 111.114px; height: 46.864px; }
+
+  .jpm-nav__tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 44px;
+    background-image: url('/assets/images/shared/nav-paper-tab.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    color: var(--color-near-black);
+  }
+
+  .jpm-nav__item--home .jpm-nav__tab { transform: rotate(-2deg); }
+  .jpm-nav__item--about .jpm-nav__tab { transform: rotate(1.5deg); }
+  .jpm-nav__item--listen .jpm-nav__tab { transform: rotate(-1deg); }
+  .jpm-nav__item--journal .jpm-nav__tab { transform: rotate(3deg); }
+  .jpm-nav__item--contact .jpm-nav__tab { transform: rotate(-1.5deg); }
+
+  .jpm-nav__tab[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-color: var(--color-crimson);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .jpm-nav__tab:hover {
+    text-decoration: underline;
+  }
 }
