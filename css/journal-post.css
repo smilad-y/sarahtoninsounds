@@ -434,6 +434,35 @@
    Mobile Journal Post (390px reference frame, Figma node 55:4
    "mobile-journal-entry") — Header only, this pass.
 
+   STANDING RULE FOR EVERY SECTION ADDED TO THIS PAGE (Nav,
+   Title Block, Polaroid Hero, Essay Body, Collage Footer): .jpm-page
+   must NEVER get a fixed height, `aspect-ratio`, or `overflow: hidden`
+   sized to Figma's 2095px mobile frame height. Essay length varies per
+   post, so the page's real height has to be driven by its own flow
+   content, growing and scrolling normally to fit whatever a given
+   essay actually needs — exactly what .jpm-page already does below
+   (`display: block`, no height/aspect-ratio of its own) and verified
+   by literally testing it: with only this Header built, scrollHeight
+   is exactly the viewport (nothing forcing extra height); with a
+   40-paragraph simulated essay injected after it, .jpm-page's own box
+   grew to match that content's real height pixel-for-pixel, with the
+   Header untouched. This is a deliberate contrast with desktop's
+   .jp-stage, which used a fixed `aspect-ratio` copied from Figma's
+   frame and had to be substantially reworked afterward once real
+   body copy needed more room than the placeholder (see TODO.md,
+   "Journal Post — Page height capped at 1024px..."). Any full-page
+   background/texture layer added for this mobile page (matching
+   desktop's 2:73/2:78, or Figma's own top-level "background-texture"
+   node 55:5) must size itself to `.jpm-page`'s real, current height
+   (e.g. `height: 100%` of a natural-height ancestor, never a literal
+   `2095px`), and any element meant to anchor near the bottom of the
+   design (e.g. CollageFooter's "Read something new!" sticker) must
+   anchor relative to the actual end of content, never a hardcoded
+   y-offset assuming Figma's exact frame height. Confirm each with the
+   same two-pass test used here — the current placeholder length, and
+   a simulated much-longer paragraph set — before considering that
+   section done, not as a cleanup pass afterward.
+
    Same established pattern as Journal Landing's .jv2m-page (see
    journal.css): a real, independent mobile composition — not desktop
    scaled down — hidden by default and only shown under the mobile
