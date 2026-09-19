@@ -326,6 +326,40 @@
         <li class="jpm-nav__item jpm-nav__item--contact"><a href="/contact.html" class="jpm-nav__tab">Contact</a></li>
       </ul>
     </nav>
+
+    <!-- Title Block — Figma node 55:19 ("PageTitleBlock"). Structure
+         (flex column, gap:12px, padding pt:32/pb:16/px:24, centered)
+         and content both confirmed directly against get_design_context
+         rather than assumed — matches this task's own description
+         exactly, including the real, confirmed title text "Cheers to
+         this" (not a placeholder — built as literal text, no
+         variable/placeholder pattern).
+
+         Font substitutions, same flagged policy as every other text
+         node this session (Figma's raw export is stale again: Playfair
+         Display SemiBold for metadata, Young Serif — not an approved
+         typeface at all — for the title):
+         - Metadata: var(--font-body) italic (IM Fell English),
+           matching desktop's corrected metadata treatment.
+         - Title: var(--font-display) (Perandory Semi-Condensed),
+           matching desktop's corrected title treatment — but NOT
+           uppercased here, unlike desktop: Figma's own mobile
+           screenshot for this node renders "Cheers to this" in mixed
+           case, matching the same already-documented, deliberate
+           mobile-vs-desktop distinction in journal.css ("article/card
+           titles are NOT uppercased on mobile").
+
+         Underline (55:22, "Title-Underline"): in Figma this is a real
+         textured SVG asset, same as desktop's title rule — per this
+         task's explicit instruction, simplified to a flat 220px
+         var(--color-crimson) bar instead of sourcing the real asset,
+         matching the same, already-flagged simplification already in
+         place on desktop (see TODO.md). -->
+    <div class="jpm-title-block">
+      <p class="jpm-title-block__meta">Essay · September 2026</p>
+      <h1 class="jpm-title-block__title">Cheers to this</h1>
+      <div class="jpm-title-block__rule" aria-hidden="true"></div>
+    </div>
   </div>
 </main>
 

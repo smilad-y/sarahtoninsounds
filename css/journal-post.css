@@ -629,4 +629,47 @@
   .jpm-nav__tab:hover {
     text-decoration: underline;
   }
+
+  /* ── Title Block ── Figma node 55:19 ("PageTitleBlock"). Literal
+     Figma px throughout, matching this page's established mobile
+     technique (scrolling flow, not a fixed-aspect stage). Font
+     substitutions and the flat-CSS underline are documented in the
+     HTML comment above this block's markup. 0° rotation, matching the
+     source frame. */
+  .jpm-title-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 24px 16px;
+  }
+
+  .jpm-title-block__meta {
+    width: 100%;
+    margin: 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-near-black);
+  }
+
+  /* Not text-transform:uppercase, deliberately — see HTML comment. */
+  .jpm-title-block__title {
+    width: 100%;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 38px;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--color-near-black);
+  }
+
+  .jpm-title-block__rule {
+    width: 220px;
+    height: 2px;
+    background-color: var(--color-crimson);
+  }
 }
