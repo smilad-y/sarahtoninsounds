@@ -59,8 +59,10 @@ html:has(body.page-listen) {
    spans x=621-1436, i.e. flush to the right edge). The reused torn-paper
    tab asset (ASSET-MANIFEST.md §1) is the tab's entire visual
    treatment; labels are real text layered on top in Crimson Text
-   SemiBold, matching this file's corrected type (not Home's
-   Henny Penny, which PROJECT-SPEC.md §6 scopes to Home only). */
+   SemiBold — a deliberate exception to the sitewide Perandory
+   Semi-Condensed nav treatment used everywhere else, including Home
+   (see TODO.md's Nav Typography item for the open cross-page decision
+   this still needs from Sarah). */
 .listen-header {
   display: flex;
   justify-content: flex-end;

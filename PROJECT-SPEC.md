@@ -146,23 +146,23 @@ Do not redesign or reconstruct the Sarahtonin Sounds wordmark. Use Sarah's estab
 
 ## 6. Home
 ### Status
-**Approved and implemented.** The illustrated-collage direction below (built against Sarah's own Figma geometry) is the current source of truth and **supersedes the earlier full-screen-video Home direction entirely** — that video-hero concept (background loop, "discover music!" note, "made by: Sarah Milad" credit) is retired, not merely on hold. The legacy video asset and its supporting images are preserved (untouched, unused) at `assets/video/home-loop.mp4` and `assets/images/home/` per the PRESERVE-by-default policy; nothing there feeds the live Home page.
+**Approved and implemented.** The illustrated-collage direction below (built against Sarah's own Figma geometry) is the current source of truth and **supersedes the earlier full-screen-video Home direction entirely** — that video-hero concept (background loop, "discover music!" note, "made by: Sarah Milad" credit) is retired, not merely on hold. The legacy video asset and its supporting images are preserved (untouched, unused) at `assets/video/home-loop.mp4` and `assets/images/home/` per the PRESERVE-by-default policy; nothing there feeds the live Home page. (The "made by: Sarah Milad" credit has since been reinstated as a small, separate piece of the collage direction — see "Approved direction" below; the background loop and the "discover music!" note remain retired/undecided.)
 
 ### Purpose
 A single-viewport, no-scroll cover for the site: an illustrated collage (Sarah reclining on a striped carpet, headphones on, leopard and record crate in the foreground, moon/stars, a torn-paper title card, a scalloped pink nav cloud, a yellow sunburst spiral, a navy scalloped band) built from Sarah's individually exported artwork layers.
 
 ### Approved direction
 - Desktop and mobile are **separately art-directed layouts**, each reconstructed from an authoritative Figma reference frame — desktop at **1440×900**, mobile at **393×852** — not one scaled into the other. Every layer's position/size is a percentage of its own reference frame, computed directly from Figma's px values, so the composition scales to any real viewport without letterboxing (desktop) or feeling like a shrunk desktop scene (mobile).
-- Desktop navigation is five real `<a>` links styled as individual torn-paper tabs, positioned across the upper-right yellow/pink area, each using the shared tab asset (see ASSET-MANIFEST.md §1) as its background with the label layered on top in Henny Penny.
-- Mobile uses a real accessible `<button>` MENU trigger (in the same Henny Penny styling) that reveals the nav list — `aria-expanded`/`aria-controls`, Escape-to-close, outside-click-to-close, and focus return to the button on close are all required behavior, not polish.
-- Henny Penny is used specifically for the Home desktop nav and the mobile MENU treatment only — it is a Home-specific display accent and is **not** part of the site-wide type hierarchy in §5.
+- Desktop navigation is five real `<a>` links styled as individual torn-paper tabs, positioned across the upper-right yellow/pink area, each using the shared tab asset (see ASSET-MANIFEST.md §1) as its background with the label layered on top in Perandory Semi-Condensed — the same site-wide display face used for nav on every other page (§5), not a Home-specific font.
+- Mobile uses a real accessible `<button>` MENU trigger, styled with that same Perandory Semi-Condensed treatment, that reveals the nav list — `aria-expanded`/`aria-controls`, Escape-to-close, outside-click-to-close, and focus return to the button on close are all required behavior, not polish.
+- A small "made by: Sarah Milad" credit sits lower-right of the composition, in Sue Ellen Francisco per §5's marginalia-only rule (never essential UI, never the logo). Approved and built as a deliberate, minor revision — not a return to the retired video-hero credit treatment.
 - Moon/stars, the tan cloud, and the small pink-paper accent are desktop-only; mobile deliberately omits them rather than approximating.
 - Sarah's exact established gold Sarahtonin Sounds wordmark remains untouched elsewhere on the site per §5; the large torn-paper "SARAHTONIN SOUNDS" title card on Home is a separate piece of Sarah-supplied artwork, not the wordmark itself.
 
 ### Explicit removals
 - No descriptive tagline.
 - Remove **"Music, Prescribed With Taste."**
-- No "discover music!" note and no "made by: Sarah Milad" credit — both belonged to the retired video-hero direction.
+- No "discover music!" note — **not yet decided**; belonged to the retired video-hero direction and has not been separately approved for the collage direction. Do not add it without explicit sign-off.
 - Do not turn Home into a scrolling content page with teasers.
 
 ## 7. Listen

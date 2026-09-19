@@ -123,10 +123,11 @@
 }
 
 /* ── Primary nav — reuses the approved nav-paper-tab asset with real
-   HTML text (ASSET-MANIFEST.md §1). Henny Penny + Home's rotated-tab
+   HTML text (ASSET-MANIFEST.md §1). Home's per-tab rotated-scatter
    treatment is documented Home-specific and intentionally not reused
    here. Nav labels use the established display face (Perandory
-   Semi-Condensed), not Figma's generated Crimson Text. ── */
+   Semi-Condensed, the same face Home's nav now uses too), not Figma's
+   generated Crimson Text. ── */
 .jv2-nav {
   position: absolute;
   z-index: 20;
