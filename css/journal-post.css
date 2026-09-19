@@ -31,14 +31,33 @@
   padding: 0;
 }
 
+.jp-page {
+  max-width: 1492px;
+  margin: 0 auto;
+}
+
 .jp-stage {
   position: relative;
   width: 100%;
-  max-width: 1492px;
-  margin: 0 auto;
   aspect-ratio: 1492 / 1024;
   overflow: hidden;
+  isolation: isolate;
   background-color: var(--color-cream);
+}
+
+/* Normal-flow sibling of .jp-stage, so real body-copy content drives
+   its own height instead of being clipped by .jp-stage's fixed
+   aspect-ratio (see TODO.md, "Journal Post — Page height capped at
+   1024px"). Percentage margins resolve against the containing block's
+   WIDTH (a CSS-spec fact, not a browser quirk), so this pulls the
+   region up to start exactly at body copy's real Figma y (324) at any
+   viewport width: -(1024-324)/1492 = -46.9169%. .jp-stage's own
+   isolation:isolate (above) contains its internal z-index range
+   (1–20) to itself, so this later plain DOM sibling naturally paints
+   above all of it with no z-index of its own needed. */
+.jp-body-region {
+  position: relative;
+  margin-top: -46.9169%;
 }
 
 /* .jp-nav's own width is set explicitly (814/1492 of the stage) rather
@@ -190,11 +209,8 @@
    to base.css's sitewide body defaults rather than repeating them
    here. */
 .jp-body-copy {
-  position: absolute;
-  left: 33.378%;
-  top: 31.6406%;
+  margin-left: 33.378%;
   width: 42.6273%;
-  z-index: 10;
 }
 
 .jp-body-copy p {
@@ -207,18 +223,62 @@
   margin-bottom: 0;
 }
 
+/* Background Paper Section 1 (Figma node 2:78) — its real Figma
+   y=1214 falls below .jp-stage's 1024px frame height, i.e. it's the
+   background for whatever continues below the fold on the real
+   (uncropped) page, so it lives here in .jp-body-region rather than
+   in .jp-decor. A plain wrapper div, not top+bottom set directly on
+   the <img>: a confirmed bug in this codebase has an absolutely-
+   positioned <img> with both top and bottom set ignore bottom
+   entirely and size itself from its own intrinsic aspect ratio
+   instead (see TODO.md) — a plain div correctly stretches between
+   top and bottom instead. left/width carry over the same horizontal
+   percentages this element used inside .jp-stage (still valid: both
+   .jp-stage and .jp-body-region resolve against the same 1492px-wide
+   .jp-page). margin-top resolves Figma's y=1214 relative to body
+   copy's own y=324, both against the reference frame's WIDTH (the
+   CSS-spec basis for percentage margins, holding correct at any
+   viewport width): (1214-324)/1492 = 59.6514%. bottom:0 then
+   stretches it to .jp-body-region's real, content-driven bottom
+   edge — no z-index needed, since it's placed before .jp-body-copy
+   in the DOM and paints beneath it naturally. */
+.jp-decor__bg-lower {
+  position: absolute;
+  left: 2.1448%;
+  top: 0;
+  margin-top: 59.6514%;
+  bottom: 0;
+  width: 102.9491%;
+  max-width: none;
+}
+
+.jp-decor__bg-lower img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  transform: scaleY(-1);
+}
+
 /* ── Decorative / Collage Layer ── every remaining element of Figma
    node 2:72 (asset choices, the metadata/design-context position
    conflicts, and the polaroid/tape pre-flattened-asset reasoning are
    documented in the HTML comment above this layer's markup).
 
    z-index tiers replicate Figma's own paint order (bottom to top):
-   backgrounds(1-2) < corner papers(3-4) < logo(5) < yellow paper(6)
-   < stars(7) < megaphone(8) ... Body Copy(10) ... Title Block(15)
-   ... Polaroid+Tape(18) < Nav(20). Nav is deliberately kept topmost
-   overall (Figma's own order paints Polaroid+Tape last/above Nav) so
-   the real nav links stay clickable — the two units never overlap on
-   screen, so this reordering is invisible. */
+   background(1) < corner papers(3-4) < logo(5) < yellow paper(6)
+   < stars(7) < megaphone(8) ... Title Block(15) ... Polaroid+Tape(18)
+   < Nav(20). Nav is deliberately kept topmost overall (Figma's own
+   order paints Polaroid+Tape last/above Nav) so the real nav links
+   stay clickable — the two units never overlap on screen, so this
+   reordering is invisible. Neither Body Copy nor Background Paper
+   Section 1 (2:78, .jp-decor__bg-lower) need a z-index of their own
+   any more: both now live in .jp-body-region, a plain DOM sibling
+   painted after .jp-stage (which contains this entire tier range via
+   isolation:isolate — see .jp-stage/.jp-body-region above), with
+   bg-lower ordered before body-copy in the markup so it paints
+   beneath the text. */
 .jp-decor {
   position: absolute;
   inset: 0;
@@ -234,18 +294,6 @@
   max-width: none;
   object-fit: cover;
   z-index: 1;
-}
-
-.jp-decor__bg-lower {
-  position: absolute;
-  left: 2.1448%;
-  top: 2.6367%;
-  width: 102.9491%;
-  height: 115.918%;
-  max-width: none;
-  object-fit: cover;
-  transform: scaleY(-1);
-  z-index: 2;
 }
 
 .jp-decor__corner2 {

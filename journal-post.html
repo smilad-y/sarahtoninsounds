@@ -17,11 +17,12 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <main id="main" class="journal-post-page">
+  <div class="jp-page">
   <div class="jp-stage" id="journal-post-stage">
 
     <!-- Decorative / Collage Layer — every remaining element of Figma
-         node 2:72 "Desktop-Journal Entry": both full-bleed background
-         papers (2:73, 2:78), the two torn corner papers (3:154,
+         node 2:72 "Desktop-Journal Entry": the full-bleed background
+         paper (2:73), the two torn corner papers (3:154,
          3:155), the angled logo badge (2:26), the yellow paper behind
          the text column (2:150), two scribble stars (3:165, 3:164),
          the edge-bleeding megaphone (3:167), and the Polaroid + Tape
@@ -31,6 +32,12 @@
          does not appear anywhere in this frame's current child list
          (confirmed via get_metadata on 2:72) — already gone, nothing
          to skip.
+
+         2:78 (the second full-bleed background paper) is NOT here: its
+         real Figma y=1214 falls below this 1024px .jp-stage frame, so
+         it lives in .jp-body-region below instead — see the comment
+         on .jp-decor__bg-lower there, and TODO.md ("Journal Post —
+         Page height capped at 1024px").
 
          Position/rotation source-of-truth conflict, same pattern
          already documented in css/journal.css for this exact page
@@ -60,10 +67,9 @@
          - 2:73  → assets/images/listen/sarahtonin_sounds-background_paper_2_1.png
                    (filename is a literal match for the Figma layer
                    name "sarahtonin sounds-background paper_2 1")
-         - 2:78  → assets/images/journal/paper.png (plain cream torn
-                   paper texture; mostly hidden behind the yellow paper
-                   and corner papers painted after it, so exact-crop
-                   fidelity here is low-stakes)
+         - 2:78  → assets/images/journal/paper.png — see .jp-body-region
+                   below, not this layer (plain cream torn paper
+                   texture)
          - 3:154 → assets/images/journal/corner-paper-pink.png
          - 3:155 → assets/images/journal/corner-paper-red.png
          - 2:26  → assets/images/home-v2/home-logo-sharp.png (name and
@@ -103,7 +109,6 @@
          value per element. -->
     <div class="jp-decor" aria-hidden="true">
       <img class="jp-decor__bg-base" src="/assets/images/listen/sarahtonin_sounds-background_paper_2_1.png" alt="">
-      <img class="jp-decor__bg-lower" src="/assets/images/journal/paper.png" alt="">
 
       <div class="jp-decor__corner2">
         <div class="jp-decor__corner2-inner">
@@ -200,35 +205,63 @@
       <h1 class="jp-title-block__title">Title Goes Here</h1>
       <div class="jp-title-block__rule" aria-hidden="true"></div>
     </div>
+  </div>
 
-    <!-- Body Copy — reproduces Figma node 2:96, a single text node
-         (not 4 separate layers) that this markup mirrors as one
-         flowing block with real <p> paragraph breaks rather than
-         Figma's own literal DOM export (which represents each blank
-         line as its own empty "​" paragraph — a text-node-to-DOM
-         export artifact, not something worth reproducing literally in
-         semantic HTML; spacing here is done with CSS margin instead).
-         Column width (636px of the 1492px frame) constrains line-wrap
-         only — height is intentionally not fixed, since real essay
-         copy will run longer or shorter than this 4-paragraph
-         placeholder. The lorem ipsum text itself, its paragraph count,
-         and paragraph lengths are not meaningful — only the "multiple
-         real paragraphs in one flowing block" structure is.
+  <!-- Body Copy — reproduces Figma node 2:96, a single text node
+       (not 4 separate layers) that this markup mirrors as one
+       flowing block with real <p> paragraph breaks rather than
+       Figma's own literal DOM export (which represents each blank
+       line as its own empty "​" paragraph — a text-node-to-DOM
+       export artifact, not something worth reproducing literally in
+       semantic HTML; spacing here is done with CSS margin instead).
+       Column width (636px of the 1492px frame) constrains line-wrap
+       only — height is intentionally not fixed, since real essay
+       copy will run longer or shorter than this 4-paragraph
+       placeholder. The lorem ipsum text itself, its paragraph count,
+       and paragraph lengths are not meaningful — only the "multiple
+       real paragraphs in one flowing block" structure is.
 
-         Font substitution, same flagged policy as Nav/Title Block:
-         Figma specifies "Playfair Display Regular" — Playfair Display
-         is an explicit legacy exclusion per CLAUDE.md. Uses
-         var(--font-body) (IM Fell English) instead, per PROJECT-SPEC
-         §5's body-copy direction. Line-height/color are not
-         hardcoded here — they inherit the sitewide base.css values
-         (1.6 / var(--color-near-black) via var(--color-text)) rather
-         than Figma's unspecified "normal" leading. -->
+       Font substitution, same flagged policy as Nav/Title Block:
+       Figma specifies "Playfair Display Regular" — Playfair Display
+       is an explicit legacy exclusion per CLAUDE.md. Uses
+       var(--font-body) (IM Fell English) instead, per PROJECT-SPEC
+       §5's body-copy direction. Line-height/color are not
+       hardcoded here — they inherit the sitewide base.css values
+       (1.6 / var(--color-near-black) via var(--color-text)) rather
+       than Figma's unspecified "normal" leading.
+
+       Now a normal-flow sibling of .jp-stage (.jp-body-region), not an
+       absolutely-positioned child of it — absolutely-positioned
+       descendants never contribute to an ancestor's auto-height, and
+       .jp-stage's aspect-ratio derives its height purely from width,
+       so real essay-length copy was being silently clipped at 1024px.
+       See TODO.md, "Journal Post — Page height capped at 1024px". -->
+  <div class="jp-body-region">
+    <!-- Background Paper Section 1 (Figma node 2:78) — its real Figma
+         y=1214 is below the 1024px .jp-stage frame's own height, i.e.
+         it's the background for whatever continues below the fold on
+         the real (uncropped) page, so it lives here in .jp-body-region
+         rather than in .jp-decor. A plain wrapper div (not top+bottom
+         directly on the <img>) per a confirmed bug in this codebase:
+         an absolutely-positioned <img> with both top and bottom set
+         ignores bottom entirely and sizes itself from its own intrinsic
+         aspect ratio instead — see TODO.md. margin-top resolves
+         Figma's y=1214 relative to body copy's own y=324, both against
+         the 1492px reference frame's WIDTH (the CSS-spec basis for
+         percentage margins, holding correct at any viewport width):
+         (1214-324)/1492 = 59.6514%. bottom:0 then stretches it to
+         .jp-body-region's real, content-driven bottom edge. -->
+    <div class="jp-decor__bg-lower">
+      <img src="/assets/images/journal/paper.png" alt="">
+    </div>
+
     <div class="jp-body-copy">
       <p>Incididunt labore veniam consequat dolore eiusmod ex dolore eiusmod consectetur commodo. Quis lorem sed commodo lorem dolore dolore exercitation quis ut. Tempor quis ut et adipiscing incididunt ut dolore laboris amet lorem consectetur. Enim lorem laboris incididunt magna ut ullamco commodo ex incididunt adipiscing sit aliqua elit ad.</p>
       <p>Ea ipsum laboris exercitation quis et adipiscing elit quis enim minim exercitation ut consequat. Ipsum ex nostrud et laboris ut eiusmod veniam do nostrud commodo. Labore amet ullamco labore enim ad dolor sit adipiscing amet.</p>
       <p>Minim minim amet dolor adipiscing nisi incididunt ad ut amet consectetur elit ullamco sed. Magna dolore dolor ad elit nostrud sed lorem adipiscing magna. Ullamco tempor laboris minim quis ut. Aliqua ad aliquip et ex laboris. Exercitation adipiscing ullamco ea aliqua ut commodo eiusmod ut sed ex ut ut tempor exercitation.</p>
       <p>Nostrud ipsum ea dolore lorem laboris elit minim. Dolore eiusmod ullamco et minim aliqua sit commodo ea ullamco laboris aliqua nisi nisi. Veniam quis magna ea labore ut ad sit consequat consectetur et ut ea dolore. Incididunt nisi commodo amet nisi aliqua elit nostrud amet nisi ad. Sit amet ut amet ut consequat ut lorem ut aliqua ut et dolor labore. Minim consectetur sit ipsum tempor ad commodo lorem incididunt tempor ad ut.</p>
     </div>
+  </div>
 
   </div>
 
