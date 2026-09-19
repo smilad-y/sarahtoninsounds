@@ -738,4 +738,40 @@
     object-fit: contain;
     pointer-events: none;
   }
+
+  /* ── Essay Body ── Figma node 55:27 ("EssayBody"). See the HTML
+     comment above this section's markup for the CMS/templating
+     rationale and the divider's "optional, not fixed-midpoint" intent.
+     gap:20px on the flex column applies uniformly between every pair
+     of adjacent children — paragraph-to-paragraph, or
+     paragraph-to-divider — so inserting/removing/moving the divider
+     never requires touching this spacing. */
+  .jpm-body-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px 24px 48px;
+  }
+
+  .jpm-body-copy p {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+  }
+
+  /* Extra 12px top/bottom on top of the column's own 20px gap, matching
+     Figma's py-[12px] on ScribbleDivider (55:29) — the star reads with
+     more breathing room than a plain paragraph-to-paragraph gap. */
+  .jpm-body-copy__divider {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+  }
+
+  .jpm-body-copy__divider img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    max-width: none;
+  }
 }

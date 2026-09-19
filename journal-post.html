@@ -420,6 +420,64 @@
         <img class="jpm-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
       </div>
     </div>
+
+    <!-- Essay Body — Figma node 55:27 ("EssayBody"), child of
+         mobile-journal-entry (55:4). Confirmed directly via
+         get_design_context: outer container is `flex flex-col
+         gap-[20px] pt-[16px] px-[24px] pb-[48px]` — implemented below
+         as literal px on .jpm-body-copy, same "literal Figma px, not a
+         percentage stage" convention as every other section on this
+         mobile page.
+
+         CMS note (this is the part that matters going into the
+         Eleventy conversion): everything between the START/END markers
+         below is exactly what will become the per-essay templated
+         content — the title/date already built above it, and this
+         paragraph-by-paragraph body, are the two "changes per essay"
+         pieces on this page. Each paragraph is its own real <p>, not
+         one text blob with blank-line spacers standing in for
+         paragraph breaks (same lesson already applied to desktop's
+         .jp-body-copy) — so a future template can loop over an array of
+         paragraph strings directly, with no markup surgery needed.
+
+         The scribble-star divider (55:29 "ScribbleDivider" / 55:30
+         "ScribbleStar") is deliberately built as .jpm-body-copy__divider,
+         an ordinary flex sibling that can be placed between ANY two
+         <p> tags — not a fixed "exactly after paragraph 2" rule. Its
+         position here (after the 2nd paragraph) matches only where
+         this placeholder essay happens to put it; a real essay's CMS
+         content decides whether a divider appears at all, and where.
+         Reuses the same star asset already used for desktop's scattered
+         .jp-decor__star1/star2 (assets/images/shared/doodles/
+         star-scribble.png) — no new export. Confirmed directly against
+         55:30: no rotation on the icon (unlike this page's Nav tabs),
+         so none is applied here either.
+
+         Typography: Figma's raw export is stale again — "Playfair
+         Display Regular, 17px, #1c1c1c, line-height 1.6" (the "Body/IM
+         Fell English" Figma Text Style is misnamed against its own
+         literal font override). Playfair Display is an explicit legacy
+         exclusion per CLAUDE.md. Uses var(--font-body) (IM Fell
+         English) instead, matching desktop's .jp-body-copy substitution
+         exactly. font-size is set explicitly to Figma's literal 17px
+         (this page's mobile sections use literal px throughout, not
+         desktop's clamp()); line-height and color are deliberately NOT
+         hardcoded, inheriting base.css's sitewide 1.6 / var(--color-text)
+         — which already resolve to values matching Figma's stated 1.6 /
+         #1c1c1c closely enough that a separate override would just be
+         restating the token, same reasoning already documented on
+         desktop's .jp-body-copy. -->
+    <div class="jpm-body-copy">
+      <!-- START essay.body (placeholder copy — count/length/split point are not meaningful) -->
+      <p>Incididunt labore veniam consequat dolore eiusmod ex dolore eiusmod consectetur commodo. Quis lorem sed commodo lorem dolore dolore exercitation quis ut. Tempor quis ut et adipiscing incididunt ut dolore laboris amet lorem consectetur. Enim lorem laboris incididunt magna ut ullamco commodo ex incididunt adipiscing sit aliqua elit ad.</p>
+      <p>Ea ipsum laboris exercitation quis et adipiscing elit quis enim minim exercitation ut consequat. Ipsum ex nostrud et laboris ut eiusmod veniam do nostrud commodo. Labore amet ullamco labore enim ad dolor sit adipiscing amet.</p>
+      <div class="jpm-body-copy__divider" aria-hidden="true">
+        <img src="/assets/images/shared/doodles/star-scribble.png" alt="">
+      </div>
+      <p>Minim minim amet dolor adipiscing nisi incididunt ad ut amet consectetur elit ullamco sed. Magna dolore dolor ad elit nostrud sed lorem adipiscing magna. Ullamco tempor laboris minim quis ut. Aliqua ad aliquip et ex laboris. Exercitation adipiscing ullamco ea aliqua ut commodo eiusmod ut sed ex ut ut tempor exercitation.</p>
+      <p>Nostrud ipsum ea dolore lorem laboris elit minim. Dolore eiusmod ullamco et minim aliqua sit commodo ea ullamco laboris aliqua nisi nisi. Veniam quis magna ea labore ut ad sit consequat consectetur et ut ea dolore. Incididunt nisi commodo amet nisi aliqua elit nostrud amet nisi ad. Sit amet ut amet ut consequat ut lorem ut aliqua ut et dolor labore.</p>
+      <!-- END essay.body -->
+    </div>
   </div>
 </main>
 
