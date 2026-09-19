@@ -32,8 +32,7 @@
 }
 
 .jp-page {
-  max-width: 1492px;
-  margin: 0 auto;
+  max-width: none;
 }
 
 .jp-stage {
@@ -243,28 +242,39 @@
    positioned <img> with both top and bottom set ignore bottom
    entirely and size itself from its own intrinsic aspect ratio
    instead (see TODO.md) — a plain div correctly stretches between
-   top and bottom instead. left/width carry over the same horizontal
-   percentages this element used inside .jp-stage (still valid: both
-   .jp-stage and .jp-body-region resolve against the same 1492px-wide
-   .jp-page). margin-top resolves Figma's y=1214 relative to body
-   copy's own y=324, both against the reference frame's WIDTH (the
-   CSS-spec basis for percentage margins, holding correct at any
-   viewport width): (1214-324)/1492 = 59.6514%. bottom:0 then
-   stretches it to .jp-body-region's real, content-driven bottom edge.
-   z-index:0 is explicit, not just omitted: this element must be
-   position:absolute (to stretch top:0/bottom:0), and a positioned
-   element with z-index:auto still outranks non-positioned flow
-   content regardless of DOM order — so a bare omission here would
-   silently paint over .jp-body-copy again the moment anyone edits
-   this rule. Pinning it to 0, below .jp-body-copy's explicit
-   z-index:1, keeps the paint order correct by rule, not by luck. */
+   top and bottom instead. left:0/width:100% (not the 2.1448%/
+   102.9491% this element used inside .jp-stage): those values gave it
+   a slight horizontal bleed past its container's edges, harmless
+   inside .jp-stage since that element's own overflow:hidden clipped
+   it — but .jp-body-region has no such clipping, so the same bleed
+   caused real horizontal page overflow (a scrollbar and content
+   spilling past the viewport's right edge at any width, worst once
+   .jp-page's own max-width was removed to make the page fill the
+   viewport). margin-top starts this texture exactly where .jp-stage's
+   own bottom edge is (frame y=1024) rather than at Figma's raw
+   y=1214 for this asset: leaving a gap at Figma's literal y left an
+   untextured band between the stage's clipped bottom edge and where
+   the texture began — flat page background showing through, with
+   text sitting directly on it. Both figures are expressed relative
+   to body copy's own y=324 (where .jp-body-region itself starts) and
+   against the reference frame's WIDTH (the CSS-spec basis for
+   percentage margins, holding correct at any viewport width):
+   (1024-324)/1492 = 46.9169%. bottom:0 then stretches it to
+   .jp-body-region's real, content-driven bottom edge. z-index:0 is
+   explicit, not just omitted: this element must be position:absolute
+   (to stretch top:0/bottom:0), and a positioned element with
+   z-index:auto still outranks non-positioned flow content regardless
+   of DOM order — so a bare omission here would silently paint over
+   .jp-body-copy again the moment anyone edits this rule. Pinning it
+   to 0, below .jp-body-copy's explicit z-index:1, keeps the paint
+   order correct by rule, not by luck. */
 .jp-decor__bg-lower {
   position: absolute;
-  left: 2.1448%;
+  left: 0;
   top: 0;
-  margin-top: 59.6514%;
+  margin-top: 46.9169%;
   bottom: 0;
-  width: 102.9491%;
+  width: 100%;
   max-width: none;
   z-index: 0;
 }
