@@ -513,12 +513,44 @@
     display: none;
   }
 
+  /* Page-level background texture — Figma node 55:5 ("background-texture"),
+     a sibling of Header/Nav/etc. at the mobile-journal-entry frame level,
+     confirmed (via grep across the codebase) to have never been added
+     since Header first flagged it out of scope.
+
+     Confirmed directly from Figma rather than guessed: get_metadata on
+     55:5 gives a 390×2095 box (Figma's literal mobile frame size), and
+     get_design_context composes it as a single `object-fit: cover`
+     <img> — not a `background-repeat` tile — so this is one stretched
+     texture meant to cover the frame, not a repeating pattern. Its
+     screenshot (a deckled torn edge near the top ~20% down, plain paper
+     grain with a faint diagonal crease below) is a close visual match
+     for assets/images/listen/sarahtonin_sounds-background_paper_2_1.png
+     — already the exact asset desktop's Journal Post uses for this same
+     background-paper role (`.jp-decor__bg-base`, Figma node 2:73) — so
+     that's reused here rather than exporting a new file.
+
+     Applied as a CSS background-image on .jpm-page itself (not an
+     absolutely-positioned <img>), using the same background-size:cover
+     technique already shipped for this exact category of problem on
+     Journal Landing's mobile page (.jv2m-page in journal.css): because
+     .jpm-page's height is content-driven (the standing rule — see the
+     comment above .jpm-page below) rather than a fixed px value,
+     background-size:cover recomputes against the box's real current
+     height on every layout, so it keeps covering the page automatically
+     however tall a given essay makes it — confirmed with both the
+     current placeholder length and a simulated much-longer essay (see
+     verification notes for this task), not just reasoned about. */
   .jpm-page {
     display: block;
     width: 100%;
     max-width: 390px;
     margin: 0 auto;
     background-color: var(--color-cream);
+    background-image: url('/assets/images/listen/sarahtonin_sounds-background_paper_2_1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   .jpm-header {
