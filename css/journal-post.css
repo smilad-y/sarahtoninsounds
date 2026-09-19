@@ -352,8 +352,12 @@
    not Figma's own data: it placed the paper in the upper-left, tucked
    behind the logo/nav, while Figma's full-frame screenshot clearly
    shows it at the bottom-left near the polaroid, at its current real
-   size. left/width/height and the rotate(180deg) scaleY(-1) transform
-   were already correct and are unchanged. See TODO.md. */
+   size. left/width/height are unchanged.
+
+   No CSS rotation: this asset (corner-paper-pink.png) is pre-flattened,
+   same as the Polaroid + Tape assets elsewhere on this page — the tilt
+   is already baked into the image's own pixels, so the earlier
+   rotate(180deg) scaleY(-1) was double-rotating it. See TODO.md. */
 .jp-decor__corner1 {
   position: absolute;
   left: -3.4182%;
@@ -362,7 +366,6 @@
   height: 56.8359%;
   max-width: none;
   object-fit: cover;
-  transform: rotate(180deg) scaleY(-1);
   z-index: 4;
 }
 

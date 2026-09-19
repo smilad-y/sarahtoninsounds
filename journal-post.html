@@ -97,7 +97,18 @@
          against the full-frame Figma screenshot, not assumed from the
          ratio match alone.
 
-         Rotation pivot: every element below uses Figma's own
+         Corner paper 1 (3:154 → corner-paper-pink.png) is the same
+         kind of pre-flattened asset: its tilt is already baked into
+         the image's own pixels, so it also carries no CSS rotation
+         (see the comment on .jp-decor__corner1 in journal-post.css —
+         an earlier pass wrongly applied Figma's stated
+         rotate(180deg) scaleY(-1) on top of it, double-rotating it
+         and hiding most of the paper's visible shape within its own
+         box). corner-paper-red (3:155, .jp-decor__corner2) is a
+         genuine "natural" pre-rotation source and is unaffected —
+         it still uses the flex-center-then-rotate technique below.
+
+         Rotation pivot: every OTHER element below uses Figma's own
          flex-center-then-rotate export technique (already established
          in css/journal.css for the Journal Landing logo/green paper) —
          an outer wrapper sized to the POST-rotation bounding box,
