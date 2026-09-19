@@ -53,6 +53,38 @@
 - [x] **Verified**: screenshots at 1440px/1920px/2560px × short (4-paragraph placeholder) and long (40-paragraph stress test) copy — no flat/background-colored area visible anywhere in the `bg-lower` region (left edge, right edge, or bottom) at any combination; `document.documentElement.scrollWidth === clientWidth` held at every width (the horizontal-overflow fix from the entry above is unaffected); tight zoomed crops of both the left and right edges at 1920px show continuous, seamless paper grain with no visible tile boundary.
 - [x] **Out of scope, left as-is**: the now-unused `<img src="paper.png">` in `journal-post.html` — this task's instructions restricted changes to `.jp-decor__bg-lower` and its asset in `journal-post.css` / the assets folder, so the markup wasn't touched. A future pass converting this page to the planned Eleventy/Decap CMS template should remove that dead `<img>` element from the HTML.
 
+## Journal Post — Below-the-fold design: corners should anchor to true content end (planned, not started)
+- [ ] Currently `.jp-decor__corner1` and `.jp-decor__corner2` are fixed decorative
+  elements positioned within/near `.jp-stage`'s original 1024px frame. Sarah wants
+  this pair repositioned as a matched set to the actual end of the page's content
+  — wherever that ends up being for a given essay's length — rather than staying
+  at their current fixed spot. No new assets needed; this is a CSS positioning
+  change (anchor to the bottom of `.jp-body-region`'s real, content-driven height,
+  same technique already used for `.jp-decor__bg-lower`'s dynamic positioning).
+  Independent of the item below — can be done anytime.
+
+## Journal Post — Yellow paper should extend as the continuous background (blocked on new asset)
+- [ ] Sarah wants the yellow paper (`.jp-decor__yellow-paper`, Figma node 2:150)
+  to be the actual continuous background for the whole page, replacing the
+  current plain-paper-tile approach for `.jp-decor__bg-lower` — so the page
+  reads as one continuous yellow-paper design ending at the corner pair (see
+  above), not "real design, then a different plain paper below the fold."
+  **Why this isn't a simple crop-and-tile like `bg-lower` was**: the yellow
+  paper asset (`assets/images/home/yellow-piece-of-paper.png`) is a single
+  torn scrap with ragged edges on all four sides — there's no clean, edge-free
+  interior region to crop a seamless tile from, unlike `paper.png`. Naively
+  tiling it would repeat torn edges across the page in an obvious grid.
+  Figma's own layer (2:150) is already sized ~40% taller than the 1024px
+  frame, confirming some overflow was planned for, but that's a fixed,
+  finite amount — it doesn't scale to arbitrary essay length.
+  **What's actually needed**: a new, separate tileable yellow/gold paper
+  texture (same color and grain family as the existing torn piece, but built
+  as a continuous fill rather than a discrete scrap) to serve as the
+  extending background, with the current torn-edge asset staying exactly
+  where it is now, layered on top near the hero. This is asset-creation work
+  (Canva, searching for a seamless kraft/gold paper texture close to this
+  color), not a code fix — blocked on Sarah sourcing or cropping that texture.
+
 ## Journal Post — Title Block underline needs the real asset
 - [ ] `.jp-title-block__rule` (css/journal-post.css) is a flat `var(--color-crimson)` bar standing in for Figma node 3:160 ("Line 4"), a real textured hand-drawn crimson brush-stroke SVG/PNG (643×12px at the reference frame). Couldn't be downloaded in-session — this sandbox's egress policy blocks `www.figma.com` asset URLs, and both `get_design_context`/`download_assets` only hand back a Figma-hosted URL to fetch. Geometry (position/width) is exact; only the visual texture is missing. Swap: export "Line 4" from Figma as PNG/SVG, drop it in `assets/images/journal/`, then replace the `background-color` rule with a `background-image` at the same box.
 
