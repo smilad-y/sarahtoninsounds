@@ -774,4 +774,13 @@
     height: 32px;
     max-width: none;
   }
+
+  /* ── Collage Footer ── Figma node 55:32 ("CollageFooter"), currently
+     empty in Figma — see the HTML comment above this element for why
+     no content is invented here. Pure closing space, on top of Essay
+     Body's own 48px bottom padding, so the page ends with a deliberate
+     rest rather than stopping right on the last paragraph. */
+  .jpm-collage-footer {
+    height: 40px;
+  }
 }
