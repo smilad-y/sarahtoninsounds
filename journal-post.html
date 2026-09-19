@@ -231,6 +231,50 @@
     </div>
 
   </div>
+
+  <!-- Mobile Journal Post (390px reference frame, Figma node 55:4
+     "mobile-journal-entry") — Header only, this pass. A real,
+     independent mobile composition (not desktop scaled down), same
+     established pattern as Journal Landing's .jv2m-page in
+     journal.css: hidden by default, shown under the mobile
+     breakpoint, with the desktop .jp-stage hidden in that same
+     breakpoint so the two never render together.
+
+     Nav, Title Block, Polaroid Hero, Essay Body, and Collage Footer
+     (Figma frames 55:8, 55:19, 55:23, 55:27, 55:32) are intentionally
+     not built yet — Header (55:6) only. The page-level
+     "background-texture" layer (55:5, a sibling of Header at the
+     mobile-journal-entry frame level, covering the whole page) is
+     also out of scope for this pass; it isn't part of the Header
+     node itself.
+
+     Rotation: the task brief assumed no rotation on this section, but
+     get_design_context on 55:6 shows the logo IS rotated -3deg (Figma:
+     "-rotate-3") — confirmed against Figma directly rather than
+     assumed, and cross-checked against the frame math: a 240×98
+     rectangle rotated 3° produces a bounding box of ~244.8×110.43px,
+     matching node 55:7's own stated post-rotation size exactly. Uses
+     the same flex-center-then-rotate technique already established
+     sitewide (outer wrapper at the post-rotation bounding box,
+     centering an inner element at the natural pre-rotation size,
+     which carries the rotate() transform) rather than a naive
+     transform-origin, avoiding the top-left-pivot issue documented
+     elsewhere on this page.
+
+     Asset: reuses assets/images/home-v2/home-logo-sharp.png — the
+     same approved gold wordmark already used for the desktop Journal
+     Post decorative layer and Home (ASSET-MANIFEST.md), not a new
+     export. Never redrawn/reconstructed per CLAUDE.md's non-negotiable
+     on the wordmark. -->
+  <div class="jpm-page" id="journal-post-mobile-stage">
+    <header class="jpm-header">
+      <div class="jpm-header__logo">
+        <div class="jpm-header__logo-inner">
+          <img src="/assets/images/home-v2/home-logo-sharp.png" alt="Sarahtonin Sounds">
+        </div>
+      </div>
+    </header>
+  </div>
 </main>
 
 <script src="/js/site.js" defer></script>

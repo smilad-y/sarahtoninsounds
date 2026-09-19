@@ -429,3 +429,95 @@
   object-fit: contain;
   z-index: 18;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   Mobile Journal Post (390px reference frame, Figma node 55:4
+   "mobile-journal-entry") — Header only, this pass.
+
+   Same established pattern as Journal Landing's .jv2m-page (see
+   journal.css): a real, independent mobile composition — not desktop
+   scaled down — hidden by default and only shown under the mobile
+   breakpoint, with .jp-stage (desktop) hidden in that same breakpoint
+   so the two never render together. Sizes/spacing below are Figma's
+   own literal px values (this is a scrolling flow page, not a
+   fixed-aspect stage, so static px is the right technique here, same
+   as Journal Landing's mobile page).
+
+   Header padding (pt:24, px:16, pb:8) comes directly from Figma's own
+   auto-layout properties on node 55:6, not a guess: 24 + 110.4263
+   (logo's post-rotation height) + 8 = 142.4263 — matches the header
+   frame's own stated height (142.4263153076172) essentially exactly,
+   confirming these are the real values Figma renders with, not the
+   raw metadata "absolute" y (36.56) for the logo child, which would
+   leave the logo's rotated bounding box bleeding ~4.6px past the
+   header's own bottom edge — inconsistent, and not what auto-layout
+   would actually produce. Horizontal centering uses flexbox
+   (align-items:center) rather than a computed left-offset: Figma's
+   72.6px margins on both sides work out to exactly (390-244.8)/2,
+   confirming the logo is centered, but flexbox centering is used here
+   instead since it holds up correctly across viewport widths other
+   than exactly 390px, per the task's explicit ask, without needing a
+   separate computed value.
+
+   Rotation: get_design_context on 55:6 shows the logo rotated -3deg
+   ("-rotate-3") — the task brief's assumption of no rotation was
+   wrong; confirmed directly against Figma rather than assumed, and
+   cross-checked mathematically (a 240×98 rectangle rotated 3° yields
+   a ~244.8×110.43px bounding box, matching node 55:7's own stated
+   post-rotation size exactly). Uses the same flex-center-then-rotate
+   technique already established sitewide (outer wrapper sized to the
+   post-rotation bounding box, centering an inner element at the
+   natural pre-rotation size, which carries the rotate() transform)
+   rather than a naive transform-origin, avoiding the top-left-pivot
+   issue documented elsewhere on this page.
+
+   Asset: assets/images/home-v2/home-logo-sharp.png — the same
+   approved gold wordmark already used on desktop (ASSET-MANIFEST.md),
+   reused as-is, not re-exported. ══════════════════════════════════ */
+
+.jpm-page {
+  display: none;
+}
+
+@media (max-width: 599px) {
+  .jp-stage {
+    display: none;
+  }
+
+  .jpm-page {
+    display: block;
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+    background-color: var(--color-cream);
+  }
+
+  .jpm-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 8px;
+  }
+
+  .jpm-header__logo {
+    width: 244.8px;
+    height: 110.4263px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jpm-header__logo-inner {
+    width: 240px;
+    height: 98px;
+    transform: rotate(-3deg);
+  }
+
+  .jpm-header__logo-inner img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+  }
+}
