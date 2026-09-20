@@ -82,10 +82,6 @@
 
     <img class="ab3-bg-foreground" src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Foreground_Paper.png" alt="">
 
-    <div class="ab3-bg-torn">
-      <img src="/assets/images/about/About Me-Desktop-Final Assets/torn_paper_1.png" alt="">
-    </div>
-
     <div class="ab3-title-block">
       <h1>About</h1>
       <hr>
@@ -116,17 +112,6 @@
        y=169), then grows with real content instead of being clipped.
        See the CSS comment on .ab3-body-region for the exact math. -->
   <div class="ab3-body-region">
-    <!-- Continues the header's own foreground-paper texture
-         (.ab3-bg-foreground, in .ab3-stage) below the old fixed stage's
-         bottom edge — without it, any bio long enough to push past that
-         edge shows a hard seam into flat cream page background (see
-         TODO.md, "About Page — Footer now flows below the bio"; same
-         category of problem as Journal Post's .jp-decor__bg-lower).
-         Stays BEHIND real content despite coming first in the DOM —
-         see the CSS comment on .ab3-body-bg for why .ab3-content/
-         .ab3-footer need their own explicit stacking to paint above it. -->
-    <div class="ab3-body-bg" aria-hidden="true"></div>
-
     <div class="ab3-content">
       <h2 class="ab3-hero">Hi! I&rsquo;m Sarah,<br>the girl behind Sarahtonin Sounds.</h2>
       <div class="ab3-bio">
@@ -154,9 +139,13 @@
          stage — see the CSS comment on .ab3-footer for the exact
          numbers and why the original DOM/paint order is preserved. -->
     <div class="ab3-footer">
-      <div class="ab3-bg-pink-strip">
-        <img src="/assets/images/about/About Me-Desktop-Final Assets/pink_strip_1.png" alt="">
-      </div>
+      <!-- Bordered footer card (Figma node 119:60, About-Me file
+           FP1ZWOSEAtNuI8w2OG2E7x, node-id 119-2) — replaces the removed
+           pink strip. Position/size are derived from where .ab3-cta and
+           .ab3-resume-card actually render in this flowed layout (not
+           Figma's literal coordinates, which assumed the old fixed
+           absolute layout) — see the CSS comment on .ab3-footer-card. -->
+      <div class="ab3-footer-card" aria-hidden="true"></div>
 
       <div class="ab3-cta">
         <h2>Let&rsquo;s Work Together!</h2>
