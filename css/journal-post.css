@@ -31,8 +31,24 @@
   padding: 0;
 }
 
+/* overflow:hidden added for the corner papers below (.jp-decor__corner1/
+   __corner2, in .jp-body-region): both have a small built-in overshoot
+   past their own container's edges (corner2's left+width sums to
+   100.4019%; corner1 bleeds slightly past the left edge, and both
+   bleed ~70px past .jp-body-region's bottom by design — see the
+   comment on .jp-decor__corner2's rule). That overshoot was always
+   invisible, clipped by .jp-stage's own overflow:hidden while these
+   lived inside it — moving them to .jp-body-region (which has no
+   clipping of its own) turned the same overshoot into real,
+   measurable page overflow (document.documentElement.scrollWidth
+   exceeding clientWidth) for the first time. Clipping here, at the
+   one container both .jp-stage and .jp-body-region already share,
+   restores the exact same truncation these elements always had rather
+   than either leaving new overflow or suddenly showing more of the
+   pink/red paper past the tear than the original design ever did. */
 .jp-page {
   max-width: none;
+  overflow: hidden;
 }
 
 .jp-stage {
@@ -268,29 +284,26 @@
    .jp-body-copy again the moment anyone edits this rule. Pinning it
    to 0, below .jp-body-copy's explicit z-index:1, keeps the paint
    order correct by rule, not by luck. */
-/* Tiled via background-repeat, not a single stretched <img>: the
-   source asset (journal/paper.png) has a real photographed torn/
-   deckled edge baked into it, chosen back when this element sat
-   fully hidden inside .jp-stage's collage. As a full-width,
-   variable-height fill it stretched that same torn edge across the
-   whole left and right sides via object-fit:cover, exposing flat
-   page background past it — object-fit:cover crops to fill the box,
-   it never generates more paper than the source photo actually has.
-   journal/paper-tile.webp is a purpose-made seamless tile cropped
-   from the same source (a 600×600 fully-opaque interior region, no
-   torn edge, from paper.png's columns 150-750 / rows 300-900 — well
-   inside the safe interior a full-grid opacity scan confirmed is
-   torn-edge-free), then made infinitely tileable in both directions
-   via the standard 4-way mirror technique (top-left/top-right/
-   bottom-left/bottom-right = the crop and its horizontal/vertical/
-   both flips): every shared internal seam is a mirror axis by
-   construction, and the tile's own outer edges equal each other
-   (both equal the crop's own column/row 0) so repeat-tiling never
-   shows a seam either. Both directions repeat, not just repeat-y:
-   the safe crop (600px) is narrower than real desktop widths (2560px
-   tested), so horizontal tiling is required too, not just vertical.
-   The <img> in the markup is unused now (kept in the DOM rather than
-   editing journal-post.html for this fix) — hidden below. */
+/* Tiled via background-repeat, not a single stretched <img> — same
+   mechanism as before, only the image itself changed. Previously
+   journal/paper-tile.webp, a purpose-made seamless tile mirrored up
+   from a plain cream crop of journal/paper.png (see TODO.md, "Journal
+   Post — bg-lower's torn edges exposed at full width"). Now
+   journal/yellow-tile.webp: Sarah wants the yellow paper
+   (.jp-decor__yellow-paper, assets/images/home/yellow-piece-of-paper.png)
+   to read as the page's one continuous background all the way to the
+   corner papers at the true end of content (see TODO.md, "Journal
+   Post — Yellow paper should extend as the continuous background"),
+   not "real design, then a different plain paper below the fold." The
+   new asset is already seamless on its own (no mirroring needed here
+   — unlike paper-tile.webp, it wasn't built by this codebase from a
+   torn-edge photo) and its color/blend against the existing torn
+   yellow-paper piece is Sarah's own approved call, not a placeholder.
+   Both directions repeat, not just repeat-y: the tile is narrower
+   than real desktop widths (2560px tested), so horizontal tiling is
+   required too, not just vertical. The <img> in the markup is unused
+   (kept in the DOM rather than editing journal-post.html for the
+   original fix this rule came from) — hidden below. */
 .jp-decor__bg-lower {
   position: absolute;
   left: 0;
@@ -300,7 +313,7 @@
   width: 100%;
   max-width: none;
   z-index: 0;
-  background-image: url('/assets/images/journal/paper-tile.webp');
+  background-image: url('/assets/images/journal/yellow-tile.webp');
   background-repeat: repeat;
 }
 
@@ -308,53 +321,59 @@
   display: none;
 }
 
-/* ── Decorative / Collage Layer ── every remaining element of Figma
-   node 2:72 (asset choices, the metadata/design-context position
-   conflicts, and the polaroid/tape pre-flattened-asset reasoning are
-   documented in the HTML comment above this layer's markup).
+/* Corner papers 1 & 2 (Figma 3:154, 3:155) — moved here from .jp-decor
+   (see the HTML comment on .jp-decor__corner2's markup, in
+   .jp-body-region, for the full rationale) so this matched pair
+   anchors to the true end of the essay's content rather than a fixed
+   spot on .jp-stage's 1024px frame. width/left are unchanged from
+   their old .jp-stage values (both already resolve against WIDTH per
+   the CSS spec, so they carry over identically since .jp-stage and
+   .jp-body-region share the same width via .jp-page). height is now
+   aspect-ratio instead of a height percentage: a % height here would
+   resolve against .jp-body-region's own content-driven height and
+   make the papers grow or shrink with essay length, which is exactly
+   the "same size" this move needs to avoid. The aspect-ratio values
+   are each element's own former width/height percentages converted
+   to the pixel box they implied at the 1492×1024 reference frame
+   (corner2: 31.233%×1492 / 36.7188%×1024 ≈ 466/376; corner1:
+   60.992%×1492 / 56.8359%×1024 ≈ 910/582).
 
-   z-index tiers replicate Figma's own paint order (bottom to top):
-   background(1) < corner papers(3-4) < logo(5) < yellow paper(6)
-   < stars(7) < megaphone(8) ... Title Block(15) ... Polaroid+Tape(18)
-   < Nav(20). Nav is deliberately kept topmost overall (Figma's own
-   order paints Polaroid+Tape last/above Nav) so the real nav links
-   stay clickable — the two units never overlap on screen, so this
-   reordering is invisible. Body Copy and Background Paper Section 1
-   (2:78, .jp-decor__bg-lower) are outside this tier range entirely:
-   both live in .jp-body-region, a plain DOM sibling painted after
-   .jp-stage (which contains 1-20 via isolation:isolate — see
-   .jp-stage/.jp-body-region above). Within .jp-body-region itself,
-   DOM order alone is NOT enough to keep bg-lower under the text:
-   bg-lower's wrapper must be position:absolute (to stretch top:0 to
-   bottom:0), and any positioned element with z-index:auto still
-   outranks non-positioned flow content regardless of DOM order — so
-   .jp-body-copy carries its own explicit position:relative;
-   z-index:1, one above bg-lower's explicit z-index:0, to force the
-   correct order. See the comment on .jp-body-copy above. */
-.jp-decor {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.jp-decor__bg-base {
-  position: absolute;
-  left: 0%;
-  top: -7.8125%;
-  width: 101.6086%;
-  height: 122.7539%;
-  max-width: none;
-  object-fit: cover;
-  z-index: 1;
-}
-
+   Vertical anchor: bottom:0 + a negative margin-bottom (a
+   width-relative percentage, since margin percentages resolve
+   against the containing block's WIDTH per spec — same technique
+   already used for .jp-body-region's own margin-top and
+   .jp-decor__bg-lower's margin-top) replaces the old
+   top-from-.jp-stage percentage. The margin-bottom value replicates
+   each paper's original relationship to the stage's bottom edge, now
+   measured from .jp-body-region's real bottom edge instead: both
+   papers' old top+height summed to ~106.836% of the 1024px frame —
+   i.e. both already bled exactly 70px past the stage's own bottom
+   edge by design (a coincidence worth noting, not assumed: computed
+   independently for each element and only found to match after the
+   fact). 70/1492 = 4.6917% of the reference frame's width, so
+   `margin-bottom: -4.6917%` on both puts their bottom edge 70px (at
+   1492 reference scale) below .jp-body-region's real, content-driven
+   bottom edge — the same visual relationship they had to the stage,
+   just against the new reference point. z-index (3, 4) is unchanged
+   from the original .jp-decor value, per the task's explicit
+   "preserve z-index stacking" instruction — see the z-index-tiers
+   comment above .jp-decor's own rule for how this now compares
+   against .jp-body-copy(1) and .jp-decor__bg-lower(0) instead of
+   .jp-stage's isolated 1–20 tier range. pointer-events:none is
+   explicit on both now (previously inherited for free from
+   .jp-decor's own pointer-events:none on the whole layer): both can
+   overlap body copy once anchored to the true end of content, and
+   being purely decorative they must never block text selection or
+   other interaction with the copy underneath. */
 .jp-decor__corner2 {
   position: absolute;
   left: 69.1689%;
-  top: 70.1172%;
   width: 31.233%;
-  height: 36.7188%;
+  aspect-ratio: 466 / 376;
+  bottom: 0;
+  margin-bottom: -4.6917%;
   z-index: 3;
+  pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -374,29 +393,67 @@
   object-fit: cover;
 }
 
-/* top: 50% (=512/1024) is Figma's own composed output for this node
-   (3:154), taken directly rather than hand-derived. An earlier pass
-   assumed Figma rotates this ±180° node around its top-left corner
-   and hand-computed top as -70/1024 = -6.8359% from the raw
-   pre-rotation box — that hand-derived value was the actual mistake,
-   not Figma's own data: it placed the paper in the upper-left, tucked
-   behind the logo/nav, while Figma's full-frame screenshot clearly
-   shows it at the bottom-left near the polaroid, at its current real
-   size. left/width/height are unchanged.
-
-   No CSS rotation: this asset (corner-paper-pink.png) is pre-flattened,
-   same as the Polaroid + Tape assets elsewhere on this page — the tilt
-   is already baked into the image's own pixels, so the earlier
-   rotate(180deg) scaleY(-1) was double-rotating it. See TODO.md. */
+/* No CSS rotation: this asset (corner-paper-pink.png) is
+   pre-flattened, same as the Polaroid + Tape assets elsewhere on this
+   page — the tilt is already baked into the image's own pixels (see
+   TODO.md for the earlier double-rotation bug this avoids). */
 .jp-decor__corner1 {
   position: absolute;
   left: -3.4182%;
-  top: 50%;
   width: 60.992%;
-  height: 56.8359%;
+  aspect-ratio: 910 / 582;
+  bottom: 0;
+  margin-bottom: -4.6917%;
   max-width: none;
   object-fit: cover;
   z-index: 4;
+  pointer-events: none;
+}
+
+/* ── Decorative / Collage Layer ── every remaining element of Figma
+   node 2:72 (asset choices, the metadata/design-context position
+   conflicts, and the polaroid/tape pre-flattened-asset reasoning are
+   documented in the HTML comment above this layer's markup).
+
+   z-index tiers replicate Figma's own paint order (bottom to top):
+   background(1) < logo(5) < yellow paper(6) < stars(7) < megaphone(8)
+   ... Title Block(15) ... Polaroid+Tape(18) < Nav(20). Nav is
+   deliberately kept topmost overall (Figma's own order paints
+   Polaroid+Tape last/above Nav) so the real nav links stay clickable
+   — the two units never overlap on screen, so this reordering is
+   invisible. Body Copy, Background Paper Section 1 (2:78,
+   .jp-decor__bg-lower), and the two corner papers (3:154/3:155,
+   .jp-decor__corner1/__corner2) are outside this tier range entirely:
+   all four live in .jp-body-region, a plain DOM sibling painted after
+   .jp-stage (which contains 1-20 via isolation:isolate — see
+   .jp-stage/.jp-body-region above). Within .jp-body-region itself,
+   DOM order alone is NOT enough to keep bg-lower under the text:
+   bg-lower's wrapper must be position:absolute (to stretch top:0 to
+   bottom:0), and any positioned element with z-index:auto still
+   outranks non-positioned flow content regardless of DOM order — so
+   .jp-body-copy carries its own explicit position:relative;
+   z-index:1, one above bg-lower's explicit z-index:0, to force the
+   correct order. See the comment on .jp-body-copy above. The corner
+   papers keep their original z-index values (3, 4) unchanged (see the
+   comment on their own rules, further below), which puts them above
+   both body copy and bg-lower — the same relative order Figma's own
+   paint order already had them in, just against a different, smaller
+   set of siblings now that they live here instead of in .jp-decor. */
+.jp-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.jp-decor__bg-base {
+  position: absolute;
+  left: 0%;
+  top: -7.8125%;
+  width: 101.6086%;
+  height: 122.7539%;
+  max-width: none;
+  object-fit: cover;
+  z-index: 1;
 }
 
 .jp-decor__logo {

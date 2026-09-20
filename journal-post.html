@@ -22,22 +22,31 @@
 
     <!-- Decorative / Collage Layer — every remaining element of Figma
          node 2:72 "Desktop-Journal Entry": the full-bleed background
-         paper (2:73), the two torn corner papers (3:154,
-         3:155), the angled logo badge (2:26), the yellow paper behind
-         the text column (2:150), two scribble stars (3:165, 3:164),
-         the edge-bleeding megaphone (3:167), and the Polaroid + Tape
-         unit (94:14). Purely decorative — aria-hidden, no informational
-         content. `home-spiral-4`, previously flagged as likely
-         leftover Home-page clutter outside the frame's visible bounds,
-         does not appear anywhere in this frame's current child list
-         (confirmed via get_metadata on 2:72) — already gone, nothing
-         to skip.
+         paper (2:73), the angled logo badge (2:26), the yellow paper
+         behind the text column (2:150), two scribble stars (3:165,
+         3:164), the edge-bleeding megaphone (3:167), and the Polaroid
+         + Tape unit (94:14). Purely decorative — aria-hidden, no
+         informational content. `home-spiral-4`, previously flagged as
+         likely leftover Home-page clutter outside the frame's visible
+         bounds, does not appear anywhere in this frame's current
+         child list (confirmed via get_metadata on 2:72) — already
+         gone, nothing to skip.
 
          2:78 (the second full-bleed background paper) is NOT here: its
          real Figma y=1214 falls below this 1024px .jp-stage frame, so
          it lives in .jp-body-region below instead — see the comment
          on .jp-decor__bg-lower there, and TODO.md ("Journal Post —
          Page height capped at 1024px").
+
+         The two torn corner papers (3:154, 3:155) are ALSO NOT here
+         any more, for the same reason as 2:78: Sarah asked for this
+         pair to anchor to the true end of the essay's content rather
+         than sit at a fixed spot on the 1024px stage, so a
+         content-length essay needs them positioned relative to
+         .jp-body-region's real, content-driven bottom edge, not
+         .jp-stage's fixed one. See the comment on .jp-decor__corner1
+         in .jp-body-region below, and TODO.md ("Journal Post — Below-
+         the-fold design: corners should anchor to true content end").
 
          Position/rotation source-of-truth conflict, same pattern
          already documented in css/journal.css for this exact page
@@ -70,8 +79,10 @@
          - 2:78  → assets/images/journal/paper.png — see .jp-body-region
                    below, not this layer (plain cream torn paper
                    texture)
-         - 3:154 → assets/images/journal/corner-paper-pink.png
-         - 3:155 → assets/images/journal/corner-paper-red.png
+         - 3:154 → assets/images/journal/corner-paper-pink.png — see
+                   .jp-body-region below, not this layer
+         - 3:155 → assets/images/journal/corner-paper-red.png — see
+                   .jp-body-region below, not this layer
          - 2:26  → assets/images/home-v2/home-logo-sharp.png (name and
                    art both match "Sarahtonin Sounds logo sharp" —
                    already used elsewhere on the site)
@@ -97,17 +108,6 @@
          against the full-frame Figma screenshot, not assumed from the
          ratio match alone.
 
-         Corner paper 1 (3:154 → corner-paper-pink.png) is the same
-         kind of pre-flattened asset: its tilt is already baked into
-         the image's own pixels, so it also carries no CSS rotation
-         (see the comment on .jp-decor__corner1 in journal-post.css —
-         an earlier pass wrongly applied Figma's stated
-         rotate(180deg) scaleY(-1) on top of it, double-rotating it
-         and hiding most of the paper's visible shape within its own
-         box). corner-paper-red (3:155, .jp-decor__corner2) is a
-         genuine "natural" pre-rotation source and is unaffected —
-         it still uses the flex-center-then-rotate technique below.
-
          Rotation pivot: every OTHER element below uses Figma's own
          flex-center-then-rotate export technique (already established
          in css/journal.css for the Journal Landing logo/green paper) —
@@ -120,13 +120,6 @@
          value per element. -->
     <div class="jp-decor" aria-hidden="true">
       <img class="jp-decor__bg-base" src="/assets/images/listen/sarahtonin_sounds-background_paper_2_1.png" alt="">
-
-      <div class="jp-decor__corner2">
-        <div class="jp-decor__corner2-inner">
-          <img src="/assets/images/journal/corner-paper-red.png" alt="">
-        </div>
-      </div>
-      <img class="jp-decor__corner1" src="/assets/images/journal/corner-paper-pink.png" alt="">
 
       <div class="jp-decor__logo">
         <div class="jp-decor__logo-inner">
@@ -272,6 +265,50 @@
       <p>Minim minim amet dolor adipiscing nisi incididunt ad ut amet consectetur elit ullamco sed. Magna dolore dolor ad elit nostrud sed lorem adipiscing magna. Ullamco tempor laboris minim quis ut. Aliqua ad aliquip et ex laboris. Exercitation adipiscing ullamco ea aliqua ut commodo eiusmod ut sed ex ut ut tempor exercitation.</p>
       <p>Nostrud ipsum ea dolore lorem laboris elit minim. Dolore eiusmod ullamco et minim aliqua sit commodo ea ullamco laboris aliqua nisi nisi. Veniam quis magna ea labore ut ad sit consequat consectetur et ut ea dolore. Incididunt nisi commodo amet nisi aliqua elit nostrud amet nisi ad. Sit amet ut amet ut consequat ut lorem ut aliqua ut et dolor labore. Minim consectetur sit ipsum tempor ad commodo lorem incididunt tempor ad ut.</p>
     </div>
+
+    <!-- Corner papers 1 & 2 (Figma 3:154, 3:155) — moved here from
+         .jp-decor per Sarah's request: this pair should anchor to the
+         true end of the essay's content, wherever that ends up being,
+         not sit at a fixed spot on the 1024px stage. Both are
+         absolutely positioned within .jp-body-region (not .jp-stage),
+         anchored with bottom:0 + a negative margin-bottom (a
+         width-relative percentage, per the CSS-spec fact that margin
+         percentages resolve against the containing block's WIDTH —
+         same technique already used for .jp-body-region's own
+         margin-top and .jp-decor__bg-lower's margin-top) instead of
+         the old top-from-.jp-stage percentage. width and left are
+         unchanged (both already resolved against WIDTH, so they carry
+         over identically between .jp-stage and .jp-body-region, which
+         share the same width via .jp-page); height is now driven by
+         aspect-ratio instead of a height percentage, since a %
+         height here would resolve against .jp-body-region's own
+         content-driven height and make the papers grow or shrink with
+         essay length — exactly the "size" this move is required to
+         preserve. z-index (3, 4) is unchanged from its original
+         .jp-decor value, per the task's explicit "preserve z-index
+         stacking" instruction, even though it now compares against
+         .jp-body-copy's z-index:1 and .jp-decor__bg-lower's z-index:0
+         instead of .jp-stage's isolated 1-20 tier range (see
+         TODO.md, "Journal Post — Below-the-fold design: corners
+         should anchor to true content end").
+
+         Corner paper 1 (3:154 → corner-paper-pink.png) is a
+         pre-flattened asset: its tilt is already baked into the
+         image's own pixels, so it carries no CSS rotation (an earlier
+         pass wrongly applied Figma's stated rotate(180deg) scaleY(-1)
+         on top of it, double-rotating it — see TODO.md). Corner paper
+         2 (3:155 → corner-paper-red.png) is a genuine "natural"
+         pre-rotation source and still uses the site's established
+         flex-center-then-rotate technique (an outer wrapper sized to
+         the POST-rotation bounding box, centering an inner element at
+         the PRE-rotation natural size, which carries the rotate()/
+         scaleY() transform). -->
+    <div class="jp-decor__corner2" aria-hidden="true">
+      <div class="jp-decor__corner2-inner">
+        <img src="/assets/images/journal/corner-paper-red.png" alt="">
+      </div>
+    </div>
+    <img class="jp-decor__corner1" src="/assets/images/journal/corner-paper-pink.png" alt="">
   </div>
 
   </div>
