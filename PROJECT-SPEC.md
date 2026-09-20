@@ -294,7 +294,7 @@ Do **not** use the previously considered full dark poster-style bio card. Let th
 - Main heading: **"About Me"**
 - Opening: **"Hi! I'm Sarah, the girl behind Sarahtonin Sounds."**
 - Preserve the personal origin story and conversational voice.
-- Approved taste heading: **"my taste is all over the place."**
+- Approved taste line (single-column bio, under the "My taste in a nutshell" subheading): **"My taste is a little all over the place, in the best way."** — Sarah's revision, supersedes the earlier locked "my taste is all over the place." (see TODO.md).
 - Do not use the older "my taste is a mess in the best way."
 - Professional credits list is removed/held off for now.
 - About copy is considered finalized for now; only minor layout-driven trimming should happen later if necessary.

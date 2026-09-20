@@ -161,14 +161,12 @@
   margin: 0;
 }
 
-.ab3-intro-row {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  width: 1080px;
-}
-
-.ab3-intro-copy {
+/* Single-column bio — supersedes the former ab3-intro-row two-column
+   layout (see TODO.md). Left edge/width match the old left column
+   (.ab3-intro-copy) exactly, so it still sits beside the polaroid the
+   same way; a comfortable reading width, not the former full
+   two-column span. */
+.ab3-bio {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -176,7 +174,7 @@
   flex-shrink: 0;
 }
 
-.ab3-intro-copy p {
+.ab3-bio p {
   margin: 0;
   font-size: 15px;
   line-height: 26px;
@@ -184,19 +182,17 @@
   color: var(--color-near-black);
 }
 
-.ab3-sarahhtonin-column {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 452px;
-  flex-shrink: 0;
-}
-
-.ab3-sarahhtonin-column p {
-  margin: 0;
-  font-size: 15px;
-  line-height: 26px;
-  letter-spacing: 1px;
+/* New subheading treatment for "My taste in a nutshell": IM Fell
+   English Italic, a step up from body copy. Perandory is reserved for
+   page-level headings and Sue Ellen Francisco for short handwritten
+   marginalia, so this pause in the text gets its own in-between
+   treatment rather than borrowing either. */
+.ab3-bio__subhead {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
   color: var(--color-near-black);
 }
 
