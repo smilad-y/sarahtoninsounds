@@ -24,14 +24,84 @@
   padding: 0;
 }
 
+/* Shared 1440px column for both .ab3-stage (fixed-height header) and
+   .ab3-body-region (the normal-flow bio+footer below it) — same role
+   as Journal Post's .jp-page (css/journal-post.css). overflow:hidden
+   reproduces the same left-edge clip the footer's blue corner paper
+   always had (left:-97px) back when it lived inside .ab3-stage's own
+   overflow:hidden — now that it's a body-region child instead, nothing
+   else would clip that bleed. */
+.ab3-page {
+  width: 1440px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* isolation:isolate contains this stage's own z-index:auto paint order
+   to itself, so .ab3-body-region below — a later, plain DOM sibling —
+   naturally paints on top of it with no z-index of its own needed
+   (same technique as Journal Post's .jp-stage). */
 .ab3-stage {
   position: relative;
   width: 1440px;
   height: 1304px;
-  margin: 0 auto;
   overflow: hidden;
+  isolation: isolate;
   background-color: #fff;
   font-family: var(--font-body);
+}
+
+/* Normal-flow sibling of .ab3-stage — the bio and footer now live here
+   instead of being absolutely positioned against the old fixed-height
+   stage, so real (long) copy can push the footer down instead of
+   colliding with it (see TODO.md, "About Page — Footer now flows
+   below the bio"). margin-top is negative so this region starts
+   exactly where .ab3-content used to sit inside .ab3-stage
+   (stage-relative top:169px): -(1304 - 169) = -1135px. Since this page
+   uses literal fixed px throughout (not the percentage-of-width
+   technique Journal Post needed for a fluid-width stage), that's a
+   plain px value, not a width-relative percentage. */
+.ab3-body-region {
+  position: relative;
+  width: 1440px;
+  margin-top: -1135px;
+}
+
+/* Continues .ab3-bg-foreground's paper texture below the old stage's
+   fixed bottom edge (stage-relative y=1304), so a bio long enough to
+   push past it doesn't hit a hard seam into flat page background (see
+   TODO.md). top is expressed in THIS container's own local coordinates
+   (where local y=0 = old stage-relative y=169, per .ab3-body-region's
+   margin-top): 1304 − 169 = 1135px — i.e. it starts exactly where the
+   header's own texture stops, never overlapping/duplicating it.
+   bottom:0 stretches it to this region's real, content-driven bottom
+   edge, covering the bio and footer both, however tall either ends up
+   (confirmed with an 8x-length stress-test bio: no visible seam,
+   tracked correctly to a 7829px-tall page — see TODO.md).
+
+   Flat background-color, not a repeated/stretched image: a first pass
+   tiling the same PNG (background-repeat, background-size:1440px auto)
+   produced a visible seam at the old stage's bottom edge — not because
+   the texture itself has a hard edge, but because that tile's own
+   crop/scale didn't match .ab3-bg-foreground's specific object-fit:cover
+   box (left:-492px/top:134px/3382×2130px), so the two didn't line up in
+   tone where they meet. Canvas-sampled the actual PNG instead of
+   guessing: its bottom band, center, and full-image average all land
+   within a couple of RGB values of each other (240–241, 223–225,
+   196–198) — this texture is close enough to a flat, uniform cream
+   already that matching its average color is visually indistinguishable
+   from continuing the real image, with no seam-alignment risk at all.
+   Confirmed with the same 8x-length stress-test bio used elsewhere on
+   this page: no visible seam anywhere in a 7829px-tall page. */
+.ab3-body-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 1135px;
+  bottom: 0;
+  z-index: 0;
+  background-color: #f1e0c6;
+  pointer-events: none;
 }
 
 /* ── Background textures ── */
@@ -76,10 +146,13 @@
   transform: rotate(180deg);
 }
 
+/* Moved into .ab3-footer (see its comment for the top-offset math) —
+   this element's own old stage-relative top (952px) IS the new
+   container's y=0 reference, so its top here is simply 0. */
 .ab3-bg-pink-strip {
   position: absolute;
   left: -748px;
-  top: 952px;
+  top: 0px;
   width: 2429px;
   height: 474px;
   display: flex;
@@ -137,13 +210,23 @@
   text-decoration: underline;
 }
 
-/* ── content: Auto Layout Vertical → real flex column, not absolute
-   positioning internally (only the block itself is placed on the
-   page at Figma's literal x=360/y=169). ── */
+/* ── content: Auto Layout Vertical → real flex column. Now a
+   normal-flow child of .ab3-body-region (margin-left replaces the old
+   position:absolute; left:360px — top:169px is no longer needed here
+   at all, since .ab3-body-region's own negative margin-top already
+   starts this region at that exact y).
+
+   position:relative + z-index:1 (not the default static/auto) is
+   required, not cosmetic — same reasoning as Journal Post's
+   .jp-body-copy: .ab3-body-bg must be position:absolute (to stretch
+   top/bottom), and CSS's stacking rules put ANY positioned element
+   above ANY non-positioned flow content in the same stacking context
+   regardless of DOM order, so without this the bio would render behind
+   its own background. ── */
 .ab3-content {
-  position: absolute;
-  left: 360px;
-  top: 169px;
+  position: relative;
+  z-index: 1;
+  margin-left: 360px;
   width: 1080px;
   padding-top: 20px;
   display: flex;
@@ -196,11 +279,49 @@
   color: var(--color-near-black);
 }
 
-/* ── Let's Work Together + Get in touch ── */
+/* ── Footer — .ab3-cta, .ab3-resume-card, and the ephemera that goes
+   with them (pink strip, blue corner paper, flowers), now grouped in
+   one self-contained block that flows right after .ab3-content instead
+   of being absolutely positioned against the old fixed-height stage.
+   margin-top gives it breathing room below the bio (a design nicety,
+   not a measured value — adjust freely).
+
+   height:352px + overflow:hidden reproduce the exact crop this group
+   always had: the pink strip and blue corner paper both used to bleed
+   past the old stage's bottom edge (y=1304) and get clipped there by
+   .ab3-stage's own overflow:hidden. Every child's new top is (old
+   stage-relative top) − 952 — the pink strip's own old top (952px),
+   used as this container's y=0 reference because it's the EARLIEST of
+   the group (not .ab3-resume-card's top, 1021, which was tried first
+   and clipped the pink strip's own top edge — since this container's
+   overflow:hidden bounds ALL four sides of its box, the reference
+   point has to be at or above the topmost child, not just the tallest
+   "content" element). 1304 − 952 = 352, this container's height —
+   clipping there reproduces the old bottom-edge crop exactly (e.g.
+   blue corner paper's old top+height summed to 1304.0, exactly the old
+   clip line; here its top+height sums to 352.0, the new one). Nothing
+   in this group had an old top below 952, so nothing is newly clipped
+   at this container's top edge either — confirmed by checking every
+   child's new top+height stays ≤352 (matching whether it was fully
+   visible, or bottom-cropped, in the old layout) before trusting this
+   number, not just computed once and assumed. DOM order (pink strip →
+   cta → resume card → resume link → vert line → blue corner → flowers
+   → get-in-touch link) is unchanged from the original stage markup,
+   preserving the exact same paint order/stacking Figma's own layer
+   order specified. ── */
+.ab3-footer {
+  position: relative;
+  z-index: 1;
+  width: 1440px;
+  height: 352px;
+  margin-top: 60px;
+  overflow: hidden;
+}
+
 .ab3-cta {
   position: absolute;
   left: 335px;
-  top: 1039px;
+  top: 87px;
   width: 484px;
 }
 
@@ -241,14 +362,14 @@
 .ab3-get-in-touch {
   position: absolute;
   left: 340px;
-  top: 1254px;
+  top: 302px;
 }
 
 /* ── Selected Credits & Resume ── */
 .ab3-resume-card {
   position: absolute;
   left: 827px;
-  top: 1021px;
+  top: 69px;
   width: 526px;
   height: 178px;
   padding: 20px;
@@ -307,13 +428,13 @@
 .ab3-resume-link {
   position: absolute;
   left: 1090px;
-  top: 1095px;
+  top: 143px;
 }
 
 .ab3-vert-line {
   position: absolute;
   left: 827px;
-  top: 1041px;
+  top: 89px;
   width: 1px;
   height: 215px;
   background-color: var(--color-crimson);
@@ -406,10 +527,13 @@
    margin there) oversteps the CTA text column's left edge by ~9px,
    clipping the leading character of every line — confirmed by
    screenshot pixel-sampling, not visible in the Figma reference render.
-   Same width/height/rotation, only shifted left to clear the text. */
+   Same width/height/rotation, only shifted left to clear the text.
+   Now inside .ab3-footer (moved from .ab3-stage — see that rule's
+   comment for the top-offset math): top = old stage-relative
+   1044.53 − 952 = 92.53px. */
 .ab3-deco--blue-corner {
   left: -97px;
-  top: 1044.53px;
+  top: 92.53px;
   width: 402.271px;
   height: 259.473px;
 }
@@ -449,9 +573,12 @@
   transform: rotate(10.87deg);
 }
 
+/* Now inside .ab3-footer (moved from .ab3-stage — see that rule's
+   comment for the top-offset math): top = old stage-relative
+   1112.42 − 952 = 160.42px. */
 .ab3-deco--flowers {
   left: 25.84px;
-  top: 1112.42px;
+  top: 160.42px;
   width: 145.912px;
   height: 143.733px;
 }
@@ -462,7 +589,13 @@
 }
 
 @media (max-width: 900px) {
-  .ab3-stage {
+  /* Hides the whole desktop composition, not just .ab3-stage: since
+     the bio and footer moved out of .ab3-stage into .ab3-body-region
+     (a sibling inside .ab3-page — see that rule's comment), hiding
+     .ab3-stage alone left .ab3-body-region's content rendering on top
+     of .av2m-page at mobile widths — confirmed as a real regression via
+     a 390px-viewport screenshot, not assumed fixed by inspection alone. */
+  .ab3-page {
     display: none;
   }
 

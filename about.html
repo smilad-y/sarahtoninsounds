@@ -67,6 +67,7 @@
        "Let's Work Together!" and the polaroid's "Me! Sarah Milad!"
        caption. Figma's "DISCOVER" tape is relabeled Listen to match
        the locked launch nav. -->
+  <div class="ab3-page">
   <div class="ab3-stage">
 
     <img class="ab3-bg-stripe" src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Red_Stripe.png" alt="">
@@ -85,9 +86,46 @@
       <img src="/assets/images/about/About Me-Desktop-Final Assets/torn_paper_1.png" alt="">
     </div>
 
-    <div class="ab3-bg-pink-strip">
-      <img src="/assets/images/about/About Me-Desktop-Final Assets/pink_strip_1.png" alt="">
+    <div class="ab3-title-block">
+      <h1>About</h1>
+      <hr>
+      <p>me&hellip;more or less</p>
     </div>
+
+    <!-- Decorative Ephemera Cluster (header half only) — blue corner
+         paper and orange flowers moved to .ab3-footer below, since they
+         visually belong to the CTA/resume footer, not this fixed-height
+         header (see TODO.md, "About Page — Footer now flows below the
+         bio"). Green paper, logo, and polaroid stay here: all three
+         render entirely within the header's own fixed bounds (measured,
+         not assumed — green paper's rotated bounding box is huge but
+         only a small top-left triangle is ever visible on-canvas; logo
+         and polaroid both sit well above where the footer now starts). -->
+    <img class="ab3-deco ab3-deco--green-paper" src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Green_Paper.png" alt="">
+    <img class="ab3-deco ab3-deco--logo" src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+    <img class="ab3-deco ab3-deco--polaroid" src="/assets/images/about/About Me-Desktop-Final Assets/sarah green background polaroid  1.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
+
+    <p class="ab3-caption">Me! Sarah Milad!</p>
+
+  </div>
+
+  <!-- Normal-flow sibling of .ab3-stage, same technique proven on
+       Journal Post (css/journal-post.css, .jp-body-region): pulled up
+       via a negative margin-top so it starts exactly where .ab3-content
+       used to sit inside the old fixed-height stage (stage-relative
+       y=169), then grows with real content instead of being clipped.
+       See the CSS comment on .ab3-body-region for the exact math. -->
+  <div class="ab3-body-region">
+    <!-- Continues the header's own foreground-paper texture
+         (.ab3-bg-foreground, in .ab3-stage) below the old fixed stage's
+         bottom edge — without it, any bio long enough to push past that
+         edge shows a hard seam into flat cream page background (see
+         TODO.md, "About Page — Footer now flows below the bio"; same
+         category of problem as Journal Post's .jp-decor__bg-lower).
+         Stays BEHIND real content despite coming first in the DOM —
+         see the CSS comment on .ab3-body-bg for why .ab3-content/
+         .ab3-footer need their own explicit stacking to paint above it. -->
+    <div class="ab3-body-bg" aria-hidden="true"></div>
 
     <div class="ab3-content">
       <h2 class="ab3-hero">Hi! I&rsquo;m Sarah,<br>the girl behind Sarahtonin Sounds.</h2>
@@ -104,49 +142,52 @@
       </div>
     </div>
 
-    <div class="ab3-cta">
-      <h2>Let&rsquo;s Work Together!</h2>
-      <p>I work across music supervision, licensing, curation, and music discovery, and I love collaborating with people on a good idea. If you think I could be a fit for something you&rsquo;re working on, I&rsquo;d love to hear about it.</p>
-    </div>
-
-    <div class="ab3-resume-card">
-      <h2>Selected Credits &amp; Resume</h2>
-      <hr>
-      <div class="ab3-resume-entry">
-        <p class="ab3-resume-entry__title">TMZ Productions</p>
-        <p class="ab3-resume-entry__role">Senior Music Coordinator</p>
-        <p class="ab3-resume-entry__dates">2023-2026</p>
+    <!-- Footer — .ab3-cta, .ab3-resume-card, and the two ephemera pieces
+         that belong with them (pink strip background, blue corner
+         paper, flowers) all used to be absolutely positioned against
+         the old fixed-height stage; now a single self-contained block
+         that flows right after the bio, so it always sits directly
+         below it regardless of bio length. Every child below keeps its
+         original left offset (still valid: this block is the same
+         1440px width, same left origin, as the old stage) and gets a
+         new top offset relative to THIS container instead of the old
+         stage — see the CSS comment on .ab3-footer for the exact
+         numbers and why the original DOM/paint order is preserved. -->
+    <div class="ab3-footer">
+      <div class="ab3-bg-pink-strip">
+        <img src="/assets/images/about/About Me-Desktop-Final Assets/pink_strip_1.png" alt="">
       </div>
+
+      <div class="ab3-cta">
+        <h2>Let&rsquo;s Work Together!</h2>
+        <p>I work across music supervision, licensing, curation, and music discovery, and I love collaborating with people on a good idea. If you think I could be a fit for something you&rsquo;re working on, I&rsquo;d love to hear about it.</p>
+      </div>
+
+      <div class="ab3-resume-card">
+        <h2>Selected Credits &amp; Resume</h2>
+        <hr>
+        <div class="ab3-resume-entry">
+          <p class="ab3-resume-entry__title">TMZ Productions</p>
+          <p class="ab3-resume-entry__role">Senior Music Coordinator</p>
+          <p class="ab3-resume-entry__dates">2023-2026</p>
+        </div>
+      </div>
+      <!-- href="#" — final resume file/link not yet supplied
+           (ASSET-MANIFEST.md); not guessed here. -->
+      <a href="#" class="ab3-link ab3-resume-link">Resume <span aria-hidden="true">&rarr;</span></a>
+
+      <div class="ab3-vert-line" aria-hidden="true"></div>
+
+      <img class="ab3-deco ab3-deco--blue-corner" src="/assets/images/about/About Me-Desktop-Final Assets/torn_blue_corner_paper_1.png" alt="">
+      <img class="ab3-deco ab3-deco--flowers" src="/assets/images/about/About Me-Desktop-Final Assets/orange_flowers_scrapbook_1.png" alt="">
+
+      <!-- contact-link — Figma's last-painted node, on top of
+           everything else in this footer group.
+           href="/contact.html" is the site's real contact route; Figma
+           doesn't specify a destination for this link. -->
+      <a href="/contact.html" class="ab3-link ab3-get-in-touch">Get in touch <span aria-hidden="true">&rarr;</span></a>
     </div>
-    <!-- href="#" — final resume file/link not yet supplied
-         (ASSET-MANIFEST.md); not guessed here. -->
-    <a href="#" class="ab3-link ab3-resume-link">Resume <span aria-hidden="true">&rarr;</span></a>
-
-    <div class="ab3-title-block">
-      <h1>About</h1>
-      <hr>
-      <p>me&hellip;more or less</p>
-    </div>
-
-    <div class="ab3-vert-line" aria-hidden="true"></div>
-
-    <!-- Decorative Ephemera Cluster — see the stage comment above for
-         why these use top-left rotation pivots instead of center. Now
-         painted BEFORE the caption, per Figma's current node order —
-         the cluster sits behind the "Me! Sarah Milad!" note again. -->
-    <img class="ab3-deco ab3-deco--blue-corner" src="/assets/images/about/About Me-Desktop-Final Assets/torn_blue_corner_paper_1.png" alt="">
-    <img class="ab3-deco ab3-deco--green-paper" src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Green_Paper.png" alt="">
-    <img class="ab3-deco ab3-deco--logo" src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
-    <img class="ab3-deco ab3-deco--polaroid" src="/assets/images/about/About Me-Desktop-Final Assets/sarah green background polaroid  1.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
-    <img class="ab3-deco ab3-deco--flowers" src="/assets/images/about/About Me-Desktop-Final Assets/orange_flowers_scrapbook_1.png" alt="">
-
-    <p class="ab3-caption">Me! Sarah Milad!</p>
-
-    <!-- contact-link — Figma's last-painted node, on top of everything.
-         href="/contact.html" is the site's real contact route; Figma
-         doesn't specify a destination for this link. -->
-    <a href="/contact.html" class="ab3-link ab3-get-in-touch">Get in touch <span aria-hidden="true">&rarr;</span></a>
-
+  </div>
   </div>
 
   <!-- Mobile — hand-reflowed from the authoritative Figma frame
