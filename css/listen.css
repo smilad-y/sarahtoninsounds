@@ -82,6 +82,13 @@ html:has(body.page-listen) {
   list-style: none;
 }
 
+/* font-weight intentionally not set (was 600 under the old Crimson
+   Text choice): only a Regular/400 cut of Perandory Semi-Condensed is
+   hosted (css/tokens.css), so 600 here would trigger a synthetic/fake
+   bold — confirmed visibly heavier than Journal's and Journal Post's
+   identical nav-tape component side by side. Those two don't set
+   font-weight either, so leaving it unset here matches them exactly
+   rather than reintroducing a synthetic-bold mismatch. */
 .listen-nav__tab {
   position: relative;
   display: flex;
@@ -92,8 +99,7 @@ html:has(body.page-listen) {
   background-image: url('/assets/images/listen/sarahtonin_sounds-listen-Menu-tape_2_1.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  font-family: 'Crimson Text', Georgia, serif;
-  font-weight: 600;
+  font-family: var(--font-display);
   font-size: 20px;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -506,53 +512,6 @@ html:has(body.page-listen) {
 .tt-picks__item:nth-child(1) { top: 27.2%; }
 .tt-picks__item:nth-child(2) { top: 50.28%; }
 .tt-picks__item:nth-child(3) { top: 75.71%; }
-
-/* ── 1950sMusicAD decorative photo (Figma node 1:55) ──
-   A direct child of the page frame, not any of the 5 named sections — it
-   sits in the gap between Turntable and Intro/Crash Courses. Figma's own
-   placement (x=1391, width=687.7 at the 1440 reference) bleeds almost
-   entirely off the page's right edge, leaving only a ~49px sliver
-   visible. That exact bleed was not reproducible: some combination of
-   this element's zero-height flow anchor + translateY bleed + an
-   ancestor clip (overflow, then clip-path) reliably fought this
-   environment's rendering — verified NOT a false alarm from a broken
-   screenshot tool, since a direct DOM check (getBoundingClientRect,
-   naturalWidth/Height, computed style) confirmed the element existed
-   with correct geometry while remaining genuinely unpainted. Rather than
-   keep fighting it for a detail that was only ever a thin sliver,
-   this is a smaller (7% wide), fully on-page circular accent near the
-   same edge instead — same idea (a small vintage-photo peek at the
-   section boundary), simpler and robustly correct rather than an exact
-   reproduction of Figma's bleed amount. Flagging for Sarah's call on
-   whether that trade-off is acceptable. Source photo is a tall
-   987×1376 torn-paper cutout (transparent background, confirmed),
-   cropped to a circle via object-fit:cover + border-radius since the
-   exact Figma crop offset isn't available. */
-.listen-1950s-ad {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  height: 0;
-}
-
-.listen-1950s-ad img {
-  position: absolute;
-  left: 92%;
-  top: 0;
-  transform: translateY(-50%);
-  width: 7%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-@media (max-width: 760px) {
-  .listen-1950s-ad {
-    display: none;
-  }
-}
 
 @media (max-width: 760px) {
   .listen-turntable {
