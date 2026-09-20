@@ -46,26 +46,6 @@
   pointer-events: none;
 }
 
-.ab3-bg-paper1 {
-  position: absolute;
-  left: 195px;
-  top: 62px;
-  width: 1314px;
-  height: 1038px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.ab3-bg-paper1 img {
-  width: 1038px;
-  height: 1314px;
-  max-width: none;
-  object-fit: cover;
-  transform: rotate(90deg);
-}
-
 .ab3-bg-foreground {
   position: absolute;
   left: -492px;
@@ -99,7 +79,7 @@
 .ab3-bg-pink-strip {
   position: absolute;
   left: -748px;
-  top: 478px;
+  top: 952px;
   width: 2429px;
   height: 474px;
   display: flex;
@@ -353,12 +333,20 @@
   pointer-events: none;
 }
 
+/* font-weight:normal is explicit, not incidental: h1 has a bold UA
+   default, and only a Regular/400 cut of Perandory Semi-Condensed is
+   hosted (css/tokens.css), so leaving weight unset triggers a
+   synthetic/fake bold — confirmed visibly heavier side-by-side against
+   font-weight:normal. Matches the same "no fake bold" convention
+   already applied everywhere else this font is used (Journal, Journal
+   Post, Listen nav). */
 .ab3-title-block h1 {
   position: absolute;
   left: 332.33px;
   top: 72px;
   width: 324px;
   font-size: 75px;
+  font-weight: normal;
   line-height: 1;
   letter-spacing: 1px;
   color: var(--color-near-black);
