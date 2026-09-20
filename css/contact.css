@@ -109,12 +109,37 @@
   z-index: 5;
 }
 
+/* clip-path trims this box right where .cv2-bg-foreground's own
+   cream-textured zone begins (top: 43.9344% of .cv2-header), so no
+   part of the moon/star cluster reads as spilling into the cream
+   section below — even though the box's own bottom edge (top 3.5% +
+   height 78.3016% = 81.8% of the header) already sits fully inside
+   .cv2-header's clip boundary (295.7px of 305px), a trailing star
+   still lands past 43.9344% into the cream zone since that boundary
+   cuts through the middle of this box, not at its edge.
+
+   The clip-path polygon is defined in this element's own LOCAL,
+   pre-rotation coordinate space (CSS clips before applying transform,
+   then rotates the already-clipped shape) — a straight horizontal cut
+   in the FINAL, rotated header space becomes a straight but tilted
+   line back here, found by inverse-rotating the target boundary by
+   -36.05° around this box's own center. Concretely: at the
+   1440×305 reference frame, this box occupies x:[439.91,674.80]
+   / y:[10.68,249.50] (from left/top/width/height above) with center
+   (557.35, 130.08); solving sin(36.05°)·x + cos(36.05°)·y = (target Y
+   133.94, i.e. 43.9344% of 305) expressed in this box's own local
+   coordinates gives a line crossing the box's left edge at 87.8223%
+   of its own height and its right edge at 16.2328% — i.e. the
+   percentages below. Re-derive with the same method if left/top/
+   width/height/rotation ever change; this shape does not update
+   itself. */
 .cv2-deco--moon {
   left: 30.5493%;
   top: 3.5%;
   width: 16.3117%;
   height: 78.3016%;
   transform: rotate(36.05deg);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 16.2328%, 0% 87.8223%);
 }
 
 .cv2-deco--disco {
@@ -350,9 +375,18 @@
 }
 
 /* ── Right column: social ── */
+/* padding-top clears .contact-note (the rotated pink label below),
+   which is position:absolute and visually extends well past its own
+   top:-1rem thanks to its rotation — at 1440px it was measured
+   (getBoundingClientRect) to reach 30.4px past where 8rem placed
+   .contact-social-intro, a real overlap, not just tight spacing.
+   11rem leaves ~18px of clear gap instead (verified empirically, not
+   just computed from the note's nominal height) — see the comment on
+   .contact-note below for why its own top/width/rotation are tuned
+   separately and shouldn't be adjusted to compensate here instead. */
 .contact-col--social {
   position: relative;
-  padding-top: 8rem;
+  padding-top: 11rem;
 }
 
 /* Sized/structured the same reliable way as .contact-tape below (a
