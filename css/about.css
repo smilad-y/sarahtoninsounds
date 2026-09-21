@@ -425,9 +425,15 @@
   text-transform: none;
 }
 
+/* left corrected from Figma's raw 441.578px: that value is missing the
+   translateX(-50%) shift Figma's own export applies to this node
+   (confirmed against its -translate-x-1/2 class) — the metadata
+   paragraph right below already has this baked into its own left
+   (285px), the underline didn't. 441.578125 - (263.828125/2) =
+   309.664px. */
 .ab3-title-block hr {
   position: absolute;
-  left: 441.58px;
+  left: 309.664px;
   top: 146.7px;
   width: 263.83px;
   height: 0;
@@ -448,10 +454,23 @@
   margin: 0;
 }
 
+/* top nudged down from Figma's raw 530px, empirically: the polaroid's
+   white bottom border is a diagonal band (the polaroid is rotated
+   10.87deg), so a horizontal caption can only clear the photo across
+   its whole width if pushed down past the diagonal seam's lower
+   (right) point. At 530px the ascenders/caps of "Me! Sarah Milad!"
+   (rendered in the real Sue Ellen Francisco font — the generic
+   "cursive" fallback this sandbox initially fell back to, from a
+   blocked font fetch, is a much smaller face and hid this) crossed
+   into the photo. Verified with a hi-res cropped screenshot at several
+   candidate values (530/540/550/560/570): 560px is the first value
+   fully clear of the photo edge at every x, with roughly even white
+   space above (to the photo) and below (to the newsprint scrap) —
+   570px was already visibly closer to the newsprint than the photo. */
 .ab3-caption {
   position: absolute;
   left: 29px;
-  top: 530px;
+  top: 560px;
   font-family: var(--font-marginalia);
   color: var(--color-crimson);
   font-size: 30px;
@@ -484,10 +503,14 @@
    Same width/height/rotation, only shifted left to clear the text.
    Now inside .ab3-footer (moved from .ab3-stage — see that rule's
    comment for the top-offset math): top = old stage-relative
-   1044.53 − 952 = 92.53px. */
+   1044.53 − 952 = 92.53px, then +28px more (120.53px) to reach
+   .ab3-footer's true bottom edge (380px: 120.53+259.473=380.003) —
+   shifted down rather than stretched taller, so the paper texture
+   doesn't distort; verified visually against the stretch alternative
+   and this reads as the paper simply sitting lower, not warped. */
 .ab3-deco--blue-corner {
   left: -97px;
-  top: 92.53px;
+  top: 120.53px;
   width: 402.271px;
   height: 259.473px;
 }
