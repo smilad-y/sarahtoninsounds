@@ -35,24 +35,26 @@
          ornamental) uses internal absolute positioning against its own
          auto-sized wrapper; .jp-page itself never has a fixed height.
 
-         Three deliberate deviations from what's literally in the Figma
-         frame, all made against this task's own written content-block
+         Background — resolved in two passes. The first build guessed
+         background-paper-base + background-paper-lower (161:588's own
+         flat rectangle sits on top of both in Figma's real paint order,
+         hiding them almost entirely) and omitted "Texture / Red Stripe"
+         (161:601) as out of scope. Sarah then confirmed directly against
+         the real Figma file: paper-base/paper-lower are genuinely
+         hidden/unused, and red-stripe is the one real background asset
+         the header needs — reversing that first guess. .jp-header now
+         carries only .jp-header__stripe (texture-red-stripe.png, the
+         same asset already used behind Journal Landing's nav,
+         .jv2-bg-stripe in css/journal.css — not a new export), with
+         var(--color-cream)-adjacent flat #fbe6b2 (on .page-journal-post)
+         showing everywhere else once the header's own texture band ends.
+
+         Two further deliberate deviations from what's literally in the
+         Figma frame, made against this task's own written content-block
          spec rather than the frame's full contents:
-         1. "Texture / Red Stripe" (161:601) is NOT built. The task's
-            own Background section names exactly two texture layers
-            (background-paper-base, background-paper-lower) plus a flat
-            color — no red stripe. This also resolves cleanly on
-            inspection: in Figma's own paint order the opaque flat
-            rectangle (161:588, folded here into .jp-page's own
-            background-color) sits on top of both the red stripe AND
-            background-paper-base in their one shared visible band
-            (page y 0–146 of the 2423-tall frame) — so red-stripe would
-            fully hide paper-base there, contradicting the task's own
-            "paper-base adds grain near the top" description. Omitting
-            it is what makes that description true.
-         2. corner-paper-1 (161:597) is removed entirely, per this
+         1. corner-paper-1 (161:597) is removed entirely, per this
             task's explicit instruction — see TODO.md.
-         3. Of Figma's three star instances (156:563, 156:564, 161:599)
+         2. Of Figma's three star instances (156:563, 156:564, 161:599)
             only two are built, matching this task's explicit "two
             small scribble-star accents" (down from the old design's
             two also, so no change in count — 161:599 is the one
@@ -92,31 +94,43 @@
          holding a gap open. Verified for every combination named in
          this task, not just the fully-populated case — see TODO.md. -->
 
-    <div class="jp-header" aria-hidden="true">
-      <img class="jp-bg-paper-base" src="/assets/images/listen/sarahtonin_sounds-background_paper_2_1.png" alt="">
-      <img class="jp-bg-paper-lower" src="/assets/images/journal/paper.png" alt="">
-      <div class="jp-logo-badge">
-        <div class="jp-logo-badge__inner">
-          <img src="/assets/images/home-v2/home-logo-sharp.png" alt="">
+    <!-- .jp-header is the real positioning context for both the
+         decorative cluster below AND .jp-nav (a real, functional,
+         non-decorative element) — .jp-header itself is NOT aria-hidden
+         for exactly that reason; only .jp-header__decor (stripe + logo)
+         is. Nav needs to live in the SAME positioned box as the
+         decor so its `top`/`left` percentages resolve against the
+         header's own 269.134px/1492px reference, not (as an earlier,
+         buggy version of this markup had it, with nav as a sibling
+         after a closed .jp-header) against the viewport — see the CSS
+         comment on .jp-header for how that surfaced and how it's
+         fixed. -->
+    <div class="jp-header">
+      <div class="jp-header__decor" aria-hidden="true">
+        <img class="jp-header__stripe" src="/assets/images/journal/texture-red-stripe.png" alt="">
+        <div class="jp-logo-badge">
+          <div class="jp-logo-badge__inner">
+            <img src="/assets/images/home-v2/home-logo-sharp.png" alt="">
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Nav — unchanged from the previous build: Figma's own nav frame
-         geometry (x=592,y=29,w=814,h=57) and asset
-         (assets/images/shared/nav-paper-tab.png, reused across all 5
-         tabs) are identical between the old and new "Desktop-Journal
-         Entry" frames. 4th tab relabeled DISCOVER→LISTEN, same
-         established site-wide precedent as before. -->
-    <nav class="jp-nav" aria-label="Primary">
-      <ul>
-        <li><a href="/" class="jp-nav__tab">Home</a></li>
-        <li><a href="/about.html" class="jp-nav__tab">About</a></li>
-        <li><a href="/listen.html" class="jp-nav__tab">Listen</a></li>
-        <li><a href="/journal.html" class="jp-nav__tab" aria-current="page">Journal</a></li>
-        <li><a href="/contact.html" class="jp-nav__tab">Contact</a></li>
-      </ul>
-    </nav>
+      <!-- Nav — unchanged from the previous build: Figma's own nav frame
+           geometry (x=592,y=29,w=814,h=57) and asset
+           (assets/images/shared/nav-paper-tab.png, reused across all 5
+           tabs) are identical between the old and new "Desktop-Journal
+           Entry" frames. 4th tab relabeled DISCOVER→LISTEN, same
+           established site-wide precedent as before. -->
+      <nav class="jp-nav" aria-label="Primary">
+        <ul>
+          <li><a href="/" class="jp-nav__tab">Home</a></li>
+          <li><a href="/about.html" class="jp-nav__tab">About</a></li>
+          <li><a href="/listen.html" class="jp-nav__tab">Listen</a></li>
+          <li><a href="/journal.html" class="jp-nav__tab" aria-current="page">Journal</a></li>
+          <li><a href="/contact.html" class="jp-nav__tab">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
 
     <!-- Title Block — metadata top-right, title + underline centered
          below. Font substitutions carried over from the previous build

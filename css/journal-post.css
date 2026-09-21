@@ -3,8 +3,9 @@
    ("Desktop-Journal Entry", "Journal-Landing" file). Replaces the
    entire previous collage-based build. See the HTML comment at the
    top of .jp-page's markup in journal-post.html for the full
-   rationale (architecture, the three deliberate Figma omissions, and
-   the photo-placeholder decision), and TODO.md, "Journal Post Desktop
+   rationale (architecture, the background revision, the two remaining
+   deliberate Figma omissions, and the photo-placeholder decision), and
+   TODO.md, "Journal Post Desktop
    — Full rebuild from new Figma reference".
 
    Architecture: normal document flow throughout — no fixed-aspect
@@ -17,20 +18,23 @@
    (css/journal.css, the old .jp-stage).
 
    Background: a flat color on .page-journal-post (#fbe6b2, Figma's
-   own value for this frame) with two textured PNGs layered on top
-   only in .jp-header, near the very top of the page — not a
-   full-height tiled texture, and no seam below where they end since
-   the flat color underneath is the same real page background, not a
-   second visual layer. #fbe6b2 does NOT map to var(--color-cream)
-   (#ded7c1) — checked directly, not assumed: cream reads distinctly
-   greyer/darker next to the actual paper-texture assets used here
-   (confirmed by eye against sarahtonin_sounds-background_paper_2_1.png's
-   own warm tan tone, which sits close to #fbe6b2 and nowhere near
-   #ded7c1), so using the token would create a visible mismatch
-   against the reused texture assets rather than the "no seam" this
-   task asks for. Kept as a literal value scoped to this page, same
-   pattern already used elsewhere in this file family for page-
-   specific tones (css/journal.css has several: #faf8ee, #fdfbed). */
+   own value for this frame) with one textured PNG (the red-stripe
+   texture, .jp-header__stripe) behind .jp-nav, near the very top of
+   the page — not a full-height tiled texture, and no seam below where
+   it ends since the flat color underneath is the same real page
+   background, not a second visual layer. Two earlier substitute
+   textures (background-paper-base/-lower) were tried first and then
+   removed once Sarah confirmed directly against the real Figma file
+   that both are hidden/unused there and red-stripe is the only
+   background asset the header actually needs — see the HTML comment
+   on .jp-header's markup and TODO.md for the full history. #fbe6b2
+   does NOT map to var(--color-cream) (#ded7c1) — checked directly,
+   not assumed: cream reads distinctly greyer/darker next to the
+   red-stripe texture's own cream/red tone, so using the token would
+   create a visible mismatch rather than the "no seam" this task asks
+   for. Kept as a literal value scoped to this page, same pattern
+   already used elsewhere in this file family for page-specific tones
+   (css/journal.css has several: #faf8ee, #fdfbed). */
 .page-journal-post {
   background-color: #fbe6b2;
 }
@@ -45,76 +49,125 @@
   margin: 0 auto;
 }
 
-/* ── Header cluster (logo badge + background paper + nav) ──
-   The only part of this page using internal absolute positioning:
-   both children are purely decorative/ornamental and their relationship
+/* ── Header cluster (logo badge + red-stripe texture + nav) ──
+   .jp-header is the shared positioning box for both .jp-header__decor
+   (the purely ornamental stripe+logo) AND .jp-nav (real, functional
+   navigation — deliberately NOT nested inside the aria-hidden decor
+   div; see the HTML comment on .jp-header's markup). Their relationship
    to each other (logo overlapping the page's top-left corner, nav
-   sitting to its right) doesn't change with essay length, unlike the
-   rest of the page below it. Sized via padding-top (a real, width-
-   relative height — CSS resolves vertical padding percentages against
-   the containing block's WIDTH, the same technique already used
-   elsewhere in this file for margin-top) to the logo badge's own
-   post-rotation bounding box, minus the 20px it starts above this
-   container's own top edge (see .jp-logo-badge's top): 269.134/1492 =
-   18.0399%, rounded to 18.04%.
+   sitting to its right, both against a red-stripe backdrop) doesn't
+   change with essay length, unlike the rest of the page below it.
 
-   isolation:isolate contains this cluster's own absolutely-positioned
-   children (the two background textures, the logo) to itself, so they
-   never get compared against the unrelated positioned elements further
-   down the page (polaroid cards, pull-quote, stars) in the same
-   ambient stacking context — the exact bug this codebase hit
-   repeatedly on the old .jp-stage (see TODO.md, "Journal Post — Page
-   height capped at 1024px", bug #2) before isolation:isolate fixed it
-   there; applied here from the start rather than waiting to hit it
-   again. */
+   Sized via padding-top (a real, width-relative height — CSS resolves
+   vertical padding percentages against the containing block's WIDTH,
+   the same technique already used elsewhere in this file for
+   margin-top) to the logo badge's own post-rotation bounding box,
+   minus the 20px it starts above this container's own top edge (see
+   .jp-logo-badge's top): 269.134/1492 = 18.0399%, rounded to 18.04%.
+   `height: 0` alongside it is the standard aspect-ratio-box technique
+   (the same one used for responsive video embeds long before the CSS
+   `aspect-ratio` property existed), not redundant with padding-top:
+   without it, this box's `height` computes to `auto` (padding alone
+   doesn't count as an explicit height per spec), and BOTH bugs below
+   trace back to that.
+
+   Two real bugs found and fixed while verifying the red-stripe layer
+   this task added (checked with exact getBoundingClientRect
+   measurements, not just a visual screenshot, precisely because
+   "nav sits cleanly on the stripe" needed to be actually true, not
+   approximately true):
+   1. .jp-nav was a DOM sibling of .jp-header, not a child — so it
+      was never positioned relative to it at all. With no positioned
+      ancestor, its containing block fell back to the initial
+      containing block (the viewport), and its `top: 10.7734%`
+      resolved against the viewport's height instead of this box's
+      269.134px reference (measured: 129px from the top of a 1200px
+      test viewport — 10.7734% of 1200 — instead of the intended 28px
+      from a 259.766px-tall header). This had been silently wrong
+      since the original full rebuild; it only surfaced now because
+      this task required nav to sit within a precise 150px-tall stripe
+      band rather than "somewhere near the top of a tall page," which
+      a casual screenshot check doesn't catch. Fixed by moving <nav>
+      to be a real child of .jp-header (see the HTML comment).
+   2. Even after fixing that nesting, .jp-header's own `height: auto`
+      (padding alone, no explicit `height`) would have left .jp-nav's
+      percentages resolving against .jp-header's PARENT instead —
+      fixed by the `height: 0` on this rule.
+   isolation:isolate is scoped to .jp-header__decor now (not this
+   outer box), containing just the stripe+logo's own internal
+   stacking — see the comment there for why the previous, broader
+   placement on this element was equivalent for two children but is
+   now scoped correctly for three (decor + nav). */
 .jp-header {
   position: relative;
-  isolation: isolate;
+  height: 0;
   padding-top: 18.04%;
   margin-bottom: 16px;
 }
 
-/* Both texture layers bleed intentionally past .jp-header's own
-   269px-tall box (down to 30vw / 460px max) — harmless since nothing
-   below clips it (no overflow:hidden anywhere on this page), and by
-   design: this is the "grain fading into the flat color" transition
-   the task asks for, not a hard-edged band. vw (not a percentage of
-   .jp-header's own explicit height) keeps both scaling with viewport
-   width rather than being capped at the header's own small height.
-   Neither asset is new: background-paper-base reuses the exact same
-   texture this page already used for this same top-of-page role
-   before this rebuild (sarahtonin_sounds-background_paper_2_1.png,
-   confirmed a close visual match for Figma's own paper-base tone);
-   background-paper-lower reuses journal/paper.png, the plain torn-
-   edge cream paper this page used for its equivalent second
-   background-paper role prior to the later yellow-tile pivot (see
-   TODO.md) — Figma's own new pixels for these two nodes could not be
-   fetched (egress blocked, same constraint as the title-underline
-   asset below). */
-.jp-bg-paper-base {
+/* isolation:isolate contains this decorative cluster's own
+   absolutely-positioned children (the red-stripe texture, the logo)
+   to itself, so they never get compared against the unrelated
+   positioned elements further down the page (polaroid cards,
+   pull-quote, stars, and now also .jp-nav, a sibling rather than a
+   descendant) in the same ambient stacking context — the exact bug
+   this codebase hit repeatedly on the old .jp-stage (see TODO.md,
+   "Journal Post — Page height capped at 1024px", bug #2) before
+   isolation:isolate fixed it there; applied here from the start
+   rather than waiting to hit it again. inset:0 makes this a plain
+   full-cover child of the now-definite-height .jp-header, so its own
+   children's top/height percentages resolve against that same
+   269.134px reference. */
+.jp-header__decor {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+}
+
+/* Red stripe (Figma "Texture / Red Stripe", 161:601) — the real asset,
+   exported directly from Figma by Sarah (assets/images/journal/
+   texture-red-stripe.png; the file already in the repo turned out to
+   be byte-equivalent to her fresh export, confirmed by an alpha-channel
+   diff against the torn-edge mask — both come from the same source).
+   Same asset already used behind Journal Landing's nav (.jv2-bg-stripe
+   in css/journal.css) — not a new export, and the same "nav sits on
+   the stripe" relationship as that page.
+
+   Sized to comfortably cover .jp-nav's own bottom edge (83px at the
+   1492px reference: nav top 10.7734% + its own height, both against
+   .jp-header's 269.134px reference height) with headroom to spare,
+   then hand off to the flat #fbe6b2 background below this element's
+   own bottom edge. This asset is a torn SCRAP (irregular torn edges on
+   all four sides, not just top/bottom — confirmed with an alpha-channel
+   row scan: opaque fraction ramps from 0% to ~90% over the first ~350px
+   and drops back down over the last ~250px of its 2250px height, with
+   the ~1600px "solid" middle band never quite reaching 100% either,
+   from the same torn irregularity along its left/right edges). An
+   earlier attempt at object-position:center bottom therefore didn't
+   line up a clean torn edge under the nav — it landed inside that
+   ramp, showing bare white torn-paper backing behind part of the nav
+   row instead of stripe. object-position:center 30% instead samples
+   well inside the solid middle band, the same "oversize past a clipped
+   boundary so only the solid interior ever shows" approach Journal
+   Landing's own .jv2-bg-stripe already uses (css/journal.css) for this
+   identical asset — the crop's own edge (not the asset's torn edge)
+   is what meets the flat color below, which reads cleanly since this
+   element simply stops and the surrounding flat #fbe6b2 shows through
+   immediately after, no color texture in between. vw + a max-height
+   cap (not a percentage of .jp-header's own explicit height) keeps it
+   scaling with viewport width like the rest of this page's horizontal-
+   percentage geometry,
+   without being capped at the header's own small height. */
+.jp-header__stripe {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 30vw;
-  max-height: 460px;
+  height: 10vw;
+  max-height: 150px;
   max-width: none;
   object-fit: cover;
-  object-position: center top;
-  z-index: 0;
-}
-
-.jp-bg-paper-lower {
-  position: absolute;
-  left: 0;
-  top: 16vw;
-  width: 100%;
-  height: 30vw;
-  max-height: 460px;
-  max-width: none;
-  object-fit: cover;
-  object-position: center bottom;
-  opacity: 0.75;
+  object-position: center 30%;
   z-index: 0;
 }
 
