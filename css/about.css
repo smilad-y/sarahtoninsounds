@@ -411,10 +411,27 @@
    font-weight:normal. Matches the same "no fake bold" convention
    already applied everywhere else this font is used (Journal, Journal
    Post, Listen nav). */
+/* top shifted down 24px (72px → 96px) as a rigid unit with the hr and
+   p below (their tops shift by the same 24px, preserving their
+   relative spacing to each other) — a compromise found empirically,
+   not the full clear-of-134px this was aimed at. Pixel-sampled the
+   actual rendered ink (not box edges, which include several px of
+   font ascent padding) to find the real constraint: "ABOUT"'s ink
+   starts ~3px inside its box top, so clearing .ab3-bg-foreground's
+   134px seam with any real margin needs a ~60px+ shift — but "me...
+   more or less"'s ink bottom (~163px at the original position) is
+   only 33px above "Hi! I'm Sarah..."'s ink top (~196px, fixed —
+   .ab3-hero is separate normal-flow content, not part of this shift),
+   so anything past ~28-30px starts visibly colliding with it. 24px is
+   the largest shift that keeps a clean gap (~9px, ink to ink) to the
+   hero text; "ABOUT" is measurably more on the beige than before but
+   its top third or so still sits on the red stripe — flagged in
+   TODO.md as a real conflict this task's own two goals couldn't both
+   fully satisfy, not fixed further here. */
 .ab3-title-block h1 {
   position: absolute;
   left: 332.33px;
-  top: 72px;
+  top: 96px;
   width: 324px;
   font-size: 75px;
   font-weight: normal;
@@ -434,7 +451,7 @@
 .ab3-title-block hr {
   position: absolute;
   left: 309.664px;
-  top: 146.7px;
+  top: 170.7px;
   width: 263.83px;
   height: 0;
   margin: 0;
@@ -445,7 +462,7 @@
 .ab3-title-block p {
   position: absolute;
   left: 285px;
-  top: 147.7px;
+  top: 171.7px;
   width: 289.216px;
   text-align: center;
   font-size: 15px;
@@ -466,7 +483,15 @@
    candidate values (530/540/550/560/570): 560px is the first value
    fully clear of the photo edge at every x, with roughly even white
    space above (to the photo) and below (to the newsprint scrap) —
-   570px was already visibly closer to the newsprint than the photo. */
+   570px was already visibly closer to the newsprint than the photo.
+
+   transform matches .ab3-deco--polaroid's own rotation (10.87deg)
+   instead of the original 3deg: at 3deg the caption read as flat
+   text laid over a visibly tilted photo rather than something written
+   on it. Compared 3/6/8/10.87deg via hi-res crops — 10.87deg is the
+   first that puts the text baseline visibly parallel to the polaroid's
+   own diagonal white-border seam, reading as one tilted object, and
+   text stays perfectly readable at that mild an angle. */
 .ab3-caption {
   position: absolute;
   left: 29px;
@@ -474,7 +499,7 @@
   font-family: var(--font-marginalia);
   color: var(--color-crimson);
   font-size: 30px;
-  transform: rotate(3deg);
+  transform: rotate(10.87deg);
   margin: 0;
   white-space: nowrap;
 }
