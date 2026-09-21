@@ -1,0 +1,33 @@
+# Pages not yet converted to Eleventy templates this round — served as
+# plain static files via addPassthroughCopy in .eleventy.js instead, so
+# their output stays byte-identical to what's live today.
+index.html
+listen.html
+contact.html
+admin/index.html
+
+# Reference-only legacy copy (see legacy/README.md) — passthrough-copied
+# as static files, never compiled as a template.
+legacy/
+
+# Project/process docs and legacy PRESERVE-only content — .md is a
+# template format (needed for content/journal/essays/*.md), so every
+# other Markdown file in the repo has to be explicitly excluded or
+# Eleventy will compile it into a page. music-picks/watermelon-in-
+# easter-hay.md in particular is legacy PRESERVE-only data (CLAUDE.md)
+# and must never become a generated page.
+ASSET-MANIFEST.md
+BUILD-ROADMAP.md
+CLAUDE.md
+PROJECT-SPEC.md
+README.md
+TODO.md
+content/README.md
+assets/fonts/README.md
+assets/icons/README.md
+assets/images/README.md
+assets/video/README.md
+music-picks/watermelon-in-easter-hay.md
+
+node_modules/
+_site/

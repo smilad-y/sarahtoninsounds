@@ -3,9 +3,14 @@
 // (Essays, Monthly Favorites) into one reverse-chronological feed.
 //
 // Deliberately framework-free, dependency-free vanilla JS, exposed as a
-// small UMD-style module so the exact same code can run in the browser
-// (window.Journal) and under Node for automated validation
-// (module.exports) without a build step.
+// small UMD-style module so the same code can run in the browser
+// (window.Journal), under Node for automated validation, AND — this is
+// now its primary use — required directly from .eleventy.js so the
+// Journal Landing page (journal.html) merges/sorts/renders this feed at
+// BUILD time via Nunjucks, instead of fetching JSON and rendering client-
+// side. The former browser-fetch orchestrator (loadJournalEntries) is
+// gone: content/journal/essays.json no longer exists (essays are now an
+// Eleventy collection of individual files), so that function would 404.
 //
 // Note: markdown-to-HTML here is a new, minimal implementation — it does
 // NOT reuse the legacy site's converter (see legacy/index.html
@@ -121,29 +126,28 @@
     return sortedEntries.length ? sortedEntries[0] : null;
   }
 
+  // Explicit, ordered Featured Journal selection (content/journal/
+  // featured.json — see the comment in that file). Uses the first entry
+  // in `featuredList` that's actually present in `sortedEntries` (by
+  // type + slug); falls back to the newest entry if the list is empty
+  // or every listed slug is missing (e.g. an entry was unpublished).
+  function resolveFeaturedEntry(sortedEntries, featuredList) {
+    var list = featuredList || [];
+    for (var i = 0; i < list.length; i++) {
+      var wanted = list[i];
+      var match = sortedEntries.filter(function (entry) {
+        return entry.type === wanted.type && entry.slug === wanted.slug;
+      })[0];
+      if (match) return match;
+    }
+    return getFeaturedEntry(sortedEntries);
+  }
+
   function mergeJournalData(essaysFile, monthlyFavoritesFile) {
     var essays = ((essaysFile && essaysFile.entries) || []).map(normalizeEssay);
     var monthlyFavorites = ((monthlyFavoritesFile && monthlyFavoritesFile.entries) || [])
       .map(normalizeMonthlyFavorite);
     return sortEntriesByDateDesc(essays.concat(monthlyFavorites));
-  }
-
-  // Browser-only orchestration: fetch both CMS-managed files and return
-  // the merged, sorted, reverse-chronological Journal feed. Not used by
-  // the Node-side validation harness, which reads the fixture files
-  // directly and calls mergeJournalData() to exercise the same logic
-  // without needing an HTTP server.
-  function loadJournalEntries() {
-    return Promise.all([
-      fetch('/content/journal/essays.json').then(function (res) {
-        return res.ok ? res.json() : { entries: [] };
-      }),
-      fetch('/content/journal/monthly-favorites.json').then(function (res) {
-        return res.ok ? res.json() : { entries: [] };
-      })
-    ]).then(function (results) {
-      return mergeJournalData(results[0], results[1]);
-    });
   }
 
   // Single reusable card renderer for both content types — visual
@@ -208,8 +212,8 @@
     normalizeMonthlyFavorite: normalizeMonthlyFavorite,
     sortEntriesByDateDesc: sortEntriesByDateDesc,
     getFeaturedEntry: getFeaturedEntry,
+    resolveFeaturedEntry: resolveFeaturedEntry,
     mergeJournalData: mergeJournalData,
-    loadJournalEntries: loadJournalEntries,
     renderJournalCard: renderJournalCard,
     renderFeaturedEntry: renderFeaturedEntry
   };

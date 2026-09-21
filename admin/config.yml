@@ -4,12 +4,25 @@
 # development writes only to this branch — never to `main`, which still
 # serves the legacy site and must not receive Journal dev content.
 # Before this rebuild becomes production, this value MUST be changed to
-# the real production branch, and the corresponding Netlify site must
-# have Identity + Git Gateway enabled for that branch. Production-branch
-# cutover is a separate launch task, not assumed to be this branch.
+# the real production branch. Production-branch cutover is a separate
+# launch task, not assumed to be this branch.
+#
+# Backend: GitHub (not the deprecated Netlify Identity + Git Gateway —
+# see the conversation record for why). Auth goes through the
+# self-hosted OAuth Netlify Functions at netlify/functions/auth.js +
+# callback.js, not a third-party-hosted provider, so publishing never
+# depends on someone else's uptime. `base_url` below is a PLACEHOLDER —
+# it must be replaced with this site's real Netlify URL (or custom
+# domain) before the CMS can authenticate, and OAUTH_CLIENT_ID /
+# OAUTH_CLIENT_SECRET must be set as Netlify environment variables from
+# a GitHub OAuth App whose callback URL is
+# <base_url>/.netlify/functions/callback.
 backend:
-  name: git-gateway
+  name: github
+  repo: smilad-y/sarahtoninsounds
   branch: claude/add-claude-md-file-3fgnk0
+  base_url: https://REPLACE-WITH-NETLIFY-SITE-URL.netlify.app
+  auth_endpoint: .netlify/functions/auth
 
 media_folder: public/uploads
 public_folder: /public/uploads
@@ -51,15 +64,11 @@ collections:
         fields:
           - { label: "Sidebar Blurb", name: blurb, widget: text, hint: "Short text shown in the left sidebar under 'about this place'" }
 
-      - name: about
-        label: "👤 About Me"
-        file: settings/about.json
-        format: json
-        fields:
-          - { label: "Bio", name: bio, widget: markdown, hint: "Supports **bold**, *italic*, paragraphs" }
-          - { label: "Location", name: location, widget: string, required: false }
-          - { label: "Credentials / extra line", name: credentials, widget: string, required: false, hint: "e.g. Guild of Music Supervisors member · UCLA Extension cert" }
-          - { label: "Email (shown as postcard)", name: email, widget: string, required: false }
+      # settings/about.json (the legacy About bio) is deliberately no
+      # longer editable from here — it's PRESERVE-only archived content
+      # (CLAUDE.md), unrelated to the live About page's own copy, which
+      # now has its own dedicated "about" collection below. The file
+      # itself is untouched on disk.
 
       - name: wheel
         label: "🎡 Mood Wheel"
@@ -159,27 +168,53 @@ collections:
   # ── JOURNAL: ESSAYS ──
   # New Journal publishing system (PROJECT-SPEC.md §8). Distinct from the
   # legacy `essays` collection above, which remains PRESERVE-only and is
-  # untouched. Single-file/list-widget pattern (matches music_picks above)
-  # so publishing never requires a manually-maintained index file.
+  # untouched. A real folder collection (one Markdown file per essay,
+  # under content/journal/essays/) so Eleventy can build a native
+  # `journalEssay` tag collection and generate a real /journal/<slug>/
+  # page per entry — replaces the earlier single-JSON/list-widget shape.
+  # `tags`/`layout`/`permalink` are implementation plumbing for the
+  # Eleventy build, not something Sarah needs to set per essay, so
+  # they're hidden fields with fixed defaults rather than exposed UI.
   - name: journal_essays
     label: "📓 Journal — Essays"
+    folder: content/journal/essays
+    create: true
+    format: frontmatter
+    extension: md
+    slug: "{{slug}}"
+    summary: "{{title}} — {{date}}"
+    fields:
+      - { label: "Title", name: title, widget: string }
+      - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>/. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
+      - { label: "Date", name: date, widget: date, format: "YYYY-MM-DD" }
+      - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
+      - { label: "Featured Image", name: featured_image, widget: image, required: false }
+      - { label: "Category", name: category, widget: hidden, default: "Essay" }
+      - { label: "Tags", name: tags, widget: hidden, default: "journalEssay" }
+      - { label: "Layout", name: layout, widget: hidden, default: "layouts/journal-post.njk" }
+      - { label: "Permalink", name: permalink, widget: hidden, default: "/journal/{{slug}}/" }
+      - { label: "Body", name: body, widget: markdown, hint: "Renders into the Journal Post page's one required body-copy block. The page's optional Hero/Polaroid/Pull-quote blocks aren't editable from here yet — see the conversation record." }
+
+  # ── JOURNAL: FEATURED ──
+  # Ordered, explicitly-curated Featured Journal selection (replaces the
+  # old always-newest-entry behavior). Today's Journal Landing template
+  # only uses the first entry (the single Featured Post slot); later
+  # entries are reserved for a possible future multi-featured layout.
+  - name: journal_featured
+    label: "📌 Journal — Featured Post"
     files:
-      - name: essays_list
-        label: "All Essays"
-        file: content/journal/essays.json
+      - name: featured_list
+        label: "Featured Selections"
+        file: content/journal/featured.json
         format: json
         fields:
-          - label: "Essays"
+          - label: "Featured (in order — the first one shows in the Featured Post slot)"
             name: entries
             widget: list
-            summary: "{{title}} — {{date}}"
+            summary: "{{type}} — {{slug}}"
             fields:
-              - { label: "Title", name: title, widget: string }
-              - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
-              - { label: "Date", name: date, widget: date, format: "YYYY-MM-DD" }
-              - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
-              - { label: "Featured Image", name: featured_image, widget: image, required: false }
-              - { label: "Body", name: body, widget: markdown }
+              - { label: "Type", name: type, widget: select, options: ["essay", "monthly-fav"] }
+              - { label: "Slug", name: slug, widget: string, hint: "Must exactly match that entry's own Slug field." }
 
   # ── JOURNAL: MONTHLY FAVORITES ──
   # Same publishing system as Journal Essays above, but keeps its own
@@ -234,3 +269,86 @@ collections:
                   - { label: "Song Title", name: title, widget: string }
                   - { label: "Artist", name: artist, widget: string }
                   - { label: "Note", name: note, widget: text, required: false }
+
+  # ── ABOUT (current site) ──
+  # content/about.json — the live About page's own copy (PROJECT-SPEC.md
+  # §9). Distinct from the legacy settings/about.json bio above (removed
+  # from this CMS's UI, PRESERVE-only). Desktop and mobile genuinely
+  # diverge in several places today (different bios, different hero
+  # phrasing, the mobile taste line's not-yet-updated wording, even the
+  # resume heading/date formatting) — every _desktop/_mobile field pair
+  # below is kept separately editable rather than forced to share one
+  # value, so editing one never silently changes the other.
+  - name: about
+    label: "👤 About (current site)"
+    files:
+      - name: about_content
+        label: "About Page Content"
+        file: content/about.json
+        format: json
+        fields:
+          - label: "Desktop — Title Block"
+            name: hero_desktop
+            widget: object
+            fields:
+              - { label: "Heading", name: heading, widget: string }
+              - { label: "Heading Subtitle", name: heading_sub, widget: string }
+          - label: "Desktop — Greeting"
+            name: greeting_desktop
+            widget: object
+            fields:
+              - { label: "Line 1", name: line1, widget: string }
+              - { label: "Line 2", name: line2, widget: string }
+          - label: "Mobile — Greeting"
+            name: greeting_mobile
+            widget: object
+            fields:
+              - { label: "Line 1", name: line1, widget: string }
+              - { label: "Line 2", name: line2, widget: string }
+          - label: "Desktop — Bio"
+            name: bio_desktop
+            widget: list
+            summary: "{{kind}}: {{text}}"
+            fields:
+              - { label: "Kind", name: kind, widget: select, options: ["paragraph", "subhead", "taste"], hint: "'taste' marks the one approved taste-line paragraph (PROJECT-SPEC.md §9) — keep exactly one." }
+              - { label: "Text", name: text, widget: text }
+          - label: "Mobile — Bio"
+            name: bio_mobile
+            widget: list
+            summary: "{{kind}}"
+            fields:
+              - { label: "Kind", name: kind, widget: select, options: ["paragraph", "divider"] }
+              - { label: "Text", name: text, widget: text, required: false, hint: "Leave blank for a divider." }
+          - label: "Mobile — Taste Section"
+            name: taste_mobile
+            widget: object
+            fields:
+              - { label: "Badge line", name: badge, widget: string }
+              - { label: "Body", name: body, widget: text }
+          - { label: "Polaroid Photo Caption (shared, desktop + mobile)", name: photo_caption, widget: string }
+          - label: "Desktop — CTA"
+            name: cta_desktop
+            widget: object
+            fields:
+              - { label: "Heading", name: heading, widget: string }
+              - { label: "Body", name: body, widget: text }
+          - label: "Resume"
+            name: resume
+            widget: object
+            fields:
+              - { label: "Heading (desktop)", name: heading_desktop, widget: string }
+              - { label: "Heading (mobile)", name: heading_mobile, widget: string }
+              - label: "Entries"
+                name: entries
+                widget: list
+                fields:
+                  - { label: "Title", name: title, widget: string }
+                  - { label: "Role", name: role, widget: string }
+                  - { label: "Dates (desktop)", name: dates_desktop, widget: string }
+                  - { label: "Dates (mobile)", name: dates_mobile, widget: string }
+          - label: "Mobile — Footer"
+            name: footer_mobile
+            widget: object
+            fields:
+              - { label: "Tagline", name: tagline, widget: string }
+              - { label: "Copyright", name: copyright, widget: string }

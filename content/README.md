@@ -5,22 +5,38 @@ separate from the legacy `settings/`, `essays/`, and `music-picks/`
 folders at the repo root, which remain PRESERVE-only legacy data
 (`PROJECT-SPEC.md` §2, `CLAUDE.md`).
 
-Nothing is populated here yet. Per the fresh-start-by-default rule,
-content only lands here once Sarah has explicitly finalized/approved it
-for the current site — it is never copied over from legacy just because
-it's usable or well-written.
+Per the fresh-start-by-default rule, content only lands here once Sarah
+has explicitly finalized/approved it for the current site — it is never
+copied over from legacy just because it's usable or well-written.
 
-Expected future structure (each schema gets defined in the phase that
-actually builds it, not before):
+CMS-managed via Decap CMS (`admin/config.yml`), built with Eleventy
+(`.eleventy.js`). Eleventy loads `about.json`, `journal/monthly-
+favorites.json`, and `journal/featured.json` as global template data
+directly (not via Eleventy's `dir.data` convention — that would exclude
+this folder from normal template discovery, which `journal/essays/`
+needs). `journal/essays/*.md` is a real Eleventy collection (tag
+`journalEssay`): each file generates its own `/journal/<slug>/` page
+through the `layouts/journal-post.njk` layout.
 
-- `about.json` or similar — About page copy, once fully finalized (Phase 3)
+Populated so far:
+
+- `about.json` — About page copy (Phase 3), desktop/mobile kept as
+  separate fields wherever the two breakpoints genuinely diverge today,
+  not unified.
+- `journal/essays/*.md` — Journal essays (Phase 7), one file per entry,
+  front matter + Markdown body.
+- `journal/monthly-favorites.json` — Monthly Favorites (Phase 7).
+  Deliberately still a single JSON file with a `list` widget, not a real
+  Eleventy collection or folder collection — that restructuring is
+  explicitly out of scope for this round (see the conversation record);
+  revisit once Essays-as-a-collection is proven out.
+- `journal/featured.json` — ordered, explicitly-curated Featured Journal
+  selection (replaces automatic newest-entry behavior).
+
+Still future work (schema gets defined in the phase that actually builds
+it, not before):
+
 - `listen/playlists.json` — curated Spotify playlist metadata (Phase 4;
   schema outlined in `ASSET-MANIFEST.md` §6 / `PROJECT-SPEC.md` §7)
 - `listen/crash-courses.json` — Crash Courses content (Phase 6)
-- `journal/` — essay + Monthly Favorites content (Phase 7)
 - `contact.json` — finalized contact copy/links (Phase 8)
-
-Whether this ends up CMS-managed (Netlify CMS, Decap, or otherwise) or
-hand-edited JSON is an open decision (`BUILD-ROADMAP.md` — CMS decision /
-Current Open Decisions). This folder's existence doesn't presuppose
-either answer.

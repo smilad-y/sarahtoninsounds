@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} · Sarahtonin Sounds</title>
+<meta name="description" content="An individual Journal entry from Sarahtonin Sounds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout.css">
+<link rel="stylesheet" href="/css/journal-post.css">
+</head>
+<body class="page-journal-post">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main id="main" class="journal-post-page">
+  <div class="jp-page">
+
+    <!-- Desktop — this file is the Eleventy layout every Journal essay
+         renders through (content/journal/essays/*.md, tags:
+         journalEssay). Everything below is unchanged, hand-verified
+         markup/CSS from the standalone build (see TODO.md, "Journal
+         Post Desktop — Full rebuild from new Figma reference") — per
+         explicit instruction, this conversion only swaps static text
+         and images for the essay's own title/category/date/body fields,
+         and wraps each already-documented "CMS: optional" block in a
+         conditional bound to a field no current essay sets yet, so it
+         stays absent exactly as it does today rather than being
+         deleted. No positioning, CSS, or markup structure was touched. -->
+
+    <div class="jp-header">
+      <div class="jp-header__decor" aria-hidden="true">
+        <div class="jp-header__stripe"></div>
+        <div class="jp-logo-badge">
+          <div class="jp-logo-badge__inner">
+            <img src="/assets/images/home-v2/home-logo-sharp.png" alt="">
+          </div>
+        </div>
+      </div>
+
+      <nav class="jp-nav" aria-label="Primary">
+        <ul>
+          <li><a href="/" class="jp-nav__tab">Home</a></li>
+          <li><a href="/about.html" class="jp-nav__tab">About</a></li>
+          <li><a href="/listen.html" class="jp-nav__tab">Listen</a></li>
+          <li><a href="/journal.html" class="jp-nav__tab" aria-current="page">Journal</a></li>
+          <li><a href="/contact.html" class="jp-nav__tab">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="jp-title-block">
+      <p class="jp-title-block__meta">{{ category }} &middot; {{ date | journalDate }}</p>
+      <div class="jp-title-block__meta-rule" aria-hidden="true"></div>
+      <h1 class="jp-title-block__title">{{ title }}</h1>
+      <div class="jp-title-block__rule" aria-hidden="true"></div>
+    </div>
+
+    <div class="jp-article">
+
+      <!-- CMS: optional — no current essay sets `hero`, so this stays
+           absent, matching the already-verified "body-only" case in
+           TODO.md. Ready the moment a future CMS field supplies it. -->
+      {% if hero %}
+      <figure class="jp-hero">
+        <div class="jp-hero__photo" role="img" aria-label="Hero photo placeholder"></div>
+        <figcaption class="jp-hero__caption">{{ hero.caption }}</figcaption>
+      </figure>
+      {% endif %}
+
+      <!-- CMS: required — the essay's full markdown body. -->
+      <div class="jp-body-copy">{{ content | safe }}</div>
+
+      <!-- CMS: optional — same as hero, absent until a future CMS field
+           supplies it. -->
+      {% if polaroid1 %}
+      <figure class="jp-polaroid jp-polaroid--1">
+        <div class="jp-polaroid__card">
+          <img class="jp-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
+          <div class="jp-polaroid__photo" role="img" aria-label="Polaroid photo placeholder"></div>
+          <figcaption class="jp-polaroid__caption">{{ polaroid1.caption }}</figcaption>
+          <img class="jp-decor__star jp-decor__star--1" src="/assets/images/shared/doodles/star-scribble.png" alt="">
+        </div>
+      </figure>
+      {% endif %}
+
+      {% if body2 %}
+      <div class="jp-body-copy">{{ body2 | safe }}</div>
+      {% endif %}
+
+      {% if pullQuote %}
+      <blockquote class="jp-pull-quote">
+        <span class="jp-pull-quote__mark jp-pull-quote__mark--open" aria-hidden="true">&ldquo;</span>
+        <p class="jp-pull-quote__text">{{ pullQuote.text }}</p>
+        <span class="jp-pull-quote__mark jp-pull-quote__mark--close" aria-hidden="true">&rdquo;</span>
+        <img class="jp-decor__megaphone" src="/assets/images/journal/megaphone.png" alt="" aria-hidden="true">
+      </blockquote>
+      {% endif %}
+
+      {% if body3 %}
+      <div class="jp-body-copy">{{ body3 | safe }}</div>
+      {% endif %}
+
+      {% if polaroid2 %}
+      <figure class="jp-polaroid jp-polaroid--2">
+        <div class="jp-polaroid__card">
+          <img class="jp-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
+          <div class="jp-polaroid__photo" role="img" aria-label="Polaroid photo placeholder"></div>
+          <figcaption class="jp-polaroid__caption">{{ polaroid2.caption }}</figcaption>
+          <img class="jp-decor__star jp-decor__star--2" src="/assets/images/shared/doodles/star-scribble.png" alt="">
+        </div>
+      </figure>
+      {% endif %}
+
+      {% if body4 %}
+      <div class="jp-body-copy">{{ body4 | safe }}</div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  <!-- Mobile Journal Post (Header/Nav/Title Block/Polaroid Hero built;
+       Essay Body wired to the same rendered body as desktop, matching
+       this section's own "essay.body" marker convention. Hero image
+       stays the fixed placeholder — mobile's swappable-image rebuild is
+       a separate, not-yet-done pass (TODO.md), left untouched here. The
+       scribble-star divider that sat mid-placeholder is omitted: it has
+       no CMS field deciding whether/where it appears, per this section's
+       own "a real essay's CMS content decides... where" note. -->
+  <div class="jpm-page" id="journal-post-mobile-stage">
+    <header class="jpm-header">
+      <div class="jpm-header__logo">
+        <div class="jpm-header__logo-inner">
+          <img src="/assets/images/home-v2/home-logo-sharp.png" alt="Sarahtonin Sounds">
+        </div>
+      </div>
+    </header>
+
+    <nav class="jpm-nav" aria-label="Primary">
+      <ul class="jpm-nav__list">
+        <li class="jpm-nav__item jpm-nav__item--home"><a href="/" class="jpm-nav__tab">Home</a></li>
+        <li class="jpm-nav__item jpm-nav__item--about"><a href="/about.html" class="jpm-nav__tab">About</a></li>
+        <li class="jpm-nav__item jpm-nav__item--listen"><a href="/listen.html" class="jpm-nav__tab">Listen</a></li>
+        <li class="jpm-nav__item jpm-nav__item--journal"><a href="/journal.html" class="jpm-nav__tab" aria-current="page">Journal</a></li>
+        <li class="jpm-nav__item jpm-nav__item--contact"><a href="/contact.html" class="jpm-nav__tab">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="jpm-title-block">
+      <p class="jpm-title-block__meta">{{ category }} &middot; {{ date | journalDate }}</p>
+      <h1 class="jpm-title-block__title">{{ title }}</h1>
+      <div class="jpm-title-block__rule" aria-hidden="true"></div>
+    </div>
+
+    <div class="jpm-polaroid-hero">
+      <div class="jpm-polaroid" aria-hidden="true">
+        <img class="jpm-polaroid__photo" src="/assets/images/journal/article-photo-sky-clouds.png" alt="">
+        <img class="jpm-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
+      </div>
+    </div>
+
+    <div class="jpm-body-copy">{{ content | safe }}</div>
+
+    <div class="jpm-collage-footer" aria-hidden="true"></div>
+  </div>
+</main>
+
+<script src="/js/site.js" defer></script>
+</body>
+</html>

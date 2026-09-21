@@ -1,3 +1,7 @@
+---
+permalink: /about.html
+templateEngineOverride: njk
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,9 +87,9 @@
     <img class="ab3-bg-foreground" src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Foreground_Paper.png" alt="">
 
     <div class="ab3-title-block">
-      <h1>About</h1>
+      <h1>{{ about.hero_desktop.heading }}</h1>
       <hr>
-      <p>me&hellip;more or less</p>
+      <p>{{ about.hero_desktop.heading_sub }}</p>
     </div>
 
     <!-- Decorative Ephemera Cluster (header half only) — blue corner
@@ -101,7 +105,7 @@
     <img class="ab3-deco ab3-deco--logo" src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
     <img class="ab3-deco ab3-deco--polaroid" src="/assets/images/about/About Me-Desktop-Final Assets/sarah green background polaroid  1.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
 
-    <p class="ab3-caption">Me! Sarah Milad!</p>
+    <p class="ab3-caption">{{ about.photo_caption }}</p>
 
   </div>
 
@@ -113,17 +117,15 @@
        See the CSS comment on .ab3-body-region for the exact math. -->
   <div class="ab3-body-region">
     <div class="ab3-content">
-      <h2 class="ab3-hero">Hi! I&rsquo;m Sarah,<br>the girl behind Sarahtonin Sounds.</h2>
+      <h2 class="ab3-hero">{{ about.greeting_desktop.line1 }}<br>{{ about.greeting_desktop.line2 }}</h2>
       <div class="ab3-bio">
-        <p>Sarahtonin Sounds started back in 2019, when I decided to take my love for music a little more seriously. What began as a space to share songs I loved slowly turned into something I wanted to explore further.</p>
-        <p>At the time, I was on a completely different path. I had plans to go to law school, but somewhere along the way, I realized that music was what I actually wanted to pursue. So, I changed direction and found my way into music supervision, where I get to combine my love for music with storytelling and the creative process.</p>
-        <p>Over the years, music has become a part of my work, but Sarahtonin Sounds has always been my personal space to share what I love. From playlists and new discoveries to writing about the music that sticks with me, this is where I get to explore my taste without any rules.</p>
-        <p class="ab3-bio__subhead">My taste in a nutshell</p>
-        <p>Growing up Egyptian, music was always a mix of different sounds and influences. Arabic music was a big part of my upbringing, but so was everything else I found myself drawn to along the way. I grew up listening to music from different cultures, genres, and eras, and I think that curiosity has shaped the way I listen to music today.</p>
-        <p>My taste is a little all over the place, in the best way. I can go from an Arabic classic to hip-hop, soul, electronic, or something completely unexpected without thinking twice about it. I love discovering new sounds, revisiting old favorites, and finding connections between music that might seem completely unrelated.</p>
-        <p>I don&rsquo;t think good music needs to fit into one genre, language, or era. If something catches my ear, I&rsquo;m listening.</p>
-        <p>And that&rsquo;s really what Sarahtonin Sounds is about: sharing the music I love, introducing people to sounds they might not have discovered otherwise, and hopefully helping someone find their next favorite song.</p>
-        <p>I&rsquo;m finally giving this project the space to grow into something more, and I&rsquo;m excited to see where it goes.</p>
+        {%- for block in about.bio_desktop %}
+        {%- if block.kind == "subhead" %}
+        <p class="ab3-bio__subhead">{{ block.text }}</p>
+        {%- else %}
+        <p>{{ block.text }}</p>
+        {%- endif %}
+        {%- endfor %}
       </div>
     </div>
 
@@ -148,18 +150,20 @@
       <div class="ab3-footer-card" aria-hidden="true"></div>
 
       <div class="ab3-cta">
-        <h2>Let&rsquo;s Work Together!</h2>
-        <p>I work across music supervision, licensing, curation, and music discovery, and I love collaborating with people on a good idea. If you think I could be a fit for something you&rsquo;re working on, I&rsquo;d love to hear about it.</p>
+        <h2>{{ about.cta_desktop.heading }}</h2>
+        <p>{{ about.cta_desktop.body }}</p>
       </div>
 
       <div class="ab3-resume-card">
-        <h2>Selected Credits &amp; Resume</h2>
+        <h2>{{ about.resume.heading_desktop }}</h2>
         <hr>
+        {%- for entry in about.resume.entries %}
         <div class="ab3-resume-entry">
-          <p class="ab3-resume-entry__title">TMZ Productions</p>
-          <p class="ab3-resume-entry__role">Senior Music Coordinator</p>
-          <p class="ab3-resume-entry__dates">2023-2026</p>
+          <p class="ab3-resume-entry__title">{{ entry.title }}</p>
+          <p class="ab3-resume-entry__role">{{ entry.role }}</p>
+          <p class="ab3-resume-entry__dates">{{ entry.dates_desktop }}</p>
         </div>
+        {%- endfor %}
       </div>
       <!-- href="#" — final resume file/link not yet supplied
            (ASSET-MANIFEST.md); not guessed here. -->
@@ -207,41 +211,42 @@
     </header>
 
     <section class="av2m-hero">
-      <h1>Hi! I&rsquo;m Sarah,</h1>
-      <p class="av2m-hero__sub">the girl behind Sarahtonin Sounds</p>
+      <h1>{{ about.greeting_mobile.line1 }}</h1>
+      <p class="av2m-hero__sub">{{ about.greeting_mobile.line2 }}</p>
       <figure class="av2m-polaroid">
         <img src="/assets/images/about/About Me-Mobile-Final Assets/Sarah_green_background_polaroid.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
         <img class="av2m-polaroid__stamp" src="/assets/images/about/About Me-Mobile-Final Assets/sun_stamp.png" alt="">
-        <figcaption>Me! Sarah Milad!</figcaption>
+        <figcaption>{{ about.photo_caption }}</figcaption>
       </figure>
     </section>
 
     <section class="av2m-bio">
-      <p>Music has been a constant in my life for as long as I can remember. Being the youngest of three meant I was always absorbing whatever was playing around me, from my sisters&rsquo; pop punk and Jesse McCartney phases to the Arabic music and old standards my parents loved. Then came LimeWire, burned CDs, and trips to Tower Records, where I bought my first CD, AFI&rsquo;s Decemberunderground, when I was around ten. Growing up in San Pedro, CA and around the South Bay&rsquo;s punk history only added to it. I never really developed one musical lane. If something caught my ear, that was enough for me.</p>
+      {%- for block in about.bio_mobile %}
+      {%- if block.kind == "divider" %}
       <hr class="av2m-divider">
-      <p>What took me longer to figure out was that music could actually be my job. I&rsquo;d gotten into law school and assumed that was the plan, but when the pandemic hit right as I got in, suddenly none of it felt right. I kept coming back to the thing that had always felt natural to me: music. Not just listening to it, but really knowing it. Researching artists, digging through catalogs, reading their stories, figuring out where a sound came from. I&rsquo;d been doing some version of that my whole life. I&rsquo;d just never thought of it as something I could build a career around.</p>
-      <p>Once I realized I could, music supervision was what I wanted to pursue. It brought together so much of what I already loved about music: discovery, research, curation, and finding the right song for the right moment. I started looking for ways into the industry, and a few early opportunities eventually led me to TMZ Productions, where I got to actually do it alongside my boss and mentor, Tony. Somewhere along the way, I stopped wondering whether skipping law school had been the wrong decision. Music wasn&rsquo;t just the thing I loved anymore. It was my career.</p>
-      <p>But Sarahtonin Sounds had been there before any of it.</p>
-      <p>I started it as my own little curation project before I ever worked professionally in music. Sarahtonin was a dumb little Sarah + serotonin joke that somehow became the perfect name. Music has always been one of the things that makes me happiest, and sharing it with people makes it even better. Apparently I couldn&rsquo;t resist a pun.</p>
-      <p>Then I got distracted by work, and Sarahtonin Sounds got put on the shelf for a while. After being laid off, resurrecting it and actually giving it the time and space to grow felt like the natural move. I don&rsquo;t know exactly what it&rsquo;ll turn into yet, and I kind of like that. This is where I get to keep music personal: the playlists, discoveries, writing, and all the things I can&rsquo;t stop telling people about.</p>
-      <p>Music gets me in touch with emotion, sparks creativity, and makes me invent entire little scenes in my head when a song hits right. It connects me to people, too.</p>
+      {%- else %}
+      <p>{{ block.text }}</p>
+      {%- endif %}
+      {%- endfor %}
     </section>
 
     <section class="av2m-taste">
-      <p class="av2m-taste__badge">My taste is all over the place.</p>
-      <p>Being Egyptian and growing up with Arabic music is a big part of my musical foundation, and it&rsquo;s something I still love digging into. I love finding hidden gems, whether it&rsquo;s an artist about to break or a song from sixty years ago that&rsquo;s criminally slept on. There&rsquo;s something really fun about finding a song I love and getting to share it with someone else.</p>
+      <p class="av2m-taste__badge">{{ about.taste_mobile.badge }}</p>
+      <p>{{ about.taste_mobile.body }}</p>
     </section>
 
     <section class="av2m-credits">
       <div class="av2m-credits__title">
-        <h2>Selected Credits &amp; Resum&eacute;</h2>
+        <h2>{{ about.resume.heading_mobile }}</h2>
         <hr>
       </div>
+      {%- for entry in about.resume.entries %}
       <div class="av2m-credits__card">
-        <p class="av2m-credits__role-title">TMZ Productions</p>
-        <p class="av2m-credits__role">Senior Music Coordinator</p>
-        <p class="av2m-credits__dates">2023 - 2026</p>
+        <p class="av2m-credits__role-title">{{ entry.title }}</p>
+        <p class="av2m-credits__role">{{ entry.role }}</p>
+        <p class="av2m-credits__dates">{{ entry.dates_mobile }}</p>
       </div>
+      {%- endfor %}
       <a href="#" class="av2m-credits__link">
         <img src="/assets/images/about/About Me-Mobile-Final Assets/imdb-icon.png" alt="">
         Full Resum&eacute;
@@ -252,8 +257,8 @@
     <footer class="av2m-footer">
       <img class="av2m-footer__green" src="/assets/images/about/About Me-Mobile-Final Assets/Texture___Green_Paper.png" alt="">
       <img class="av2m-footer__flower" src="/assets/images/about/About Me-Mobile-Final Assets/orange_flowers_scrapbook.png" alt="">
-      <p class="av2m-footer__tagline">anything for a little extra Sarahtonin :)</p>
-      <p class="av2m-footer__copyright">&copy; 2026 Sarahtonin Sounds. All rights reserved.</p>
+      <p class="av2m-footer__tagline">{{ about.footer_mobile.tagline }}</p>
+      <p class="av2m-footer__copyright">{{ about.footer_mobile.copyright }}</p>
     </footer>
 
   </div>

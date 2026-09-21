@@ -1,0 +1,6 @@
+{
+  "_comment": "Ordered, explicitly-curated Featured Journal selections (replaces the old always-newest-entry behavior). The Journal Landing template uses entries[0] as the single Featured Post slot today; later entries are reserved for a future multi-featured layout, not yet built. `type` is 'essay' or 'monthly-fav' — monthly-fav entries are matched by slug against content/journal/monthly-favorites.json since that file isn't a real Eleventy collection yet (see TODO/decisions on Monthly Favorites staying on its current shape). Seeded with the entry that's actually live-featured today (the newest overall entry, unchanged), so this file doesn't change what's currently shown.",
+  "entries": [
+    { "type": "monthly-fav", "slug": "dev-placeholder-monthly-favorites" }
+  ]
+}

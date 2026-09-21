@@ -1,3 +1,7 @@
+---
+permalink: /journal.html
+templateEngineOverride: njk
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +19,10 @@
 </head>
 <body class="page-journal">
 <a class="skip-link" href="#main">Skip to content</a>
+
+{%- set feed = collections.journalEssay | journalFeed(journal.monthlyFavorites) -%}
+{%- set featured = feed | resolveFeatured(journal.featured) -%}
+{%- set recent = feed | journalRecent(featured, 4) -%}
 
 <main id="main" class="journal-page">
   <div class="journal-v2__stage" id="journal-stage">
@@ -57,7 +65,7 @@
     </div>
 
     <section class="jv2-featured" id="journal-featured" aria-label="Featured Journal entry">
-      <p class="journal-empty">Loading the latest from the Journal&hellip;</p>
+      {%- if featured %}{{ featured | renderFeaturedEntry | safe }}{% else %}<p class="journal-empty">New essays and Monthly Favorites are on the way.</p>{% endif -%}
     </section>
 
     <!-- Four fixed slots at their exact individual Figma coordinates
@@ -66,11 +74,11 @@
          them exactly). js/journal.js fills each slot with a real entry
          via the same reusable renderJournalCard() used everywhere else,
          and hides any slot beyond the number of entries available. -->
-    <section class="jv2-recent" id="journal-recent" aria-label="More from the Journal">
-      <div class="jv2-card-slot jv2-card-slot--1" id="journal-card-1"></div>
-      <div class="jv2-card-slot jv2-card-slot--2" id="journal-card-2"></div>
-      <div class="jv2-card-slot jv2-card-slot--3" id="journal-card-3"></div>
-      <div class="jv2-card-slot jv2-card-slot--4" id="journal-card-4"></div>
+    <section class="jv2-recent" id="journal-recent" aria-label="More from the Journal"{% if not recent.length %} hidden{% endif %}>
+      <div class="jv2-card-slot jv2-card-slot--1" id="journal-card-1"{% if not recent[0] %} hidden{% endif %}>{% if recent[0] %}{{ recent[0] | renderJournalCard | safe }}{% endif %}</div>
+      <div class="jv2-card-slot jv2-card-slot--2" id="journal-card-2"{% if not recent[1] %} hidden{% endif %}>{% if recent[1] %}{{ recent[1] | renderJournalCard | safe }}{% endif %}</div>
+      <div class="jv2-card-slot jv2-card-slot--3" id="journal-card-3"{% if not recent[2] %} hidden{% endif %}>{% if recent[2] %}{{ recent[2] | renderJournalCard | safe }}{% endif %}</div>
+      <div class="jv2-card-slot jv2-card-slot--4" id="journal-card-4"{% if not recent[3] %} hidden{% endif %}>{% if recent[3] %}{{ recent[3] | renderJournalCard | safe }}{% endif %}</div>
     </section>
 
     <!-- Visual treatment only — the reusable Journal Post page doesn't
@@ -117,16 +125,16 @@
 
     <section class="jv2m-featured-section" aria-label="Featured Journal entry">
       <div class="jv2m-featured-card" id="journal-mobile-featured">
-        <p class="journal-empty">Loading the latest from the Journal&hellip;</p>
+        {%- if featured %}{{ featured | renderFeaturedEntry | safe }}{% else %}<p class="journal-empty">New essays and Monthly Favorites are on the way.</p>{% endif -%}
       </div>
     </section>
 
-    <section class="jv2m-recent" id="journal-mobile-recent" aria-label="More from the Journal">
+    <section class="jv2m-recent" id="journal-mobile-recent" aria-label="More from the Journal"{% if not recent.length %} hidden{% endif %}>
       <h2 class="jv2m-recent__title">Recent Pages</h2>
-      <div class="jv2m-card-slot" id="journal-mobile-card-1"></div>
-      <div class="jv2m-card-slot" id="journal-mobile-card-2"></div>
-      <div class="jv2m-card-slot" id="journal-mobile-card-3"></div>
-      <div class="jv2m-card-slot" id="journal-mobile-card-4"></div>
+      <div class="jv2m-card-slot" id="journal-mobile-card-1"{% if not recent[0] %} hidden{% endif %}>{% if recent[0] %}{{ recent[0] | renderJournalCard | safe }}{% endif %}</div>
+      <div class="jv2m-card-slot" id="journal-mobile-card-2"{% if not recent[1] %} hidden{% endif %}>{% if recent[1] %}{{ recent[1] | renderJournalCard | safe }}{% endif %}</div>
+      <div class="jv2m-card-slot" id="journal-mobile-card-3"{% if not recent[2] %} hidden{% endif %}>{% if recent[2] %}{{ recent[2] | renderJournalCard | safe }}{% endif %}</div>
+      <div class="jv2m-card-slot" id="journal-mobile-card-4"{% if not recent[3] %} hidden{% endif %}>{% if recent[3] %}{{ recent[3] | renderJournalCard | safe }}{% endif %}</div>
     </section>
 
     <!-- Visual treatment only, matching desktop's footer note — see
@@ -141,73 +149,6 @@
   </div>
 </main>
 
-<script src="/js/journal.js" defer></script>
 <script src="/js/site.js" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  // Note: `defer` has no effect on an inline script (only on scripts
-  // with `src`), so this waits for DOMContentLoaded explicitly to run
-  // after the deferred /js/journal.js and /js/site.js have executed.
-  var featuredEl = document.getElementById('journal-featured');
-  var recentSection = document.getElementById('journal-recent');
-  var slots = [
-    document.getElementById('journal-card-1'),
-    document.getElementById('journal-card-2'),
-    document.getElementById('journal-card-3'),
-    document.getElementById('journal-card-4')
-  ];
-
-  // Mobile targets — same feed, same renderers, just a different
-  // (flow-layout) destination in the DOM. Not a second data layer.
-  var mobileFeaturedEl = document.getElementById('journal-mobile-featured');
-  var mobileRecentSection = document.getElementById('journal-mobile-recent');
-  var mobileSlots = [
-    document.getElementById('journal-mobile-card-1'),
-    document.getElementById('journal-mobile-card-2'),
-    document.getElementById('journal-mobile-card-3'),
-    document.getElementById('journal-mobile-card-4')
-  ];
-
-  if (!window.Journal || !featuredEl) return;
-
-  function showEmptyState() {
-    var emptyMarkup = '<p class="journal-empty">New essays and Monthly Favorites are on the way.</p>';
-    featuredEl.innerHTML = emptyMarkup;
-    if (recentSection) recentSection.hidden = true;
-    if (mobileFeaturedEl) mobileFeaturedEl.innerHTML = emptyMarkup;
-    if (mobileRecentSection) mobileRecentSection.hidden = true;
-  }
-
-  function fillSlots(slotList, rest) {
-    slotList.forEach(function (slot, i) {
-      if (!slot) return;
-      var entry = rest[i];
-      if (entry) {
-        slot.innerHTML = window.Journal.renderJournalCard(entry);
-        slot.hidden = false;
-      } else {
-        slot.hidden = true;
-      }
-    });
-  }
-
-  window.Journal.loadJournalEntries().then(function (entries) {
-    if (!entries.length) {
-      showEmptyState();
-      return;
-    }
-
-    var featured = window.Journal.getFeaturedEntry(entries);
-    var rest = entries.slice(1, 5);
-    var featuredHtml = window.Journal.renderFeaturedEntry(featured);
-
-    featuredEl.innerHTML = featuredHtml;
-    if (mobileFeaturedEl) mobileFeaturedEl.innerHTML = featuredHtml;
-
-    fillSlots(slots, rest);
-    fillSlots(mobileSlots, rest);
-  }).catch(showEmptyState);
-});
-</script>
 </body>
 </html>
