@@ -4,10 +4,17 @@ IM Fell English (Regular + Italic) is loaded from Google Fonts in every
 page's `<head>` — it's openly licensed (SIL Open Font License), so no
 local files are needed for it.
 
-Sue Ellen Francisco is also openly licensed and available via Google
-Fonts, and is now loaded the same way on `index.html` (Home's two
-handwritten annotations only — never for navigation, body copy, major
-headings, or the wordmark).
+Sue Ellen Francisco is also openly licensed (SIL Open Font License),
+but is locally hosted here as `SueEllenFrancisco.woff2` — same pattern
+as Perandory below — rather than loaded from Google Fonts. It was
+loaded via Google Fonts originally, but that stylesheet request was
+silently failing in at least one environment (a proxy/cert issue),
+which made `--font-marginalia` render as a plain fallback cursive
+font instead of real handwriting; self-hosting removes that failure
+mode entirely. It's used across Home, About, Contact, Journal, and
+Listen for handwritten marginalia/annotation-style text (never for
+navigation, body copy, major headings, or the wordmark) — not just
+Home's annotations.
 
 Perandory Semi-Condensed is a licensed webfont, locally hosted here as
 `Perandory-SemiCondensed.woff2` and wired to the `--font-display` token
