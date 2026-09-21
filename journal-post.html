@@ -18,146 +18,96 @@
 
 <main id="main" class="journal-post-page">
   <div class="jp-page">
-  <div class="jp-stage" id="journal-post-stage">
 
-    <!-- Decorative / Collage Layer — every remaining element of Figma
-         node 2:72 "Desktop-Journal Entry": the full-bleed background
-         paper (2:73), the angled logo badge (2:26), the yellow paper
-         behind the text column (2:150), two scribble stars (3:165,
-         3:164), the edge-bleeding megaphone (3:167), and the Polaroid
-         + Tape unit (94:14). Purely decorative — aria-hidden, no
-         informational content. `home-spiral-4`, previously flagged as
-         likely leftover Home-page clutter outside the frame's visible
-         bounds, does not appear anywhere in this frame's current
-         child list (confirmed via get_metadata on 2:72) — already
-         gone, nothing to skip.
+    <!-- ══════════════════════════════════════════════════════════════
+         DESKTOP — full rebuild from figma.com/design/NmseLluZJR0NqBKcwIq02A,
+         node 156:553 ("Desktop-Journal Entry", "Journal-Landing" file).
+         This replaces the ENTIRE previous collage-based desktop build
+         (fixed-height .jp-stage + isolation:isolate, yellow-paper tile,
+         corner-paper-1/2 anchored to content end) — see TODO.md,
+         "Journal Post Desktop — Full rebuild from new Figma reference".
 
-         2:78 (the second full-bleed background paper) is NOT here: its
-         real Figma y=1214 falls below this 1024px .jp-stage frame, so
-         it lives in .jp-body-region below instead — see the comment
-         on .jp-decor__bg-lower there, and TODO.md ("Journal Post —
-         Page height capped at 1024px").
+         Architecture: plain normal document flow throughout, nav down
+         through the last paragraph, however long a given essay's body
+         turns out to be — no fixed-aspect "stage," no overflow:hidden
+         clipping content, no absolute-position-everything. Only the
+         small decorative header cluster (logo badge + nav, both purely
+         ornamental) uses internal absolute positioning against its own
+         auto-sized wrapper; .jp-page itself never has a fixed height.
 
-         The two torn corner papers (3:154, 3:155) are ALSO NOT here
-         any more, for the same reason as 2:78: Sarah asked for this
-         pair to anchor to the true end of the essay's content rather
-         than sit at a fixed spot on the 1024px stage, so a
-         content-length essay needs them positioned relative to
-         .jp-body-region's real, content-driven bottom edge, not
-         .jp-stage's fixed one. See the comment on .jp-decor__corner1
-         in .jp-body-region below, and TODO.md ("Journal Post — Below-
-         the-fold design: corners should anchor to true content end").
+         Three deliberate deviations from what's literally in the Figma
+         frame, all made against this task's own written content-block
+         spec rather than the frame's full contents:
+         1. "Texture / Red Stripe" (161:601) is NOT built. The task's
+            own Background section names exactly two texture layers
+            (background-paper-base, background-paper-lower) plus a flat
+            color — no red stripe. This also resolves cleanly on
+            inspection: in Figma's own paint order the opaque flat
+            rectangle (161:588, folded here into .jp-page's own
+            background-color) sits on top of both the red stripe AND
+            background-paper-base in their one shared visible band
+            (page y 0–146 of the 2423-tall frame) — so red-stripe would
+            fully hide paper-base there, contradicting the task's own
+            "paper-base adds grain near the top" description. Omitting
+            it is what makes that description true.
+         2. corner-paper-1 (161:597) is removed entirely, per this
+            task's explicit instruction — see TODO.md.
+         3. Of Figma's three star instances (156:563, 156:564, 161:599)
+            only two are built, matching this task's explicit "two
+            small scribble-star accents" (down from the old design's
+            two also, so no change in count — 161:599 is the one
+            dropped, being the near-duplicate closest to 156:563).
+         Hero's four corner-tape pieces (164:6–9) and the pull-quote's
+         tape (164:22) are also not built: this task's own content-block
+         list gives Polaroid-1/2 tape explicitly but describes the hero
+         and pull-quote blocks without mentioning tape at all — treated
+         as the same kind of deliberate "much lighter" curation as the
+         star count, not an oversight.
 
-         Position/rotation source-of-truth conflict, same pattern
-         already documented in css/journal.css for this exact page
-         family ("Three coordinate conflicts between Figma's own two
-         data sources were resolved against the finalized rendered
-         reference"): get_metadata's raw XML bounding boxes disagreed
-         with get_design_context's composed/rendered code for 6 of
-         these 11 elements (2:78, 3:154, 2:26, 2:150, 3:164, 3:167) —
-         in every case get_metadata's numbers would push the element
-         mostly or entirely outside the 1492×1024 frame (e.g. the
-         megaphone at metadata's x=1497 vs design-context's x=1255.58 —
-         confirmed against the full-frame screenshot, where the
-         megaphone is clearly still mostly on-canvas, just clipped at
-         the right edge) or onto the wrong side of the page (corner
-         paper 1 at metadata's x=859 vs design-context's x=-51 — the
-         screenshot clearly shows corner paper 1's dusty-pink color at
-         the BOTTOM-LEFT, not the right-center the task brief's
-         reference table suggested). get_design_context's numbers are
-         used throughout, cross-checked against the full-frame
-         screenshot rather than trusted blindly.
+         Photo placeholders: hero/polaroid-1/polaroid-2 use a plain
+         toned placeholder in place of a real photo (see
+         .jp-hero__photo, .jp-polaroid__photo). Figma's own hero/
+         polaroid photo exports could not be fetched — this sandbox's
+         egress policy blocks www.figma.com asset URLs (the same
+         constraint already on record for this page's title-underline
+         asset, see TODO.md) — and the two existing repo images with a
+         plausible size/shape (article-cheers-to-this.png,
+         article-photo-sky-clouds.png) are already real CMS
+         featured_image content for other, unrelated Journal entries
+         (content/journal/essays.json, monthly-favorites.json), so
+         reusing either here as this template's demo photo would
+         misrepresent someone else's entry as this placeholder's own.
+         Swap in real photos per essay once Sarah supplies them
+         (CLAUDE.md's asset-provision model) — the frame/tape/shadow/
+         caption chrome around each placeholder is already real,
+         finished CSS, not a stand-in.
 
-         Asset reuse — every element below is a real exported asset
-         already sitting in this repo (no new asset created, per the
-         asset-handling instruction), matched by filename and/or
-         direct visual comparison against each node's own Figma
-         render:
-         - 2:73  → assets/images/listen/sarahtonin_sounds-background_paper_2_1.png
-                   (filename is a literal match for the Figma layer
-                   name "sarahtonin sounds-background paper_2 1")
-         - 2:78  → assets/images/journal/paper.png — see .jp-body-region
-                   below, not this layer (plain cream torn paper
-                   texture)
-         - 3:154 → assets/images/journal/corner-paper-pink.png — see
-                   .jp-body-region below, not this layer
-         - 3:155 → assets/images/journal/corner-paper-red.png — see
-                   .jp-body-region below, not this layer
-         - 2:26  → assets/images/home-v2/home-logo-sharp.png (name and
-                   art both match "Sarahtonin Sounds logo sharp" —
-                   already used elsewhere on the site)
-         - 2:150 → assets/images/home/yellow-piece-of-paper.png
-         - 3:164, 3:165 → assets/images/shared/doodles/star-scribble.png
-         - 3:167 → assets/images/journal/megaphone.png
+         Every optional block below is marked CMS: optional in a
+         comment, matching the established convention on this page's
+         own mobile build (`.jpm-body-copy`'s "essay.body" START/END
+         markers) — each is independently removable per essay; when
+         removed, everything below it flows up with no gap, since nav/
+         header/title/body paragraphs are all the block's own ordinary
+         flow siblings with no absolute positioning or fixed heights
+         holding a gap open. Verified for every combination named in
+         this task, not just the fully-populated case — see TODO.md. -->
 
-         Two assets — the polaroid (94:14 → 3:156) and the tape
-         (94:14 → 3:162) — are used from
-         assets/images/journal/article-photo-sky-clouds.png (already
-         referenced elsewhere as a Journal "featured_image") and
-         assets/images/journal/tape-orange.png. Both are placed at
-         Figma's OUTER (post-rotation) bounding box with NO additional
-         CSS rotation, unlike every other rotated element here: their
-         pixel aspect ratios match Figma's post-rotation wrapper box
-         almost exactly (polaroid 608×733 = 0.829 vs Figma's
-         303.765×366.363 = 0.8291; tape 273×191 = 1.429 vs Figma's
-         136.409×95.043 = 1.435) and both visibly already contain a
-         baked-in tilt + drop shadow — they're pre-flattened exports,
-         not the "natural" pre-rotation source Figma's other assets
-         are. Applying Figma's stated rotate() on top of these would
-         double-rotate them. Verified by rendering and comparing
-         against the full-frame Figma screenshot, not assumed from the
-         ratio match alone.
-
-         Rotation pivot: every OTHER element below uses Figma's own
-         flex-center-then-rotate export technique (already established
-         in css/journal.css for the Journal Landing logo/green paper) —
-         an outer wrapper sized to the POST-rotation bounding box,
-         centering an inner element sized to the PRE-rotation natural
-         image dimensions, which then carries the rotate()/scaleY()
-         transform. This avoids the top-left-pivot bug CSS's default
-         transform-origin would otherwise cause on a naively-sized
-         single element, without needing a different transform-origin
-         value per element. -->
-    <div class="jp-decor" aria-hidden="true">
-      <img class="jp-decor__bg-base" src="/assets/images/listen/sarahtonin_sounds-background_paper_2_1.png" alt="">
-
-      <div class="jp-decor__logo">
-        <div class="jp-decor__logo-inner">
+    <div class="jp-header" aria-hidden="true">
+      <img class="jp-bg-paper-base" src="/assets/images/listen/sarahtonin_sounds-background_paper_2_1.png" alt="">
+      <img class="jp-bg-paper-lower" src="/assets/images/journal/paper.png" alt="">
+      <div class="jp-logo-badge">
+        <div class="jp-logo-badge__inner">
           <img src="/assets/images/home-v2/home-logo-sharp.png" alt="">
         </div>
       </div>
-
-      <div class="jp-decor__yellow-paper">
-        <div class="jp-decor__yellow-paper-inner">
-          <img src="/assets/images/home/yellow-piece-of-paper.png" alt="">
-        </div>
-      </div>
-
-      <img class="jp-decor__star2" src="/assets/images/shared/doodles/star-scribble.png" alt="">
-      <img class="jp-decor__star1" src="/assets/images/shared/doodles/star-scribble.png" alt="">
-
-      <div class="jp-decor__megaphone">
-        <div class="jp-decor__megaphone-inner">
-          <img src="/assets/images/journal/megaphone.png" alt="">
-        </div>
-      </div>
-
     </div>
 
-    <!-- Nav — reproduces Figma node 94:8 ("Nav") from the Journal Post
-         desktop frame (figma.com/design/NmseLluZJR0NqBKcwIq02A, node
-         2:72 "Desktop-Journal Entry", confirmed 1492×1024 reference
-         frame). Reuses the same approved torn-tape nav asset already
-         established on Home/Journal Landing
-         (assets/images/shared/nav-paper-tab.png, ASSET-MANIFEST.md
-         §1) — not a new asset.
-
-         Figma's 4th tab is labeled "DISCOVER". Journal Landing's
-         mobile nav already documents relabeling this exact tape to
-         LISTEN to match the site's real production nav (Home · About
-         · Listen · Journal · Contact — CLAUDE.md, PROJECT-SPEC.md);
-         this page follows that same established precedent rather
-         than introducing a sixth/different label. -->
+    <!-- Nav — unchanged from the previous build: Figma's own nav frame
+         geometry (x=592,y=29,w=814,h=57) and asset
+         (assets/images/shared/nav-paper-tab.png, reused across all 5
+         tabs) are identical between the old and new "Desktop-Journal
+         Entry" frames. 4th tab relabeled DISCOVER→LISTEN, same
+         established site-wide precedent as before. -->
     <nav class="jp-nav" aria-label="Primary">
       <ul>
         <li><a href="/" class="jp-nav__tab">Home</a></li>
@@ -168,147 +118,94 @@
       </ul>
     </nav>
 
-    <!-- Title Block — reproduces Figma nodes 5:170 (metadata), 5:171
-         (metadata underline), 3:159 (title), 3:160 (title underline
-         rule), all direct children of the
-         same 2:72 "Desktop-Journal Entry" frame. Positions are exact
-         percentages of the 1492×1024 reference frame, same technique
-         as Nav. Placeholder text only (matches Figma's own sample
-         copy) — not real content; swap the text nodes when a real
-         entry is wired up.
-
-         Two font substitutions, both flagged rather than silently
-         applied (same policy as the Nav pass):
-
-         - Title (3:159): Figma specifies "Perandory Regular" — only
-           Perandory Semi-Condensed and Condensed are hosted
-           (assets/fonts/), no plain Regular cut. Uses var(--font-display)
-           (Semi-Condensed), matching every other Perandory heading
-           already on this page family (journal.css).
-         - Metadata (5:170): Figma specifies "Playfair Regular".
-           Playfair Display is explicitly listed in CLAUDE.md as a
-           legacy typeface that is NOT a current requirement. Uses
-           var(--font-body) (IM Fell English) italic instead, matching
-           the established "ESSAY · ..." meta-line treatment already
-           used on Journal Landing (.journal-featured__meta /
-           .journal-card__meta in journal.css) — not a one-off choice.
-
-         Rule (3:160) is, in the real Figma file, a textured hand-drawn
-         crimson brush-stroke SVG/PNG asset (643×12px) — not a flat
-         line. That asset could not be downloaded in this build
-         session (this sandbox's egress policy blocks www.figma.com
-         asset URLs), so it's implemented here as a flat
-         var(--color-crimson) bar at the exact Figma geometry, per
-         explicit sign-off rather than a silent substitution. Swap in
-         the real exported asset when available — see TODO.md. -->
+    <!-- Title Block — metadata top-right, title + underline centered
+         below. Font substitutions carried over from the previous build
+         (still correct, unchanged reasoning): title uses
+         var(--font-display) for Figma's unhosted "Perandory Regular";
+         metadata/rule use var(--font-body) italic for Figma's
+         "Playfair Regular" (an explicit legacy exclusion, CLAUDE.md).
+         The title underline is still a flat var(--color-crimson) bar,
+         not Figma's real textured brush-stroke asset — same
+         still-open, still-blocked-download item as before, see
+         TODO.md ("Journal Post — Title Block underline needs the real
+         asset"), now also true of this rebuild. -->
     <div class="jp-title-block">
       <p class="jp-title-block__meta">Essay · September 2026</p>
       <div class="jp-title-block__meta-rule" aria-hidden="true"></div>
       <h1 class="jp-title-block__title">Title Goes Here</h1>
       <div class="jp-title-block__rule" aria-hidden="true"></div>
     </div>
-  </div>
 
-  <!-- Body Copy — reproduces Figma node 2:96, a single text node
-       (not 4 separate layers) that this markup mirrors as one
-       flowing block with real <p> paragraph breaks rather than
-       Figma's own literal DOM export (which represents each blank
-       line as its own empty "​" paragraph — a text-node-to-DOM
-       export artifact, not something worth reproducing literally in
-       semantic HTML; spacing here is done with CSS margin instead).
-       Column width (636px of the 1492px frame) constrains line-wrap
-       only — height is intentionally not fixed, since real essay
-       copy will run longer or shorter than this 4-paragraph
-       placeholder. The lorem ipsum text itself, its paragraph count,
-       and paragraph lengths are not meaningful — only the "multiple
-       real paragraphs in one flowing block" structure is.
+    <!-- Article — the flowing content column. Every block from here
+         down except the four body-copy groups is independently
+         optional (CMS: optional) per the comments on each. -->
+    <div class="jp-article">
 
-       Font substitution, same flagged policy as Nav/Title Block:
-       Figma specifies "Playfair Display Regular" — Playfair Display
-       is an explicit legacy exclusion per CLAUDE.md. Uses
-       var(--font-body) (IM Fell English) instead, per PROJECT-SPEC
-       §5's body-copy direction. Line-height/color are not
-       hardcoded here — they inherit the sitewide base.css values
-       (1.6 / var(--color-near-black) via var(--color-text)) rather
-       than Figma's unspecified "normal" leading.
+      <!-- CMS: optional — Hero image + caption (content block 1). -->
+      <figure class="jp-hero">
+        <div class="jp-hero__photo" role="img" aria-label="Hero photo placeholder"></div>
+        <figcaption class="jp-hero__caption">A look inside the creative process — September 2026</figcaption>
+      </figure>
 
-       Now a normal-flow sibling of .jp-stage (.jp-body-region), not an
-       absolutely-positioned child of it — absolutely-positioned
-       descendants never contribute to an ancestor's auto-height, and
-       .jp-stage's aspect-ratio derives its height purely from width,
-       so real essay-length copy was being silently clipped at 1024px.
-       See TODO.md, "Journal Post — Page height capped at 1024px". -->
-  <div class="jp-body-region">
-    <!-- Background Paper Section 1 (Figma node 2:78) — its real Figma
-         y=1214 is below the 1024px .jp-stage frame's own height, i.e.
-         it's the background for whatever continues below the fold on
-         the real (uncropped) page, so it lives here in .jp-body-region
-         rather than in .jp-decor. A plain wrapper div (not top+bottom
-         directly on the <img>) per a confirmed bug in this codebase:
-         an absolutely-positioned <img> with both top and bottom set
-         ignores bottom entirely and sizes itself from its own intrinsic
-         aspect ratio instead — see TODO.md. margin-top resolves
-         Figma's y=1214 relative to body copy's own y=324, both against
-         the 1492px reference frame's WIDTH (the CSS-spec basis for
-         percentage margins, holding correct at any viewport width):
-         (1214-324)/1492 = 59.6514%. bottom:0 then stretches it to
-         .jp-body-region's real, content-driven bottom edge. -->
-    <div class="jp-decor__bg-lower">
-      <img src="/assets/images/journal/paper.png" alt="">
-    </div>
-
-    <div class="jp-body-copy">
-      <p>Incididunt labore veniam consequat dolore eiusmod ex dolore eiusmod consectetur commodo. Quis lorem sed commodo lorem dolore dolore exercitation quis ut. Tempor quis ut et adipiscing incididunt ut dolore laboris amet lorem consectetur. Enim lorem laboris incididunt magna ut ullamco commodo ex incididunt adipiscing sit aliqua elit ad.</p>
-      <p>Ea ipsum laboris exercitation quis et adipiscing elit quis enim minim exercitation ut consequat. Ipsum ex nostrud et laboris ut eiusmod veniam do nostrud commodo. Labore amet ullamco labore enim ad dolor sit adipiscing amet.</p>
-      <p>Minim minim amet dolor adipiscing nisi incididunt ad ut amet consectetur elit ullamco sed. Magna dolore dolor ad elit nostrud sed lorem adipiscing magna. Ullamco tempor laboris minim quis ut. Aliqua ad aliquip et ex laboris. Exercitation adipiscing ullamco ea aliqua ut commodo eiusmod ut sed ex ut ut tempor exercitation.</p>
-      <p>Nostrud ipsum ea dolore lorem laboris elit minim. Dolore eiusmod ullamco et minim aliqua sit commodo ea ullamco laboris aliqua nisi nisi. Veniam quis magna ea labore ut ad sit consequat consectetur et ut ea dolore. Incididunt nisi commodo amet nisi aliqua elit nostrud amet nisi ad. Sit amet ut amet ut consequat ut lorem ut aliqua ut et dolor labore. Minim consectetur sit ipsum tempor ad commodo lorem incididunt tempor ad ut.</p>
-    </div>
-
-    <!-- Corner papers 1 & 2 (Figma 3:154, 3:155) — moved here from
-         .jp-decor per Sarah's request: this pair should anchor to the
-         true end of the essay's content, wherever that ends up being,
-         not sit at a fixed spot on the 1024px stage. Both are
-         absolutely positioned within .jp-body-region (not .jp-stage),
-         anchored with bottom:0 + a negative margin-bottom (a
-         width-relative percentage, per the CSS-spec fact that margin
-         percentages resolve against the containing block's WIDTH —
-         same technique already used for .jp-body-region's own
-         margin-top and .jp-decor__bg-lower's margin-top) instead of
-         the old top-from-.jp-stage percentage. width and left are
-         unchanged (both already resolved against WIDTH, so they carry
-         over identically between .jp-stage and .jp-body-region, which
-         share the same width via .jp-page); height is now driven by
-         aspect-ratio instead of a height percentage, since a %
-         height here would resolve against .jp-body-region's own
-         content-driven height and make the papers grow or shrink with
-         essay length — exactly the "size" this move is required to
-         preserve. z-index (3, 4) is unchanged from its original
-         .jp-decor value, per the task's explicit "preserve z-index
-         stacking" instruction, even though it now compares against
-         .jp-body-copy's z-index:1 and .jp-decor__bg-lower's z-index:0
-         instead of .jp-stage's isolated 1-20 tier range (see
-         TODO.md, "Journal Post — Below-the-fold design: corners
-         should anchor to true content end").
-
-         Corner paper 1 (3:154 → corner-paper-pink.png) is a
-         pre-flattened asset: its tilt is already baked into the
-         image's own pixels, so it carries no CSS rotation (an earlier
-         pass wrongly applied Figma's stated rotate(180deg) scaleY(-1)
-         on top of it, double-rotating it — see TODO.md). Corner paper
-         2 (3:155 → corner-paper-red.png) is a genuine "natural"
-         pre-rotation source and still uses the site's established
-         flex-center-then-rotate technique (an outer wrapper sized to
-         the POST-rotation bounding box, centering an inner element at
-         the PRE-rotation natural size, which carries the rotate()/
-         scaleY() transform). -->
-    <div class="jp-decor__corner2" aria-hidden="true">
-      <div class="jp-decor__corner2-inner">
-        <img src="/assets/images/journal/corner-paper-red.png" alt="">
+      <!-- CMS: required — Body paragraphs (content block 2). -->
+      <div class="jp-body-copy">
+        <p>Incididunt labore veniam consequat dolore eiusmod ex dolore eiusmod consectetur commodo. Quis lorem sed commodo lorem dolore dolore exercitation quis ut. Tempor quis ut et adipiscing incididunt ut dolore laboris amet lorem consectetur. Enim lorem laboris incididunt magna ut ullamco commodo ex incididunt adipiscing sit aliqua elit ad.</p>
+        <p>Ea ipsum laboris exercitation quis et adipiscing elit quis enim minim exercitation ut consequat. Ipsum ex nostrud et laboris ut eiusmod veniam do nostrud commodo. Labore amet ullamco labore enim ad dolor sit adipiscing amet.</p>
       </div>
-    </div>
-    <img class="jp-decor__corner1" src="/assets/images/journal/corner-paper-pink.png" alt="">
-  </div>
 
+      <!-- CMS: optional — Polaroid-1: image + tape + italic caption,
+           rotated +3deg (content block 3). Tape/photo/caption are real
+           elements on the card, not baked into one flattened image, so
+           the photo is the only thing a real essay needs to swap. -->
+      <figure class="jp-polaroid jp-polaroid--1">
+        <div class="jp-polaroid__card">
+          <img class="jp-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
+          <div class="jp-polaroid__photo" role="img" aria-label="Polaroid photo placeholder"></div>
+          <figcaption class="jp-polaroid__caption">&ldquo;The groove doesn't lie.&rdquo;</figcaption>
+          <img class="jp-decor__star jp-decor__star--1" src="/assets/images/shared/doodles/star-scribble.png" alt="">
+        </div>
+      </figure>
+
+      <!-- CMS: required — Body paragraphs (content block 4). -->
+      <div class="jp-body-copy">
+        <p>Incididunt labore veniam consequat dolore eiusmod ex dolore eiusmod consectetur commodo. Quis lorem sed commodo lorem dolore dolore exercitation quis ut. Tempor quis ut et adipiscing incididunt ut dolore laboris amet lorem consectetur.</p>
+        <p>Ea ipsum laboris exercitation quis et adipiscing elit quis enim minim exercitation ut consequat. Ipsum ex nostrud et laboris ut eiusmod veniam do nostrud commodo. Labore amet ullamco labore enim ad dolor sit adipiscing amet.</p>
+      </div>
+
+      <!-- CMS: optional — Pull-quote band (content block 5). -->
+      <blockquote class="jp-pull-quote">
+        <span class="jp-pull-quote__mark jp-pull-quote__mark--open" aria-hidden="true">&ldquo;</span>
+        <p class="jp-pull-quote__text">The music you make in the margins of your life is often the most honest thing about you.</p>
+        <span class="jp-pull-quote__mark jp-pull-quote__mark--close" aria-hidden="true">&rdquo;</span>
+        <img class="jp-decor__megaphone" src="/assets/images/journal/megaphone.png" alt="" aria-hidden="true">
+      </blockquote>
+
+      <!-- CMS: required — Body paragraphs (content block 6). -->
+      <div class="jp-body-copy">
+        <p>Incididunt labore veniam consequat dolore eiusmod ex dolore eiusmod consectetur commodo. Quis lorem sed commodo lorem dolore dolore exercitation quis ut. Tempor quis ut et adipiscing incididunt ut dolore laboris amet lorem consectetur. Enim lorem laboris incididunt magna ut ullamco commodo ex incididunt adipiscing sit aliqua elit ad.</p>
+        <p>Ea ipsum laboris exercitation quis et adipiscing elit quis enim minim exercitation ut consequat. Ipsum ex nostrud et laboris ut eiusmod veniam do nostrud commodo. Labore amet ullamco labore enim ad dolor sit adipiscing amet.</p>
+      </div>
+
+      <!-- CMS: optional — Polaroid-2: image + tape + italic caption,
+           rotated -2.5deg (content block 7) — a different rotation
+           than Polaroid-1, per this task's explicit instruction. -->
+      <figure class="jp-polaroid jp-polaroid--2">
+        <div class="jp-polaroid__card">
+          <img class="jp-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
+          <div class="jp-polaroid__photo" role="img" aria-label="Polaroid photo placeholder"></div>
+          <figcaption class="jp-polaroid__caption">Handwritten drafts, September session.</figcaption>
+          <img class="jp-decor__star jp-decor__star--2" src="/assets/images/shared/doodles/star-scribble.png" alt="">
+        </div>
+      </figure>
+
+      <!-- CMS: required — Body paragraphs (content block 8). -->
+      <div class="jp-body-copy">
+        <p>Ea ipsum laboris exercitation quis et adipiscing elit quis enim minim exercitation ut consequat. Ipsum ex nostrud et laboris ut eiusmod veniam do nostrud commodo. Labore amet ullamco labore enim ad dolor sit adipiscing amet.</p>
+        <p>Ea ipsum laboris exercitation quis et adipiscing elit quis enim minim exercitation ut consequat. Ipsum ex nostrud et laboris ut eiusmod veniam do nostrud commodo. Labore amet ullamco labore enim ad dolor sit adipiscing amet.</p>
+        <p>Incididunt labore veniam consequat dolore eiusmod ex dolore eiusmod consectetur commodo. Quis lorem sed commodo lorem dolore dolore exercitation quis ut. Tempor quis ut et adipiscing incididunt ut dolore laboris amet lorem consectetur. Enim lorem laboris incididunt magna ut ullamco commodo ex incididunt adipiscing sit aliqua elit ad.</p>
+      </div>
+
+    </div>
   </div>
 
   <!-- Mobile Journal Post (390px reference frame, Figma node 55:4

@@ -1,94 +1,169 @@
-/* Journal Post (desktop) — Nav, Title Block, Body Copy, and the full
-   decorative/collage layer.
-   Reproduces Figma node 94:8 ("Nav") from the Journal Post desktop
-   frame (figma.com/design/NmseLluZJR0NqBKcwIq02A, node 2:72
-   "Desktop-Journal Entry", confirmed 1492×1024 reference frame).
-   Nav frame geometry per Figma: x=592, y=29, w=814, h=57 (5 items ×
-   142px + 4 gaps × 26px = 814px, confirming the frame is a pure hug-
-   content auto-layout row — no full-width stretch). Percentages below
-   are that geometry expressed against the 1492×1024 reference frame,
-   the same technique used for the Journal Landing stage
-   (css/journal.css). Each Nav Item keeps its own 142:57 aspect ratio
-   so the tape art never stretches as the stage scales. 0° rotation
-   throughout, matching the source frame exactly.
+/* Journal Post (desktop) — full rebuild from
+   figma.com/design/NmseLluZJR0NqBKcwIq02A, node 156:553
+   ("Desktop-Journal Entry", "Journal-Landing" file). Replaces the
+   entire previous collage-based build. See the HTML comment at the
+   top of .jp-page's markup in journal-post.html for the full
+   rationale (architecture, the three deliberate Figma omissions, and
+   the photo-placeholder decision), and TODO.md, "Journal Post Desktop
+   — Full rebuild from new Figma reference".
 
-   Typography: Figma's raw export specifies Crimson Text SemiBold,
-   20px, #000 for the nav labels. This instead uses the established
-   Sarahtonin Sounds system — var(--font-display) (Perandory
-   Semi-Condensed) and var(--color-near-black) — matching journal.css's
-   identical, already-documented decision for this same nav-tape
-   component: PROJECT-SPEC.md §8 ("Perandory Semi-Condensed direction
-   for major editorial headings"), CLAUDE.md's design hierarchy, and
-   the site style guide file's own Perandory heading example, which
-   lists "About / Listen / Journal" as the reference usage. Only a
-   Regular weight of Perandory Semi-Condensed is currently hosted
-   (assets/fonts — no Semibold cut supplied), so no synthetic/fake
-   bold is applied for the spec's "SemiBold" weight; flagged for Sarah
-   rather than approximated. */
+   Architecture: normal document flow throughout — no fixed-aspect
+   "stage," no overflow:hidden clipping content, no
+   absolute-position-everything. Only the small decorative header
+   cluster (.jp-header: logo badge + nav) uses internal absolute
+   positioning against its own auto-sized wrapper. Reference frame
+   width (1492px) is still used for left/width percentages site-wide,
+   same convention as every other page in this family
+   (css/journal.css, the old .jp-stage).
+
+   Background: a flat color on .page-journal-post (#fbe6b2, Figma's
+   own value for this frame) with two textured PNGs layered on top
+   only in .jp-header, near the very top of the page — not a
+   full-height tiled texture, and no seam below where they end since
+   the flat color underneath is the same real page background, not a
+   second visual layer. #fbe6b2 does NOT map to var(--color-cream)
+   (#ded7c1) — checked directly, not assumed: cream reads distinctly
+   greyer/darker next to the actual paper-texture assets used here
+   (confirmed by eye against sarahtonin_sounds-background_paper_2_1.png's
+   own warm tan tone, which sits close to #fbe6b2 and nowhere near
+   #ded7c1), so using the token would create a visible mismatch
+   against the reused texture assets rather than the "no seam" this
+   task asks for. Kept as a literal value scoped to this page, same
+   pattern already used elsewhere in this file family for page-
+   specific tones (css/journal.css has several: #faf8ee, #fdfbed). */
+.page-journal-post {
+  background-color: #fbe6b2;
+}
 
 .page-journal-post main.journal-post-page {
   max-width: none;
   padding: 0;
 }
 
-/* overflow:hidden added for the corner papers below (.jp-decor__corner1/
-   __corner2, in .jp-body-region): both have a small built-in overshoot
-   past their own container's edges (corner2's left+width sums to
-   100.4019%; corner1 bleeds slightly past the left edge, and both
-   bleed ~70px past .jp-body-region's bottom by design — see the
-   comment on .jp-decor__corner2's rule). That overshoot was always
-   invisible, clipped by .jp-stage's own overflow:hidden while these
-   lived inside it — moving them to .jp-body-region (which has no
-   clipping of its own) turned the same overshoot into real,
-   measurable page overflow (document.documentElement.scrollWidth
-   exceeding clientWidth) for the first time. Clipping here, at the
-   one container both .jp-stage and .jp-body-region already share,
-   restores the exact same truncation these elements always had rather
-   than either leaving new overflow or suddenly showing more of the
-   pink/red paper past the tear than the original design ever did. */
 .jp-page {
-  max-width: none;
-  overflow: hidden;
+  max-width: 1492px;
+  margin: 0 auto;
 }
 
-.jp-stage {
+/* ── Header cluster (logo badge + background paper + nav) ──
+   The only part of this page using internal absolute positioning:
+   both children are purely decorative/ornamental and their relationship
+   to each other (logo overlapping the page's top-left corner, nav
+   sitting to its right) doesn't change with essay length, unlike the
+   rest of the page below it. Sized via padding-top (a real, width-
+   relative height — CSS resolves vertical padding percentages against
+   the containing block's WIDTH, the same technique already used
+   elsewhere in this file for margin-top) to the logo badge's own
+   post-rotation bounding box, minus the 20px it starts above this
+   container's own top edge (see .jp-logo-badge's top): 269.134/1492 =
+   18.0399%, rounded to 18.04%.
+
+   isolation:isolate contains this cluster's own absolutely-positioned
+   children (the two background textures, the logo) to itself, so they
+   never get compared against the unrelated positioned elements further
+   down the page (polaroid cards, pull-quote, stars) in the same
+   ambient stacking context — the exact bug this codebase hit
+   repeatedly on the old .jp-stage (see TODO.md, "Journal Post — Page
+   height capped at 1024px", bug #2) before isolation:isolate fixed it
+   there; applied here from the start rather than waiting to hit it
+   again. */
+.jp-header {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1492 / 1024;
-  overflow: hidden;
   isolation: isolate;
-  background-color: var(--color-cream);
+  padding-top: 18.04%;
+  margin-bottom: 16px;
 }
 
-/* Normal-flow sibling of .jp-stage, so real body-copy content drives
-   its own height instead of being clipped by .jp-stage's fixed
-   aspect-ratio (see TODO.md, "Journal Post — Page height capped at
-   1024px"). Percentage margins resolve against the containing block's
-   WIDTH (a CSS-spec fact, not a browser quirk), so this pulls the
-   region up to start exactly at body copy's real Figma y (324) at any
-   viewport width: -(1024-324)/1492 = -46.9169%. .jp-stage's own
-   isolation:isolate (above) contains its internal z-index range
-   (1–20) to itself, so this later plain DOM sibling naturally paints
-   above all of it with no z-index of its own needed. */
-.jp-body-region {
-  position: relative;
-  margin-top: -46.9169%;
+/* Both texture layers bleed intentionally past .jp-header's own
+   269px-tall box (down to 30vw / 460px max) — harmless since nothing
+   below clips it (no overflow:hidden anywhere on this page), and by
+   design: this is the "grain fading into the flat color" transition
+   the task asks for, not a hard-edged band. vw (not a percentage of
+   .jp-header's own explicit height) keeps both scaling with viewport
+   width rather than being capped at the header's own small height.
+   Neither asset is new: background-paper-base reuses the exact same
+   texture this page already used for this same top-of-page role
+   before this rebuild (sarahtonin_sounds-background_paper_2_1.png,
+   confirmed a close visual match for Figma's own paper-base tone);
+   background-paper-lower reuses journal/paper.png, the plain torn-
+   edge cream paper this page used for its equivalent second
+   background-paper role prior to the later yellow-tile pivot (see
+   TODO.md) — Figma's own new pixels for these two nodes could not be
+   fetched (egress blocked, same constraint as the title-underline
+   asset below). */
+.jp-bg-paper-base {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 30vw;
+  max-height: 460px;
+  max-width: none;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
 }
 
-/* .jp-nav's own width is set explicitly (814/1492 of the stage) rather
-   than left to shrink-wrap: an absolutely-positioned box with no
-   declared width can't resolve percentage widths on its own flex
-   children (the container's width would depend on the children's
-   rendered width, which would depend on the container's width — a
-   circular reference browsers can't resolve, collapsing every tab to
-   its text's intrinsic width). This value hugs the same 814px Figma
-   totals precisely without a fixed px width. */
+.jp-bg-paper-lower {
+  position: absolute;
+  left: 0;
+  top: 16vw;
+  width: 100%;
+  height: 30vw;
+  max-height: 460px;
+  max-width: none;
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: 0.75;
+  z-index: 0;
+}
+
+/* Logo badge (Figma "logo-badge-angled", 156:558) — unchanged geometry
+   from the previous build (confirmed: same -34,-20,436.083,289.134
+   outer box, same 404×166 natural inner size, same -19.11deg), only
+   re-expressed against this header's own 269.134px reference height
+   instead of the old 1024px stage. Same asset as before
+   (home-logo-sharp.png — the approved gold wordmark, ASSET-MANIFEST.md),
+   not a new export. */
+.jp-logo-badge {
+  position: absolute;
+  left: -2.2788%;
+  top: -7.431%;
+  width: 29.2317%;
+  height: 107.431%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jp-logo-badge__inner {
+  width: 92.6449%;
+  height: 57.4074%;
+  transform: rotate(-19.11deg);
+}
+
+.jp-logo-badge__inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Nav — unchanged geometry/asset from the previous build (Figma's own
+   nav frame, x=592,y=29,w=814,h=57, is identical between the old and
+   new "Desktop-Journal Entry" frames); only `top` is re-expressed
+   against .jp-header's own 269.134px reference height (29/269.134 =
+   10.7734%) instead of the old 1024px stage (where it was 2.832%).
+   left/width are unchanged since both already resolve against the
+   same 1492px reference width in both builds. */
 .jp-nav {
   position: absolute;
   left: 39.6782%;
-  top: 2.832%;
+  top: 10.7734%;
   width: 54.5576%;
-  z-index: 20;
+  z-index: 2;
 }
 
 .jp-nav ul {
@@ -139,25 +214,32 @@
   text-decoration: underline;
 }
 
-/* ── Title Block ── Figma nodes 5:170 (metadata), 3:159 (title),
-   3:160 (underline rule) — exact percentages of the 1492×1024
-   reference frame (x/y/w straight from Figma's own geometry: metadata
-   1012,120,243; title 430,185,801; rule 498,295,643). Font
-   substitutions and the underline-asset placeholder are documented in
-   the HTML comment above this block's markup. 0° rotation throughout,
-   matching the source frame. */
+/* ── Title Block ── metadata top-right, title + underline centered
+   below. Now a normal-flow block (a sibling of .jp-header, not an
+   inset:0 absolute overlay on a fixed-height stage) — meta/meta-rule
+   are the only children still absolutely positioned, pinned to the
+   title block's own top-right corner, which is independent of essay
+   length. left/width values are still the exact Figma percentages of
+   the 1492px reference frame (metadata box resolved from Figma's
+   center-anchored 1315.5/243 as left=1194,width=243; title similarly
+   from 771.5/801 as left=371,width=801) — expressed here as `right`
+   (measuring from the title block's own right edge, which is simpler
+   than converting to a left+translateX given both boxes are already
+   right-of-center) rather than `left`, and title is centered via
+   margin:0 auto instead of Figma's precise (slightly off-center) left
+   value: a deliberate simplification for this "much lighter" pass,
+   not a precision loss anywhere that matters (a symmetric title reads
+   as more intentional than a 25px-off-center one at this size). */
 .jp-title-block {
-  position: absolute;
-  inset: 0;
-  z-index: 15;
-  pointer-events: none;
+  position: relative;
+  padding: 8px 0 28px;
 }
 
 .jp-title-block__meta {
   position: absolute;
-  left: 67.8284%;
-  top: 11.7188%;
-  width: 16.2869%;
+  top: 0;
+  right: 3.6863%;
+  width: 16.287%;
   margin: 0;
   font-family: var(--font-body);
   font-style: italic;
@@ -168,18 +250,10 @@
   color: var(--color-near-black);
 }
 
-/* Figma node 5:171 ("Line 5") — a plain flat 1px rule directly under
-   the metadata text (x=1009,y=142,w=246 of the 1492×1024 frame; no
-   named Figma variable and no texture, unlike 3:160's brush-stroke
-   asset, so this one is reproduced as pure CSS with no asset gap).
-   Pixel-exact fill sampling wasn't possible in this sandbox (same
-   www.figma.com download restriction as 3:160), but it reads as the
-   same accent red with no distinct token of its own, so it uses
-   var(--color-crimson) rather than a second hardcoded value. */
 .jp-title-block__meta-rule {
   position: absolute;
-  left: 67.6273%;
-  top: 13.8672%;
+  top: 21px;
+  right: 3.9544%;
   width: 16.4879%;
   height: 1px;
   background-color: var(--color-crimson);
@@ -188,11 +262,9 @@
 /* Width constrains wrap only — height is intentionally not fixed so a
    real (longer) title can grow without being clipped or truncated. */
 .jp-title-block__title {
-  position: absolute;
-  left: 28.8206%;
-  top: 18.0664%;
   width: 53.6864%;
-  margin: 0;
+  max-width: 801px;
+  margin: 40px auto 0;
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 6.7vw, 6.25rem);
   line-height: 1.05;
@@ -202,41 +274,80 @@
   color: var(--color-near-black);
 }
 
-/* Placeholder for the real textured brush-stroke asset (see comment
-   in journal-post.html) — flat var(--color-crimson) bar at the exact
-   Figma geometry so swapping in the real asset later only needs a
-   background-image added here, not a position/size rework. */
+/* Still a flat var(--color-crimson) bar, not Figma's real textured
+   brush-stroke asset — that asset remains undownloadable in this
+   sandbox (egress blocked to www.figma.com), same still-open item as
+   before this rebuild. See TODO.md, "Journal Post — Title Block
+   underline needs the real asset". */
 .jp-title-block__rule {
-  position: absolute;
-  left: 33.378%;
-  top: 28.8086%;
   width: 43.0965%;
+  max-width: 643px;
   height: 2px;
+  margin: 16px auto 0;
   background-color: var(--color-crimson);
 }
 
-/* ── Body Copy ── Figma node 2:96 — exact percentages of the
-   1492×1024 reference frame (x=498,y=324,w=636). Width constrains
-   line-wrap only; no height is set so real essay copy of any length
-   can flow. font-family/font-size/color are set explicitly per the
-   node (font substitution documented in the HTML comment above this
-   block's markup); line-height and color intentionally fall through
-   to base.css's sitewide body defaults rather than repeating them
-   here. */
-/* position:relative + z-index:1 (not the default static/auto) is
-   required here, not cosmetic: .jp-decor__bg-lower's wrapper below
-   must be position:absolute (to stretch top:0 to bottom:0 inside
-   .jp-body-region), and CSS's stacking rules put ANY positioned
-   element above ANY non-positioned flow content in the same stacking
-   context regardless of DOM order — z-index:auto on a positioned
-   element still outranks ordinary flow. Without this, .jp-decor__bg-
-   lower painted over every paragraph below where it starts (~y=1214),
-   even though it comes first in the DOM. See TODO.md. */
-.jp-body-copy {
+/* ── Article column ── the flowing content: hero, body copy, the two
+   polaroids, and the pull-quote all live here as ordinary block-level
+   siblings, in document order. Width matches Figma's hero-image/pull-
+   quote-container width (1092/1492 = 73.1902%) — both of those blocks
+   span the article's full width; body copy and the polaroids are
+   deliberately narrower and centered within it (see their own rules
+   below) for readability, a single-column simplification of Figma's
+   original two-column layout (see the HTML comment on .jp-page's
+   markup for the full reasoning). position:relative only so any
+   future block could anchor a small decorative accent to the article
+   itself if needed — nothing currently uses it. */
+.jp-article {
   position: relative;
-  z-index: 1;
-  margin-left: 33.378%;
-  width: 42.6273%;
+  width: 73.1902%;
+  max-width: 1092px;
+  margin: 0 auto;
+}
+
+/* ── Hero (content block 1, optional) ── Figma hero-image-container
+   (164:4), 1092×420. No tape pieces (see the HTML comment on
+   .jp-page's markup — this task's own content-block list doesn't
+   include tape on the hero, unlike the two polaroids). The photo is a
+   placeholder fill, not a real image — see the HTML comment on
+   .jp-hero__photo's markup for why. margin-bottom is this block's own
+   spacing to whatever follows; when this block is absent, nothing
+   else needs to change; since every block below is an ordinary flow
+   sibling, the next one simply moves up to occupy the freed space. */
+.jp-hero {
+  margin: 0 0 32px;
+}
+
+.jp-hero__photo {
+  width: 100%;
+  aspect-ratio: 1092 / 420;
+  border-radius: 3px;
+  background-color: #d8c9a3;
+  border: 1px solid rgba(28, 26, 22, 0.15);
+}
+
+.jp-hero__caption {
+  margin: 10px 0 0;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.8125rem;
+  text-align: center;
+  color: var(--color-near-black);
+  opacity: 0.7;
+}
+
+/* ── Body copy (content blocks 2/4/6/8, required) ── Narrower than
+   the article column and centered, for line-length readability — a
+   plain paragraph group with no positioning of its own, so it always
+   just flows to wherever the previous block (or the top of .jp-article,
+   if nothing precedes it) ends. */
+.jp-body-copy {
+  max-width: 640px;
+  margin: 0 auto 32px;
+}
+
+.jp-body-copy:last-child {
+  margin-bottom: 0;
 }
 
 .jp-body-copy p {
@@ -249,345 +360,157 @@
   margin-bottom: 0;
 }
 
-/* Background Paper Section 1 (Figma node 2:78) — its real Figma
-   y=1214 falls below .jp-stage's 1024px frame height, i.e. it's the
-   background for whatever continues below the fold on the real
-   (uncropped) page, so it lives here in .jp-body-region rather than
-   in .jp-decor. A plain wrapper div, not top+bottom set directly on
-   the <img>: a confirmed bug in this codebase has an absolutely-
-   positioned <img> with both top and bottom set ignore bottom
-   entirely and size itself from its own intrinsic aspect ratio
-   instead (see TODO.md) — a plain div correctly stretches between
-   top and bottom instead. left:0/width:100% (not the 2.1448%/
-   102.9491% this element used inside .jp-stage): those values gave it
-   a slight horizontal bleed past its container's edges, harmless
-   inside .jp-stage since that element's own overflow:hidden clipped
-   it — but .jp-body-region has no such clipping, so the same bleed
-   caused real horizontal page overflow (a scrollbar and content
-   spilling past the viewport's right edge at any width, worst once
-   .jp-page's own max-width was removed to make the page fill the
-   viewport). margin-top starts this texture exactly where .jp-stage's
-   own bottom edge is (frame y=1024) rather than at Figma's raw
-   y=1214 for this asset: leaving a gap at Figma's literal y left an
-   untextured band between the stage's clipped bottom edge and where
-   the texture began — flat page background showing through, with
-   text sitting directly on it. Both figures are expressed relative
-   to body copy's own y=324 (where .jp-body-region itself starts) and
-   against the reference frame's WIDTH (the CSS-spec basis for
-   percentage margins, holding correct at any viewport width):
-   (1024-324)/1492 = 46.9169%. bottom:0 then stretches it to
-   .jp-body-region's real, content-driven bottom edge. z-index:0 is
-   explicit, not just omitted: this element must be position:absolute
-   (to stretch top:0/bottom:0), and a positioned element with
-   z-index:auto still outranks non-positioned flow content regardless
-   of DOM order — so a bare omission here would silently paint over
-   .jp-body-copy again the moment anyone edits this rule. Pinning it
-   to 0, below .jp-body-copy's explicit z-index:1, keeps the paint
-   order correct by rule, not by luck. */
-/* Tiled via background-repeat, not a single stretched <img> — same
-   mechanism as before, only the image itself changed. Previously
-   journal/paper-tile.webp, a purpose-made seamless tile mirrored up
-   from a plain cream crop of journal/paper.png (see TODO.md, "Journal
-   Post — bg-lower's torn edges exposed at full width"). Now
-   journal/yellow-tile.webp: Sarah wants the yellow paper
-   (.jp-decor__yellow-paper, assets/images/home/yellow-piece-of-paper.png)
-   to read as the page's one continuous background all the way to the
-   corner papers at the true end of content (see TODO.md, "Journal
-   Post — Yellow paper should extend as the continuous background"),
-   not "real design, then a different plain paper below the fold." The
-   new asset is already seamless on its own (no mirroring needed here
-   — unlike paper-tile.webp, it wasn't built by this codebase from a
-   torn-edge photo) and its color/blend against the existing torn
-   yellow-paper piece is Sarah's own approved call, not a placeholder.
-   Both directions repeat, not just repeat-y: the tile is narrower
-   than real desktop widths (2560px tested), so horizontal tiling is
-   required too, not just vertical. The <img> in the markup is unused
-   (kept in the DOM rather than editing journal-post.html for the
-   original fix this rule came from) — hidden below. */
-.jp-decor__bg-lower {
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin-top: 46.9169%;
-  bottom: 0;
-  width: 100%;
-  max-width: none;
-  z-index: 0;
-  background-image: url('/assets/images/journal/yellow-tile.webp');
-  background-repeat: repeat;
-}
-
-.jp-decor__bg-lower img {
-  display: none;
-}
-
-/* Corner papers 1 & 2 (Figma 3:154, 3:155) — moved here from .jp-decor
-   (see the HTML comment on .jp-decor__corner2's markup, in
-   .jp-body-region, for the full rationale) so this matched pair
-   anchors to the true end of the essay's content rather than a fixed
-   spot on .jp-stage's 1024px frame. width/left are unchanged from
-   their old .jp-stage values (both already resolve against WIDTH per
-   the CSS spec, so they carry over identically since .jp-stage and
-   .jp-body-region share the same width via .jp-page). height is now
-   aspect-ratio instead of a height percentage: a % height here would
-   resolve against .jp-body-region's own content-driven height and
-   make the papers grow or shrink with essay length, which is exactly
-   the "same size" this move needs to avoid. The aspect-ratio values
-   are each element's own former width/height percentages converted
-   to the pixel box they implied at the 1492×1024 reference frame
-   (corner2: 31.233%×1492 / 36.7188%×1024 ≈ 466/376; corner1:
-   60.992%×1492 / 56.8359%×1024 ≈ 910/582).
-
-   Vertical anchor: bottom:0 + a negative margin-bottom (a
-   width-relative percentage, since margin percentages resolve
-   against the containing block's WIDTH per spec — same technique
-   already used for .jp-body-region's own margin-top and
-   .jp-decor__bg-lower's margin-top) replaces the old
-   top-from-.jp-stage percentage. The margin-bottom value replicates
-   each paper's original relationship to the stage's bottom edge, now
-   measured from .jp-body-region's real bottom edge instead: both
-   papers' old top+height summed to ~106.836% of the 1024px frame —
-   i.e. both already bled exactly 70px past the stage's own bottom
-   edge by design (a coincidence worth noting, not assumed: computed
-   independently for each element and only found to match after the
-   fact). 70/1492 = 4.6917% of the reference frame's width, so
-   `margin-bottom: -4.6917%` on both puts their bottom edge 70px (at
-   1492 reference scale) below .jp-body-region's real, content-driven
-   bottom edge — the same visual relationship they had to the stage,
-   just against the new reference point. z-index (3, 4) is unchanged
-   from the original .jp-decor value, per the task's explicit
-   "preserve z-index stacking" instruction — see the z-index-tiers
-   comment above .jp-decor's own rule for how this now compares
-   against .jp-body-copy(1) and .jp-decor__bg-lower(0) instead of
-   .jp-stage's isolated 1–20 tier range. pointer-events:none is
-   explicit on both now (previously inherited for free from
-   .jp-decor's own pointer-events:none on the whole layer): both can
-   overlap body copy once anchored to the true end of content, and
-   being purely decorative they must never block text selection or
-   other interaction with the copy underneath. */
-.jp-decor__corner2 {
-  position: absolute;
-  left: 69.1689%;
-  width: 31.233%;
-  aspect-ratio: 466 / 376;
-  bottom: 0;
-  margin-bottom: -4.6917%;
-  z-index: 3;
-  pointer-events: none;
+/* ── Polaroids (content blocks 3/7, optional) ── Each is a centered
+   card: real tape + photo + caption elements, not one flattened
+   image, so a real essay only ever needs to swap the photo (this is
+   what resolves TODO.md's "Journal Post — Hero photo needs to become
+   swappable" item — see the entry marked resolved there). Rotation
+   differs between the two per this task's explicit instruction
+   (+3deg / -2.5deg, matching Figma's polaroid-1/polaroid-2 exactly).
+   Sizes (300px / 340px, and each photo's own aspect-ratio) are
+   Figma's own box dimensions for 164:12/164:24. */
+.jp-polaroid {
   display: flex;
-  align-items: center;
   justify-content: center;
+  margin: 0 0 32px;
 }
 
-.jp-decor__corner2-inner {
-  width: 80.6867%;
-  height: 123.9362%;
-  transform: rotate(90deg) scaleY(-1);
+.jp-polaroid__card {
+  position: relative;
+  background-color: #fefcf5;
+  border-radius: 2px;
+  padding: 16px 16px 18px;
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.18);
 }
 
-.jp-decor__corner2-inner img {
-  display: block;
+.jp-polaroid--1 .jp-polaroid__card {
+  width: 300px;
+  transform: rotate(3deg);
+}
+
+.jp-polaroid--2 .jp-polaroid__card {
+  width: 340px;
+  transform: rotate(-2.5deg);
+}
+
+.jp-polaroid__photo {
   width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
+  border: 1px solid rgba(28, 26, 22, 0.15);
+  background-color: #d8c9a3;
 }
 
-/* No CSS rotation: this asset (corner-paper-pink.png) is
-   pre-flattened, same as the Polaroid + Tape assets elsewhere on this
-   page — the tilt is already baked into the image's own pixels (see
-   TODO.md for the earlier double-rotation bug this avoids). */
-.jp-decor__corner1 {
+.jp-polaroid--1 .jp-polaroid__photo {
+  aspect-ratio: 279.57 / 241.71;
+}
+
+.jp-polaroid--2 .jp-polaroid__photo {
+  aspect-ratio: 319.14 / 275.19;
+}
+
+.jp-polaroid__caption {
+  margin: 10px 0 0;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.8125rem;
+  text-align: center;
+  color: var(--color-near-black);
+  opacity: 0.75;
+}
+
+.jp-polaroid__tape {
   position: absolute;
-  left: -3.4182%;
-  width: 60.992%;
-  aspect-ratio: 910 / 582;
-  bottom: 0;
-  margin-bottom: -4.6917%;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: auto;
   max-width: none;
-  object-fit: cover;
-  z-index: 4;
+  object-fit: contain;
   pointer-events: none;
 }
 
-/* ── Decorative / Collage Layer ── every remaining element of Figma
-   node 2:72 (asset choices, the metadata/design-context position
-   conflicts, and the polaroid/tape pre-flattened-asset reasoning are
-   documented in the HTML comment above this layer's markup).
+.jp-polaroid--2 .jp-polaroid__tape {
+  width: 120px;
+}
 
-   z-index tiers replicate Figma's own paint order (bottom to top):
-   background(1) < logo(5) < yellow paper(6) < stars(7) < megaphone(8)
-   ... Title Block(15) ... Polaroid+Tape(18) < Nav(20). Nav is
-   deliberately kept topmost overall (Figma's own order paints
-   Polaroid+Tape last/above Nav) so the real nav links stay clickable
-   — the two units never overlap on screen, so this reordering is
-   invisible. Body Copy, Background Paper Section 1 (2:78,
-   .jp-decor__bg-lower), and the two corner papers (3:154/3:155,
-   .jp-decor__corner1/__corner2) are outside this tier range entirely:
-   all four live in .jp-body-region, a plain DOM sibling painted after
-   .jp-stage (which contains 1-20 via isolation:isolate — see
-   .jp-stage/.jp-body-region above). Within .jp-body-region itself,
-   DOM order alone is NOT enough to keep bg-lower under the text:
-   bg-lower's wrapper must be position:absolute (to stretch top:0 to
-   bottom:0), and any positioned element with z-index:auto still
-   outranks non-positioned flow content regardless of DOM order — so
-   .jp-body-copy carries its own explicit position:relative;
-   z-index:1, one above bg-lower's explicit z-index:0, to force the
-   correct order. See the comment on .jp-body-copy above. The corner
-   papers keep their original z-index values (3, 4) unchanged (see the
-   comment on their own rules, further below), which puts them above
-   both body copy and bg-lower — the same relative order Figma's own
-   paint order already had them in, just against a different, smaller
-   set of siblings now that they live here instead of in .jp-decor. */
-.jp-decor {
+/* Two kept scribble-star accents (see the HTML comment on .jp-page's
+   markup for why only two of Figma's three star instances are built)
+   — each scoped to its own polaroid card as a small corner flourish,
+   so it only ever appears together with that polaroid and never as an
+   orphaned decoration when the card is absent. */
+.jp-decor__star {
   position: absolute;
-  inset: 0;
+  width: 36px;
+  height: 36px;
+  max-width: none;
   pointer-events: none;
 }
 
-.jp-decor__bg-base {
-  position: absolute;
-  left: 0%;
-  top: -7.8125%;
-  width: 101.6086%;
-  height: 122.7539%;
-  max-width: none;
-  object-fit: cover;
-  z-index: 1;
+.jp-decor__star--1 {
+  top: -20px;
+  right: -20px;
 }
 
-.jp-decor__logo {
-  position: absolute;
-  left: -2.2788%;
-  top: -1.9531%;
-  width: 29.2317%;
-  height: 28.2358%;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.jp-decor__logo-inner {
-  width: 92.6449%;
-  height: 57.4074%;
-  transform: rotate(-19.11deg);
-}
-
-.jp-decor__logo-inner img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-}
-
-.jp-decor__yellow-paper {
-  position: absolute;
-  left: 9.7783%;
-  top: -4.3555%;
-  width: 88.546%;
-  height: 138.4785%;
-  z-index: 6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.jp-decor__yellow-paper-inner {
-  width: 87.5645%;
-  height: 89.5983%;
-  transform: rotate(7.93deg);
-}
-
-.jp-decor__yellow-paper-inner img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-}
-
-.jp-decor__star2 {
-  position: absolute;
-  left: 94.3029%;
-  top: 66.3086%;
-  width: 3.4853%;
-  height: 4.6875%;
-  max-width: none;
-  object-fit: cover;
+.jp-decor__star--2 {
+  bottom: -16px;
+  left: -18px;
   transform: scaleY(-1);
-  z-index: 7;
 }
 
-.jp-decor__star1 {
+/* ── Pull-quote (content block 5, optional) ── Figma
+   pull-quote-container (164:17), full article width, exact
+   background color match (--color-crimson === Figma's #af3838). No
+   tape (see the HTML comment on .jp-page's markup). The megaphone
+   decal is scoped to this block the same way the stars are scoped to
+   their polaroids — appears only alongside the pull-quote, never
+   orphaned. */
+.jp-pull-quote {
+  position: relative;
+  margin: 0 0 32px;
+  padding: 44px 64px;
+  background-color: var(--color-crimson);
+  border-radius: 2px;
+  text-align: center;
+}
+
+.jp-pull-quote__mark {
   position: absolute;
-  left: 3.0161%;
-  top: 88.1836%;
-  width: 3.3512%;
-  height: 4.1016%;
-  max-width: none;
-  object-fit: cover;
-  z-index: 7;
+  font-family: var(--font-body);
+  font-size: 4.5rem;
+  line-height: 1;
+  color: #fefcf5;
+  opacity: 0.4;
 }
 
-/* Megaphone (3:167) is allowed to bleed past .jp-stage's right edge —
-   confirmed intentional against the full-frame Figma screenshot
-   (clipped cleanly at the frame boundary, not spilling past it), which
-   is simply Figma's default frame-clip behavior; .jp-stage's own
-   overflow: hidden reproduces the same clip. */
+.jp-pull-quote__mark--open {
+  top: 8px;
+  left: 24px;
+}
+
+.jp-pull-quote__mark--close {
+  bottom: -4px;
+  right: 24px;
+}
+
+.jp-pull-quote__text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1.125rem, 1.7vw, 1.625rem);
+  line-height: 1.4;
+  color: #fefcf5;
+}
+
 .jp-decor__megaphone {
   position: absolute;
-  left: 84.1622%;
-  top: 20.6533%;
-  width: 16.2124%;
-  height: 23.0483%;
-  z-index: 8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.jp-decor__megaphone-inner {
-  width: 83.117%;
-  height: 81.7754%;
-  transform: rotate(-165.95deg) scaleY(-1);
-}
-
-.jp-decor__megaphone-inner img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-}
-
-/* Polaroid + Tape (Figma group 94:14) — both assets are pre-flattened
-   exports that already bake in their own tilt + drop shadow (ratio
-   match verified in the HTML comment), so neither gets an additional
-   CSS rotation: each sits directly at Figma's post-rotation bounding
-   box. object-fit: contain (not cover) so the whole flattened graphic,
-   shadow included, stays uncropped. */
-.jp-decor__polaroid {
-  position: absolute;
-  left: 0.4021%;
-  top: 56.5401%;
-  width: 20.3596%;
-  height: 35.7776%;
+  bottom: -24px;
+  right: -16px;
+  width: 90px;
+  height: auto;
   max-width: none;
   object-fit: contain;
-  z-index: 18;
-}
-
-.jp-decor__tape {
-  position: absolute;
-  left: 9.7855%;
-  top: 53.8086%;
-  width: 9.1425%;
-  height: 9.2816%;
-  max-width: none;
-  object-fit: contain;
-  z-index: 18;
+  pointer-events: none;
+  transform: rotate(-14deg);
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -669,7 +592,7 @@
 }
 
 @media (max-width: 599px) {
-  .jp-stage {
+  .jp-page {
     display: none;
   }
 
