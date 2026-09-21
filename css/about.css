@@ -159,10 +159,15 @@
    background lives on .ab3-page itself (a container's own background,
    not a stacked child), there's nothing left in .ab3-body-region for
    plain static flow to lose to. ── */
+/* padding-top increased from 20px to 90px so .ab3-hero ("Hi! I'm
+   Sarah...") moves down far enough to give .ab3-title-block real room
+   to fully clear the beige seam below it without colliding — see the
+   comment on .ab3-title-block h1 for the paired numbers this solves
+   for together (this can't be tuned in isolation from that shift). */
 .ab3-content {
   margin-left: 360px;
   width: 1080px;
-  padding-top: 20px;
+  padding-top: 90px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -411,27 +416,30 @@
    font-weight:normal. Matches the same "no fake bold" convention
    already applied everywhere else this font is used (Journal, Journal
    Post, Listen nav). */
-/* top shifted down 24px (72px → 96px) as a rigid unit with the hr and
-   p below (their tops shift by the same 24px, preserving their
-   relative spacing to each other) — a compromise found empirically,
-   not the full clear-of-134px this was aimed at. Pixel-sampled the
+/* top shifted down 76px (72px → 148px) as a rigid unit with the hr
+   and p below (their tops shift by the same 76px, preserving their
+   relative spacing to each other). Fully resolves the earlier
+   partial fix (a 24px shift alone, which could clear .ab3-bg-foreground's
+   134px beige seam OR avoid colliding with .ab3-hero below, but not
+   both — see TODO.md for that history) by also increasing
+   .ab3-content's padding-top (20px → 90px, see that rule's comment),
+   which moves .ab3-hero itself down and opens up real room. The two
+   numbers were solved together, not independently: pixel-sampled the
    actual rendered ink (not box edges, which include several px of
-   font ascent padding) to find the real constraint: "ABOUT"'s ink
-   starts ~3px inside its box top, so clearing .ab3-bg-foreground's
-   134px seam with any real margin needs a ~60px+ shift — but "me...
-   more or less"'s ink bottom (~163px at the original position) is
-   only 33px above "Hi! I'm Sarah..."'s ink top (~196px, fixed —
-   .ab3-hero is separate normal-flow content, not part of this shift),
-   so anything past ~28-30px starts visibly colliding with it. 24px is
-   the largest shift that keeps a clean gap (~9px, ink to ink) to the
-   hero text; "ABOUT" is measurably more on the beige than before but
-   its top third or so still sits on the red stripe — flagged in
-   TODO.md as a real conflict this task's own two goals couldn't both
-   fully satisfy, not fixed further here. */
+   font ascent padding) at each step —
+   - "ABOUT"'s ink starts ~3px inside its box top, so its ink-top at
+     top:148px lands at 151px, 17px clear of the 134px seam.
+   - "me...more or less"'s ink bottom lands at ~239.7px; .ab3-hero's
+     own ink-top, pushed down by the padding-top increase, lands at
+     ~267px — a 27px ink-to-ink gap, comfortably more than the ~9px
+     gap the previous partial fix had. Confirmed with a full-page
+     screenshot: no collision anywhere, and the extra padding-top
+     doesn't crowd anything else (.ab3-hero still sits well above the
+     polaroid's own bottom edge, ~735px). */
 .ab3-title-block h1 {
   position: absolute;
   left: 332.33px;
-  top: 96px;
+  top: 148px;
   width: 324px;
   font-size: 75px;
   font-weight: normal;
@@ -451,7 +459,7 @@
 .ab3-title-block hr {
   position: absolute;
   left: 309.664px;
-  top: 170.7px;
+  top: 222.6875px;
   width: 263.83px;
   height: 0;
   margin: 0;
@@ -462,7 +470,7 @@
 .ab3-title-block p {
   position: absolute;
   left: 285px;
-  top: 171.7px;
+  top: 223.6875px;
   width: 289.216px;
   text-align: center;
   font-size: 15px;
@@ -491,10 +499,17 @@
    on it. Compared 3/6/8/10.87deg via hi-res crops — 10.87deg is the
    first that puts the text baseline visibly parallel to the polaroid's
    own diagonal white-border seam, reading as one tilted object, and
-   text stays perfectly readable at that mild an angle. */
+   text stays perfectly readable at that mild an angle.
+
+   left nudged from 29px to 10px: compared 29/15/0/-15px via zoomed
+   crops against the polaroid — 10px reads better centered under the
+   photo above it (29px sat noticeably right-of-center within the
+   border) while staying safely clear of the polaroid's own left edge;
+   0px was already right at that edge and -15px visibly clipped the
+   leading "M" off the page. */
 .ab3-caption {
   position: absolute;
-  left: 29px;
+  left: 10px;
   top: 560px;
   font-family: var(--font-marginalia);
   color: var(--color-crimson);
