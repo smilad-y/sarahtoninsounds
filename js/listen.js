@@ -34,7 +34,11 @@
     { id: 'light-green', label: 'Light green mood — not yet curated', circle: '/assets/images/listen/light-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-light green.png', curated: false },
     { id: 'lavender', label: 'Lavender mood — not yet curated', circle: '/assets/images/listen/lavendar-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-lavendar.png', curated: false },
     { id: 'dark-blue', label: 'Dark blue mood — not yet curated', circle: '/assets/images/listen/dark-blue-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-dark_blue.png', curated: false },
-    { id: 'black', label: 'Black mood — not yet curated', circle: '/assets/images/listen/black-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-black.png', curated: false }
+    { id: 'black', label: 'Black mood — not yet curated', circle: '/assets/images/listen/black-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-black.png', curated: false },
+    { id: 'berry', label: 'Berry mood — not yet curated', circle: '/assets/images/listen/berry-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-maroon.png', curated: false },
+    { id: 'dark-green', label: 'Dark green mood — not yet curated', circle: '/assets/images/listen/dark-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-green.png', curated: false },
+    { id: 'purple', label: 'Purple mood — not yet curated', circle: '/assets/images/listen/purple-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-purple.png', curated: false },
+    { id: 'peach', label: 'Peach mood — not yet curated', circle: '/assets/images/listen/peach-cirlcle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-peach.png', curated: false }
   ];
 
   window.SarahtoninListenMoods = MOODS;
@@ -94,7 +98,11 @@
     'light-green': '#9fc37c',
     lavender: '#c7b3e0',
     'dark-blue': '#2d4a9e',
-    black: '#3a3a3a'
+    black: '#3a3a3a',
+    berry: '#7a1f3d',
+    'dark-green': '#2e5339',
+    purple: '#6a3b8f',
+    peach: '#f2b79a'
   };
 
   function renderTurntable(moodId) {
