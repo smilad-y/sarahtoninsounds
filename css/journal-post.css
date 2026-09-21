@@ -44,9 +44,18 @@
   padding: 0;
 }
 
+/* No max-width here (unlike .jp-article further down, which deliberately
+   caps at 1092px for readable line length): the header's red-stripe
+   texture and logo badge are meant to bleed to both true viewport edges
+   at any width, same fix already applied to the old Journal Post build
+   and to the About page. Every child here is already percentage-based
+   against this box's own width (left/width geometry, plus vw-based
+   heights on the stripe), so removing the cap doesn't need new layout
+   math — it was already built to scale to any width, just previously
+   clamped at 1492px. Verified at 1440/1512/1920/2560px: no gutter,
+   stripe/logo/all 5 nav tabs span genuinely edge-to-edge. */
 .jp-page {
-  max-width: 1492px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 /* ── Header cluster (logo badge + red-stripe texture + nav) ──
