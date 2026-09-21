@@ -1,0 +1,14 @@
+# Netlify build settings for the Eleventy build. Build command, publish
+# directory, and package directory are all "Not set" in the dashboard —
+# this file is what actually configures them; the dashboard's base
+# directory ("/") already matches .eleventy.js's dir.input (".").
+#
+# Functions directory is deliberately NOT declared here: the dashboard
+# already has it set to netlify/functions (matching where
+# netlify/functions/auth.js and callback.js live), and a netlify.toml
+# [functions] block isn't needed on top of that — adding one here would
+# just be restating the same value with a second, redundant source of
+# truth to keep in sync, not fixing anything that's actually broken.
+[build]
+  command = "npm run build"
+  publish = "_site"
