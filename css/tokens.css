@@ -21,6 +21,25 @@
   font-display: swap;
 }
 
+/* Openly licensed (SIL Open Font License) via Google Fonts, but now
+   self-hosted the same way as Perandory above instead of loaded from
+   fonts.googleapis.com: the Google Fonts stylesheet link was silently
+   failing in at least one environment (a proxy/cert issue blocking
+   fonts.googleapis.com), which made --font-marginalia render as a
+   plain fallback cursive font instead of the real handwriting —
+   confirmed by screenshot, not just by checking the CSS was set
+   correctly (that check alone had given false confidence before).
+   Self-hosting removes the extra network dependency entirely. File
+   pulled directly from Google Fonts' own CDN (the same
+   fonts.gstatic.com URL its stylesheet points to), not re-encoded. */
+@font-face {
+  font-family: 'Sue Ellen Francisco';
+  src: url('/assets/fonts/SueEllenFrancisco.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Color — core palette */
   --color-cream: #ded7c1;         /* confirmed: PROJECT-SPEC.md §4 Journal background direction */
@@ -41,12 +60,14 @@
   --color-focus-ring: var(--color-gold);
 
   /* Typography — families
-     Perandory Semi-Condensed is now a locally-hosted licensed webfont
-     (see @font-face above). IM Fell English and Sue Ellen Francisco are
-     loaded via Google Fonts where actually used (Sue Ellen Francisco
-     currently only on index.html's annotations). Amoresa and Luxurious
-     Script remain unloaded/fallback-only — see assets/fonts/README.md —
-     and are never used to reconstruct the wordmark itself. */
+     Perandory Semi-Condensed and Sue Ellen Francisco are both
+     locally-hosted (see @font-face above). IM Fell English is still
+     loaded via Google Fonts on every page that uses it. Sue Ellen
+     Francisco is used across Home, About, Contact, Journal, and
+     Listen for handwritten marginalia/annotation-style text, not
+     just Home's own annotations. Amoresa and Luxurious Script remain
+     unloaded/fallback-only — see assets/fonts/README.md — and are
+     never used to reconstruct the wordmark itself. */
   --font-display: 'Perandory Semi-Condensed', 'Arial Narrow', sans-serif;
   --font-body: 'IM Fell English', Georgia, serif;
   --font-marginalia: 'Sue Ellen Francisco', cursive;

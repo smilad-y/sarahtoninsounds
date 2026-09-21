@@ -455,11 +455,20 @@
    (confirmed against its -translate-x-1/2 class) — the metadata
    paragraph right below already has this baked into its own left
    (285px), the underline didn't. 441.578125 - (263.828125/2) =
-   309.664px. */
+   309.664px.
+
+   top pulled up 12px (222.6875 → 210.6875) to close the gap to
+   "ABOUT" above it — pixel-sampled the real ink, not box math: at the
+   position this task started from, "ABOUT"'s ink bottom was at
+   page-y≈203 but the underline's own ink didn't start until ≈223, a
+   20px empty gap that read as two separately-floating elements.
+   Compared 8/10/12/14/16px reductions via hi-res crops — 12px is the
+   largest that still leaves a clean gap below the letters' bottom
+   serifs; 14px and up started visibly touching/overlapping them. */
 .ab3-title-block hr {
   position: absolute;
   left: 309.664px;
-  top: 222.6875px;
+  top: 210.6875px;
   width: 263.83px;
   height: 0;
   margin: 0;
@@ -470,7 +479,7 @@
 .ab3-title-block p {
   position: absolute;
   left: 285px;
-  top: 223.6875px;
+  top: 211.6875px;
   width: 289.216px;
   text-align: center;
   font-size: 15px;
@@ -501,15 +510,18 @@
    own diagonal white-border seam, reading as one tilted object, and
    text stays perfectly readable at that mild an angle.
 
-   left nudged from 29px to 10px: compared 29/15/0/-15px via zoomed
-   crops against the polaroid — 10px reads better centered under the
-   photo above it (29px sat noticeably right-of-center within the
-   border) while staying safely clear of the polaroid's own left edge;
-   0px was already right at that edge and -15px visibly clipped the
-   leading "M" off the page. */
+   left nudged further, from 10px to -12px: Sarah confirmed 10px was
+   progress but still not centered enough. Compared 0/-5/-8/-10/-12/-13/
+   -14/-15px via wide zoomed crops (isolated, fresh page load per value
+   — a narrower high-DPI crop gave a false "not clipped" reading at
+   -14/-15 the first time around, caught by cross-checking against a
+   wider view before trusting it) — the leading "M" is intact through
+   -13px and clipped starting at -14px, so -12px keeps a small safety
+   margin from that real boundary while reading as genuinely centered
+   under the photo above it. */
 .ab3-caption {
   position: absolute;
-  left: 10px;
+  left: -12px;
   top: 560px;
   font-family: var(--font-marginalia);
   color: var(--color-crimson);
