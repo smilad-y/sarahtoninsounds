@@ -24,14 +24,66 @@
   padding: 0;
 }
 
+/* Shared 1440px column for both .ab3-stage (fixed-height header) and
+   .ab3-body-region (the normal-flow bio+footer below it) — same role
+   as Journal Post's .jp-page (css/journal-post.css). overflow:hidden
+   reproduces the same left-edge clip the footer's blue corner paper
+   always had (left:-97px) back when it lived inside .ab3-stage's own
+   overflow:hidden — now that it's a body-region child instead, nothing
+   else would clip that bleed.
+
+   background-color is this page's single continuous base layer (Figma
+   reference: figma.com/design/FP1ZWOSEAtNuI8w2OG2E7x/About-Me,
+   node-id 119-2), replacing the old two-piece setup (.ab3-bg-foreground
+   image inside .ab3-stage, plus a separate .ab3-body-bg patch starting
+   exactly at the stage's old bottom edge to continue it). Putting the
+   color here instead removes the seam-alignment problem entirely: one
+   flat fill behind the whole page, with .ab3-bg-foreground's real
+   texture image simply painting on top of it wherever the header still
+   shows it — no second element needing to start in exactly the right
+   place. The color itself is canvas-sampled from
+   Texture___Foreground_Paper.png (bottom band, center, and full-image
+   average all land within a couple of RGB values of each other:
+   240–241/223–225/196–198), not guessed — that same sampling is what
+   proved a flat match would be visually indistinguishable from the
+   real texture in the first place (see TODO.md). Verified at both the
+   current bio length and an 8x-length stress test: one continuous
+   fill, no band, seam, or color shift anywhere on the page. */
+.ab3-page {
+  width: 1440px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #f1e0c6;
+}
+
+/* isolation:isolate contains this stage's own z-index:auto paint order
+   to itself, so .ab3-body-region below — a later, plain DOM sibling —
+   naturally paints on top of it with no z-index of its own needed
+   (same technique as Journal Post's .jp-stage). */
 .ab3-stage {
   position: relative;
   width: 1440px;
   height: 1304px;
-  margin: 0 auto;
   overflow: hidden;
+  isolation: isolate;
   background-color: #fff;
   font-family: var(--font-body);
+}
+
+/* Normal-flow sibling of .ab3-stage — the bio and footer now live here
+   instead of being absolutely positioned against the old fixed-height
+   stage, so real (long) copy can push the footer down instead of
+   colliding with it (see TODO.md, "About Page — Footer now flows
+   below the bio"). margin-top is negative so this region starts
+   exactly where .ab3-content used to sit inside .ab3-stage
+   (stage-relative top:169px): -(1304 - 169) = -1135px. Since this page
+   uses literal fixed px throughout (not the percentage-of-width
+   technique Journal Post needed for a fluid-width stage), that's a
+   plain px value, not a width-relative percentage. */
+.ab3-body-region {
+  position: relative;
+  width: 1440px;
+  margin-top: -1135px;
 }
 
 /* ── Background textures ── */
@@ -55,46 +107,6 @@
   max-width: none;
   object-fit: cover;
   pointer-events: none;
-}
-
-/* 180deg rotation doesn't change the bounding footprint, so the image
-   can just fill its wrapper 1:1 — no oversized-wrapper math needed. */
-.ab3-bg-torn {
-  position: absolute;
-  left: -23px;
-  top: 598px;
-  width: 1595px;
-  height: 471px;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.ab3-bg-torn img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: rotate(180deg);
-}
-
-.ab3-bg-pink-strip {
-  position: absolute;
-  left: -748px;
-  top: 952px;
-  width: 2429px;
-  height: 474px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.ab3-bg-pink-strip img {
-  width: 474px;
-  height: 2429px;
-  max-width: none;
-  object-fit: cover;
-  transform: rotate(-90deg);
 }
 
 /* ── Nav ── */
@@ -137,15 +149,25 @@
   text-decoration: underline;
 }
 
-/* ── content: Auto Layout Vertical → real flex column, not absolute
-   positioning internally (only the block itself is placed on the
-   page at Figma's literal x=360/y=169). ── */
+/* ── content: Auto Layout Vertical → real flex column. Now a
+   normal-flow child of .ab3-body-region (margin-left replaces the old
+   position:absolute; left:360px — top:169px is no longer needed here
+   at all, since .ab3-body-region's own negative margin-top already
+   starts this region at that exact y). No position/z-index of its own
+   needed: that was only required to out-stack the since-removed
+   .ab3-body-bg patch (a positioned sibling) — now that the page
+   background lives on .ab3-page itself (a container's own background,
+   not a stacked child), there's nothing left in .ab3-body-region for
+   plain static flow to lose to. ── */
+/* padding-top increased from 20px to 90px so .ab3-hero ("Hi! I'm
+   Sarah...") moves down far enough to give .ab3-title-block real room
+   to fully clear the beige seam below it without colliding — see the
+   comment on .ab3-title-block h1 for the paired numbers this solves
+   for together (this can't be tuned in isolation from that shift). */
 .ab3-content {
-  position: absolute;
-  left: 360px;
-  top: 169px;
+  margin-left: 360px;
   width: 1080px;
-  padding-top: 20px;
+  padding-top: 90px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -161,14 +183,12 @@
   margin: 0;
 }
 
-.ab3-intro-row {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  width: 1080px;
-}
-
-.ab3-intro-copy {
+/* Single-column bio — supersedes the former ab3-intro-row two-column
+   layout (see TODO.md). Left edge/width match the old left column
+   (.ab3-intro-copy) exactly, so it still sits beside the polaroid the
+   same way; a comfortable reading width, not the former full
+   two-column span. */
+.ab3-bio {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -176,7 +196,7 @@
   flex-shrink: 0;
 }
 
-.ab3-intro-copy p {
+.ab3-bio p {
   margin: 0;
   font-size: 15px;
   line-height: 26px;
@@ -184,27 +204,83 @@
   color: var(--color-near-black);
 }
 
-.ab3-sarahhtonin-column {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 452px;
-  flex-shrink: 0;
-}
-
-.ab3-sarahhtonin-column p {
-  margin: 0;
-  font-size: 15px;
-  line-height: 26px;
-  letter-spacing: 1px;
+/* New subheading treatment for "My taste in a nutshell": IM Fell
+   English Italic, a step up from body copy. Perandory is reserved for
+   page-level headings and Sue Ellen Francisco for short handwritten
+   marginalia, so this pause in the text gets its own in-between
+   treatment rather than borrowing either. */
+.ab3-bio__subhead {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
   color: var(--color-near-black);
 }
 
-/* ── Let's Work Together + Get in touch ── */
+/* ── Footer — .ab3-cta, .ab3-resume-card, and the ephemera that goes
+   with them (now the bordered .ab3-footer-card, plus blue corner paper
+   and flowers — the pink strip that used to live here is removed, per
+   the new Figma reference), grouped in one self-contained block that
+   flows right after .ab3-content instead of being absolutely
+   positioned against the old fixed-height stage. margin-top gives it
+   breathing room below the bio (a design nicety, not a measured value
+   — adjust freely).
+
+   height:380px fits every child, including the new .ab3-footer-card
+   (its own tallest element, bottom edge at 366.8px — see that rule's
+   comment for how it's sized) with a little room to spare; previously
+   this was 352px specifically to reproduce the old pink strip's crop
+   against the stage's bottom edge, which no longer applies now that
+   the pink strip is gone. overflow:hidden is still needed for the
+   blue corner paper's horizontal bleed (left:-97px) — same left-edge
+   clip it always had, now against this container instead of the old
+   stage. Every child's top is (old stage-relative top) − 952 — the
+   group's old topmost element's own former top (952px, previously the
+   pink strip's; kept as the reference point so these numbers didn't
+   all need re-deriving when the strip was removed). DOM order (footer
+   card → cta → resume card → resume link → vert line → blue corner →
+   flowers → get-in-touch link) preserves the original relative paint
+   order (each visible element still paints above whatever was behind
+   it before). ── */
+.ab3-footer {
+  position: relative;
+  z-index: 1;
+  width: 1440px;
+  height: 380px;
+  margin-top: 60px;
+  overflow: hidden;
+}
+
+/* Bordered footer card (Figma node 119:60, About-Me file
+   FP1ZWOSEAtNuI8w2OG2E7x, node-id 119-2): "background: rgba(235,216,
+   184,0.4); border: 1px solid #ac2946;" wrapping the CTA + resume card
+   content as one unit — replaces the removed pink strip. Figma's own
+   literal coordinates for this node assumed the old fixed-absolute
+   layout and don't apply here (this page now flows), so the box is
+   derived instead from where .ab3-cta/.ab3-resume-card/.ab3-resume-link/
+   .ab3-vert-line/.ab3-get-in-touch actually render inside .ab3-footer,
+   measured directly (bounding rect: left 335–1353, top 69–338.8), with
+   28px of padding on every side added around that so text doesn't sit
+   flush against the border. Positioned first in .ab3-footer's DOM order
+   (like the pink strip it replaces) so it paints behind all of the
+   above, which are still position:absolute with no z-index of their
+   own — DOM order alone keeps them on top. */
+.ab3-footer-card {
+  position: absolute;
+  left: 307px;
+  top: 41px;
+  width: 1074px;
+  height: 325.8px;
+  background: rgba(235, 216, 184, 0.4);
+  border: 1px solid #ac2946;
+  pointer-events: none;
+}
+
 .ab3-cta {
   position: absolute;
   left: 335px;
-  top: 1039px;
+  top: 87px;
   width: 484px;
 }
 
@@ -245,14 +321,14 @@
 .ab3-get-in-touch {
   position: absolute;
   left: 340px;
-  top: 1254px;
+  top: 302px;
 }
 
 /* ── Selected Credits & Resume ── */
 .ab3-resume-card {
   position: absolute;
   left: 827px;
-  top: 1021px;
+  top: 69px;
   width: 526px;
   height: 178px;
   padding: 20px;
@@ -311,13 +387,13 @@
 .ab3-resume-link {
   position: absolute;
   left: 1090px;
-  top: 1095px;
+  top: 143px;
 }
 
 .ab3-vert-line {
   position: absolute;
   left: 827px;
-  top: 1041px;
+  top: 89px;
   width: 1px;
   height: 215px;
   background-color: var(--color-crimson);
@@ -340,10 +416,30 @@
    font-weight:normal. Matches the same "no fake bold" convention
    already applied everywhere else this font is used (Journal, Journal
    Post, Listen nav). */
+/* top shifted down 76px (72px → 148px) as a rigid unit with the hr
+   and p below (their tops shift by the same 76px, preserving their
+   relative spacing to each other). Fully resolves the earlier
+   partial fix (a 24px shift alone, which could clear .ab3-bg-foreground's
+   134px beige seam OR avoid colliding with .ab3-hero below, but not
+   both — see TODO.md for that history) by also increasing
+   .ab3-content's padding-top (20px → 90px, see that rule's comment),
+   which moves .ab3-hero itself down and opens up real room. The two
+   numbers were solved together, not independently: pixel-sampled the
+   actual rendered ink (not box edges, which include several px of
+   font ascent padding) at each step —
+   - "ABOUT"'s ink starts ~3px inside its box top, so its ink-top at
+     top:148px lands at 151px, 17px clear of the 134px seam.
+   - "me...more or less"'s ink bottom lands at ~239.7px; .ab3-hero's
+     own ink-top, pushed down by the padding-top increase, lands at
+     ~267px — a 27px ink-to-ink gap, comfortably more than the ~9px
+     gap the previous partial fix had. Confirmed with a full-page
+     screenshot: no collision anywhere, and the extra padding-top
+     doesn't crowd anything else (.ab3-hero still sits well above the
+     polaroid's own bottom edge, ~735px). */
 .ab3-title-block h1 {
   position: absolute;
   left: 332.33px;
-  top: 72px;
+  top: 148px;
   width: 324px;
   font-size: 75px;
   font-weight: normal;
@@ -354,10 +450,16 @@
   text-transform: none;
 }
 
+/* left corrected from Figma's raw 441.578px: that value is missing the
+   translateX(-50%) shift Figma's own export applies to this node
+   (confirmed against its -translate-x-1/2 class) — the metadata
+   paragraph right below already has this baked into its own left
+   (285px), the underline didn't. 441.578125 - (263.828125/2) =
+   309.664px. */
 .ab3-title-block hr {
   position: absolute;
-  left: 441.58px;
-  top: 146.7px;
+  left: 309.664px;
+  top: 222.6875px;
   width: 263.83px;
   height: 0;
   margin: 0;
@@ -368,7 +470,7 @@
 .ab3-title-block p {
   position: absolute;
   left: 285px;
-  top: 147.7px;
+  top: 223.6875px;
   width: 289.216px;
   text-align: center;
   font-size: 15px;
@@ -377,14 +479,42 @@
   margin: 0;
 }
 
+/* top nudged down from Figma's raw 530px, empirically: the polaroid's
+   white bottom border is a diagonal band (the polaroid is rotated
+   10.87deg), so a horizontal caption can only clear the photo across
+   its whole width if pushed down past the diagonal seam's lower
+   (right) point. At 530px the ascenders/caps of "Me! Sarah Milad!"
+   (rendered in the real Sue Ellen Francisco font — the generic
+   "cursive" fallback this sandbox initially fell back to, from a
+   blocked font fetch, is a much smaller face and hid this) crossed
+   into the photo. Verified with a hi-res cropped screenshot at several
+   candidate values (530/540/550/560/570): 560px is the first value
+   fully clear of the photo edge at every x, with roughly even white
+   space above (to the photo) and below (to the newsprint scrap) —
+   570px was already visibly closer to the newsprint than the photo.
+
+   transform matches .ab3-deco--polaroid's own rotation (10.87deg)
+   instead of the original 3deg: at 3deg the caption read as flat
+   text laid over a visibly tilted photo rather than something written
+   on it. Compared 3/6/8/10.87deg via hi-res crops — 10.87deg is the
+   first that puts the text baseline visibly parallel to the polaroid's
+   own diagonal white-border seam, reading as one tilted object, and
+   text stays perfectly readable at that mild an angle.
+
+   left nudged from 29px to 10px: compared 29/15/0/-15px via zoomed
+   crops against the polaroid — 10px reads better centered under the
+   photo above it (29px sat noticeably right-of-center within the
+   border) while staying safely clear of the polaroid's own left edge;
+   0px was already right at that edge and -15px visibly clipped the
+   leading "M" off the page. */
 .ab3-caption {
   position: absolute;
-  left: 29px;
-  top: 530px;
+  left: 10px;
+  top: 560px;
   font-family: var(--font-marginalia);
   color: var(--color-crimson);
   font-size: 30px;
-  transform: rotate(3deg);
+  transform: rotate(10.87deg);
   margin: 0;
   white-space: nowrap;
 }
@@ -410,10 +540,17 @@
    margin there) oversteps the CTA text column's left edge by ~9px,
    clipping the leading character of every line — confirmed by
    screenshot pixel-sampling, not visible in the Figma reference render.
-   Same width/height/rotation, only shifted left to clear the text. */
+   Same width/height/rotation, only shifted left to clear the text.
+   Now inside .ab3-footer (moved from .ab3-stage — see that rule's
+   comment for the top-offset math): top = old stage-relative
+   1044.53 − 952 = 92.53px, then +28px more (120.53px) to reach
+   .ab3-footer's true bottom edge (380px: 120.53+259.473=380.003) —
+   shifted down rather than stretched taller, so the paper texture
+   doesn't distort; verified visually against the stretch alternative
+   and this reads as the paper simply sitting lower, not warped. */
 .ab3-deco--blue-corner {
   left: -97px;
-  top: 1044.53px;
+  top: 120.53px;
   width: 402.271px;
   height: 259.473px;
 }
@@ -453,9 +590,12 @@
   transform: rotate(10.87deg);
 }
 
+/* Now inside .ab3-footer (moved from .ab3-stage — see that rule's
+   comment for the top-offset math): top = old stage-relative
+   1112.42 − 952 = 160.42px. */
 .ab3-deco--flowers {
   left: 25.84px;
-  top: 1112.42px;
+  top: 160.42px;
   width: 145.912px;
   height: 143.733px;
 }
@@ -466,7 +606,13 @@
 }
 
 @media (max-width: 900px) {
-  .ab3-stage {
+  /* Hides the whole desktop composition, not just .ab3-stage: since
+     the bio and footer moved out of .ab3-stage into .ab3-body-region
+     (a sibling inside .ab3-page — see that rule's comment), hiding
+     .ab3-stage alone left .ab3-body-region's content rendering on top
+     of .av2m-page at mobile widths — confirmed as a real regression via
+     a 390px-viewport screenshot, not assumed fixed by inspection alone. */
+  .ab3-page {
     display: none;
   }
 
