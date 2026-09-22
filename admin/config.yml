@@ -21,7 +21,7 @@ backend:
   name: github
   repo: smilad-y/sarahtoninsounds
   branch: claude/add-claude-md-file-3fgnk0
-  base_url: https://REPLACE-WITH-NETLIFY-SITE-URL.netlify.app
+  base_url: https://sarahtoninsounds.com
   auth_endpoint: .netlify/functions/auth
 
 media_folder: public/uploads
