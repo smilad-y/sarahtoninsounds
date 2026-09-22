@@ -125,15 +125,16 @@
       },
       function (controller) {
         spotifyController = controller;
+        playerIsReady = true;
 
-        controller.addListener('ready', function () {
-          playerIsReady = true;
-          if (activePlaylistId && activePlaylistId !== initialPlaylistId) {
-            controller.loadUri('spotify:playlist:' + activePlaylistId);
-          }
-          setPlayerAvailability(Boolean(activePlaylistId));
-          setPlaybackUI(false);
-        });
+        // Spotify supplies a usable controller through this callback. Waiting
+        // for a separate `ready` event can leave the custom control disabled
+        // forever because that event may have fired before listeners attach.
+        if (activePlaylistId && activePlaylistId !== initialPlaylistId) {
+          controller.loadUri('spotify:playlist:' + activePlaylistId);
+        }
+        setPlayerAvailability(Boolean(activePlaylistId));
+        setPlaybackUI(false);
 
         controller.addListener('playback_update', function (event) {
           if (!event || !event.data) return;
