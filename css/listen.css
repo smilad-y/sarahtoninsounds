@@ -516,7 +516,7 @@ html:has(body.page-listen) {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-powder-blue);
+  background-color: transparent;
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
