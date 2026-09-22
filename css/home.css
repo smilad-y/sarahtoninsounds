@@ -7,11 +7,11 @@
 
    Every layer below is positioned as a percentage of its frame's own
    width/height, computed directly from the Figma left/top/width/height
-   in px (e.g. leftPct = left / frameWidth * 100). The frame itself is
-   scaled uniformly to COVER the real viewport (like background-size:
-   cover — fills the screen, crops overflow, never letterboxes), so the
-   pixel relationships Figma specified are preserved exactly at any
-   viewport size. Rotated layers use CSS transform: rotate() applied
+   in px (e.g. leftPct = left / frameWidth * 100). The desktop frame is
+   scaled uniformly to CONTAIN the real viewport (like background-size:
+   contain — nothing in the frame is ever cropped), so the pixel
+   relationships Figma specified are preserved exactly at any viewport
+   size. Rotated layers use CSS transform: rotate() applied
    after that positioning, around the layer's own center by default
    (Figma's default rotation pivot) or top-left where Figma specifies
    transform-origin explicitly (the spiral).
@@ -46,24 +46,31 @@ body.page-home {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   DESKTOP — fixed 1440:900 stage, COVER-fitted to any viewport
-   (fills the screen; crops left/right or top/bottom as needed —
-   never shows empty space around the composition)
+   DESKTOP — fixed 1440:900 stage, CONTAIN-fitted to any viewport:
+   scaled by whichever viewport dimension is more limiting, so the
+   whole frame is always visible (short laptop windows no longer crop
+   the nav or the leopard/crate). Wider-than-16:10 viewports leave
+   side space around the frame, currently the plain .home-v2 fallback
+   colour — side-fill treatment is pending Sarah's pick.
    ══════════════════════════════════════════════════════════════ */
 .home-v2__stage {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 100%;
-  width: auto;
+  width: min(100vw, 160vh);    /* 160 = 100 * 1440 / 900 */
+  width: min(100vw, 160dvh);
+  height: auto;
   aspect-ratio: 1440 / 900;
 }
 
-@media (min-aspect-ratio: 1440/900) {
+@media (min-width: 601px) {
+  /* Lets nav/credit type scale with the frame (cqw) instead of the
+     viewport, so their Figma proportions hold at every fit size. */
   .home-v2__stage {
-    width: 100%;
-    height: auto;
+    container-type: inline-size;
+    overflow: hidden; /* clip to the Figma frame; layers that bleed past
+                         it would otherwise show raw edges in side space */
   }
 }
 
@@ -202,7 +209,7 @@ body.page-home {
   background-repeat: no-repeat;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(0.95rem, 1.2vw, 1.3rem);
+  font-size: max(0.75rem, 1.2cqw); /* 17.28px in the 1440 frame */
   letter-spacing: 0.02em;
   text-transform: uppercase;
   text-decoration: none;
@@ -246,7 +253,7 @@ body.page-home {
   right: 2.5%;
   margin: 0;
   font-family: var(--font-marginalia);
-  font-size: clamp(0.9rem, 1.3vw, 1.15rem);
+  font-size: max(0.75rem, 1.2778cqw); /* 18.4px in the 1440 frame */
   color: #fdf6e8;
   transform: rotate(-3deg);
   pointer-events: none;
