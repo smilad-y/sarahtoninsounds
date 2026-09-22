@@ -22,12 +22,18 @@ Unless a manifest entry below is explicitly marked as approved/current, treat it
 ### Home V2 collage — desktop nav tab asset
 **Status:** Approved and in production use.  
 **Asset:** `assets/images/shared/nav-paper-tab.png` — a blank, transparent torn cream-paper scrap exported from Figma (no label baked in).  
-**Use:** Background for each of the five desktop Home nav links (Home/About/Listen/Journal/Contact). Reused five times via CSS `background-image`, stretched per-tab to that tab's own auto-sized box; the visible label is real HTML text layered on top in Henny Penny. Not cropped, recolored, or approximated with CSS — the PNG is the tab's entire visual treatment.  
+**Use:** Background for each of the five desktop Home nav links (Home/About/Listen/Journal/Contact). Reused five times via CSS `background-image`, stretched per-tab to that tab's own auto-sized box; the visible label is real HTML text layered on top in Perandory Semi-Condensed (the site-wide display face, per PROJECT-SPEC.md §5–6). Not cropped, recolored, or approximated with CSS — the PNG is the tab's entire visual treatment.  
 **Rule:** Do not add a `box-shadow`/`filter: drop-shadow()`/duplicate background behind it — the asset's torn silhouette only fills part of its bounding box, so a box-shadow renders as a rectangular ghost behind the visible shape.
 
 ### Home V2 collage — remaining layers
 **Status:** Approved and in production use, at `assets/images/home-v2/`: `home-paper-red.png` (background), `home-spiral-4.png` (sunburst), `home-logo-cloud.png` (desktop-only tan cloud), `home-top-scallop-hires.png` (nav-cloud shelf, desktop + mobile), `home-blue-background.png` (scalloped band), `home-logo-sharp.png` (title card), `home-moon-stars.png` (desktop-only), `home-girl-carpet-v2.png` (Sarah on the carpet), `home-record-crate.png`, `home-leopard-highres.png`. Positioned per the authoritative Figma geometry described in PROJECT-SPEC.md §6 (separate 1440×900 desktop / 393×852 mobile reference frames).  
 **Superseded/unused variants** (uploaded during iteration, PRESERVE only, not referenced by the page): `home-girl-carpet.png`, `home-girl-records.png`, `home-girl-records-1.png`, `home-girl-records-2.png`, `home-spiral.png`, `home-spiral-3.png`, `home-leopard.png`, `home-logo.png`, `home-logo-alt.png`, `home-top-scallop.png`, `home-dragonfly.png`, `home-pink-paper.png` (the bottom-right paper-scrap accent — explicitly removed from the composition; do not restore without new direction), `home-full-image.png`, `home-full-no-logo.png`.
+
+### Home V2 collage — desktop bleed strips
+**Status:** Approved and in production use (desktop only).
+**Source:** Sarah's Figma "Desktop Home — Extended Bleed" frame (1840×900, node 69-2, file `Home-final`) — the left (x 0–200) and right (x 1640–1840) strips around the centered 1440×900 composition. Background artwork only: no leopard, squiggle, or carpet fragments (those are the collage layers' own overflow).
+**In use:** `assets/images/home-v2/home-bleed-left.webp`, `home-bleed-right.webp` — WebP (quality 82), 400×1800 (2× export). Loaded as CSS backgrounds inside the desktop media query only, so mobile never downloads them.
+**Masters:** `assets/images/home-v2/home-bleed-left.png`, `home-bleed-right.png` — Sarah's 2× PNG exports, PRESERVE; not referenced by the page. Re-export from Figma and re-convert to WebP if the strips change.
 
 ## 2. Photography
 ### Primary About portrait

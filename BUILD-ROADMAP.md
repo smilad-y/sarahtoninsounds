@@ -64,10 +64,12 @@ Possible outcomes:
 The earlier video-hero plan below was superseded during the build by an illustrated-collage direction reconstructed from Sarah's own Figma geometry (see PROJECT-SPEC.md §6, ASSET-MANIFEST.md §1). What actually shipped:
 - Single viewport/no scroll, `100dvh` desktop / `100svh` mobile.
 - Desktop (1440×900 reference) and mobile (393×852 reference) as separately art-directed layouts, not one scaled from the other.
+- Desktop fit-scales the 1440×900 composition so it is never cropped; wider windows fill the side space with Sarah's Extended Bleed strips (see PROJECT-SPEC.md §6).
 - Illustrated layers (Sarah on the carpet, leopard, record crate, moon/stars, spiral, torn-paper title card, scalloped nav cloud, navy band) positioned from Figma px values.
 - Desktop nav: five real `<a>` links styled as torn-paper tabs (`assets/images/shared/nav-paper-tab.png`).
 - Mobile: real accessible `<button>` MENU trigger with full keyboard/focus behavior.
-- No "discover music!" note, no "made by: Sarah Milad" credit — both belonged to the retired video plan and were explicitly excluded.
+- No "discover music!" note — belonged to the retired video plan; still undecided for the collage direction (see PROJECT-SPEC.md §6).
+- Small "made by: Sarah Milad" credit, lower-right in Sue Ellen Francisco — reinstated for the collage direction as a deliberate, minor revision and live (see PROJECT-SPEC.md §6); not a return to the retired video-hero treatment.
 - Reduced-motion: moot for the current build (no video/animation on Home); the site-wide `prefers-reduced-motion` rule in `css/base.css` still applies globally.
 
 <details>
