@@ -450,12 +450,21 @@
   text-transform: none;
 }
 
-/* left corrected from Figma's raw 441.578px: that value is missing the
-   translateX(-50%) shift Figma's own export applies to this node
-   (confirmed against its -translate-x-1/2 class) — the metadata
-   paragraph right below already has this baked into its own left
-   (285px), the underline didn't. 441.578125 - (263.828125/2) =
-   309.664px.
+/* left corrected AGAIN, this time from measured real ink rather than
+   any box math (441.578px, then 309.664px from a translateX(-50%)
+   correction, were both still off — see below). "About" renders in
+   Perandory Semi-Condensed, a condensed display face: the glyphs are
+   noticeably narrower than the h1's own 324px CSS box, so centering
+   against that box (or against Figma's node geometry) doesn't center
+   against what's actually drawn on screen. Measured directly:
+   canvas-scanned a screenshot of the rendered h1 for the true leftmost/
+   rightmost dark (ink) pixel columns, not estimated from font metrics
+   — real ink spans page-x 334.33 to 498.33 (a 164px-wide glyph run,
+   well under this rule's own 263.83px width, so the width stays
+   unchanged per the task's own instruction). Centering this rule under
+   that measured 416.33px midpoint: 416.328125 - (263.83/2) =
+   284.413px. Verified visually after applying — see TODO.md for the
+   before/after crop.
 
    top pulled up 12px (222.6875 → 210.6875) to close the gap to
    "ABOUT" above it — pixel-sampled the real ink, not box math: at the
@@ -467,7 +476,7 @@
    serifs; 14px and up started visibly touching/overlapping them. */
 .ab3-title-block hr {
   position: absolute;
-  left: 309.664px;
+  left: 284.413px;
   top: 210.6875px;
   width: 263.83px;
   height: 0;
