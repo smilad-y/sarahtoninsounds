@@ -50,8 +50,8 @@ body.page-home {
    scaled by whichever viewport dimension is more limiting, so the
    whole frame is always visible (short laptop windows no longer crop
    the nav or the leopard/crate). Wider-than-16:10 viewports leave
-   side space around the frame, currently the plain .home-v2 fallback
-   colour — side-fill treatment is pending Sarah's pick.
+   side space around the frame, filled by Sarah's bleed artwork
+   (.home-v2::before) out to a 1840:900 (~2.04:1) viewport.
    ══════════════════════════════════════════════════════════════ */
 .home-v2__stage {
   position: absolute;
@@ -67,6 +67,27 @@ body.page-home {
 @media (min-width: 601px) {
   /* Lets nav/credit type scale with the frame (cqw) instead of the
      viewport, so their Figma proportions hold at every fit size. */
+  /* Sarah's Extended Bleed frame (Figma "Desktop Home — Extended
+     Bleed", 1840x900): the 1440x900 composition centered, plus 200px
+     of bleed artwork each side. Only the two bleed strips are drawn
+     here, in a 1840:900 box scaled with the stage; the stage paints
+     over the middle. Anything past the viewport is clipped by
+     .home-v2. Background images, so mobile never downloads them. */
+  .home-v2::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(127.7778vw, 204.4444vh);   /* stage width * 1840 / 1440 */
+    width: min(127.7778vw, 204.4444dvh);
+    aspect-ratio: 1840 / 900;
+    background:
+      url('/assets/images/home-v2/home-bleed-left.webp') left top / 10.8696% 100% no-repeat,
+      url('/assets/images/home-v2/home-bleed-right.webp') right top / 10.8696% 100% no-repeat;
+    pointer-events: none;
+  }
+
   .home-v2__stage {
     container-type: inline-size;
     overflow: hidden; /* clip to the Figma frame; layers that bleed past
