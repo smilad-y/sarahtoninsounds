@@ -479,14 +479,15 @@ html:has(body.page-listen) {
   background: var(--color-gold, #ffd200);
 }
 
-/* The iframe must stay in the DOM for audio playback. Keep it visually
-   de-emphasized and off-canvas rather than using display:none. */
+/* The iframe must stay rendered in the viewport for Spotify playback.
+   A one-pixel shell keeps its native chrome out of the composition without
+   moving the player off-canvas (which can prevent play() from starting). */
 .spotify-embed-shell {
-  position: fixed;
-  left: -9999px;
-  bottom: 0;
-  width: 320px;
-  height: 80px;
+  position: absolute;
+  left: 31.53%;
+  top: 12.59%;
+  width: 1px;
+  height: 1px;
   overflow: hidden;
   opacity: 0.01;
   pointer-events: none;
