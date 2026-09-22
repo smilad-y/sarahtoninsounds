@@ -19,7 +19,7 @@
       tape: '/assets/images/listen/Tape-Light_Blue_1.png',
       curated: true,
       tapeLabel: 'DREAMY',
-      spotifyPlaylistId: '6FhZxeM54u0L6x8muXy7SI',
+      spotifyPlaylistId: '5RbZK1fPP47ohsKVMBQUcO',
       blurb: 'For when your mind needs some room to wonder',
       description: 'Floaty, atmospheric, and transportive. These are the songs for late nights, daydreaming, and everywhere in between.',
       picks: [
@@ -28,23 +28,23 @@
         { title: 'Kisses', artist: 'Slowdive' }
       ]
     },
-    { id: 'yellow', label: 'Energized — not yet curated', circle: '/assets/images/listen/yellow-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-yellow.png', tape: '/assets/images/listen/Tape-Yellow.png', spotifyPlaylistId: '5BrpdG6D8ZWvZRpem1YUjK', curated: false },
-    { id: 'red', label: 'Sultry — not yet curated', circle: '/assets/images/listen/red-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-red.png', tape: '/assets/images/listen/Tape-Red.png', spotifyPlaylistId: '5gZMZPKxAf6YaPvVm799tg', curated: false },
-    { id: 'pink', label: 'Cute — not yet curated', circle: '/assets/images/listen/pink-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-pink.png', tape: '/assets/images/listen/Tape-Pink.png', spotifyPlaylistId: '1MKeBuS1z21UUnE01WeC7F', curated: false },
+    { id: 'yellow', label: 'Energized — not yet curated', circle: '/assets/images/listen/yellow-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-yellow.png', tape: '/assets/images/listen/Tape-Yellow.png', spotifyPlaylistId: '6sP6dpEbjOagcJGJ7bgINa', curated: false },
+    { id: 'red', label: 'Sultry — not yet curated', circle: '/assets/images/listen/red-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-red.png', tape: '/assets/images/listen/Tape-Red.png', spotifyPlaylistId: '1MKeBuS1z21UUnE01WeC7F', curated: false },
+    { id: 'pink', label: 'Cute — not yet curated', circle: '/assets/images/listen/pink-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-pink.png', tape: '/assets/images/listen/Tape-Pink.png', spotifyPlaylistId: '3XKtSRi5IhoSJA4flxU58N', curated: false },
     { id: 'orange', label: 'Audacious — not yet curated', circle: '/assets/images/listen/orange-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-orange.png', tape: '/assets/images/listen/Tape-Orange.png', spotifyPlaylistId: '1nRKb7lCLt7ehak4PoAr4Y', curated: false },
-    { id: 'light-green', label: 'Chill — not yet curated', circle: '/assets/images/listen/light-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-light green.png', tape: '/assets/images/listen/Tape-Light_Green.png', spotifyPlaylistId: '24fenp1dE6vpIDbmS6FwAB', curated: false },
-    { id: 'lavender', label: 'Melancholy — not yet curated', circle: '/assets/images/listen/lavendar-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-lavendar.png', tape: '/assets/images/listen/Tape-Lavendar.png', spotifyPlaylistId: '5JAjZESFqplxGdXXnkZv7d', curated: false },
-    { id: 'brown', label: 'Lost — not yet curated', circle: '/assets/images/listen/brown_Circle.png', record: '/assets/images/listen/sarahtonin_sounds-listen-record-brown.png', tape: '/assets/images/listen/Tape-brown.png', spotifyPlaylistId: '0H4yQYUFBjYbRaUGEG3MzA', curated: false },
-    { id: 'dark-blue', label: 'Burdened — not yet curated', circle: '/assets/images/listen/dark-blue-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-dark_blue.png', tape: '/assets/images/listen/Tape-Dark_Blue.png', spotifyPlaylistId: '4oS3oJ23hvqh8PMDnxrbtY', curated: false },
-    { id: 'black', label: 'Defiant — not yet curated', circle: '/assets/images/listen/black-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-black.png', tape: '/assets/images/listen/Tape-Black.png', spotifyPlaylistId: '4TQdShNqgVeLDUD0X4Gquq', curated: false },
-    { id: 'berry', label: 'Playful / Cheeky — not yet curated', circle: '/assets/images/listen/berry-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-maroon.png', tape: '/assets/images/listen/Tape-Maroon.png', spotifyPlaylistId: '52MLdAdmlGKmj8Q7OESYYA', curated: false },
-    { id: 'dark-green', label: 'Unleashed — not yet curated', circle: '/assets/images/listen/dark-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-green.png', tape: '/assets/images/listen/Tape-Green.png', spotifyPlaylistId: '0zksiK8ZEBUECUqxLAHRzp', curated: false },
-    { id: 'purple', label: 'Hype — not yet curated', circle: '/assets/images/listen/purple-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-purple.png', tape: '/assets/images/listen/Tape-Purple.png', spotifyPlaylistId: '7eluu31I9kVwckY5gspmKR', curated: false },
-    { id: 'peach', label: 'Nostalgic — not yet curated', circle: '/assets/images/listen/peach-cirlcle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-peach.png', tape: '/assets/images/listen/Tape-Peach.png', spotifyPlaylistId: '6sP6dpEbjOagcJGJ7bgINa', curated: false },
-    { id: 'forest-green', label: 'Hopeful / At Peace — not yet curated', circle: '/assets/images/listen/forest green circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-forest-green.png', tape: '/assets/images/listen/Tape-Forest_Green.png', spotifyPlaylistId: '5RbZK1fPP47ohsKVMBQUcO', curated: false },
-    { id: 'gold', label: 'Euphoric — not yet curated', circle: '/assets/images/listen/gold circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-gold.png', tape: '/assets/images/listen/Tape-Gold.png', spotifyPlaylistId: '3XKtSRi5IhoSJA4flxU58N', curated: false },
-    { id: 'fuschia', label: 'Tender — not yet curated', circle: '/assets/images/listen/Fuschia Circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-fuschia.png', tape: '/assets/images/listen/Tape-Fuschia.png', spotifyPlaylistId: '5BHM7EYebAJE4QZQcCoapO', curated: false },
-    { id: 'silver', label: 'Hypnotic — not yet curated', circle: '/assets/images/listen/Silver Circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-silver.png', tape: '/assets/images/listen/Tape-Silver.png', spotifyPlaylistId: '00G4dsIODpNybJ17oYCpIc', curated: false }
+    { id: 'light-green', label: 'Chill — not yet curated', circle: '/assets/images/listen/light-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-light green.png', tape: '/assets/images/listen/Tape-Light_Green.png', spotifyPlaylistId: '52MLdAdmlGKmj8Q7OESYYA', curated: false },
+    { id: 'lavender', label: 'Melancholy — not yet curated', circle: '/assets/images/listen/lavendar-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-lavendar.png', tape: '/assets/images/listen/Tape-Lavendar.png', spotifyPlaylistId: '5BrpdG6D8ZWvZRpem1YUjK', curated: false },
+    { id: 'brown', label: 'Lost — not yet curated', circle: '/assets/images/listen/brown_Circle.png', record: '/assets/images/listen/sarahtonin_sounds-listen-record-brown.png', tape: '/assets/images/listen/Tape-brown.png', spotifyPlaylistId: '5gZMZPKxAf6YaPvVm799tg', curated: false },
+    { id: 'dark-blue', label: 'Burdened — not yet curated', circle: '/assets/images/listen/dark-blue-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-dark_blue.png', tape: '/assets/images/listen/Tape-Dark_Blue.png', spotifyPlaylistId: '24fenp1dE6vpIDbmS6FwAB', curated: false },
+    { id: 'black', label: 'Defiant — not yet curated', circle: '/assets/images/listen/black-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-black.png', tape: '/assets/images/listen/Tape-Black.png', curated: false },
+    { id: 'berry', label: 'Playful / Cheeky — not yet curated', circle: '/assets/images/listen/berry-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-maroon.png', tape: '/assets/images/listen/Tape-Maroon.png', spotifyPlaylistId: '4oS3oJ23hvqh8PMDnxrbtY', curated: false },
+    { id: 'dark-green', label: 'Unleashed — not yet curated', circle: '/assets/images/listen/dark-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-green.png', tape: '/assets/images/listen/Tape-Green.png', spotifyPlaylistId: '5JAjZESFqplxGdXXnkZv7d', curated: false },
+    { id: 'purple', label: 'Hype — not yet curated', circle: '/assets/images/listen/purple-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-purple.png', tape: '/assets/images/listen/Tape-Purple.png', curated: false },
+    { id: 'peach', label: 'Nostalgic — not yet curated', circle: '/assets/images/listen/peach-cirlcle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-peach.png', tape: '/assets/images/listen/Tape-Peach.png', spotifyPlaylistId: '0zksiK8ZEBUECUqxLAHRzp', curated: false },
+    { id: 'forest-green', label: 'Hopeful / At Peace — not yet curated', circle: '/assets/images/listen/forest green circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-forest-green.png', tape: '/assets/images/listen/Tape-Forest_Green.png', spotifyPlaylistId: '5BHM7EYebAJE4QZQcCoapO', curated: false },
+    { id: 'gold', label: 'Euphoric — not yet curated', circle: '/assets/images/listen/gold circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-gold.png', tape: '/assets/images/listen/Tape-Gold.png', spotifyPlaylistId: '0H4yQYUFBjYbRaUGEG3MzA', curated: false },
+    { id: 'fuschia', label: 'Tender — not yet curated', circle: '/assets/images/listen/Fuschia Circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-fuschia.png', tape: '/assets/images/listen/Tape-Fuschia.png', spotifyPlaylistId: '00G4dsIODpNybJ17oYCpIc', curated: false },
+    { id: 'silver', label: 'Hypnotic — not yet curated', circle: '/assets/images/listen/Silver Circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-silver.png', tape: '/assets/images/listen/Tape-Silver.png', spotifyPlaylistId: '6FhZxeM54u0L6x8muXy7SI', curated: false }
   ];
 
   window.SarahtoninListenMoods = MOODS;
@@ -251,6 +251,7 @@
     var descEl = document.getElementById('tt-description');
     var picksList = document.getElementById('tt-picks-list');
     var recordImg = document.getElementById('tt-record-img');
+    var vinylLabelImg = document.getElementById('tt-vinyl-label-img');
     if (!mood || !tape || !nameEl) return;
 
     loadSpotifyMood(mood);
@@ -259,6 +260,9 @@
 
     if (recordImg && mood.record) {
       recordImg.src = encodeURI(mood.record);
+      if (vinylLabelImg) {
+        vinylLabelImg.src = encodeURI(mood.record);
+      }
     }
 
     if (mood.tape) {
