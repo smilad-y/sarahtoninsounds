@@ -408,6 +408,18 @@ html:has(body.page-listen) {
   object-fit: contain;
 }
 
+/* The source art combines the vinyl, tonearm, and deck. This duplicate
+   is clipped to the center label so playback produces real rotational detail
+   without spinning the stationary tonearm and controls. */
+.tt-vinyl-label {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  clip-path: circle(11.4% at 40% 48.4%);
+  transform-origin: 40% 48.4%;
+  pointer-events: none;
+}
+
 /* The exported artwork combines the vinyl, tonearm, and turntable in one
    image. A rotating sheen makes the vinyl read as moving without rotating
    the stationary tonearm and deck along with it. */
@@ -502,9 +514,17 @@ html:has(body.page-listen) {
     opacity: 1;
     animation: tt-record-spin 3s linear infinite;
   }
+
+  .tt-record.is-playing .tt-vinyl-label {
+    animation: tt-vinyl-label-spin 2.4s linear infinite;
+  }
 }
 
 @keyframes tt-record-spin {
+  to { transform: rotate(1turn); }
+}
+
+@keyframes tt-vinyl-label-spin {
   to { transform: rotate(1turn); }
 }
 
