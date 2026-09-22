@@ -402,9 +402,83 @@ html:has(body.page-listen) {
 }
 
 .tt-record img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+/* The illustration is the visible player control. This real button sits
+   over the record/tonearm area so it remains keyboard-operable without
+   introducing Spotify's branded chrome into the composition. */
+.tt-playback-toggle {
+  position: absolute;
+  z-index: 2;
+  left: 8%;
+  top: 8%;
+  width: 84%;
+  height: 84%;
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tt-playback-toggle:focus-visible {
+  outline: 4px solid var(--color-crimson);
+  outline-offset: 5px;
+}
+
+.tt-playback-toggle:disabled {
+  cursor: wait;
+}
+
+.tt-playback-toggle__status {
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+  padding: 0.3rem 0.65rem;
+  border: 2px solid var(--color-near-black);
+  border-radius: 999px;
+  background: var(--color-cream);
+  box-shadow: 2px 2px 0 var(--color-near-black);
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: clamp(0.8rem, 1.15vw, 1rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-near-black);
+}
+
+.tt-playback-toggle[data-state='playing'] .tt-playback-toggle__status {
+  background: var(--color-gold, #ffd200);
+}
+
+/* The iframe must stay in the DOM for audio playback. Keep it visually
+   de-emphasized and off-canvas rather than using display:none. */
+.spotify-embed-shell {
+  position: fixed;
+  left: -9999px;
+  bottom: 0;
+  width: 320px;
+  height: 80px;
+  overflow: hidden;
+  opacity: 0.01;
+  pointer-events: none;
+}
+
+.spotify-embed-shell.is-unavailable {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tt-record.is-playing #tt-record-img {
+    animation: tt-record-spin 3s linear infinite;
+  }
+}
+
+@keyframes tt-record-spin {
+  to { transform: rotate(1turn); }
 }
 
 .tt-tape {

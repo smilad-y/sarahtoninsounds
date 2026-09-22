@@ -19,6 +19,7 @@
       tape: '/assets/images/listen/Tape-Light_Blue_1.png',
       curated: true,
       tapeLabel: 'DREAMY',
+      spotifyPlaylistId: '6FhZxeM54u0L6x8muXy7SI',
       blurb: 'For when your mind needs some room to wonder',
       description: 'Floaty, atmospheric, and transportive. These are the songs for late nights, daydreaming, and everywhere in between.',
       picks: [
@@ -27,18 +28,23 @@
         { title: 'Kisses', artist: 'Slowdive' }
       ]
     },
-    { id: 'yellow', label: 'Yellow mood — not yet curated', circle: '/assets/images/listen/yellow-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-yellow.png', curated: false },
-    { id: 'red', label: 'Red mood — not yet curated', circle: '/assets/images/listen/red-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-red.png', curated: false },
-    { id: 'pink', label: 'Pink mood — not yet curated', circle: '/assets/images/listen/pink-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-pink.png', curated: false },
-    { id: 'orange', label: 'Orange mood — not yet curated', circle: '/assets/images/listen/orange-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-orange.png', curated: false },
-    { id: 'light-green', label: 'Light green mood — not yet curated', circle: '/assets/images/listen/light-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-light green.png', curated: false },
-    { id: 'lavender', label: 'Lavender mood — not yet curated', circle: '/assets/images/listen/lavendar-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-lavendar.png', curated: false },
-    { id: 'dark-blue', label: 'Dark blue mood — not yet curated', circle: '/assets/images/listen/dark-blue-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-dark_blue.png', curated: false },
-    { id: 'black', label: 'Black mood — not yet curated', circle: '/assets/images/listen/black-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-black.png', curated: false },
-    { id: 'berry', label: 'Berry mood — not yet curated', circle: '/assets/images/listen/berry-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-maroon.png', curated: false },
-    { id: 'dark-green', label: 'Dark green mood — not yet curated', circle: '/assets/images/listen/dark-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-green.png', curated: false },
-    { id: 'purple', label: 'Purple mood — not yet curated', circle: '/assets/images/listen/purple-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-purple.png', curated: false },
-    { id: 'peach', label: 'Peach mood — not yet curated', circle: '/assets/images/listen/peach-cirlcle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-peach.png', curated: false }
+    { id: 'yellow', label: 'Energized — not yet curated', circle: '/assets/images/listen/yellow-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-yellow.png', tape: '/assets/images/listen/Tape-Yellow.png', spotifyPlaylistId: '5BrpdG6D8ZWvZRpem1YUjK', curated: false },
+    { id: 'red', label: 'Sultry — not yet curated', circle: '/assets/images/listen/red-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-red.png', tape: '/assets/images/listen/Tape-Red.png', spotifyPlaylistId: '5gZMZPKxAf6YaPvVm799tg', curated: false },
+    { id: 'pink', label: 'Cute — not yet curated', circle: '/assets/images/listen/pink-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-pink.png', tape: '/assets/images/listen/Tape-Pink.png', spotifyPlaylistId: '1MKeBuS1z21UUnE01WeC7F', curated: false },
+    { id: 'orange', label: 'Audacious — not yet curated', circle: '/assets/images/listen/orange-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-orange.png', tape: '/assets/images/listen/Tape-Orange.png', spotifyPlaylistId: '1nRKb7lCLt7ehak4PoAr4Y', curated: false },
+    { id: 'light-green', label: 'Chill — not yet curated', circle: '/assets/images/listen/light-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-light green.png', tape: '/assets/images/listen/Tape-Light_Green.png', spotifyPlaylistId: '24fenp1dE6vpIDbmS6FwAB', curated: false },
+    { id: 'lavender', label: 'Melancholy — not yet curated', circle: '/assets/images/listen/lavendar-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-lavendar.png', tape: '/assets/images/listen/Tape-Lavendar.png', spotifyPlaylistId: '5JAjZESFqplxGdXXnkZv7d', curated: false },
+    { id: 'brown', label: 'Lost — not yet curated', circle: '/assets/images/listen/brown_Circle.png', record: '/assets/images/listen/sarahtonin_sounds-listen-record-brown.png', tape: '/assets/images/listen/Tape-brown.png', spotifyPlaylistId: '0H4yQYUFBjYbRaUGEG3MzA', curated: false },
+    { id: 'dark-blue', label: 'Burdened — not yet curated', circle: '/assets/images/listen/dark-blue-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-dark_blue.png', tape: '/assets/images/listen/Tape-Dark_Blue.png', spotifyPlaylistId: '4oS3oJ23hvqh8PMDnxrbtY', curated: false },
+    { id: 'black', label: 'Defiant — not yet curated', circle: '/assets/images/listen/black-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-black.png', tape: '/assets/images/listen/Tape-Black.png', spotifyPlaylistId: '4TQdShNqgVeLDUD0X4Gquq', curated: false },
+    { id: 'berry', label: 'Playful / Cheeky — not yet curated', circle: '/assets/images/listen/berry-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-maroon.png', tape: '/assets/images/listen/Tape-Maroon.png', spotifyPlaylistId: '52MLdAdmlGKmj8Q7OESYYA', curated: false },
+    { id: 'dark-green', label: 'Unleashed — not yet curated', circle: '/assets/images/listen/dark-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-green.png', tape: '/assets/images/listen/Tape-Green.png', spotifyPlaylistId: '0zksiK8ZEBUECUqxLAHRzp', curated: false },
+    { id: 'purple', label: 'Hype — not yet curated', circle: '/assets/images/listen/purple-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-purple.png', tape: '/assets/images/listen/Tape-Purple.png', spotifyPlaylistId: '7eluu31I9kVwckY5gspmKR', curated: false },
+    { id: 'peach', label: 'Nostalgic — not yet curated', circle: '/assets/images/listen/peach-cirlcle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-peach.png', tape: '/assets/images/listen/Tape-Peach.png', spotifyPlaylistId: '6sP6dpEbjOagcJGJ7bgINa', curated: false },
+    { id: 'forest-green', label: 'Hopeful / At Peace — not yet curated', circle: '/assets/images/listen/forest_green_circle.png', record: '/assets/images/listen/sarahtonin_sounds-listen-record-forest-green.png', tape: '/assets/images/listen/Tape-Forest_Green.png', spotifyPlaylistId: '5RbZK1fPP47ohsKVMBQUcO', curated: false },
+    { id: 'gold', label: 'Euphoric — not yet curated', circle: '/assets/images/listen/gold_circle.png', record: '/assets/images/listen/sarahtonin_sounds-listen-record-gold.png', tape: '/assets/images/listen/Tape-Gold.png', spotifyPlaylistId: '3XKtSRi5IhoSJA4flxU58N', curated: false },
+    { id: 'fuschia', label: 'Tender — not yet curated', circle: '/assets/images/listen/Fuschia_Circle.png', record: '/assets/images/listen/sarahtonin_sounds-listen-record-fuschia.png', tape: '/assets/images/listen/Tape-Fuschia.png', spotifyPlaylistId: '5BHM7EYebAJE4QZQcCoapO', curated: false },
+    { id: 'silver', label: 'Hypnotic — not yet curated', circle: '/assets/images/listen/Silver_Circle.png', record: '/assets/images/listen/sarahtonin_sounds-listen-record-silver.png', tape: '/assets/images/listen/Tape-Silver.png', spotifyPlaylistId: '00G4dsIODpNybJ17oYCpIc', curated: false }
   ];
 
   window.SarahtoninListenMoods = MOODS;
@@ -50,6 +56,132 @@
     return null;
   }
   window.SarahtoninGetMood = getMood;
+
+  var spotifyIFrameAPI = null;
+  var spotifyController = null;
+  var activePlaylistId = null;
+  var activeMoodLabel = '';
+  var isPlaying = false;
+  var playerIsReady = false;
+
+  function getPlaybackElements() {
+    return {
+      record: document.querySelector('.tt-record'),
+      button: document.getElementById('tt-playback-toggle'),
+      status: document.querySelector('.tt-playback-toggle__status'),
+      shell: document.getElementById('spotify-embed-shell'),
+      container: document.getElementById('spotify-embed-container')
+    };
+  }
+
+  function setPlaybackUI(playing) {
+    var elements = getPlaybackElements();
+    isPlaying = Boolean(playing);
+
+    if (elements.record) {
+      elements.record.classList.toggle('is-playing', isPlaying);
+    }
+
+    if (!elements.button) return;
+
+    elements.button.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+    elements.button.setAttribute(
+      'aria-label',
+      (isPlaying ? 'Pause ' : 'Play ') + activeMoodLabel + ' playlist'
+    );
+    elements.button.dataset.state = isPlaying ? 'playing' : 'paused';
+
+    if (elements.status) {
+      elements.status.textContent = isPlaying ? 'Playing' : 'Play';
+    }
+  }
+
+  function setPlayerAvailability(isAvailable) {
+    var elements = getPlaybackElements();
+    if (elements.button) {
+      elements.button.hidden = !isAvailable;
+      elements.button.disabled = !isAvailable || !playerIsReady;
+    }
+    if (elements.shell) {
+      elements.shell.classList.toggle('is-unavailable', !isAvailable);
+    }
+    if (isAvailable && !playerIsReady && elements.status) {
+      elements.status.textContent = 'Loading player…';
+    }
+  }
+
+  function createSpotifyController() {
+    var elements = getPlaybackElements();
+    if (!spotifyIFrameAPI || spotifyController || !activePlaylistId || !elements.container) return;
+
+    var initialPlaylistId = activePlaylistId;
+
+    spotifyIFrameAPI.createController(
+      elements.container,
+      {
+        uri: 'spotify:playlist:' + initialPlaylistId,
+        width: '100%',
+        height: '80'
+      },
+      function (controller) {
+        spotifyController = controller;
+
+        controller.addListener('ready', function () {
+          playerIsReady = true;
+          if (activePlaylistId && activePlaylistId !== initialPlaylistId) {
+            controller.loadUri('spotify:playlist:' + activePlaylistId);
+          }
+          setPlayerAvailability(Boolean(activePlaylistId));
+          setPlaybackUI(false);
+        });
+
+        controller.addListener('playback_update', function (event) {
+          if (!event || !event.data) return;
+          setPlaybackUI(!event.data.isPaused && !event.data.isBuffering);
+        });
+      }
+    );
+  }
+
+  function loadSpotifyMood(mood) {
+    var nextPlaylistId = mood && mood.spotifyPlaylistId ? mood.spotifyPlaylistId : null;
+    activeMoodLabel = mood ? mood.label.replace(/ — not yet curated$/, '') : '';
+
+    if (spotifyController) {
+      spotifyController.pause();
+    }
+    setPlaybackUI(false);
+    activePlaylistId = nextPlaylistId;
+    setPlayerAvailability(Boolean(activePlaylistId));
+
+    if (!activePlaylistId) return;
+
+    if (spotifyController) {
+      spotifyController.loadUri('spotify:playlist:' + activePlaylistId);
+      setPlayerAvailability(true);
+    } else {
+      createSpotifyController();
+    }
+  }
+
+  function initPlaybackControl() {
+    var button = document.getElementById('tt-playback-toggle');
+    if (!button) return;
+
+    button.addEventListener('click', function () {
+      if (!spotifyController || !activePlaylistId) return;
+      if (isPlaying) {
+        spotifyController.pause();
+      } else {
+        spotifyController.play();
+      }
+    });
+  }
+
+  window.onSpotifyIframeApiReady = function (IFrameAPI) {
+    spotifyIFrameAPI = IFrameAPI;
+    createSpotifyController();
+  };
 
   function initMoodPicker() {
     var row = document.getElementById('mood-row');
@@ -102,7 +234,12 @@
     berry: '#7a1f3d',
     'dark-green': '#2e5339',
     purple: '#6a3b8f',
-    peach: '#f2b79a'
+    peach: '#f2b79a',
+    'forest-green': '#1d3f24',
+    gold: '#c9a227',
+    fuschia: '#c2185b',
+    silver: '#b8b8b8',
+    brown: '#6d4f4a'
   };
 
   function renderTurntable(moodId) {
@@ -114,6 +251,8 @@
     var picksList = document.getElementById('tt-picks-list');
     var recordImg = document.getElementById('tt-record-img');
     if (!mood || !tape || !nameEl) return;
+
+    loadSpotifyMood(mood);
 
     nameEl.textContent = mood.curated ? mood.label : mood.label.replace(/ — not yet curated$/, '');
 
@@ -158,6 +297,7 @@
   });
 
   function init() {
+    initPlaybackControl();
     initMoodPicker();
     if (document.getElementById('tt-tape')) {
       renderTurntable('dreamy');
