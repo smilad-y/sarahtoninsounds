@@ -65,29 +65,33 @@ body.page-home {
 }
 
 @media (min-width: 601px) {
-  /* Lets nav/credit type scale with the frame (cqw) instead of the
-     viewport, so their Figma proportions hold at every fit size. */
   /* Sarah's Extended Bleed frame (Figma "Desktop Home — Extended
      Bleed", 1840x900): the 1440x900 composition centered, plus 200px
      of bleed artwork each side. Only the two bleed strips are drawn
-     here, in a 1840:900 box scaled with the stage; the stage paints
-     over the middle. Anything past the viewport is clipped by
-     .home-v2. Background images, so mobile never downloads them. */
-  .home-v2::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(127.7778vw, 204.4444vh);   /* stage width * 1840 / 1440 */
-    width: min(127.7778vw, 204.4444dvh);
-    aspect-ratio: 1840 / 900;
-    background:
-      url('/assets/images/home-v2/home-bleed-left.webp') left top / 10.8696% 100% no-repeat,
-      url('/assets/images/home-v2/home-bleed-right.webp') right top / 10.8696% 100% no-repeat;
-    pointer-events: none;
+     here, in a 1840:900 box matching the stage's height; the stage
+     paints over the middle and .home-v2 clips anything past the
+     viewport. Background images, so mobile never downloads them;
+     skipped at <=16:10, where there is no side space to fill. */
+  @media (min-aspect-ratio: 1441/900) {
+    .home-v2::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;    /* wider than 16:10, the stage is always full height */
+      aspect-ratio: 1840 / 900;
+      /* 200/1840 each, +1px tucked under the stage so sub-pixel
+         rounding never opens a hairline at the seams */
+      background:
+        url('/assets/images/home-v2/home-bleed-left.webp') left top / calc(10.8696% + 1px) 100% no-repeat,
+        url('/assets/images/home-v2/home-bleed-right.webp') right top / calc(10.8696% + 1px) 100% no-repeat;
+      pointer-events: none;
+    }
   }
 
+  /* Lets nav/credit type scale with the frame (cqw) instead of the
+     viewport, so their Figma proportions hold at every fit size. */
   .home-v2__stage {
     container-type: inline-size;
     overflow: hidden; /* clip to the Figma frame; layers that bleed past
