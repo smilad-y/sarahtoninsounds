@@ -408,6 +408,31 @@ html:has(body.page-listen) {
   object-fit: contain;
 }
 
+/* The exported artwork combines the vinyl, tonearm, and turntable in one
+   image. A rotating sheen makes the vinyl read as moving without rotating
+   the stationary tonearm and deck along with it. */
+.tt-record::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 3.5%;
+  top: 1%;
+  width: 73%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 20deg,
+    transparent 0 18%,
+    rgba(255, 255, 255, 0.25) 24%,
+    transparent 31% 68%,
+    rgba(255, 255, 255, 0.14) 75%,
+    transparent 82% 100%
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* The illustration is the visible player control. This real button sits
    over the record/tonearm area so it remains keyboard-operable without
    introducing Spotify's branded chrome into the composition. */
@@ -472,7 +497,8 @@ html:has(body.page-listen) {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .tt-record.is-playing #tt-record-img {
+  .tt-record.is-playing::before {
+    opacity: 1;
     animation: tt-record-spin 3s linear infinite;
   }
 }
