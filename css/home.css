@@ -100,8 +100,9 @@ body.page-home {
   }
 
   .home-v2__stage::after {
-    left: 100%;
-    width: 13.8889%;
+    left: 99.8611%;  /* 2px over the frame's yellow right-edge column
+                        (1px at 1x; 2px covers it at fractional scales) */
+    width: 14.0278%; /* 202px */
     background-image: url('/assets/images/home-v2/home-bleed-right.webp');
   }
 }
