@@ -161,7 +161,8 @@
   - The previous "desktop temporarily disabled" stopgap entry (removing `.jp-decor__polaroid`/`.jp-decor__tape` markup to dodge the corner1/polaroid overlap bug) no longer applies: both `.jp-decor__polaroid`/`.jp-decor__tape` and `.jp-decor__corner1`/`.jp-decor__corner2` are gone from the codebase entirely, replaced by the new `.jp-hero`/`.jp-polaroid` markup and CSS described above.
 
 ## Listen Page — Follow-ups
-- [ ] Only "Dreamy" has a blurb, description, and Sarah's Picks. The other 17 moods show their name, vinyl, tape, and live playlist; blurb/description/picks stay hidden until Sarah writes them (`UNDECIDED` in `content/listen/moods.json`).
+- [ ] Only Dreamy is live (`"live": true` in `content/listen/moods.json`); the other 17 are hidden from the selector until Sarah flips them. Only Dreamy has a blurb, description, and Sarah's Picks; for other moods those stay hidden while `UNDECIDED`.
+- [ ] Selector note slot (`selectorNote` in `content/listen/moods.json`, `#listen-moods-note`) is empty; Sarah decides the wording and style.
 
 ## Listen — now spinning bar
 - [x] Built: bottom-pinned bar with the mood's label art, name, and color, a Spotify / Apple Music toggle, and the visible embed (Spotify 80px, Apple Music 175px). Mood data moved to `content/listen/moods.json` with slug IDs. The old hidden 1px Spotify player is archived in `legacy/listen-hidden-spotify-player/`.

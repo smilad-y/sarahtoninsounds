@@ -1,7 +1,8 @@
 // Listen page: mood selector, turntable, and the "now spinning" bar.
 // Everything mood-specific comes from content/listen/moods.json
 // (PROJECT-SPEC.md §7), so moods can be added, renamed, reordered, or
-// removed there without touching this file.
+// removed there without touching this file. Only moods with
+// `"live": true` are rendered; the rest are left out entirely.
 //
 // Playback lives in the now spinning bar as a visible Spotify or Apple
 // Music embed. Spotify's IFrame API lets the turntable act as a second
@@ -140,6 +141,23 @@
     var behavior = reduceMotion ? 'auto' : 'smooth';
     if (prevBtn) prevBtn.addEventListener('click', function () { row.scrollBy({ left: -240, behavior: behavior }); });
     if (nextBtn) nextBtn.addEventListener('click', function () { row.scrollBy({ left: 240, behavior: behavior }); });
+
+    // Scroll arrows only matter when the live moods overflow the row.
+    function updateArrows() {
+      var overflows = row.scrollWidth > row.clientWidth + 1;
+      [prevBtn, nextBtn].forEach(function (btn) {
+        if (btn) btn.style.visibility = overflows ? '' : 'hidden';
+      });
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(updateArrows).observe(row);
+    else window.addEventListener('resize', updateArrows);
+    updateArrows();
+  }
+
+  function renderSelectorNote() {
+    var note = $('listen-moods-note');
+    note.textContent = isSet(config.selectorNote) ? config.selectorNote : '';
+    note.hidden = !isSet(config.selectorNote);
   }
 
   function markSelected(moodId) {
@@ -369,9 +387,12 @@
       })
       .then(function (data) {
         config = data;
+        config.moods = data.moods.filter(function (mood) { return mood.live === true; });
         renderSelector();
+        renderSelectorNote();
         initSelectorControls();
         trackBarHeight();
+        if (!config.moods.length) return;
         selectMood(getMood(config.defaultMood) ? config.defaultMood : config.moods[0].id);
       })
       .catch(function (err) {

@@ -100,6 +100,7 @@ Two mood names, several icons, four colors, and all descriptors are still undeci
 - Sarah writes descriptors.
 - Finish remaining mood icons.
 - Add Crash Courses as a clearly separate section.
+- Launch with 6-8 live moods Sarah is confident in. Moods not yet live are hidden from the selector (not shown as locked), with a short handwritten note near the selector saying more are coming. Adding a mood later = flip its live flag in moods.json.
 
 ### Nice to have
 - Small tactile transitions/microinteractions that do not compromise performance or accessibility.
@@ -175,7 +176,7 @@ These are intentionally not finalized and should not be guessed:
 - remaining mood icons and descriptors
 - colors for Euphoric, Hopeful/At Peace, Unleashed, Hypnotic; hex values for all colors
 - mood display order
-- whether all 18 moods (and Crash Courses) must be live at launch, or can roll out as playlists are ready
+- whether Crash Courses must be live at launch, or can roll out later
 - "discover music!" note on Home
 - final Crash Course topics
 - final Journal production content

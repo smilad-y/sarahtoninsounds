@@ -352,6 +352,18 @@ html:has(body.page-listen) {
   outline-offset: 8px;
 }
 
+/* Slot for Sarah's note about more moods coming. Position only; the
+   typeface and styling are still to be decided. */
+.listen-moods__note {
+  position: absolute;
+  left: 5.273%;
+  top: 76%;
+  width: 89.81%;
+  margin: 0;
+  text-align: center;
+  color: var(--color-near-black);
+}
+
 .listen-moods__error {
   margin: 0;
   font-family: 'Crimson Text', Georgia, serif;
@@ -394,7 +406,8 @@ html:has(body.page-listen) {
   }
 
   .listen-moods__heading,
-  .listen-moods__row-wrap {
+  .listen-moods__row-wrap,
+  .listen-moods__note {
     position: static;
     width: 100%;
     height: auto;
@@ -402,6 +415,10 @@ html:has(body.page-listen) {
 
   .listen-moods__row-wrap {
     margin-top: 1rem;
+  }
+
+  .listen-moods__note {
+    margin-top: 0.75rem;
   }
 
   .listen-moods__row li {

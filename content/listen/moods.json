@@ -1,14 +1,17 @@
 {
   "_about": [
     "Listen mood config (PROJECT-SPEC.md §7). The page renders the selector, turntable, and now spinning bar from this file.",
+    "live: true shows the mood in the selector; false hides it completely (not shown as locked). Going live later = flip it to true.",
     "UNDECIDED = not decided by Sarah yet; the page shows nothing for it rather than inventing copy.",
     "PLACEHOLDER = no real URL yet; that service is shown as unavailable for the mood.",
-    "Array order is the current display order. Final display order is UNDECIDED; the number on each label is just its position here.",
+    "Array order is the current display order. Final display order is UNDECIDED; the number on each label is its position among the live moods.",
     "labelText: text color on the circle art (dark or light), for contrast.",
     "labelColors hex values are PROVISIONAL, sampled from the circle art; final hex values are UNDECIDED.",
-    "art paths are the existing assets, unchanged. Lost uses the brown art and Euphoric / Hopeful / Unleashed / Hypnotic use gold / forest green / dark green / silver art even though the spec leaves their colors open; art.record is the pre-composited record export, not currently rendered."
+    "art paths are the existing assets, unchanged. Lost uses the brown art and Euphoric / Hopeful / Unleashed / Hypnotic use gold / forest green / dark green / silver art even though the spec leaves their colors open; art.record is the pre-composited record export, not currently rendered.",
+    "selectorNote: short note shown near the selector (e.g. that more moods are coming). UNDECIDED = nothing shown; wording and style are Sarah's call."
   ],
   "defaultMood": "dreamy",
+  "selectorNote": "UNDECIDED",
   "labelColors": {
     "light blue": "#b0caf9",
     "yellow": "#fad52a",
@@ -32,6 +35,7 @@
     {
       "id": "dreamy",
       "name": "Dreamy",
+      "live": true,
       "color": "light blue",
       "icon": "cloud",
       "descriptor": "UNDECIDED",
@@ -68,6 +72,7 @@
     {
       "id": "energized",
       "name": "Energized",
+      "live": false,
       "color": "yellow",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
@@ -91,6 +96,7 @@
     {
       "id": "sultry",
       "name": "Sultry",
+      "live": false,
       "color": "red",
       "icon": "lips",
       "descriptor": "UNDECIDED",
@@ -114,6 +120,7 @@
     {
       "id": "cute",
       "name": "Cute",
+      "live": false,
       "color": "pink",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
@@ -137,6 +144,7 @@
     {
       "id": "audacious",
       "name": "Audacious",
+      "live": false,
       "color": "orange",
       "icon": "sunglasses",
       "descriptor": "UNDECIDED",
@@ -160,6 +168,7 @@
     {
       "id": "chill",
       "name": "Chill",
+      "live": false,
       "color": "light green",
       "icon": "sun",
       "descriptor": "UNDECIDED",
@@ -183,6 +192,7 @@
     {
       "id": "melancholy",
       "name": "Melancholy",
+      "live": false,
       "color": "lavender",
       "icon": "broken heart",
       "descriptor": "UNDECIDED",
@@ -206,6 +216,7 @@
     {
       "id": "lost",
       "name": "Lost",
+      "live": false,
       "color": "lavender",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
@@ -229,6 +240,7 @@
     {
       "id": "burdened",
       "name": "Burdened",
+      "live": false,
       "color": "dark blue",
       "icon": "scribble",
       "descriptor": "UNDECIDED",
@@ -252,6 +264,7 @@
     {
       "id": "defiant",
       "name": "Defiant",
+      "live": false,
       "color": "black",
       "icon": "fist",
       "descriptor": "UNDECIDED",
@@ -275,6 +288,7 @@
     {
       "id": "playful-cheeky",
       "name": "Playful / Cheeky",
+      "live": false,
       "color": "berry",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
@@ -298,6 +312,7 @@
     {
       "id": "unleashed",
       "name": "Unleashed",
+      "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
@@ -321,6 +336,7 @@
     {
       "id": "hype",
       "name": "Hype",
+      "live": false,
       "color": "purple",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
@@ -344,6 +360,7 @@
     {
       "id": "nostalgic",
       "name": "Nostalgic",
+      "live": false,
       "color": "peach",
       "icon": "camera",
       "descriptor": "UNDECIDED",
@@ -367,6 +384,7 @@
     {
       "id": "hopeful-at-peace",
       "name": "Hopeful / At Peace",
+      "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
@@ -390,6 +408,7 @@
     {
       "id": "euphoric",
       "name": "Euphoric",
+      "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
@@ -413,6 +432,7 @@
     {
       "id": "tender",
       "name": "Tender",
+      "live": false,
       "color": "fuschia",
       "icon": "heart",
       "descriptor": "UNDECIDED",
@@ -436,6 +456,7 @@
     {
       "id": "hypnotic",
       "name": "Hypnotic",
+      "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
