@@ -1,0 +1,460 @@
+{
+  "_about": [
+    "Listen mood config (PROJECT-SPEC.md §7). The page renders the selector, turntable, and now spinning bar from this file.",
+    "UNDECIDED = not decided by Sarah yet; the page shows nothing for it rather than inventing copy.",
+    "PLACEHOLDER = no real URL yet; that service is shown as unavailable for the mood.",
+    "Array order is the current display order. Final display order is UNDECIDED; the number on each label is just its position here.",
+    "labelText: text color on the circle art (dark or light), for contrast.",
+    "labelColors hex values are PROVISIONAL, sampled from the circle art; final hex values are UNDECIDED.",
+    "art paths are the existing assets, unchanged. Lost uses the brown art and Euphoric / Hopeful / Unleashed / Hypnotic use gold / forest green / dark green / silver art even though the spec leaves their colors open; art.record is the pre-composited record export, not currently rendered."
+  ],
+  "defaultMood": "dreamy",
+  "labelColors": {
+    "light blue": "#b0caf9",
+    "yellow": "#fad52a",
+    "red": "#d14644",
+    "pink": "#f6bfdc",
+    "orange": "#f58730",
+    "light green": "#a1c071",
+    "lavender": "#d3b9f1",
+    "dark blue": "#2d49b2",
+    "black": "#555555",
+    "berry": "#9a406a",
+    "dark green": "#659344",
+    "purple": "#6c4d8f",
+    "peach": "#fa9fa1",
+    "forest green": "#868d63",
+    "gold": "#c3a455",
+    "fuschia": "#c964ad",
+    "silver": "#cacaca"
+  },
+  "moods": [
+    {
+      "id": "dreamy",
+      "name": "Dreamy",
+      "color": "light blue",
+      "icon": "cloud",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/light-blue-cirle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Light_Blue.png",
+        "record": "/assets/images/listen/sarahtonin_sounds-listen-record-dreamy_2.png",
+        "tape": "/assets/images/listen/Tape-Light_Blue_1.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/6FhZxeM54u0L6x8muXy7SI"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "For when your mind needs some room to wonder",
+      "description": "Floaty, atmospheric, and transportive. These are the songs for late nights, daydreaming, and everywhere in between.",
+      "picks": [
+        {
+          "title": "Falling",
+          "artist": "Julee Cruise"
+        },
+        {
+          "title": "Closer",
+          "artist": "You’ll Never Get To Heaven"
+        },
+        {
+          "title": "Kisses",
+          "artist": "Slowdive"
+        }
+      ]
+    },
+    {
+      "id": "energized",
+      "name": "Energized",
+      "color": "yellow",
+      "icon": "UNDECIDED",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/yellow-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Yellow.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-yellow.png",
+        "tape": "/assets/images/listen/Tape-Yellow.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/5BrpdG6D8ZWvZRpem1YUjK"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "sultry",
+      "name": "Sultry",
+      "color": "red",
+      "icon": "lips",
+      "descriptor": "UNDECIDED",
+      "labelText": "light",
+      "art": {
+        "circle": "/assets/images/listen/red-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Red.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-red.png",
+        "tape": "/assets/images/listen/Tape-Red.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/5gZMZPKxAf6YaPvVm799tg"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "cute",
+      "name": "Cute",
+      "color": "pink",
+      "icon": "UNDECIDED",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/pink-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Pink.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-pink.png",
+        "tape": "/assets/images/listen/Tape-Pink.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/1MKeBuS1z21UUnE01WeC7F"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "audacious",
+      "name": "Audacious",
+      "color": "orange",
+      "icon": "sunglasses",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/orange-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Orange.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-orange.png",
+        "tape": "/assets/images/listen/Tape-Orange.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/1nRKb7lCLt7ehak4PoAr4Y"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "chill",
+      "name": "Chill",
+      "color": "light green",
+      "icon": "sun",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/light-green-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Light_Green.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-light green.png",
+        "tape": "/assets/images/listen/Tape-Light_Green.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/24fenp1dE6vpIDbmS6FwAB"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "melancholy",
+      "name": "Melancholy",
+      "color": "lavender",
+      "icon": "broken heart",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/lavendar-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Recoord-Lavendar.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-lavendar.png",
+        "tape": "/assets/images/listen/Tape-Lavendar.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/5JAjZESFqplxGdXXnkZv7d"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "lost",
+      "name": "Lost",
+      "color": "lavender",
+      "icon": "UNDECIDED",
+      "descriptor": "UNDECIDED",
+      "labelText": "light",
+      "art": {
+        "circle": "/assets/images/listen/brown_Circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Brown.png",
+        "record": "/assets/images/listen/sarahtonin_sounds-listen-record-brown.png",
+        "tape": "/assets/images/listen/Tape-brown.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/0H4yQYUFBjYbRaUGEG3MzA"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "burdened",
+      "name": "Burdened",
+      "color": "dark blue",
+      "icon": "scribble",
+      "descriptor": "UNDECIDED",
+      "labelText": "light",
+      "art": {
+        "circle": "/assets/images/listen/dark-blue-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Dark_Blue.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-dark_blue.png",
+        "tape": "/assets/images/listen/Tape-Dark_Blue.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/4oS3oJ23hvqh8PMDnxrbtY"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "defiant",
+      "name": "Defiant",
+      "color": "black",
+      "icon": "fist",
+      "descriptor": "UNDECIDED",
+      "labelText": "light",
+      "art": {
+        "circle": "/assets/images/listen/black-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Black.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-black.png",
+        "tape": "/assets/images/listen/Tape-Black.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/4TQdShNqgVeLDUD0X4Gquq"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "playful-cheeky",
+      "name": "Playful / Cheeky",
+      "color": "berry",
+      "icon": "UNDECIDED",
+      "descriptor": "UNDECIDED",
+      "labelText": "light",
+      "art": {
+        "circle": "/assets/images/listen/berry-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Maroon.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-maroon.png",
+        "tape": "/assets/images/listen/Tape-Maroon.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/52MLdAdmlGKmj8Q7OESYYA"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "unleashed",
+      "name": "Unleashed",
+      "color": "UNDECIDED",
+      "icon": "UNDECIDED",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/dark-green-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Green.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-green.png",
+        "tape": "/assets/images/listen/Tape-Green.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/0zksiK8ZEBUECUqxLAHRzp"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "hype",
+      "name": "Hype",
+      "color": "purple",
+      "icon": "UNDECIDED",
+      "descriptor": "UNDECIDED",
+      "labelText": "light",
+      "art": {
+        "circle": "/assets/images/listen/purple-circle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Purple.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-purple.png",
+        "tape": "/assets/images/listen/Tape-Purple.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/7eluu31I9kVwckY5gspmKR"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "nostalgic",
+      "name": "Nostalgic",
+      "color": "peach",
+      "icon": "camera",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/peach-cirlcle.png",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Peach.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-peach.png",
+        "tape": "/assets/images/listen/Tape-Peach.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/6sP6dpEbjOagcJGJ7bgINa"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "hopeful-at-peace",
+      "name": "Hopeful / At Peace",
+      "color": "UNDECIDED",
+      "icon": "UNDECIDED",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/forest green circle.png",
+        "vinyl": "/assets/images/listen/Record-forest_Green.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-forest-green.png",
+        "tape": "/assets/images/listen/Tape-Forest_Green.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/5RbZK1fPP47ohsKVMBQUcO"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "euphoric",
+      "name": "Euphoric",
+      "color": "UNDECIDED",
+      "icon": "UNDECIDED",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/gold circle.png",
+        "vinyl": "/assets/images/listen/Record-gold.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-gold.png",
+        "tape": "/assets/images/listen/Tape-Gold.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/3XKtSRi5IhoSJA4flxU58N"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "tender",
+      "name": "Tender",
+      "color": "fuschia",
+      "icon": "heart",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/Fuschia Circle.png",
+        "vinyl": "/assets/images/listen/Record-fuschia.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-fuschia.png",
+        "tape": "/assets/images/listen/Tape-Fuschia.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/5BHM7EYebAJE4QZQcCoapO"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "hypnotic",
+      "name": "Hypnotic",
+      "color": "UNDECIDED",
+      "icon": "UNDECIDED",
+      "descriptor": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/Silver Circle.png",
+        "vinyl": "/assets/images/listen/Record-silver.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-silver.png",
+        "tape": "/assets/images/listen/Tape-Silver.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/00G4dsIODpNybJ17oYCpIc"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    }
+  ]
+}

@@ -157,7 +157,6 @@ Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Pres
 - Icons for the moods listed in §3.
 - Colors for Euphoric, Hopeful/At Peace, Unleashed, Hypnotic; hex values for all 17 colors.
 - Spotify + Apple Music URLs per mood.
-- Now Playing approach given embed limitations.
 - Crash Course topics/art.
 - Journal production content/art.
 - Final contact/social URLs and form handling.

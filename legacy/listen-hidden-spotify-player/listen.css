@@ -226,9 +226,16 @@ html:has(body.page-listen) {
 }
 
 /* ── Mood Picker Bar (Figma node 15:5) ──
-   A flexbox row of record-label buttons, rendered by js/listen.js from
-   content/listen/moods.json (number, name, and descriptor once Sarah
-   writes one). The card backdrop uses the real "Menu-tape_3" export. */
+   A genuine Auto Layout row in Figma (mood-circle-row, 11:2): built as
+   a flexbox row with a gap, per the task brief, not nine individually
+   positioned circles. The nine circle images are the exact confirmed
+   ASSET-MANIFEST.md §3 swatches. The card backdrop uses the real
+   "Menu-tape_3" export.
+
+   Mood content: only "dreamy" (js/listen.js) has Figma-confirmed copy —
+   PROJECT-SPEC.md §7 leaves the other 8 circles' color→mood mapping
+   undecided, so they stay genuinely clickable but uncurated rather than
+   inventing names/descriptions per CLAUDE.md. */
 .listen-moods {
   position: relative;
   width: 100%;
@@ -279,9 +286,7 @@ html:has(body.page-listen) {
   scroll-snap-type: x proximity;
   list-style: none;
   margin: 0;
-  /* room for the selected ring and focus outline, which the scroll
-     container would otherwise clip */
-  padding: 0.75rem 0.75rem;
+  padding: 0.25rem 0;
   flex: 1 1 0%;
   min-width: 0;
 }
@@ -293,70 +298,26 @@ html:has(body.page-listen) {
 }
 
 .mood-circle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.15em;
+  display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: none;
-  padding: 12%;
+  padding: 0;
   background-color: transparent;
   background-size: cover;
   background-position: center;
-  font-family: var(--font-display);
-  font-weight: normal;
-  text-align: center;
   cursor: pointer;
   transition: transform 0.15s ease;
 }
 
-.mood-circle--dark-text { color: var(--color-near-black); }
-.mood-circle--light-text { color: #fffaf0; }
-
-.mood-circle__number {
-  font-size: clamp(0.7rem, 0.9vw, 0.85rem);
-  line-height: 1;
-  opacity: 0.8;
+.mood-circle:hover {
+  transform: translateY(-3px);
 }
 
-.mood-circle__name {
-  font-size: clamp(0.85rem, 1.3vw, 1.2rem);
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.mood-circle__descriptor {
-  font-family: 'Crimson Text', Georgia, serif;
-  font-size: clamp(0.6rem, 0.75vw, 0.75rem);
-  line-height: 1.1;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .mood-circle:hover {
-    transform: translateY(-3px);
-  }
-}
-
-/* Selected = crimson ring; keyboard focus = separate dashed outline, so
-   the two stay distinguishable when they land on the same label. */
 .mood-circle.is-active {
-  box-shadow: 0 0 0 3px var(--color-cream), 0 0 0 6px var(--color-crimson);
-}
-
-.mood-circle:focus-visible {
-  outline: 3px dashed var(--color-near-black);
-  outline-offset: 8px;
-}
-
-.listen-moods__error {
-  margin: 0;
-  font-family: 'Crimson Text', Georgia, serif;
-  font-size: 1.1rem;
-  color: var(--color-near-black);
+  outline: 3px solid var(--color-crimson);
+  outline-offset: 3px;
 }
 
 .listen-moods__arrow {
@@ -405,12 +366,8 @@ html:has(body.page-listen) {
   }
 
   .listen-moods__row li {
-    width: 5.75rem;
+    width: 4.5rem;
   }
-
-  .mood-circle { padding: 10%; }
-  .mood-circle__number { font-size: 0.75rem; }
-  .mood-circle__name { font-size: 0.9rem; }
 }
 
 /* ── Turntable + Mood Detail (Figma node 15:7) ──
@@ -420,9 +377,13 @@ html:has(body.page-listen) {
    genuinely drives this section's content, per the task's functional
    requirement.
 
-   Vinyl and tape art come from each mood's entry in
-   content/listen/moods.json. Blurb, description, and Sarah's Picks are
-   hidden for moods where they're still undecided. */
+   The turntable uses the real per-mood pre-composited record exports
+   (record-dreamy for the default state; the other 8 "Colored Records"/
+   "record-COLOR" exports for the uncurated moods, matched by swatch
+   color only — not a content claim). Tape and note backgrounds use the
+   real Tape-Light_Blue and paper-note-with-sticker exports; the other 8
+   moods have no matching tape export, so they keep a plain provisional
+   color (js/listen.js TAPE_COLORS) until Sarah supplies one. */
 .listen-turntable {
   position: relative;
   width: 100%;
@@ -509,8 +470,9 @@ html:has(body.page-listen) {
   pointer-events: none;
 }
 
-/* Play/pause for the Spotify embed in the now spinning bar, sitting over
-   the record so the turntable itself is the control. */
+/* The illustration is the visible player control. This real button sits
+   over the record/tonearm area so it remains keyboard-operable without
+   introducing Spotify's branded chrome into the composition. */
 .tt-playback-toggle {
   position: absolute;
   z-index: 4;
@@ -554,10 +516,22 @@ html:has(body.page-listen) {
   background: var(--color-gold, #ffd200);
 }
 
-/* Hidden while Apple Music is the active embed: that embed has no
-   control API, so the turntable can't start or stop it. */
-.tt-playback-toggle[hidden] {
-  display: none;
+/* The iframe must stay rendered in the viewport for Spotify playback.
+   A one-pixel shell keeps its native chrome out of the composition without
+   moving the player off-canvas (which can prevent play() from starting). */
+.spotify-embed-shell {
+  position: absolute;
+  left: 31.53%;
+  top: 12.59%;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0.01;
+  pointer-events: none;
+}
+
+.spotify-embed-shell.is-unavailable {
+  visibility: hidden;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -976,157 +950,5 @@ html:has(body.page-listen) {
   .listen-hero__divider {
     width: 80%;
     margin: 0.75rem auto;
-  }
-}
-
-/* ── Now spinning bar ──
-   Pinned to the bottom of the viewport on this page only. It holds the
-   visible Spotify / Apple Music embed, so playback continues while the
-   visitor scrolls. --mood-color and --now-spinning-height are set by
-   js/listen.js. */
-.page-listen {
-  padding-bottom: var(--now-spinning-height, 0px);
-}
-
-.now-spinning {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 50;
-  border-top: 6px solid var(--mood-color, var(--color-near-black));
-  background-color: var(--color-cream);
-  background-image: url('/assets/images/journal/paper-tile.webp');
-  background-size: 600px 600px;
-  box-shadow: 0 -4px 14px rgba(28, 26, 22, 0.22);
-}
-
-.now-spinning[hidden],
-.now-spinning [hidden] {
-  display: none;
-}
-
-.now-spinning__inner {
-  display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
-  align-items: center;
-  gap: 0.75rem 1.5rem;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0.625rem 1.5rem;
-}
-
-.now-spinning__mood {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  min-width: 0;
-}
-
-.now-spinning__label {
-  flex: none;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 0 0 3px var(--mood-color, var(--color-near-black));
-}
-
-.now-spinning__eyebrow {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: normal;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-crimson);
-}
-
-.now-spinning__name {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  line-height: 1.05;
-  text-transform: uppercase;
-  color: var(--color-near-black);
-}
-
-.now-spinning__source {
-  display: flex;
-  gap: 0.375rem;
-}
-
-.now-spinning__source-btn {
-  min-height: 2.5rem;
-  padding: 0.4rem 0.8rem;
-  border: 2px solid var(--color-near-black);
-  border-radius: 999px;
-  background: var(--color-cream);
-  font-family: 'Crimson Text', Georgia, serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--color-near-black);
-  cursor: pointer;
-}
-
-.now-spinning__source-btn[aria-pressed='true'] {
-  background: var(--color-near-black);
-  color: var(--color-cream);
-}
-
-.now-spinning__source-btn:disabled {
-  border-style: dashed;
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.now-spinning__player {
-  min-width: 0;
-}
-
-.now-spinning__embed iframe {
-  display: block;
-  width: 100%;
-  border: 0;
-  border-radius: 12px;
-}
-
-.now-spinning__embed--apple iframe {
-  max-width: 660px;
-  overflow: hidden;
-  background: transparent;
-}
-
-.now-spinning__unavailable {
-  margin: 0;
-  font-family: 'Crimson Text', Georgia, serif;
-  font-size: 1rem;
-  color: var(--color-near-black);
-}
-
-@media (max-width: 760px) {
-  .now-spinning__inner {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.5rem 0.75rem;
-    padding: 0.5rem 1rem 0.75rem;
-  }
-
-  .now-spinning__player {
-    grid-column: 1 / -1;
-  }
-
-  .now-spinning__label {
-    width: 40px;
-    height: 40px;
-  }
-
-  .now-spinning__eyebrow { font-size: 0.75rem; }
-  .now-spinning__name { font-size: 1.15rem; }
-
-  .now-spinning__source-btn {
-    padding: 0.45rem 0.65rem;
-    font-size: 0.85rem;
   }
 }

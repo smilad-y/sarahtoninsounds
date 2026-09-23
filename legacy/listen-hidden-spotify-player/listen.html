@@ -47,8 +47,26 @@
         <button type="button" class="listen-moods__arrow listen-moods__arrow--prev" aria-label="Scroll moods left">
           <span aria-hidden="true"></span>
         </button>
-        <!-- Mood labels are rendered by js/listen.js from content/listen/moods.json. -->
-        <ul class="listen-moods__row" id="mood-row" aria-labelledby="listen-moods-heading"></ul>
+        <ul class="listen-moods__row" id="mood-row">
+          <li><button type="button" class="mood-circle" data-mood-id="dreamy" aria-pressed="true" style="background-image:url('/assets/images/listen/light-blue-cirle.png')"><span class="visually-hidden">Dreamy</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="yellow" aria-pressed="false" style="background-image:url('/assets/images/listen/yellow-circle.png')"><span class="visually-hidden">Energized &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="red" aria-pressed="false" style="background-image:url('/assets/images/listen/red-circle.png')"><span class="visually-hidden">Sultry &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="pink" aria-pressed="false" style="background-image:url('/assets/images/listen/pink-circle.png')"><span class="visually-hidden">Cute &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="orange" aria-pressed="false" style="background-image:url('/assets/images/listen/orange-circle.png')"><span class="visually-hidden">Audacious &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="light-green" aria-pressed="false" style="background-image:url('/assets/images/listen/light-green-circle.png')"><span class="visually-hidden">Chill &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="lavender" aria-pressed="false" style="background-image:url('/assets/images/listen/lavendar-circle.png')"><span class="visually-hidden">Melancholy &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="brown" aria-pressed="false" style="background-image:url('/assets/images/listen/brown_Circle.png')"><span class="visually-hidden">Lost &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="dark-blue" aria-pressed="false" style="background-image:url('/assets/images/listen/dark-blue-circle.png')"><span class="visually-hidden">Burdened &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="black" aria-pressed="false" style="background-image:url('/assets/images/listen/black-circle.png')"><span class="visually-hidden">Defiant &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="berry" aria-pressed="false" style="background-image:url('/assets/images/listen/berry-circle.png')"><span class="visually-hidden">Playful / Cheeky &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="dark-green" aria-pressed="false" style="background-image:url('/assets/images/listen/dark-green-circle.png')"><span class="visually-hidden">Unleashed &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="purple" aria-pressed="false" style="background-image:url('/assets/images/listen/purple-circle.png')"><span class="visually-hidden">Hype &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="peach" aria-pressed="false" style="background-image:url('/assets/images/listen/peach-cirlcle.png')"><span class="visually-hidden">Nostalgic &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="forest-green" aria-pressed="false" style="background-image:url('/assets/images/listen/forest%20green%20circle.png')"><span class="visually-hidden">Hopeful / At Peace &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="gold" aria-pressed="false" style="background-image:url('/assets/images/listen/gold%20circle.png')"><span class="visually-hidden">Euphoric &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="fuschia" aria-pressed="false" style="background-image:url('/assets/images/listen/Fuschia%20Circle.png')"><span class="visually-hidden">Tender &mdash; not yet curated</span></button></li>
+          <li><button type="button" class="mood-circle" data-mood-id="silver" aria-pressed="false" style="background-image:url('/assets/images/listen/Silver%20Circle.png')"><span class="visually-hidden">Hypnotic &mdash; not yet curated</span></button></li>
+        </ul>
         <button type="button" class="listen-moods__arrow listen-moods__arrow--next" aria-label="Scroll moods right">
           <span aria-hidden="true"></span>
         </button>
@@ -88,6 +106,10 @@
       </button>
     </div>
 
+    <div class="spotify-embed-shell" id="spotify-embed-shell" aria-hidden="true">
+      <div id="spotify-embed-container"></div>
+    </div>
+
     <div class="tt-tape" id="tt-tape" style="background-image:url('/assets/images/listen/Tape-Light_Blue_1.png')">
       <h2 class="tt-tape__label" id="tt-mood-name">Dreamy</h2>
     </div>
@@ -95,7 +117,7 @@
     <p class="tt-blurb" id="tt-blurb">For when your mind needs some room to wonder</p>
     <p class="tt-description" id="tt-description">Floaty, atmospheric, and transportive. These are the songs for late nights, daydreaming, and everywhere in between.</p>
 
-    <div class="tt-picks" id="tt-picks">
+    <div class="tt-picks">
       <h3 class="tt-picks__heading">Sarah&rsquo;s Picks</h3>
       <div class="tt-picks__divider" aria-hidden="true"></div>
       <ul class="tt-picks__list" id="tt-picks-list">
@@ -125,33 +147,9 @@
       </a>
     </div>
   </section>
-</main>
 
-<!-- Now spinning bar: the selected mood's live, visible Spotify / Apple
-     Music embed. Pinned to the bottom of the viewport so playback keeps
-     going while scrolling this page. -->
-<aside class="now-spinning" id="now-spinning" aria-labelledby="now-spinning-heading" hidden>
-  <div class="now-spinning__inner">
-    <div class="now-spinning__mood">
-      <span class="now-spinning__label" id="now-spinning-label" aria-hidden="true"></span>
-      <div class="now-spinning__text">
-        <h2 class="now-spinning__eyebrow" id="now-spinning-heading">Now spinning</h2>
-        <p class="now-spinning__name" id="now-spinning-name"></p>
-      </div>
-    </div>
-    <div class="now-spinning__source" role="group" aria-label="Listen on">
-      <button type="button" class="now-spinning__source-btn" data-source="spotify" aria-pressed="true">Spotify</button>
-      <button type="button" class="now-spinning__source-btn" data-source="apple" aria-pressed="false">Apple Music</button>
-    </div>
-    <div class="now-spinning__player">
-      <div class="now-spinning__embed now-spinning__embed--spotify" id="now-spinning-spotify">
-        <div id="now-spinning-spotify-mount"></div>
-      </div>
-      <div class="now-spinning__embed now-spinning__embed--apple" id="now-spinning-apple" hidden></div>
-      <p class="now-spinning__unavailable" id="now-spinning-unavailable" hidden></p>
-    </div>
-  </div>
-</aside>
+  <!-- Persistent Now Playing mini player is a Phase 5 deliverable. -->
+</main>
 
 <script src="/js/site.js" defer></script>
 <script src="/js/listen.js" defer></script>

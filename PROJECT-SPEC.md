@@ -266,9 +266,11 @@ The turntable is a signature interaction, not decorative filler. A selected mood
 Separate from mood playlists. Curated introductions to genres, artists, scenes, or sounds. Do not collapse Crash Courses into the mood taxonomy.
 
 ### Now Playing
-Persistent mini-player/Now Playing area across the Listen experience.
-
-**Open technical constraint:** a persistent mini player is hard to build on top of live third-party embeds. Spotify's IFrame API exposes some playback control; Apple Music's embed exposes essentially none without MusicKit (a larger integration). The Now Playing design may need to be simplified or Spotify-only. **Undecided.** Surface options to Sarah before building it.
+**Decided (Sarah, September 2026): a "now spinning" bar.**
+- A bar pinned to the bottom of the Listen page shows the selected mood's label art, name, and color, and holds the live Spotify / Apple Music embed with the toggle.
+- The embed stays **visible**, sized so the current song's title and artist show. No hidden or unbranded embed.
+- Playback keeps going while scrolling the Listen page (e.g. down to Crash Courses). It does not need to persist across other pages.
+- Apple Music's embed has no control API (without MusicKit), so with Apple Music selected the turntable play button is hidden and playback happens only in the embed. With Spotify, the turntable also works as play/pause.
 
 ### Copy/decorative rules
 - Playlist descriptions and microcopy should wait until mood sorting/taxonomy is sufficiently stable.

@@ -26,3 +26,7 @@ Per the fresh-start-by-default content rule (`PROJECT-SPEC.md` §2,
 `CLAUDE.md`), nothing from the legacy implementation — this reference
 copy included — feeds the new site unless Sarah explicitly approves a
 specific item.
+
+`listen-hidden-spotify-player/` holds verbatim copies of the Listen page
+files from just before the visible "now spinning" bar replaced the
+hidden 1px Spotify player. See its own README.

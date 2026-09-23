@@ -33,10 +33,11 @@ Populated so far:
 - `journal/featured.json` — ordered, explicitly-curated Featured Journal
   selection (replaces automatic newest-entry behavior).
 
-Still future work (schema gets defined in the phase that actually builds
-it, not before):
-
-- `listen/playlists.json` — curated Spotify playlist metadata (Phase 4;
-  schema outlined in `ASSET-MANIFEST.md` §6 / `PROJECT-SPEC.md` §7)
+- `listen/moods.json` — Listen mood config (Phase 4/5): the 18 moods
+  from `PROJECT-SPEC.md` §7 with name, color, icon, descriptor, art,
+  Spotify and Apple Music URLs, and Sarah's Picks. Undecided values are
+  `UNDECIDED`, missing links `PLACEHOLDER`; the notes at the top of the
+  file explain the rest. Passthrough-copied (not template data) and
+  fetched at runtime by `js/listen.js`.
 - `listen/crash-courses.json` — Crash Courses content (Phase 6)
 - `contact.json` — finalized contact copy/links (Phase 8)

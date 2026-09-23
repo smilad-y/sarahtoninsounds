@@ -12,6 +12,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("index.html");
   eleventyConfig.addPassthroughCopy("listen.html");
   eleventyConfig.addPassthroughCopy("contact.html");
+  // Listen mood config, fetched at runtime by js/listen.js.
+  eleventyConfig.addPassthroughCopy("content/listen");
   // netlify/functions/ is NOT passthrough-copied: Netlify Functions
   // deploy from their configured source directory directly, independent
   // of the static publish dir, once netlify.toml declares

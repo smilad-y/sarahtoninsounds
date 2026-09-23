@@ -89,7 +89,7 @@ The legacy song library is archive-only. There is no migration or remapping phas
 - Reduced-motion alternative.
 
 ### Decide before building
-- **Now Playing approach.** Apple Music's embed exposes almost no playback control without MusicKit; Spotify's IFrame API exposes some. Options need Sarah's call.
+- ~~**Now Playing approach.**~~ Decided: "now spinning" bar (PROJECT-SPEC §7 Now Playing).
 
 ### Dependency
 Two mood names, several icons, four colors, and all descriptors are still undecided. Build so these drop in via config.
@@ -175,7 +175,6 @@ These are intentionally not finalized and should not be guessed:
 - remaining mood icons and descriptors
 - colors for Euphoric, Hopeful/At Peace, Unleashed, Hypnotic; hex values for all colors
 - mood display order
-- Now Playing approach given embed limitations
 - whether all 18 moods (and Crash Courses) must be live at launch, or can roll out as playlists are ready
 - "discover music!" note on Home
 - final Crash Course topics

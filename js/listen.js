@@ -1,308 +1,384 @@
-// Listen page — mood data + mood picker interaction (BUILD-ROADMAP.md
-// Phase 4/5). Config-driven per PROJECT-SPEC.md §7: the taxonomy can
-// grow/change without rewriting this file's logic.
+// Listen page: mood selector, turntable, and the "now spinning" bar.
+// Everything mood-specific comes from content/listen/moods.json
+// (PROJECT-SPEC.md §7), so moods can be added, renamed, reordered, or
+// removed there without touching this file.
 //
-// Content status: only "dreamy" has real Figma-sourced copy (matches the
-// default Turntable + Mood Detail state in the source design). The other
-// 8 circles are genuinely clickable/functional, but PROJECT-SPEC.md §7
-// explicitly leaves the color→mood mapping undecided and CLAUDE.md
-// forbids inventing mood names/descriptions/playlists — so those entries
-// carry only their confirmed swatch color, marked curated:false, until
-// Sarah assigns real names/copy/tracklists.
+// Playback lives in the now spinning bar as a visible Spotify or Apple
+// Music embed. Spotify's IFrame API lets the turntable act as a second
+// play/pause control; Apple Music's embed exposes no control API, so
+// with Apple Music selected the turntable button is hidden and playback
+// happens only inside the embed.
 (function () {
-  var MOODS = [
-    {
-      id: 'dreamy',
-      label: 'Dreamy',
-      circle: '/assets/images/listen/light-blue-cirle.png',
-      record: '/assets/images/listen/sarahtonin_sounds-listen-record-dreamy_2.png', vinyl: '/assets/images/listen/Colored Records/Record-Light_Blue.png',
-      tape: '/assets/images/listen/Tape-Light_Blue_1.png',
-      curated: true,
-      tapeLabel: 'DREAMY',
-      spotifyPlaylistId: '6FhZxeM54u0L6x8muXy7SI',
-      blurb: 'For when your mind needs some room to wonder',
-      description: 'Floaty, atmospheric, and transportive. These are the songs for late nights, daydreaming, and everywhere in between.',
-      picks: [
-        { title: 'Falling', artist: 'Julee Cruise' },
-        { title: 'Closer', artist: 'You’ll Never Get To Heaven' },
-        { title: 'Kisses', artist: 'Slowdive' }
-      ]
-    },
-    { id: 'yellow', label: 'Energized — not yet curated', circle: '/assets/images/listen/yellow-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-yellow.png', vinyl: '/assets/images/listen/Colored Records/Record-Yellow.png', tape: '/assets/images/listen/Tape-Yellow.png', spotifyPlaylistId: '5BrpdG6D8ZWvZRpem1YUjK', curated: false },
-    { id: 'red', label: 'Sultry — not yet curated', circle: '/assets/images/listen/red-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-red.png', vinyl: '/assets/images/listen/Colored Records/Record-Red.png', tape: '/assets/images/listen/Tape-Red.png', spotifyPlaylistId: '5gZMZPKxAf6YaPvVm799tg', curated: false },
-    { id: 'pink', label: 'Cute — not yet curated', circle: '/assets/images/listen/pink-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-pink.png', vinyl: '/assets/images/listen/Colored Records/Record-Pink.png', tape: '/assets/images/listen/Tape-Pink.png', spotifyPlaylistId: '1MKeBuS1z21UUnE01WeC7F', curated: false },
-    { id: 'orange', label: 'Audacious — not yet curated', circle: '/assets/images/listen/orange-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-orange.png', vinyl: '/assets/images/listen/Colored Records/Record-Orange.png', tape: '/assets/images/listen/Tape-Orange.png', spotifyPlaylistId: '1nRKb7lCLt7ehak4PoAr4Y', curated: false },
-    { id: 'light-green', label: 'Chill — not yet curated', circle: '/assets/images/listen/light-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-light green.png', vinyl: '/assets/images/listen/Colored Records/Record-Light_Green.png', tape: '/assets/images/listen/Tape-Light_Green.png', spotifyPlaylistId: '24fenp1dE6vpIDbmS6FwAB', curated: false },
-    { id: 'lavender', label: 'Melancholy — not yet curated', circle: '/assets/images/listen/lavendar-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-lavendar.png', vinyl: '/assets/images/listen/Colored Records/Recoord-Lavendar.png', tape: '/assets/images/listen/Tape-Lavendar.png', spotifyPlaylistId: '5JAjZESFqplxGdXXnkZv7d', curated: false },
-    { id: 'brown', label: 'Lost — not yet curated', circle: '/assets/images/listen/brown_Circle.png', record: '/assets/images/listen/sarahtonin_sounds-listen-record-brown.png', vinyl: '/assets/images/listen/Colored Records/Record-Brown.png', tape: '/assets/images/listen/Tape-brown.png', spotifyPlaylistId: '0H4yQYUFBjYbRaUGEG3MzA', curated: false },
-    { id: 'dark-blue', label: 'Burdened — not yet curated', circle: '/assets/images/listen/dark-blue-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-dark_blue.png', vinyl: '/assets/images/listen/Colored Records/Record-Dark_Blue.png', tape: '/assets/images/listen/Tape-Dark_Blue.png', spotifyPlaylistId: '4oS3oJ23hvqh8PMDnxrbtY', curated: false },
-    { id: 'black', label: 'Defiant — not yet curated', circle: '/assets/images/listen/black-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-black.png', vinyl: '/assets/images/listen/Colored Records/Record-Black.png', tape: '/assets/images/listen/Tape-Black.png', spotifyPlaylistId: '4TQdShNqgVeLDUD0X4Gquq', curated: false },
-    { id: 'berry', label: 'Playful / Cheeky — not yet curated', circle: '/assets/images/listen/berry-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-maroon.png', vinyl: '/assets/images/listen/Colored Records/Record-Maroon.png', tape: '/assets/images/listen/Tape-Maroon.png', spotifyPlaylistId: '52MLdAdmlGKmj8Q7OESYYA', curated: false },
-    { id: 'dark-green', label: 'Unleashed — not yet curated', circle: '/assets/images/listen/dark-green-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-green.png', vinyl: '/assets/images/listen/Colored Records/Record-Green.png', tape: '/assets/images/listen/Tape-Green.png', spotifyPlaylistId: '0zksiK8ZEBUECUqxLAHRzp', curated: false },
-    { id: 'purple', label: 'Hype — not yet curated', circle: '/assets/images/listen/purple-circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-purple.png', vinyl: '/assets/images/listen/Colored Records/Record-Purple.png', tape: '/assets/images/listen/Tape-Purple.png', spotifyPlaylistId: '7eluu31I9kVwckY5gspmKR', curated: false },
-    { id: 'peach', label: 'Nostalgic — not yet curated', circle: '/assets/images/listen/peach-cirlcle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-peach.png', vinyl: '/assets/images/listen/Colored Records/Record-Peach.png', tape: '/assets/images/listen/Tape-Peach.png', spotifyPlaylistId: '6sP6dpEbjOagcJGJ7bgINa', curated: false },
-    { id: 'forest-green', label: 'Hopeful / At Peace — not yet curated', circle: '/assets/images/listen/forest green circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-forest-green.png', vinyl: '/assets/images/listen/Record-forest_Green.png', tape: '/assets/images/listen/Tape-Forest_Green.png', spotifyPlaylistId: '5RbZK1fPP47ohsKVMBQUcO', curated: false },
-    { id: 'gold', label: 'Euphoric — not yet curated', circle: '/assets/images/listen/gold circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-gold.png', vinyl: '/assets/images/listen/Record-gold.png', tape: '/assets/images/listen/Tape-Gold.png', spotifyPlaylistId: '3XKtSRi5IhoSJA4flxU58N', curated: false },
-    { id: 'fuschia', label: 'Tender — not yet curated', circle: '/assets/images/listen/Fuschia Circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-fuschia.png', vinyl: '/assets/images/listen/Record-fuschia.png', tape: '/assets/images/listen/Tape-Fuschia.png', spotifyPlaylistId: '5BHM7EYebAJE4QZQcCoapO', curated: false },
-    { id: 'silver', label: 'Hypnotic — not yet curated', circle: '/assets/images/listen/Silver Circle.png', record: '/assets/images/listen/sarahtonin sounds-listen-record-silver.png', vinyl: '/assets/images/listen/Record-silver.png', tape: '/assets/images/listen/Tape-Silver.png', spotifyPlaylistId: '00G4dsIODpNybJ17oYCpIc', curated: false }
-  ];
+  var CONFIG_URL = '/content/listen/moods.json';
+  // Embed heights. Both must leave the current track's title and artist
+  // visible; see TODO.md "Listen — now spinning bar" for test status.
+  var SPOTIFY_HEIGHT = 80;
+  var APPLE_HEIGHT = 175;
 
-  window.SarahtoninListenMoods = MOODS;
+  var config = null;
+  var state = {
+    mood: null,
+    preferredSource: 'spotify',
+    activeSource: null,
+    isPlaying: false
+  };
+  var spotify = { api: null, controller: null, uri: null };
+
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function $(id) { return document.getElementById(id); }
+
+  // Values Sarah hasn't decided (or links that don't exist yet) are
+  // stored as UNDECIDED / PLACEHOLDER and render as nothing.
+  function isSet(value) {
+    return typeof value === 'string' && value !== '' &&
+      value !== 'UNDECIDED' && value !== 'PLACEHOLDER';
+  }
+
+  function spotifyUri(mood) {
+    var url = mood.spotify && mood.spotify.url;
+    var match = isSet(url) && url.match(/playlist[/:]([A-Za-z0-9]+)/);
+    return match ? 'spotify:playlist:' + match[1] : null;
+  }
+
+  function appleEmbedSrc(mood) {
+    var url = mood.appleMusic && mood.appleMusic.url;
+    if (!isSet(url) || !/^https:\/\/(embed\.)?music\.apple\.com\//.test(url)) return null;
+    return url.replace('https://music.apple.com/', 'https://embed.music.apple.com/');
+  }
+
+  function hasSource(mood, source) {
+    return source === 'spotify' ? Boolean(spotifyUri(mood)) : Boolean(appleEmbedSrc(mood));
+  }
+
+  function moodColor(mood) {
+    return (config.labelColors && config.labelColors[mood.color]) || '';
+  }
+
+  function assetUrl(path) {
+    return encodeURI(path);
+  }
 
   function getMood(id) {
-    for (var i = 0; i < MOODS.length; i++) {
-      if (MOODS[i].id === id) return MOODS[i];
+    for (var i = 0; i < config.moods.length; i++) {
+      if (config.moods[i].id === id) return config.moods[i];
     }
     return null;
   }
-  window.SarahtoninGetMood = getMood;
 
-  var spotifyIFrameAPI = null;
-  var spotifyController = null;
-  var activePlaylistId = null;
-  var activeMoodLabel = '';
-  var isPlaying = false;
-  var playerIsReady = false;
+  // ── Mood selector ──
 
-  function getPlaybackElements() {
-    return {
-      record: document.querySelector('.tt-record'),
-      button: document.getElementById('tt-playback-toggle'),
-      status: document.querySelector('.tt-playback-toggle__status'),
-      shell: document.getElementById('spotify-embed-shell'),
-      container: document.getElementById('spotify-embed-container')
-    };
-  }
+  function renderSelector() {
+    var row = $('mood-row');
+    row.innerHTML = '';
 
-  function setPlaybackUI(playing) {
-    var elements = getPlaybackElements();
-    isPlaying = Boolean(playing);
+    config.moods.forEach(function (mood, i) {
+      var li = document.createElement('li');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mood-circle mood-circle--' + (mood.labelText === 'light' ? 'light' : 'dark') + '-text';
+      btn.dataset.moodId = mood.id;
+      btn.setAttribute('aria-pressed', 'false');
+      btn.tabIndex = -1;
+      btn.style.backgroundImage = "url('" + assetUrl(mood.art.circle) + "')";
 
-    if (elements.record) {
-      elements.record.classList.toggle('is-playing', isPlaying);
-    }
+      var number = document.createElement('span');
+      number.className = 'mood-circle__number';
+      number.textContent = String(i + 1);
+      btn.appendChild(number);
 
-    if (!elements.button) return;
+      var name = document.createElement('span');
+      name.className = 'mood-circle__name';
+      name.textContent = mood.name;
+      btn.appendChild(name);
 
-    elements.button.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
-    elements.button.setAttribute(
-      'aria-label',
-      (isPlaying ? 'Pause ' : 'Play ') + activeMoodLabel + ' playlist'
-    );
-    elements.button.dataset.state = isPlaying ? 'playing' : 'paused';
-
-    if (elements.status) {
-      elements.status.textContent = isPlaying ? 'Playing' : 'Play';
-    }
-  }
-
-  function setPlayerAvailability(isAvailable) {
-    var elements = getPlaybackElements();
-    if (elements.button) {
-      elements.button.hidden = !isAvailable;
-      elements.button.disabled = !isAvailable || !playerIsReady;
-    }
-    if (elements.shell) {
-      elements.shell.classList.toggle('is-unavailable', !isAvailable);
-    }
-    if (isAvailable && !playerIsReady && elements.status) {
-      elements.status.textContent = 'Loading player…';
-    }
-  }
-
-  function createSpotifyController() {
-    var elements = getPlaybackElements();
-    if (!spotifyIFrameAPI || spotifyController || !activePlaylistId || !elements.container) return;
-
-    var initialPlaylistId = activePlaylistId;
-
-    spotifyIFrameAPI.createController(
-      elements.container,
-      {
-        uri: 'spotify:playlist:' + initialPlaylistId,
-        width: '100%',
-        height: '80'
-      },
-      function (controller) {
-        spotifyController = controller;
-        playerIsReady = true;
-
-        // Spotify supplies a usable controller through this callback. Waiting
-        // for a separate `ready` event can leave the custom control disabled
-        // forever because that event may have fired before listeners attach.
-        if (activePlaylistId && activePlaylistId !== initialPlaylistId) {
-          controller.loadUri('spotify:playlist:' + activePlaylistId);
-        }
-        setPlayerAvailability(Boolean(activePlaylistId));
-        setPlaybackUI(false);
-
-        controller.addListener('playback_update', function (event) {
-          if (!event || !event.data) return;
-          setPlaybackUI(!event.data.isPaused && !event.data.isBuffering);
-        });
+      if (isSet(mood.descriptor)) {
+        var descriptor = document.createElement('span');
+        descriptor.className = 'mood-circle__descriptor';
+        descriptor.textContent = mood.descriptor;
+        btn.appendChild(descriptor);
       }
-    );
-  }
 
-  function loadSpotifyMood(mood) {
-    var nextPlaylistId = mood && mood.spotifyPlaylistId ? mood.spotifyPlaylistId : null;
-    activeMoodLabel = mood ? mood.label.replace(/ — not yet curated$/, '') : '';
-
-    if (spotifyController) {
-      spotifyController.pause();
-    }
-    setPlaybackUI(false);
-    activePlaylistId = nextPlaylistId;
-    setPlayerAvailability(Boolean(activePlaylistId));
-
-    if (!activePlaylistId) return;
-
-    if (spotifyController) {
-      spotifyController.loadUri('spotify:playlist:' + activePlaylistId);
-      setPlayerAvailability(true);
-    } else {
-      createSpotifyController();
-    }
-  }
-
-  function initPlaybackControl() {
-    var button = document.getElementById('tt-playback-toggle');
-    if (!button) return;
-
-    button.addEventListener('click', function () {
-      if (!spotifyController || !activePlaylistId) return;
-      if (isPlaying) {
-        spotifyController.pause();
-      } else {
-        spotifyController.play();
-      }
+      li.appendChild(btn);
+      row.appendChild(li);
     });
   }
 
-  window.onSpotifyIframeApiReady = function (IFrameAPI) {
-    spotifyIFrameAPI = IFrameAPI;
-    createSpotifyController();
-  };
+  function moodButtons() {
+    return Array.prototype.slice.call($('mood-row').querySelectorAll('.mood-circle'));
+  }
 
-  function initMoodPicker() {
-    var row = document.getElementById('mood-row');
-    if (!row) return;
-    var buttons = Array.prototype.slice.call(row.querySelectorAll('.mood-circle'));
+  function initSelectorControls() {
+    var row = $('mood-row');
 
-    function setActive(moodId) {
-      buttons.forEach(function (btn) {
-        var isActive = btn.dataset.moodId === moodId;
-        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-        btn.classList.toggle('is-active', isActive);
-      });
-      document.dispatchEvent(new CustomEvent('listen:moodchange', { detail: { moodId: moodId } }));
-    }
+    row.addEventListener('click', function (e) {
+      var btn = e.target.closest('.mood-circle');
+      if (btn) selectMood(btn.dataset.moodId);
+    });
 
-    buttons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        setActive(btn.dataset.moodId);
-      });
+    // One tab stop for the whole row; arrow keys move between labels.
+    row.addEventListener('keydown', function (e) {
+      var buttons = moodButtons();
+      var index = buttons.indexOf(document.activeElement);
+      if (index === -1) return;
+      var next = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (index + 1) % buttons.length;
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (index - 1 + buttons.length) % buttons.length;
+      if (e.key === 'Home') next = 0;
+      if (e.key === 'End') next = buttons.length - 1;
+      if (next === null) return;
+      e.preventDefault();
+      buttons[index].tabIndex = -1;
+      buttons[next].tabIndex = 0;
+      buttons[next].focus();
+      buttons[next].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
     });
 
     var prevBtn = document.querySelector('.listen-moods__arrow--prev');
     var nextBtn = document.querySelector('.listen-moods__arrow--next');
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function () {
-        row.scrollBy({ left: -240, behavior: 'smooth' });
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function () {
-        row.scrollBy({ left: 240, behavior: 'smooth' });
-      });
-    }
+    var behavior = reduceMotion ? 'auto' : 'smooth';
+    if (prevBtn) prevBtn.addEventListener('click', function () { row.scrollBy({ left: -240, behavior: behavior }); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { row.scrollBy({ left: 240, behavior: behavior }); });
   }
 
-  // Provisional swatch colors for the tape label on moods with no real
-  // tape export (only "dreamy" has one — Tape-Light_Blue_1.png) — same
-  // "provisional, not confirmed brand hex" status as the secondary
-  // accents in css/tokens.css, used only until Sarah supplies real tape
-  // exports or per-mood color values for the rest.
-  var TAPE_COLORS = {
-    yellow: '#f0c93a',
-    red: '#c0392b',
-    pink: '#f0b8d0',
-    orange: '#e08a3c',
-    'light-green': '#9fc37c',
-    lavender: '#c7b3e0',
-    'dark-blue': '#2d4a9e',
-    black: '#3a3a3a',
-    berry: '#7a1f3d',
-    'dark-green': '#2e5339',
-    purple: '#6a3b8f',
-    peach: '#f2b79a',
-    'forest-green': '#1d3f24',
-    gold: '#c9a227',
-    fuschia: '#c2185b',
-    silver: '#b8b8b8',
-    brown: '#6d4f4a'
-  };
+  function markSelected(moodId) {
+    moodButtons().forEach(function (btn) {
+      var active = btn.dataset.moodId === moodId;
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      btn.classList.toggle('is-active', active);
+      btn.tabIndex = active ? 0 : -1;
+    });
+  }
 
-  function renderTurntable(moodId) {
-    var mood = getMood(moodId);
-    var tape = document.getElementById('tt-tape');
-    var nameEl = document.getElementById('tt-mood-name');
-    var blurbEl = document.getElementById('tt-blurb');
-    var descEl = document.getElementById('tt-description');
-    var picksList = document.getElementById('tt-picks-list');
-    var recordImg = document.getElementById('tt-record-img');
-    if (!mood || !tape || !nameEl) return;
+  // ── Turntable ──
 
-    loadSpotifyMood(mood);
+  function renderTurntable(mood) {
+    $('tt-mood-name').textContent = mood.name;
+    $('tt-record-img').src = assetUrl(mood.art.vinyl);
 
-    nameEl.textContent = mood.curated ? mood.label : mood.label.replace(/ — not yet curated$/, '');
-
-    if (recordImg && mood.vinyl) {
-      recordImg.src = encodeURI(mood.vinyl);
-    }
-
-    if (mood.tape) {
-      tape.style.backgroundImage = "url('" + encodeURI(mood.tape) + "')";
+    var tape = $('tt-tape');
+    if (isSet(mood.art.tape)) {
+      tape.style.backgroundImage = "url('" + assetUrl(mood.art.tape) + "')";
       tape.style.backgroundColor = '';
     } else {
       tape.style.backgroundImage = 'none';
-      tape.style.backgroundColor = TAPE_COLORS[mood.id] || '';
+      tape.style.backgroundColor = moodColor(mood);
     }
 
-    if (mood.curated) {
-      blurbEl.textContent = mood.blurb;
-      descEl.textContent = mood.description;
-      picksList.innerHTML = '';
-      mood.picks.forEach(function (pick, i) {
-        var li = document.createElement('li');
-        li.className = 'tt-picks__item';
-        li.style.setProperty('--tt-rotate', (i === 0 ? -12.18 : -6.99) + 'deg');
-        li.textContent = pick.title + ' — ' + pick.artist;
-        picksList.appendChild(li);
-      });
-    } else {
-      blurbEl.textContent = 'This mood is still being sorted.';
-      descEl.textContent = 'Sarah hasn’t curated this playlist yet — check back soon.';
-      picksList.innerHTML = '';
+    [['tt-blurb', mood.blurb], ['tt-description', mood.description]].forEach(function (pair) {
+      var el = $(pair[0]);
+      el.textContent = isSet(pair[1]) ? pair[1] : '';
+      el.hidden = !isSet(pair[1]);
+    });
+
+    var picks = mood.picks || [];
+    var list = $('tt-picks-list');
+    list.innerHTML = '';
+    picks.forEach(function (pick, i) {
       var li = document.createElement('li');
       li.className = 'tt-picks__item';
-      li.style.setProperty('--tt-rotate', '-4deg');
-      li.textContent = 'Coming soon';
-      picksList.appendChild(li);
-    }
+      li.style.setProperty('--tt-rotate', (i === 0 ? -12.18 : -6.99) + 'deg');
+      li.textContent = pick.title + ' — ' + pick.artist;
+      list.appendChild(li);
+    });
+    $('tt-picks').hidden = picks.length === 0;
   }
-  window.SarahtoninRenderTurntable = renderTurntable;
 
-  document.addEventListener('listen:moodchange', function (e) {
-    renderTurntable(e.detail.moodId);
-  });
+  function setPlaying(playing) {
+    state.isPlaying = Boolean(playing);
+    document.querySelector('.tt-record').classList.toggle('is-playing', state.isPlaying);
+    $('now-spinning').classList.toggle('is-playing', state.isPlaying);
+
+    var button = $('tt-playback-toggle');
+    button.setAttribute('aria-pressed', state.isPlaying ? 'true' : 'false');
+    button.setAttribute('aria-label', (state.isPlaying ? 'Pause ' : 'Play ') + (state.mood ? state.mood.name : '') + ' playlist');
+    button.dataset.state = state.isPlaying ? 'playing' : 'paused';
+    button.querySelector('.tt-playback-toggle__status').textContent =
+      !spotify.controller ? 'Loading player…' : (state.isPlaying ? 'Playing' : 'Play');
+  }
+
+  // The turntable only works as a control while Spotify is the active
+  // embed. Otherwise it's hidden rather than left looking clickable.
+  function updateTurntableControl() {
+    var button = $('tt-playback-toggle');
+    var usable = state.activeSource === 'spotify';
+    button.hidden = !usable;
+    button.disabled = !usable || !spotify.controller;
+    setPlaying(usable && state.isPlaying);
+  }
+
+  function initTurntableControl() {
+    $('tt-playback-toggle').addEventListener('click', function () {
+      if (state.activeSource !== 'spotify' || !spotify.controller) return;
+      if (state.isPlaying) spotify.controller.pause();
+      else spotify.controller.play();
+    });
+  }
+
+  // ── Now spinning bar ──
+
+  function renderBar(mood) {
+    var bar = $('now-spinning');
+    bar.hidden = false;
+    bar.style.setProperty('--mood-color', moodColor(mood) || 'var(--color-near-black)');
+    $('now-spinning-label').style.backgroundImage = "url('" + assetUrl(mood.art.circle) + "')";
+    $('now-spinning-name').textContent = mood.name;
+
+    Array.prototype.forEach.call(bar.querySelectorAll('.now-spinning__source-btn'), function (btn) {
+      var source = btn.dataset.source;
+      var available = hasSource(mood, source);
+      var label = source === 'spotify' ? 'Spotify' : 'Apple Music';
+      btn.disabled = !available;
+      btn.setAttribute('aria-pressed', source === state.activeSource ? 'true' : 'false');
+      if (available) {
+        btn.removeAttribute('aria-label');
+        btn.removeAttribute('title');
+      } else {
+        btn.setAttribute('aria-label', label + ' (not linked for this mood yet)');
+        btn.title = 'Not linked for this mood yet';
+      }
+    });
+  }
+
+  function initSourceToggle() {
+    Array.prototype.forEach.call(document.querySelectorAll('.now-spinning__source-btn'), function (btn) {
+      btn.addEventListener('click', function () {
+        if (btn.disabled || btn.dataset.source === state.activeSource) return;
+        state.preferredSource = btn.dataset.source;
+        loadPlayer(state.mood);
+        renderBar(state.mood);
+      });
+    });
+  }
+
+  // Keep the page's last content clear of the fixed bar.
+  function trackBarHeight() {
+    var bar = $('now-spinning');
+    function update() {
+      document.documentElement.style.setProperty('--now-spinning-height', bar.offsetHeight + 'px');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(update).observe(bar);
+    else window.addEventListener('resize', update);
+    update();
+  }
+
+  // ── Players ──
+
+  function stopApple() {
+    var host = $('now-spinning-apple');
+    host.innerHTML = '';   // removing the iframe is the only way to stop it
+    host.hidden = true;
+  }
+
+  function showApple(mood) {
+    if (spotify.controller) spotify.controller.pause();
+    $('now-spinning-spotify').hidden = true;
+
+    var host = $('now-spinning-apple');
+    var src = appleEmbedSrc(mood);
+    var iframe = host.querySelector('iframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.height = String(APPLE_HEIGHT);
+      iframe.allow = 'autoplay *; encrypted-media *; fullscreen *; clipboard-write';
+      iframe.setAttribute('sandbox', 'allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation');
+      host.appendChild(iframe);
+    }
+    iframe.title = 'Apple Music player: ' + mood.name + ' playlist';
+    if (iframe.getAttribute('src') !== src) iframe.src = src;
+    host.hidden = false;
+  }
+
+  function showSpotify(mood) {
+    stopApple();
+    $('now-spinning-spotify').hidden = false;
+    var uri = spotifyUri(mood);
+    if (spotify.controller && spotify.uri !== uri) {
+      spotify.controller.pause();
+      spotify.controller.loadUri(uri);
+      setPlaying(false);
+    }
+    spotify.uri = uri;
+    createSpotifyController();
+  }
+
+  function createSpotifyController() {
+    var mount = $('now-spinning-spotify-mount');
+    if (!spotify.api || spotify.controller || !spotify.uri || !mount) return;
+    var initialUri = spotify.uri;
+
+    spotify.api.createController(mount, { uri: initialUri, width: '100%', height: String(SPOTIFY_HEIGHT) }, function (controller) {
+      spotify.controller = controller;
+      // Use the controller from this callback; a separate `ready` event
+      // can fire before a listener is attached.
+      if (spotify.uri !== initialUri) controller.loadUri(spotify.uri);
+      controller.addListener('playback_update', function (event) {
+        if (!event || !event.data || state.activeSource !== 'spotify') return;
+        setPlaying(!event.data.isPaused && !event.data.isBuffering);
+      });
+      updateTurntableControl();
+    });
+  }
+
+  function loadPlayer(mood) {
+    var source = hasSource(mood, state.preferredSource) ? state.preferredSource
+      : (hasSource(mood, 'spotify') ? 'spotify' : (hasSource(mood, 'apple') ? 'apple' : null));
+    state.activeSource = source;
+    state.isPlaying = false;
+
+    var unavailable = $('now-spinning-unavailable');
+    unavailable.hidden = source !== null;
+    unavailable.textContent = source ? '' : 'No playlist linked for this mood yet.';
+
+    if (source === 'spotify') showSpotify(mood);
+    else if (source === 'apple') showApple(mood);
+    else {
+      if (spotify.controller) spotify.controller.pause();
+      $('now-spinning-spotify').hidden = true;
+      stopApple();
+    }
+    updateTurntableControl();
+  }
+
+  window.onSpotifyIframeApiReady = function (IFrameAPI) {
+    spotify.api = IFrameAPI;
+    if (state.activeSource === 'spotify') createSpotifyController();
+  };
+
+  // ── Selection ──
+
+  function selectMood(moodId) {
+    var mood = getMood(moodId);
+    if (!mood || mood === state.mood) return;
+    state.mood = mood;
+    markSelected(mood.id);
+    renderTurntable(mood);
+    loadPlayer(mood);
+    renderBar(mood);
+  }
 
   function init() {
-    initPlaybackControl();
-    initMoodPicker();
-    if (document.getElementById('tt-tape')) {
-      renderTurntable('dreamy');
-    }
+    initTurntableControl();
+    initSourceToggle();
+
+    fetch(CONFIG_URL)
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        config = data;
+        renderSelector();
+        initSelectorControls();
+        trackBarHeight();
+        selectMood(getMood(config.defaultMood) ? config.defaultMood : config.moods[0].id);
+      })
+      .catch(function (err) {
+        $('mood-row').insertAdjacentHTML('afterend',
+          '<p class="listen-moods__error">The moods didn’t load. Refresh the page to try again.</p>');
+        if (window.console) console.error('Listen: could not load ' + CONFIG_URL, err);
+      });
   }
 
   if (document.readyState === 'loading') {
