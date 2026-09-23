@@ -49,7 +49,7 @@ Do not begin by wiping the legacy repo.
 - Preserve legacy CMS config/content before replacing anything.
 
 ## Phase 2 — Home (done)
-Illustrated collage Home is approved and implemented: separate desktop (1440×900) and mobile (393×852) compositions, torn-paper tab nav, accessible mobile MENU button, "made by: Sarah Milad" credit.
+Illustrated collage Home is approved and implemented: separate desktop (1440×900) and mobile (393×852) compositions, torn-paper tab nav, accessible mobile MENU button, "made by: Sarah Milad" credit. Desktop fit-scales the 1440×900 composition so it is never cropped; wider windows fill the side space with Sarah's Extended Bleed strips (see PROJECT-SPEC.md §6).
 
 ### Still open
 - "discover music!" note: undecided. Not a launch blocker.

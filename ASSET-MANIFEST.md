@@ -14,6 +14,12 @@
 **Rule:** The torn-paper title card is separate Sarah-supplied artwork, not the gold wordmark.  
 **Note:** Desktop (1440×900) and mobile (393×852) are separately art-directed from Figma. Moon/stars, tan cloud, and pink-paper accent are desktop-only.
 
+### Home collage — desktop bleed strips
+**Status:** Approved and in production use (desktop only).
+**Source:** Sarah's Figma "Desktop Home — Extended Bleed" frame (1840×900, node 69-2, file `Home-final`) — the left (x 0–200) and right (x 1640–1840) strips around the centered 1440×900 composition. Background artwork only: no leopard, squiggle, or carpet fragments (those are the collage layers' own overflow).
+**In use:** `assets/images/home-v2/home-bleed-left.webp`, `home-bleed-right.webp` — WebP (quality 82), 400×1800 (2× export). Loaded as CSS backgrounds inside the desktop media query only, so mobile never downloads them.
+**Masters:** `assets/images/home-v2/home-bleed-left.png`, `home-bleed-right.png` — Sarah's 2× PNG exports, PRESERVE; not referenced by the page. Re-export from Figma and re-convert to WebP if the strips change.
+
 ### Legacy Home background video (retired)
 **Status:** PRESERVE only. The full-screen video Home direction is retired.  
 **Location:** `assets/video/home-loop.mp4` and `assets/images/home/`, untouched and unused by the live site.
