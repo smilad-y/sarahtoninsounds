@@ -60,6 +60,12 @@
   </section>
 
   <section class="listen-turntable" aria-labelledby="tt-mood-name">
+    <!-- Tape comes first so mobile (stacked) reads name, turntable, then
+         copy. Desktop positions each piece absolutely. -->
+    <div class="tt-tape" id="tt-tape" style="background-image:url('/assets/images/listen/Tape-Light_Blue_1.png')">
+      <h2 class="tt-tape__label" id="tt-mood-name">Dreamy</h2>
+    </div>
+
     <div class="tt-record">
       <img
         src="/assets/images/listen/Colored%20Records/Record-Light_Blue.png"
@@ -89,10 +95,6 @@
       >
         <span class="tt-playback-toggle__status" aria-hidden="true">Loading player&hellip;</span>
       </button>
-    </div>
-
-    <div class="tt-tape" id="tt-tape" style="background-image:url('/assets/images/listen/Tape-Light_Blue_1.png')">
-      <h2 class="tt-tape__label" id="tt-mood-name">Dreamy</h2>
     </div>
 
     <p class="tt-blurb" id="tt-blurb">For when your mind needs some room to wonder</p>
