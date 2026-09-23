@@ -1,18 +1,12 @@
-# CLAUDE.md — Working Instructions for Sarahtonin Sounds
+# CLAUDE.md · Working Instructions for Sarahtonin Sounds
 
 Read `PROJECT-SPEC.md` before making design, content, architecture, or implementation decisions. Treat it as the current source of truth.
 
 ## Core role
-You are continuing an already-developed Sarahtonin Sounds project. Your job is to implement and refine the current approved direction.
-
-**Content philosophy: fresh start by default.** The new site's content comes from `PROJECT-SPEC.md` / `ASSET-MANIFEST.md` / `BUILD-ROADMAP.md`, assets Sarah provides, the Spotify playlists she is currently curating, and copy explicitly finalized in this process — not from the legacy site. Legacy content/data is safely preserved, never migrated by default.
-
-Two distinct statuses apply to every piece of legacy code/data/content:
-- **PRESERVE** — the default for all legacy material (essays, song picks, copy, links, playlist content, CMS fields, implementation code, anything else). Kept safely in the legacy/archive location so nothing is lost. Preservation alone does not put it on the current site.
-- **MIGRATE** — only for a specific legacy item Sarah has explicitly approved for the current site. Being usable, well-written, or otherwise good is not sufficient justification by itself.
+You are continuing an already-developed Sarahtonin Sounds project. Your job is to implement and refine the current approved direction, while **preserving** everything from the older site implementation. Legacy material stays archived; it only enters the current site when Sarah explicitly approves a specific item.
 
 ## Critical distinction: CURRENT vs LEGACY
-There is an older Sarahtonin Sounds site/codebase. It may contain valuable music data, essays, CMS content, and implementation logic.
+There is an older Sarahtonin Sounds site/codebase with music data, essays, CMS content, and implementation logic.
 
 **Do not confuse legacy architecture/design with current requirements.**
 
@@ -24,42 +18,56 @@ Legacy examples that are NOT current requirements:
 - falling petals
 - animated cursor
 - marquee ticker
+- full-screen video Home (retired; assets preserved at `assets/video/home-loop.mp4`)
 
-The current project uses a different site structure, visual system, typography, and working mood taxonomy.
+### PRESERVE vs MIGRATE
+- **PRESERVE** is the default for all legacy code, data, and content. It stays in its archive location, untouched. Preserved does not mean on the site.
+- **MIGRATE** only happens when Sarah explicitly approves that specific item. Being good or usable is not approval.
+
+### Legacy music library
+The legacy Spotify-derived library is **8,653 verified songs** (the old ~10,047 figure was an estimate). It is **archive only**:
+- keep it and its original mood tags exactly as-is;
+- do not migrate, remap, or retag it;
+- do not use it to populate or seed Listen playlists.
 
 Before removing legacy code/data:
 1. inspect it;
-2. preserve it in the legacy/archive location, untouched;
-3. do not migrate it into the current site unless Sarah has explicitly approved that specific item;
-4. if approved, migrate it deliberately into the current structure.
+2. preserve it in an archive location;
+3. do not migrate unless Sarah has approved that specific item;
+4. document any destructive change before making it.
 
-A Spotify-derived library of **8,653 verified songs** (the earlier ~10,047 estimate is unconfirmed and should not be treated as a gap to fill) exists in the legacy project. It is PRESERVE-only, archive/reference data — it does not feed the current Listen experience, is not remapped into the current mood taxonomy, and is not used to generate or seed playlists.
+## Repository
+- Active working branch: `claude/add-claude-md-file-3fgnk0`.
+- `work-in-progress` is stale (legacy mood-wheel site). Do not push current work there.
+- Sarah commits through the GitHub web interface.
 
 ## Non-negotiables
 - Preserve Sarah's established Sarahtonin Sounds gold wordmark. Never redesign, reconstruct, or substitute it.
 - Launch navigation is: Home · About · Listen · Journal · Contact.
 - Guestbook is Phase 2/on hold. Do not add it to launch scope unless Sarah explicitly reactivates it.
-- Use plain HTML, CSS, and JavaScript unless a concrete technical requirement makes a framework necessary.
-- Maintain “clean structure + weird/tactile decoration.”
+- Plain HTML, CSS, and JavaScript, plus **Eleventy + Decap CMS** for content editing (a deliberate decision; see spec §1). No other framework without a concrete requirement.
+- Maintain "clean structure + weird/tactile decoration."
 - Intentional cream/paper negative space is part of the design. Do not fill empty areas automatically.
 - Do not add generic filler copy, fake testimonials, invented playlists, invented mood categories, or decorative phrases that do not sound like Sarah.
-- Wanderlust and Exploratory are not mood playlists.
-- Do not revive the removed Home tagline “Music, Prescribed With Taste.”
+- The Listen mood list is the 18 moods in spec §7. Wanderlust and Exploratory are not mood playlists.
+- Listen playlists come only from Sarah's curated playlists via live Spotify / Apple Music embeds.
+- Do not revive the removed Home tagline "Music, Prescribed With Taste."
 - Do not turn the Home page into a scrolling marketing page.
 - Do not use casual handwriting for body text, essential instructions, major UI, or the logo.
 - Do not quietly replace finalized choices when suggesting an alternative.
+- No em dashes in any copy you write for the site.
 
 ## Design hierarchy
-Use:
-- Perandory Semi-Condensed for major display/editorial headings.
-- IM Fell English for readable body/long-form editorial copy.
+- Perandory Semi-Condensed for major display/editorial headings and nav.
+- IM Fell English for readable body/long-form editorial copy (decided; not switching to Playfair).
 - Sue Ellen Francisco only for short annotations/marginalia.
 - Amoresa for the logo's calligraphic S only if appropriately licensed; Luxurious Script is fallback only.
 - Warm cream/paper + near-black + gold/yellow + crimson as the core palette.
 - Dusty pink, powder blue, olive, and lavender selectively.
+- Mood label colors are their own set (spec §7).
 
 ## Page personalities
-- Home = cinematic, minimal, no-scroll cover.
+- Home = minimal, no-scroll illustrated collage cover (approved and implemented).
 - Listen = signature interactive experience; most playful.
 - Journal = calm indie magazine/zine; readability first.
 - About = editorial profile + scrapbook.
@@ -70,6 +78,7 @@ Use:
 - Prefer semantic HTML and straightforward CSS architecture.
 - Keep JavaScript modular and understandable.
 - Avoid unnecessary dependencies.
+- Keep Listen config-driven so moods can change without code changes.
 - Build responsive behavior intentionally rather than shrinking desktop layouts.
 - Make keyboard navigation and visible focus states work.
 - Respect `prefers-reduced-motion`.
@@ -78,17 +87,6 @@ Use:
 - Keep comments useful and sparse.
 - Do not over-engineer.
 
-## Migration behavior
-If the existing GitHub repo contains the legacy site:
-- audit before rewriting;
-- preserve all legacy JSON/content in the archive by default — this is not conditional on quality;
-- identify CMS dependencies;
-- do not migrate content merely because it *could* migrate cleanly — migrate only items Sarah has explicitly approved for the current site;
-- document any destructive change before making it;
-- never wipe legacy data; preservation is the default outcome, not migration.
-
-The old Netlify CMS setup is not automatically part of the new architecture. Keep, replace, or simplify it only after evaluating whether it still serves the current site.
-
 ## Collaboration behavior
 When Sarah proposes something that conflicts with the spec:
 1. identify the existing decision it conflicts with;
@@ -96,16 +94,18 @@ When Sarah proposes something that conflicts with the spec:
 3. offer the new direction as a conscious revision, not an automatic replacement;
 4. wait for Sarah to choose before changing the source of truth.
 
+Sarah decides faster reacting to concrete options or mockups than open-ended questions. Keep asks narrow.
+
 When planning work, distinguish:
 - **Must have for launch**
 - **Nice to have / polish**
 - **Phase 2**
 
-When information is genuinely undecided, mark it as undecided rather than inventing an answer.
+When information is genuinely undecided, mark it as undecided rather than inventing an answer. The current open decisions list lives at the bottom of `BUILD-ROADMAP.md`.
 
 ## Source-of-truth files
-- `PROJECT-SPEC.md` — approved product/design/content decisions.
-- `ASSET-MANIFEST.md` — required, known, and legacy assets/data.
-- `BUILD-ROADMAP.md` — implementation order and launch scope.
+- `PROJECT-SPEC.md`: approved product/design/content decisions.
+- `ASSET-MANIFEST.md`: required, known, and legacy assets/data.
+- `BUILD-ROADMAP.md`: implementation order, launch scope, open decisions.
 
 If implementation reveals a genuine conflict or constraint, surface it before rewriting an approved design decision.

@@ -1,18 +1,10 @@
 # Sarahtonin Sounds — Build & Migration Roadmap
-**Version:** v2
+**Version:** v3 · September 23, 2026
 
 ## Launch Scope
 **Home · About · Listen · Journal · Contact**
 
 Guestbook is Phase 2 and must not block launch.
-
-## Content Philosophy — Fresh Start by Default
-The new site is built from `PROJECT-SPEC.md` / `ASSET-MANIFEST.md` / `BUILD-ROADMAP.md`, assets Sarah provides, the Spotify playlists she is currently curating, and copy explicitly finalized in this process — not from the legacy site.
-
-- **PRESERVE** = default status for all legacy content (essays, song picks, copy, links, playlist content, CMS fields, other editorial material). Kept safely in the legacy/archive location so nothing is lost. This is not conditional on quality.
-- **MIGRATE** = only for a specific legacy item Sarah has explicitly approved for the current site. Being usable or well-written is not approval.
-
-This includes the Turnstile and Zappa "Watermelon in Easter Hay" picks: Sarah does not recognize them as current content, so they remain PRESERVE-only/archived unless she explicitly says otherwise.
 
 ## Phase 0 — Legacy Audit / Preservation
 ### Must have
@@ -21,7 +13,7 @@ Before rebuilding or deleting anything in the existing repo:
 - identify legacy HTML/CSS/JS;
 - inspect Netlify CMS / Git Gateway setup;
 - inventory all JSON/content files;
-- preserve the ~10,047-song music library;
+- preserve the 8,653-song legacy music library (archive only, never a Listen data source);
 - preserve essay/content files;
 - identify any reusable assets;
 - make a safe backup/branch before destructive migration work.
@@ -48,56 +40,25 @@ Do not begin by wiping the legacy repo.
 - Media optimization conventions.
 - Netlify deployment baseline.
 
-### CMS decision
-Evaluate whether the old Netlify CMS still serves a real need.
+### CMS decision (resolved)
+**Decap CMS + Eleventy.**
+- Keep the hand-built HTML/CSS/JS design; Eleventy templates wrap it.
+- First collection: Journal.
+- Add About in the same pass if it fits; otherwise fast-follow.
+- Contact and Listen editability later.
+- Preserve legacy CMS config/content before replacing anything.
 
-Do **not** retain it merely because it already exists.
-Do **not** remove it before preserving content.
+## Phase 2 — Home (done)
+Illustrated collage Home is approved and implemented: separate desktop (1440×900) and mobile (393×852) compositions, torn-paper tab nav, accessible mobile MENU button, "made by: Sarah Milad" credit.
 
-Possible outcomes:
-- keep and update;
-- simplify;
-- replace;
-- remove after migration.
-
-## Phase 2 — Home — **Complete, approved**
-The earlier video-hero plan below was superseded during the build by an illustrated-collage direction reconstructed from Sarah's own Figma geometry (see PROJECT-SPEC.md §6, ASSET-MANIFEST.md §1). What actually shipped:
-- Single viewport/no scroll, `100dvh` desktop / `100svh` mobile.
-- Desktop (1440×900 reference) and mobile (393×852 reference) as separately art-directed layouts, not one scaled from the other.
-- Desktop fit-scales the 1440×900 composition so it is never cropped; wider windows fill the side space with Sarah's Extended Bleed strips (see PROJECT-SPEC.md §6).
-- Illustrated layers (Sarah on the carpet, leopard, record crate, moon/stars, spiral, torn-paper title card, scalloped nav cloud, navy band) positioned from Figma px values.
-- Desktop nav: five real `<a>` links styled as torn-paper tabs (`assets/images/shared/nav-paper-tab.png`).
-- Mobile: real accessible `<button>` MENU trigger with full keyboard/focus behavior.
-- No "discover music!" note — belonged to the retired video plan; still undecided for the collage direction (see PROJECT-SPEC.md §6).
-- Small "made by: Sarah Milad" credit, lower-right in Sue Ellen Francisco — reinstated for the collage direction as a deliberate, minor revision and live (see PROJECT-SPEC.md §6); not a return to the retired video-hero treatment.
-- Reduced-motion: moot for the current build (no video/animation on Home); the site-wide `prefers-reduced-motion` rule in `css/base.css` still applies globally.
-
-<details>
-<summary>Original (superseded) video-hero plan, kept for history</summary>
-
-### Must have
-- Single viewport/no scroll.
-- Optimized looping "video option 1" background.
-- Poster/fallback image.
-- Exact gold wordmark asset centered.
-- Top navigation.
-- "discover music!" upper-left note.
-- "made by: Sarah Milad" lower-right note.
-- Mobile composition.
-- Reduced-motion behavior.
-- Contrast/readability testing over actual footage.
-
-### Polish
-- Minor video brightness/contrast adjustment only after browser review.
-- Very restrained doodle/star accents if they genuinely improve composition.
-
-</details>
+### Still open
+- "discover music!" note: undecided. Not a launch blocker.
 
 ## Phase 3 — About
 ### Must have
 - Oversized primary halftone/cutout portrait.
 - Approved About copy.
-- "my taste is all over the place." emphasis section.
+- “my taste is all over the place.” emphasis section.
 - Secondary candid treatment where composition supports it.
 - Responsive editorial rhythm.
 
@@ -105,24 +66,20 @@ The earlier video-hero plan below was superseded during the build by an illustra
 - Old full dark bio card.
 - Professional credits list unless Sarah reactivates it.
 
-## Phase 4 — Listen Playlist Data Setup
-**Note:** This phase no longer involves the legacy song library. The legacy library (Section 4 of `ASSET-MANIFEST.md`) is archive/reference only — it is not migrated, remapped, or otherwise pulled into the live Listen experience. No mood-mapping work is needed or wanted.
+## Phase 4 — Listen Data / Config
+The legacy song library is archive-only. There is no migration or remapping phase.
 
 ### Must have
-- Define the curated-playlist metadata schema: mood/category, display name, short descriptor, artwork/icon, Spotify playlist URL or ID, optional track/display metadata for the turntable/player.
-- Decide where this data lives (a new location, separate from legacy `music-picks/`).
-- Build the schema so mood/category is config-driven, not hardcoded — the taxonomy must be able to change without rewriting the page (see `PROJECT-SPEC.md` §7).
-- Populate initial entries only from Sarah's actual curated Spotify playlists, as they exist.
-- Do not migrate the legacy Turnstile or Zappa "Watermelon in Easter Hay" picks, or any other legacy content, into this structure by default — they remain PRESERVE-only/archived unless Sarah explicitly approves a specific item for the current site.
-- Decide and document the Spotify integration method for playback/tracklist display (embed vs. Web API vs. Web Playback SDK) before building Phase 5 UI on top of it.
-
-### Goal
-Give the new Listen experience a small, hand-maintained, taxonomy-agnostic data layer sourced entirely from Sarah's manually curated Spotify playlists — independent of the legacy library.
+- One config file (or CMS collection) for moods: name, color, icon, descriptor, Spotify URL, Apple Music URL, Sarah's Picks.
+- Page renders entirely from config, so moods can be added, renamed, or removed without code changes.
+- Placeholder entries allowed while real playlists are being built.
 
 ## Phase 5 — Listen UI Foundation
 ### Must have
-- "Pick Your Mood" selector.
+- “Pick Your Mood” selector with the 18 moods (PROJECT-SPEC §7).
 - Colored circular record-label-style controls.
+- Live embed with Spotify / Apple Music toggle.
+- Sarah's Picks list.
 - Horizontal swipe treatment on mobile.
 - Selection state.
 - Turntable/player section.
@@ -131,22 +88,26 @@ Give the new Listen experience a small, hand-maintained, taxonomy-agnostic data 
 - Keyboard/touch interaction.
 - Reduced-motion alternative.
 
+### Decide before building
+- **Now Playing approach.** Apple Music's embed exposes almost no playback control without MusicKit; Spotify's IFrame API exposes some. Options need Sarah's call.
+
 ### Dependency
-Final labels/descriptors and some artwork depend on continued sorting/remapping of real songs. Build the system so the taxonomy can change without rewriting the page.
+Two mood names, several icons, four colors, and all descriptors are still undecided. Build so these drop in via config.
 
 ## Phase 6 — Listen Content + Crash Courses
 ### Must have
-- Populate active mood playlists from Sarah's manually curated Spotify playlists (not legacy library data).
-- Finalize descriptors only after taxonomy stabilizes.
+- Populate mood playlists with Sarah's real Spotify + Apple Music URLs.
+- Sarah writes descriptors.
+- Finish remaining mood icons.
 - Add Crash Courses as a clearly separate section.
-- Confirm playback/data integration approach.
 
 ### Nice to have
 - Small tactile transitions/microinteractions that do not compromise performance or accessibility.
 
 ## Phase 7 — Journal
 ### Must have
-- Inspect legacy essay JSON for reference; do not migrate any of it into the current Journal unless Sarah explicitly approves a specific essay.
+- Legacy essays are PRESERVE only; migrate a specific essay only with Sarah's explicit approval.
+- Journal collection in Decap CMS + Eleventy (retires the manual `essays/index.json` step).
 - Journal landing page.
 - Reverse chronological content.
 - All / Essays / Monthly Favs filters.
@@ -177,6 +138,7 @@ Final labels/descriptors and some artwork depend on continued sorting/remapping 
 - Media-size/performance review.
 - Broken-link/form testing.
 - Metadata, title, description, favicon/share image.
+- Confirm Netlify's production branch; merge or repoint from `claude/add-claude-md-file-3fgnk0`.
 - Netlify production deployment.
 - Confirm no Guestbook links/routes accidentally appear in launch nav.
 - Confirm legacy purple/petal/marquee UI did not leak into current design unintentionally.
@@ -208,13 +170,14 @@ Before implementation, decide:
 
 ## Current Open Decisions
 These are intentionally not finalized and should not be guessed:
-- final mood count and final public-facing mood names
-- remaining mood icons/descriptors
-- Spotify integration method for playback/tracklist display (embed vs. Web API vs. Web Playback SDK)
-- exact playlist playback/data integration
-- curated-playlist metadata file location/structure
-- which specific legacy items, if any, Sarah explicitly approves for migration (none are approved by default)
-- whether legacy Netlify CMS is kept, changed, or retired
+- Hopeful vs. At Peace; Playful vs. Cheeky
+- which of Energized / Hype gets the disco ball icon
+- remaining mood icons and descriptors
+- colors for Euphoric, Hopeful/At Peace, Unleashed, Hypnotic; hex values for all colors
+- mood display order
+- Now Playing approach given embed limitations
+- whether all 18 moods (and Crash Courses) must be live at launch, or can roll out as playlists are ready
+- "discover music!" note on Home
 - final Crash Course topics
 - final Journal production content
 - final contact/social URLs

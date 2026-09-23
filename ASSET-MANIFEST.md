@@ -1,12 +1,5 @@
 # Sarahtonin Sounds — Asset & Data Manifest
-**Version:** v2
-
-## 0. Content Philosophy — Fresh Start by Default
-The new site starts fresh on content (see `PROJECT-SPEC.md` §2 for the full statement). Two statuses apply throughout this manifest:
-- **PRESERVE** — default for all legacy content/data. Kept safely in the legacy/archive location; not used on the current site.
-- **MIGRATE** — only for a specific item Sarah has explicitly approved. Quality or reusability alone never qualifies something for migration.
-
-Unless a manifest entry below is explicitly marked as approved/current, treat it as PRESERVE only.
+**Version:** v3 · September 23, 2026
 
 ## 1. Signature / Must Preserve
 ### Sarahtonin Sounds gold wordmark
@@ -14,92 +7,71 @@ Unless a manifest entry below is explicitly marked as approved/current, treat it
 **Use:** Home hero and other approved brand placements.  
 **Rule:** Never redraw/retype/reconstruct it. Calligraphic S = Amoresa; remainder = Perandory Semicondensed.
 
-### Home background video — SUPERSEDED
-**Status:** No longer the Home direction. Replaced by the illustrated-collage Home built from Sarah's Figma-exported layers (see PROJECT-SPEC.md §6 and the Home V2 collage asset list below).  
-**Asset:** Sarah's edited "video option 1" vinyl/turntable footage.  
-**Disposition:** PRESERVE only — untouched at `assets/video/home-loop.mp4`, not loaded or referenced by the live Home page.
+### Home collage artwork
+**Status:** Approved and implemented.  
+**Asset:** Sarah's individually exported artwork layers for the illustrated Home collage (reclining Sarah on striped carpet, leopard, record crate, moon/stars, tan cloud, pink-paper accent, torn-paper "SARAHTONIN SOUNDS" title card, scalloped pink nav cloud, yellow sunburst spiral, navy scalloped band).  
+**Shared torn-paper tab asset:** used as the background for each desktop nav link, with the label layered on top in Perandory Semi-Condensed.  
+**Rule:** The torn-paper title card is separate Sarah-supplied artwork, not the gold wordmark.  
+**Note:** Desktop (1440×900) and mobile (393×852) are separately art-directed from Figma. Moon/stars, tan cloud, and pink-paper accent are desktop-only.
 
-### Home V2 collage — desktop nav tab asset
-**Status:** Approved and in production use.  
-**Asset:** `assets/images/shared/nav-paper-tab.png` — a blank, transparent torn cream-paper scrap exported from Figma (no label baked in).  
-**Use:** Background for each of the five desktop Home nav links (Home/About/Listen/Journal/Contact). Reused five times via CSS `background-image`, stretched per-tab to that tab's own auto-sized box; the visible label is real HTML text layered on top in Perandory Semi-Condensed (the site-wide display face, per PROJECT-SPEC.md §5–6). Not cropped, recolored, or approximated with CSS — the PNG is the tab's entire visual treatment.  
-**Rule:** Do not add a `box-shadow`/`filter: drop-shadow()`/duplicate background behind it — the asset's torn silhouette only fills part of its bounding box, so a box-shadow renders as a rectangular ghost behind the visible shape.
-
-### Home V2 collage — remaining layers
-**Status:** Approved and in production use, at `assets/images/home-v2/`: `home-paper-red.png` (background), `home-spiral-4.png` (sunburst), `home-logo-cloud.png` (desktop-only tan cloud), `home-top-scallop-hires.png` (nav-cloud shelf, desktop + mobile), `home-blue-background.png` (scalloped band), `home-logo-sharp.png` (title card), `home-moon-stars.png` (desktop-only), `home-girl-carpet-v2.png` (Sarah on the carpet), `home-record-crate.png`, `home-leopard-highres.png`. Positioned per the authoritative Figma geometry described in PROJECT-SPEC.md §6 (separate 1440×900 desktop / 393×852 mobile reference frames).  
-**Superseded/unused variants** (uploaded during iteration, PRESERVE only, not referenced by the page): `home-girl-carpet.png`, `home-girl-records.png`, `home-girl-records-1.png`, `home-girl-records-2.png`, `home-spiral.png`, `home-spiral-3.png`, `home-leopard.png`, `home-logo.png`, `home-logo-alt.png`, `home-top-scallop.png`, `home-dragonfly.png`, `home-pink-paper.png` (the bottom-right paper-scrap accent — explicitly removed from the composition; do not restore without new direction), `home-full-image.png`, `home-full-no-logo.png`.
-
-### Home V2 collage — desktop bleed strips
-**Status:** Approved and in production use (desktop only).
-**Source:** Sarah's Figma "Desktop Home — Extended Bleed" frame (1840×900, node 69-2, file `Home-final`) — the left (x 0–200) and right (x 1640–1840) strips around the centered 1440×900 composition. Background artwork only: no leopard, squiggle, or carpet fragments (those are the collage layers' own overflow).
-**In use:** `assets/images/home-v2/home-bleed-left.webp`, `home-bleed-right.webp` — WebP (quality 82), 400×1800 (2× export). Loaded as CSS backgrounds inside the desktop media query only, so mobile never downloads them.
-**Masters:** `assets/images/home-v2/home-bleed-left.png`, `home-bleed-right.png` — Sarah's 2× PNG exports, PRESERVE; not referenced by the page. Re-export from Figma and re-convert to WebP if the strips change.
+### Legacy Home background video (retired)
+**Status:** PRESERVE only. The full-screen video Home direction is retired.  
+**Location:** `assets/video/home-loop.mp4` and `assets/images/home/`, untouched and unused by the live site.
 
 ## 2. Photography
 ### Primary About portrait
-**Status:** Direction approved; candidate files now supplied, exact pick not yet decided.
+**Status:** Approved.  
 **Description:** Black-and-white cutout/halftone portrait; arms up / hand near face.  
 **Use:** Oversized About editorial hero.
-**Available candidates:** `assets/images/about/selfie-bw.png` and 8 more portrait/selfie photos in `assets/images/shared/portraits/` (see that folder's inventory in the asset-integration chat report). Which specific photo fulfills this role is not decided — do not assume a mapping.
 
 ### Secondary About candid
-**Status:** Direction approved; candidate files now supplied, exact pick not yet decided.
+**Status:** Approved as secondary.  
 **Description:** Restaurant-table photo of Sarah.  
 **Treatment:** Orange/gold halftone version is appropriate.  
 **Use:** Smaller snapshot/collage moment, not primary portrait.
-**Available candidates:** `assets/images/shared/portraits/me-at-dinner.png` looks like a plausible match by filename, but this is not a confirmed assignment — decide explicitly rather than assuming.
 
 ## 3. Listen Assets
 ### Turntable / record-player graphic
-**Status:** Signature component; asset now supplied at `assets/images/listen/record-player.png`.
+**Status:** Signature component; approved source asset exists in project history.  
 **Use:** Selected mood/player interaction.  
 **Rule:** Full vinyl appears after selection; mood selector itself remains colored record-label-style buttons.
 
 ### Mood label artwork
-Need/maintain one illustrated circular label per active mood. Preserve original collage colors/textures.
-
-**Status:** 13 colored circle images now supplied in `assets/images/listen/` (berry, black, dark-blue, dark-green, lavendar, light-blue, light-green, orange, peach, pink, purple, red, yellow). Which color maps to which of the 12 working moods is **not decided** — do not assume a mapping; that's a future visual-pass decision. `assets/images/listen/paper.png` (a paper texture) was also supplied, use not yet assigned.
+Need/maintain one illustrated circular label per mood (18 total, see PROJECT-SPEC §7). Preserve original collage colors/textures.
 
 Confirmed icon directions:
-- Dreamy / Daydream — cloud
-- Chill — sun
-- Audacious — sunglasses
-- Tender / Romantic — heart
-- Energized / Hype — disco ball
-- Melancholy — broken heart
-- Burdened — scribble
-- Defiant — fist
-- Nostalgic — camera
-- Sultry / Sensual — lips
+- Dreamy: cloud
+- Chill: sun
+- Audacious: sunglasses
+- Tender: heart
+- Melancholy: broken heart
+- Burdened: scribble
+- Defiant: fist
+- Nostalgic: camera
+- Sultry: lips
+- Disco ball: confirmed for the old combined "Energized / Hype" mood; now that they are separate moods, which one gets it is undecided
 
-Other working moods still require finalized icon/label treatment as taxonomy stabilizes.
+Still need icons:
+- Euphoric
+- Hopeful / At Peace
+- Lost
+- Playful / Cheeky
+- Unleashed
+- Cute
+- Hypnotic
+- whichever of Energized / Hype does not get the disco ball
 
-## 4. Legacy Music Library — Archive / Reference Only (Not Production Source)
-**Update (decision):** A verified repository count of **8,653 songs** exists across the legacy `music-picks/<mood>.json` files (not the earlier ~10,047 estimate — that figure is unconfirmed and the gap should not be invented or reconstructed).
+## 4. Legacy Music Library (archive only)
+A Spotify-derived music library of **8,653 verified songs** (not the earlier ~10,047 estimate) exists in the previous implementation, tagged by the older eight-mood system:
+chill · moody · nostalgic · euphoric · tender · defiant · cinematic · electric
 
-This library is **archive/source data only**. It is explicitly **not** the data source for the live Listen experience.
+Files may include `music-picks/<mood>.json` and related legacy JSON/config.
 
-### Known legacy organization
-Songs were tagged/split across an older eight-mood system (only 7 of the 8 have files; `defiant.json` does not exist):
-- chill
-- moody
-- nostalgic
-- euphoric
-- tender
-- defiant *(referenced by legacy UI, no corresponding data file)*
-- cinematic
-- electric
-
-Files:
-- `music-picks/chill.json`, `cinematic.json`, `electric.json`, `euphoric.json`, `moody.json`, `nostalgic.json`, `tender.json`
-- `music-picks/index.json` (single curated entry) and `music-picks/watermelon-in-easter-hay.md` (orphaned curated entry) — see Section 6.
-
-### Preservation rules
-- Preserve the raw source data and its original legacy mood tags exactly as-is; do not overwrite, retag, or remap them.
-- Do not migrate, remap, or import this library into the new Listen taxonomy or playlists.
-- Do not use it to generate, seed, or backfill any live playlist.
-- No mood-mapping/remapping tooling is needed for this library — that work is explicitly out of scope.
-- Keep it available for future reference only, in case Sarah wants to draw on it later. Until then it has no production role.
+**Decision:** PRESERVE only.
+- Keep the library and its original mood tags exactly as-is.
+- Do not migrate, remap, or retag it into the current taxonomy.
+- Do not use it to generate or fill playlists.
+- It is not a data source for the Listen page. Keep it purely for future reference.
 
 ## 5. Legacy CMS / Content Assets
 The old repo may include:
@@ -113,33 +85,31 @@ The old repo may include:
 - `settings/wheel.json`
 - `essays/` JSON files
 
-**PRESERVE only by default.** These stay safely in the legacy/archive location. None of this content moves onto the current site automatically, however usable or well-written it is — it migrates only if Sarah explicitly approves a specific item.
+These may contain valuable real copy/content. Inspect them before replacing old architecture.
 
-**Important:** The old Netlify CMS setup is not automatically approved for the rebuilt site. Preserve its content by default; retain, replace, or simplify the CMS itself only after evaluating the current editing needs — independent of whether any of its content is ever migrated.
+All legacy content is PRESERVE by default. Nothing migrates to the current site without Sarah's explicit, item-specific approval (see PROJECT-SPEC §2).
+
+**CMS decision:** the rebuilt site uses **Decap CMS + Eleventy** (see PROJECT-SPEC §1). The old Netlify CMS config is reference only.
 
 ## 6. Playlist / Track Data
-**Source of truth: Sarah's manually curated Spotify playlists.** The legacy library (Section 4) is not a data source for this — do not pull from it, migrate it, or use it to seed or fill in playlists.
+Populate only from Sarah's manually curated playlists, embedded live with a Spotify / Apple Music toggle. Not from legacy song data.
 
-Expect a relatively small, hand-maintained set of curated playlists. Each entry needs metadata such as:
-- mood/category (key into the current working taxonomy — see `PROJECT-SPEC.md` §7; not fixed/hardcoded)
-- display name
+Per mood, collect:
+- Spotify playlist URL
+- Apple Music playlist URL
+- Sarah's Picks (small manual highlights list)
 - short descriptor
-- artwork/icon
-- Spotify playlist URL or ID
-- optional track/display metadata as needed for the turntable/player experience
 
-The two legacy curated single-song picks — the Turnstile entry in `music-picks/index.json` and the orphaned Zappa "Watermelon in Easter Hay" entry in `music-picks/watermelon-in-easter-hay.md` — are **PRESERVE only**. Sarah does not recognize them as current content; they stay archived and do not migrate into this structure unless she explicitly approves them.
-
-Do not invent final playlist descriptions before mood taxonomy is stable.
+Do not invent playlist descriptions. Sarah writes them.
 
 ## 7. Crash Courses
 **Status:** Requires real curated course topics and supporting artwork.  
 Keep separate from mood playlists.
 
 ## 8. Journal Assets
-- Real essay titles, dates, excerpts, and article copy — from content Sarah explicitly finalizes for the current site.
+- Real essay titles, dates, excerpts, and article copy.
 - Monthly Favorites content and associated artwork/images.
-- Legacy `essays/` JSON files (including the existing "My 12 Song Submission" essay) are **PRESERVE only** by default; none of it migrates into the current Journal unless Sarah explicitly approves a specific piece.
+- Legacy `essays/` JSON files may contain reusable editorial content.
 - Optional halftone/editorial imagery per article where meaningful.
 - Mockup placeholder titles/images are not final unless Sarah explicitly adopts them.
 
@@ -149,7 +119,7 @@ Keep separate from mood playlists.
 - Any small decorative elements should come from the established visual library.
 
 ## 10. Visual Texture Library
-Useful reusable assets (vocabulary, not a checklist — every page does not need every treatment):
+Useful reusable assets:
 - warm paper / cream texture
 - kraft paper texture
 - torn-paper edges
@@ -160,20 +130,14 @@ Useful reusable assets (vocabulary, not a checklist — every page does not need
 - Polaroid/photo scraps
 - halftone treatments
 
-**Now supplied**, none yet assigned to specific layouts:
-- `assets/images/shared/doodles/` — 15 general doodles (records, stars, sun/moon, cassette).
-- `assets/images/shared/scrapbook-images/` — 15 decorative elements (flowers, sparkles, hearts, constellations).
-- `assets/images/shared/tape/` — 3 tape-strip textures (beige, green, pink).
-- `assets/images/home/`, `assets/images/journal/` — page-specific picks (paper/tape/star textures) already pulled from the shared pools above; see the asset-integration chat report for the full inventory.
-
-Treat these as raw material for the next visual pass — nothing here has been placed on any page yet.
+**Rule:** These are a vocabulary, not a checklist. Every page does not need every treatment.
 
 ## 11. Fonts / Licensing
-- **Perandory Semi-Condensed** — licensed webfont, now locally hosted at `assets/fonts/Perandory-SemiCondensed.woff2` and wired to `--font-display` via `@font-face` in `css/tokens.css`. A second file, `Perandory-Condensed.woff2`, was also supplied but is unused/unassigned (Semi-Condensed is the approved style per §5).
-- IM Fell English Regular + Italic — loaded via Google Fonts.
-- Sue Ellen Francisco — loaded via Google Fonts (Home annotations only).
-- Amoresa for logo S — not yet supplied/licensed; never used to reconstruct the wordmark itself.
-- Luxurious Script only as fallback for logo S if needed — not yet supplied.
+- Perandory Semi-Condensed
+- IM Fell English Regular + Italic
+- Sue Ellen Francisco
+- Amoresa for logo S, subject to suitable license (if the wordmark only ships as an image, a webfont license may not be needed; confirm)
+- Luxurious Script only as fallback for logo S if needed
 
 Before production deployment, verify webfont licensing/hosting rights for any non-open font. Never redistribute font files in handoff documents.
 
@@ -181,16 +145,14 @@ Before production deployment, verify webfont licensing/hosting rights for any no
 Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Preserve them if they have archival value, but **do not treat them as part of the current visual system** unless Sarah explicitly brings one back.
 
 ## 13. Still To Resolve
-- Final active mood count/names/descriptors.
-- Which of the 13 supplied Listen circle-label images (§3) maps to which working mood.
-- Which supplied About portrait photo (§2) fulfills the primary/secondary roles.
-- How the newly supplied journal/shared image pools (§10) get placed into actual page layouts — nothing is assigned yet (Home's own pool is resolved — see §1).
-- Curated-playlist metadata file structure/location (proposed as a new location separate from legacy `music-picks/`).
-- Spotify integration method for playback/tracklist display (embed player vs. Web API vs. Web Playback SDK) — has real tradeoffs (auth, backend needs, Premium requirements) and needs a decision, not a default.
-- Exact playlist playback/data integration.
-- Whether any part of legacy Netlify CMS remains useful.
+- Exact production filenames and `/assets/` directory organization.
+- Hopeful vs. At Peace; Playful vs. Cheeky.
+- Mood descriptors.
+- Icons for the moods listed in §3.
+- Colors for Euphoric, Hopeful/At Peace, Unleashed, Hypnotic; hex values for all 17 colors.
+- Spotify + Apple Music URLs per mood.
+- Now Playing approach given embed limitations.
 - Crash Course topics/art.
 - Journal production content/art.
 - Final contact/social URLs and form handling.
 - Favicon/social-share image set.
-- Whether `assets/fonts/Perandory-Condensed.woff2` (the non-Semi-Condensed style) ever gets a use.

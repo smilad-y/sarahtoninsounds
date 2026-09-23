@@ -1,5 +1,5 @@
 # Sarahtonin Sounds — Master Project Spec
-**Handoff version:** September 9, 2026 — v2  
+**Handoff version:** September 23, 2026 · v3  
 **Purpose:** Current source of truth for continuing the Sarahtonin Sounds website in Claude / Claude Code.
 
 ## 1. Project
@@ -18,6 +18,19 @@ The current site should feel personal, editorial, tactile, music-obsessed, and s
 - Deploy through Netlify.
 - Keep the code understandable, maintainable, responsive, accessible, and performant.
 - Do not introduce a framework unless there is a concrete requirement that plain HTML/CSS/JS cannot reasonably meet.
+
+### Content editing (decided)
+**Decap CMS + Eleventy.** Sarah needs to edit site content without touching code, Journal essays first and ideally About, Contact, and Listen later. That is the concrete requirement that justifies adding a build step.
+- Keep the existing hand-built HTML/CSS/JS design. Eleventy templates wrap it; it is not a redesign or a platform switch.
+- Start with a **Journal-only** content collection.
+- Fold About into the same pass if it can be done alongside the rest of the setup; otherwise it is a fast-follow.
+- Not WordPress, not another platform.
+- This replaces the old manual step of adding each essay slug to `essays/index.json`.
+
+### Repository
+- Active working branch: `claude/add-claude-md-file-3fgnk0` (Sarah plans to rename it later).
+- The `work-in-progress` branch is stale and holds the legacy single-page mood-wheel site. Do not push current work there.
+- Confirm which branch Netlify deploys to production before launch.
 
 ## 2. Legacy Site / Existing Implementation
 There is an older Sarahtonin Sounds implementation that predates the current design direction.
@@ -92,7 +105,7 @@ Layouts must remain understandable and usable. Personality comes from imagery, c
 A useful conceptual balance is roughly **70% clean structure / 30% visual weirdness**, adjusted by page. Empty warm-paper space is intentional. Never add decoration merely because an area feels empty.
 
 Not every page should be equally busy:
-- Home: cinematic and minimal.
+- Home: minimal, no-scroll illustrated collage cover.
 - Listen: most interactive/playful.
 - Journal: calmer and editorial.
 - About: editorial profile + scrapbook.
@@ -152,10 +165,7 @@ Do not redesign or reconstruct the Sarahtonin Sounds wordmark. Use Sarah's estab
 A single-viewport, no-scroll cover for the site: an illustrated collage (Sarah reclining on a striped carpet, headphones on, leopard and record crate in the foreground, moon/stars, a torn-paper title card, a scalloped pink nav cloud, a yellow sunburst spiral, a navy scalloped band) built from Sarah's individually exported artwork layers.
 
 ### Approved direction
-- Desktop and mobile are **separately art-directed layouts**, each reconstructed from an authoritative Figma reference frame — desktop at **1440×900**, mobile at **393×852** — not one scaled into the other. Every layer's position/size is a percentage of its own reference frame, computed directly from Figma's px values, so relationships between layers hold at any size and mobile never reads as a shrunk desktop scene.
-- **Desktop scaling: fit, never crop.** The 1440×900 composition is scaled uniformly by whichever viewport dimension is more limiting, so the whole frame — nav tabs through leopard and record crate — is always fully visible on any desktop window, including short laptop windows. Nav tab and credit type scale with the frame, not the viewport.
-- **Desktop side bleed.** On windows wider than 16:10, the side space is filled by Sarah's 200px left/right bleed strips from the Figma "Desktop Home — Extended Bleed" frame (1840×900, node 69-2; the 1440×900 composition sits centered in it, unchanged). The strips scale with the frame, sit behind the girl/carpet, crate and leopard, and overlap the frame's edges slightly (3px left, 2px right) to hide hairline edge columns. The leopard and red squiggle may extend past the 1440 frame edge into the bleed so they render whole; nothing extends past the 1840 bleed frame.
-- **Known edge cases (accepted):** windows wider than ~2.04:1 (1840:900, e.g. 21:9 ultrawide) show the plain background fill color beyond the bleed strips; desktop windows narrower than 16:10 show it above and below the composition, since the bleed only extends sideways. A faint tone step where the tan/cream shapes cross the left bleed seam is accepted as-is.
+- Desktop and mobile are **separately art-directed layouts**, each reconstructed from an authoritative Figma reference frame — desktop at **1440×900**, mobile at **393×852** — not one scaled into the other. Every layer's position/size is a percentage of its own reference frame, computed directly from Figma's px values, so the composition scales to any real viewport without letterboxing (desktop) or feeling like a shrunk desktop scene (mobile).
 - Desktop navigation is five real `<a>` links styled as individual torn-paper tabs, positioned across the upper-right yellow/pink area, each using the shared tab asset (see ASSET-MANIFEST.md §1) as its background with the label layered on top in Perandory Semi-Condensed — the same site-wide display face used for nav on every other page (§5), not a Home-specific font.
 - Mobile uses a real accessible `<button>` MENU trigger, styled with that same Perandory Semi-Condensed treatment, that reveals the nav list — `aria-expanded`/`aria-controls`, Escape-to-close, outside-click-to-close, and focus return to the button on close are all required behavior, not polish.
 - A small "made by: Sarah Milad" credit sits lower-right of the composition, in Sue Ellen Francisco per §5's marginalia-only rule (never essential UI, never the logo). Approved and built as a deliberate, minor revision — not a return to the retired video-hero credit treatment.
@@ -173,15 +183,22 @@ A single-viewport, no-scroll cover for the site: an illustrated collage (Sarah r
 The main interactive music-curation experience and signature functional page.
 
 ### Data source
-**Sarah's manually curated Spotify playlists are the sole source of truth for the live Listen experience.** The legacy 8,653-track library is archive-only (see §2) and does not feed this page — no migration, remapping, or auto-population from it.
+**Sarah's manually curated playlists are the sole source of truth for the live Listen experience.** The legacy 8,653-track library is archive-only (see §2) and does not feed this page: no migration, remapping, or auto-population from it.
+
+**Playback (decided):** each mood's playlist uses a **live embed with a Spotify / Apple Music toggle**, not a static track list. Adding or removing songs on the actual playlists updates the site automatically.
+
+**Sarah's Picks (decided):** a small hand-picked highlights list per mood, maintained manually on top of the live embed.
 
 Expect a relatively small, hand-maintained set of curated playlists. Each needs metadata such as:
 - mood/category
 - display name
 - short descriptor
+- label color (see mood color mapping below)
 - artwork/icon
 - Spotify playlist URL or ID
-- optional track/display metadata as needed for the turntable/player experience
+- Apple Music playlist URL or ID
+- Sarah's Picks list
+- optional display metadata as needed for the turntable/player experience
 
 This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (§ below) can keep evolving without rewriting the page. Crash Courses are a separate curated playlist/content system — do not fold them into mood playlist data.
 
@@ -199,43 +216,45 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 - **Do not turn mobile mood buttons into black vinyl records.**
 - Full vinyl appears only after a mood is selected.
 
-### Current working mood system
-The current working system has 12 moods, but **12 is not a sacred number**. Add, merge, or remove moods only when sorting real songs provides evidence.
+### Mood list (final, supersedes the earlier 12-mood working list)
+18 moods:
 
-Current working territories:
-- Chill
-- Dreamy / Float Away
-- Euphoric
-- Energized / Hype
-- Defiant
-- Audacious
-- Sultry / Sensual
-- Tender / Romantic
-- Melancholy
-- Burdened
-- Nostalgic
-- Focus
+| # | Mood | Label color | Icon |
+|---|------|-------------|------|
+| 1 | Chill | light green | sun |
+| 2 | Dreamy | light blue | cloud |
+| 3 | Euphoric | *undecided* | *undecided* |
+| 4 | Energized | yellow | disco ball *(see note)* |
+| 5 | Defiant | black | fist |
+| 6 | Audacious | orange | sunglasses |
+| 7 | Sultry | red | lips |
+| 8 | Tender | fuschia | heart |
+| 9 | Melancholy | lavender | broken heart |
+| 10 | Burdened | dark blue | scribble |
+| 11 | Nostalgic | peach | camera |
+| 12 | Hopeful / At Peace | *undecided* | *undecided* |
+| 13 | Lost | lavender | *undecided* |
+| 14 | Playful / Cheeky | berry | *undecided* |
+| 15 | Unleashed | *undecided* | *undecided* |
+| 16 | Cute | pink | *undecided* |
+| 17 | Hypnotic | *undecided* | *undecided* |
+| 18 | Hype | purple | *undecided* *(see note)* |
 
-Names are still working labels until the taxonomy stabilizes.
+Row numbers are for reference only; display order is not decided.
 
-Possible territories to watch, **not approved as moods**:
-- Reflective / Introspective
-- Playful / Mischievous
-- Cathartic / Volatile / Rage
+Notes:
+- **Hopeful / At Peace** and **Playful / Cheeky**: Sarah will keep one word from each pair. Both are placeholders until she picks.
+- **Melancholy and Lost share lavender** for now (18 moods, 17 colors).
+- **Unassigned colors:** dark green, forest green, gold, silver. Euphoric, Hopeful/At Peace, Unleashed, and Hypnotic have no color yet. Do not assign these without Sarah.
+- **Disco ball:** originally confirmed for the combined "Energized / Hype" mood. Energized and Hype are now separate moods, so which one keeps the disco ball is undecided.
+- **Focus** from the earlier working list is not in the final 18.
+- Earlier combined names (Dreamy / Float Away, Tender / Romantic, Sultry / Sensual) are now single words: Dreamy, Tender, Sultry.
+- The mood data is config-driven, so the list can still change without rewriting the page.
 
 **Wanderlust and Exploratory are not mood playlists.** Ignore any mockup that invented those categories.
 
-### Confirmed icon directions
-- Dreamy / Daydream — cloud
-- Chill — sun
-- Audacious — sunglasses
-- Tender / Romantic — heart
-- Energized / Hype — disco ball
-- Melancholy — broken heart
-- Burdened — scribble
-- Defiant — fist
-- Nostalgic — camera
-- Sultry / Sensual — lips
+### Full mood-circle color set
+17 colors: yellow, red, pink, orange, light green, lavender, dark blue, black, berry, dark green, purple, peach, forest green, gold, fuschia, silver, light blue. Exact hex values are not recorded here yet.
 
 ### Turntable
 The turntable is a signature interaction, not decorative filler. A selected mood should resolve into the full record/turntable experience.
@@ -245,6 +264,8 @@ Separate from mood playlists. Curated introductions to genres, artists, scenes, 
 
 ### Now Playing
 Persistent mini-player/Now Playing area across the Listen experience.
+
+**Open technical constraint:** a persistent mini player is hard to build on top of live third-party embeds. Spotify's IFrame API exposes some playback control; Apple Music's embed exposes essentially none without MusicKit (a larger integration). The Now Playing design may need to be simplified or Spotify-only. **Undecided.** Surface options to Sarah before building it.
 
 ### Copy/decorative rules
 - Playlist descriptions and microcopy should wait until mood sorting/taxonomy is sufficiently stable.
@@ -297,7 +318,7 @@ Do **not** use the previously considered full dark poster-style bio card. Let th
 - Main heading: **"About Me"**
 - Opening: **"Hi! I'm Sarah, the girl behind Sarahtonin Sounds."**
 - Preserve the personal origin story and conversational voice.
-- Approved taste line (single-column bio, under the "My taste in a nutshell" subheading): **"My taste is a little all over the place, in the best way."** — Sarah's revision, supersedes the earlier locked "my taste is all over the place." (see TODO.md).
+- Approved taste heading: **"my taste is all over the place."**
 - Do not use the older "my taste is a mess in the best way."
 - Professional credits list is removed/held off for now.
 - About copy is considered finalized for now; only minor layout-driven trimming should happen later if necessary.
@@ -350,14 +371,14 @@ Decorative handwritten copy can be more playful than functional/interface copy.
 
 ## 13. Accessibility, Responsiveness, Performance
 These are first-class requirements, not final polish.
-- Preserve readable contrast over video and textured backgrounds.
+- Preserve readable contrast over illustrated and textured backgrounds.
 - Essential instructions must never rely on handwritten typography.
 - Keyboard interaction and visible focus states for interactive controls.
 - Semantic HTML.
 - Useful alt text for meaningful images; decorative collage elements should not create screen-reader noise.
-- Respect reduced-motion preferences, especially Home video and animated turntable interactions.
+- Respect reduced-motion preferences, especially animated turntable interactions.
 - Mobile Listen interactions must remain understandable and touch-friendly.
-- Optimize background video and imagery rather than shipping oversized assets.
+- Optimize imagery (including the Home collage layers) rather than shipping oversized assets.
 - Avoid decoration that obscures content or interaction targets.
 
 ## 14. Decision Rules for Future Work
