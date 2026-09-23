@@ -286,6 +286,12 @@ html:has(body.page-listen) {
   min-width: 0;
 }
 
+/* Set by js/listen.js when every live label fits; overflowing rows stay
+   left-aligned so the first labels can't be clipped. */
+.listen-moods__row.is-centered {
+  justify-content: center;
+}
+
 .listen-moods__row li {
   flex: none;
   width: 8.981%;
@@ -723,9 +729,13 @@ html:has(body.page-listen) {
     transform: none;
   }
 
+  /* Every layer inside is absolutely positioned, so without an aspect
+     ratio the box collapses to 0px and the vinyl spills over the text
+     below. 1991 / 1538 is turntable-overlay.png's own size. */
   .tt-record {
     max-width: 22rem;
     margin: 0 auto;
+    aspect-ratio: 1991 / 1538;
   }
 
   .tt-picks {

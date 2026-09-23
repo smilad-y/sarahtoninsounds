@@ -142,9 +142,11 @@
     if (prevBtn) prevBtn.addEventListener('click', function () { row.scrollBy({ left: -240, behavior: behavior }); });
     if (nextBtn) nextBtn.addEventListener('click', function () { row.scrollBy({ left: 240, behavior: behavior }); });
 
-    // Scroll arrows only matter when the live moods overflow the row.
+    // Labels are centered when they all fit; otherwise left-aligned with
+    // scroll arrows.
     function updateArrows() {
       var overflows = row.scrollWidth > row.clientWidth + 1;
+      row.classList.toggle('is-centered', !overflows);
       [prevBtn, nextBtn].forEach(function (btn) {
         if (btn) btn.style.visibility = overflows ? '' : 'hidden';
       });

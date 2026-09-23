@@ -7,7 +7,7 @@
     "Array order is the current display order. Final display order is UNDECIDED; the number on each label is its position among the live moods.",
     "labelText: text color on the circle art (dark or light), for contrast.",
     "labelColors hex values are PROVISIONAL, sampled from the circle art; final hex values are UNDECIDED.",
-    "art paths are the existing assets, unchanged. Lost uses the brown art and Euphoric / Hopeful / Unleashed / Hypnotic use gold / forest green / dark green / silver art even though the spec leaves their colors open; art.record is the pre-composited record export, not currently rendered.",
+    "art paths are the existing assets (circles are 320px WebP exports; full-size originals in archive/listen-circle-originals/). Lost uses the brown art and Euphoric / Hopeful / Unleashed / Hypnotic use gold / forest green / dark green / silver art even though the spec leaves their colors open; art.record is the pre-composited record export, not currently rendered.",
     "selectorNote: short note shown near the selector (e.g. that more moods are coming). UNDECIDED = nothing shown; wording and style are Sarah's call."
   ],
   "defaultMood": "dreamy",
@@ -41,7 +41,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/light-blue-cirle.png",
+        "circle": "/assets/images/listen/light-blue-cirle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Light_Blue.png",
         "record": "/assets/images/listen/sarahtonin_sounds-listen-record-dreamy_2.png",
         "tape": "/assets/images/listen/Tape-Light_Blue_1.png"
@@ -78,7 +78,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/yellow-circle.png",
+        "circle": "/assets/images/listen/yellow-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Yellow.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-yellow.png",
         "tape": "/assets/images/listen/Tape-Yellow.png"
@@ -102,7 +102,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
-        "circle": "/assets/images/listen/red-circle.png",
+        "circle": "/assets/images/listen/red-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Red.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-red.png",
         "tape": "/assets/images/listen/Tape-Red.png"
@@ -126,7 +126,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/pink-circle.png",
+        "circle": "/assets/images/listen/pink-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Pink.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-pink.png",
         "tape": "/assets/images/listen/Tape-Pink.png"
@@ -150,7 +150,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/orange-circle.png",
+        "circle": "/assets/images/listen/orange-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Orange.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-orange.png",
         "tape": "/assets/images/listen/Tape-Orange.png"
@@ -174,7 +174,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/light-green-circle.png",
+        "circle": "/assets/images/listen/light-green-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Light_Green.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-light green.png",
         "tape": "/assets/images/listen/Tape-Light_Green.png"
@@ -198,7 +198,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/lavendar-circle.png",
+        "circle": "/assets/images/listen/lavendar-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Recoord-Lavendar.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-lavendar.png",
         "tape": "/assets/images/listen/Tape-Lavendar.png"
@@ -222,7 +222,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
-        "circle": "/assets/images/listen/brown_Circle.png",
+        "circle": "/assets/images/listen/brown_Circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Brown.png",
         "record": "/assets/images/listen/sarahtonin_sounds-listen-record-brown.png",
         "tape": "/assets/images/listen/Tape-brown.png"
@@ -246,7 +246,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
-        "circle": "/assets/images/listen/dark-blue-circle.png",
+        "circle": "/assets/images/listen/dark-blue-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Dark_Blue.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-dark_blue.png",
         "tape": "/assets/images/listen/Tape-Dark_Blue.png"
@@ -270,7 +270,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
-        "circle": "/assets/images/listen/black-circle.png",
+        "circle": "/assets/images/listen/black-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Black.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-black.png",
         "tape": "/assets/images/listen/Tape-Black.png"
@@ -294,7 +294,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
-        "circle": "/assets/images/listen/berry-circle.png",
+        "circle": "/assets/images/listen/berry-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Maroon.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-maroon.png",
         "tape": "/assets/images/listen/Tape-Maroon.png"
@@ -318,7 +318,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/dark-green-circle.png",
+        "circle": "/assets/images/listen/dark-green-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Green.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-green.png",
         "tape": "/assets/images/listen/Tape-Green.png"
@@ -342,7 +342,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
-        "circle": "/assets/images/listen/purple-circle.png",
+        "circle": "/assets/images/listen/purple-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Purple.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-purple.png",
         "tape": "/assets/images/listen/Tape-Purple.png"
@@ -366,7 +366,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/peach-cirlcle.png",
+        "circle": "/assets/images/listen/peach-cirlcle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Peach.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-peach.png",
         "tape": "/assets/images/listen/Tape-Peach.png"
@@ -390,7 +390,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/forest green circle.png",
+        "circle": "/assets/images/listen/forest green circle.webp",
         "vinyl": "/assets/images/listen/Record-forest_Green.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-forest-green.png",
         "tape": "/assets/images/listen/Tape-Forest_Green.png"
@@ -414,7 +414,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/gold circle.png",
+        "circle": "/assets/images/listen/gold circle.webp",
         "vinyl": "/assets/images/listen/Record-gold.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-gold.png",
         "tape": "/assets/images/listen/Tape-Gold.png"
@@ -438,7 +438,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/Fuschia Circle.png",
+        "circle": "/assets/images/listen/Fuschia Circle.webp",
         "vinyl": "/assets/images/listen/Record-fuschia.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-fuschia.png",
         "tape": "/assets/images/listen/Tape-Fuschia.png"
@@ -462,7 +462,7 @@
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/Silver Circle.png",
+        "circle": "/assets/images/listen/Silver Circle.webp",
         "vinyl": "/assets/images/listen/Record-silver.png",
         "record": "/assets/images/listen/sarahtonin sounds-listen-record-silver.png",
         "tape": "/assets/images/listen/Tape-Silver.png"

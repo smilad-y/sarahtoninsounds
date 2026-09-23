@@ -31,3 +31,7 @@ music-picks/watermelon-in-easter-hay.md
 
 node_modules/
 _site/
+
+# Full-size source images kept out of the published site; the site uses
+# optimized exports (see archive/listen-circle-originals/README.md).
+archive/
