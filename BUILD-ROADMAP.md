@@ -1,8 +1,10 @@
 # Sarahtonin Sounds — Build & Migration Roadmap
-**Version:** v4 · September 23, 2026
+**Version:** v5 · September 24, 2026
 
 ## Launch Scope
 **Home · About · Listen · Journal · Contact**
+
+**Launched (September 2026).** `main` is live; see PROJECT-SPEC.md §1 for the post-launch workflow.
 
 Guestbook is Phase 2 and must not block launch.
 
@@ -129,6 +131,8 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - Success/error states.
 
 ## Phase 9 — Launch QA
+**Done (September 2026).**
+
 ### Must have
 - Cross-browser desktop/mobile checks.
 - Keyboard-only pass.
@@ -143,14 +147,18 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - Netlify production deployment.
 - CMS login at launch: set `backend.branch` in `admin/config.yml` to `main`; optionally set `site_domain` to `sarahtoninsounds.com` once the domain is attached. The GitHub OAuth App callback (`https://api.netlify.com/auth/done`) does not change.
 - Confirm no Guestbook links/routes accidentally appear in launch nav.
-- Confirm legacy purple/petal/marquee UI did not leak into current design unintentionally.
+- Confirm legacy purple/petal/marquee UI did not leak into current design unintentionally. (The Home ticker is a deliberate revision, not a leak: PROJECT-SPEC.md §6.)
 
 ## Phase 10 — Post-launch Polish
 ### Nice to have
 - 404 personality/microcopy.
 - Refined hover/motion details.
 - Additional Journal treatments.
-- Crash Courses section, as a clearly separate section of Listen (rolled out after launch; decided Sarah, September 2026). **System built (September 2026):** CMS collection, course pages, index, and Listen shelf, all hidden until a course is set Live. Content is Sarah's.
+- ~~Crash Courses section, as a clearly separate section of Listen.~~ **Built (September 2026):** CMS collection, course pages, index, and Listen shelf. Switched off until Sarah adds a live course; the courses themselves are Sarah's.
+- Once the first Crash Course is live, check on the live site: the course page's Spotify (and Apple Music, if set) embed plays and switching between them stops the other, and the card art loads through Netlify's image resizing (`/.netlify/images`).
+- Once the first Crash Course is live, Sarah decides whether Listen's page description should mention Crash Courses, and whether the Crash Courses index gets its own description (neither exists now; no copy was invented).
+- Real-embed check for the now spinning bar on the live site (see the now spinning bar section of TODO.md).
+- Apple Music links per mood (launch was Spotify-only; the toggle appears on its own once a mood has one).
 - Performance tuning based on real deployment.
 - Small copy trims based on actual layouts.
 - Mood icons on the selector labels, added all at once for every live mood (deferred from launch; PROJECT-SPEC §7 Mood selector).

@@ -17,7 +17,7 @@ Legacy examples that are NOT current requirements:
 - Playfair Display / Caveat
 - falling petals
 - animated cursor
-- marquee ticker
+- marquee ticker (brought back on purpose as the Home ticker, Sarah, September 2026; spec §6. It is not a leak to flag.)
 - full-screen video Home (retired; assets preserved at `assets/video/home-loop.mp4`)
 
 ### PRESERVE vs MIGRATE
@@ -36,18 +36,21 @@ Before removing legacy code/data:
 3. do not migrate unless Sarah has approved that specific item;
 4. document any destructive change before making it.
 
-## Repository
-- Active working branch: `claude/add-claude-md-file-3fgnk0`.
-- Netlify production branch is `main`. At launch, the working branch is merged into `main`.
+## Repository (post-launch workflow)
+- `main` is the live site. Netlify publishes it automatically on every change.
+- CMS saves go straight to `main`, so they publish right away.
+- Do all Claude Code work on `claude/add-claude-md-file-3fgnk0`. Update it from `main` before every task.
+- Bring changes to `main` through a pull request, and check them on its Netlify Deploy Preview first.
+- Only one Claude Code session works on the repo at a time. Parallel sessions collide.
+- Never delete `legacy-main-archive`.
 - `work-in-progress` is stale (legacy mood-wheel site). Do not push current work there.
 - Sarah commits through the GitHub web interface.
-- Only one Claude Code session works on the repo at a time. Parallel sessions collide.
 
 ## Non-negotiables
 - Preserve Sarah's established Sarahtonin Sounds gold wordmark. Never redesign, reconstruct, or substitute it.
 - Launch navigation is: Home · About · Listen · Journal · Contact.
 - Guestbook is Phase 2/on hold. Do not add it to launch scope unless Sarah explicitly reactivates it.
-- Crash Courses roll out after launch. Keep them out of launch scope and separate from mood playlist data.
+- Crash Courses are built and switched off; they appear only when Sarah sets a course live. Keep them separate from mood playlist data.
 - Plain HTML, CSS, and JavaScript, plus **Eleventy + Decap CMS** for content editing (a deliberate decision; see spec §1). No other framework without a concrete requirement.
 - Maintain "clean structure + weird/tactile decoration."
 - Intentional cream/paper negative space is part of the design. Do not fill empty areas automatically.

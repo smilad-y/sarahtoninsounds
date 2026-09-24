@@ -1,5 +1,5 @@
 # Sarahtonin Sounds — Master Project Spec
-**Handoff version:** September 23, 2026 · v4  
+**Handoff version:** September 24, 2026 · v5 (post-launch)  
 **Purpose:** Current source of truth for continuing the Sarahtonin Sounds website in Claude / Claude Code.
 
 ## 1. Project
@@ -11,6 +11,10 @@ The current site should feel personal, editorial, tactile, music-obsessed, and s
 **Home · About · Listen · Journal · Contact**
 
 **Guestbook is Phase 2 / on hold.** Preserve the concept, but do not include it in launch navigation or MVP implementation.
+
+### Site-wide footer and logo
+- Every page except Home has a "© [year] Sarahtonin Sounds" footer. The year is set at build time.
+- On every page except Home, the logo links to Home.
 
 ### Technical direction
 - Plain HTML, CSS, and JavaScript.
@@ -27,10 +31,14 @@ The current site should feel personal, editorial, tactile, music-obsessed, and s
 - Not WordPress, not another platform.
 - This replaces the old manual step of adding each essay slug to `essays/index.json`.
 
-### Repository
-- Active working branch: `claude/add-claude-md-file-3fgnk0` (Sarah plans to rename it later).
+### Repository (post-launch workflow)
+- `main` is the live site. Netlify publishes it automatically on every change.
+- CMS saves go straight to `main`, so they publish right away.
+- All Claude Code work happens on `claude/add-claude-md-file-3fgnk0` (Sarah plans to rename it later). Update it from `main` before every task.
+- Changes reach `main` only through a pull request, reviewed on its Netlify Deploy Preview first.
+- One Claude Code session works on the repo at a time.
+- Never delete `legacy-main-archive`.
 - The `work-in-progress` branch is stale and holds the legacy single-page mood-wheel site. Do not push current work there.
-- Netlify deploys `main` to production. At launch, the working branch is merged into `main`.
 
 ## 2. Legacy Site / Existing Implementation
 There is an older Sarahtonin Sounds implementation that predates the current design direction.
@@ -67,7 +75,7 @@ The older site used:
 - gold/pink accents
 - animated cursor
 - falling petals
-- marquee ticker
+- marquee ticker (brought back on purpose as the Home ticker, see §6)
 
 These are **legacy design decisions, not current requirements**. Do not reintroduce them automatically.
 
@@ -173,6 +181,8 @@ A single-viewport, no-scroll cover for the site: an illustrated collage (Sarah r
 - Mobile uses a real accessible `<button>` MENU trigger, styled with that same Perandory Semi-Condensed treatment, that reveals the nav list — `aria-expanded`/`aria-controls`, Escape-to-close, outside-click-to-close, and focus return to the button on close are all required behavior, not polish.
 - A small "made by: Sarah Milad" credit sits lower-right of the composition, in Sue Ellen Francisco per §5's marginalia-only rule (never essential UI, never the logo). Approved and built as a deliberate, minor revision — not a return to the retired video-hero credit treatment.
 - Moon/stars, the tan cloud, and the small pink-paper accent are desktop-only; mobile deliberately omits them rather than approximating.
+- **Ticker (deliberate revision, Sarah, September 2026).** A thin, full-width navy strip runs across the top of Home on desktop and mobile, with cream Perandory Semi-Condensed text. Its phrases and its on/off toggle are edited in the CMS ("Home (current site)"). It has a pause button, and with reduced motion it is a still line. The collage is fit-scaled into the space below it, so no layer is covered or cropped; when the ticker is off, the collage returns to its full size. This replaces the retired legacy marquee on purpose: it is not a leak of the old site.
+- The torn-paper "SARAHTONIN SOUNDS" title card links to Listen.
 - Sarah's exact established gold Sarahtonin Sounds wordmark remains untouched elsewhere on the site per §5; the large torn-paper "SARAHTONIN SOUNDS" title card on Home is a separate piece of Sarah-supplied artwork, not the wordmark itself.
 
 ### Explicit removals
@@ -208,7 +218,7 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 ### Desktop flow
 1. Pick Your Mood
 2. Selected mood turntable/player/tracklist
-3. Crash Courses (rolls out after launch)
+3. Crash Courses (shown only when a course is live)
 4. Persistent Now Playing mini player
 
 ### Mood selector
@@ -219,6 +229,7 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 - On mobile, keep these as colored illustrated labels in a horizontal swipe row.
 - **Do not turn mobile mood buttons into black vinyl records.**
 - Full vinyl appears only after a mood is selected.
+- A mood can set an optional `titleColor` in `moods.json` for its name on the turntable banner. Hazy and Defiant use white.
 
 ### Mood list (final, supersedes the earlier 12-mood working list)
 18 moods (18 colors):
@@ -267,7 +278,10 @@ Notes:
 The turntable is a signature interaction, not decorative filler. A selected mood should resolve into the full record/turntable experience.
 
 ### Crash Courses
-**Rolls out after launch (decided, Sarah, September 2026).** Not part of launch scope.
+**Built after launch (September 2026), switched off until Sarah adds a live course.** Courses are managed in the CMS ("Crash Courses"). Each has a title, square card art with an art description, an optional hook, an optional intro, a Spotify playlist URL, an optional Apple Music URL, an optional "Start here" track list, a Live switch, and an Order number.
+- Only courses with Live on appear anywhere on the site. With none live, Listen shows no Crash Courses section at all.
+- Listen shows a shelf of up to 4 live courses below the turntable (a swipe row on mobile). The shelf has no embeds; the now spinning bar stays the only player on Listen.
+- Each live course has its own page at `/listen/crash-courses/<slug>/` with its own playlist embed, and `/listen/crash-courses/` lists all live courses.
 
 Separate from mood playlists. Curated introductions to genres, artists, scenes, or sounds. Do not collapse Crash Courses into the mood taxonomy.
 
