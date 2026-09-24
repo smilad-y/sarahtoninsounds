@@ -155,7 +155,7 @@ Never redistribute font files in handoff documents.
 ## 12. Site Icons and Share Image
 ### Favicon set
 **Status:** In use on every page (plus the CMS admin page).  
-**Source:** Sarah's dragonfly drawing, `assets/images/home-v2/home-dragonfly.png` (1656×1299, transparent). Master, never edited; every icon below is generated from it.  
+**Master:** Sarah's dragonfly drawing, `assets/images/brand/dragonfly.png` (1656×1299, transparent; an identical copy of the Home collage layer `home-v2/home-dragonfly.png`). Never edited; every icon below is generated from it.  
 **Treatment:** Cropped tight to the drawing and centered on a square with about 1% margin. Not redrawn or restyled. The 16 and 32 px sizes only get a slight saturation (+35%) and contrast (+20%) boost so the pale wings hold up on a white browser tab; 48 px and up keep the original colors.  
 **Files:**
 - `favicon.ico` (repo root): 16, 32 (boosted) and 48 px.
@@ -167,7 +167,7 @@ Never redistribute font files in handoff documents.
 **Status:** In use as the Open Graph and Twitter card image on every page.  
 **File:** `assets/images/brand/share-image.jpg` (1200×630).  
 **Source:** The desktop Home collage exactly as the site renders it (1440 px wide), with the nav tabs, menu button, and "made by" credit hidden, cropped to a 1440×756 band that keeps the whole torn-paper title card, then scaled down. Nothing redrawn.  
-**Tags:** Absolute URLs on `https://sarahtoninsounds.com`. Titles and descriptions currently reuse each page's existing `<title>` and meta description; final wording still to come.
+**Tags:** Absolute URLs on `https://sarahtoninsounds.com`. Open Graph and Twitter titles and descriptions match each page's `<title>` and meta description (final wording, Sarah's). Journal and Monthly Favs pages use the entry's own title, Excerpt (summary), and Featured Image as the share image, falling back to this image when an entry has none.
 
 ## 13. Legacy Visual Assets
 Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Preserve them if they have archival value, but **do not treat them as part of the current visual system** unless Sarah explicitly brings one back.
