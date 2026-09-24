@@ -526,10 +526,14 @@
    wider view before trusting it) — the leading "M" is intact through
    -13px and clipped starting at -14px, so -12px keeps a small safety
    margin from that real boundary while reading as genuinely centered
-   under the photo above it. */
+   under the photo above it.
+
+   Then +28px (with the polaroid, same shift) so the leading "M" clears
+   the page's left edge: at -12px it was still clipped on the live
+   site. */
 .ab3-caption {
   position: absolute;
-  left: -12px;
+  left: 16px;
   top: 560px;
   font-family: var(--font-marginalia);
   color: var(--color-crimson);
@@ -600,9 +604,11 @@
    the render, not by re-deriving the math — which the reference
    screenshot does not show. Same width/height/rotation, only shifted
    left to clear the heading, per the instruction to fix what direct
-   pixel comparison finds rather than trust the computed value alone. */
+   pixel comparison finds rather than trust the computed value alone.
+   Later moved back +28px (to -15px), together with .ab3-caption, so the
+   caption is fully on-page; the flower still clears the heading. */
 .ab3-deco--polaroid {
-  left: -43px;
+  left: -15px;
   top: 118.399px;
   width: 395.103px;
   height: 552.423px;
