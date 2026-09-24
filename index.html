@@ -59,7 +59,9 @@ templateEngineOverride: njk
     <img class="hv2-layer hv2-leopard" src="/assets/images/home-v2/home-leopard-highres.png" alt="">
 
     <h1 class="hv2-title">
-      <img src="/assets/images/home-v2/home-logo-sharp.png" alt="Sarahtonin Sounds">
+      <a class="hv2-title__link" href="/listen.html" aria-label="Sarahtonin Sounds, go to Listen">
+        <img src="/assets/images/home-v2/home-logo-sharp.png" alt="">
+      </a>
     </h1>
 
     <img class="hv2-layer hv2-scallop" src="/assets/images/home-v2/home-top-scallop-hires.png" alt="">
@@ -89,10 +91,21 @@ templateEngineOverride: njk
       </ul>
     </nav>
 
+    {%- set tickerPhrases = [] %}
+    {%- for phrase in home.ticker.phrases or [] %}{% if phrase | trim %}{% set tickerPhrases = (tickerPhrases.push(phrase | trim), tickerPhrases) %}{% endif %}{% endfor %}
+    {%- if home.ticker.enabled and tickerPhrases.length %}
+    <div class="hv2-ticker" data-ticker>
+      <p class="hv2-ticker__line">{{ tickerPhrases | join(" ✶ ") }}</p>
+      <button class="hv2-ticker__toggle" type="button" aria-label="Pause ticker" hidden>
+        <span class="hv2-ticker__icon" aria-hidden="true"></span>
+      </button>
+    </div>
+    {%- endif %}
     <p class="hv2-credit" aria-hidden="true">made by: Sarah Milad</p>
   </div>
 </main>
 
 <script src="/js/site.js" defer></script>
+<script src="/js/home-ticker.js" defer></script>
 </body>
 </html>

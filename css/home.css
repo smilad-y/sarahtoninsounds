@@ -489,3 +489,159 @@ body.page-home {
     font-size: 0.9rem;
   }
 }
+
+/* ── Title card → Listen ──
+   The link box is trimmed to the torn-paper card inside the logo image
+   (its transparent margins are 5.696% / 7.493% / 6.646% / 6.724% of
+   the image, left/top/right/bottom), so only the card is clickable and
+   the focus ring hugs it. The image is offset back out by the same
+   amounts, so it renders exactly where it did before. */
+.hv2-title__link {
+  position: absolute;
+  top: 7.493%;
+  left: 5.696%;
+  width: 87.658%;
+  height: 85.783%;
+  display: block;
+}
+
+.hv2-title__link img {
+  position: absolute;
+  top: -8.735%;
+  left: -6.498%;
+  width: 114.08%;
+  height: 116.573%;
+  max-width: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hv2-title__link {
+    transition: transform 0.25s ease;
+  }
+
+  .hv2-title__link:hover,
+  .hv2-title__link:focus-visible {
+    transform: translateY(-0.8%) rotate(-0.6deg);
+  }
+}
+
+/* ── Ticker ──
+   Runs along the navy band, above it (z 5) but below the girl, crate
+   and leopard (z 9-11), so the words slide out from behind the crate.
+   Without JS, or with reduced motion, .hv2-ticker__line is shown as a
+   still line. With motion, js/home-ticker.js keeps that line for screen
+   readers only and adds an aria-hidden moving copy. */
+.hv2-ticker {
+  position: absolute;
+  z-index: 8;
+  left: 63%;   /* still line: starts just right of the crate */
+  right: 1.2%;
+  top: 87%;
+  height: 4%;
+  display: flex;
+  align-items: center;
+  gap: 0.6%;
+  font-family: var(--font-display);
+  font-size: max(0.8rem, 1.15cqw); /* 16.6px in the 1440 frame */
+  letter-spacing: 0.04em;
+  color: #fdf6e8;
+  pointer-events: none;
+}
+
+/* Moving: the window starts behind the crate, so words appear from
+   under it. */
+.hv2-ticker.is-moving {
+  left: 55%;
+}
+
+.hv2-ticker__line,
+.hv2-ticker__window {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+/* Still line wraps rather than hiding under the crate when the phrases
+   are longer than the clear stretch of navy. */
+.hv2-ticker__line {
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.hv2-ticker__window {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.hv2-ticker__track {
+  display: inline-block;
+  animation: hv2-ticker-scroll var(--ticker-duration, 60s) linear infinite;
+}
+
+.hv2-ticker.is-paused .hv2-ticker__track {
+  animation-play-state: paused;
+}
+
+@keyframes hv2-ticker-scroll {
+  to { transform: translateX(-50%); }
+}
+
+.hv2-ticker__toggle {
+  flex: none;
+  position: relative;
+  width: 1.8em;
+  height: 1.8em;
+  padding: 0;
+  border: 1px solid rgba(253, 246, 232, 0.7);
+  border-radius: 50%;
+  background: rgba(20, 30, 55, 0.55);
+  color: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.hv2-ticker__toggle[hidden] {
+  display: none;
+}
+
+.hv2-ticker__toggle:hover {
+  background: rgba(20, 30, 55, 0.85);
+}
+
+/* Pause: two bars. Play: a triangle. */
+.hv2-ticker__icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0.6em;
+  height: 0.7em;
+  border-left: 0.2em solid currentColor;
+  border-right: 0.2em solid currentColor;
+  box-sizing: border-box;
+}
+
+.hv2-ticker.is-paused .hv2-ticker__icon {
+  width: 0;
+  height: 0;
+  left: 0.12em;
+  border-style: solid;
+  border-width: 0.35em 0 0.35em 0.6em;
+  border-color: transparent transparent transparent currentColor;
+}
+
+@media (max-width: 600px) {
+  .hv2-ticker,
+  .hv2-ticker.is-moving {
+    left: 0;
+    right: 3%;
+    top: 72.6%;
+    height: 3.6%;
+    gap: 2%;
+    font-size: 0.95rem;
+  }
+
+  .hv2-ticker__line {
+    padding-left: 4%;
+    font-size: 0.85rem;
+  }
+}

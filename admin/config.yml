@@ -329,6 +329,29 @@ collections:
                   - { label: "Artist", name: artist, widget: string }
                   - { label: "Note", name: note, widget: text, required: false }
 
+  # ── HOME (current site) ──
+  # content/home.json. The ticker runs along the navy band on Home; the
+  # site adds the ✶ between phrases and loops them.
+  - name: home
+    label: "🏠 Home (current site)"
+    files:
+      - name: home_content
+        label: "Home Page Settings"
+        file: content/home.json
+        format: json
+        fields:
+          - label: "Ticker"
+            name: ticker
+            widget: object
+            fields:
+              - { label: "Show the ticker?", name: enabled, widget: boolean, default: true, hint: "Off hides the ticker. It also stays hidden when the list below is empty." }
+              - label: "Phrases"
+                name: phrases
+                widget: list
+                required: false
+                hint: "Short phrases, plain text. The ✶ between them is added for you."
+                field: { label: "Phrase", name: phrase, widget: string }
+
   # ── ABOUT (current site) ──
   # content/about.json — the live About page's own copy (PROJECT-SPEC.md
   # §9). Distinct from the legacy settings/about.json bio above (removed
