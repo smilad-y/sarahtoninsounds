@@ -38,13 +38,16 @@ Before removing legacy code/data:
 
 ## Repository
 - Active working branch: `claude/add-claude-md-file-3fgnk0`.
+- Netlify production branch is `main`. At launch, the working branch is merged into `main`.
 - `work-in-progress` is stale (legacy mood-wheel site). Do not push current work there.
 - Sarah commits through the GitHub web interface.
+- Only one Claude Code session works on the repo at a time. Parallel sessions collide.
 
 ## Non-negotiables
 - Preserve Sarah's established Sarahtonin Sounds gold wordmark. Never redesign, reconstruct, or substitute it.
 - Launch navigation is: Home · About · Listen · Journal · Contact.
 - Guestbook is Phase 2/on hold. Do not add it to launch scope unless Sarah explicitly reactivates it.
+- Crash Courses roll out after launch. Keep them out of launch scope and separate from mood playlist data.
 - Plain HTML, CSS, and JavaScript, plus **Eleventy + Decap CMS** for content editing (a deliberate decision; see spec §1). No other framework without a concrete requirement.
 - Maintain "clean structure + weird/tactile decoration."
 - Intentional cream/paper negative space is part of the design. Do not fill empty areas automatically.
