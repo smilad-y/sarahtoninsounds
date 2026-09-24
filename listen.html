@@ -7,7 +7,7 @@
 <meta name="description" content="Curated mood playlists and crash courses from Sarahtonin Sounds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=IM+Fell+English&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/layout.css">
@@ -95,6 +95,7 @@
       >
         <span class="tt-playback-toggle__status" aria-hidden="true">Loading player&hellip;</span>
       </button>
+      <p class="tt-player-fallback" id="tt-player-fallback" hidden></p>
     </div>
 
     <p class="tt-blurb" id="tt-blurb">For when your mind needs some room to wonder</p>
@@ -154,6 +155,7 @@
       </div>
       <div class="now-spinning__embed now-spinning__embed--apple" id="now-spinning-apple" hidden></div>
       <p class="now-spinning__unavailable" id="now-spinning-unavailable" hidden></p>
+      <p class="now-spinning__fallback" id="now-spinning-fallback" hidden></p>
     </div>
   </div>
 </aside>

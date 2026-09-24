@@ -15,6 +15,9 @@
   // visible; see TODO.md "Listen — now spinning bar" for test status.
   var SPOTIFY_HEIGHT = 80;
   var APPLE_HEIGHT = 175;
+  // How long to wait for the Spotify player before offering a plain
+  // link instead (blocked by a content blocker, network, or outage).
+  var SPOTIFY_TIMEOUT_MS = 12000;
 
   var config = null;
   var state = {
@@ -23,7 +26,7 @@
     activeSource: null,
     isPlaying: false
   };
-  var spotify = { api: null, controller: null, uri: null };
+  var spotify = { api: null, controller: null, uri: null, failed: false, timer: null };
 
   var reduceMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -41,6 +44,11 @@
     var url = mood.spotify && mood.spotify.url;
     var match = isSet(url) && url.match(/playlist[/:]([A-Za-z0-9]+)/);
     return match ? 'spotify:playlist:' + match[1] : null;
+  }
+
+  function spotifyWebUrl(mood) {
+    var match = spotifyUri(mood);
+    return match ? 'https://open.spotify.com/playlist/' + match.split(':')[2] : null;
   }
 
   function appleEmbedSrc(mood) {
@@ -223,7 +231,8 @@
   function updateTurntableControl() {
     var button = $('tt-playback-toggle');
     var usable = state.activeSource === 'spotify';
-    button.hidden = !usable;
+    renderSpotifyFallback();
+    button.hidden = !usable || spotify.failed;
     button.disabled = !usable || !spotify.controller;
     setPlaying(usable && state.isPlaying);
   }
@@ -320,7 +329,40 @@
       setPlaying(false);
     }
     spotify.uri = uri;
+    startSpotifyTimeout();
     createSpotifyController();
+  }
+
+  // If the player never shows up, swap "Loading player…" and the empty
+  // embed space for a plain link to the playlist on Spotify.
+  function renderSpotifyFallback() {
+    var show = spotify.failed && state.activeSource === 'spotify';
+    var href = show && spotifyWebUrl(state.mood);
+    ['tt-player-fallback', 'now-spinning-fallback'].forEach(function (id) {
+      var el = $(id);
+      el.hidden = !show;
+      el.textContent = '';
+      if (!show) return;
+      var link = document.createElement('a');
+      link.href = href;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = 'Listen on Spotify';
+      el.appendChild(document.createTextNode('The player didn\u2019t load. '));
+      el.appendChild(link);
+      el.appendChild(document.createTextNode(' instead.'));
+    });
+    // The API swaps the mount for its iframe, so hide the wrapper.
+    $('now-spinning-spotify').classList.toggle('is-failed', show);
+  }
+
+  function startSpotifyTimeout() {
+    if (spotify.controller || spotify.failed || spotify.timer) return;
+    spotify.timer = setTimeout(function () {
+      if (spotify.controller) return;
+      spotify.failed = true;
+      updateTurntableControl();
+    }, SPOTIFY_TIMEOUT_MS);
   }
 
   function createSpotifyController() {
@@ -330,6 +372,8 @@
 
     spotify.api.createController(mount, { uri: initialUri, width: '100%', height: String(SPOTIFY_HEIGHT) }, function (controller) {
       spotify.controller = controller;
+      spotify.failed = false;   // a late load still wins over the fallback
+      clearTimeout(spotify.timer);
       // Use the controller from this callback; a separate `ready` event
       // can fire before a listener is attached.
       if (spotify.uri !== initialUri) controller.loadUri(spotify.uri);

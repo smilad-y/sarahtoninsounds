@@ -577,6 +577,43 @@ html:has(body.page-listen) {
   background: var(--color-gold, #ffd200);
 }
 
+/* Shown in place of the status pill if the Spotify player never loads. */
+.tt-player-fallback {
+  position: absolute;
+  z-index: 4;
+  right: 8%;
+  bottom: 8%;
+  max-width: 15rem;
+  margin: 0;
+  padding: 0.45rem 0.75rem;
+  border: 2px solid var(--color-near-black);
+  border-radius: 12px;
+  background: var(--color-cream);
+  box-shadow: 2px 2px 0 var(--color-near-black);
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  line-height: 1.3;
+  color: var(--color-near-black);
+}
+
+.tt-player-fallback[hidden],
+.now-spinning__fallback[hidden] {
+  display: none;
+}
+
+.tt-player-fallback a,
+.now-spinning__fallback a {
+  color: var(--color-crimson);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.tt-player-fallback a:focus-visible,
+.now-spinning__fallback a:focus-visible {
+  outline: 3px solid var(--color-crimson);
+  outline-offset: 2px;
+}
+
 /* Hidden while Apple Music is the active embed: that embed has no
    control API, so the turntable can't start or stop it. */
 .tt-playback-toggle[hidden] {
@@ -1130,6 +1167,18 @@ html:has(body.page-listen) {
   margin: 0;
   font-family: 'Crimson Text', Georgia, serif;
   font-size: 1rem;
+  color: var(--color-near-black);
+}
+
+.now-spinning__embed--spotify.is-failed {
+  display: none;
+}
+
+.now-spinning__fallback {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.3;
   color: var(--color-near-black);
 }
 
