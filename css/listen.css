@@ -982,6 +982,12 @@ html:has(body.page-listen) {
     width: 60%;
   }
 
+  /* Even line lengths, so "SOUNDS" doesn't sit alone. */
+  .listen-intro__subheading {
+    max-width: 21rem;
+    text-wrap: balance;
+  }
+
   .crash-course {
     position: static;
     width: 100%;
@@ -1148,7 +1154,13 @@ html:has(body.page-listen) {
 }
 
 .now-spinning__player {
+  grid-column: -2 / -1;   /* stays in the wide column when the toggle is hidden */
   min-width: 0;
+}
+
+/* Hidden while the mood has no Apple Music link (launch is Spotify-only). */
+.now-spinning__source[hidden] {
+  display: none;
 }
 
 .now-spinning__embed iframe {

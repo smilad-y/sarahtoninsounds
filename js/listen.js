@@ -255,6 +255,10 @@
     $('now-spinning-label').style.backgroundImage = "url('" + assetUrl(mood.art.circle) + "')";
     $('now-spinning-name').textContent = mood.name;
 
+    // No point offering a choice with only Spotify linked; the toggle
+    // comes back on its own once the mood has an Apple Music URL.
+    bar.querySelector('.now-spinning__source').hidden = !hasSource(mood, 'apple');
+
     Array.prototype.forEach.call(bar.querySelectorAll('.now-spinning__source-btn'), function (btn) {
       var source = btn.dataset.source;
       var available = hasSource(mood, source);

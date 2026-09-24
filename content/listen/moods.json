@@ -3,7 +3,7 @@
     "Listen mood config (PROJECT-SPEC.md §7). The page renders the selector, turntable, and now spinning bar from this file.",
     "live: true shows the mood in the selector; false hides it completely (not shown as locked). Going live later = flip it to true.",
     "UNDECIDED = not decided by Sarah yet; the page shows nothing for it rather than inventing copy.",
-    "PLACEHOLDER = no real URL yet; that service is shown as unavailable for the mood.",
+    "PLACEHOLDER = no real URL yet. With no Apple Music URL, the Spotify / Apple Music toggle is hidden for that mood (launch is Spotify-only); it appears once a real URL is added.",
     "Array order is the current display order. Final display order is UNDECIDED; the number on each label is its position among the live moods.",
     "labelText: text color on the circle art (dark or light), for contrast. labelShadow: true adds a faint dark shadow behind that text, for circle art where neither text color reaches 4.5:1 on its own (the red circle).",
     "labelColors hex values are PROVISIONAL, sampled from the circle art; final hex values are UNDECIDED.",
