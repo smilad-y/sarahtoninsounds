@@ -748,6 +748,13 @@ html:has(body.page-listen) {
 
 .tt-picks__item:last-child { margin-bottom: 0; }
 
+/* Each half wraps as a unit: a pick that doesn't fit breaks at the
+   dash, and only a half that is itself too long wraps inside. */
+.tt-picks__song,
+.tt-picks__artist {
+  display: inline-block;
+}
+
 /* A little handwritten wobble around the note's own tilt. */
 .tt-picks__item:nth-child(1) { --tt-rotate: -5.8deg; }
 .tt-picks__item:nth-child(2) { --tt-rotate: -3.4deg; }

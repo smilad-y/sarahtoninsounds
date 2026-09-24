@@ -169,6 +169,7 @@
 - [x] Listen opens on Chill (`defaultMood`). Mood names reduced together (desktop `clamp(0.8rem, 1.15vw, 1.05rem)`, mobile 0.85rem) so UNLEASHED sits inside its circle; descriptors 12px minimum.
 - [x] Launch is Spotify-only: the Spotify / Apple Music toggle is hidden for any mood without an Apple Music URL and reappears automatically once one is added (tested with a temporary Apple URL on Hazy). Mobile "A deeper dive…" subheading balanced onto two even lines.
 - [x] Sarah's Picks note: the note art is a border image (tape and bottom edge keep their proportions, only plain paper stretches), so the note fits its picks at any length. Title sits just below the tape; the red line stays inside the paper; title, line, and picks follow the paper's measured -4.3° tilt, with picks at -5.8° / -3.4° / -4.9° (softer than Figma's -12° / -7°, approved by Sarah).
+- [x] Long picks break at the dash ("Song" / "- Artist"), never stranding one word; picks that fit stay on one line. Pure CSS: each half is an inline-block.
 - [ ] IM Fell descriptors at 12px read slightly soft on 1x (non-retina) screens. Readable, but the weakest text on the page; 13px would need slightly larger circles.
 - [ ] `ASSET-MANIFEST.md` and `assets/icons/README.md` still use the old names Dreamy / Sultry / Energized in their icon lists.
 - [ ] Selector note slot (`selectorNote` in `content/listen/moods.json`, `#listen-moods-note`) is empty; Sarah decides the wording and style.

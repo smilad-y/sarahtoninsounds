@@ -207,7 +207,15 @@
     picks.forEach(function (pick) {
       var li = document.createElement('li');
       li.className = 'tt-picks__item';
-      li.textContent = pick.title + ' - ' + pick.artist;
+      // Two unbreakable-as-a-unit halves, so a long pick wraps at the
+      // dash ("Title" / "- Artist") rather than stranding one word.
+      [['tt-picks__song', pick.title], ['tt-picks__artist', '- ' + pick.artist]].forEach(function (part, i) {
+        if (i) li.appendChild(document.createTextNode(' '));
+        var span = document.createElement('span');
+        span.className = part[0];
+        span.textContent = part[1];
+        li.appendChild(span);
+      });
       list.appendChild(li);
     });
     $('tt-picks').hidden = picks.length === 0;
