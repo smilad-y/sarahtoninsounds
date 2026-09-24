@@ -1,5 +1,5 @@
 # Sarahtonin Sounds — Asset & Data Manifest
-**Version:** v3 · September 23, 2026
+**Version:** v4 · September 24, 2026
 
 ## 1. Signature / Must Preserve
 ### Sarahtonin Sounds gold wordmark
@@ -44,10 +44,12 @@
 **Rule:** Full vinyl appears after selection; mood selector itself remains colored record-label-style buttons.
 
 ### Mood label artwork
-Need/maintain one illustrated circular label per mood (18 total, see PROJECT-SPEC §7). Preserve original collage colors/textures.
+**In use:** each color has a full art set in `assets/images/listen/`: circle (320px WebP; full-size originals in `archive/listen-circle-originals/`), colored vinyl, pre-composited record, and tape. Each mood's set is listed in `content/listen/moods.json`; a live mood always uses one color's complete set, never mixed.
 
-Confirmed icon directions:
-- Dreamy: cloud
+**Icons: deferred past launch (Sarah, September 2026).** Launch labels are the color circles with number, mood name, and descriptor only. Icons are added later, all at once for every live mood (BUILD-ROADMAP Phase 10). When they are made, preserve the original collage colors/textures.
+
+Confirmed icon directions (for that later pass):
+- Hazy: cloud
 - Chill: sun
 - Audacious: sunglasses
 - Tender: heart
@@ -55,10 +57,10 @@ Confirmed icon directions:
 - Burdened: scribble
 - Defiant: fist
 - Nostalgic: camera
-- Sultry: lips
-- Disco ball: confirmed for the old combined "Energized / Hype" mood; now that they are separate moods, which one gets it is undecided
+- Sensual: lips
+- Disco ball: confirmed for the old combined "Energized / Hype" mood; now that Electric (formerly Energized) and Hype are separate moods, which one gets it is undecided
 
-Still need icons:
+Still need icon directions:
 - Euphoric
 - Hopeful / At Peace
 - Lost
@@ -66,7 +68,7 @@ Still need icons:
 - Unleashed
 - Cute
 - Hypnotic
-- whichever of Energized / Hype does not get the disco ball
+- whichever of Electric / Hype does not get the disco ball
 
 ## 4. Legacy Music Library (archive only)
 A Spotify-derived music library of **8,653 verified songs** (not the earlier ~10,047 estimate) exists in the previous implementation, tagged by the older eight-mood system:
@@ -99,13 +101,13 @@ All legacy content is PRESERVE by default. Nothing migrates to the current site 
 **CMS decision:** the rebuilt site uses **Decap CMS + Eleventy** (see PROJECT-SPEC §1). The old Netlify CMS config is reference only.
 
 ## 6. Playlist / Track Data
-Populate only from Sarah's manually curated playlists, embedded live with a Spotify / Apple Music toggle. Not from legacy song data.
+Populate only from Sarah's manually curated playlists, embedded live. Not from legacy song data. **Launch is Spotify-only;** the Spotify / Apple Music toggle appears for a mood once it has an Apple Music URL.
 
-Per mood, collect:
-- Spotify playlist URL
-- Apple Music playlist URL
+Per mood, collect (stored in `content/listen/moods.json`):
+- Spotify playlist URL (in place for all 18 moods, each checked against the playlist it opens)
+- Apple Music playlist URL (added after launch)
 - Sarah's Picks (small manual highlights list)
-- short descriptor
+- descriptor, blurb, and description (final for the 8 launch moods)
 
 Do not invent playlist descriptions. Sarah writes them.
 
@@ -142,13 +144,13 @@ Useful reusable assets:
 **Shared mobile chrome (in use):** `assets/images/shared/mobile/paper.webp` (warm paper, 9 KB, flattened from About's mobile paper texture onto `--color-paper` #f1e0c6) and `stripe-band.webp` (red stripe, 1200px wide, ~160 KB, from About's desktop stripe texture). Every page's mobile layout uses them via `--m-paper` / `--m-band` in `css/layout.css`. The multi-MB source PNGs are unchanged.
 
 ## 11. Fonts / Licensing
-- Perandory Semi-Condensed
-- IM Fell English Regular + Italic (self-hosted, `assets/fonts/IMFellEnglish-*.woff2`, SIL OFL)
-- Sue Ellen Francisco
-- Amoresa for logo S, subject to suitable license (if the wordmark only ships as an image, a webfont license may not be needed; confirm)
-- Luxurious Script only as fallback for logo S if needed
+- Perandory Semi-Condensed (self-hosted, `assets/fonts/Perandory-SemiCondensed.woff2`). **Open:** confirm its license covers commercial web use.
+- IM Fell English Regular + Italic (self-hosted, `assets/fonts/IMFellEnglish-*.woff2`). SIL Open Font License, so self-hosting is settled.
+- Sue Ellen Francisco (self-hosted, `assets/fonts/SueEllenFrancisco.woff2`). SIL Open Font License.
+- Amoresa for the logo S. **Open:** whether it needs any license at all, given the wordmark only ships as an image (`assets/images/wordmark-gold.svg`) and the font is never loaded on the site.
+- Luxurious Script only as fallback for the logo S if needed.
 
-Before production deployment, verify webfont licensing/hosting rights for any non-open font. Never redistribute font files in handoff documents.
+Never redistribute font files in handoff documents.
 
 ## 12. Legacy Visual Assets
 Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Preserve them if they have archival value, but **do not treat them as part of the current visual system** unless Sarah explicitly brings one back.
@@ -156,10 +158,11 @@ Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Pres
 ## 13. Still To Resolve
 - Exact production filenames and `/assets/` directory organization.
 - Hopeful vs. At Peace; Playful vs. Cheeky.
-- Mood descriptors.
-- Icons for the moods listed in §3.
-- Colors for Euphoric, Hopeful/At Peace, Unleashed, Hypnotic; hex values for all 17 colors.
-- Spotify + Apple Music URLs per mood.
+- Descriptors, blurbs, descriptions, and Sarah's Picks for the 10 non-launch moods.
+- Mood icons (deferred past launch; see §3).
+- Colors for Hopeful/At Peace, Hypnotic, Cute, Audacious, Lost, and Hype; final hex values for all 18 colors (current ones are provisional).
+- Apple Music URLs per mood (after launch).
+- Perandory Semi-Condensed commercial web license; whether Amoresa needs a license (§11).
 - Crash Course topics/art.
 - Journal production content/art.
 - Final contact/social URLs and form handling.

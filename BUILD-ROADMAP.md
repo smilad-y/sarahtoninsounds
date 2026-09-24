@@ -182,5 +182,5 @@ These are intentionally not finalized and should not be guessed:
 - final Crash Course topics
 - final Journal production content
 - final contact/social URLs
-- final webfont licensing/hosting details
+- font licensing: confirm the Perandory Semi-Condensed license covers commercial web use, and whether Amoresa needs any license at all given the logo only ships as an image. (IM Fell English is SIL Open Font License, so self-hosting it is settled.)
 - Guestbook backend/moderation implementation, if Phase 2 is activated
