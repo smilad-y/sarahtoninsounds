@@ -23,6 +23,6 @@ Several files exist in both a page folder and a shared pool with identical conte
 
 ## Still pending (not part of this upload)
 - `home-poster.jpg` — static poster/fallback frame for the Home hero video, referenced (commented out) in `index.html`.
-- Favicon / social-share image set — deferred to launch polish (`ASSET-MANIFEST.md` §13).
+- Favicon / social-share image set: in `brand/` (see `ASSET-MANIFEST.md` §12).
 
 Do not substitute placeholder or stock imagery for anything still pending.

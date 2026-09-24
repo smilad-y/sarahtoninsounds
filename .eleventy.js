@@ -12,6 +12,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("index.html");
   eleventyConfig.addPassthroughCopy("listen.html");
   eleventyConfig.addPassthroughCopy("contact.html");
+  // Favicon and iOS home-screen icon live at the root, where browsers
+  // look for them by default (sources: assets/images/brand/).
+  eleventyConfig.addPassthroughCopy("favicon.ico");
+  eleventyConfig.addPassthroughCopy("apple-touch-icon.png");
   // Listen mood config, fetched at runtime by js/listen.js.
   eleventyConfig.addPassthroughCopy("content/listen");
   // netlify/functions/ is NOT passthrough-copied: Netlify Functions

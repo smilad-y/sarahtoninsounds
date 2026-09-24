@@ -152,10 +152,27 @@ Useful reusable assets:
 
 Never redistribute font files in handoff documents.
 
-## 12. Legacy Visual Assets
+## 12. Site Icons and Share Image
+### Favicon set
+**Status:** In use on every page (plus the CMS admin page).  
+**Source:** Sarah's dragonfly drawing, `assets/images/home-v2/home-dragonfly.png` (1656×1299, transparent). Master, never edited; every icon below is generated from it.  
+**Treatment:** Cropped tight to the drawing and centered on a square with about 1% margin. Not redrawn or restyled. The 16 and 32 px sizes only get a slight saturation (+35%) and contrast (+20%) boost so the pale wings hold up on a white browser tab; 48 px and up keep the original colors.  
+**Files:**
+- `favicon.ico` (repo root): 16, 32 (boosted) and 48 px.
+- `assets/images/brand/favicon-16.png`, `favicon-32.png` (boosted).
+- `assets/images/brand/icon-192.png`, `icon-512.png` (original colors).
+- `apple-touch-icon.png` (repo root): 180×180 on the paper color `#f1e0c6`, since iOS does not support transparency.
+
+### Social share image
+**Status:** In use as the Open Graph and Twitter card image on every page.  
+**File:** `assets/images/brand/share-image.jpg` (1200×630).  
+**Source:** The desktop Home collage exactly as the site renders it (1440 px wide), with the nav tabs, menu button, and "made by" credit hidden, cropped to a 1440×756 band that keeps the whole torn-paper title card, then scaled down. Nothing redrawn.  
+**Tags:** Absolute URLs on `https://sarahtoninsounds.com`. Titles and descriptions currently reuse each page's existing `<title>` and meta description; final wording still to come.
+
+## 13. Legacy Visual Assets
 Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Preserve them if they have archival value, but **do not treat them as part of the current visual system** unless Sarah explicitly brings one back.
 
-## 13. Still To Resolve
+## 14. Still To Resolve
 - Exact production filenames and `/assets/` directory organization.
 - Hopeful vs. At Peace; Playful vs. Cheeky.
 - Descriptors, blurbs, descriptions, and Sarah's Picks for the 10 non-launch moods.
@@ -166,4 +183,3 @@ Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Pres
 - Crash Course topics/art.
 - Journal production content/art.
 - Final contact/social URLs and form handling.
-- Favicon/social-share image set.
