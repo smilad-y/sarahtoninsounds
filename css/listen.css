@@ -165,14 +165,15 @@ html:has(body.page-listen) {
   font-size: clamp(2.5rem, 6.9444vw, 6.25rem);
   line-height: 1;
   text-align: center;
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.7);
   color: var(--color-near-black);
 }
 
+/* Divider and subtitle sit ~18% of the hero higher than the Figma
+   frame so the line hugs the heading, as on the other pages. */
 .listen-hero__divider {
   position: absolute;
   left: -0.0694%;
-  top: 86.685%;
+  top: 68.5%;
   width: 37.977%;
   height: 2px;
   background-color: var(--color-crimson);
@@ -181,7 +182,7 @@ html:has(body.page-listen) {
 .listen-hero__subtitle {
   position: absolute;
   left: -0.833%;
-  top: 88.6%;
+  top: 70.4%;
   width: 36.25%;
   margin: 0;
   font-family: var(--font-body);
