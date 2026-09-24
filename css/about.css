@@ -751,14 +751,17 @@
     transform: rotate(8deg);
   }
 
+  /* Centered on the polaroid's white strip (about 24-83% across and
+     74-84% down in this export), right of the newspaper scrap that
+     pokes out under the lower-left corner; rotated with the file's tilt. */
   .av2m-polaroid figcaption {
     position: absolute;
-    left: 53%;
-    top: 78.5%;
+    left: 56%;
+    top: 75.5%;
     transform: translateX(-50%) rotate(4deg);
     font-family: var(--font-marginalia);
     color: var(--color-crimson);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     white-space: nowrap;
   }
 

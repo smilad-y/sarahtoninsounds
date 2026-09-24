@@ -1018,34 +1018,36 @@ html:has(body.page-listen) {
 
 @media (max-width: 760px) {
   /* Shared mobile paper and red-stripe band (css/layout.css). The logo
-     lives in the hero rather than the header here, so the band runs
-     through both: the header, then the hero's logo block right under
-     it. Same image, size, and x-position, so the vertical stripes line
-     up across the join. */
+     lives in the hero, not the header, but on mobile it sits above the
+     nav like every other page: the header's band gets a logo-height
+     top padding, and the logo is lifted into that space (positioned
+     against the page, since the hero and main are static here). One
+     band element, so the stripes are continuous. */
   .page-listen {
     background: var(--m-paper);
   }
 
   .listen-header {
     background: var(--m-band);
-    background-position: center top;
-    padding-bottom: 0.5rem;
+    padding: 8.5rem 1rem 1.25rem;
   }
 
   .listen-hero {
+    position: static;
     aspect-ratio: auto;
-    min-height: 20rem;
-    padding: 0 1rem 2rem;
+    min-height: 0;
+    padding: 1.75rem 1rem 2rem;
   }
 
   .listen-hero__logo {
-    position: static;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     width: auto;
-    height: auto;
-    margin: 0 -1rem 1.5rem;
-    padding: 0.75rem 0 1.5rem;
-    background: var(--m-band);
-    background-position: center 30%;
+    height: 8.5rem;
+    margin: 0;
+    padding: 0;
   }
 
   .listen-hero__logo-inner {
