@@ -252,44 +252,73 @@
   margin: 0.35em 0 0;
 }
 
-/* ── Featured entry (automatic newest-dated entry) ──
-   #journal-featured is a full-stage, non-visual positioning context
-   (like .jv2-nav) — every child below is positioned with flat
-   percentages of the same 1429×900 reference frame. */
-.jv2-featured {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+/* ── Flow layer: Featured Post + Recent cards ──
+   .journal-v2 is a one-cell grid: the fixed-ratio stage and this flow
+   layer share the cell, so the page grows to fit whichever is taller
+   while the stage's textures keep their Figma proportions. Inside the
+   layer, the Featured card and Recent row are in normal flow, so a
+   longer title or summary grows the card and pushes the Recent row
+   down instead of colliding with it. Percentages here are of the stage
+   width (padding/margin %), converted from the 1429×900 Figma frame. */
+.journal-v2 {
+  display: grid;
+}
+
+.journal-v2__stage,
+.jv2-flow {
+  grid-area: 1 / 1;
+}
+
+.journal-v2__stage {
+  align-self: start;
+}
+
+.jv2-flow {
+  position: relative;
   z-index: 5;
+  /* Figma's card top, 18.4444% of the frame height, as % of width. */
+  padding-top: 11.6166%;
   pointer-events: none;
 }
 
+/* ── Featured entry ──
+   Two real columns: the photo keeps Figma's box (x 20.01%, w 24.49%)
+   and the text sits in its own column to the right, so an image of any
+   shape can never cover the meta line, divider, or summary. The card
+   keeps the backdrop's own 1914×816 ratio (Figma's 957×408 box) as its
+   minimum size and only grows taller when the text needs more room. */
+.jv2-featured {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 44.03% 1fr;
+  column-gap: 4.49%;
+  width: 66.9699%;
+  margin-left: 14.5556%;
+  aspect-ratio: 1914 / 816;
+  padding: 4.9% 5.88% 2.87% 5.46%;
+  container-type: inline-size;
+  pointer-events: auto;
+}
+
+/* Nine-slice: the torn top (with both tapes) and torn bottom keep their
+   natural proportions at any card height; only the plain paper band
+   between them (42%-82% of the image) stretches when the card grows.
+   Slice sizes are image px; widths are the same slices at card scale
+   (344/1914 and 144/1914 of the card width). */
 .journal-featured__backdrop {
   position: absolute;
-  left: 14.5556%;
-  top: 18.4444%;
-  width: 66.9699%;
-  height: 45.3333%;
-  background-image: url('/assets/images/journal/featured-paper-backdrop.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 1;
+  inset: 0;
+  border-image-source: url('/assets/images/journal/featured-paper-backdrop.png');
+  border-image-slice: 344 0 144 0 fill;
+  /* Fallback without container units: same slices at the base ratio. */
+  border-image-width: 42.16% 0 17.65% 0;
+  border-image-width: 17.973cqw 0 7.524cqw 0;
+  border-image-repeat: stretch;
 }
 
-/* Figma's Featured Image layer is 887×547 (62.07%×60.78% of the
-   stage) — used exactly as specified. Object-fit: cover preserves the
-   CMS image's own aspect ratio (crop, not stretch). */
-.journal-featured__photo {
-  position: absolute;
-  left: 20.014%;
-  top: 26.2222%;
-  width: 24.4927%;
-  height: 33%;
-  z-index: 2;
-}
-
+/* Cropped to fill its box (cover) unless the CMS "Show the whole
+   Featured Image" switch is on (contain, below). */
 .journal-featured__photo img {
   display: block;
   width: 100%;
@@ -298,15 +327,33 @@
   border-radius: 4px;
 }
 
-/* Featured text fields — each positioned at its own exact Figma box
-   (x/y/w converted to % of the 1429×900 stage), not a shared flow
-   container. */
-.journal-featured__meta {
+/* Desktop: the photo fills its column at whatever height the card
+   ends up, so landscape and portrait images both stay inside it. */
+.jv2-featured .journal-featured__photo {
+  position: relative;
+  min-height: 12rem;
+}
+
+.jv2-featured .journal-featured__photo img {
   position: absolute;
-  left: 39.6781%;
-  top: 30.7778%;
-  width: 17.1449%;
-  pointer-events: auto;
+  inset: 0;
+}
+
+.jv2-featured .journal-featured__body {
+  position: relative;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* No image: the text takes the whole card. */
+.jv2-featured .journal-featured__backdrop + .journal-featured__body {
+  grid-column: 1 / -1;
+}
+
+.journal-featured__meta {
   font-family: var(--font-body);
   font-style: italic;
   font-size: clamp(0.7rem, 0.9vw, 0.85rem);
@@ -314,55 +361,33 @@
   text-align: center;
   color: var(--color-near-black);
   margin: 0;
-  z-index: 3;
 }
 
 .journal-featured__title {
-  position: absolute;
-  left: 42.0574%;
-  top: 34.1111%;
-  width: 33.5899%;
-  pointer-events: auto;
   font-family: var(--font-display);
   font-size: clamp(2rem, 4.9vw, 4.4rem);
   text-transform: uppercase;
   text-align: center;
   line-height: 1.05;
+  overflow-wrap: break-word;
   color: var(--color-near-black);
   margin: 0;
-  z-index: 3;
 }
 
 .journal-featured__divider {
-  position: absolute;
-  left: 43.1071%;
-  top: 42.6667%;
-  width: 31.4906%;
   height: 2px;
-  pointer-events: auto;
   background-color: var(--color-crimson);
-  z-index: 3;
 }
 
 .journal-featured__excerpt {
-  position: absolute;
-  left: 44.6466%;
-  top: 44.6667%;
-  width: 29.951%;
-  pointer-events: auto;
   font-family: var(--font-body);
   font-size: clamp(0.85rem, 1.4vw, 1.25rem);
   line-height: 1.5;
   color: var(--color-near-black);
   margin: 0;
-  z-index: 3;
 }
 
 .journal-featured__link {
-  position: absolute;
-  left: 45.6263%;
-  top: 52.7778%;
-  pointer-events: auto;
   display: inline-block;
   font-family: var(--font-display);
   letter-spacing: 0.04em;
@@ -372,32 +397,53 @@
   text-decoration: none;
   border-bottom: 2px solid var(--color-crimson);
   padding-bottom: 2px;
-  z-index: 3;
 }
 
-/* ── Recent entries: four fixed slots at their exact individual Figma
-   coordinates (see journal.html comment on why these are fixed slots
-   rather than an equal-gap grid). Each slot is filled with the same
-   .journal-card markup used by renderJournalCard() everywhere. ── */
+.jv2-featured .journal-featured__title {
+  margin-top: 0.15em;
+}
+
+/* Titles over 16 characters (set by renderFeaturedEntry) step down a
+   size so a 40-character title (the CMS limit) wraps to three lines at
+   most instead of five. */
+.jv2-featured .journal-featured__title--long {
+  font-size: clamp(1.6rem, 3.4vw, 3.05rem);
+}
+
+.jv2-featured .journal-featured__divider {
+  margin: 0.5em 0 0.7em;
+}
+
+/* READ gets its own row under the summary, never on top of it. */
+.jv2-featured .journal-featured__link {
+  align-self: flex-start;
+  margin-top: 0.9em;
+}
+
+/* ── Recent entries: four slots at their exact individual Figma x
+   offsets (see journal.html comment on why these are fixed offsets
+   rather than an equal-gap grid), one flex row directly under the
+   Featured card. Each slot is filled with the same .journal-card
+   markup used by renderJournalCard() everywhere. ── */
 .jv2-recent {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 6;
-  pointer-events: none;
+  display: flex;
+  align-items: stretch;
+  /* Figma's 0.39%-of-height gap between the Featured card and cards. */
+  margin-top: 0.245%;
 }
 
-/* min-height, not height: the card keeps Figma's size but grows when
-   its text wraps more on narrower screens, instead of spilling out. */
+/* aspect-ratio is a minimum here: the card keeps Figma's 269×326 size
+   but grows when its text wraps more on narrower screens. */
 .jv2-card-slot {
-  position: absolute;
-  top: 64.1667%;
-  width: 18.8244%;
-  min-height: 36.2222%;
   display: flex;
   flex-direction: column;
+  width: 18.8244%;
+  aspect-ratio: 269 / 326;
   pointer-events: auto;
+}
+
+.jv2-card-slot[hidden] {
+  display: none;
 }
 
 .jv2-card-slot > .journal-card {
@@ -411,10 +457,10 @@
   aspect-ratio: 1.6915;
 }
 
-.jv2-card-slot--1 { left: 5.7383%; }
-.jv2-card-slot--2 { left: 26.802%; }
-.jv2-card-slot--3 { left: 46.8859%; }
-.jv2-card-slot--4 { left: 66.9699%; }
+.jv2-card-slot--1 { margin-left: 5.7383%; }
+.jv2-card-slot--2 { margin-left: 2.2393%; }
+.jv2-card-slot--3 { margin-left: 1.2595%; }
+.jv2-card-slot--4 { margin-left: 1.2596%; }
 
 .journal-card {
   display: flex;
@@ -538,6 +584,11 @@
   .journal-v2__stage {
     aspect-ratio: auto;
     min-height: 700px;
+  }
+
+  /* The card top stays at 18.4444% of the now 700px-tall stage. */
+  .jv2-flow {
+    padding-top: 129px;
   }
 }
 

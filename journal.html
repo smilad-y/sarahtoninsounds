@@ -83,15 +83,31 @@ templateEngineOverride: njk
       <p class="jv2-hero__subtitle">essays, monthly favs, and random thoughts</p>
     </div>
 
+    {{ journalFilters(journalTypes, "desktop") }}
+
+    <!-- Visual treatment only — the reusable Journal Post page doesn't
+         exist yet, so this stays a decorative note rather than a link
+         to nowhere. -->
+    <div class="jv2-footer-note" aria-hidden="true">
+      <img src="/assets/images/journal/blue-paper.png" alt="">
+      <span>Read something new!</span>
+    </div>
+
+  </div>
+
+  <!-- Featured Post and Recent cards sit in one flow layer over the
+       stage (same grid cell), so a Featured card with a long title or
+       summary grows and pushes the Recent row down instead of
+       overlapping it. The stage keeps its fixed aspect ratio, so the
+       background textures never stretch. -->
+  <div class="jv2-flow">
     <section class="jv2-featured" id="journal-featured" aria-label="Featured Journal entry">
       {%- if featured %}{{ featured | renderFeaturedEntry | safe }}{% else %}<p class="journal-empty">New essays and Monthly Favorites are on the way.</p>{% endif -%}
     </section>
 
-    {{ journalFilters(journalTypes, "desktop") }}
-
-    <!-- Four fixed slots at their exact individual Figma coordinates
-         (the four card positions are not perfectly uniformly spaced in
-         the source file, so a flexible equal-gap grid would not match
+    <!-- Four slots at their exact individual Figma x offsets (the
+         four card positions are not perfectly uniformly spaced in the
+         source file, so a flexible equal-gap grid would not match
          them exactly). Filled at build time via the same reusable
          renderJournalCard() used everywhere else (and re-filled by
          js/journal-filters.js when a filter is chosen); any slot beyond
@@ -102,15 +118,6 @@ templateEngineOverride: njk
       <div class="jv2-card-slot jv2-card-slot--3" id="journal-card-3"{% if not recent[2] %} hidden{% endif %}>{% if recent[2] %}{{ recent[2] | renderJournalCard | safe }}{% endif %}</div>
       <div class="jv2-card-slot jv2-card-slot--4" id="journal-card-4"{% if not recent[3] %} hidden{% endif %}>{% if recent[3] %}{{ recent[3] | renderJournalCard | safe }}{% endif %}</div>
     </section>
-
-    <!-- Visual treatment only — the reusable Journal Post page doesn't
-         exist yet, so this stays a decorative note rather than a link
-         to nowhere. -->
-    <div class="jv2-footer-note" aria-hidden="true">
-      <img src="/assets/images/journal/blue-paper.png" alt="">
-      <span>Read something new!</span>
-    </div>
-
   </div>
   </div>
 

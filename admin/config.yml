@@ -193,11 +193,11 @@ collections:
     slug: "{{slug}}"
     summary: "{{title}} — {{date}}"
     fields:
-      - { label: "Title", name: title, widget: string }
+      - { label: "Title", name: title, widget: string, hint: "Up to 40 characters. Titles of 16 characters or fewer get the big headline size on the Featured card; longer ones step down a size and wrap to two or three lines.", pattern: ['^.{1,40}$', 'Keep the title to 40 characters or fewer so it fits the Featured card.'] }
       - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>/. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
       - { label: "Date", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-      - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
-      - { label: "Featured Image", name: featured_image, widget: image, required: false }
+      - { label: "Excerpt (summary)", name: excerpt, widget: text, hint: "One or two sentences, up to 160 characters (100 to 140 reads best). Shown on the Featured card and the Journal cards.", pattern: ['^[\s\S]{1,160}$', 'Keep the summary to 160 characters or fewer so it fits the Featured card.'] }
+      - { label: "Featured Image", name: featured_image, widget: image, required: false, hint: "Best as a landscape image around 3:2, at least 1200 × 800 px (1500 × 1000 is ideal). It is cropped a little differently on the Featured card, the Journal cards, and mobile, so keep the main subject near the center. Portrait images work too but lose some of the top and bottom unless Show the whole Featured Image is on. JPG under 500 KB loads fastest." }
       - { label: "Show the whole Featured Image", name: featured_image_whole, widget: boolean, default: false, required: false, hint: "Turn on for polaroids and cut-outs so no edge gets cropped. Leave off for regular photos, which are cropped to fill the space." }
       - { label: "Category", name: category, widget: hidden, default: "Essay" }
       - { label: "Tags", name: tags, widget: hidden, default: "journalEssay" }
@@ -213,7 +213,7 @@ collections:
         required: false
         collapsed: true
         fields:
-          - { label: "Image", name: image, widget: image, required: false }
+          - { label: "Image", name: image, widget: image, required: false, hint: "A wide banner above the post on desktop, cropped to about 2.6:1. Best at 2200 × 850 px, at least 1600 px wide. Mobile shows the whole image in a polaroid, so any shape works there. Use Image position to choose what stays visible when it is cropped." }
           - { label: "Image position", name: position, widget: select, options: ["top", "center", "bottom"], default: "center", required: false, hint: "Which part of the photo stays visible when it is cropped to fit. Use top for portraits so faces are not cut off." }
           - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
           - { label: "Caption", name: caption, widget: string, required: false }
@@ -273,11 +273,11 @@ collections:
             widget: list
             summary: "{{title}} — {{date}}"
             fields:
-              - { label: "Title", name: title, widget: string, hint: "e.g. August Favorites" }
+              - { label: "Title", name: title, widget: string, hint: "e.g. August Favorites. Up to 40 characters. Titles of 16 characters or fewer get the big headline size on the Featured card; longer ones step down a size and wrap to two or three lines.", pattern: ['^.{1,40}$', 'Keep the title to 40 characters or fewer so it fits the Featured card.'] }
               - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
               - { label: "Date", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-              - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
-              - { label: "Featured Image", name: featured_image, widget: image, required: false }
+              - { label: "Excerpt (summary)", name: excerpt, widget: text, hint: "One or two sentences, up to 160 characters (100 to 140 reads best). Shown on the Featured card and the Journal cards.", pattern: ['^[\s\S]{1,160}$', 'Keep the summary to 160 characters or fewer so it fits the Featured card.'] }
+              - { label: "Featured Image", name: featured_image, widget: image, required: false, hint: "Best as a landscape image around 3:2, at least 1200 × 800 px (1500 × 1000 is ideal). It is cropped a little differently on the Featured card, the Journal cards, and mobile, so keep the main subject near the center. Portrait images work too but lose some of the top and bottom unless Show the whole Featured Image is on. JPG under 500 KB loads fastest." }
               - { label: "Show the whole Featured Image", name: featured_image_whole, widget: boolean, default: false, required: false, hint: "Turn on for polaroids and cut-outs so no edge gets cropped. Leave off for regular photos, which are cropped to fill the space." }
               - label: "Hero Image (optional)"
                 name: hero
@@ -285,7 +285,7 @@ collections:
                 required: false
                 collapsed: true
                 fields:
-                  - { label: "Image", name: image, widget: image, required: false }
+                  - { label: "Image", name: image, widget: image, required: false, hint: "A wide banner above the post on desktop, cropped to about 2.6:1. Best at 2200 × 850 px, at least 1600 px wide. Mobile shows the whole image in a polaroid, so any shape works there. Use Image position to choose what stays visible when it is cropped." }
                   - { label: "Image position", name: position, widget: select, options: ["top", "center", "bottom"], default: "center", required: false, hint: "Which part of the photo stays visible when it is cropped to fit. Use top for portraits so faces are not cut off." }
                   - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
                   - { label: "Caption", name: caption, widget: string, required: false }

@@ -199,7 +199,7 @@
       imageHtml +
       '<div class="journal-featured__body">' +
       '<div class="journal-featured__meta">' + categoryLabel + ' &middot; ' + displayDate + '</div>' +
-      '<h2 class="journal-featured__title">' + escapeHtml(entry.title) + '</h2>' +
+      '<h2 class="journal-featured__title' + (String(entry.title).trim().length > 16 ? ' journal-featured__title--long' : '') + '">' + escapeHtml(entry.title) + '</h2>' +
       '<div class="journal-featured__divider"></div>' +
       '<p class="journal-featured__excerpt">' + escapeHtml(entry.excerpt) + '</p>' +
       '<a class="journal-featured__link" href="/journal/' + encodeURIComponent(entry.slug) + '">Read</a>' +
