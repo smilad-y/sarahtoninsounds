@@ -289,7 +289,6 @@
 }
 
 .contact-field input,
-.contact-field select,
 .contact-field textarea {
   display: block;
   width: 100%;
@@ -311,15 +310,6 @@
 .contact-field textarea {
   min-height: 7.5rem;
   resize: vertical;
-}
-
-.contact-field select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 4.5 7 9.5 12 4.5' fill='none' stroke='%231c1a16' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right var(--space-3) center;
-  background-size: 0.85rem;
-  padding-right: var(--space-7);
 }
 
 .contact-form__actions {
@@ -364,6 +354,10 @@
   margin-top: var(--space-4);
   font-family: var(--font-body);
   font-size: var(--text-lg);
+}
+
+.contact-form__status:empty {
+  display: none;
 }
 
 .contact-form__status[data-state="success"] {
@@ -497,8 +491,17 @@
   opacity: 0.75;
 }
 
+.contact-social-card:hover,
 .contact-social-link:hover {
   border-color: var(--color-crimson);
+}
+
+/* The site-wide gold focus ring is too faint on this page's cream
+   paper and white fields (about 1.9:1), so Contact uses near-black
+   with a paper-colored gap, which also reads on the red stripes. */
+.page-contact :focus-visible {
+  outline-color: var(--color-near-black);
+  box-shadow: 0 0 0 2px var(--color-paper);
 }
 
 /* Small paper-scrap sign-off, reusing the established shared/tape
@@ -531,6 +534,12 @@
   font-size: 1rem;
   line-height: 1.2;
   color: var(--color-near-black);
+}
+
+/* The flower hangs past the column edge by design; on narrower desktop
+   widths that pushed past the viewport and caused sideways scroll. */
+.contact-page {
+  overflow-x: clip;
 }
 
 .contact-flower {
