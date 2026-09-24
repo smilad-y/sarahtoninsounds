@@ -1,5 +1,5 @@
 # Sarahtonin Sounds — Master Project Spec
-**Handoff version:** September 23, 2026 · v3  
+**Handoff version:** September 23, 2026 · v4  
 **Purpose:** Current source of truth for continuing the Sarahtonin Sounds website in Claude / Claude Code.
 
 ## 1. Project
@@ -30,7 +30,7 @@ The current site should feel personal, editorial, tactile, music-obsessed, and s
 ### Repository
 - Active working branch: `claude/add-claude-md-file-3fgnk0` (Sarah plans to rename it later).
 - The `work-in-progress` branch is stale and holds the legacy single-page mood-wheel site. Do not push current work there.
-- Confirm which branch Netlify deploys to production before launch.
+- Netlify deploys `main` to production. At launch, the working branch is merged into `main`.
 
 ## 2. Legacy Site / Existing Implementation
 There is an older Sarahtonin Sounds implementation that predates the current design direction.
@@ -208,7 +208,7 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 ### Desktop flow
 1. Pick Your Mood
 2. Selected mood turntable/player/tracklist
-3. Crash Courses
+3. Crash Courses (rolls out after launch)
 4. Persistent Now Playing mini player
 
 ### Mood selector
@@ -267,6 +267,8 @@ Notes:
 The turntable is a signature interaction, not decorative filler. A selected mood should resolve into the full record/turntable experience.
 
 ### Crash Courses
+**Rolls out after launch (decided, Sarah, September 2026).** Not part of launch scope.
+
 Separate from mood playlists. Curated introductions to genres, artists, scenes, or sounds. Do not collapse Crash Courses into the mood taxonomy.
 
 ### Now Playing

@@ -1,5 +1,5 @@
 # Sarahtonin Sounds — Build & Migration Roadmap
-**Version:** v3 · September 23, 2026
+**Version:** v4 · September 23, 2026
 
 ## Launch Scope
 **Home · About · Listen · Journal · Contact**
@@ -92,12 +92,12 @@ The legacy song library is archive-only. There is no migration or remapping phas
 ### Dependency
 Two mood names, the icons (deferred past launch), six colors, and the non-launch moods' descriptors are still undecided. Build so these drop in via config.
 
-## Phase 6 — Listen Content + Crash Courses
+## Phase 6 — Listen Content
 ### Must have
 - Populate mood playlists with Sarah's real Spotify + Apple Music URLs.
 - Sarah writes descriptors.
 - ~~Finish remaining mood icons.~~ **Deferred past launch (Sarah, September 2026):** launch labels are color circles with number, name, and descriptor only. Icons are added later, all at once (Phase 10).
-- Add Crash Courses as a clearly separate section.
+- ~~Add Crash Courses as a clearly separate section.~~ **Moved to post-launch (Sarah, September 2026).** See Phase 10.
 - Launch with 6-8 live moods Sarah is confident in. Moods not yet live are hidden from the selector (not shown as locked), with a short handwritten note near the selector saying more are coming. Adding a mood later = flip its live flag in moods.json.
   - **Decided (Sarah, September 2026): 8 launch moods, in display order:** Chill, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant. Set live in `content/listen/moods.json`, with each one's Spotify link checked against the playlist it opens, and final descriptor, blurb, description, and Sarah's Picks in place. Still owed: Apple Music links.
   - **Decided (Sarah, September 2026): launch is Spotify-only.** Apple Music is added later, mood by mood. The Spotify / Apple Music toggle in the now spinning bar is hidden for any mood without an Apple Music URL in `moods.json` and appears on its own once one is added; no code change needed.
@@ -139,9 +139,9 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - Media-size/performance review.
 - Broken-link/form testing.
 - Metadata, title, description, favicon/share image.
-- Confirm Netlify's production branch; merge or repoint from `claude/add-claude-md-file-3fgnk0`.
+- Merge `claude/add-claude-md-file-3fgnk0` into `main` (Netlify's production branch, confirmed).
 - Netlify production deployment.
-- CMS login at launch: set `backend.branch` in `admin/config.yml` to the production branch; optionally set `site_domain` to `sarahtoninsounds.com` once the domain is attached. The GitHub OAuth App callback (`https://api.netlify.com/auth/done`) does not change.
+- CMS login at launch: set `backend.branch` in `admin/config.yml` to `main`; optionally set `site_domain` to `sarahtoninsounds.com` once the domain is attached. The GitHub OAuth App callback (`https://api.netlify.com/auth/done`) does not change.
 - Confirm no Guestbook links/routes accidentally appear in launch nav.
 - Confirm legacy purple/petal/marquee UI did not leak into current design unintentionally.
 
@@ -150,7 +150,7 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - 404 personality/microcopy.
 - Refined hover/motion details.
 - Additional Journal treatments.
-- Additional Crash Courses.
+- Crash Courses section, as a clearly separate section of Listen (rolled out after launch; decided Sarah, September 2026).
 - Performance tuning based on real deployment.
 - Small copy trims based on actual layouts.
 - Mood icons on the selector labels, added all at once for every live mood (deferred from launch; PROJECT-SPEC §7 Mood selector).
@@ -177,7 +177,6 @@ These are intentionally not finalized and should not be guessed:
 - which of Electric (formerly Energized) / Hype gets the disco ball icon
 - remaining mood icons (not needed for launch; added all at once after launch), and descriptors for non-launch moods
 - colors for Hopeful/At Peace, Hypnotic, Cute, Audacious, Lost, and Hype; final hex values for all colors (current ones are provisional, sampled from the circle art)
-- whether Crash Courses must be live at launch, or can roll out later
 - "discover music!" note on Home
 - final Crash Course topics
 - final Journal production content
