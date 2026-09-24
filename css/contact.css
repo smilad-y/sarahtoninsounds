@@ -430,7 +430,6 @@
   gap: var(--space-3);
 }
 
-.contact-social-card,
 .contact-social-link {
   display: flex;
   align-items: center;
@@ -441,11 +440,6 @@
   text-decoration: none;
   color: var(--color-near-black);
   background: rgba(255, 255, 255, 0.6);
-}
-
-.contact-social-card--spotify {
-  border-width: 1.5px;
-  background: var(--color-cream);
 }
 
 .contact-social-icon {
@@ -462,21 +456,6 @@
   height: 100%;
 }
 
-.contact-social-icon--dark {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background: var(--color-near-black);
-  color: var(--color-cream);
-  padding: var(--space-2);
-}
-
-.contact-social-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2em;
-}
-
 .contact-social-label {
   font-family: var(--font-body);
   font-size: 1.1rem;
@@ -484,14 +463,6 @@
   letter-spacing: 0.08em;
 }
 
-.contact-social-desc {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  color: var(--color-near-black);
-  opacity: 0.75;
-}
-
-.contact-social-card:hover,
 .contact-social-link:hover {
   border-color: var(--color-crimson);
 }
