@@ -150,7 +150,7 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - 404 personality/microcopy.
 - Refined hover/motion details.
 - Additional Journal treatments.
-- Crash Courses section, as a clearly separate section of Listen (rolled out after launch; decided Sarah, September 2026).
+- Crash Courses section, as a clearly separate section of Listen (rolled out after launch; decided Sarah, September 2026). **System built (September 2026):** CMS collection, course pages, index, and Listen shelf, all hidden until a course is set Live. Content is Sarah's.
 - Performance tuning based on real deployment.
 - Small copy trims based on actual layouts.
 - Mood icons on the selector labels, added all at once for every live mood (deferred from launch; PROJECT-SPEC §7 Mood selector).

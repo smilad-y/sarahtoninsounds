@@ -329,6 +329,47 @@ collections:
                   - { label: "Artist", name: artist, widget: string }
                   - { label: "Note", name: note, widget: text, required: false }
 
+  # ── CRASH COURSES ──
+  # Listen's Crash Courses (PROJECT-SPEC.md §7): curated introductions to
+  # a genre, artist, scene, or sound. Separate from the mood data in
+  # content/listen/moods.json. A folder collection like Journal Essays:
+  # one Markdown file per course, and the file name (set from the title
+  # when the entry is created) is its URL, /listen/crash-courses/<slug>/.
+  # Entries with Live off appear nowhere on the site. The folder's data
+  # file (crash-courses.11tydata.js) handles the URL, so tags/layout are
+  # the only hidden plumbing here.
+  - name: crash_courses
+    label: "🎧 Crash Courses"
+    label_singular: "Crash Course"
+    folder: content/listen/crash-courses
+    create: true
+    format: frontmatter
+    extension: md
+    slug: "{{slug}}"
+    summary: "{{title}} (order {{order}}, live: {{live}})"
+    sortable_fields: ["order", "title"]
+    fields:
+      - { label: "Title", name: title, widget: string, hint: "What the course is about. Shown after \"a crash course in\" on the course page, and on the cards. The page URL is made from this title when you first save, and stays the same if you edit the title later." }
+      - { label: "Card art", name: card_art, widget: image, hint: "Square, at least 1200 × 1200 px. Shown taped onto the cards and on the course page, cropped to a square." }
+      - { label: "Art description", name: card_art_alt, widget: string, hint: "Describe the card art for screen readers." }
+      - { label: "Hook", name: hook, widget: string, required: false, hint: "One short line shown under the title on the cards." }
+      - { label: "Intro", name: body, widget: markdown, required: false, hint: "Shown under the title on the course page." }
+      - { label: "Spotify playlist URL", name: spotify_url, widget: string, pattern: ['^https://open\.spotify\.com/playlist/[A-Za-z0-9]+', 'Paste a Spotify playlist link, like https://open.spotify.com/playlist/...'], hint: "The course page plays this playlist." }
+      - { label: "Apple Music playlist URL", name: apple_music_url, widget: string, required: false, pattern: ['^https://music\.apple\.com/', 'Paste an Apple Music playlist link, like https://music.apple.com/...'], hint: "Optional. When set, the course page shows a Spotify / Apple Music toggle." }
+      - label: "Start here"
+        name: start_here
+        widget: list
+        required: false
+        summary: "{{track}} by {{artist}}"
+        fields:
+          - { label: "Track", name: track, widget: string }
+          - { label: "Artist", name: artist, widget: string }
+          - { label: "Note", name: note, widget: string, required: false, hint: "A short handwritten note beside the track." }
+      - { label: "Live", name: live, widget: boolean, default: false, required: false, hint: "Off: the course appears nowhere on the site. On: it shows on Listen, the Crash Courses page, and at its own URL." }
+      - { label: "Order", name: order, widget: number, value_type: int, required: false, hint: "Lower numbers show first on Listen and the Crash Courses page." }
+      - { label: "Tags", name: tags, widget: hidden, default: "crashCourse" }
+      - { label: "Layout", name: layout, widget: hidden, default: "layouts/crash-course.njk" }
+
   # ── HOME (current site) ──
   # content/home.json. The ticker runs along the navy band on Home; the
   # site adds the ✶ between phrases and loops them.

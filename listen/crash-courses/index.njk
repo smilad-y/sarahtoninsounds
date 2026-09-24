@@ -1,0 +1,57 @@
+---js
+{
+  // The Crash Courses index: every live course, in Order. Paginating
+  // over the live list means no page is built at all while none are
+  // live (Eleventy skips pagination over empty data).
+  pagination: {
+    data: "collections.crashCourseLive",
+    size: 1000,
+    alias: "courses"
+  },
+  permalink: "/listen/crash-courses/"
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{%- set metaTitle = "Crash Courses | Sarahtonin Sounds" %}
+<title>{{ metaTitle }}</title>
+{% include "partials/crash-course-head.njk" %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ metaTitle }}">
+<meta property="og:url" content="https://sarahtoninsounds.com{{ page.url }}">
+<meta property="og:image" content="https://sarahtoninsounds.com/assets/images/brand/share-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sarahtonin Sounds">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ metaTitle }}">
+<meta name="twitter:image" content="https://sarahtoninsounds.com/assets/images/brand/share-image.jpg">
+<meta name="twitter:image:alt" content="Sarahtonin Sounds">
+</head>
+<body class="page-listen page-crash-courses">
+<a class="skip-link" href="#main">Skip to content</a>
+
+{% include "partials/crash-course-header.njk" %}
+
+<main id="main" class="cc-page cc-index">
+  <p class="cc-back"><a href="/listen.html"><span class="arrow-line cc-back__arrow" aria-hidden="true"></span>Back to Listen</a></p>
+  <h1 class="cc-index__heading">Crash Courses</h1>
+  <div class="cc-rule" aria-hidden="true"></div>
+  <ul class="cc-grid">
+    {%- set cardHeading = "h2" %}
+    {%- set cardSizes = "(max-width: 560px) 80vw, (max-width: 1100px) 40vw, 300px" %}
+    {%- for course in courses %}
+    <li>{% include "partials/crash-course-card.njk" %}</li>
+    {%- endfor %}
+  </ul>
+</main>
+
+{% include "site-footer.njk" %}
+
+<script src="/js/site.js" defer></script>
+
+</body>
+</html>
