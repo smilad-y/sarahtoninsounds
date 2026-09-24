@@ -11,9 +11,10 @@ start_here:
       before. Here's your chance to hear the original and discover one of
       Egypt's most beloved singers.
   - track: Enta Omry
-    artist: If you're going to listen to one Umm Kulthum song, start here. Her
-      voice, the orchestra, the emotion, the way the song builds. It's an
-      experience. Give yourself time with this one.
+    artist: "Umm Kulthum "
+    note: If you're going to listen to one Umm Kulthum song, start here. Her voice,
+      the orchestra, the emotion, the way the song builds. It's an experience.
+      Give yourself time with this one.
   - track: Ouda
     artist: Hamid Al Shaeri
     note: For listeners who love synths, retro production, and the sounds of
