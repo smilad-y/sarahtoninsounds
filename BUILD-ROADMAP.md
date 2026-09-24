@@ -141,6 +141,7 @@ Two mood names, several icons, four colors, and all descriptors are still undeci
 - Metadata, title, description, favicon/share image.
 - Confirm Netlify's production branch; merge or repoint from `claude/add-claude-md-file-3fgnk0`.
 - Netlify production deployment.
+- CMS login at launch: set `backend.branch` in `admin/config.yml` to the production branch; optionally set `site_domain` to `sarahtoninsounds.com` once the domain is attached. The GitHub OAuth App callback (`https://api.netlify.com/auth/done`) does not change.
 - Confirm no Guestbook links/routes accidentally appear in launch nav.
 - Confirm legacy purple/petal/marquee UI did not leak into current design unintentionally.
 

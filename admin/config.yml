@@ -7,22 +7,28 @@
 # the real production branch. Production-branch cutover is a separate
 # launch task, not assumed to be this branch.
 #
-# Backend: GitHub (not the deprecated Netlify Identity + Git Gateway —
-# see the conversation record for why). Auth goes through the
-# self-hosted OAuth Netlify Functions at netlify/functions/auth.js +
-# callback.js, not a third-party-hosted provider, so publishing never
-# depends on someone else's uptime. `base_url` below is a PLACEHOLDER —
-# it must be replaced with this site's real Netlify URL (or custom
-# domain) before the CMS can authenticate, and OAUTH_CLIENT_ID /
-# OAUTH_CLIENT_SECRET must be set as Netlify environment variables from
-# a GitHub OAuth App whose callback URL is
-# <base_url>/.netlify/functions/callback.
+# Backend: GitHub, logged in through Netlify's built-in GitHub OAuth
+# provider (Project configuration > Access & security > OAuth). Not the
+# deprecated Netlify Identity + Git Gateway. The GitHub OAuth App's
+# callback URL is https://api.netlify.com/auth/done, which works on
+# previews and on the live domain alike, so it never changes.
+# base_url / auth_endpoint are left at Decap's defaults (Netlify's auth
+# service). site_domain pins the login to this Netlify project so it
+# also works from deploy-preview and branch-deploy addresses.
+#
+# At launch: change `branch` to the production branch (see the warning
+# above). site_domain can stay as the netlify.app name, or become
+# sarahtoninsounds.com once that domain is attached to this project.
+#
+# The old self-hosted login (netlify/functions/auth.js + callback.js)
+# is no longer used. Left in place for now; do not point the OAuth App
+# back at it without fixing callback.js, which posts the token to any
+# opener window.
 backend:
   name: github
   repo: smilad-y/sarahtoninsounds
   branch: claude/add-claude-md-file-3fgnk0
-  base_url: https://sarahtoninsounds.com
-  auth_endpoint: .netlify/functions/auth
+  site_domain: cool-sfogliatella-be8fb5.netlify.app
 
 # Uploads land inside assets/, which .eleventy.js already passthrough-
 # copies to the published site (public/uploads was never copied, so
