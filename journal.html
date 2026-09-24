@@ -203,6 +203,8 @@ templateEngineOverride: njk
   </div>
 </main>
 
+{% include "site-footer.njk" %}
+
 <script type="application/json" id="journal-data">{{ feed | journalFeedJson(journal.featured) | safe }}</script>
 <script src="/js/site.js" defer></script>
 <script src="/js/journal.js" defer></script>

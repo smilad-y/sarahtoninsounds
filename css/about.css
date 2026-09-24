@@ -257,7 +257,7 @@
   position: relative;
   z-index: 1;
   width: 1440px;
-  height: 380px;
+  height: 430px;
   margin-top: 60px;
   overflow-x: visible;
   overflow-y: clip;
@@ -597,7 +597,7 @@
    and this reads as the paper simply sitting lower, not warped. */
 .ab3-deco--blue-corner {
   left: -97px;
-  top: 120.53px;
+  top: 170.53px;
   width: 402.271px;
   height: 259.473px;
 }
@@ -642,9 +642,20 @@
    1112.42 − 952 = 160.42px. */
 .ab3-deco--flowers {
   left: 25.84px;
-  top: 160.42px;
+  top: 210.42px;
   width: 145.912px;
   height: 143.733px;
+}
+
+/* The copyright line sits in the bottom 50px added to .ab3-footer
+   (was 380px tall), so the blue corner paper and its flowers, moved
+   down by the same 50px, still bleed off the page's bottom edge. */
+.ab3-footer .site-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 1rem;
 }
 
 /* ── Mobile page — hidden by default ── */

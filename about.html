@@ -188,6 +188,8 @@ templateEngineOverride: njk
       <img class="ab3-deco ab3-deco--blue-corner" src="/assets/images/about/About Me-Desktop-Final Assets/torn_blue_corner_paper_1.png" alt="">
       <img class="ab3-deco ab3-deco--flowers" src="/assets/images/about/About Me-Desktop-Final Assets/orange_flowers_scrapbook_1.png" alt="">
 
+      {% include "site-footer.njk" %}
+
       <!-- contact-link — Figma's last-painted node, on top of
            everything else in this footer group.
            href="/contact.html" is the site's real contact route; Figma
@@ -259,7 +261,7 @@ templateEngineOverride: njk
       <img class="av2m-footer__green" src="/assets/images/about/About Me-Mobile-Final Assets/Texture___Green_Paper.png" alt="">
       <img class="av2m-footer__flower" src="/assets/images/about/About Me-Mobile-Final Assets/orange_flowers_scrapbook.png" alt="">
       <p class="av2m-footer__tagline">{{ about.footer_mobile.tagline }}</p>
-      <p class="av2m-footer__copyright">{{ about.footer_mobile.copyright }}</p>
+      <p class="av2m-footer__copyright">&copy; {{ buildYear }} Sarahtonin Sounds</p>
     </footer>
 
   </div>
