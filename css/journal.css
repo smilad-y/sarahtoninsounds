@@ -45,11 +45,24 @@
    Recent cards, which run past the frame's bottom edge (more on narrow
    screens, where their text wraps more), are never cut off. The textures already extend well below the frame, so
    that extra room is the same paper, not a seam. */
+/* Query container so --jv2-gutter can use cqw (window width minus any
+   scrollbar); overflow-x:clip trims the edge textures at the window. */
+.journal-page {
+  container-type: inline-size;
+  overflow-x: clip;
+}
+
 .journal-v2 {
+  /* Empty margin either side of the 1600px frame on wide windows (0 at
+     or below 1600). The stripe band, green paper, logo and paper
+     texture extend or shift by this much so they reach the window
+     edges instead of stopping at the frame. */
+  --jv2-gutter: max(0px, (100cqw - 1600px) / 2);
   max-width: 1600px;
   margin: 0 auto;
   padding-bottom: max(2.5rem, calc(240px - 12%));
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: clip;
   background-color: var(--color-paper);
 }
 
@@ -64,8 +77,8 @@
 .journal-v2::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  left: calc(-1 * var(--jv2-gutter));
+  right: calc(-1 * var(--jv2-gutter));
   bottom: 0;
   height: 160px;
   z-index: 4;
@@ -84,9 +97,9 @@
    paper, foreground on top). Percentages from the audited geometry. ── */
 .jv2-bg-stripe {
   position: absolute;
-  left: -10.077%;
+  left: calc(-10.077% - var(--jv2-gutter));
   top: -104.6667%;
-  width: 129.881%;
+  width: calc(129.881% + 2 * var(--jv2-gutter));
   height: 250%;
   max-width: none;
   object-fit: cover;
@@ -107,14 +120,15 @@
   max-width: none;
   object-fit: cover;
   transform: translate(-50%, -50%) rotate(47.87deg);
+  translate: calc(-1 * var(--jv2-gutter)) 0;
   z-index: 2;
 }
 
 .jv2-bg-foreground {
   position: absolute;
-  left: -14.2757%;
+  left: calc(-14.2757% - var(--jv2-gutter));
   top: 6.6667%;
-  width: 128.5514%;
+  width: calc(128.5514% + 2 * var(--jv2-gutter));
   height: 128.5556%;
   max-width: none;
   object-fit: cover;
@@ -128,6 +142,7 @@
   top: -2.7778%;
   width: 25.1512%;
   height: 29.4287%;
+  translate: calc(-1 * var(--jv2-gutter)) 0;
   z-index: 20;
   display: flex;
   align-items: center;
