@@ -101,3 +101,20 @@ main section + section {
   color: var(--color-near-black);
   opacity: 0.7;
 }
+
+/* ── Logo → Home ──
+   On every page but Home the logo is a link. The link box carries the
+   logo's own size and rotation (from each page's CSS); the image just
+   fills it, so the focus ring hugs the logo. */
+.logo-home-link {
+  display: block;
+  min-height: 0; /* keep aspect-ratio sizing; don't grow to the image's own ratio */
+}
+
+.logo-home-link > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}

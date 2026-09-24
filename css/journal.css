@@ -157,7 +157,7 @@
 /* width/height are % of the parent .jv2-logo box (25.1512%/29.4287% of
    stage), scaled so the rendered size equals 23.2813%/15.2222% of the
    stage — i.e. Figma's exact 332.69×137px at this 1429-wide frame. */
-.jv2-logo img {
+.jv2-logo > a {
   display: block;
   width: 92.56%;
   height: 51.72%;

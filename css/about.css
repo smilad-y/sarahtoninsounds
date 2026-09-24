@@ -612,6 +612,7 @@
 }
 
 .ab3-deco--logo {
+  pointer-events: auto; /* links to Home */
   left: -23.811px;
   top: 127.219px;
   width: 337.107px;
