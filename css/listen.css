@@ -36,7 +36,7 @@ html:has(body.page-listen) {
 
 .page-listen {
   overflow-x: hidden;
-  background-color: var(--color-cream);
+  background-color: var(--color-paper);
   background-image: url('/assets/images/listen/background-paper.webp');
   background-size: cover;
   background-position: top center;
@@ -1024,17 +1024,41 @@ html:has(body.page-listen) {
 }
 
 @media (max-width: 760px) {
+  /* Shared mobile paper and red-stripe band (css/layout.css). The logo
+     lives in the hero rather than the header here, so the band runs
+     through both: the header, then the hero's logo block right under
+     it. Same image, size, and x-position, so the vertical stripes line
+     up across the join. */
+  .page-listen {
+    background: var(--m-paper);
+  }
+
+  .listen-header {
+    background: var(--m-band);
+    background-position: center top;
+    padding-bottom: 0.5rem;
+  }
+
   .listen-hero {
     aspect-ratio: auto;
     min-height: 20rem;
-    padding: 4.5rem 1rem 2rem;
+    padding: 0 1rem 2rem;
   }
 
   .listen-hero__logo {
     position: static;
-    width: 12rem;
+    width: auto;
     height: auto;
-    margin: 0 auto 1rem;
+    margin: 0 -1rem 1.5rem;
+    padding: 0.75rem 0 1.5rem;
+    background: var(--m-band);
+    background-position: center 30%;
+  }
+
+  .listen-hero__logo-inner {
+    width: 12rem;
+    margin: 0 auto;
+    transform: rotate(-6deg);
   }
 
   .listen-hero__title,

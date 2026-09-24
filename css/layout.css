@@ -73,3 +73,14 @@ main section + section {
     padding: var(--space-1) var(--space-2);
   }
 }
+
+/* ── Shared small-screen chrome ──
+   Every page's mobile layout uses the same warm paper and the same
+   red-stripe band behind its logo and nav. Each page's own CSS applies
+   these (background: var(--m-paper) / var(--m-band)) inside its own
+   mobile breakpoint. Both images are small WebP exports made for this
+   (assets/images/shared/mobile/), not the multi-MB desktop textures. */
+:root {
+  --m-paper: var(--color-paper) url('/assets/images/shared/mobile/paper.webp') center top / cover no-repeat;
+  --m-band: #c56c71 url('/assets/images/shared/mobile/stripe-band.webp') center 35% / max(900px, 100%) auto no-repeat;
+}

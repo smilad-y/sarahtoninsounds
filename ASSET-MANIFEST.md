@@ -28,7 +28,7 @@
 ### About photo
 **Status:** In use.  
 **Description:** Green-background polaroid of Sarah ("Me! Sarah Milad!").  
-**Location:** `assets/images/about/` (desktop and mobile exports).
+**Location:** `assets/images/about/`. Both desktop and mobile use the desktop export (`About Me-Desktop-Final Assets/sarah green background polaroid  1.png`); the mobile export crops the tape and flower flat along its top edge and is no longer referenced (kept, not deleted).
 
 ### Black-and-white cutout/halftone portrait; restaurant-table candid
 **Status:** No longer used on About (PROJECT-SPEC.md §9). Files kept, not deleted.
@@ -139,9 +139,11 @@ Useful reusable assets:
 
 **Rule:** These are a vocabulary, not a checklist. Every page does not need every treatment.
 
+**Shared mobile chrome (in use):** `assets/images/shared/mobile/paper.webp` (warm paper, 9 KB, flattened from About's mobile paper texture onto `--color-paper` #f1e0c6) and `stripe-band.webp` (red stripe, 1200px wide, ~160 KB, from About's desktop stripe texture). Every page's mobile layout uses them via `--m-paper` / `--m-band` in `css/layout.css`. The multi-MB source PNGs are unchanged.
+
 ## 11. Fonts / Licensing
 - Perandory Semi-Condensed
-- IM Fell English Regular + Italic
+- IM Fell English Regular + Italic (self-hosted, `assets/fonts/IMFellEnglish-*.woff2`, SIL OFL)
 - Sue Ellen Francisco
 - Amoresa for logo S, subject to suitable license (if the wordmark only ships as an image, a webfont license may not be needed; confirm)
 - Luxurious Script only as fallback for logo S if needed

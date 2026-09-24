@@ -40,9 +40,31 @@
   font-display: swap;
 }
 
+/* IM Fell English (SIL Open Font License), Regular + Italic — the only
+   two cuts that exist. Self-hosted like Sue Ellen Francisco above, for
+   the same reason: no dependency on fonts.googleapis.com. Files are
+   Google Fonts' own latin woff2s from fonts.gstatic.com, not
+   re-encoded. */
+@font-face {
+  font-family: 'IM Fell English';
+  src: url('/assets/fonts/IMFellEnglish-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IM Fell English';
+  src: url('/assets/fonts/IMFellEnglish-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   /* Color — core palette */
   --color-cream: #ded7c1;         /* confirmed: PROJECT-SPEC.md §4 Journal background direction */
+  --color-paper: #f1e0c6;         /* average of the warm paper textures; flat stand-in wherever the texture ends */
   --color-near-black: #1c1a16;    /* provisional */
   --color-gold: #c9a227;          /* provisional — confirm against wordmark asset */
   --color-crimson: #af3838;
@@ -54,15 +76,15 @@
   --color-lavender: #b7a8c9;      /* provisional */
 
   /* Color — semantic aliases */
-  --color-bg: var(--color-cream);
+  --color-bg: var(--color-paper);
   --color-text: var(--color-near-black);
   --color-accent: var(--color-gold);
   --color-focus-ring: var(--color-gold);
 
   /* Typography — families
-     Perandory Semi-Condensed and Sue Ellen Francisco are both
-     locally-hosted (see @font-face above). IM Fell English is still
-     loaded via Google Fonts on every page that uses it. Sue Ellen
+     Perandory Semi-Condensed, IM Fell English, and Sue Ellen Francisco
+     are all locally hosted (see @font-face above); no page loads
+     Google Fonts. Sue Ellen
      Francisco is used across Home, About, Contact, Journal, and
      Listen for handwritten marginalia/annotation-style text, not
      just Home's own annotations. Amoresa and Luxurious Script remain

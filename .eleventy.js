@@ -45,7 +45,8 @@ module.exports = function (eleventyConfig) {
       title: item.data.title,
       date: item.data.date,
       excerpt: item.data.excerpt,
-      featured_image: item.data.featured_image
+      featured_image: item.data.featured_image,
+      featured_image_whole: item.data.featured_image_whole
     });
   }
 
@@ -98,7 +99,8 @@ module.exports = function (eleventyConfig) {
         title: entry.title,
         date: entry.dateObj.toISOString(),
         excerpt: entry.excerpt,
-        image: entry.image
+        image: entry.image,
+        imageWhole: entry.imageWhole
       };
     });
     return JSON.stringify({

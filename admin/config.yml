@@ -192,6 +192,7 @@ collections:
       - { label: "Date", name: date, widget: date, format: "YYYY-MM-DD" }
       - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
       - { label: "Featured Image", name: featured_image, widget: image, required: false }
+      - { label: "Show the whole Featured Image", name: featured_image_whole, widget: boolean, default: false, required: false, hint: "Turn on for polaroids and cut-outs so no edge gets cropped. Leave off for regular photos, which are cropped to fill the space." }
       - { label: "Category", name: category, widget: hidden, default: "Essay" }
       - { label: "Tags", name: tags, widget: hidden, default: "journalEssay" }
       - { label: "Layout", name: layout, widget: hidden, default: "layouts/journal-post.njk" }
@@ -271,6 +272,7 @@ collections:
               - { label: "Date", name: date, widget: date, format: "YYYY-MM-DD" }
               - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
               - { label: "Featured Image", name: featured_image, widget: image, required: false }
+              - { label: "Show the whole Featured Image", name: featured_image_whole, widget: boolean, default: false, required: false, hint: "Turn on for polaroids and cut-outs so no edge gets cropped. Leave off for regular photos, which are cropped to fill the space." }
               - label: "Hero Image (optional)"
                 name: hero
                 widget: object

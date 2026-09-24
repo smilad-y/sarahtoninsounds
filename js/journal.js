@@ -89,6 +89,7 @@
       dateObj: toDateObject(raw.date),
       excerpt: raw.excerpt || '',
       image: raw.featured_image || null,
+      imageWhole: !!raw.featured_image_whole,
       body: raw.body || ''
     };
   }
@@ -105,6 +106,7 @@
       dateObj: toDateObject(raw.date),
       excerpt: raw.excerpt || '',
       image: raw.featured_image || null,
+      imageWhole: !!raw.featured_image_whole,
       sections: {
         newReleases: raw.new_releases || [],
         favoriteSongs: raw.favorite_songs || [],
@@ -160,7 +162,7 @@
       year: 'numeric'
     });
     var imageHtml = entry.image
-      ? '<img class="journal-card__image" src="' + escapeHtml(entry.image) + '" alt="">'
+      ? '<img class="journal-card__image' + (entry.imageWhole ? ' journal-image--whole' : '') + '" src="' + escapeHtml(entry.image) + '" alt="">'
       : '';
 
     return (
@@ -189,7 +191,7 @@
       year: 'numeric'
     });
     var imageHtml = entry.image
-      ? '<div class="journal-featured__photo"><img src="' + escapeHtml(entry.image) + '" alt=""></div>'
+      ? '<div class="journal-featured__photo"><img' + (entry.imageWhole ? ' class="journal-image--whole"' : '') + ' src="' + escapeHtml(entry.image) + '" alt=""></div>'
       : '';
 
     return (

@@ -17,7 +17,7 @@
    .ab3-page's zoom rule below), so nothing inside it reflows. */
 
 .page-about {
-  background-color: var(--color-cream);
+  background-color: var(--color-paper);
 }
 
 .page-about main.about-page {
@@ -307,7 +307,6 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-body);
-  font-weight: 700;
   font-size: 23px;
   letter-spacing: 1px;
   color: var(--color-near-black);
@@ -371,12 +370,11 @@
 }
 
 .ab3-resume-entry__title {
-  font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .ab3-resume-entry__role {
-  font-weight: 600;
+  font-style: italic;
   font-size: 15px;
 }
 
@@ -639,23 +637,30 @@
     display: none;
   }
 
+  /* Full-width shared mobile paper (css/layout.css --m-paper); the
+     content itself stays in a readable column (see below). */
   .av2m-page {
     display: block;
     width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    background-color: var(--color-cream);
-    background-image: url('/assets/images/about/About Me-Mobile-Final Assets/Texture___Foreground_Paper.png');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: var(--m-paper);
   }
 
+  .av2m-hero,
+  .av2m-bio,
+  .av2m-credits,
+  .av2m-footer {
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  /* Shared red-stripe band behind the logo and nav (--m-band). */
   .av2m-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-3);
-    padding: var(--space-5) var(--space-4) var(--space-3);
+    padding: var(--space-5) var(--space-4) var(--space-4);
+    background: var(--m-band);
   }
 
   .av2m-logo {
@@ -722,11 +727,13 @@
     margin: 0.3em 0 0;
   }
 
+  /* Uses the desktop polaroid export: the mobile export crops the tape
+     and flower flat along its top edge. That file already has its tilt,
+     tape, flower, and newspaper scrap baked in, so no extra rotation. */
   .av2m-polaroid {
     position: relative;
-    width: 14rem;
-    margin: var(--space-5) auto 0;
-    transform: rotate(2deg);
+    width: 16rem;
+    margin: var(--space-4) auto 0;
   }
 
   .av2m-polaroid > img:first-child {
@@ -737,17 +744,18 @@
 
   .av2m-polaroid__stamp {
     position: absolute;
-    top: -1rem;
-    right: -1rem;
+    top: 26%;
+    right: -0.4rem;
     width: 3rem;
     height: auto;
+    transform: rotate(8deg);
   }
 
   .av2m-polaroid figcaption {
     position: absolute;
-    left: 50%;
-    bottom: 11%;
-    transform: translateX(-50%);
+    left: 53%;
+    top: 78.5%;
+    transform: translateX(-50%) rotate(4deg);
     font-family: var(--font-marginalia);
     color: var(--color-crimson);
     font-size: 1.3rem;
@@ -778,8 +786,7 @@
 
   .av2m-credits__title h2 {
     font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin: 0 0 0.4em;
   }
 
@@ -801,8 +808,7 @@
 
   .av2m-credits__role-title {
     font-family: var(--font-body);
-    font-weight: 700;
-    font-size: var(--text-lg);
+    font-size: 1.4rem;
     margin: 0 0 0.3em;
   }
 
@@ -827,19 +833,8 @@
     gap: 0.5em;
     text-decoration: underline;
     font-family: var(--font-body);
-    font-weight: 600;
-    font-size: var(--text-base);
+    font-size: var(--text-lg);
     color: var(--color-near-black);
-  }
-
-  .av2m-credits__link img {
-    width: 1.3rem;
-    height: 1.3rem;
-  }
-
-  .av2m-credits__link img:last-child {
-    width: 1rem;
-    height: 1rem;
   }
 
   .av2m-footer {
@@ -887,5 +882,65 @@
     font-size: 0.75rem;
     opacity: 0.7;
     margin: 0;
+  }
+}
+
+/* ── Tablet (768px up to the 1224px desktop floor) ──
+   Same mobile content, order, paper, and red-stripe band (all set in
+   the mobile block above); here the logo and nav share one row and the
+   content column widens to ~720px. */
+@media (min-width: 768px) and (max-width: 1223.98px) {
+  .av2m-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) clamp(1rem, 4vw, 3rem);
+  }
+
+  .av2m-logo {
+    width: clamp(9.5rem, 16vw, 12.5rem);
+  }
+
+  .av2m-nav,
+  .av2m-nav__row {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: clamp(0.35rem, 1vw, 0.75rem);
+  }
+
+  .av2m-tab {
+    width: clamp(5.6rem, 9.5vw, 7rem);
+    height: 2.8rem;
+    font-size: 0.95rem;
+  }
+
+  .av2m-hero,
+  .av2m-bio,
+  .av2m-credits,
+  .av2m-footer {
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .av2m-hero {
+    padding-top: var(--space-6);
+  }
+
+  .av2m-hero h1 {
+    font-size: 3rem;
+  }
+
+  .av2m-hero__sub {
+    font-size: 1.35rem;
+  }
+
+  .av2m-polaroid {
+    width: 20rem;
+  }
+
+  .av2m-bio p {
+    font-size: 1.125rem;
+    line-height: 1.65;
   }
 }

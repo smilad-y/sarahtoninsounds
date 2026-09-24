@@ -6,6 +6,7 @@
       "date": "2026-09-12",
       "excerpt": "A reflection on figuring out next steps, life, freelance, and more",
       "featured_image": "/assets/images/journal/article-photo-sky-clouds.png",
+      "featured_image_whole": true,
       "new_releases": [
         { "title": "[Placeholder Track]", "artist": "[Placeholder Artist]", "note": "[DEV PLACEHOLDER note — replace via CMS]" }
       ],
@@ -25,6 +26,7 @@
       "date": "2026-09-11",
       "excerpt": "Favorite new releases, needle drops, earworm, and much more.",
       "featured_image": "/assets/images/journal/article-photo-sky-clouds.png",
+      "featured_image_whole": true,
       "new_releases": [
         { "title": "[Placeholder Track]", "artist": "[Placeholder Artist]", "note": "[DEV PLACEHOLDER]" }
       ],

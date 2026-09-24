@@ -31,7 +31,7 @@
    the Figma sample copy is hard-coded here. */
 
 .page-journal {
-  background-color: var(--color-cream);
+  background-color: var(--color-paper);
 }
 
 .page-journal main.journal-page {
@@ -39,15 +39,44 @@
   padding: 0;
 }
 
-/* ── Stage: the 1429×900 reference frame, scaled responsively ── */
+/* ── Stage: the 1429×900 reference frame, scaled responsively ──
+   .journal-v2 does the clipping instead of the stage itself, with a
+   little extra room below it (padding-bottom, a % of width) so the
+   Recent cards, which run past the frame's bottom edge (more on narrow
+   screens, where their text wraps more), are never cut off. The textures already extend well below the frame, so
+   that extra room is the same paper, not a seam. */
+.journal-v2 {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-bottom: max(2.5rem, calc(240px - 12%));
+  overflow: hidden;
+  background-color: var(--color-paper);
+}
+
+/* Fades the textured paper into the flat --color-paper the page
+   continues with below, so there's no visible edge where the texture
+   ends. z-index 4 sits above the paper textures (1-3) but below the
+   cards (6) and everything else. */
+.journal-v2 {
+  position: relative;
+}
+
+.journal-v2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  z-index: 4;
+  background: linear-gradient(to bottom, rgba(241, 224, 198, 0), var(--color-paper));
+  pointer-events: none;
+}
+
 .journal-v2__stage {
   position: relative;
   width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
   aspect-ratio: 1429 / 900;
-  overflow: hidden;
-  background-color: var(--color-cream);
 }
 
 /* ── Background textures — real exported assets, stacked in Figma's
@@ -359,12 +388,27 @@
   pointer-events: none;
 }
 
+/* min-height, not height: the card keeps Figma's size but grows when
+   its text wraps more on narrower screens, instead of spilling out. */
 .jv2-card-slot {
   position: absolute;
   top: 64.1667%;
   width: 18.8244%;
-  height: 36.2222%;
+  min-height: 36.2222%;
+  display: flex;
+  flex-direction: column;
   pointer-events: auto;
+}
+
+.jv2-card-slot > .journal-card {
+  flex: 1 0 auto;
+}
+
+/* Same image shape as Figma's 48.773%-of-card-height slot, expressed
+   as an aspect ratio now that the card height can grow. */
+.jv2-card-slot .journal-card__image {
+  height: auto;
+  aspect-ratio: 1.6915;
 }
 
 .jv2-card-slot--1 { left: 5.7383%; }
@@ -392,7 +436,7 @@
 .journal-card__meta {
   font-family: var(--font-body);
   font-style: italic;
-  font-size: clamp(0.65rem, 0.75vw, 0.75rem);
+  font-size: clamp(0.8rem, 0.95vw, 0.9rem);
   letter-spacing: 0.05em;
   color: var(--color-near-black);
   padding: 0.9em 5.2% 0;
@@ -418,8 +462,8 @@
 .journal-card__excerpt {
   flex: 1;
   font-family: var(--font-body);
-  font-size: clamp(0.7rem, 0.85vw, 0.85rem);
-  line-height: 1.55;
+  font-size: clamp(0.875rem, 1.05vw, 1rem);
+  line-height: 1.45;
   color: var(--color-near-black);
   padding: 0.6em 5.2% 0;
   margin: 0;
@@ -450,12 +494,15 @@
    Visual treatment only per the Figma reference — kept non-interactive
    since the destination Journal Post page doesn't exist until the next
    phase. */
+/* Shrunk and moved right from Figma's 82.14% / 77.44% / 14.86% so the
+   rotated note sits in the margin past the 4th card instead of
+   covering its title. */
 .jv2-footer-note {
   position: absolute;
-  left: 82.1439%;
-  top: 77.4444%;
-  width: 14.8561%;
-  height: 22.272%;
+  left: 88%;
+  top: 72%;
+  width: 10%;
+  height: 15.6%;
   z-index: 10;
   display: flex;
   align-items: center;
@@ -477,13 +524,17 @@
   display: block;
   width: 70%;
   font-family: var(--font-marginalia);
-  font-size: clamp(0.8rem, 1.05vw, 1.05rem);
+  font-size: clamp(0.65rem, 0.78vw, 0.8rem);
   text-align: center;
   color: var(--color-near-black);
   transform: rotate(-37.15deg);
 }
 
 @media (max-width: 900px) {
+  .journal-v2 {
+    padding-bottom: 110px;
+  }
+
   .journal-v2__stage {
     aspect-ratio: auto;
     min-height: 700px;
@@ -523,20 +574,25 @@
 }
 
 @media (max-width: 599px) {
-  .journal-v2__stage {
+  .journal-v2 {
     display: none;
   }
 
+  /* Shared mobile paper and red-stripe band (css/layout.css); the page
+     runs full width, its content keeps the 430px reference column. */
   .jv2m-page {
     display: block;
     width: 100%;
+    background: var(--m-paper);
+  }
+
+  .jv2m-page > :not(.jv2m-masthead) {
     max-width: 430px;
-    margin: 0 auto;
-    background-color: var(--color-cream);
-    background-image: url('/assets/images/journal/mobile-background-paper.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    margin-inline: auto;
+  }
+
+  .jv2m-masthead {
+    background: var(--m-band);
   }
 
   /* ── Header + logo ── */
@@ -608,7 +664,7 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    padding: 0 24px 24px;
+    padding: 28px 24px 24px;
     text-align: center;
   }
 
@@ -678,7 +734,7 @@
     border-radius: 4px 4px 0 0;
     padding: 12px 12px 8px;
     margin: 0;
-    font-size: 0.6875rem;
+    font-size: 0.8125rem;
   }
 
   .jv2m-featured-card .journal-featured__photo {
@@ -775,7 +831,7 @@
   .jv2m-card-slot .journal-card__meta {
     order: 1;
     text-align: left;
-    font-size: 0.6875rem;
+    font-size: 0.8125rem;
     padding: 0;
   }
 
@@ -797,7 +853,7 @@
 
   .jv2m-card-slot .journal-card__excerpt {
     order: 4;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     line-height: 1.4;
     padding: 0;
     margin: 0 0 12px;
@@ -904,4 +960,12 @@
 
 .journal-filters--mobile .journal-filter {
   font-size: 1rem;
+}
+
+/* CMS "Show the whole Featured Image": polaroids and cut-outs are shown
+   entire (contain) instead of cropped to fill (cover, the default for
+   photos). Applies to the Featured slot and cards, desktop and mobile. */
+.journal-card__image.journal-image--whole,
+.journal-featured__photo img.journal-image--whole {
+  object-fit: contain;
 }

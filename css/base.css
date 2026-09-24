@@ -3,7 +3,13 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+/* Every typeface on the site ships in one weight only (Perandory,
+   IM Fell English, Sue Ellen Francisco), so a browser-faked bold is
+   never allowed: emphasis comes from size, italics, or color instead. */
+html {
+  -webkit-text-size-adjust: 100%;
+  font-synthesis-weight: none;
+}
 
 body {
   margin: 0;
@@ -16,11 +22,18 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
+  font-weight: normal;
   line-height: 1.15;
   margin: 0 0 var(--space-3);
 }
 
 p { margin: 0 0 var(--space-4); }
+
+/* Bold in essay bodies etc.: color, not weight (see html rule above). */
+strong, b {
+  font-weight: normal;
+  color: var(--color-crimson);
+}
 
 img, video { max-width: 100%; display: block; }
 
@@ -81,4 +94,17 @@ ul, ol { padding: 0; margin: 0; list-style: none; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Line arrow from the About Figma (resume-link "Arrow 1"): used instead
+   of the "\2192" character, which none of the site's fonts include.
+   A mask, so it takes the surrounding text color. */
+.arrow-line {
+  display: inline-block;
+  width: 1.1em;
+  height: 0.7em;
+  vertical-align: 0.05em;
+  background-color: currentColor;
+  -webkit-mask: url('/assets/icons/arrow-line.svg') no-repeat center / contain;
+  mask: url('/assets/icons/arrow-line.svg') no-repeat center / contain;
 }

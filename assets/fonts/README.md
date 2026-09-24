@@ -1,8 +1,15 @@
 # Fonts
 
-IM Fell English (Regular + Italic) is loaded from Google Fonts in every
-page's `<head>` — it's openly licensed (SIL Open Font License), so no
-local files are needed for it.
+IM Fell English (Regular + Italic, the only two cuts that exist) is
+openly licensed (SIL Open Font License) and locally hosted here as
+`IMFellEnglish-Regular.woff2` and `IMFellEnglish-Italic.woff2`, wired
+up in `css/tokens.css`. They are Google Fonts' own latin woff2 files
+from fonts.gstatic.com, not re-encoded. Self-hosted for the same reason
+as Sue Ellen Francisco below: no page depends on fonts.googleapis.com.
+
+None of these fonts has a bold weight, and the site turns off
+browser-faked bold (`font-synthesis-weight: none` in `css/base.css`).
+Emphasis uses size, italics, or color instead.
 
 Sue Ellen Francisco is also openly licensed (SIL Open Font License),
 but is locally hosted here as `SueEllenFrancisco.woff2` — same pattern

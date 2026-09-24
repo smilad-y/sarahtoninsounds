@@ -36,7 +36,7 @@
    hex values, matching the same substitution journal.css already made. */
 
 .page-contact {
-  background-color: var(--color-cream);
+  background-color: var(--color-paper);
   background-image: url('/assets/Foreground%20Paper.png');
   background-repeat: repeat;
 }
@@ -262,8 +262,7 @@
 .contact-badge {
   display: inline-block;
   font-family: var(--font-body);
-  font-weight: 700;
-  font-size: var(--text-sm);
+  font-size: 0.95rem;
   color: var(--color-crimson);
   background: rgba(158, 27, 50, 0.06);
   border: 1px solid var(--color-crimson);
@@ -284,8 +283,8 @@
 .contact-field label {
   display: block;
   font-family: var(--font-body);
-  font-weight: 700;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
+  letter-spacing: 0.02em;
   margin-bottom: var(--space-2);
 }
 
@@ -335,6 +334,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.35em;
   min-width: 9.5rem;
   height: 3.3rem;
   padding: 0 var(--space-5);
@@ -343,8 +343,8 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
   font-family: var(--font-body);
-  font-weight: 700;
-  font-size: var(--text-lg);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
   color: var(--color-crimson);
 }
 
@@ -356,14 +356,14 @@
 }
 
 .contact-form__alt a {
-  font-weight: 700;
+  color: var(--color-crimson);
   text-decoration-thickness: 1px;
 }
 
 .contact-form__status {
   margin-top: var(--space-4);
   font-family: var(--font-body);
-  font-weight: 700;
+  font-size: var(--text-lg);
 }
 
 .contact-form__status[data-state="success"] {
@@ -485,10 +485,9 @@
 
 .contact-social-label {
   font-family: var(--font-body);
-  font-weight: 700;
-  font-size: var(--text-base);
+  font-size: 1.1rem;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.08em;
 }
 
 .contact-social-desc {
@@ -529,8 +528,7 @@
   text-align: center;
   padding: 0 1.75rem;
   font-family: var(--font-marginalia);
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.2;
   color: var(--color-near-black);
 }
@@ -555,13 +553,18 @@
     display: none;
   }
 
+  /* Shared mobile paper and red-stripe band (css/layout.css). */
+  .page-contact {
+    background: var(--m-paper);
+  }
+
   .cv2m-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-4);
-    padding: var(--space-5) var(--space-4) var(--space-4);
-    background-color: var(--color-cream);
+    padding: var(--space-5) var(--space-4) var(--space-5);
+    background: var(--m-band);
   }
 
   .cv2m-logo {
