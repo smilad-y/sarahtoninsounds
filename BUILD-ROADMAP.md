@@ -90,7 +90,7 @@ The legacy song library is archive-only. There is no migration or remapping phas
 - ~~**Now Playing approach.**~~ Decided: "now spinning" bar (PROJECT-SPEC §7 Now Playing).
 
 ### Dependency
-Two mood names, several icons, four colors, and all descriptors are still undecided. Build so these drop in via config.
+Two mood names, the icons (deferred past launch), six colors, and the non-launch moods' descriptors are still undecided. Build so these drop in via config.
 
 ## Phase 6 — Listen Content + Crash Courses
 ### Must have
@@ -176,8 +176,7 @@ These are intentionally not finalized and should not be guessed:
 - Hopeful vs. At Peace; Playful vs. Cheeky
 - which of Electric (formerly Energized) / Hype gets the disco ball icon
 - remaining mood icons (not needed for launch; added all at once after launch), and descriptors for non-launch moods
-- colors for Euphoric, Hopeful/At Peace, Unleashed, Hypnotic; hex values for all colors
-- mood display order
+- colors for Hopeful/At Peace, Hypnotic, Cute, Audacious, Lost, and Hype; final hex values for all colors (current ones are provisional, sampled from the circle art)
 - whether Crash Courses must be live at launch, or can roll out later
 - "discover music!" note on Home
 - final Crash Course topics
