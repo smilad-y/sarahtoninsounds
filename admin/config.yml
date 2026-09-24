@@ -417,4 +417,3 @@ collections:
             widget: object
             fields:
               - { label: "Tagline", name: tagline, widget: string }
-              - { label: "Copyright", name: copyright, widget: string }

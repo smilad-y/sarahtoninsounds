@@ -303,6 +303,7 @@
       "icon": "fist",
       "descriptor": "Resistance, refusal, confrontation.",
       "labelText": "light",
+      "titleColor": "#ffffff",
       "art": {
         "circle": "/assets/images/listen/black-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Black.png",
