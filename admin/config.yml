@@ -1,11 +1,4 @@
-# ⚠️ TEMPORARY DEVELOPMENT SETTING — DO NOT SHIP AS-IS ⚠️
-# backend.branch below is pointed at the in-progress Journal rebuild
-# branch (claude/add-claude-md-file-3fgnk0) so that any CMS use during
-# development writes only to this branch — never to `main`, which still
-# serves the legacy site and must not receive Journal dev content.
-# Before this rebuild becomes production, this value MUST be changed to
-# the real production branch. Production-branch cutover is a separate
-# launch task, not assumed to be this branch.
+# CMS edits commit to `main`, the production branch.
 #
 # Backend: GitHub, logged in through Netlify's built-in GitHub OAuth
 # provider (Project configuration > Access & security > OAuth). Not the
@@ -16,10 +9,6 @@
 # service). site_domain pins the login to this Netlify project so it
 # also works from deploy-preview and branch-deploy addresses.
 #
-# At launch: change `branch` to the production branch (see the warning
-# above). site_domain can stay as the netlify.app name, or become
-# sarahtoninsounds.com once that domain is attached to this project.
-#
 # The old self-hosted login (netlify/functions/auth.js + callback.js)
 # is no longer used. Left in place for now; do not point the OAuth App
 # back at it without fixing callback.js, which posts the token to any
@@ -27,8 +16,8 @@
 backend:
   name: github
   repo: smilad-y/sarahtoninsounds
-  branch: claude/add-claude-md-file-3fgnk0
-  site_domain: cool-sfogliatella-be8fb5.netlify.app
+  branch: main
+  site_domain: sarahtoninsounds.com
 
 # Uploads land inside assets/, which .eleventy.js already passthrough-
 # copies to the published site (public/uploads was never copied, so
