@@ -328,10 +328,31 @@
 }
 
 /* Desktop: the photo fills its column at whatever height the card
-   ends up, so landscape and portrait images both stay inside it. */
+   ends up, so landscape and portrait images both stay inside it. The
+   inset leaves a band of paper around it and tucks its top-left corner
+   under the tape (.jv2-featured::after). */
 .jv2-featured .journal-featured__photo {
   position: relative;
   min-height: 12rem;
+  margin: 2.6cqw 0 1.4cqw 2.4cqw;
+}
+
+/* The backdrop's upper-left tape, cut out on its own and laid exactly
+   over the backdrop's copy so it sits on top of the photo's corner.
+   Box = the cutout's crop (x 8, y 24, 488x352 of the 1914px-wide
+   backdrop), inside the backdrop's top slice. Horizontal values are %
+   of the card (the backdrop spans it); vertical ones use cqw, the same
+   scale as the backdrop's top border-image-width. */
+.jv2-featured::after {
+  content: "";
+  position: absolute;
+  left: 0.418%;
+  top: 1.254cqw;
+  width: 25.496%;
+  height: 18.391cqw;
+  background: url('/assets/images/journal/featured-tape-left.webp') 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .jv2-featured .journal-featured__photo img {
