@@ -7,7 +7,7 @@
     "Array order is the current display order. Final display order is UNDECIDED; the number on each label is its position among the live moods.",
     "labelText: text color on the circle art (dark or light), for contrast.",
     "labelColors hex values are PROVISIONAL, sampled from the circle art; final hex values are UNDECIDED.",
-    "art paths are the existing assets (circles are 320px WebP exports; full-size originals in archive/listen-circle-originals/). Each live mood uses one color's full set (circle, vinyl, record, tape) plus that color's labelColors entry, never mixed. Non-live moods with color UNDECIDED keep the art they had, so some share art with a live mood; Hopeful / Unleashed / Hypnotic use forest green / dark green / silver art even though the spec leaves their colors open. art.record is the pre-composited record export, not currently rendered.",
+    "art paths are the existing assets (circles are 320px WebP exports; full-size originals in archive/listen-circle-originals/). Each live mood uses one color's full set (circle, vinyl, record, tape) plus that color's labelColors entry, never mixed. Non-live moods with color UNDECIDED keep the art they had, so some share art with a live mood; Hopeful / Hypnotic use forest green / silver art even though the spec leaves their colors open. art.record is the pre-composited record export, not currently rendered.",
     "selectorNote: short note shown near the selector (e.g. that more moods are coming). UNDECIDED = nothing shown; wording and style are Sarah's call."
   ],
   "defaultMood": "hazy",
@@ -33,6 +33,43 @@
     "silver": "#cacaca"
   },
   "moods": [
+    {
+      "id": "chill",
+      "name": "Chill",
+      "live": true,
+      "color": "light blue",
+      "icon": "sun",
+      "descriptor": "Ease, relaxation, low stakes.",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/light-blue-cirle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Light_Blue.png",
+        "record": "/assets/images/listen/sarahtonin_sounds-listen-record-dreamy_2.png",
+        "tape": "/assets/images/listen/Tape-Light_Blue_1.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/52MLdAdmlGKmj8Q7OESYYA?si=d5f6d2a93b304293"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "For taking it easy.",
+      "description": "Easygoing music for slowing down and settling into the moment. Nothing demanding, nothing to escape from.",
+      "picks": [
+        {
+          "title": "On the Level",
+          "artist": "Mac DeMarco"
+        },
+        {
+          "title": "Vibin' Out",
+          "artist": "FKJ"
+        },
+        {
+          "title": "Smoke Break (Interlude)",
+          "artist": "Flatbush Zombies"
+        }
+      ]
+    },
     {
       "id": "hazy",
       "name": "Hazy",
@@ -67,6 +104,117 @@
         {
           "title": "Butterfly Net",
           "artist": "Caroline Polachek"
+        }
+      ]
+    },
+    {
+      "id": "tender",
+      "name": "Tender",
+      "live": true,
+      "color": "pink",
+      "icon": "heart",
+      "descriptor": "Emotional intimacy, affection, vulnerability.",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/pink-circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Pink.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-pink.png",
+        "tape": "/assets/images/listen/Tape-Pink.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/00G4dsIODpNybJ17oYCpIc?si=166fc3a77a1a4a8a"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "For feeling close.",
+      "description": "Warmth, care, and emotional openness. Love in its quieter, more vulnerable forms.",
+      "picks": [
+        {
+          "title": "As",
+          "artist": "Stevie Wonder"
+        },
+        {
+          "title": "God Only Knows",
+          "artist": "The Beach Boys"
+        },
+        {
+          "title": "I Found a Reason",
+          "artist": "The Velvet Underground"
+        }
+      ]
+    },
+    {
+      "id": "sensual",
+      "name": "Sensual",
+      "live": true,
+      "color": "red",
+      "icon": "lips",
+      "descriptor": "Intimacy, attraction, tension.",
+      "labelText": "light",
+      "art": {
+        "circle": "/assets/images/listen/red-circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Red.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-red.png",
+        "tape": "/assets/images/listen/Tape-Red.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/1MKeBuS1z21UUnE01WeC7F?si=6bbe990e79c54624"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "For feeling the chemistry.",
+      "description": "Seductive grooves, physical intimacy, and slow-building tension. Felt as much as heard.",
+      "picks": [
+        {
+          "title": "The First Taste",
+          "artist": "Fiona Apple"
+        },
+        {
+          "title": "Woosah",
+          "artist": "Jeremih, Juicy J, Twista"
+        },
+        {
+          "title": "When Eye Lay My Hands on U",
+          "artist": "Prince"
+        }
+      ]
+    },
+    {
+      "id": "euphoric",
+      "name": "Euphoric",
+      "live": true,
+      "color": "orange",
+      "icon": "UNDECIDED",
+      "descriptor": "Joy, release, emotional elevation.",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/orange-circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Orange.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-orange.png",
+        "tape": "/assets/images/listen/Tape-Orange.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/0H4yQYUFBjYbRaUGEG3MzA?si=feb7f6638a1b471b"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "For feeling on top of the world.",
+      "description": "A sense of possibility, excitement, or emotional release. From quiet optimism to overwhelming joy.",
+      "picks": [
+        {
+          "title": "Cosmic Girl",
+          "artist": "Jamiroquai"
+        },
+        {
+          "title": "Love Is Everywhere",
+          "artist": "Pharoah Sanders"
+        },
+        {
+          "title": "Girlfriend",
+          "artist": "Hemlock Springs"
         }
       ]
     },
@@ -108,39 +256,76 @@
       ]
     },
     {
-      "id": "sensual",
-      "name": "Sensual",
+      "id": "unleashed",
+      "name": "Unleashed",
       "live": true,
-      "color": "red",
-      "icon": "lips",
-      "descriptor": "Intimacy, attraction, tension.",
-      "labelText": "light",
+      "color": "dark green",
+      "icon": "UNDECIDED",
+      "descriptor": "Catharsis, abandon, release.",
+      "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/red-circle.webp",
-        "vinyl": "/assets/images/listen/Colored Records/Record-Red.png",
-        "record": "/assets/images/listen/sarahtonin sounds-listen-record-red.png",
-        "tape": "/assets/images/listen/Tape-Red.png"
+        "circle": "/assets/images/listen/dark-green-circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Green.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-green.png",
+        "tape": "/assets/images/listen/Tape-Green.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/1MKeBuS1z21UUnE01WeC7F?si=6bbe990e79c54624"
+        "url": "https://open.spotify.com/playlist/5JAjZESFqplxGdXXnkZv7d"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
       },
-      "blurb": "For feeling the chemistry.",
-      "description": "Seductive grooves, physical intimacy, and slow-building tension. Felt as much as heard.",
+      "blurb": "For letting it all out.",
+      "description": "Raw energy and unrestrained expression. A release for whatever has been building up.",
       "picks": [
         {
-          "title": "The First Taste",
-          "artist": "Fiona Apple"
+          "title": "Stay",
+          "artist": "Angel Du$t"
         },
         {
-          "title": "Woosah",
-          "artist": "Jeremih, Juicy J, Twista"
+          "title": "The Obituaries",
+          "artist": "The Menzingers"
         },
         {
-          "title": "When Eye Lay My Hands on U",
-          "artist": "Prince"
+          "title": "Shot Down",
+          "artist": "Scowl"
+        }
+      ]
+    },
+    {
+      "id": "defiant",
+      "name": "Defiant",
+      "live": true,
+      "color": "black",
+      "icon": "fist",
+      "descriptor": "Resistance, refusal, confrontation.",
+      "labelText": "light",
+      "art": {
+        "circle": "/assets/images/listen/black-circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Black.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-black.png",
+        "tape": "/assets/images/listen/Tape-Black.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/4TQdShNqgVeLDUD0X4Gquq?si=8b1ecb9f383d4067"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "For when you're not backing down.",
+      "description": "Something to push against. Rebellion, frustration, and the refusal to accept things as they are.",
+      "picks": [
+        {
+          "title": "Sick in the Head",
+          "artist": "Kneecap"
+        },
+        {
+          "title": "Killing in the Name",
+          "artist": "Rage Against the Machine"
+        },
+        {
+          "title": "Pledge",
+          "artist": "Mannequin Pussy"
         }
       ]
     },
@@ -191,43 +376,6 @@
       "blurb": "UNDECIDED",
       "description": "UNDECIDED",
       "picks": []
-    },
-    {
-      "id": "chill",
-      "name": "Chill",
-      "live": true,
-      "color": "light blue",
-      "icon": "sun",
-      "descriptor": "Ease, relaxation, low stakes.",
-      "labelText": "dark",
-      "art": {
-        "circle": "/assets/images/listen/light-blue-cirle.webp",
-        "vinyl": "/assets/images/listen/Colored Records/Record-Light_Blue.png",
-        "record": "/assets/images/listen/sarahtonin_sounds-listen-record-dreamy_2.png",
-        "tape": "/assets/images/listen/Tape-Light_Blue_1.png"
-      },
-      "spotify": {
-        "url": "https://open.spotify.com/playlist/52MLdAdmlGKmj8Q7OESYYA?si=d5f6d2a93b304293"
-      },
-      "appleMusic": {
-        "url": "PLACEHOLDER"
-      },
-      "blurb": "For taking it easy.",
-      "description": "Easygoing music for slowing down and settling into the moment. Nothing demanding, nothing to escape from.",
-      "picks": [
-        {
-          "title": "On the Level",
-          "artist": "Mac DeMarco"
-        },
-        {
-          "title": "Vibin' Out",
-          "artist": "FKJ"
-        },
-        {
-          "title": "Smoke Break (Interlude)",
-          "artist": "Flatbush Zombies"
-        }
-      ]
     },
     {
       "id": "melancholy",
@@ -302,43 +450,6 @@
       "picks": []
     },
     {
-      "id": "defiant",
-      "name": "Defiant",
-      "live": true,
-      "color": "brown",
-      "icon": "fist",
-      "descriptor": "Resistance, refusal, confrontation.",
-      "labelText": "light",
-      "art": {
-        "circle": "/assets/images/listen/brown_Circle.webp",
-        "vinyl": "/assets/images/listen/Colored Records/Record-Brown.png",
-        "record": "/assets/images/listen/sarahtonin_sounds-listen-record-brown.png",
-        "tape": "/assets/images/listen/Tape-brown.png"
-      },
-      "spotify": {
-        "url": "https://open.spotify.com/playlist/4TQdShNqgVeLDUD0X4Gquq?si=8b1ecb9f383d4067"
-      },
-      "appleMusic": {
-        "url": "PLACEHOLDER"
-      },
-      "blurb": "For when you're not backing down.",
-      "description": "Something to push against. Rebellion, frustration, and the refusal to accept things as they are.",
-      "picks": [
-        {
-          "title": "Sick in the Head",
-          "artist": "Kneecap"
-        },
-        {
-          "title": "Killing in the Name",
-          "artist": "Rage Against the Machine"
-        },
-        {
-          "title": "Pledge",
-          "artist": "Mannequin Pussy"
-        }
-      ]
-    },
-    {
       "id": "playful-cheeky",
       "name": "Playful / Cheeky",
       "live": false,
@@ -361,43 +472,6 @@
       "blurb": "UNDECIDED",
       "description": "UNDECIDED",
       "picks": []
-    },
-    {
-      "id": "unleashed",
-      "name": "Unleashed",
-      "live": false,
-      "color": "UNDECIDED",
-      "icon": "UNDECIDED",
-      "descriptor": "Catharsis, abandon, release.",
-      "labelText": "dark",
-      "art": {
-        "circle": "/assets/images/listen/dark-green-circle.webp",
-        "vinyl": "/assets/images/listen/Colored Records/Record-Green.png",
-        "record": "/assets/images/listen/sarahtonin sounds-listen-record-green.png",
-        "tape": "/assets/images/listen/Tape-Green.png"
-      },
-      "spotify": {
-        "url": "https://open.spotify.com/playlist/5JAjZESFqplxGdXXnkZv7d"
-      },
-      "appleMusic": {
-        "url": "PLACEHOLDER"
-      },
-      "blurb": "For letting it all out.",
-      "description": "Raw energy and unrestrained expression. A release for whatever has been building up.",
-      "picks": [
-        {
-          "title": "Stay",
-          "artist": "Angel Du$t"
-        },
-        {
-          "title": "The Obituaries",
-          "artist": "The Menzingers"
-        },
-        {
-          "title": "Shot Down",
-          "artist": "Scowl"
-        }
-      ]
     },
     {
       "id": "hype",
@@ -470,80 +544,6 @@
       "blurb": "UNDECIDED",
       "description": "UNDECIDED",
       "picks": []
-    },
-    {
-      "id": "euphoric",
-      "name": "Euphoric",
-      "live": true,
-      "color": "orange",
-      "icon": "UNDECIDED",
-      "descriptor": "Joy, release, emotional elevation.",
-      "labelText": "dark",
-      "art": {
-        "circle": "/assets/images/listen/orange-circle.webp",
-        "vinyl": "/assets/images/listen/Colored Records/Record-Orange.png",
-        "record": "/assets/images/listen/sarahtonin sounds-listen-record-orange.png",
-        "tape": "/assets/images/listen/Tape-Orange.png"
-      },
-      "spotify": {
-        "url": "https://open.spotify.com/playlist/0H4yQYUFBjYbRaUGEG3MzA?si=feb7f6638a1b471b"
-      },
-      "appleMusic": {
-        "url": "PLACEHOLDER"
-      },
-      "blurb": "For feeling on top of the world.",
-      "description": "A sense of possibility, excitement, or emotional release. From quiet optimism to overwhelming joy.",
-      "picks": [
-        {
-          "title": "Cosmic Girl",
-          "artist": "Jamiroquai"
-        },
-        {
-          "title": "Love Is Everywhere",
-          "artist": "Pharoah Sanders"
-        },
-        {
-          "title": "Girlfriend",
-          "artist": "Hemlock Springs"
-        }
-      ]
-    },
-    {
-      "id": "tender",
-      "name": "Tender",
-      "live": true,
-      "color": "pink",
-      "icon": "heart",
-      "descriptor": "Emotional intimacy, affection, vulnerability.",
-      "labelText": "dark",
-      "art": {
-        "circle": "/assets/images/listen/pink-circle.webp",
-        "vinyl": "/assets/images/listen/Colored Records/Record-Pink.png",
-        "record": "/assets/images/listen/sarahtonin sounds-listen-record-pink.png",
-        "tape": "/assets/images/listen/Tape-Pink.png"
-      },
-      "spotify": {
-        "url": "https://open.spotify.com/playlist/00G4dsIODpNybJ17oYCpIc?si=166fc3a77a1a4a8a"
-      },
-      "appleMusic": {
-        "url": "PLACEHOLDER"
-      },
-      "blurb": "For feeling close.",
-      "description": "Warmth, care, and emotional openness. Love in its quieter, more vulnerable forms.",
-      "picks": [
-        {
-          "title": "As",
-          "artist": "Stevie Wonder"
-        },
-        {
-          "title": "God Only Knows",
-          "artist": "The Beach Boys"
-        },
-        {
-          "title": "I Found a Reason",
-          "artist": "The Velvet Underground"
-        }
-      ]
     },
     {
       "id": "hypnotic",

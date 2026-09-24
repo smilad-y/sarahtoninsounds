@@ -228,7 +228,7 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 | 2 | Hazy | purple | cloud |
 | 3 | Euphoric | orange | *undecided* |
 | 4 | Electric | yellow | *undecided* (disco ball?) *(see note)* |
-| 5 | Defiant | brown | fist |
+| 5 | Defiant | black | fist |
 | 6 | Audacious | *undecided* | sunglasses |
 | 7 | Sensual | red | lips |
 | 8 | Tender | pink | heart |
@@ -238,20 +238,20 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 | 12 | Hopeful / At Peace | *undecided* | *undecided* |
 | 13 | Lost | *undecided* | *undecided* |
 | 14 | Playful / Cheeky | berry | *undecided* |
-| 15 | Unleashed | *undecided* | *undecided* |
+| 15 | Unleashed | dark green | *undecided* |
 | 16 | Cute | *undecided* | *undecided* |
 | 17 | Hypnotic | *undecided* | *undecided* |
 | 18 | Hype | *undecided* | *undecided* *(see note)* |
 
-Row numbers are for reference only; display order is not decided.
+Row numbers are for reference only. The launch display order is below; the order of moods added later is not decided.
 
-**Launch moods (decided, Sarah, September 2026):** Tender, Defiant, Hazy, Sensual, Electric, Euphoric, and Chill are live at launch (`"live": true` in `content/listen/moods.json`). The other 11 are hidden until Sarah flips them.
+**Launch moods (decided, Sarah, September 2026):** 8 moods are live at launch (`"live": true` in `content/listen/moods.json`), shown in this order: **Chill, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant.** The other 10 are hidden until Sarah flips them.
 
 Notes:
 - **Hopeful / At Peace** and **Playful / Cheeky**: Sarah will keep one word from each pair. Both are placeholders until she picks.
 - **Renamed (Sarah, September 2026):** Sultry is now **Sensual**, Energized is now **Electric**, Dreamy is now **Hazy**. Hazy keeps the cloud icon.
-- **Color reassignments (Sarah, September 2026):** the launch moods took pink (from Cute), brown (from Lost), purple (from Hype), orange (from Audacious), and light blue (from Dreamy, now Chill). Cute, Hype, Audacious, and Lost now have no color; their existing art is kept in the config unchanged.
-- **Unassigned colors:** fuschia, black, light green, dark green, forest green, gold, silver. Cute, Audacious, Lost, Hopeful/At Peace, Unleashed, Hype, and Hypnotic have no color yet. Do not assign these without Sarah.
+- **Color reassignments (Sarah, September 2026):** the launch moods took pink (from Cute), purple (from Hype), orange (from Audacious), and light blue (from Dreamy, now Chill). Defiant is black (briefly brown, then changed back), and Unleashed is dark green, using the dark green art it already had. Cute, Hype, Audacious, and Lost have no color; their existing art is kept in the config unchanged. Brown is not used by any launch mood.
+- **Unassigned colors:** fuschia, light green, brown, forest green, gold, silver. Cute, Audacious, Lost, Hopeful/At Peace, Hype, and Hypnotic have no color yet. Do not assign these without Sarah.
 - **Disco ball:** originally confirmed for the combined "Energized / Hype" mood. Energized (now Electric) and Hype are separate moods, so which one keeps the disco ball is undecided. Electric is the likely candidate, not confirmed. Euphoric's icon is also undecided.
 - **Focus** from the earlier working list is not in the final 18.
 - Earlier combined names (Dreamy / Float Away, Tender / Romantic, Sultry / Sensual) became single words (Dreamy, Tender, Sultry), then Dreamy and Sultry were renamed Hazy and Sensual (see above).

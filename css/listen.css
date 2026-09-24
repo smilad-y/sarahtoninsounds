@@ -274,9 +274,13 @@ html:has(body.page-listen) {
 .listen-moods__row {
   display: flex;
   align-items: center;
-  gap: 2.383%;
+  /* Tighter than Figma's 2.383% so all 8 launch labels fit at 1440px. */
+  gap: 1.5%;
   overflow-x: auto;
   scroll-snap-type: x proximity;
+  /* Snap labels inside the row's padding so the selected ring and
+     focus outline aren't scrolled under the row's clipped edge. */
+  scroll-padding-inline: 0.75rem;
   list-style: none;
   margin: 0;
   /* room for the selected ring and focus outline, which the scroll
@@ -325,9 +329,8 @@ html:has(body.page-listen) {
 .mood-circle--light-text { color: #fffaf0; }
 
 .mood-circle__number {
-  font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
   line-height: 1;
-  opacity: 0.8;
 }
 
 .mood-circle__name {
@@ -430,13 +433,17 @@ html:has(body.page-listen) {
     margin-top: 0.75rem;
   }
 
+  .listen-moods__row {
+    gap: 2.383%;
+  }
+
   .listen-moods__row li {
     width: 7.5rem;
   }
 
   .mood-circle { padding: 10%; }
   .mood-circle__descriptor { font-size: 0.75rem; }
-  .mood-circle__number { font-size: 0.75rem; }
+  .mood-circle__number { font-size: 0.95rem; }
   .mood-circle__name { font-size: 0.9rem; }
 }
 
