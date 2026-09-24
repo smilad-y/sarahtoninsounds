@@ -873,6 +873,14 @@
     gap: 4px;
   }
 
+  /* The card's red border is an outline, so focus has to restate the
+     site ring here or it would replace it. */
+  .jv2m-card-slot .journal-card:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--color-focus-gap), 0 4px 8px rgba(72, 44, 8, 0.12);
+  }
+
   .jv2m-card-slot .journal-card__image {
     order: 0;
     width: 100%;

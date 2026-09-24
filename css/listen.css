@@ -346,15 +346,20 @@ html:has(body.page-listen) {
   }
 }
 
-/* Selected = crimson ring; keyboard focus = separate dashed outline, so
-   the two stay distinguishable when they land on the same label. */
+/* Selected = crimson ring; keyboard focus = the site's dark ring pushed
+   out past it, so the two stay distinguishable on the same label. The
+   paper gap fills the space between them. */
 .mood-circle.is-active {
   box-shadow: 0 0 0 3px var(--color-cream), 0 0 0 6px var(--color-crimson);
 }
 
 .mood-circle:focus-visible {
-  outline: 3px dashed var(--color-near-black);
   outline-offset: 8px;
+  box-shadow: 0 0 0 8px var(--color-focus-gap);
+}
+
+.mood-circle.is-active:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-cream), 0 0 0 6px var(--color-crimson), 0 0 0 8px var(--color-focus-gap);
 }
 
 /* Slot for Sarah's note about more moods coming. Position only; the
@@ -553,11 +558,6 @@ html:has(body.page-listen) {
   cursor: pointer;
 }
 
-.tt-playback-toggle:focus-visible {
-  outline: 4px solid var(--color-crimson);
-  outline-offset: 5px;
-}
-
 .tt-playback-toggle:disabled {
   cursor: wait;
 }
@@ -610,12 +610,6 @@ html:has(body.page-listen) {
   color: var(--color-crimson);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
-}
-
-.tt-player-fallback a:focus-visible,
-.now-spinning__fallback a:focus-visible {
-  outline: 3px solid var(--color-crimson);
-  outline-offset: 2px;
 }
 
 /* Hidden while Apple Music is the active embed: that embed has no

@@ -467,13 +467,6 @@
   border-color: var(--color-crimson);
 }
 
-/* The site-wide gold focus ring is too faint on this page's cream
-   paper and white fields (about 1.9:1), so Contact uses near-black
-   with a paper-colored gap, which also reads on the red stripes. */
-.page-contact :focus-visible {
-  outline-color: var(--color-near-black);
-  box-shadow: 0 0 0 2px var(--color-paper);
-}
 
 /* Small paper-scrap sign-off, reusing the established shared/tape
    library rather than Figma's own purple washi tape asset (no matching

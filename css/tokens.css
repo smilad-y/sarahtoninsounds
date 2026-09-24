@@ -79,7 +79,11 @@
   --color-bg: var(--color-paper);
   --color-text: var(--color-near-black);
   --color-accent: var(--color-gold);
-  --color-focus-ring: var(--color-gold);
+  /* Near-black ring with a paper-colored gap: gold was about 1.9:1 on
+     the paper and too faint to see. The gap keeps the ring readable on
+     dark or busy backgrounds (red stripes, mood colors, photos). */
+  --color-focus-ring: var(--color-near-black);
+  --color-focus-gap: var(--color-paper);
 
   /* Typography — families
      Perandory Semi-Condensed, IM Fell English, and Sue Ellen Francisco
