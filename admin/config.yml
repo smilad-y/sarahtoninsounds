@@ -145,7 +145,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: title, widget: string }
-      - { label: "Date", name: date, widget: date, format: YYYY-MM-DD }
+      - { label: "Date", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Category", name: category, widget: string, default: essay }
       - { label: "Excerpt", name: excerpt, widget: text }
       - { label: "Body", name: body, widget: markdown }
@@ -195,7 +195,7 @@ collections:
     fields:
       - { label: "Title", name: title, widget: string }
       - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>/. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
-      - { label: "Date", name: date, widget: date, format: "YYYY-MM-DD" }
+      - { label: "Date", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
       - { label: "Featured Image", name: featured_image, widget: image, required: false }
       - { label: "Show the whole Featured Image", name: featured_image_whole, widget: boolean, default: false, required: false, hint: "Turn on for polaroids and cut-outs so no edge gets cropped. Leave off for regular photos, which are cropped to fill the space." }
@@ -275,7 +275,7 @@ collections:
             fields:
               - { label: "Title", name: title, widget: string, hint: "e.g. August Favorites" }
               - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
-              - { label: "Date", name: date, widget: date, format: "YYYY-MM-DD" }
+              - { label: "Date", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
               - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
               - { label: "Featured Image", name: featured_image, widget: image, required: false }
               - { label: "Show the whole Featured Image", name: featured_image_whole, widget: boolean, default: false, required: false, hint: "Turn on for polaroids and cut-outs so no edge gets cropped. Leave off for regular photos, which are cropped to fill the space." }
