@@ -90,3 +90,49 @@
   fitAbout();
   window.addEventListener('resize', fitAbout);
 })();
+
+// Logo links: fit the focus ring / click area (.logo-home-link::after) to
+// the torn-paper card inside the logo image. data-card-inset holds the
+// card's left/top/right/bottom margins as fractions of the image; the
+// image is object-fit: cover, so the crop is worked out from the link
+// box before converting to % insets.
+(function () {
+  var links = document.querySelectorAll('.logo-home-link[data-card-inset]');
+  if (!links.length) return;
+
+  function fit(link) {
+    var img = link.querySelector('img');
+    var w = link.offsetWidth;
+    var h = link.offsetHeight;
+    if (!img || !img.naturalWidth || !w || !h) return;
+    var f = link.getAttribute('data-card-inset').split(' ').map(Number);
+    var W = img.naturalWidth;
+    var H = img.naturalHeight;
+    var s = Math.max(w / W, h / H);
+    var x0 = (w - W * s) / 2;
+    var y0 = (h - H * s) / 2;
+    var inset = [
+      (y0 + f[1] * H * s) / h,
+      (w - x0 - (1 - f[2]) * W * s) / w,
+      (h - y0 - (1 - f[3]) * H * s) / h,
+      (x0 + f[0] * W * s) / w
+    ].map(function (v) { return (Math.max(0, v) * 100).toFixed(2) + '%'; });
+    link.style.setProperty('--logo-card-inset', inset.join(' '));
+  }
+
+  function fitAll() {
+    Array.prototype.forEach.call(links, fit);
+  }
+
+  Array.prototype.forEach.call(links, function (link) {
+    var img = link.querySelector('img');
+    if (img && !img.complete) img.addEventListener('load', function () { fit(link); });
+  });
+
+  var timer = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(timer);
+    timer = setTimeout(fitAll, 150);
+  });
+  fitAll();
+})();

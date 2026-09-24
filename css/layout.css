@@ -104,11 +104,17 @@ main section + section {
 
 /* ── Logo → Home ──
    On every page but Home the logo is a link. The link box carries the
-   logo's own size and rotation (from each page's CSS); the image just
-   fills it, so the focus ring hugs the logo. */
+   logo's own size and rotation (from each page's CSS) and the image
+   fills it, transparent margins included. The focus ring and the
+   clickable area are drawn on ::after, inset to the torn-paper card
+   itself: js/site.js sets --logo-card-inset from the card's position in
+   the image (data-card-inset); the default here fits home-logo.png. */
 .logo-home-link {
+  --logo-card-inset: 7.2% 13% 13.3% 8.5%;
+  position: relative;
   display: block;
   min-height: 0; /* keep aspect-ratio sizing; don't grow to the image's own ratio */
+  pointer-events: none;
 }
 
 .logo-home-link > img {
@@ -117,4 +123,22 @@ main section + section {
   height: 100%;
   max-width: none;
   object-fit: cover;
+}
+
+.logo-home-link::after {
+  content: "";
+  position: absolute;
+  inset: var(--logo-card-inset);
+  pointer-events: auto;
+}
+
+.logo-home-link:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.logo-home-link:focus-visible::after {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-focus-gap);
 }
