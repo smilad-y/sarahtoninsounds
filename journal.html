@@ -157,7 +157,7 @@ templateEngineOverride: njk
     </section>
 
     <section class="jv2m-recent" id="journal-mobile-recent" aria-label="More from the Journal"{% if not recent.length %} hidden{% endif %}>
-      <h2 class="jv2m-recent__title">Recent Pages</h2>
+      <h2 class="jv2m-recent__title">More to Read</h2>
       <div class="jv2m-card-slot" id="journal-mobile-card-1"{% if not recent[0] %} hidden{% endif %}>{% if recent[0] %}{{ recent[0] | renderJournalCard | safe }}{% endif %}</div>
       <div class="jv2m-card-slot" id="journal-mobile-card-2"{% if not recent[1] %} hidden{% endif %}>{% if recent[1] %}{{ recent[1] | renderJournalCard | safe }}{% endif %}</div>
       <div class="jv2m-card-slot" id="journal-mobile-card-3"{% if not recent[2] %} hidden{% endif %}>{% if recent[2] %}{{ recent[2] | renderJournalCard | safe }}{% endif %}</div>

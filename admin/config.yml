@@ -207,6 +207,7 @@ collections:
         collapsed: true
         fields:
           - { label: "Image", name: image, widget: image, required: false }
+          - { label: "Image position", name: position, widget: select, options: ["top", "center", "bottom"], default: "center", required: false, hint: "Which part of the photo stays visible when it is cropped to fit. Use top for portraits so faces are not cut off." }
           - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
           - { label: "Caption", name: caption, widget: string, required: false }
       - label: "Polaroid 1 (optional)"
@@ -277,6 +278,7 @@ collections:
                 collapsed: true
                 fields:
                   - { label: "Image", name: image, widget: image, required: false }
+                  - { label: "Image position", name: position, widget: select, options: ["top", "center", "bottom"], default: "center", required: false, hint: "Which part of the photo stays visible when it is cropped to fit. Use top for portraits so faces are not cut off." }
                   - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
                   - { label: "Caption", name: caption, widget: string, required: false }
               - label: "Polaroid 1 (optional)"

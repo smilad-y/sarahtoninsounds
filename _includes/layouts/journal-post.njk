@@ -69,7 +69,7 @@
            set (admin/config.yml). Absent otherwise, the "body-only" case. -->
       {% if hero and hero.image %}
       <figure class="jp-hero">
-        <img class="jp-hero__photo" src="{{ hero.image }}" alt="{{ hero.alt }}">
+        <img class="jp-hero__photo jp-photo--{{ hero.position or 'center' }}" src="{{ hero.image }}" alt="{{ hero.alt }}">
         {% if hero.caption %}<figcaption class="jp-hero__caption">{{ hero.caption }}</figcaption>{% endif %}
       </figure>
       {% endif %}
@@ -158,11 +158,12 @@
     </div>
 
     {%- set mobileHeroImage = (hero and hero.image) or featured_image %}
+    {%- set mobileHeroPosition = (hero.position if (hero and hero.image and hero.position) else 'center') %}
     {% if mobileHeroImage %}
     <div class="jpm-polaroid-hero">
       <div class="jpm-polaroid">
         <div class="jpm-polaroid__frame">
-          <img class="jpm-polaroid__photo" src="{{ mobileHeroImage }}" alt="{{ hero.alt if (hero and hero.image) else '' }}">
+          <img class="jpm-polaroid__photo jp-photo--{{ mobileHeroPosition }}" src="{{ mobileHeroImage }}" alt="{{ hero.alt if (hero and hero.image) else '' }}">
         </div>
         <img class="jpm-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
       </div>

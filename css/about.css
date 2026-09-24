@@ -57,13 +57,15 @@
   background-color: #f1e0c6;
 }
 
-/* Between the mobile breakpoint and 1440px the whole fixed composition
-   is scaled down uniformly instead of overflowing sideways. zoom (not
+/* Between 1224px and 1440px the whole fixed composition is scaled down
+   uniformly instead of overflowing sideways. 1224px is 85% of 1440, the
+   smallest the desktop layout is allowed to get; below it the page
+   switches to the mobile layout instead. zoom (not
    transform) so layout height shrinks with it and no blank scroll area
    is left below. --ab3-zoom is viewport width / 1440, set on :root by
    an inline script in about.html and kept current by js/site.js;
    without JS the page falls back to its native 1440px width. */
-@media (min-width: 901px) and (max-width: 1439.98px) {
+@media (min-width: 1224px) and (max-width: 1439.98px) {
   .ab3-page {
     zoom: var(--ab3-zoom, 1);
   }
@@ -639,7 +641,8 @@
   display: none;
 }
 
-@media (max-width: 900px) {
+/* 1223.98px: see the zoom rule above (85% of 1440 is the desktop floor). */
+@media (max-width: 1223.98px) {
   /* Hides the whole desktop composition, not just .ab3-stage: since
      the bio and footer moved out of .ab3-stage into .ab3-body-region
      (a sibling inside .ab3-page — see that rule's comment), hiding

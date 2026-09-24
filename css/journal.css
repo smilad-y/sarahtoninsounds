@@ -186,10 +186,13 @@
 /* ── Hero heading ──
    z-index raised above .jv2-featured deliberately — see the HTML
    comment above this block's markup for why. */
+/* top raised from Figma's 11.2222%, the title about 10% smaller, and
+   its line box and the gaps below it tightened, so the subtitle clears
+   the Featured Post's torn top edge instead of sitting on it. */
 .jv2-hero {
   position: absolute;
   left: 37.7887%;
-  top: 11.2222%;
+  top: 9.4%;
   width: 24.9825%;
   z-index: 8;
   text-align: center;
@@ -197,9 +200,10 @@
 
 .jv2-hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5.6vw, 5.25rem);
+  font-size: clamp(2.25rem, 5vw, 4.7rem);
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  line-height: 1;
   color: var(--color-near-black);
   margin: 0;
 }
@@ -207,7 +211,7 @@
 .jv2-hero__divider {
   width: 82%;
   height: 2px;
-  margin: 0.5em auto 0;
+  margin: 0.3em auto 0;
   background-color: var(--color-crimson);
 }
 
@@ -216,7 +220,7 @@
   font-size: clamp(1rem, 1.3vw, 1.3rem);
   letter-spacing: 0.03em;
   color: var(--color-near-black);
-  margin: 0.5em 0 0;
+  margin: 0.35em 0 0;
 }
 
 /* ── Featured entry (automatic newest-dated entry) ──
@@ -730,7 +734,7 @@
     font-size: 0.875rem;
   }
 
-  /* ── Recent Pages ──
+  /* ── "More to Read" (recent entries) ──
      .journal-card is already a normal (non-absolute) flex column on
      desktop, so mobile only needs a solid-card treatment plus a few
      field-level overrides — no structural rebuild. */

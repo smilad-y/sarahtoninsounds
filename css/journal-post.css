@@ -438,6 +438,13 @@
   margin-bottom: 0;
 }
 
+/* Hero Image position (CMS "Image position" field): which part of the
+   photo stays visible when object-fit: cover crops it. Also applied to
+   the mobile polaroid hero. */
+.jp-photo--top { object-position: center top; }
+.jp-photo--center { object-position: center center; }
+.jp-photo--bottom { object-position: center bottom; }
+
 /* ── Monthly Favs sections ── Stand in for the essay body on Monthly
    Favorites pages (journal-monthly-favs.njk); shared by the desktop
    .jp-body-copy and mobile .jpm-body-copy columns. */
