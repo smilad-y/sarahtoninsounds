@@ -87,6 +87,7 @@
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'mood-circle mood-circle--' + (mood.labelText === 'light' ? 'light' : 'dark') + '-text';
+      if (mood.labelShadow === true) btn.classList.add('mood-circle--shadow');
       btn.dataset.moodId = mood.id;
       btn.setAttribute('aria-pressed', 'false');
       btn.tabIndex = -1;

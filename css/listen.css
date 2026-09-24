@@ -5,14 +5,9 @@
    (BUILD-ROADMAP.md Phase 5); sections not yet built keep the earlier
    structural-only placeholder markup/styles until their turn.
 
-   Typography note: this Figma file explicitly corrects the page's type
-   to Perandory Semi-Condensed for display headings and Crimson Text for
-   body copy (confirmed instruction, not Figma's usual placeholder
-   Playfair Display/Crimson Text noise seen on other pages) — so this
-   page intentionally uses Crimson Text rather than the sitewide IM Fell
-   English body direction from PROJECT-SPEC.md §5. This is a deliberate,
-   page-specific font choice for Listen, not a silent replacement of the
-   sitewide body font elsewhere.
+   Typography: Perandory Semi-Condensed for display headings and nav,
+   IM Fell English for readable text (PROJECT-SPEC.md §5), Sue Ellen
+   Francisco for handwritten notes.
 
    Asset note: a parallel session uploaded the real Figma exports for
    this page (assets/images/listen/) after this file's first pass, which
@@ -58,11 +53,8 @@ html:has(body.page-listen) {
    26.25px gap, right-aligned within the 1440px reference frame (tab row
    spans x=621-1436, i.e. flush to the right edge). The reused torn-paper
    tab asset (ASSET-MANIFEST.md §1) is the tab's entire visual
-   treatment; labels are real text layered on top in Crimson Text
-   SemiBold — a deliberate exception to the sitewide Perandory
-   Semi-Condensed nav treatment used everywhere else, including Home
-   (see TODO.md's Nav Typography item for the open cross-page decision
-   this still needs from Sarah). */
+   treatment; labels are real text layered on top in Perandory
+   Semi-Condensed, matching the nav on every other page. */
 .listen-header {
   display: flex;
   justify-content: flex-end;
@@ -82,8 +74,7 @@ html:has(body.page-listen) {
   list-style: none;
 }
 
-/* font-weight intentionally not set (was 600 under the old Crimson
-   Text choice): only a Regular/400 cut of Perandory Semi-Condensed is
+/* font-weight intentionally not set: only a Regular/400 cut of Perandory Semi-Condensed is
    hosted (css/tokens.css), so 600 here would trigger a synthetic/fake
    bold — confirmed visibly heavier than Journal's and Journal Post's
    identical nav-tape component side by side. Those two don't set
@@ -193,8 +184,7 @@ html:has(body.page-listen) {
   top: 88.6%;
   width: 36.25%;
   margin: 0;
-  font-family: 'Crimson Text', Georgia, serif;
-  font-weight: 600;
+  font-family: var(--font-body);
   font-size: clamp(0.9rem, 1.3889vw, 1.25rem);
   text-align: center;
   color: var(--color-near-black);
@@ -253,8 +243,7 @@ html:has(body.page-listen) {
   width: 18.74%;
   height: 11.687%;
   margin: 0;
-  font-family: 'Crimson Text', Georgia, serif;
-  font-weight: 600;
+  font-family: var(--font-display);
   font-size: clamp(0.9rem, 1.3889vw, 1.25rem);
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -328,21 +317,25 @@ html:has(body.page-listen) {
 .mood-circle--dark-text { color: var(--color-near-black); }
 .mood-circle--light-text { color: #fffaf0; }
 
+/* Faint halo for circle art where the label text alone falls short of
+   4.5:1 (set per mood with labelShadow in moods.json). */
+.mood-circle--shadow { text-shadow: 0 0 2px rgba(28, 26, 22, 0.7); }
+
 .mood-circle__number {
   font-size: clamp(0.95rem, 1.15vw, 1.1rem);
   line-height: 1;
 }
 
 .mood-circle__name {
-  font-size: clamp(0.85rem, 1.3vw, 1.2rem);
+  font-size: clamp(0.8rem, 1.15vw, 1.05rem);
   line-height: 1.05;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
 .mood-circle__descriptor {
-  font-family: 'Crimson Text', Georgia, serif;
-  font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 0.85vw, 0.8rem);
   line-height: 1.15;
   overflow-wrap: break-word;
 }
@@ -378,7 +371,7 @@ html:has(body.page-listen) {
 
 .listen-moods__error {
   margin: 0;
-  font-family: 'Crimson Text', Georgia, serif;
+  font-family: var(--font-body);
   font-size: 1.1rem;
   color: var(--color-near-black);
 }
@@ -444,7 +437,7 @@ html:has(body.page-listen) {
   .mood-circle { padding: 10%; }
   .mood-circle__descriptor { font-size: 0.75rem; }
   .mood-circle__number { font-size: 0.95rem; }
-  .mood-circle__name { font-size: 0.9rem; }
+  .mood-circle__name { font-size: 0.85rem; }
 }
 
 /* ── Turntable + Mood Detail (Figma node 15:7) ──
@@ -577,9 +570,8 @@ html:has(body.page-listen) {
   border-radius: 999px;
   background: var(--color-cream);
   box-shadow: 2px 2px 0 var(--color-near-black);
-  font-family: 'Crimson Text', Georgia, serif;
+  font-family: var(--font-body);
   font-size: clamp(0.8rem, 1.15vw, 1rem);
-  font-weight: 700;
   line-height: 1;
   color: var(--color-near-black);
 }
@@ -692,7 +684,7 @@ html:has(body.page-listen) {
   top: 54.26%;
   width: 31.04%;
   margin: 0;
-  font-family: 'Crimson Text', Georgia, serif;
+  font-family: var(--font-body);
   font-size: clamp(1rem, 2.0833vw, 1.5rem);
   line-height: 1.35;
   text-align: center;
@@ -848,8 +840,7 @@ html:has(body.page-listen) {
   top: 19.98%;
   width: 31.42%;
   margin: 0;
-  font-family: 'Crimson Text', Georgia, serif;
-  font-weight: 600;
+  font-family: var(--font-display);
   font-size: clamp(1.15rem, 2.4306vw, 2.1875rem);
   letter-spacing: 0.03em;
   text-align: center;
@@ -934,7 +925,7 @@ html:has(body.page-listen) {
   top: 24%;
   width: 86.12%;
   margin: 0;
-  font-family: 'Crimson Text', Georgia, serif;
+  font-family: var(--font-body);
   font-size: clamp(0.9rem, 1.3889vw, 1.25rem);
   letter-spacing: 0.02em;
   text-align: center;
@@ -1138,9 +1129,8 @@ html:has(body.page-listen) {
   border: 2px solid var(--color-near-black);
   border-radius: 999px;
   background: var(--color-cream);
-  font-family: 'Crimson Text', Georgia, serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
-  font-weight: 700;
   line-height: 1;
   color: var(--color-near-black);
   cursor: pointer;
@@ -1176,7 +1166,7 @@ html:has(body.page-listen) {
 
 .now-spinning__unavailable {
   margin: 0;
-  font-family: 'Crimson Text', Georgia, serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   color: var(--color-near-black);
 }

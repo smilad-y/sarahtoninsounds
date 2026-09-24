@@ -5,12 +5,12 @@
     "UNDECIDED = not decided by Sarah yet; the page shows nothing for it rather than inventing copy.",
     "PLACEHOLDER = no real URL yet; that service is shown as unavailable for the mood.",
     "Array order is the current display order. Final display order is UNDECIDED; the number on each label is its position among the live moods.",
-    "labelText: text color on the circle art (dark or light), for contrast.",
+    "labelText: text color on the circle art (dark or light), for contrast. labelShadow: true adds a faint dark shadow behind that text, for circle art where neither text color reaches 4.5:1 on its own (the red circle).",
     "labelColors hex values are PROVISIONAL, sampled from the circle art; final hex values are UNDECIDED.",
     "art paths are the existing assets (circles are 320px WebP exports; full-size originals in archive/listen-circle-originals/). Each live mood uses one color's full set (circle, vinyl, record, tape) plus that color's labelColors entry, never mixed. Non-live moods with color UNDECIDED keep the art they had, so some share art with a live mood; Hopeful / Hypnotic use forest green / silver art even though the spec leaves their colors open. art.record is the pre-composited record export, not currently rendered.",
     "selectorNote: short note shown near the selector (e.g. that more moods are coming). UNDECIDED = nothing shown; wording and style are Sarah's call."
   ],
-  "defaultMood": "hazy",
+  "defaultMood": "chill",
   "selectorNote": "UNDECIDED",
   "labelColors": {
     "light blue": "#b0caf9",
@@ -152,6 +152,7 @@
       "icon": "lips",
       "descriptor": "Intimacy, attraction, tension.",
       "labelText": "light",
+      "labelShadow": true,
       "art": {
         "circle": "/assets/images/listen/red-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Red.png",
