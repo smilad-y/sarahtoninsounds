@@ -806,6 +806,19 @@ html:has(body.page-listen) {
    Copy: the "AN INTRODUCTION TO..." heading/subheading and the Arabic
    Music paragraph are Sarah's real Figma-sourced copy, used verbatim —
    not placeholder text. */
+/* Hidden until Crash Courses roll out after launch (see listen.html). */
+.listen-intro[hidden] {
+  display: none;
+}
+
+/* With Crash Courses hidden the turntable ends the page, so give it
+   room above the now spinning bar. Drops away when the section returns. */
+@media (min-width: 761px) {
+  .listen-turntable:has(+ .listen-intro[hidden]) {
+    margin-bottom: 3rem;
+  }
+}
+
 .listen-intro {
   position: relative;
   width: 100%;

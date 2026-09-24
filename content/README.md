@@ -39,5 +39,5 @@ Populated so far:
   `UNDECIDED`, missing links `PLACEHOLDER`; the notes at the top of the
   file explain the rest. Passthrough-copied (not template data) and
   fetched at runtime by `js/listen.js`.
-- `listen/crash-courses.json` — Crash Courses content (Phase 6)
+- `listen/crash-courses.json` — Crash Courses content (not created yet; Crash Courses roll out after launch, BUILD-ROADMAP.md Phase 10)
 - `contact.json` — finalized contact copy/links (Phase 8)
