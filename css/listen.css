@@ -156,7 +156,7 @@ html:has(body.page-listen) {
 .listen-hero__title {
   position: absolute;
   left: -11.597%;
-  top: 34.96%;
+  top: 41.96%; /* 7% below Figma so the logo's bottom edge doesn't crowd the L */
   width: 59.167%;
   height: 60.86%;
   margin: 0;
@@ -168,12 +168,13 @@ html:has(body.page-listen) {
   color: var(--color-near-black);
 }
 
-/* Divider and subtitle sit ~18% of the hero higher than the Figma
-   frame so the line hugs the heading, as on the other pages. */
+/* Divider and subtitle follow the heading (7% lower than Figma) and sit
+   ~18% higher relative to it than the Figma frame, so the line hugs
+   the heading as on the other pages. */
 .listen-hero__divider {
   position: absolute;
   left: -0.0694%;
-  top: 68.5%;
+  top: 75.5%;
   width: 37.977%;
   height: 2px;
   background-color: var(--color-crimson);
@@ -182,7 +183,7 @@ html:has(body.page-listen) {
 .listen-hero__subtitle {
   position: absolute;
   left: -0.833%;
-  top: 70.4%;
+  top: 77.4%;
   width: 36.25%;
   margin: 0;
   font-family: var(--font-body);
@@ -225,6 +226,14 @@ html:has(body.page-listen) {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
+}
+
+/* Between the mobile layout and ~880px the subtitle wraps to two lines
+   and would run into the mood card; give it room. */
+@media (min-width: 761px) and (max-width: 879.98px) {
+  .listen-moods {
+    margin-top: 2.5rem;
+  }
 }
 
 .listen-moods__card {
