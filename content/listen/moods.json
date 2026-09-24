@@ -7,10 +7,10 @@
     "Array order is the current display order. Final display order is UNDECIDED; the number on each label is its position among the live moods.",
     "labelText: text color on the circle art (dark or light), for contrast.",
     "labelColors hex values are PROVISIONAL, sampled from the circle art; final hex values are UNDECIDED.",
-    "art paths are the existing assets (circles are 320px WebP exports; full-size originals in archive/listen-circle-originals/). Lost uses the brown art and Euphoric / Hopeful / Unleashed / Hypnotic use gold / forest green / dark green / silver art even though the spec leaves their colors open; art.record is the pre-composited record export, not currently rendered.",
+    "art paths are the existing assets (circles are 320px WebP exports; full-size originals in archive/listen-circle-originals/). Each live mood uses one color's full set (circle, vinyl, record, tape) plus that color's labelColors entry, never mixed. Non-live moods with color UNDECIDED keep the art they had, so some share art with a live mood; Hopeful / Unleashed / Hypnotic use forest green / dark green / silver art even though the spec leaves their colors open. art.record is the pre-composited record export, not currently rendered.",
     "selectorNote: short note shown near the selector (e.g. that more moods are coming). UNDECIDED = nothing shown; wording and style are Sarah's call."
   ],
-  "defaultMood": "dreamy",
+  "defaultMood": "hazy",
   "selectorNote": "UNDECIDED",
   "labelColors": {
     "light blue": "#b0caf9",
@@ -22,6 +22,7 @@
     "lavender": "#d3b9f1",
     "dark blue": "#2d49b2",
     "black": "#555555",
+    "brown": "#664e4b",
     "berry": "#9a406a",
     "dark green": "#659344",
     "purple": "#6c4d8f",
@@ -33,18 +34,18 @@
   },
   "moods": [
     {
-      "id": "dreamy",
-      "name": "Dreamy",
+      "id": "hazy",
+      "name": "Hazy",
       "live": true,
-      "color": "light blue",
+      "color": "purple",
       "icon": "cloud",
       "descriptor": "UNDECIDED",
-      "labelText": "dark",
+      "labelText": "light",
       "art": {
-        "circle": "/assets/images/listen/light-blue-cirle.webp",
-        "vinyl": "/assets/images/listen/Colored Records/Record-Light_Blue.png",
-        "record": "/assets/images/listen/sarahtonin_sounds-listen-record-dreamy_2.png",
-        "tape": "/assets/images/listen/Tape-Light_Blue_1.png"
+        "circle": "/assets/images/listen/purple-circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Purple.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-purple.png",
+        "tape": "/assets/images/listen/Tape-Purple.png"
       },
       "spotify": {
         "url": "https://open.spotify.com/playlist/5RbZK1fPP47ohsKVMBQUcO?si=a6b9af46bd42466d"
@@ -70,9 +71,9 @@
       ]
     },
     {
-      "id": "energized",
-      "name": "Energized",
-      "live": false,
+      "id": "electric",
+      "name": "Electric",
+      "live": true,
       "color": "yellow",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
@@ -94,9 +95,9 @@
       "picks": []
     },
     {
-      "id": "sultry",
-      "name": "Sultry",
-      "live": false,
+      "id": "sensual",
+      "name": "Sensual",
+      "live": true,
       "color": "red",
       "icon": "lips",
       "descriptor": "UNDECIDED",
@@ -121,7 +122,7 @@
       "id": "cute",
       "name": "Cute",
       "live": false,
-      "color": "pink",
+      "color": "UNDECIDED",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
       "labelText": "dark",
@@ -132,7 +133,7 @@
         "tape": "/assets/images/listen/Tape-Pink.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/1MKeBuS1z21UUnE01WeC7F"
+        "url": "https://open.spotify.com/playlist/3XKtSRi5IhoSJA4flxU58N"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
@@ -145,7 +146,7 @@
       "id": "audacious",
       "name": "Audacious",
       "live": false,
-      "color": "orange",
+      "color": "UNDECIDED",
       "icon": "sunglasses",
       "descriptor": "UNDECIDED",
       "labelText": "dark",
@@ -168,16 +169,16 @@
     {
       "id": "chill",
       "name": "Chill",
-      "live": false,
-      "color": "light green",
+      "live": true,
+      "color": "light blue",
       "icon": "sun",
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/light-green-circle.webp",
-        "vinyl": "/assets/images/listen/Colored Records/Record-Light_Green.png",
-        "record": "/assets/images/listen/sarahtonin sounds-listen-record-light green.png",
-        "tape": "/assets/images/listen/Tape-Light_Green.png"
+        "circle": "/assets/images/listen/light-blue-cirle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Light_Blue.png",
+        "record": "/assets/images/listen/sarahtonin_sounds-listen-record-dreamy_2.png",
+        "tape": "/assets/images/listen/Tape-Light_Blue_1.png"
       },
       "spotify": {
         "url": "https://open.spotify.com/playlist/52MLdAdmlGKmj8Q7OESYYA?si=d5f6d2a93b304293"
@@ -204,7 +205,7 @@
         "tape": "/assets/images/listen/Tape-Lavendar.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/5JAjZESFqplxGdXXnkZv7d"
+        "url": "https://open.spotify.com/playlist/5BrpdG6D8ZWvZRpem1YUjK"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
@@ -217,7 +218,7 @@
       "id": "lost",
       "name": "Lost",
       "live": false,
-      "color": "lavender",
+      "color": "UNDECIDED",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
       "labelText": "light",
@@ -228,7 +229,7 @@
         "tape": "/assets/images/listen/Tape-brown.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/0H4yQYUFBjYbRaUGEG3MzA"
+        "url": "https://open.spotify.com/playlist/5gZMZPKxAf6YaPvVm799tg"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
@@ -252,7 +253,7 @@
         "tape": "/assets/images/listen/Tape-Dark_Blue.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/4oS3oJ23hvqh8PMDnxrbtY"
+        "url": "https://open.spotify.com/playlist/24fenp1dE6vpIDbmS6FwAB"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
@@ -264,16 +265,16 @@
     {
       "id": "defiant",
       "name": "Defiant",
-      "live": false,
-      "color": "black",
+      "live": true,
+      "color": "brown",
       "icon": "fist",
       "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
-        "circle": "/assets/images/listen/black-circle.webp",
-        "vinyl": "/assets/images/listen/Colored Records/Record-Black.png",
-        "record": "/assets/images/listen/sarahtonin sounds-listen-record-black.png",
-        "tape": "/assets/images/listen/Tape-Black.png"
+        "circle": "/assets/images/listen/brown_Circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Brown.png",
+        "record": "/assets/images/listen/sarahtonin_sounds-listen-record-brown.png",
+        "tape": "/assets/images/listen/Tape-brown.png"
       },
       "spotify": {
         "url": "https://open.spotify.com/playlist/4TQdShNqgVeLDUD0X4Gquq?si=8b1ecb9f383d4067"
@@ -300,7 +301,7 @@
         "tape": "/assets/images/listen/Tape-Maroon.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/52MLdAdmlGKmj8Q7OESYYA"
+        "url": "https://open.spotify.com/playlist/4oS3oJ23hvqh8PMDnxrbtY"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
@@ -324,7 +325,7 @@
         "tape": "/assets/images/listen/Tape-Green.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/0zksiK8ZEBUECUqxLAHRzp"
+        "url": "https://open.spotify.com/playlist/5JAjZESFqplxGdXXnkZv7d"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
@@ -337,7 +338,7 @@
       "id": "hype",
       "name": "Hype",
       "live": false,
-      "color": "purple",
+      "color": "UNDECIDED",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
       "labelText": "light",
@@ -372,7 +373,7 @@
         "tape": "/assets/images/listen/Tape-Peach.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/6sP6dpEbjOagcJGJ7bgINa"
+        "url": "https://open.spotify.com/playlist/0zksiK8ZEBUECUqxLAHRzp"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
@@ -396,7 +397,7 @@
         "tape": "/assets/images/listen/Tape-Forest_Green.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/5RbZK1fPP47ohsKVMBQUcO"
+        "url": "https://open.spotify.com/playlist/5BHM7EYebAJE4QZQcCoapO"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
@@ -408,16 +409,16 @@
     {
       "id": "euphoric",
       "name": "Euphoric",
-      "live": false,
-      "color": "UNDECIDED",
+      "live": true,
+      "color": "orange",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/gold circle.webp",
-        "vinyl": "/assets/images/listen/Record-gold.png",
-        "record": "/assets/images/listen/sarahtonin sounds-listen-record-gold.png",
-        "tape": "/assets/images/listen/Tape-Gold.png"
+        "circle": "/assets/images/listen/orange-circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Orange.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-orange.png",
+        "tape": "/assets/images/listen/Tape-Orange.png"
       },
       "spotify": {
         "url": "https://open.spotify.com/playlist/0H4yQYUFBjYbRaUGEG3MzA?si=feb7f6638a1b471b"
@@ -432,16 +433,16 @@
     {
       "id": "tender",
       "name": "Tender",
-      "live": false,
-      "color": "fuschia",
+      "live": true,
+      "color": "pink",
       "icon": "heart",
       "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
-        "circle": "/assets/images/listen/Fuschia Circle.webp",
-        "vinyl": "/assets/images/listen/Record-fuschia.png",
-        "record": "/assets/images/listen/sarahtonin sounds-listen-record-fuschia.png",
-        "tape": "/assets/images/listen/Tape-Fuschia.png"
+        "circle": "/assets/images/listen/pink-circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Pink.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-pink.png",
+        "tape": "/assets/images/listen/Tape-Pink.png"
       },
       "spotify": {
         "url": "https://open.spotify.com/playlist/00G4dsIODpNybJ17oYCpIc?si=166fc3a77a1a4a8a"
@@ -468,7 +469,7 @@
         "tape": "/assets/images/listen/Tape-Silver.png"
       },
       "spotify": {
-        "url": "https://open.spotify.com/playlist/00G4dsIODpNybJ17oYCpIc"
+        "url": "https://open.spotify.com/playlist/6FhZxeM54u0L6x8muXy7SI"
       },
       "appleMusic": {
         "url": "PLACEHOLDER"

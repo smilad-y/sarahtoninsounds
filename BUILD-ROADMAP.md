@@ -101,6 +101,7 @@ Two mood names, several icons, four colors, and all descriptors are still undeci
 - Finish remaining mood icons.
 - Add Crash Courses as a clearly separate section.
 - Launch with 6-8 live moods Sarah is confident in. Moods not yet live are hidden from the selector (not shown as locked), with a short handwritten note near the selector saying more are coming. Adding a mood later = flip its live flag in moods.json.
+  - **Decided (Sarah, September 2026): 7 launch moods:** Tender, Defiant, Hazy, Sensual, Electric, Euphoric, Chill. Set live in `content/listen/moods.json`, with each one's Spotify link checked against the playlist it opens. Still owed for these: Apple Music links, and blurbs, descriptions, and Sarah's Picks for all but Hazy.
 
 ### Nice to have
 - Small tactile transitions/microinteractions that do not compromise performance or accessibility.
@@ -172,7 +173,7 @@ Before implementation, decide:
 ## Current Open Decisions
 These are intentionally not finalized and should not be guessed:
 - Hopeful vs. At Peace; Playful vs. Cheeky
-- which of Energized / Hype gets the disco ball icon
+- which of Electric (formerly Energized) / Hype gets the disco ball icon
 - remaining mood icons and descriptors
 - colors for Euphoric, Hopeful/At Peace, Unleashed, Hypnotic; hex values for all colors
 - mood display order

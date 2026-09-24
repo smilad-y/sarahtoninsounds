@@ -220,44 +220,47 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 - Full vinyl appears only after a mood is selected.
 
 ### Mood list (final, supersedes the earlier 12-mood working list)
-18 moods:
+18 moods (18 colors):
 
 | # | Mood | Label color | Icon |
 |---|------|-------------|------|
-| 1 | Chill | light green | sun |
-| 2 | Dreamy | light blue | cloud |
-| 3 | Euphoric | *undecided* | *undecided* |
-| 4 | Energized | yellow | disco ball *(see note)* |
-| 5 | Defiant | black | fist |
-| 6 | Audacious | orange | sunglasses |
-| 7 | Sultry | red | lips |
-| 8 | Tender | fuschia | heart |
+| 1 | Chill | light blue | sun |
+| 2 | Hazy | purple | cloud |
+| 3 | Euphoric | orange | *undecided* |
+| 4 | Electric | yellow | *undecided* (disco ball?) *(see note)* |
+| 5 | Defiant | brown | fist |
+| 6 | Audacious | *undecided* | sunglasses |
+| 7 | Sensual | red | lips |
+| 8 | Tender | pink | heart |
 | 9 | Melancholy | lavender | broken heart |
 | 10 | Burdened | dark blue | scribble |
 | 11 | Nostalgic | peach | camera |
 | 12 | Hopeful / At Peace | *undecided* | *undecided* |
-| 13 | Lost | lavender | *undecided* |
+| 13 | Lost | *undecided* | *undecided* |
 | 14 | Playful / Cheeky | berry | *undecided* |
 | 15 | Unleashed | *undecided* | *undecided* |
-| 16 | Cute | pink | *undecided* |
+| 16 | Cute | *undecided* | *undecided* |
 | 17 | Hypnotic | *undecided* | *undecided* |
-| 18 | Hype | purple | *undecided* *(see note)* |
+| 18 | Hype | *undecided* | *undecided* *(see note)* |
 
 Row numbers are for reference only; display order is not decided.
 
+**Launch moods (decided, Sarah, September 2026):** Tender, Defiant, Hazy, Sensual, Electric, Euphoric, and Chill are live at launch (`"live": true` in `content/listen/moods.json`). The other 11 are hidden until Sarah flips them.
+
 Notes:
 - **Hopeful / At Peace** and **Playful / Cheeky**: Sarah will keep one word from each pair. Both are placeholders until she picks.
-- **Melancholy and Lost share lavender** for now (18 moods, 17 colors).
-- **Unassigned colors:** dark green, forest green, gold, silver. Euphoric, Hopeful/At Peace, Unleashed, and Hypnotic have no color yet. Do not assign these without Sarah.
-- **Disco ball:** originally confirmed for the combined "Energized / Hype" mood. Energized and Hype are now separate moods, so which one keeps the disco ball is undecided.
+- **Renamed (Sarah, September 2026):** Sultry is now **Sensual**, Energized is now **Electric**, Dreamy is now **Hazy**. Hazy keeps the cloud icon.
+- **Color reassignments (Sarah, September 2026):** the launch moods took pink (from Cute), brown (from Lost), purple (from Hype), orange (from Audacious), and light blue (from Dreamy, now Chill). Cute, Hype, Audacious, and Lost now have no color; their existing art is kept in the config unchanged.
+- **Unassigned colors:** fuschia, black, light green, dark green, forest green, gold, silver. Cute, Audacious, Lost, Hopeful/At Peace, Unleashed, Hype, and Hypnotic have no color yet. Do not assign these without Sarah.
+- **Disco ball:** originally confirmed for the combined "Energized / Hype" mood. Energized (now Electric) and Hype are separate moods, so which one keeps the disco ball is undecided. Electric is the likely candidate, not confirmed. Euphoric's icon is also undecided.
 - **Focus** from the earlier working list is not in the final 18.
-- Earlier combined names (Dreamy / Float Away, Tender / Romantic, Sultry / Sensual) are now single words: Dreamy, Tender, Sultry.
+- Earlier combined names (Dreamy / Float Away, Tender / Romantic, Sultry / Sensual) became single words (Dreamy, Tender, Sultry), then Dreamy and Sultry were renamed Hazy and Sensual (see above).
 - The mood data is config-driven, so the list can still change without rewriting the page.
 
 **Wanderlust and Exploratory are not mood playlists.** Ignore any mockup that invented those categories.
 
 ### Full mood-circle color set
-17 colors: yellow, red, pink, orange, light green, lavender, dark blue, black, berry, dark green, purple, peach, forest green, gold, fuschia, silver, light blue. Exact hex values are not recorded here yet.
+18 colors: yellow, red, pink, orange, light green, lavender, dark blue, black, brown, berry, dark green, purple, peach, forest green, gold, fuschia, silver, light blue. Exact hex values are not recorded here yet (provisional values sampled from the circle art live in `content/listen/moods.json`).
 
 ### Turntable
 The turntable is a signature interaction, not decorative filler. A selected mood should resolve into the full record/turntable experience.
