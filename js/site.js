@@ -73,3 +73,20 @@
     }
   });
 })();
+
+// About desktop scaling: the 1440px composition is zoomed to fit the
+// viewport between the mobile breakpoint and 1440px (css/about.css,
+// .ab3-page). about.html sets the first value inline in <head> so there
+// is no unscaled first paint; this keeps it current on resize. No-ops on
+// any page without .ab3-page.
+(function () {
+  if (!document.querySelector('.ab3-page')) return;
+
+  function fitAbout() {
+    var zoom = Math.min(document.documentElement.clientWidth / 1440, 1);
+    document.documentElement.style.setProperty('--ab3-zoom', zoom);
+  }
+
+  fitAbout();
+  window.addEventListener('resize', fitAbout);
+})();

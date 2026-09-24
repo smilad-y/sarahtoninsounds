@@ -24,8 +24,11 @@ backend:
   base_url: https://sarahtoninsounds.com
   auth_endpoint: .netlify/functions/auth
 
-media_folder: public/uploads
-public_folder: /public/uploads
+# Uploads land inside assets/, which .eleventy.js already passthrough-
+# copies to the published site (public/uploads was never copied, so
+# uploaded images never appeared).
+media_folder: assets/images/uploads
+public_folder: /assets/images/uploads
 
 collections:
 
@@ -193,7 +196,37 @@ collections:
       - { label: "Tags", name: tags, widget: hidden, default: "journalEssay" }
       - { label: "Layout", name: layout, widget: hidden, default: "layouts/journal-post.njk" }
       - { label: "Permalink", name: permalink, widget: hidden, default: "/journal/{{slug}}/" }
-      - { label: "Body", name: body, widget: markdown, hint: "Renders into the Journal Post page's one required body-copy block. The page's optional Hero/Polaroid/Pull-quote blocks aren't editable from here yet — see the conversation record." }
+      - { label: "Body", name: body, widget: markdown, hint: "Renders into the Journal Post page's main body-copy block." }
+      # Optional photo blocks on the Journal Post page. Each only renders
+      # once an image is set. Hero sits above the body; the polaroids sit
+      # below it on desktop.
+      - label: "Hero Image (optional)"
+        name: hero
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: "Image", name: image, widget: image, required: false }
+          - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
+          - { label: "Caption", name: caption, widget: string, required: false }
+      - label: "Polaroid 1 (optional)"
+        name: polaroid1
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: "Image", name: image, widget: image, required: false }
+          - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
+          - { label: "Caption", name: caption, widget: string, required: false }
+      - label: "Polaroid 2 (optional)"
+        name: polaroid2
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: "Image", name: image, widget: image, required: false }
+          - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
+          - { label: "Caption", name: caption, widget: string, required: false }
 
   # ── JOURNAL: FEATURED ──
   # Ordered, explicitly-curated Featured Journal selection (replaces the
@@ -237,6 +270,33 @@ collections:
               - { label: "Date", name: date, widget: date, format: "YYYY-MM-DD" }
               - { label: "Excerpt", name: excerpt, widget: text, hint: "Short teaser shown on the Journal card." }
               - { label: "Featured Image", name: featured_image, widget: image, required: false }
+              - label: "Hero Image (optional)"
+                name: hero
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { label: "Image", name: image, widget: image, required: false }
+                  - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
+                  - { label: "Caption", name: caption, widget: string, required: false }
+              - label: "Polaroid 1 (optional)"
+                name: polaroid1
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { label: "Image", name: image, widget: image, required: false }
+                  - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
+                  - { label: "Caption", name: caption, widget: string, required: false }
+              - label: "Polaroid 2 (optional)"
+                name: polaroid2
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { label: "Image", name: image, widget: image, required: false }
+                  - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
+                  - { label: "Caption", name: caption, widget: string, required: false }
               - label: "New Releases I Loved"
                 name: new_releases
                 widget: list

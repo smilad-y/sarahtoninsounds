@@ -57,7 +57,7 @@
     </div>
 
     <div class="jp-title-block">
-      <p class="jp-title-block__meta">{{ category }} &middot; {{ date | journalDate }}</p>
+      <p class="jp-title-block__meta">{{ category }} &middot; {{ (postDate or date) | journalDate }}</p>
       <div class="jp-title-block__meta-rule" aria-hidden="true"></div>
       <h1 class="jp-title-block__title">{{ title }}</h1>
       <div class="jp-title-block__rule" aria-hidden="true"></div>
@@ -65,27 +65,25 @@
 
     <div class="jp-article">
 
-      <!-- CMS: optional — no current essay sets `hero`, so this stays
-           absent, matching the already-verified "body-only" case in
-           TODO.md. Ready the moment a future CMS field supplies it. -->
-      {% if hero %}
+      <!-- CMS: optional — renders only once the entry's Hero Image is
+           set (admin/config.yml). Absent otherwise, the "body-only" case. -->
+      {% if hero and hero.image %}
       <figure class="jp-hero">
-        <div class="jp-hero__photo" role="img" aria-label="Hero photo placeholder"></div>
-        <figcaption class="jp-hero__caption">{{ hero.caption }}</figcaption>
+        <img class="jp-hero__photo" src="{{ hero.image }}" alt="{{ hero.alt }}">
+        {% if hero.caption %}<figcaption class="jp-hero__caption">{{ hero.caption }}</figcaption>{% endif %}
       </figure>
       {% endif %}
 
       <!-- CMS: required — the essay's full markdown body. -->
       <div class="jp-body-copy">{{ content | safe }}</div>
 
-      <!-- CMS: optional — same as hero, absent until a future CMS field
-           supplies it. -->
-      {% if polaroid1 %}
+      <!-- CMS: optional — same as hero, absent until its image is set. -->
+      {% if polaroid1 and polaroid1.image %}
       <figure class="jp-polaroid jp-polaroid--1">
         <div class="jp-polaroid__card">
           <img class="jp-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
-          <div class="jp-polaroid__photo" role="img" aria-label="Polaroid photo placeholder"></div>
-          <figcaption class="jp-polaroid__caption">{{ polaroid1.caption }}</figcaption>
+          <img class="jp-polaroid__photo" src="{{ polaroid1.image }}" alt="{{ polaroid1.alt }}">
+          {% if polaroid1.caption %}<figcaption class="jp-polaroid__caption">{{ polaroid1.caption }}</figcaption>{% endif %}
           <img class="jp-decor__star jp-decor__star--1" src="/assets/images/shared/doodles/star-scribble.png" alt="">
         </div>
       </figure>
@@ -108,12 +106,12 @@
       <div class="jp-body-copy">{{ body3 | safe }}</div>
       {% endif %}
 
-      {% if polaroid2 %}
+      {% if polaroid2 and polaroid2.image %}
       <figure class="jp-polaroid jp-polaroid--2">
         <div class="jp-polaroid__card">
           <img class="jp-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
-          <div class="jp-polaroid__photo" role="img" aria-label="Polaroid photo placeholder"></div>
-          <figcaption class="jp-polaroid__caption">{{ polaroid2.caption }}</figcaption>
+          <img class="jp-polaroid__photo" src="{{ polaroid2.image }}" alt="{{ polaroid2.alt }}">
+          {% if polaroid2.caption %}<figcaption class="jp-polaroid__caption">{{ polaroid2.caption }}</figcaption>{% endif %}
           <img class="jp-decor__star jp-decor__star--2" src="/assets/images/shared/doodles/star-scribble.png" alt="">
         </div>
       </figure>
@@ -128,9 +126,9 @@
 
   <!-- Mobile Journal Post (Header/Nav/Title Block/Polaroid Hero built;
        Essay Body wired to the same rendered body as desktop, matching
-       this section's own "essay.body" marker convention. Hero image
-       stays the fixed placeholder — mobile's swappable-image rebuild is
-       a separate, not-yet-done pass (TODO.md), left untouched here. The
+       this section's own "essay.body" marker convention. The polaroid
+       hero shows the entry's Hero Image, falling back to its Featured
+       Image, and is left out when neither is set. The
        scribble-star divider that sat mid-placeholder is omitted: it has
        no CMS field deciding whether/where it appears, per this section's
        own "a real essay's CMS content decides... where" note. -->
@@ -154,17 +152,22 @@
     </nav>
 
     <div class="jpm-title-block">
-      <p class="jpm-title-block__meta">{{ category }} &middot; {{ date | journalDate }}</p>
+      <p class="jpm-title-block__meta">{{ category }} &middot; {{ (postDate or date) | journalDate }}</p>
       <h1 class="jpm-title-block__title">{{ title }}</h1>
       <div class="jpm-title-block__rule" aria-hidden="true"></div>
     </div>
 
+    {%- set mobileHeroImage = (hero and hero.image) or featured_image %}
+    {% if mobileHeroImage %}
     <div class="jpm-polaroid-hero">
-      <div class="jpm-polaroid" aria-hidden="true">
-        <img class="jpm-polaroid__photo" src="/assets/images/journal/article-photo-sky-clouds.png" alt="">
+      <div class="jpm-polaroid">
+        <div class="jpm-polaroid__frame">
+          <img class="jpm-polaroid__photo" src="{{ mobileHeroImage }}" alt="{{ hero.alt if (hero and hero.image) else '' }}">
+        </div>
         <img class="jpm-polaroid__tape" src="/assets/images/journal/tape-orange.png" alt="">
       </div>
     </div>
+    {% endif %}
 
     <div class="jpm-body-copy">{{ content | safe }}</div>
 

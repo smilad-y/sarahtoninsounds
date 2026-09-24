@@ -12,8 +12,9 @@
    only for "Let's Work Together!" and the polaroid caption. Colors use
    the established design tokens rather than Figma's literal hex
    values. Figma's own literal px values are used verbatim throughout
-   (not rem/percentage) since this stage is deliberately fixed-width,
-   not responsive. */
+   (not rem/percentage): the composition is authored at a fixed 1440px
+   and scaled as one unit between the mobile breakpoint and 1440px (see
+   .ab3-page's zoom rule below), so nothing inside it reflows. */
 
 .page-about {
   background-color: var(--color-cream);
@@ -54,6 +55,18 @@
   margin: 0 auto;
   overflow: hidden;
   background-color: #f1e0c6;
+}
+
+/* Between the mobile breakpoint and 1440px the whole fixed composition
+   is scaled down uniformly instead of overflowing sideways. zoom (not
+   transform) so layout height shrinks with it and no blank scroll area
+   is left below. --ab3-zoom is viewport width / 1440, set on :root by
+   an inline script in about.html and kept current by js/site.js;
+   without JS the page falls back to its native 1440px width. */
+@media (min-width: 901px) and (max-width: 1439.98px) {
+  .ab3-page {
+    zoom: var(--ab3-zoom, 1);
+  }
 }
 
 /* isolation:isolate contains this stage's own z-index:auto paint order

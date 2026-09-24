@@ -77,6 +77,36 @@ module.exports = function (eleventyConfig) {
       .slice(0, limit);
   });
 
+  // Which filter buttons the Journal Landing shows: one per content type
+  // with at least one entry. js/journal-filters.js re-renders the slots
+  // client-side from journalFeedJson below.
+  eleventyConfig.addFilter("journalTypes", function (sortedEntries) {
+    var types = [];
+    (sortedEntries || []).forEach(function (entry) {
+      if (types.indexOf(entry.type) === -1) types.push(entry.type);
+    });
+    return types;
+  });
+
+  // Card-level fields only (no bodies), escaped so the JSON is safe
+  // inside a <script> element.
+  eleventyConfig.addFilter("journalFeedJson", function (sortedEntries, featuredData) {
+    var entries = (sortedEntries || []).map(function (entry) {
+      return {
+        type: entry.type,
+        slug: entry.slug,
+        title: entry.title,
+        date: entry.dateObj.toISOString(),
+        excerpt: entry.excerpt,
+        image: entry.image
+      };
+    });
+    return JSON.stringify({
+      entries: entries,
+      featured: (featuredData && featuredData.entries) || []
+    }).replace(/</g, "\\u003c");
+  });
+
   eleventyConfig.addFilter("renderJournalCard", Journal.renderJournalCard);
   eleventyConfig.addFilter("renderFeaturedEntry", Journal.renderFeaturedEntry);
 

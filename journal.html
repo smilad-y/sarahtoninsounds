@@ -26,6 +26,25 @@ templateEngineOverride: njk
 {%- set feed = collections.journalEssay | journalFeed(journal.monthlyFavorites) -%}
 {%- set featured = feed | resolveFeatured(journal.featured) -%}
 {%- set recent = feed | journalRecent(featured, 4) -%}
+{%- set journalTypes = feed | journalTypes -%}
+{#- All / Essays / Monthly Favs (PROJECT-SPEC.md §8). A button only
+    appears for a type with published entries, and the whole bar only
+    when there are at least two types to choose between. Hidden until
+    js/journal-filters.js enables it, so without JS the page simply
+    shows everything. -#}
+{%- macro journalFilters(journalTypes, modifier) -%}
+{%- if journalTypes.length > 1 %}
+<div class="journal-filters journal-filters--{{ modifier }}" role="group" aria-label="Filter Journal entries" data-journal-filters hidden>
+  <button type="button" class="journal-filter" data-filter="all" aria-pressed="true">All</button>
+  {%- if "essay" in journalTypes %}
+  <button type="button" class="journal-filter" data-filter="essay" aria-pressed="false">Essays</button>
+  {%- endif %}
+  {%- if "monthly-fav" in journalTypes %}
+  <button type="button" class="journal-filter" data-filter="monthly-fav" aria-pressed="false">Monthly Favs</button>
+  {%- endif %}
+</div>
+{%- endif %}
+{%- endmacro -%}
 
 <main id="main" class="journal-page">
   <div class="journal-v2__stage" id="journal-stage">
@@ -71,12 +90,15 @@ templateEngineOverride: njk
       {%- if featured %}{{ featured | renderFeaturedEntry | safe }}{% else %}<p class="journal-empty">New essays and Monthly Favorites are on the way.</p>{% endif -%}
     </section>
 
+    {{ journalFilters(journalTypes, "desktop") }}
+
     <!-- Four fixed slots at their exact individual Figma coordinates
          (the four card positions are not perfectly uniformly spaced in
          the source file, so a flexible equal-gap grid would not match
-         them exactly). js/journal.js fills each slot with a real entry
-         via the same reusable renderJournalCard() used everywhere else,
-         and hides any slot beyond the number of entries available. -->
+         them exactly). Filled at build time via the same reusable
+         renderJournalCard() used everywhere else (and re-filled by
+         js/journal-filters.js when a filter is chosen); any slot beyond
+         the number of entries available is hidden. -->
     <section class="jv2-recent" id="journal-recent" aria-label="More from the Journal"{% if not recent.length %} hidden{% endif %}>
       <div class="jv2-card-slot jv2-card-slot--1" id="journal-card-1"{% if not recent[0] %} hidden{% endif %}>{% if recent[0] %}{{ recent[0] | renderJournalCard | safe }}{% endif %}</div>
       <div class="jv2-card-slot jv2-card-slot--2" id="journal-card-2"{% if not recent[1] %} hidden{% endif %}>{% if recent[1] %}{{ recent[1] | renderJournalCard | safe }}{% endif %}</div>
@@ -126,6 +148,8 @@ templateEngineOverride: njk
       <p class="jv2m-hero__subtitle">essays, monthly favs, and random thoughts</p>
     </div>
 
+    {{ journalFilters(journalTypes, "mobile") }}
+
     <section class="jv2m-featured-section" aria-label="Featured Journal entry">
       <div class="jv2m-featured-card" id="journal-mobile-featured">
         {%- if featured %}{{ featured | renderFeaturedEntry | safe }}{% else %}<p class="journal-empty">New essays and Monthly Favorites are on the way.</p>{% endif -%}
@@ -152,6 +176,9 @@ templateEngineOverride: njk
   </div>
 </main>
 
+<script type="application/json" id="journal-data">{{ feed | journalFeedJson(journal.featured) | safe }}</script>
 <script src="/js/site.js" defer></script>
+<script src="/js/journal.js" defer></script>
+<script src="/js/journal-filters.js" defer></script>
 </body>
 </html>

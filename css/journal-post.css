@@ -385,9 +385,8 @@
 /* ── Hero (content block 1, optional) ── Figma hero-image-container
    (164:4), 1092×420. No tape pieces (see the HTML comment on
    .jp-page's markup — this task's own content-block list doesn't
-   include tape on the hero, unlike the two polaroids). The photo is a
-   placeholder fill, not a real image — see the HTML comment on
-   .jp-hero__photo's markup for why. margin-bottom is this block's own
+   include tape on the hero, unlike the two polaroids). The photo is the
+   entry's CMS Hero Image, cropped to the frame. margin-bottom is this block's own
    spacing to whatever follows; when this block is absent, nothing
    else needs to change; since every block below is an ordinary flow
    sibling, the next one simply moves up to occupy the freed space. */
@@ -396,7 +395,9 @@
 }
 
 .jp-hero__photo {
+  display: block;
   width: 100%;
+  object-fit: cover;
   aspect-ratio: 1092 / 420;
   border-radius: 3px;
   background-color: #d8c9a3;
@@ -437,6 +438,65 @@
   margin-bottom: 0;
 }
 
+/* ── Monthly Favs sections ── Stand in for the essay body on Monthly
+   Favorites pages (journal-monthly-favs.njk); shared by the desktop
+   .jp-body-copy and mobile .jpm-body-copy columns. */
+.jp-favs-section {
+  margin: 0 0 2.5em;
+}
+
+.jp-favs-section:last-child {
+  margin-bottom: 0;
+}
+
+.jp-favs-section__heading {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+  margin: 0 0 0.6em;
+  padding-bottom: 0.25em;
+  border-bottom: 2px solid var(--color-crimson);
+}
+
+.jp-favs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.jp-favs-list__item {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.34vw, 1.25rem);
+  color: var(--color-near-black);
+  margin: 0 0 1em;
+}
+
+.jp-favs-list__item:last-child {
+  margin-bottom: 0;
+}
+
+.jp-favs-list__title {
+  font-weight: 700;
+}
+
+.jp-favs-list__artist {
+  font-style: italic;
+}
+
+.jp-favs-list__artist::before {
+  content: " \00B7  ";
+  font-style: normal;
+}
+
+.jp-body-copy .jp-favs-list__note,
+.jpm-body-copy .jp-favs-list__note {
+  font-size: 0.9em;
+  margin: 0.25em 0 0;
+  opacity: 0.85;
+}
+
 /* ── Polaroids (content blocks 3/7, optional) ── Each is a centered
    card: real tape + photo + caption elements, not one flattened
    image, so a real essay only ever needs to swap the photo (this is
@@ -471,7 +531,9 @@
 }
 
 .jp-polaroid__photo {
+  display: block;
   width: 100%;
+  object-fit: cover;
   border: 1px solid rgba(28, 26, 22, 0.15);
   background-color: #d8c9a3;
 }
@@ -918,6 +980,30 @@
     height: 100%;
     max-width: none;
     object-fit: contain;
+  }
+
+  /* A CMS photo is a plain image with no baked-in frame or tilt (unlike
+     the original article-photo-sky-clouds.png mock asset), so the frame
+     is real markup: Figma's 260x330 PolaroidFrame at -4deg, centered in
+     the 282x347 bounding box above, styled like desktop's
+     .jp-polaroid__card. */
+  .jpm-polaroid__frame {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 260px;
+    height: 330px;
+    margin: -165px 0 0 -130px;
+    padding: 14px 14px 56px;
+    box-sizing: border-box;
+    background-color: #fefcf5;
+    border-radius: 2px;
+    box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.18);
+    transform: rotate(-4deg);
+  }
+
+  .jpm-polaroid__frame .jpm-polaroid__photo {
+    object-fit: cover;
   }
 
   .jpm-polaroid__tape {

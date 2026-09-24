@@ -844,3 +844,60 @@
     transform-origin: top left;
   }
 }
+
+/* ── Filters: All / Essays / Monthly Favs ── Built by journal.html's
+   journalFilters() macro and wired up by js/journal-filters.js. Plain
+   display-face labels with the same crimson underline as the "Read"
+   links marking the active one. On desktop it is a short stacked list
+   in the open column under the logo (the gap between the Featured Post
+   and the Recent cards is too tight to hold it); on mobile it is a row
+   under the hero. */
+.journal-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em 1.6em;
+}
+
+.journal-filters[hidden] {
+  display: none;
+}
+
+.journal-filter {
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 0.15em 0 2px;
+  cursor: pointer;
+}
+
+.journal-filter:hover {
+  border-bottom-color: rgba(28, 26, 22, 0.35);
+}
+
+.journal-filter[aria-pressed="true"] {
+  border-bottom-color: var(--color-crimson);
+}
+
+.journal-filters--desktop {
+  position: absolute;
+  left: 2.8%;
+  top: 34%;
+  z-index: 7;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7em;
+}
+
+.journal-filters--mobile {
+  justify-content: center;
+  padding: 0 20px 24px;
+}
+
+.journal-filters--mobile .journal-filter {
+  font-size: 1rem;
+}
