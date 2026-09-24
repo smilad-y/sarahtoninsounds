@@ -25,16 +25,17 @@
 **Location:** `assets/video/home-loop.mp4` and `assets/images/home/`, untouched and unused by the live site.
 
 ## 2. Photography
-### Primary About portrait
-**Status:** Approved.  
-**Description:** Black-and-white cutout/halftone portrait; arms up / hand near face.  
-**Use:** Oversized About editorial hero.
+### About photo
+**Status:** In use.  
+**Description:** Green-background polaroid of Sarah ("Me! Sarah Milad!").  
+**Location:** `assets/images/about/` (desktop and mobile exports).
 
-### Secondary About candid
-**Status:** Approved as secondary.  
-**Description:** Restaurant-table photo of Sarah.  
-**Treatment:** Orange/gold halftone version is appropriate.  
-**Use:** Smaller snapshot/collage moment, not primary portrait.
+### Black-and-white cutout/halftone portrait; restaurant-table candid
+**Status:** No longer used on About (PROJECT-SPEC.md §9). Files kept, not deleted.
+
+### Resume
+**Status:** In use.  
+**Location:** `assets/docs/sarah-milad-resume.pdf`, linked from both About Resume links (opens in a new tab).
 
 ## 3. Listen Assets
 ### Turntable / record-player graphic

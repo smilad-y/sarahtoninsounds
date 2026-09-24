@@ -305,30 +305,30 @@ An indie music magazine / personal zine inside the larger Sarahtonin world. This
 
 ## 9. About
 ### Status
-Foundational design and current copy direction are approved.
+Foundational design and current copy direction are approved. The built About page (Figma-based) is the source of truth for the decisions below; they supersede the earlier portrait/heading/credits direction.
 
 ### Direction
 Editorial profile meets scrapbook — not a conventional portfolio bio.
 
 ### Primary visual
-Sarah's black-and-white cutout/halftone portrait (arms up / hand near face), used oversized as an editorial hero and potentially overlapping large typography.
+The green-background polaroid of Sarah ("Me! Sarah Milad!"), on desktop and mobile.
 
-### Secondary visual
-Restaurant-table candid. The orange/gold halftone treatment can be a smaller snapshot/alternate graphic, not the primary portrait.
+The black-and-white cutout/halftone portrait and the restaurant-table candid are **no longer used on About**. Their files are kept (not deleted) in case they are wanted elsewhere later.
 
 ### Layout rhythm
-Bold hero → readable bio/story → playful taste section → readable continuation → professional context → personal sign-off.
+Bold hero → readable bio/story → professional context (credits + resume) → personal sign-off.
 
 ### Design constraint
 Do **not** use the previously considered full dark poster-style bio card. Let the cream paper breathe; reserve dark/crimson/gold blocks for emphasis.
 
 ### Current copy decisions
-- Main heading: **"About Me"**
+- Main heading: **"About"** with the sub-line **"me…more or less"**.
 - Opening: **"Hi! I'm Sarah, the girl behind Sarahtonin Sounds."**
 - Preserve the personal origin story and conversational voice.
-- Approved taste heading: **"my taste is all over the place."**
+- One bio, shared by desktop and mobile (the desktop bio).
+- No separate taste heading: "My taste in a nutshell" and "my taste is all over the place." are both removed; the taste paragraphs stay as part of the bio.
 - Do not use the older "my taste is a mess in the best way."
-- Professional credits list is removed/held off for now.
+- Selected Credits & Resume stays on the page. Resume links open `assets/docs/sarah-milad-resume.pdf` in a new tab.
 - About copy is considered finalized for now; only minor layout-driven trimming should happen later if necessary.
 
 ## 10. Contact

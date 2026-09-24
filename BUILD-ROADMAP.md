@@ -56,15 +56,13 @@ Illustrated collage Home is approved and implemented: separate desktop (1440×90
 
 ## Phase 3 — About
 ### Must have
-- Oversized primary halftone/cutout portrait.
-- Approved About copy.
-- “my taste is all over the place.” emphasis section.
-- Secondary candid treatment where composition supports it.
+- Green polaroid as the main photo (PROJECT-SPEC.md §9).
+- Approved About copy: one bio shared by desktop and mobile, no separate taste heading.
+- Selected Credits & Resume, linking the resume PDF.
 - Responsive editorial rhythm.
 
 ### Do not add
 - Old full dark bio card.
-- Professional credits list unless Sarah reactivates it.
 
 ## Phase 4 — Listen Data / Config
 The legacy song library is archive-only. There is no migration or remapping phase.

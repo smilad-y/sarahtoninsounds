@@ -123,12 +123,8 @@ templateEngineOverride: njk
     <div class="ab3-content">
       <h2 class="ab3-hero">{{ about.greeting_desktop.line1 }}<br>{{ about.greeting_desktop.line2 }}</h2>
       <div class="ab3-bio">
-        {%- for block in about.bio_desktop %}
-        {%- if block.kind == "subhead" %}
-        <p class="ab3-bio__subhead">{{ block.text }}</p>
-        {%- else %}
+        {%- for block in about.bio %}
         <p>{{ block.text }}</p>
-        {%- endif %}
         {%- endfor %}
       </div>
     </div>
@@ -169,9 +165,7 @@ templateEngineOverride: njk
         </div>
         {%- endfor %}
       </div>
-      <!-- href="#" — final resume file/link not yet supplied
-           (ASSET-MANIFEST.md); not guessed here. -->
-      <a href="#" class="ab3-link ab3-resume-link">Resume <span aria-hidden="true">&rarr;</span></a>
+      <a href="/assets/docs/sarah-milad-resume.pdf" class="ab3-link ab3-resume-link" target="_blank" rel="noopener">Resume <span aria-hidden="true">&rarr;</span></a>
 
       <div class="ab3-vert-line" aria-hidden="true"></div>
 
@@ -189,13 +183,9 @@ templateEngineOverride: njk
 
   <!-- Mobile — hand-reflowed from the authoritative Figma frame
        (node 11:4, "mobile-about-page") for section order and structure
-       (header → hero → bio → taste → credits → footer). That frame's
-       own text layers are still its own mockup copy (a generic
-       "creative director" bio, Lorem ipsum in the taste paragraph) —
-       not the real, approved bio — so every section below uses the same
-       real copy as desktop, reflowed into single-column paragraphs,
-       with the same duplicate-phrase fix and taste-line emphasis
-       applied. No mobile equivalent of the "Let's Work Together" CTA
+       (header → hero → bio → credits → footer). The bio is the same one
+       desktop shows (PROJECT-SPEC.md §9); that frame's own mockup text
+       isn't used. No mobile equivalent of the "Let's Work Together" CTA
        exists in the mobile frame, so it isn't added here. -->
   <div class="av2m-page">
 
@@ -224,19 +214,11 @@ templateEngineOverride: njk
       </figure>
     </section>
 
+    <!-- Same bio as desktop (about.bio), reflowed as one column. -->
     <section class="av2m-bio">
-      {%- for block in about.bio_mobile %}
-      {%- if block.kind == "divider" %}
-      <hr class="av2m-divider">
-      {%- else %}
+      {%- for block in about.bio %}
       <p>{{ block.text }}</p>
-      {%- endif %}
       {%- endfor %}
-    </section>
-
-    <section class="av2m-taste">
-      <p class="av2m-taste__badge">{{ about.taste_mobile.badge }}</p>
-      <p>{{ about.taste_mobile.body }}</p>
     </section>
 
     <section class="av2m-credits">
@@ -251,7 +233,7 @@ templateEngineOverride: njk
         <p class="av2m-credits__dates">{{ entry.dates_mobile }}</p>
       </div>
       {%- endfor %}
-      <a href="#" class="av2m-credits__link">
+      <a href="/assets/docs/sarah-milad-resume.pdf" class="av2m-credits__link" target="_blank" rel="noopener">
         <img src="/assets/images/about/About Me-Mobile-Final Assets/imdb-icon.png" alt="">
         Full Resum&eacute;
         <img src="/assets/images/about/About Me-Mobile-Final Assets/arrow-right.svg" alt="">

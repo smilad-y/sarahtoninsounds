@@ -219,20 +219,6 @@
   color: var(--color-near-black);
 }
 
-/* New subheading treatment for "My taste in a nutshell": IM Fell
-   English Italic, a step up from body copy. Perandory is reserved for
-   page-level headings and Sue Ellen Francisco for short handwritten
-   marginalia, so this pause in the text gets its own in-between
-   treatment rather than borrowing either. */
-.ab3-bio__subhead {
-  font-family: var(--font-body);
-  font-style: italic;
-  font-size: 19px;
-  line-height: 1.4;
-  letter-spacing: 0.2px;
-  color: var(--color-near-black);
-}
-
 /* ── Footer — .ab3-cta, .ab3-resume-card, and the ephemera that goes
    with them (now the bordered .ab3-footer-card, plus blue corner paper
    and flowers — the pink strip that used to live here is removed, per
@@ -768,14 +754,12 @@
     white-space: nowrap;
   }
 
-  .av2m-bio,
-  .av2m-taste {
+  .av2m-bio {
     padding: var(--space-5) var(--space-4);
     text-align: center;
   }
 
-  .av2m-bio p,
-  .av2m-taste p {
+  .av2m-bio p {
     font-family: var(--font-body);
     font-size: var(--text-base);
     line-height: 1.6;
@@ -783,32 +767,8 @@
     margin: 0 0 var(--space-4);
   }
 
-  .av2m-bio p:last-child,
-  .av2m-taste p:last-child {
+  .av2m-bio p:last-child {
     margin-bottom: 0;
-  }
-
-  .av2m-divider {
-    border: 0;
-    height: 1px;
-    width: 60%;
-    background-color: rgba(28, 26, 22, 0.25);
-    margin: var(--space-4) auto;
-  }
-
-  .av2m-taste__badge {
-    display: block;
-    width: fit-content;
-    margin: 0 auto var(--space-4);
-    font-family: var(--font-marginalia);
-    font-weight: 700;
-    font-size: 1.4rem;
-    text-align: center;
-    color: var(--color-crimson);
-    background: rgba(246, 231, 154, 0.4);
-    border: 1px solid var(--color-crimson);
-    border-radius: var(--radius-sm);
-    padding: 0.3em 0.9em;
   }
 
   .av2m-credits {

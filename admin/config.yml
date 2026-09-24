@@ -335,12 +335,9 @@ collections:
   # ── ABOUT (current site) ──
   # content/about.json — the live About page's own copy (PROJECT-SPEC.md
   # §9). Distinct from the legacy settings/about.json bio above (removed
-  # from this CMS's UI, PRESERVE-only). Desktop and mobile genuinely
-  # diverge in several places today (different bios, different hero
-  # phrasing, the mobile taste line's not-yet-updated wording, even the
-  # resume heading/date formatting) — every _desktop/_mobile field pair
-  # below is kept separately editable rather than forced to share one
-  # value, so editing one never silently changes the other.
+  # from this CMS's UI, PRESERVE-only). One bio is shared by desktop and
+  # mobile; the remaining _desktop/_mobile pairs are formatted
+  # differently per layout, so they stay separately editable.
   - name: about
     label: "👤 About (current site)"
     files:
@@ -367,26 +364,13 @@ collections:
             fields:
               - { label: "Line 1", name: line1, widget: string }
               - { label: "Line 2", name: line2, widget: string }
-          - label: "Desktop — Bio"
-            name: bio_desktop
+          - label: "Bio (desktop and mobile)"
+            name: bio
             widget: list
-            summary: "{{kind}}: {{text}}"
+            summary: "{{text}}"
             fields:
-              - { label: "Kind", name: kind, widget: select, options: ["paragraph", "subhead", "taste"], hint: "'taste' marks the one approved taste-line paragraph (PROJECT-SPEC.md §9) — keep exactly one." }
+              - { label: "Kind", name: kind, widget: hidden, default: "paragraph" }
               - { label: "Text", name: text, widget: text }
-          - label: "Mobile — Bio"
-            name: bio_mobile
-            widget: list
-            summary: "{{kind}}"
-            fields:
-              - { label: "Kind", name: kind, widget: select, options: ["paragraph", "divider"] }
-              - { label: "Text", name: text, widget: text, required: false, hint: "Leave blank for a divider." }
-          - label: "Mobile — Taste Section"
-            name: taste_mobile
-            widget: object
-            fields:
-              - { label: "Badge line", name: badge, widget: string }
-              - { label: "Body", name: body, widget: text }
           - { label: "Polaroid Photo Caption (shared, desktop + mobile)", name: photo_caption, widget: string }
           - label: "Desktop — CTA"
             name: cta_desktop

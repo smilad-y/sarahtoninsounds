@@ -1,5 +1,5 @@
 {
-  "_comment": "Current-site About copy only (PROJECT-SPEC.md §9). Distinct from legacy settings/about.json, which is PRESERVE-only and not a source for this file (CLAUDE.md). Desktop and mobile diverge for real today in several places (different bios, different hero phrasing, the mobile taste line's stale wording, even the resume heading/date formatting) — every _desktop/_mobile pair below is captured exactly as each breakpoint currently renders it, not unified. Only fields confirmed byte-identical on both breakpoints (the polaroid caption, the resume entry's title/role) are shared. Each bio paragraph is tagged with a `kind` so the approved taste-line paragraph and the subheading stay separately identifiable without duplicating text or changing the rendered markup.",
+  "_comment": "Current-site About copy only (PROJECT-SPEC.md §9). Distinct from legacy settings/about.json, which is PRESERVE-only and not a source for this file (CLAUDE.md). `bio` is the one bio shown on both desktop and mobile. bio_mobile and taste_mobile are the retired mobile-only copy, kept for reference but no longer rendered or editable in the CMS. The remaining _desktop/_mobile pairs (greeting, resume heading/dates) stay separately editable because the two layouts format them differently.",
 
   "hero_desktop": {
     "heading": "About",
@@ -16,11 +16,10 @@
     "line2": "the girl behind Sarahtonin Sounds"
   },
 
-  "bio_desktop": [
+  "bio": [
     { "kind": "paragraph", "text": "Sarahtonin Sounds started back in 2019, when I decided to take my love for music a little more seriously. What began as a space to share songs I loved slowly turned into something I wanted to explore further." },
     { "kind": "paragraph", "text": "At the time, I was on a completely different path. I had plans to go to law school, but somewhere along the way, I realized that music was what I actually wanted to pursue. So, I changed direction and found my way into music supervision, where I get to combine my love for music with storytelling and the creative process." },
     { "kind": "paragraph", "text": "Over the years, music has become a part of my work, but Sarahtonin Sounds has always been my personal space to share what I love. From playlists and new discoveries to writing about the music that sticks with me, this is where I get to explore my taste without any rules." },
-    { "kind": "subhead", "text": "My taste in a nutshell" },
     { "kind": "paragraph", "text": "Growing up Egyptian, music was always a mix of different sounds and influences. Arabic music was a big part of my upbringing, but so was everything else I found myself drawn to along the way. I grew up listening to music from different cultures, genres, and eras, and I think that curiosity has shaped the way I listen to music today." },
     { "kind": "taste", "text": "My taste is a little all over the place, in the best way. I can go from an Arabic classic to hip-hop, soul, electronic, or something completely unexpected without thinking twice about it. I love discovering new sounds, revisiting old favorites, and finding connections between music that might seem completely unrelated." },
     { "kind": "paragraph", "text": "I don’t think good music needs to fit into one genre, language, or era. If something catches my ear, I’m listening." },
