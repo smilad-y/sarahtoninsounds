@@ -478,6 +478,7 @@
   pointer-events: auto;
 }
 
+.jv2-recent[hidden],
 .jv2-card-slot[hidden] {
   display: none;
 }
@@ -888,6 +889,11 @@
     flex-direction: column;
     gap: 24px;
     padding: 0 20px 48px;
+  }
+
+  /* No entries beyond the Featured one: no "More to Read" heading. */
+  .jv2m-recent[hidden] {
+    display: none;
   }
 
   .jv2m-recent__title {
