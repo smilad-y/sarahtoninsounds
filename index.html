@@ -41,6 +41,17 @@ templateEngineOverride: njk
 <a class="skip-link" href="#main">Skip to content</a>
 
 <main id="main" class="home-v2">
+  {%- set tickerPhrases = [] %}
+  {%- for phrase in home.ticker.phrases or [] %}{% if phrase | trim %}{% set tickerPhrases = (tickerPhrases.push(phrase | trim), tickerPhrases) %}{% endif %}{% endfor %}
+  {%- if home.ticker.enabled and tickerPhrases.length %}
+  <div class="hv2-ticker" data-ticker>
+    <p class="hv2-ticker__line">{{ tickerPhrases | join(" ✶ ") }}</p>
+    <button class="hv2-ticker__toggle" type="button" aria-label="Pause ticker" hidden>
+      <span class="hv2-ticker__icon" aria-hidden="true"></span>
+    </button>
+  </div>
+  {%- endif %}
+  <div class="home-v2__frame">
   <div class="home-v2__stage">
     <!--
       Home V2: Sarah's illustrated collage composition, rebuilt against
@@ -91,17 +102,8 @@ templateEngineOverride: njk
       </ul>
     </nav>
 
-    {%- set tickerPhrases = [] %}
-    {%- for phrase in home.ticker.phrases or [] %}{% if phrase | trim %}{% set tickerPhrases = (tickerPhrases.push(phrase | trim), tickerPhrases) %}{% endif %}{% endfor %}
-    {%- if home.ticker.enabled and tickerPhrases.length %}
-    <div class="hv2-ticker" data-ticker>
-      <p class="hv2-ticker__line">{{ tickerPhrases | join(" ✶ ") }}</p>
-      <button class="hv2-ticker__toggle" type="button" aria-label="Pause ticker" hidden>
-        <span class="hv2-ticker__icon" aria-hidden="true"></span>
-      </button>
-    </div>
-    {%- endif %}
     <p class="hv2-credit" aria-hidden="true">made by: Sarah Milad</p>
+  </div>
   </div>
 </main>
 

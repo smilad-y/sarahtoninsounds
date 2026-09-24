@@ -19,7 +19,6 @@
     teardown();
     if (reduceMotion.matches) return;
 
-    ticker.classList.add('is-moving');
     windowEl = document.createElement('div');
     windowEl.className = 'hv2-ticker__window';
     windowEl.setAttribute('aria-hidden', 'true');
@@ -52,7 +51,6 @@
     if (windowEl) windowEl.remove();
     windowEl = null;
     line.classList.remove('visually-hidden');
-    ticker.classList.remove('is-moving');
     toggle.hidden = true;
     setPaused(false);
   }
