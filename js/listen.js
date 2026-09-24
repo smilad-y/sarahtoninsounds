@@ -204,10 +204,9 @@
     var picks = mood.picks || [];
     var list = $('tt-picks-list');
     list.innerHTML = '';
-    picks.forEach(function (pick, i) {
+    picks.forEach(function (pick) {
       var li = document.createElement('li');
       li.className = 'tt-picks__item';
-      li.style.setProperty('--tt-rotate', (i === 0 ? -12.18 : -6.99) + 'deg');
       li.textContent = pick.title + ' - ' + pick.artist;
       list.appendChild(li);
     });
