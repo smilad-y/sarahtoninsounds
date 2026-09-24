@@ -52,7 +52,7 @@
 
   "resume": {
     "heading_desktop": "Selected Credits & Resume",
-    "heading_mobile": "Selected Credits & Résumé",
+    "heading_mobile": "Selected Credits & Resume",
     "entries": [
       { "title": "TMZ Productions", "role": "Senior Music Coordinator", "dates_desktop": "2023-2026", "dates_mobile": "2023 - 2026" }
     ]
