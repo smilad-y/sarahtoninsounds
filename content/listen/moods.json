@@ -39,7 +39,7 @@
       "live": true,
       "color": "purple",
       "icon": "cloud",
-      "descriptor": "UNDECIDED",
+      "descriptor": "Immersive, blurred, transportive.",
       "labelText": "light",
       "art": {
         "circle": "/assets/images/listen/purple-circle.webp",
@@ -53,20 +53,20 @@
       "appleMusic": {
         "url": "PLACEHOLDER"
       },
-      "blurb": "For when your mind needs some room to wonder",
-      "description": "Floaty, atmospheric, and transportive. These are the songs for late nights, daydreaming, and everywhere in between.",
+      "blurb": "For getting lost in the sound.",
+      "description": "Pulls you out of your surroundings. Floating melodies, washed-out textures, and atmospheres that feel removed from reality.",
       "picks": [
         {
-          "title": "Falling",
-          "artist": "Julee Cruise"
+          "title": "Cherry-coloured Funk",
+          "artist": "Cocteau Twins"
         },
         {
-          "title": "Closer",
-          "artist": "You’ll Never Get To Heaven"
-        },
-        {
-          "title": "Kisses",
+          "title": "Alison",
           "artist": "Slowdive"
+        },
+        {
+          "title": "Butterfly Net",
+          "artist": "Caroline Polachek"
         }
       ]
     },
@@ -76,7 +76,7 @@
       "live": true,
       "color": "yellow",
       "icon": "UNDECIDED",
-      "descriptor": "UNDECIDED",
+      "descriptor": "Rhythm, movement, momentum.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/yellow-circle.webp",
@@ -90,9 +90,22 @@
       "appleMusic": {
         "url": "PLACEHOLDER"
       },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      "blurb": "For when you need to move.",
+      "description": "Driven by rhythm and physical energy. The kind that makes staying still difficult.",
+      "picks": [
+        {
+          "title": "Be the One",
+          "artist": "Eli Brown"
+        },
+        {
+          "title": "Where's Your Head At",
+          "artist": "Basement Jaxx"
+        },
+        {
+          "title": "Around the Bend",
+          "artist": "Nia Archives"
+        }
+      ]
     },
     {
       "id": "sensual",
@@ -100,7 +113,7 @@
       "live": true,
       "color": "red",
       "icon": "lips",
-      "descriptor": "UNDECIDED",
+      "descriptor": "Intimacy, attraction, tension.",
       "labelText": "light",
       "art": {
         "circle": "/assets/images/listen/red-circle.webp",
@@ -114,9 +127,22 @@
       "appleMusic": {
         "url": "PLACEHOLDER"
       },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      "blurb": "For feeling the chemistry.",
+      "description": "Seductive grooves, physical intimacy, and slow-building tension. Felt as much as heard.",
+      "picks": [
+        {
+          "title": "The First Taste",
+          "artist": "Fiona Apple"
+        },
+        {
+          "title": "Woosah",
+          "artist": "Jeremih, Juicy J, Twista"
+        },
+        {
+          "title": "When Eye Lay My Hands on U",
+          "artist": "Prince"
+        }
+      ]
     },
     {
       "id": "cute",
@@ -172,7 +198,7 @@
       "live": true,
       "color": "light blue",
       "icon": "sun",
-      "descriptor": "UNDECIDED",
+      "descriptor": "Ease, relaxation, low stakes.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/light-blue-cirle.webp",
@@ -186,9 +212,22 @@
       "appleMusic": {
         "url": "PLACEHOLDER"
       },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      "blurb": "For taking it easy.",
+      "description": "Easygoing music for slowing down and settling into the moment. Nothing demanding, nothing to escape from.",
+      "picks": [
+        {
+          "title": "On the Level",
+          "artist": "Mac DeMarco"
+        },
+        {
+          "title": "Vibin' Out",
+          "artist": "FKJ"
+        },
+        {
+          "title": "Smoke Break (Interlude)",
+          "artist": "Flatbush Zombies"
+        }
+      ]
     },
     {
       "id": "melancholy",
@@ -268,7 +307,7 @@
       "live": true,
       "color": "brown",
       "icon": "fist",
-      "descriptor": "UNDECIDED",
+      "descriptor": "Resistance, refusal, confrontation.",
       "labelText": "light",
       "art": {
         "circle": "/assets/images/listen/brown_Circle.webp",
@@ -282,9 +321,22 @@
       "appleMusic": {
         "url": "PLACEHOLDER"
       },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      "blurb": "For when you're not backing down.",
+      "description": "Something to push against. Rebellion, frustration, and the refusal to accept things as they are.",
+      "picks": [
+        {
+          "title": "Sick in the Head",
+          "artist": "Kneecap"
+        },
+        {
+          "title": "Killing in the Name",
+          "artist": "Rage Against the Machine"
+        },
+        {
+          "title": "Pledge",
+          "artist": "Mannequin Pussy"
+        }
+      ]
     },
     {
       "id": "playful-cheeky",
@@ -316,7 +368,7 @@
       "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
-      "descriptor": "UNDECIDED",
+      "descriptor": "Catharsis, abandon, release.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/dark-green-circle.webp",
@@ -330,9 +382,22 @@
       "appleMusic": {
         "url": "PLACEHOLDER"
       },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      "blurb": "For letting it all out.",
+      "description": "Raw energy and unrestrained expression. A release for whatever has been building up.",
+      "picks": [
+        {
+          "title": "Stay",
+          "artist": "Angel Du$t"
+        },
+        {
+          "title": "The Obituaries",
+          "artist": "The Menzingers"
+        },
+        {
+          "title": "Shot Down",
+          "artist": "Scowl"
+        }
+      ]
     },
     {
       "id": "hype",
@@ -412,7 +477,7 @@
       "live": true,
       "color": "orange",
       "icon": "UNDECIDED",
-      "descriptor": "UNDECIDED",
+      "descriptor": "Joy, release, emotional elevation.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/orange-circle.webp",
@@ -426,9 +491,22 @@
       "appleMusic": {
         "url": "PLACEHOLDER"
       },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      "blurb": "For feeling on top of the world.",
+      "description": "A sense of possibility, excitement, or emotional release. From quiet optimism to overwhelming joy.",
+      "picks": [
+        {
+          "title": "Cosmic Girl",
+          "artist": "Jamiroquai"
+        },
+        {
+          "title": "Love Is Everywhere",
+          "artist": "Pharoah Sanders"
+        },
+        {
+          "title": "Girlfriend",
+          "artist": "Hemlock Springs"
+        }
+      ]
     },
     {
       "id": "tender",
@@ -436,7 +514,7 @@
       "live": true,
       "color": "pink",
       "icon": "heart",
-      "descriptor": "UNDECIDED",
+      "descriptor": "Emotional intimacy, affection, vulnerability.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/pink-circle.webp",
@@ -450,9 +528,22 @@
       "appleMusic": {
         "url": "PLACEHOLDER"
       },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      "blurb": "For feeling close.",
+      "description": "Warmth, care, and emotional openness. Love in its quieter, more vulnerable forms.",
+      "picks": [
+        {
+          "title": "As",
+          "artist": "Stevie Wonder"
+        },
+        {
+          "title": "God Only Knows",
+          "artist": "The Beach Boys"
+        },
+        {
+          "title": "I Found a Reason",
+          "artist": "The Velvet Underground"
+        }
+      ]
     },
     {
       "id": "hypnotic",

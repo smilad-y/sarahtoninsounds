@@ -162,7 +162,8 @@
 
 ## Listen Page — Follow-ups
 - [x] 7 launch moods live (Tender, Defiant, Hazy, Sensual, Electric, Euphoric, Chill); the other 11 are hidden until Sarah flips them. Renames Sultry → Sensual, Energized → Electric, Dreamy → Hazy (names and slugs). Each live mood uses one color's complete art set; brown's bar color `#664e4b` is provisional, sampled from the brown circle art like the others. All 18 Spotify links checked against the playlist name each opens (no duplicates).
-- [ ] Only Hazy has a blurb, description, and Sarah's Picks; for the other launch moods those stay hidden while `UNDECIDED`.
+- [x] Final descriptor, blurb, description, and Sarah's Picks for the 7 launch moods plus Unleashed (Unleashed is still `live: false`). Picks render as "Song - Artist". Mood circles sized up (desktop `clamp(7.75rem, 11%, 9.5rem)`, mobile 7.5rem) so descriptors stay at 12px or larger inside the circle.
+- [ ] Sensual's light label text on red measures about 4.3:1 against the sampled red, just under the 4.5:1 WCAG AA target for small text. Sarah to decide whether to adjust.
 - [ ] `ASSET-MANIFEST.md` and `assets/icons/README.md` still use the old names Dreamy / Sultry / Energized in their icon lists.
 - [ ] Selector note slot (`selectorNote` in `content/listen/moods.json`, `#listen-moods-note`) is empty; Sarah decides the wording and style.
 

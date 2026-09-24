@@ -207,7 +207,7 @@
       var li = document.createElement('li');
       li.className = 'tt-picks__item';
       li.style.setProperty('--tt-rotate', (i === 0 ? -12.18 : -6.99) + 'deg');
-      li.textContent = pick.title + ' — ' + pick.artist;
+      li.textContent = pick.title + ' - ' + pick.artist;
       list.appendChild(li);
     });
     $('tt-picks').hidden = picks.length === 0;

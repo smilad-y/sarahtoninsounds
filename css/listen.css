@@ -292,9 +292,11 @@ html:has(body.page-listen) {
   justify-content: center;
 }
 
+/* Sized up from Figma's 8.981% so Sarah's descriptors fit at a readable
+   size (12px minimum) inside the circle. */
 .listen-moods__row li {
   flex: none;
-  width: 8.981%;
+  width: clamp(7.75rem, 11%, 9.5rem);
   scroll-snap-align: start;
 }
 
@@ -308,7 +310,7 @@ html:has(body.page-listen) {
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: none;
-  padding: 12%;
+  padding: 11%;
   background-color: transparent;
   background-size: cover;
   background-position: center;
@@ -337,8 +339,9 @@ html:has(body.page-listen) {
 
 .mood-circle__descriptor {
   font-family: 'Crimson Text', Georgia, serif;
-  font-size: clamp(0.6rem, 0.75vw, 0.75rem);
-  line-height: 1.1;
+  font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+  line-height: 1.15;
+  overflow-wrap: break-word;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -428,10 +431,11 @@ html:has(body.page-listen) {
   }
 
   .listen-moods__row li {
-    width: 5.75rem;
+    width: 7.5rem;
   }
 
   .mood-circle { padding: 10%; }
+  .mood-circle__descriptor { font-size: 0.75rem; }
   .mood-circle__number { font-size: 0.75rem; }
   .mood-circle__name { font-size: 0.9rem; }
 }
