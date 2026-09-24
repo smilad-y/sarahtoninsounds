@@ -1,0 +1,519 @@
+/* Crash Courses (PROJECT-SPEC.md §7): the shelf on Listen, the course
+   index (/listen/crash-courses/), and each course page. Content comes
+   from content/listen/crash-courses/ through the CMS. Loaded on Listen
+   only when at least one course is live; the course pages also load
+   css/listen.css for the shared torn-paper nav and page paper. */
+
+/* ── Card: taped art, title, hook ── */
+.cc-card {
+  display: block;
+  color: var(--color-near-black);
+  text-decoration: none;
+}
+
+.cc-card:focus-visible {
+  outline-offset: 6px;
+}
+
+.cc-card__art {
+  position: relative;
+  display: block;
+  margin: 0.75rem 7% 1.25rem;
+  padding: 5%;
+  background-color: var(--color-cream);
+  box-shadow: 0 4px 10px rgba(54, 24, 6, 0.28);
+  transform: rotate(var(--cc-tilt, -2deg));
+}
+
+/* A little variety in the tilt, so a row doesn't look stamped out. */
+li:nth-child(4n + 2) > .cc-card { --cc-tilt: 1.6deg; }
+li:nth-child(4n + 3) > .cc-card { --cc-tilt: -1deg; }
+li:nth-child(4n + 4) > .cc-card { --cc-tilt: 2.2deg; }
+
+.cc-card__img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.cc-card__tape {
+  position: absolute;
+  top: -9%;
+  left: 50%;
+  width: 34%;
+  max-width: none;
+  transform: translateX(-50%) rotate(-4deg);
+  pointer-events: none;
+}
+
+.cc-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.cc-card__hook {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.cc-card:hover .cc-card__title,
+.cc-card:focus-visible .cc-card__title {
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cc-card__art {
+    transition: transform 0.2s ease;
+  }
+
+  .cc-card:hover .cc-card__art {
+    transform: rotate(0deg) translateY(-4px);
+  }
+}
+
+/* ── Shared bits ── */
+.cc-rule {
+  height: 2px;
+  background-color: var(--color-crimson);
+}
+
+/* ── Listen shelf ── */
+.cc-shelf {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1.5rem 4.5% 4rem;
+}
+
+.cc-shelf__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.25rem 0 2rem;
+}
+
+.cc-shelf__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+}
+
+.cc-shelf__all {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.cc-shelf__row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.5rem 3%;
+}
+
+/* ── Course index ── */
+.page-listen main.cc-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 4rem;
+}
+
+.cc-back {
+  margin: 0 0 1.5rem;
+}
+
+.cc-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+  text-decoration: none;
+}
+
+.cc-back a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 4px;
+}
+
+.cc-back__arrow {
+  transform: scaleX(-1);
+}
+
+.cc-index__heading {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 5.5vw, 4.75rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+}
+
+.cc-index .cc-rule {
+  max-width: 28rem;
+  margin-bottom: 3rem;
+}
+
+.cc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3rem 3%;
+}
+
+/* ── Course page ── */
+.cc-course__top {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 4rem;
+  align-items: start;
+}
+
+.cc-course__art {
+  position: relative;
+  margin: 1.5rem 1.5rem 0;
+  padding: 4%;
+  background-color: var(--color-cream);
+  box-shadow: 0 6px 14px rgba(54, 24, 6, 0.3);
+  transform: rotate(-3deg);
+}
+
+.cc-course__img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.cc-course__tape {
+  position: absolute;
+  top: -7%;
+  left: 50%;
+  width: 30%;
+  max-width: none;
+  transform: translateX(-50%) rotate(3deg);
+  pointer-events: none;
+}
+
+.cc-course__kicker {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-marginalia);
+  font-size: clamp(1.4rem, 2vw, 1.75rem);
+  line-height: 1.2;
+  color: var(--color-crimson);
+  transform: rotate(-2deg);
+  transform-origin: left center;
+}
+
+.cc-course__title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 5.5vw, 4.75rem);
+  line-height: 0.98;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+  color: var(--color-near-black);
+}
+
+.cc-course__intro {
+  max-width: 38em;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  line-height: 1.55;
+}
+
+.cc-course__intro > :last-child {
+  margin-bottom: 0;
+}
+
+.cc-course__intro a {
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 3px;
+}
+
+.cc-player {
+  margin-top: 2rem;
+}
+
+.cc-player__source {
+  display: flex;
+  gap: 0.375rem;
+  margin-bottom: 0.75rem;
+}
+
+.cc-player__source[hidden],
+.cc-player__embed[hidden] {
+  display: none;
+}
+
+/* Same pill buttons as the now spinning bar's toggle on Listen. */
+.cc-player__source-btn {
+  min-height: 2.5rem;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid var(--color-near-black);
+  border-radius: 999px;
+  background: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--color-near-black);
+  cursor: pointer;
+}
+
+.cc-player__source-btn[aria-pressed='true'] {
+  background: var(--color-near-black);
+  color: var(--color-cream);
+}
+
+.cc-player__embed iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+}
+
+.cc-course__bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 4rem;
+  align-items: start;
+  margin-top: 4.5rem;
+}
+
+.cc-section-heading {
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-crimson);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+}
+
+.cc-start__item {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed rgba(28, 26, 22, 0.3);
+}
+
+.cc-start__number {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--color-crimson);
+}
+
+.cc-start__text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.cc-start__artist {
+  font-style: italic;
+}
+
+.cc-start__note {
+  display: inline-block;
+  margin-left: 0.6rem;
+  font-family: var(--font-marginalia);
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--color-crimson);
+  transform: rotate(-1.5deg);
+}
+
+/* Sits beside Start here, so none of layout.css's section spacing. */
+.cc-more {
+  margin-top: 0;
+}
+
+.cc-more__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: 1.5rem 1rem;
+}
+
+.cc-more .cc-card__title {
+  font-size: 1.1rem;
+}
+
+.cc-more .cc-card__hook {
+  font-size: 0.95rem;
+}
+
+/* ── Header on the index and course pages ──
+   Listen's own header and nav (css/listen.css), plus the logo, which
+   Listen keeps in its hero instead. */
+.cc-header {
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cc-header__logo {
+  flex: none;
+  width: 15rem;
+  aspect-ratio: 351.406 / 155.659;
+  margin-left: 1rem;
+  transform: rotate(-8deg);
+}
+
+.cc-header__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cc-header .listen-nav__tab[aria-current="true"] {
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 1100px) {
+  .cc-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cc-course__top,
+  .cc-course__bottom {
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .cc-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cc-header__logo {
+    width: 13rem;
+    margin: 0.5rem 0 0;
+  }
+}
+
+/* ── Small screens ──
+   Shelf: a sideways swipe row, like the mood labels above it.
+   Course page: one column in reading order (art, title, intro, player,
+   Start here, more courses). */
+@media (max-width: 760px) {
+  .cc-shelf {
+    padding: 0.5rem 1rem 2.5rem;
+  }
+
+  .cc-shelf__head {
+    margin: 1rem 0 1rem;
+  }
+
+  .cc-shelf__row {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: 1rem;
+    /* Bleeds to the screen edges; the padding keeps the tape, tilt and
+       focus ring from being clipped by the scroll box. */
+    margin: 0 -1rem;
+    padding: 0.75rem 1rem 1rem;
+  }
+
+  /* Narrow enough that the next card peeks in, so the row reads as
+     swipeable. */
+  .cc-shelf__row > li {
+    flex: none;
+    width: min(11rem, 40vw);
+    scroll-snap-align: start;
+  }
+
+  .page-listen main.cc-page {
+    padding: 1.25rem 1.25rem 3rem;
+  }
+
+  .cc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1rem;
+  }
+
+  .cc-course__top,
+  .cc-course__bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cc-course__top {
+    gap: 2.25rem;
+  }
+
+  .cc-course__art {
+    width: min(18rem, 78%);
+    margin: 1rem auto 0;
+  }
+
+  .cc-course__bottom {
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .cc-course__intro,
+  .cc-start__text {
+    font-size: 1.1rem;
+  }
+
+  .cc-more__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The header gets the shared mobile band (css/listen.css) with room
+     at the top for the logo, as on Listen. */
+  .cc-header__logo {
+    position: absolute;
+    top: 1.6rem;
+    left: 0;
+    right: 0;
+    width: 12rem;
+    margin: 0 auto;
+    transform: rotate(-6deg);
+  }
+}
+
+@media (max-width: 560px) {
+  .cc-grid {
+    grid-template-columns: minmax(0, 20rem);
+    justify-content: center;
+  }
+}

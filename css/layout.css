@@ -84,3 +84,61 @@ main section + section {
   --m-paper: var(--color-paper) url('/assets/images/shared/mobile/paper.webp') center top / cover no-repeat;
   --m-band: #c56c71 url('/assets/images/shared/mobile/stripe-band.webp') center 35% / max(900px, 100%) auto no-repeat;
 }
+
+/* ── Site footer ──
+   One quiet copyright line on every page except Home. The year is
+   filled in at build time (buildYear in .eleventy.js). */
+.site-footer {
+  padding: 1.25rem 1rem 1.5rem;
+  text-align: center;
+}
+
+.site-footer__copyright {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--color-near-black);
+  opacity: 0.7;
+}
+
+/* ── Logo → Home ──
+   On every page but Home the logo is a link. The link box carries the
+   logo's own size and rotation (from each page's CSS) and the image
+   fills it, transparent margins included. The focus ring and the
+   clickable area are drawn on ::after, inset to the torn-paper card
+   itself: js/site.js sets --logo-card-inset from the card's position in
+   the image (data-card-inset); the default here fits home-logo.png. */
+.logo-home-link {
+  --logo-card-inset: 7.2% 13% 13.3% 8.5%;
+  position: relative;
+  display: block;
+  min-height: 0; /* keep aspect-ratio sizing; don't grow to the image's own ratio */
+  pointer-events: none;
+}
+
+.logo-home-link > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.logo-home-link::after {
+  content: "";
+  position: absolute;
+  inset: var(--logo-card-inset);
+  pointer-events: auto;
+}
+
+.logo-home-link:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.logo-home-link:focus-visible::after {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-focus-gap);
+}

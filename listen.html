@@ -1,3 +1,7 @@
+---
+permalink: /listen.html
+templateEngineOverride: njk
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +33,9 @@
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/layout.css">
 <link rel="stylesheet" href="/css/listen.css">
+{%- if collections.crashCourseLive.length %}
+<link rel="stylesheet" href="/css/crash-courses.css">
+{%- endif %}
 </head>
 <body class="page-listen">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -48,9 +55,9 @@
 <main id="main" class="listen-page">
   <section class="listen-hero" aria-label="Listen">
     <div class="listen-hero__logo">
-      <div class="listen-hero__logo-inner">
-        <img src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
-      </div>
+      <a class="listen-hero__logo-inner logo-home-link" href="/" data-card-inset="0.085 0.1014 0.1299 0.1589" aria-label="Sarahtonin Sounds, go to Home">
+        <img src="/assets/images/home-v2/home-logo.png" alt="">
+      </a>
     </div>
     <h1 class="listen-hero__title">Listen</h1>
     <div class="listen-hero__divider" aria-hidden="true"></div>
@@ -128,30 +135,32 @@
       </ul>
     </div>
   </section>
+{#- Crash Courses shelf (PROJECT-SPEC.md §7): up to 4 live courses from
+    content/listen/crash-courses/. With none live, nothing renders here
+    and the page ends at the turntable. No embeds: the now spinning bar
+    stays the only player on this page. The earlier "An Introduction
+    To..." section is archived in archive/listen-crash-courses-v1/. #}
+{%- set shelfCourses = collections.crashCourseLive | head(4) %}
+{%- if shelfCourses.length %}
 
-  <!-- Crash Courses roll out after launch (PROJECT-SPEC.md §7,
-       BUILD-ROADMAP.md Phase 10). Kept intact but hidden; remove
-       `hidden` to turn the section back on. -->
-  <section class="listen-intro" aria-labelledby="listen-crash-heading" hidden>
-    <h2 id="listen-crash-heading" class="listen-intro__heading">An Introduction To...</h2>
-    <p class="listen-intro__subheading">A deeper dive into genres, artists, scenes, and sounds</p>
-    <p class="listen-intro__note">(more to come)</p>
-    <div class="listen-intro__divider listen-intro__divider--top" aria-hidden="true"></div>
-
-    <div class="crash-course">
-      <img class="crash-course__collage" src="/assets/images/listen/sarahtonin_sounds-listen_intro_arabic_collage_1.png" alt="Collage of Arabic album covers and artists">
-      <h3 class="crash-course__heading">Arabic Music:</h3>
-      <div class="listen-intro__divider listen-intro__divider--course" aria-hidden="true"></div>
-      <p class="crash-course__description">A starting point for exploring voices from across the Arab world&mdash;from Oum Kulthum and Fairuz to contemporary favorites, with a few familiar samples hiding along the way.</p>
-      <!-- Real destination is a future Crash Course detail page/route
-           (BUILD-ROADMAP.md Phase 6, not yet built) — placeholder href. -->
-      <a href="#" class="crash-course__explore">
-        <span class="crash-course__explore-label">Explore</span>
-        <span class="crash-course__explore-arrow arrow-line" aria-hidden="true"></span>
-      </a>
+  <section class="cc-shelf" aria-labelledby="cc-shelf-heading">
+    <div class="cc-rule" aria-hidden="true"></div>
+    <div class="cc-shelf__head">
+      <h2 id="cc-shelf-heading" class="cc-shelf__heading">Crash Courses</h2>
+      <a class="cc-shelf__all" href="/listen/crash-courses/">See all<span class="visually-hidden"> crash courses</span></a>
     </div>
+    <ul class="cc-shelf__row">
+      {%- set cardHeading = "h3" %}
+      {%- set cardSizes = "(max-width: 760px) 40vw, 300px" %}
+      {%- for course in shelfCourses %}
+      <li>{% include "partials/crash-course-card.njk" %}</li>
+      {%- endfor %}
+    </ul>
   </section>
+{%- endif %}
 </main>
+
+{% include "site-footer.njk" %}
 
 <!-- Now spinning bar: the selected mood's live, visible Spotify / Apple
      Music embed. Pinned to the bottom of the viewport so playback keeps

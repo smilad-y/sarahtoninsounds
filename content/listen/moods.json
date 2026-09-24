@@ -6,6 +6,7 @@
     "PLACEHOLDER = no real URL yet. With no Apple Music URL, the Spotify / Apple Music toggle is hidden for that mood (launch is Spotify-only); it appears once a real URL is added.",
     "Array order is the current display order. Final display order is UNDECIDED; the number on each label is its position among the live moods.",
     "labelText: text color on the circle art (dark or light), for contrast. labelShadow: true adds a faint dark shadow behind that text, for circle art where neither text color reaches 4.5:1 on its own (the red circle).",
+    "titleColor: optional text color for the mood name on its tape banner (any CSS color). Leave it out to use the default near-black. Keep at least 3:1 contrast against the banner.",
     "labelColors hex values are PROVISIONAL, sampled from the circle art; final hex values are UNDECIDED.",
     "art paths are the existing assets (circles are 320px WebP exports; full-size originals in archive/listen-circle-originals/). Each live mood uses one color's full set (circle, vinyl, record, tape) plus that color's labelColors entry, never mixed. Non-live moods with color UNDECIDED keep the art they had, so some share art with a live mood; Hopeful / Hypnotic use forest green / silver art even though the spec leaves their colors open. art.record is the pre-composited record export, not currently rendered.",
     "selectorNote: short note shown near the selector (e.g. that more moods are coming). UNDECIDED = nothing shown; wording and style are Sarah's call."
@@ -78,6 +79,7 @@
       "icon": "cloud",
       "descriptor": "Immersive, blurred, transportive.",
       "labelText": "light",
+      "titleColor": "#ffffff",
       "art": {
         "circle": "/assets/images/listen/purple-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Purple.png",
@@ -301,6 +303,7 @@
       "icon": "fist",
       "descriptor": "Resistance, refusal, confrontation.",
       "labelText": "light",
+      "titleColor": "#ffffff",
       "art": {
         "circle": "/assets/images/listen/black-circle.webp",
         "vinyl": "/assets/images/listen/Colored Records/Record-Black.png",

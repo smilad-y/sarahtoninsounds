@@ -122,7 +122,7 @@ templateEngineOverride: njk
          only a small top-left triangle is ever visible on-canvas; logo
          and polaroid both sit well above where the footer now starts). -->
     <img class="ab3-deco ab3-deco--green-paper" src="/assets/images/about/About Me-Desktop-Final Assets/Texture___Green_Paper.png" alt="">
-    <img class="ab3-deco ab3-deco--logo" src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+    <a class="ab3-deco ab3-deco--logo logo-home-link" href="/" data-card-inset="0.085 0.1014 0.1299 0.1589" aria-label="Sarahtonin Sounds, go to Home"><img src="/assets/images/home-v2/home-logo.png" alt=""></a>
     <img class="ab3-deco ab3-deco--polaroid" src="/assets/images/about/About Me-Desktop-Final Assets/sarah green background polaroid  1.png" alt="Polaroid-style photo of Sarah Milad smiling, arm reaching toward the camera, against a green patterned background.">
 
     <p class="ab3-caption">{{ about.photo_caption }}</p>
@@ -188,6 +188,8 @@ templateEngineOverride: njk
       <img class="ab3-deco ab3-deco--blue-corner" src="/assets/images/about/About Me-Desktop-Final Assets/torn_blue_corner_paper_1.png" alt="">
       <img class="ab3-deco ab3-deco--flowers" src="/assets/images/about/About Me-Desktop-Final Assets/orange_flowers_scrapbook_1.png" alt="">
 
+      {% include "site-footer.njk" %}
+
       <!-- contact-link — Figma's last-painted node, on top of
            everything else in this footer group.
            href="/contact.html" is the site's real contact route; Figma
@@ -206,7 +208,7 @@ templateEngineOverride: njk
   <div class="av2m-page">
 
     <header class="av2m-header">
-      <img class="av2m-logo" src="/assets/images/about/About Me-Mobile-Final Assets/Brand___Sarahtonin_Sounds_Logo.png" alt="Sarahtonin Sounds">
+      <a class="av2m-logo logo-home-link" href="/" data-card-inset="0.0645 0.1056 0.086 0.1056" aria-label="Sarahtonin Sounds, go to Home"><img src="/assets/images/about/About Me-Mobile-Final Assets/Brand___Sarahtonin_Sounds_Logo.png" alt=""></a>
       <nav class="av2m-nav" aria-label="Primary">
         <div class="av2m-nav__row">
           <a href="/" class="av2m-tab">Home</a>
@@ -259,7 +261,7 @@ templateEngineOverride: njk
       <img class="av2m-footer__green" src="/assets/images/about/About Me-Mobile-Final Assets/Texture___Green_Paper.png" alt="">
       <img class="av2m-footer__flower" src="/assets/images/about/About Me-Mobile-Final Assets/orange_flowers_scrapbook.png" alt="">
       <p class="av2m-footer__tagline">{{ about.footer_mobile.tagline }}</p>
-      <p class="av2m-footer__copyright">{{ about.footer_mobile.copyright }}</p>
+      <p class="av2m-footer__copyright">&copy; {{ buildYear }} Sarahtonin Sounds</p>
     </footer>
 
   </div>

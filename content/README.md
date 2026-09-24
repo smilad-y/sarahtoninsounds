@@ -39,5 +39,9 @@ Populated so far:
   `UNDECIDED`, missing links `PLACEHOLDER`; the notes at the top of the
   file explain the rest. Passthrough-copied (not template data) and
   fetched at runtime by `js/listen.js`.
-- `listen/crash-courses.json` — Crash Courses content (not created yet; Crash Courses roll out after launch, BUILD-ROADMAP.md Phase 10)
+- `listen/crash-courses/*.md` — Crash Courses (BUILD-ROADMAP.md Phase 10), one
+  file per course from the CMS, a real Eleventy collection (tag
+  `crashCourse`). Only entries with `live: true` get a page
+  (`crash-courses.11tydata.js`) or show on the shelf and index.
+  Separate from `moods.json`, and never published as raw files.
 - `contact.json` — finalized contact copy/links (Phase 8)

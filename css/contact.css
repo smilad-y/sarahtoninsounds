@@ -92,7 +92,7 @@
 /* home-logo.png has transparent padding around the visible ticket
    artwork — sized so the visible content matches Figma's ~332x137
    target, same technique/ratio as .jv2-logo in css/journal.css. */
-.cv2-logo img {
+.cv2-logo > a {
   display: block;
   width: 92.56%;
   height: 51.72%;

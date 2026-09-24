@@ -1,0 +1,15 @@
+{#- One Crash Course card: taped art, title, hook. Shared by the Listen
+    shelf, the Crash Courses index, and "More crash courses". Expects
+    `course` (a crashCourseLive item), `cardHeading` (h2/h3), and
+    `cardSizes` (the img sizes attribute for where it sits). -#}
+{%- set artSrcset = course.data.card_art | imageSrcset([300, 450, 600, 900]) %}
+<a class="cc-card" href="{{ course.url }}">
+  <span class="cc-card__art">
+    <img class="cc-card__img" src="{{ course.data.card_art | imageSrc(600) }}"{% if artSrcset %} srcset="{{ artSrcset }}" sizes="{{ cardSizes }}"{% endif %} alt="{{ course.data.card_art_alt }}" width="600" height="600" loading="lazy" decoding="async">
+    <img class="cc-card__tape" src="/assets/images/journal/tape-orange.png" alt="">
+  </span>
+  <{{ cardHeading }} class="cc-card__title">{{ course.data.title }}</{{ cardHeading }}>
+  {%- if course.data.hook %}
+  <p class="cc-card__hook">{{ course.data.hook }}</p>
+  {%- endif %}
+</a>

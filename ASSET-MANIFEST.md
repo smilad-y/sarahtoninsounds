@@ -115,6 +115,8 @@ Do not invent playlist descriptions. Sarah writes them.
 **Status:** Requires real curated course topics and supporting artwork.  
 Keep separate from mood playlists.
 
+Per course (entered in the CMS, `🎧 Crash Courses`): title, card art (square, at least 1200 × 1200 px) with an art description, optional hook, optional intro, Spotify playlist URL, optional Apple Music playlist URL, optional Start here tracks.
+
 ## 8. Journal Assets
 - Real essay titles, dates, excerpts, and article copy.
 - Monthly Favorites content and associated artwork/images.

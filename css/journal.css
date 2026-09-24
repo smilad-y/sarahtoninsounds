@@ -45,11 +45,24 @@
    Recent cards, which run past the frame's bottom edge (more on narrow
    screens, where their text wraps more), are never cut off. The textures already extend well below the frame, so
    that extra room is the same paper, not a seam. */
+/* Query container so --jv2-gutter can use cqw (window width minus any
+   scrollbar); overflow-x:clip trims the edge textures at the window. */
+.journal-page {
+  container-type: inline-size;
+  overflow-x: clip;
+}
+
 .journal-v2 {
+  /* Empty margin either side of the 1600px frame on wide windows (0 at
+     or below 1600). The stripe band, green paper, logo and paper
+     texture extend or shift by this much so they reach the window
+     edges instead of stopping at the frame. */
+  --jv2-gutter: max(0px, (100cqw - 1600px) / 2);
   max-width: 1600px;
   margin: 0 auto;
   padding-bottom: max(2.5rem, calc(240px - 12%));
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: clip;
   background-color: var(--color-paper);
 }
 
@@ -64,8 +77,8 @@
 .journal-v2::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  left: calc(-1 * var(--jv2-gutter));
+  right: calc(-1 * var(--jv2-gutter));
   bottom: 0;
   height: 160px;
   z-index: 4;
@@ -84,9 +97,9 @@
    paper, foreground on top). Percentages from the audited geometry. ── */
 .jv2-bg-stripe {
   position: absolute;
-  left: -10.077%;
+  left: calc(-10.077% - var(--jv2-gutter));
   top: -104.6667%;
-  width: 129.881%;
+  width: calc(129.881% + 2 * var(--jv2-gutter));
   height: 250%;
   max-width: none;
   object-fit: cover;
@@ -107,14 +120,15 @@
   max-width: none;
   object-fit: cover;
   transform: translate(-50%, -50%) rotate(47.87deg);
+  translate: calc(-1 * var(--jv2-gutter)) 0;
   z-index: 2;
 }
 
 .jv2-bg-foreground {
   position: absolute;
-  left: -14.2757%;
+  left: calc(-14.2757% - var(--jv2-gutter));
   top: 6.6667%;
-  width: 128.5514%;
+  width: calc(128.5514% + 2 * var(--jv2-gutter));
   height: 128.5556%;
   max-width: none;
   object-fit: cover;
@@ -128,6 +142,7 @@
   top: -2.7778%;
   width: 25.1512%;
   height: 29.4287%;
+  translate: calc(-1 * var(--jv2-gutter)) 0;
   z-index: 20;
   display: flex;
   align-items: center;
@@ -142,7 +157,7 @@
 /* width/height are % of the parent .jv2-logo box (25.1512%/29.4287% of
    stage), scaled so the rendered size equals 23.2813%/15.2222% of the
    stage — i.e. Figma's exact 332.69×137px at this 1429-wide frame. */
-.jv2-logo img {
+.jv2-logo > a {
   display: block;
   width: 92.56%;
   height: 51.72%;
@@ -328,10 +343,31 @@
 }
 
 /* Desktop: the photo fills its column at whatever height the card
-   ends up, so landscape and portrait images both stay inside it. */
+   ends up, so landscape and portrait images both stay inside it. The
+   inset leaves a band of paper around it and tucks its top-left corner
+   under the tape (.jv2-featured::after). */
 .jv2-featured .journal-featured__photo {
   position: relative;
   min-height: 12rem;
+  margin: 2.6cqw 0 1.4cqw 2.4cqw;
+}
+
+/* The backdrop's upper-left tape, cut out on its own and laid exactly
+   over the backdrop's copy so it sits on top of the photo's corner.
+   Box = the cutout's crop (x 8, y 24, 488x352 of the 1914px-wide
+   backdrop), inside the backdrop's top slice. Horizontal values are %
+   of the card (the backdrop spans it); vertical ones use cqw, the same
+   scale as the backdrop's top border-image-width. */
+.jv2-featured::after {
+  content: "";
+  position: absolute;
+  left: 0.418%;
+  top: 1.254cqw;
+  width: 25.496%;
+  height: 18.391cqw;
+  background: url('/assets/images/journal/featured-tape-left.webp') 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .jv2-featured .journal-featured__photo img {
@@ -442,6 +478,7 @@
   pointer-events: auto;
 }
 
+.jv2-recent[hidden],
 .jv2-card-slot[hidden] {
   display: none;
 }
@@ -852,6 +889,11 @@
     flex-direction: column;
     gap: 24px;
     padding: 0 20px 48px;
+  }
+
+  /* No entries beyond the Featured one: no "More to Read" heading. */
+  .jv2m-recent[hidden] {
+    display: none;
   }
 
   .jv2m-recent__title {

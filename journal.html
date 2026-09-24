@@ -74,7 +74,7 @@ templateEngineOverride: njk
     <img class="jv2-bg-foreground" src="/assets/images/journal/texture-foreground-paper.png" alt="">
 
     <div class="jv2-logo">
-      <img src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+      <a class="logo-home-link" href="/" data-card-inset="0.085 0.1014 0.1299 0.1589" aria-label="Sarahtonin Sounds, go to Home"><img src="/assets/images/home-v2/home-logo.png" alt=""></a>
     </div>
 
     <nav class="jv2-nav" aria-label="Primary">
@@ -153,7 +153,7 @@ templateEngineOverride: njk
 
     <div class="jv2m-masthead">
     <header class="jv2m-header">
-      <img class="jv2m-logo" src="/assets/images/home-v2/home-logo.png" alt="Sarahtonin Sounds">
+      <a class="jv2m-logo logo-home-link" href="/" data-card-inset="0.085 0.1014 0.1299 0.1589" aria-label="Sarahtonin Sounds, go to Home"><img src="/assets/images/home-v2/home-logo.png" alt=""></a>
     </header>
 
     <nav class="jv2m-nav" aria-label="Primary">
@@ -202,6 +202,8 @@ templateEngineOverride: njk
 
   </div>
 </main>
+
+{% include "site-footer.njk" %}
 
 <script type="application/json" id="journal-data">{{ feed | journalFeedJson(journal.featured) | safe }}</script>
 <script src="/js/site.js" defer></script>

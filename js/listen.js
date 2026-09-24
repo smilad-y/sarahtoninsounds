@@ -183,7 +183,9 @@
   // ── Turntable ──
 
   function renderTurntable(mood) {
-    $('tt-mood-name').textContent = mood.name;
+    var title = $('tt-mood-name');
+    title.textContent = mood.name;
+    title.style.color = isSet(mood.titleColor) ? mood.titleColor : '';
     $('tt-record-img').src = assetUrl(mood.art.vinyl);
 
     var tape = $('tt-tape');

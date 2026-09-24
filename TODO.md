@@ -170,7 +170,15 @@
 - [x] Launch is Spotify-only: the Spotify / Apple Music toggle is hidden for any mood without an Apple Music URL and reappears automatically once one is added (tested with a temporary Apple URL on Hazy). Mobile "A deeper dive…" subheading balanced onto two even lines.
 - [x] Sarah's Picks note: the note art is a border image (tape and bottom edge keep their proportions, only plain paper stretches), so the note fits its picks at any length. Title sits just below the tape; the red line stays inside the paper; title, line, and picks follow the paper's measured -4.3° tilt, with picks at -5.8° / -3.4° / -4.9° (softer than Figma's -12° / -7°, approved by Sarah).
 - [x] Long picks break at the dash ("Song" / "- Artist"), never stranding one word; picks that fit stay on one line. Pure CSS: each half is an inline-block.
-- [x] Crash Courses hidden until after launch: `hidden` on `.listen-intro` in `listen.html` (markup, styles, and the Arabic Music card kept). To turn it back on in Phase 10, remove `hidden`; the extra desktop space below the turntable drops away on its own. Page meta description no longer mentions crash courses; restore that too.
+- [x] ~~Crash Courses hidden until after launch: `hidden` on `.listen-intro`.~~ Replaced by the Crash Courses system (below). The old "An Introduction To..." section (markup, styles, Arabic Music collage and copy) is archived in `archive/listen-crash-courses-v1/`.
+
+## Listen — Crash Courses
+- [x] Built: CMS collection (`🎧 Crash Courses`, `content/listen/crash-courses/*.md`), course page (`_includes/layouts/crash-course.njk`, `/listen/crash-courses/<slug>/`), index (`listen/crash-courses/index.njk`), and the Listen shelf (up to 4 cards). Only entries with Live on appear anywhere; with none live, Listen builds exactly as before and no course pages or index are generated. Styles in `css/crash-courses.css`; the Spotify / Apple Music toggle on course pages is `js/crash-course.js`.
+- [ ] **Don't create entries until this branch is merged into `main`.** The CMS commits to `main`, and `main` doesn't have the course layout yet, so a course entry there would fail the production build.
+- [ ] Card art is resized through Netlify's Image CDN (`/.netlify/images`) on Netlify builds only; local builds use the original file. Confirm on a deploy preview that the shelf and course page images load from `/.netlify/images`.
+- [ ] Real-embed check for course pages (same blocker as the now spinning bar below): Spotify at 352px and Apple Music at 450px, and that switching away from one stops it.
+- [ ] Listen's page meta description doesn't mention Crash Courses. Sarah to decide whether to add them once the first course is live.
+- [ ] The index and course pages have no meta description unless the course has a Hook (no copy invented). Sarah to write one for the index if wanted.
 - [ ] IM Fell descriptors at 12px read slightly soft on 1x (non-retina) screens. Readable, but the weakest text on the page; 13px would need slightly larger circles.
 - [ ] `ASSET-MANIFEST.md` and `assets/icons/README.md` still use the old names Dreamy / Sultry / Energized in their icon lists.
 - [ ] Selector note slot (`selectorNote` in `content/listen/moods.json`, `#listen-moods-note`) is empty; Sarah decides the wording and style.

@@ -29,11 +29,22 @@ body.page-home {
 
 .home-v2 {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;    /* legacy fallback */
   height: 100dvh;
   overflow: hidden;
   background: #6d1f2c; /* fallback: sampled from home-paper-red.png while it loads */
+}
+
+/* Everything below the ticker strip. The collage stage is fitted inside
+   this box (cqw/cqh), so the strip never covers or crops a layer. */
+.home-v2__frame {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  container-type: size;
 }
 
 .hv2-layer {
@@ -60,9 +71,9 @@ body.page-home {
   margin: auto;   /* centers on whole pixels; a translate(-50%) put the
                      frame half a pixel off at odd viewport sizes */
   width: min(100vw, 160vh);    /* 160 = 100 * 1440 / 900 */
-  width: min(100vw, 160dvh);
+  width: min(100cqw, 160cqh);  /* fit inside .home-v2__frame */
   height: min(100vh, 62.5vw);  /* 62.5 = 100 * 900 / 1440 */
-  height: min(100dvh, 62.5vw);
+  height: min(100cqh, 62.5cqw);
   aspect-ratio: 1440 / 900;
 }
 
@@ -305,7 +316,6 @@ body.page-home {
   }
 
   .home-v2__stage {
-    position: static;
     transform: none;
     width: 100%;
     height: 100%;
@@ -487,5 +497,162 @@ body.page-home {
     bottom: 1.5%;
     right: 4%;
     font-size: 0.9rem;
+  }
+}
+
+/* ── Title card → Listen ──
+   The link box is trimmed to the torn-paper card inside the logo image
+   (its transparent margins are 5.696% / 7.493% / 6.646% / 6.724% of
+   the image, left/top/right/bottom), so only the card is clickable and
+   the focus ring hugs it. The image is offset back out by the same
+   amounts, so it renders exactly where it did before. */
+.hv2-title__link {
+  position: absolute;
+  top: 7.493%;
+  left: 5.696%;
+  width: 87.658%;
+  height: 85.783%;
+  display: block;
+}
+
+.hv2-title__link img {
+  position: absolute;
+  top: -8.735%;
+  left: -6.498%;
+  width: 114.08%;
+  height: 116.573%;
+  max-width: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hv2-title__link {
+    transition: transform 0.25s ease;
+  }
+
+  .hv2-title__link:hover,
+  .hv2-title__link:focus-visible {
+    transform: translateY(-0.8%) rotate(-0.6deg);
+  }
+}
+
+/* ── Ticker ──
+   A thin navy strip across the top of Home, above the collage (which
+   is fitted into the space below it, see .home-v2__frame). Without JS,
+   or with reduced motion, .hv2-ticker__line is shown as a still line.
+   With motion, js/home-ticker.js keeps that line for screen readers
+   only and adds an aria-hidden moving copy. */
+.hv2-ticker {
+  position: relative;
+  z-index: 30;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.75rem 0.25rem 1rem;
+  box-sizing: border-box;
+  background: #283c51; /* the collage's navy band */
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  color: #fdf6e8;
+}
+
+.hv2-ticker__line,
+.hv2-ticker__window {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+/* Still line: centered, and wraps rather than cutting off on narrow
+   screens. */
+.hv2-ticker__line {
+  text-align: center;
+  text-wrap: balance;
+}
+
+.hv2-ticker__window {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.hv2-ticker__track {
+  display: inline-block;
+  animation: hv2-ticker-scroll var(--ticker-duration, 60s) linear infinite;
+}
+
+.hv2-ticker.is-paused .hv2-ticker__track {
+  animation-play-state: paused;
+}
+
+@keyframes hv2-ticker-scroll {
+  to { transform: translateX(-50%); }
+}
+
+.hv2-ticker__toggle {
+  flex: none;
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 1px solid rgba(253, 246, 232, 0.7);
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.hv2-ticker__toggle[hidden] {
+  display: none;
+}
+
+.hv2-ticker__toggle:hover {
+  background: rgba(253, 246, 232, 0.15);
+}
+
+/* Focus ring on the navy strip: cream ring, navy gap. */
+.hv2-ticker__toggle:focus-visible {
+  outline-color: #fdf6e8;
+  box-shadow: 0 0 0 2px #283c51;
+}
+
+/* Pause: two bars. Play: a triangle. */
+.hv2-ticker__icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0.55rem;
+  height: 0.6rem;
+  border-left: 0.18rem solid currentColor;
+  border-right: 0.18rem solid currentColor;
+  box-sizing: border-box;
+}
+
+.hv2-ticker.is-paused .hv2-ticker__icon {
+  width: 0;
+  height: 0;
+  left: 0.12rem;
+  border-style: solid;
+  border-width: 0.3rem 0 0.3rem 0.5rem;
+  border-color: transparent transparent transparent currentColor;
+}
+
+@media (max-width: 600px) {
+  /* layout.css pads <main> on phones; the collage has always bled past
+     that padding, so the strip steps out of it too and runs edge to
+     edge along the very top. */
+  .hv2-ticker {
+    margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-3)) 0;
+    font-size: 0.85rem;
+    padding-left: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  /* The MENU button's box started 3px above the stage; keep it clear of
+     the strip. */
+  .hv2-menu-btn {
+    top: 0.4%;
   }
 }

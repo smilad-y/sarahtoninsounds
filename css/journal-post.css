@@ -1068,4 +1068,10 @@
   .jpm-collage-footer {
     height: 40px;
   }
+
+  /* Phones get the copyright line inside the paper column (.jpm-page)
+     instead of on the page color below it. */
+  .page-journal-post > .site-footer {
+    display: none;
+  }
 }
