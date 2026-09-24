@@ -1,6 +1,6 @@
 ---
 title: "Cheers To This "
-slug: test-essay
+slug: cheers-to-this
 date: 2026-09-23
 excerpt: On getting laid off, finally taking myself seriously, and figuring out
   what I want this little corner of the internet to be.
