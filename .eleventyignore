@@ -1,9 +1,4 @@
-# Pages not yet converted to Eleventy templates this round — served as
-# plain static files via addPassthroughCopy in .eleventy.js instead, so
-# their output stays byte-identical to what's live today.
-index.html
-listen.html
-contact.html
+# Decap's admin page is served as a plain static file.
 admin/index.html
 
 # Reference-only legacy copy (see legacy/README.md) — passthrough-copied

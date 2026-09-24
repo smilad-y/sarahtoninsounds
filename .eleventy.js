@@ -9,9 +9,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("js");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("legacy");
-  eleventyConfig.addPassthroughCopy("index.html");
-  eleventyConfig.addPassthroughCopy("listen.html");
-  eleventyConfig.addPassthroughCopy("contact.html");
   // Favicon and iOS home-screen icon live at the root, where browsers
   // look for them by default (sources: assets/images/brand/).
   eleventyConfig.addPassthroughCopy("favicon.ico");
@@ -122,6 +119,9 @@ module.exports = function (eleventyConfig) {
   // from ever being picked up as pages. This keeps content/ as an
   // ordinary part of the input tree (so the essays collection works)
   // while still exposing the JSON files as global template data.
+  // Build year for the site footer's copyright line.
+  eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear());
+  eleventyConfig.addGlobalData("home", () => require("./content/home.json"));
   eleventyConfig.addGlobalData("about", () => require("./content/about.json"));
   eleventyConfig.addGlobalData("journal", () => ({
     monthlyFavorites: require("./content/journal/monthly-favorites.json"),

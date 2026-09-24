@@ -23,6 +23,11 @@
 .page-about main.about-page {
   max-width: none;
   padding: 0;
+  /* Query container so --ab3-gutter can use cqw (viewport width minus
+     any scrollbar). overflow-x:clip trims the edge pieces at the window
+     instead of at the 1440px frame. */
+  container-type: inline-size;
+  overflow-x: clip;
 }
 
 /* Shared 1440px column for both .ab3-stage (fixed-height header) and
@@ -51,9 +56,12 @@
    current bio length and an 8x-length stress test: one continuous
    fill, no band, seam, or color shift anywhere on the page. */
 .ab3-page {
+  /* Width of the empty margin either side of the centered 1440px frame
+     on wide windows (0 at or below 1440). Edge pieces shift left by
+     this much so they bleed off the window, not the frame. */
+  --ab3-gutter: max(0px, (100cqw - 1440px) / 2);
   width: 1440px;
   margin: 0 auto;
-  overflow: hidden;
   background-color: #f1e0c6;
 }
 
@@ -79,7 +87,8 @@
   position: relative;
   width: 1440px;
   height: 1304px;
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: clip;
   isolation: isolate;
   background-color: #fff;
   font-family: var(--font-body);
@@ -104,9 +113,9 @@
 /* ── Background textures ── */
 .ab3-bg-stripe {
   position: absolute;
-  left: -173px;
+  left: calc(-173px - var(--ab3-gutter));
   top: -594px;
-  width: 1856px;
+  width: calc(1856px + 2 * var(--ab3-gutter));
   height: 2250px;
   max-width: none;
   object-fit: cover;
@@ -115,9 +124,9 @@
 
 .ab3-bg-foreground {
   position: absolute;
-  left: -492px;
+  left: calc(-492px - var(--ab3-gutter));
   top: 134px;
-  width: 3382px;
+  width: calc(3382px + 2 * var(--ab3-gutter));
   height: 2130px;
   max-width: none;
   object-fit: cover;
@@ -250,7 +259,8 @@
   width: 1440px;
   height: 380px;
   margin-top: 60px;
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: clip;
 }
 
 /* Bordered footer card (Figma node 119:60, About-Me file
@@ -528,9 +538,10 @@
    margin from that real boundary while reading as genuinely centered
    under the photo above it.
 
-   Then +28px (with the polaroid, same shift) so the leading "M" clears
-   the page's left edge: at -12px it was still clipped on the live
-   site. */
+   Then +28px on its own (the polaroid still bleeds off the edge) so
+   the leading "M" clears the window's left edge: at -12px it was still
+   clipped on the live site. It now sits centered on the visible part
+   of the white strip. */
 .ab3-caption {
   position: absolute;
   left: 16px;
@@ -557,6 +568,18 @@
   max-width: none;
   object-fit: cover;
   pointer-events: none;
+}
+
+/* The left-edge cluster rides the window's left edge on wide screens
+   (see --ab3-gutter). translate composes with each piece's own
+   rotate transform. */
+.ab3-deco--green-paper,
+.ab3-deco--logo,
+.ab3-deco--polaroid,
+.ab3-deco--blue-corner,
+.ab3-deco--flowers,
+.ab3-caption {
+  translate: calc(-1 * var(--ab3-gutter)) 0;
 }
 
 /* left is nudged left from the computed -58.26px: at that position the
@@ -604,11 +627,9 @@
    the render, not by re-deriving the math — which the reference
    screenshot does not show. Same width/height/rotation, only shifted
    left to clear the heading, per the instruction to fix what direct
-   pixel comparison finds rather than trust the computed value alone.
-   Later moved back +28px (to -15px), together with .ab3-caption, so the
-   caption is fully on-page; the flower still clears the heading. */
+   pixel comparison finds rather than trust the computed value alone. */
 .ab3-deco--polaroid {
-  left: -15px;
+  left: -43px;
   top: 118.399px;
   width: 395.103px;
   height: 552.423px;
