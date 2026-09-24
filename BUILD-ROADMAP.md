@@ -96,7 +96,7 @@ Two mood names, several icons, four colors, and all descriptors are still undeci
 ### Must have
 - Populate mood playlists with Sarah's real Spotify + Apple Music URLs.
 - Sarah writes descriptors.
-- Finish remaining mood icons.
+- ~~Finish remaining mood icons.~~ **Deferred past launch (Sarah, September 2026):** launch labels are color circles with number, name, and descriptor only. Icons are added later, all at once (Phase 10).
 - Add Crash Courses as a clearly separate section.
 - Launch with 6-8 live moods Sarah is confident in. Moods not yet live are hidden from the selector (not shown as locked), with a short handwritten note near the selector saying more are coming. Adding a mood later = flip its live flag in moods.json.
   - **Decided (Sarah, September 2026): 8 launch moods, in display order:** Chill, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant. Set live in `content/listen/moods.json`, with each one's Spotify link checked against the playlist it opens, and final descriptor, blurb, description, and Sarah's Picks in place. Still owed: Apple Music links.
@@ -153,6 +153,7 @@ Two mood names, several icons, four colors, and all descriptors are still undeci
 - Additional Crash Courses.
 - Performance tuning based on real deployment.
 - Small copy trims based on actual layouts.
+- Mood icons on the selector labels, added all at once for every live mood (deferred from launch; PROJECT-SPEC §7 Mood selector).
 
 ## Phase 2 Product Feature — Guestbook
 Only revisit after launch if visitor behavior supports it.
@@ -174,7 +175,7 @@ Before implementation, decide:
 These are intentionally not finalized and should not be guessed:
 - Hopeful vs. At Peace; Playful vs. Cheeky
 - which of Electric (formerly Energized) / Hype gets the disco ball icon
-- remaining mood icons and descriptors
+- remaining mood icons (not needed for launch; added all at once after launch), and descriptors for non-launch moods
 - colors for Euphoric, Hopeful/At Peace, Unleashed, Hypnotic; hex values for all colors
 - mood display order
 - whether Crash Courses must be live at launch, or can roll out later

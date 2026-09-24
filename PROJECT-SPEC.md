@@ -214,6 +214,7 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 ### Mood selector
 - Colored circular **record-label-style buttons**.
 - Each includes collage icon, number, mood name, and tiny descriptor.
+- **Launch (decided, Sarah, September 2026): icons are deferred past launch.** Launch labels are the color circles with number, mood name, and descriptor only. Icons are added later, all at once for every live mood, not one by one. The icon column in the mood list below records the intended icon for that later pass.
 - Preserve the original colors/textures of collage icons rather than recoloring everything black.
 - On mobile, keep these as colored illustrated labels in a horizontal swipe row.
 - **Do not turn mobile mood buttons into black vinyl records.**
