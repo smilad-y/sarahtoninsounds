@@ -1,5 +1,5 @@
 # Sarahtonin Sounds — Asset & Data Manifest
-**Version:** v4 · September 24, 2026
+**Version:** v5 · September 24, 2026
 
 ## 1. Signature / Must Preserve
 ### Sarahtonin Sounds gold wordmark
@@ -35,7 +35,8 @@
 
 ### Resume
 **Status:** In use.  
-**Location:** `assets/docs/sarah-milad-resume.pdf`, linked from both About Resume links (opens in a new tab).
+**Location:** `assets/docs/sarah-milad-resume.pdf`, linked from both About Resume links (opens in a new tab).  
+**Updated (September 2026):** replaced with the version without a phone number. The duplicate `Sarah_Milad_Resume.pdf` was removed.
 
 ## 3. Listen Assets
 ### Turntable / record-player graphic
@@ -112,8 +113,10 @@ Per mood, collect (stored in `content/listen/moods.json`):
 Do not invent playlist descriptions. Sarah writes them.
 
 ## 7. Crash Courses
-**Status:** Requires real curated course topics and supporting artwork.  
+**Status:** System built, switched off. Needs Sarah's real course topics and artwork.  
 Keep separate from mood playlists.
+
+**Card art:** uploaded through the CMS (saved to `assets/images/uploads/`), square, 1200 × 1200 px or larger.
 
 Per course (entered in the CMS, `🎧 Crash Courses`): title, card art (square, at least 1200 × 1200 px) with an art description, optional hook, optional intro, Spotify playlist URL, optional Apple Music playlist URL, optional Start here tracks.
 
