@@ -491,7 +491,9 @@
   height: 0;
   margin: 0;
   border: 0;
-  border-top: 7px solid var(--color-crimson);
+  /* Figma draws this as a 7px brush stroke; Sarah chose 2px so every
+     page title line matches (Listen, Journal, Contact). */
+  border-top: 2px solid var(--color-crimson);
 }
 
 .ab3-title-block p {
