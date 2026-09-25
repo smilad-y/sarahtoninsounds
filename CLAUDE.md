@@ -55,7 +55,7 @@ Before removing legacy code/data:
 - Maintain "clean structure + weird/tactile decoration."
 - Intentional cream/paper negative space is part of the design. Do not fill empty areas automatically.
 - Do not add generic filler copy, fake testimonials, invented playlists, invented mood categories, or decorative phrases that do not sound like Sarah.
-- The Listen mood list is the 18 moods in spec §7. Wanderlust and Exploratory are not mood playlists.
+- The Listen mood list is the 19 moods in spec §7. Wanderlust and Exploratory are not mood playlists.
 - Listen playlists come only from Sarah's curated playlists via live Spotify / Apple Music embeds.
 - Do not revive the removed Home tagline "Music, Prescribed With Taste."
 - Do not turn the Home page into a scrolling marketing page.

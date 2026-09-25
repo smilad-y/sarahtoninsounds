@@ -72,6 +72,44 @@
       ]
     },
     {
+      "id": "vibes",
+      "name": "Vibes",
+      "live": true,
+      "color": "berry",
+      "icon": "UNDECIDED",
+      "descriptor": "Laid-back grooves, mellow rhythms, effortless flow.",
+      "labelText": "light",
+      "titleColor": "#ffffff",
+      "art": {
+        "circle": "/assets/images/listen/berry-circle.webp",
+        "vinyl": "/assets/images/listen/Colored Records/Record-Maroon.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-maroon.png",
+        "tape": "/assets/images/listen/Tape-Maroon.png"
+      },
+      "spotify": {
+        "url": "https://open.spotify.com/playlist/7DI4qHEEJgZWN7YwEqEDOU"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      },
+      "blurb": "For settling into a good groove.",
+      "description": "Warm basslines, relaxed rhythms, and easygoing energy. Music for when you want to move, but slowly.",
+      "picks": [
+        {
+          "title": "Coming Back",
+          "artist": "Domo Genesis ft. Mac Miller"
+        },
+        {
+          "title": "So Far to Go",
+          "artist": "J Dilla ft. Common & D'Angelo"
+        },
+        {
+          "title": "Little Q, Pt. 2",
+          "artist": "Little Simz"
+        }
+      ]
+    },
+    {
       "id": "hazy",
       "name": "Hazy",
       "live": true,
@@ -457,7 +495,7 @@
       "id": "playful-cheeky",
       "name": "Playful / Cheeky",
       "live": false,
-      "color": "berry",
+      "color": "UNDECIDED",
       "icon": "UNDECIDED",
       "descriptor": "UNDECIDED",
       "labelText": "light",

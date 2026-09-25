@@ -69,6 +69,7 @@ Still need icon directions:
 - Unleashed
 - Cute
 - Hypnotic
+- Vibes
 - whichever of Electric / Hype does not get the disco ball
 
 ## 4. Legacy Music Library (archive only)
@@ -105,10 +106,10 @@ All legacy content is PRESERVE by default. Nothing migrates to the current site 
 Populate only from Sarah's manually curated playlists, embedded live. Not from legacy song data. **Launch is Spotify-only;** the Spotify / Apple Music toggle appears for a mood once it has an Apple Music URL.
 
 Per mood, collect (stored in `content/listen/moods.json`):
-- Spotify playlist URL (in place for all 18 moods, each checked against the playlist it opens)
+- Spotify playlist URL (in place for all 19 moods, each checked against the playlist it opens)
 - Apple Music playlist URL (added after launch)
 - Sarah's Picks (small manual highlights list)
-- descriptor, blurb, and description (final for the 8 launch moods)
+- descriptor, blurb, and description (final for the 8 launch moods and Vibes)
 
 Do not invent playlist descriptions. Sarah writes them.
 
@@ -182,7 +183,7 @@ Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Pres
 - Hopeful vs. At Peace; Playful vs. Cheeky.
 - Descriptors, blurbs, descriptions, and Sarah's Picks for the 10 non-launch moods.
 - Mood icons (deferred past launch; see §3).
-- Colors for Hopeful/At Peace, Hypnotic, Cute, Audacious, Lost, and Hype; final hex values for all 18 colors (current ones are provisional).
+- Colors for Hopeful/At Peace, Hypnotic, Cute, Audacious, Lost, Playful / Cheeky, and Hype; final hex values for all 18 colors (current ones are provisional).
 - Apple Music URLs per mood (after launch).
 - Perandory Semi-Condensed commercial web license; whether Amoresa needs a license (§11).
 - Crash Course topics/art.
