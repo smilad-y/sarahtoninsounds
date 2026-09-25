@@ -34,11 +34,36 @@ Populated so far:
   selection (replaces automatic newest-entry behavior).
 
 - `listen/moods.json` — Listen mood config (Phase 4/5): the 19 moods
-  from `PROJECT-SPEC.md` §7 with name, color, icon, descriptor, art,
-  Spotify and Apple Music URLs, and Sarah's Picks. Undecided values are
-  `UNDECIDED`, missing links `PLACEHOLDER`; the notes at the top of the
-  file explain the rest. Passthrough-copied (not template data) and
-  fetched at runtime by `js/listen.js`.
+  from `PROJECT-SPEC.md` §7 with id, name, live flag, color, icon, art,
+  and Spotify and Apple Music URLs, in display order. Not in the CMS.
+  Undecided values are `UNDECIDED`, missing links `PLACEHOLDER`; the
+  notes at the top of the file explain the rest. Passthrough-copied
+  (not template data) and fetched at runtime by `js/listen.js`.
+- `listen/mood-words.json`: each mood's descriptor, blurb, description,
+  and Sarah's Picks, edited in the CMS ("Listen Moods"). Also
+  passthrough-copied and fetched by `js/listen.js`. Split from
+  `moods.json` because Decap rewrites any object with more than eight
+  keys in a scrambled key order; keep every object here at eight keys or
+  fewer.
+
+  **How the two files match up:** by `id` only (e.g. `chill`). The page
+  takes everything from `moods.json` and fills in the four word fields
+  from the `mood-words.json` entry with the same `id`. The `name` in
+  `mood-words.json` is only the label in the CMS list; the site never
+  shows it. What each change needs:
+  - Flip a mood live: `moods.json` only. Every mood already has an
+    entry in `mood-words.json`.
+  - Rename a mood: change `name` in `moods.json` (that's what the site
+    shows), and in `mood-words.json` too so the CMS list matches (the
+    CMS can't edit it; do it in the file). Leave `id` alone.
+  - Change an `id`: change it in both files at once. If they don't
+    match, the page shows that mood with no descriptor, blurb,
+    description, or picks, and gives no error.
+  - Add a new mood: add it to both files with the same `id`. The CMS
+    can't add moods. Remove one: take it out of `moods.json`; a leftover
+    entry in `mood-words.json` is ignored.
+  - Reorder moods: `moods.json` only. Keep `mood-words.json` in the same
+    order so the CMS list matches the site.
 - `listen/crash-courses/*.md` — Crash Courses (BUILD-ROADMAP.md Phase 10), one
   file per course from the CMS, a real Eleventy collection (tag
   `crashCourse`). Only entries with `live: true` get a page

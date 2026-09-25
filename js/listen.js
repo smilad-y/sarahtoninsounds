@@ -1,7 +1,9 @@
 // Listen page: mood selector, turntable, and the "now spinning" bar.
 // Everything mood-specific comes from content/listen/moods.json
 // (PROJECT-SPEC.md §7), so moods can be added, renamed, reordered, or
-// removed there without touching this file. Only moods with
+// removed there without touching this file. Each mood's words and picks
+// come from content/listen/mood-words.json (edited in the CMS), matched
+// by id. Only moods with
 // `"live": true` are rendered; the rest are left out entirely.
 //
 // Playback lives in the now spinning bar as a visible Spotify or Apple
@@ -11,6 +13,8 @@
 // happens only inside the embed.
 (function () {
   var CONFIG_URL = '/content/listen/moods.json';
+  var WORDS_URL = '/content/listen/mood-words.json';
+  var WORD_FIELDS = ['descriptor', 'blurb', 'description', 'picks'];
   // Embed heights. Both must leave the current track's title and artist
   // visible; see TODO.md "Listen — now spinning bar" for test status.
   var SPOTIFY_HEIGHT = 80;
@@ -471,12 +475,23 @@
     initTurntableControl();
     initSourceToggle();
 
-    fetch(CONFIG_URL)
-      .then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
+    function getJson(url) {
+      return fetch(url).then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status + ' for ' + url);
         return res.json();
-      })
-      .then(function (data) {
+      });
+    }
+
+    Promise.all([getJson(CONFIG_URL), getJson(WORDS_URL)])
+      .then(function (results) {
+        var data = results[0];
+        var words = {};
+        (results[1].moods || []).forEach(function (entry) { words[entry.id] = entry; });
+        data.moods.forEach(function (mood) {
+          var entry = words[mood.id] || {};
+          WORD_FIELDS.forEach(function (field) { mood[field] = entry[field]; });
+        });
+
         config = data;
         config.moods = data.moods.filter(function (mood) { return mood.live === true; });
         renderSelector();
@@ -489,7 +504,7 @@
       .catch(function (err) {
         $('mood-row').insertAdjacentHTML('afterend',
           '<p class="listen-moods__error">The moods didn’t load. Refresh the page to try again.</p>');
-        if (window.console) console.error('Listen: could not load ' + CONFIG_URL, err);
+        if (window.console) console.error('Listen: could not load the mood files', err);
       });
   }
 

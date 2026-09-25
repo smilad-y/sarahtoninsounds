@@ -13,10 +13,11 @@ module.exports = function (eleventyConfig) {
   // look for them by default (sources: assets/images/brand/).
   eleventyConfig.addPassthroughCopy("favicon.ico");
   eleventyConfig.addPassthroughCopy("apple-touch-icon.png");
-  // Listen mood config, fetched at runtime by js/listen.js. Only this
-  // file: content/listen/crash-courses/ holds Markdown entries (drafts
+  // Listen mood config and mood words, fetched at runtime by
+  // js/listen.js. Only these two files: content/listen/crash-courses/ holds Markdown entries (drafts
   // included) that must never be published as raw files.
   eleventyConfig.addPassthroughCopy("content/listen/moods.json");
+  eleventyConfig.addPassthroughCopy("content/listen/mood-words.json");
   // netlify/functions/ is NOT passthrough-copied: Netlify Functions
   // deploy from their configured source directory directly, independent
   // of the static publish dir, once netlify.toml declares
