@@ -155,6 +155,12 @@ Useful reusable assets:
 
 **Shared mobile chrome (in use):** `assets/images/shared/mobile/paper.webp` (warm paper, 9 KB, flattened from About's mobile paper texture onto `--color-paper` #FFE6AC) and `stripe-band.webp` (red stripe, 1200px wide, ~160 KB, from About's desktop stripe texture). Every page's mobile layout uses them via `--m-paper` / `--m-band` in `css/layout.css`. The multi-MB source PNGs are unchanged.
 
+**Tinted paper textures (in use, September 2026):** each is a copy of an original texture with its color shifted so it reads as #FFE6AC (the grain is kept; alpha is untouched). The originals stay in place, unedited, as masters. To re-tint, start from the master, never from a `-tinted` file.
+- `assets/images/listen/background-paper-tinted.webp` (Listen page background; master `background-paper.webp`)
+- `assets/images/journal/paper-tile-tinted.webp` (Listen now spinning bar; master `paper-tile.webp`)
+- `assets/images/journal/texture-foreground-paper-tinted.png` (Journal and Contact desktop; master `texture-foreground-paper.png`)
+- `assets/images/about/About Me-Desktop-Final Assets/Texture___Foreground_Paper-tinted.png` (About desktop; master `Texture___Foreground_Paper.png`)
+
 ## 11. Fonts / Licensing
 - Perandory Semi-Condensed (self-hosted, `assets/fonts/Perandory-SemiCondensed.woff2`). **Open:** confirm its license covers commercial web use.
 - IM Fell English Regular + Italic (self-hosted, `assets/fonts/IMFellEnglish-*.woff2`). SIL Open Font License, so self-hosting is settled.
@@ -173,7 +179,7 @@ Never redistribute font files in handoff documents.
 - `favicon.ico` (repo root): 16, 32 (boosted) and 48 px.
 - `assets/images/brand/favicon-16.png`, `favicon-32.png` (boosted).
 - `assets/images/brand/icon-192.png`, `icon-512.png` (original colors).
-- `apple-touch-icon.png` (repo root): 180×180 on the paper color `#f1e0c6`, since iOS does not support transparency.
+- `apple-touch-icon.png` (repo root): 180×180 (the 512 icon at 160 px, centered) on the paper color `#FFE6AC`, since iOS does not support transparency.
 
 ### Social share image
 **Status:** In use as the Open Graph and Twitter card image on every page.  

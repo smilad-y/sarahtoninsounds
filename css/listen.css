@@ -37,7 +37,7 @@ html:has(body.page-listen) {
 .page-listen {
   overflow-x: hidden;
   background-color: var(--color-paper);
-  background-image: url('/assets/images/listen/background-paper.webp');
+  background-image: url('/assets/images/listen/background-paper-tinted.webp');
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -903,7 +903,7 @@ html:has(body.page-listen) {
   z-index: 50;
   border-top: 6px solid var(--mood-color, var(--color-near-black));
   background-color: var(--color-cream);
-  background-image: url('/assets/images/journal/paper-tile.webp');
+  background-image: url('/assets/images/journal/paper-tile-tinted.webp');
   background-size: 600px 600px;
   box-shadow: 0 -4px 14px rgba(28, 26, 22, 0.22);
 }

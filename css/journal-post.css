@@ -17,26 +17,14 @@
    same convention as every other page in this family
    (css/journal.css, the old .jp-stage).
 
-   Background: a flat color on .page-journal-post (#fbe6b2, Figma's
-   own value for this frame) with one textured PNG (the red-stripe
+   Background: a flat var(--color-paper) on .page-journal-post (the one
+   sitewide paper color, #FFE6AC, Sarah, September 2026; this page used
+   Figma's #fbe6b2 before) with one textured PNG (the red-stripe
    texture, .jp-header__stripe) behind .jp-nav, near the very top of
-   the page — not a full-height tiled texture, and no seam below where
-   it ends since the flat color underneath is the same real page
-   background, not a second visual layer. Two earlier substitute
-   textures (background-paper-base/-lower) were tried first and then
-   removed once Sarah confirmed directly against the real Figma file
-   that both are hidden/unused there and red-stripe is the only
-   background asset the header actually needs — see the HTML comment
-   on .jp-header's markup and TODO.md for the full history. #fbe6b2
-   did NOT map to the old --color-cream (#ded7c1) — checked directly,
-   not assumed: cream reads distinctly greyer/darker next to the
-   red-stripe texture's own cream/red tone, so using the token would
-   create a visible mismatch rather than the "no seam" this task asks
-   for. Kept as a literal value scoped to this page, same pattern
-   already used elsewhere in this file family for page-specific tones
-   (css/journal.css has several: #faf8ee, #fdfbed). */
+   the page, not a full-height tiled texture. See the HTML comment on
+   .jp-header's markup and TODO.md for the history. */
 .page-journal-post {
-  background-color: #fbe6b2;
+  background-color: var(--color-paper);
 }
 
 .page-journal-post main.journal-post-page {
