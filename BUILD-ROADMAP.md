@@ -119,6 +119,7 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - Reusable article card/content model.
 - Individual article template with strong long-form readability.
 - Populate real essay/Monthly Favs content as available.
+- Monthly Favs posts follow spec §8 "Monthly Favs posts" (built, September 2026).
 
 ### Nice to have
 - Selective editorial collage treatments per piece.
@@ -190,6 +191,8 @@ These are intentionally not finalized and should not be guessed:
 - "discover music!" note on Home
 - final Crash Course topics
 - final Journal production content
+- placement of the optional Monthly Favs reflection blurb (tentatively at the top)
+- Monthly Favs parked blocks: watched / read / learned; TV / Ad / Film tag on the needle drop
 - final contact/social URLs
 - font licensing: confirm the Perandory Semi-Condensed license covers commercial web use, and whether Amoresa needs any license at all given the logo only ships as an image. (IM Fell English is SIL Open Font License, so self-hosting it is settled.)
 - Guestbook backend/moderation implementation, if Phase 2 is activated

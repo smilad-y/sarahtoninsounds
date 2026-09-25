@@ -26,6 +26,7 @@ Populated so far:
 - `journal/essays/*.md` — Journal essays (Phase 7), one file per entry,
   front matter + Markdown body.
 - `journal/monthly-favorites.json` — Monthly Favorites (Phase 7).
+  Post fields follow PROJECT-SPEC.md §8 "Monthly Favs posts".
   Deliberately still a single JSON file with a `list` widget, not a real
   Eleventy collection or folder collection — that restructuring is
   explicitly out of scope for this round (see the conversation record);

@@ -3,7 +3,8 @@
   // One Journal Post page per Monthly Favorites entry
   // (content/journal/monthly-favorites.json), at the same /journal/<slug>/
   // URL the Journal cards already link to. Renders through the same
-  // layout as essays; the four song sections stand in for an essay body.
+  // layout as essays (whose Hero and Polaroids are the post's optional
+  // photos); the content below stands in for an essay body.
   pagination: {
     data: "journal.monthlyFavorites.entries",
     size: 1,
@@ -23,30 +24,74 @@
     polaroid1: function (data) { return data.fav.polaroid1; },
     polaroid2: function (data) { return data.fav.polaroid2; }
   },
-  sections: [
-    { key: "new_releases", heading: "New Releases I Loved" },
-    { key: "favorite_songs", heading: "Favorite Songs" },
-    { key: "favorite_discoveries", heading: "Favorite Discoveries" },
-    { key: "favorite_needledrops", heading: "Favorite Needledrops" }
+  highlights: [
+    { key: "favorite_song", number: "01", label: "Favorite Song" },
+    { key: "favorite_album", number: "02", label: "Favorite Album" },
+    { key: "needle_drop", number: "03", label: "Favorite Needle Drop" }
   ]
 }
 ---
-{%- for section in sections %}
-{%- set songs = fav[section.key] %}
-{%- if songs and songs.length %}
-<section class="jp-favs-section">
-  <h2 class="jp-favs-section__heading">{{ section.heading }}</h2>
-  <ul class="jp-favs-list">
-    {%- for song in songs %}
-    <li class="jp-favs-list__item">
-      <span class="jp-favs-list__title">{{ song.title }}</span>
-      <span class="jp-favs-list__artist">{{ song.artist }}</span>
-      {%- if song.note %}
-      <p class="jp-favs-list__note">{{ song.note }}</p>
+{#- Post content per PROJECT-SPEC.md §8 "Monthly Favs posts". The layout
+    renders this twice (desktop and mobile columns), so no ids here. -#}
+{%- set spotifySrc = fav.playlist and (fav.playlist.spotify_url | spotifyEmbedUrl) %}
+{%- set startHere = (fav.playlist and fav.playlist.start_here) or [] %}
+<div class="jp-favs">
+  {%- if fav.month %}
+  <p class="jp-favs-month">{{ fav.month | monthLabel(true) }}</p>
+  {%- endif %}
+
+  {%- if fav.reflection | trim %}
+  <p class="jp-favs-reflection">{{ fav.reflection | trim }}</p>
+  {%- endif %}
+
+  <ol class="jp-favs-highlights">
+    {%- for h in highlights %}
+    {%- set pick = fav[h.key] %}
+    {%- if pick and pick.title %}
+    <li class="jp-favs-pick">
+      {%- if pick.art %}
+      <img class="jp-favs-pick__art" src="{{ pick.art | imageSrc(400) }}" alt="" width="400" height="400" loading="lazy" decoding="async">
       {%- endif %}
+      <div class="jp-favs-pick__text">
+        <h2 class="jp-favs-pick__label"><span class="jp-favs-pick__number">{{ h.number }}</span> {{ h.label }}</h2>
+        <p class="jp-favs-pick__title">{{ pick.title }} <span class="jp-favs-pick__artist">by {{ pick.artist }}</span></p>
+        {%- if pick.heard_in %}
+        <p class="jp-favs-pick__heard">Heard in {{ pick.heard_in }}</p>
+        {%- endif %}
+        {%- if pick.note %}
+        <p class="jp-favs-pick__note">{{ pick.note }}</p>
+        {%- endif %}
+      </div>
     </li>
+    {%- endif %}
     {%- endfor %}
-  </ul>
-</section>
-{%- endif %}
-{%- endfor %}
+  </ol>
+
+  {%- if spotifySrc or startHere.length %}
+  <section class="jp-favs-playlist">
+    <h2 class="jp-favs-heading">{{ fav.month | monthLabel(false) }} Playlist</h2>
+    {%- if spotifySrc %}
+    <div class="jp-favs-player">
+      <iframe src="{{ spotifySrc }}" title="Spotify player: {{ fav.title }} playlist" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+    {%- endif %}
+    {%- if startHere.length %}
+    <h3 class="jp-favs-subheading">Start here</h3>
+    <ol class="jp-favs-start">
+      {%- for item in startHere %}
+      <li class="jp-favs-start__item">
+        <span class="jp-favs-start__number" aria-hidden="true">{{ loop.index }}</span>
+        <p class="jp-favs-start__text">
+          <span class="jp-favs-start__track">{{ item.track }}</span>
+          <span class="jp-favs-start__artist">by {{ item.artist }}</span>
+          {%- if item.note %}
+          <span class="jp-favs-start__note">{{ item.note }}</span>
+          {%- endif %}
+        </p>
+      </li>
+      {%- endfor %}
+    </ol>
+    {%- endif %}
+  </section>
+  {%- endif %}
+</div>

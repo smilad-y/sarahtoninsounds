@@ -95,8 +95,8 @@
   }
 
   // Normalizes a raw Monthly Favorites CMS entry the same way, keeping
-  // its four structured sections intact under `sections` rather than
-  // collapsing them into a single body.
+  // its structured post content (PROJECT-SPEC.md §8) intact rather than
+  // collapsing it into a single body.
   function normalizeMonthlyFavorite(raw) {
     return {
       type: 'monthly-fav',
@@ -107,12 +107,14 @@
       excerpt: raw.excerpt || '',
       image: raw.featured_image || null,
       imageWhole: !!raw.featured_image_whole,
-      sections: {
-        newReleases: raw.new_releases || [],
-        favoriteSongs: raw.favorite_songs || [],
-        favoriteDiscoveries: raw.favorite_discoveries || [],
-        favoriteNeedledrops: raw.favorite_needledrops || []
-      }
+      month: raw.month || null,
+      reflection: raw.reflection || '',
+      highlights: {
+        favoriteSong: raw.favorite_song || null,
+        favoriteAlbum: raw.favorite_album || null,
+        needleDrop: raw.needle_drop || null
+      },
+      playlist: raw.playlist || null
     };
   }
 

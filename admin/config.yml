@@ -248,7 +248,9 @@ collections:
 
   # ── JOURNAL: MONTHLY FAVORITES ──
   # Same publishing system as Journal Essays above, but keeps its own
-  # structured sections rather than a single markdown body.
+  # structured post content (PROJECT-SPEC.md §8, "Monthly Favs posts")
+  # rather than a markdown body. Photos are the optional Hero and
+  # Polaroid blocks.
   - name: journal_monthly_favorites
     label: "📓 Journal — Monthly Favorites"
     files:
@@ -265,6 +267,7 @@ collections:
               - { label: "Title", name: title, widget: string, hint: "e.g. August Favorites. Up to 40 characters. Titles of 16 characters or fewer get the big headline size on the Featured card; longer ones step down a size and wrap to two or three lines.", pattern: ['^.{1,40}$', 'Keep the title to 40 characters or fewer so it fits the Featured card.'] }
               - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
               - { label: "Date", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Month", name: month, widget: datetime, format: "YYYY-MM", date_format: "MMMM YYYY", time_format: false, hint: "The month these favorites are from. Shown as the post's month and year header." }
               - { label: "Excerpt (summary)", name: excerpt, widget: text, hint: "One or two sentences, up to 160 characters (100 to 140 reads best). Shown on the Featured card and the Journal cards.", pattern: ['^[\s\S]{1,160}$', 'Keep the summary to 160 characters or fewer so it fits the Featured card.'] }
               - { label: "Featured Image", name: featured_image, widget: image, required: false, hint: "Best as a landscape image around 3:2, at least 1200 × 800 px (1500 × 1000 is ideal). It is cropped a little differently on the Featured card, the Journal cards, and mobile, so keep the main subject near the center. Portrait images work too but lose some of the top and bottom unless Show the whole Featured Image is on. JPG under 500 KB loads fastest." }
               - { label: "Show the whole Featured Image", name: featured_image_whole, widget: boolean, default: false, required: false, hint: "Turn on for polaroids and cut-outs so no edge gets cropped. Leave off for regular photos, which are cropped to fill the space." }
@@ -296,38 +299,47 @@ collections:
                   - { label: "Image", name: image, widget: image, required: false }
                   - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
                   - { label: "Caption", name: caption, widget: string, required: false }
-              - label: "New Releases I Loved"
-                name: new_releases
-                widget: list
-                required: false
+              - { label: "Reflection (optional)", name: reflection, widget: text, required: false, hint: "A short blurb at the top of the post. Leave empty to hide it." }
+              - label: "01 Favorite Song"
+                name: favorite_song
+                widget: object
                 fields:
                   - { label: "Song Title", name: title, widget: string }
                   - { label: "Artist", name: artist, widget: string }
-                  - { label: "Note", name: note, widget: text, required: false }
-              - label: "Favorite Songs"
-                name: favorite_songs
-                widget: list
-                required: false
+                  - { label: "Art", name: art, widget: image, hint: "Square works best, at least 600 × 600 px." }
+                  - { label: "Note", name: note, widget: text }
+              - label: "02 Favorite Album"
+                name: favorite_album
+                widget: object
+                fields:
+                  - { label: "Album Title", name: title, widget: string }
+                  - { label: "Artist", name: artist, widget: string }
+                  - { label: "Art", name: art, widget: image, hint: "Square works best, at least 600 × 600 px." }
+                  - { label: "Note", name: note, widget: text }
+              - label: "03 Favorite Needle Drop"
+                name: needle_drop
+                widget: object
                 fields:
                   - { label: "Song Title", name: title, widget: string }
                   - { label: "Artist", name: artist, widget: string }
-                  - { label: "Note", name: note, widget: text, required: false }
-              - label: "Favorite Discoveries"
-                name: favorite_discoveries
-                widget: list
-                required: false
+                  - { label: "Heard In", name: heard_in, widget: string, hint: "The TV show, ad, or movie you heard it in." }
+                  - { label: "Art", name: art, widget: image, hint: "Square works best, at least 600 × 600 px." }
+                  - { label: "Note", name: note, widget: text }
+              - label: "The Month's Playlist"
+                name: playlist
+                widget: object
                 fields:
-                  - { label: "Song Title", name: title, widget: string }
-                  - { label: "Artist", name: artist, widget: string }
-                  - { label: "Note", name: note, widget: text, required: false }
-              - label: "Favorite Needledrops"
-                name: favorite_needledrops
-                widget: list
-                required: false
-                fields:
-                  - { label: "Song Title", name: title, widget: string }
-                  - { label: "Artist", name: artist, widget: string }
-                  - { label: "Note", name: note, widget: text, required: false }
+                  - { label: "Spotify Playlist URL", name: spotify_url, widget: string, hint: "Paste the playlist's share link. Shown as a full Spotify player." }
+                  - label: "Start Here"
+                    name: start_here
+                    widget: list
+                    min: 1
+                    summary: "{{track}} by {{artist}}"
+                    hint: "A few tracks to start with, like on a Crash Course page."
+                    fields:
+                      - { label: "Track", name: track, widget: string }
+                      - { label: "Artist", name: artist, widget: string }
+                      - { label: "Note", name: note, widget: string, required: false }
 
   # ── CRASH COURSES ──
   # Listen's Crash Courses (PROJECT-SPEC.md §7): curated introductions to

@@ -445,63 +445,165 @@
 .jp-photo--center { object-position: center center; }
 .jp-photo--bottom { object-position: center bottom; }
 
-/* ── Monthly Favs sections ── Stand in for the essay body on Monthly
+/* ── Monthly Favs posts ── Stand in for the essay body on Monthly
    Favorites pages (journal-monthly-favs.njk); shared by the desktop
-   .jp-body-copy and mobile .jpm-body-copy columns. */
-.jp-favs-section {
-  margin: 0 0 2.5em;
-}
-
-.jp-favs-section:last-child {
-  margin-bottom: 0;
-}
-
-.jp-favs-section__heading {
+   .jp-body-copy and mobile .jpm-body-copy columns. Playlist and Start
+   here follow the Crash Course page (css/crash-courses.css). */
+/* Scoped like this to win over .jp-body-copy p / .jpm-body-copy p. */
+.jp-body-copy .jp-favs-month,
+.jpm-body-copy .jp-favs-month {
+  margin: 0 0 0.6em;
   font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-weight: 400;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-near-black);
-  margin: 0 0 0.6em;
-  padding-bottom: 0.25em;
+}
+
+.jp-body-copy .jp-favs-reflection,
+.jpm-body-copy .jp-favs-reflection {
+  margin: 0 0 2em;
+}
+
+.jp-favs-highlights {
+  list-style: none;
+  margin: 0 0 3em;
+  padding: 0;
+}
+
+.jp-favs-pick {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.5rem 0;
+  border-bottom: 1px dashed rgba(28, 26, 22, 0.3);
+}
+
+.jp-favs-pick:first-child {
+  padding-top: 0;
+}
+
+/* No art: text takes the full row. */
+.jp-favs-pick__text:first-child {
+  grid-column: 1 / -1;
+}
+
+.jp-favs-pick__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(28, 26, 22, 0.25);
+}
+
+.jp-favs-pick__label,
+.jp-favs-heading {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.9vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+}
+
+.jp-favs-pick__number {
+  color: var(--color-crimson);
+}
+
+.jp-favs-heading {
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--color-crimson);
 }
 
-.jp-favs-list {
+.jp-body-copy .jp-favs-pick__title,
+.jpm-body-copy .jp-favs-pick__title,
+.jp-body-copy .jp-favs-pick__heard,
+.jpm-body-copy .jp-favs-pick__heard,
+.jp-body-copy .jp-favs-pick__note,
+.jpm-body-copy .jp-favs-pick__note {
+  margin: 0 0 0.4em;
+}
+
+.jp-favs-pick__artist,
+.jp-favs-start__artist {
+  font-style: italic;
+}
+
+.jp-body-copy .jp-favs-pick__heard,
+.jpm-body-copy .jp-favs-pick__heard {
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+
+.jp-favs-player {
+  margin-bottom: 2rem;
+}
+
+.jp-favs-player iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+}
+
+.jp-favs-subheading {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+}
+
+.jp-favs-start {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.jp-favs-list__item {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 1.34vw, 1.25rem);
-  color: var(--color-near-black);
-  margin: 0 0 1em;
+.jp-favs-start__item {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed rgba(28, 26, 22, 0.3);
 }
 
-.jp-favs-list__item:last-child {
-  margin-bottom: 0;
+.jp-favs-start__number {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--color-crimson);
 }
 
-.jp-favs-list__title {
-  font-size: 1.08em;
+.jp-body-copy .jp-favs-start__text,
+.jpm-body-copy .jp-favs-start__text {
+  margin: 0;
 }
 
-.jp-favs-list__artist {
-  font-style: italic;
+.jp-favs-start__note {
+  display: inline-block;
+  margin-left: 0.6rem;
+  font-family: var(--font-marginalia);
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--color-crimson);
+  transform: rotate(-1.5deg);
 }
 
-.jp-favs-list__artist::before {
-  content: " \00B7  ";
-  font-style: normal;
-}
-
-.jp-body-copy .jp-favs-list__note,
-.jpm-body-copy .jp-favs-list__note {
-  font-size: 0.9em;
-  margin: 0.25em 0 0;
-  opacity: 0.85;
+@media (max-width: 600px) {
+  .jp-favs-pick {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 1rem;
+  }
 }
 
 /* ── Polaroids (content blocks 3/7, optional) ── Each is a centered

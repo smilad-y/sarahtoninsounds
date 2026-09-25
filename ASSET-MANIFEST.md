@@ -129,7 +129,7 @@ Per course (entered in the CMS, `🎧 Crash Courses`): title, card art (square, 
 
 ## 8. Journal Assets
 - Real essay titles, dates, excerpts, and article copy.
-- Monthly Favorites content and associated artwork/images.
+- Monthly Favorites content and associated artwork/images. Per post (spec §8): the month, art for the favorite song, album, and needle drop (square, at least 600 × 600 px), the month's Spotify playlist URL, a few Start here tracks, and optionally a reflection and photos.
 - Legacy `essays/` JSON files may contain reusable editorial content.
 - Optional halftone/editorial imagery per article where meaningful.
 - Mockup placeholder titles/images are not final unless Sarah explicitly adopts them.

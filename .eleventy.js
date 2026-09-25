@@ -139,6 +139,18 @@ module.exports = function (eleventyConfig) {
     return (list || []).filter(function (item) { return item.url !== url; }).slice(0, n);
   });
 
+  // Monthly Favs "Month" field ("2026-08") as "August 2026", or just
+  // "August" without the year. Parsed by hand so the build's time zone
+  // can't shift it into the previous month.
+  eleventyConfig.addFilter("monthLabel", function (value, withYear) {
+    var match = typeof value === "string" && value.match(/^(\d{4})-(\d{2})/);
+    if (!match) return "";
+    var names = ["January", "February", "March", "April", "May", "June", "July",
+      "August", "September", "October", "November", "December"];
+    var name = names[Number(match[2]) - 1] || "";
+    return withYear ? name + " " + match[1] : name;
+  });
+
   // Same URL rules as js/listen.js's spotifyUri() / appleEmbedSrc(), so
   // a link that works for a mood works here too.
   eleventyConfig.addFilter("spotifyEmbedUrl", function (url) {

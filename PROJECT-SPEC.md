@@ -316,6 +316,21 @@ An indie music magazine / personal zine inside the larger Sarahtonin world. This
 - Filters: **All / Essays / Monthly Favs**.
 - Architecture should leave room for future formats such as reviews/interviews without adding them prematurely.
 
+### Monthly Favs posts
+**Decided (Sarah, September 2026).** Every post has:
+- A **month + year header** (the month the favorites are from, its own CMS field, separate from the publish date).
+- **Three numbered highlights**, each with title, artist, art, and a short note:
+  - **01 Favorite song**
+  - **02 Favorite album**
+  - **03 Favorite needle drop**: a song Sarah heard in a TV show, ad, or movie, with where she heard it.
+- **The month's playlist**: a full Spotify embed plus a short **"Start here"** list of a few tracks, set up like the Crash Course pages.
+
+Optional, shown only when filled:
+- A short **reflection** blurb at the top (placement tentative).
+- **Photos** with optional captions. These are the post's optional Hero and Polaroid photo blocks, the same ones essays have.
+
+Parked (not built): watched / read / learned blocks; a TV / Ad / Film tag on the needle drop.
+
 ### Article pages
 - More breathing room than the landing page.
 - Avoid busy margins.
