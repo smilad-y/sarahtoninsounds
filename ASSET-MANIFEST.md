@@ -107,7 +107,7 @@ Populate only from Sarah's manually curated playlists, embedded live. Not from l
 
 Per mood, collect (stored in `content/listen/moods.json`):
 - Spotify playlist URL (in place for all 19 moods, each checked against the playlist it opens)
-- Apple Music playlist URL (added after launch)
+- Apple Music playlist URL (added after launch; in place for every live mood as of September 2026. Hype has one too but isn't live.)
 - Sarah's Picks (small manual highlights list)
 - descriptor, blurb, and description (final for the 8 launch moods and Vibes)
 
@@ -184,7 +184,7 @@ Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Pres
 - Descriptors, blurbs, descriptions, and Sarah's Picks for the 10 non-launch moods.
 - Mood icons (deferred past launch; see §3).
 - Colors for Hopeful/At Peace, Hypnotic, Cute, Audacious, Lost, Playful / Cheeky, and Hype; final hex values for all 18 colors (current ones are provisional).
-- Apple Music URLs per mood (after launch).
+- Apple Music URLs for the non-live moods other than Hype (every live mood and Hype have one as of September 2026).
 - Perandory Semi-Condensed commercial web license; whether Amoresa needs a license (§11).
 - Crash Course topics/art.
 - Journal production content/art.

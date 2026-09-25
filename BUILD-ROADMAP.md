@@ -101,9 +101,9 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - ~~Finish remaining mood icons.~~ **Deferred past launch (Sarah, September 2026):** launch labels are color circles with number, name, and descriptor only. Icons are added later, all at once (Phase 10).
 - ~~Add Crash Courses as a clearly separate section.~~ **Moved to post-launch (Sarah, September 2026).** See Phase 10.
 - Launch with 6-8 live moods Sarah is confident in. Moods not yet live are hidden from the selector (not shown as locked), with a short handwritten note near the selector saying more are coming. Adding a mood later = flip its live flag in moods.json.
-  - **Decided (Sarah, September 2026): 8 launch moods, in display order:** Chill, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant. Set live in `content/listen/moods.json`, with each one's Spotify link checked against the playlist it opens, and final descriptor, blurb, description, and Sarah's Picks in place. Still owed: Apple Music links.
+  - **Decided (Sarah, September 2026): 8 launch moods, in display order:** Chill, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant. Set live in `content/listen/moods.json`, with each one's Spotify link checked against the playlist it opens, and final descriptor, blurb, description, and Sarah's Picks in place. Apple Music links (Sarah, September 2026) are now in place for every live mood, Vibes included. Hype has one too but isn't live.
   - **Added after launch (Sarah, September 2026): Vibes**, a 19th mood, live in second place. Live order: Chill, Vibes, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant.
-  - **Decided (Sarah, September 2026): launch is Spotify-only.** Apple Music is added later, mood by mood. The Spotify / Apple Music toggle in the now spinning bar is hidden for any mood without an Apple Music URL in `moods.json` and appears on its own once one is added; no code change needed.
+  - **Decided (Sarah, September 2026): launch is Spotify-only.** Apple Music is added later, mood by mood (now done for every live mood, September 2026). The Spotify / Apple Music toggle in the now spinning bar is hidden for any mood without an Apple Music URL in `moods.json` and appears on its own once one is added; no code change needed.
 
 ### Nice to have
 - Small tactile transitions/microinteractions that do not compromise performance or accessibility.
@@ -159,7 +159,7 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - Once the first Crash Course is live, check on the live site: the course page's Spotify (and Apple Music, if set) embed plays and switching between them stops the other, and the card art loads through Netlify's image resizing (`/.netlify/images`).
 - Once the first Crash Course is live, Sarah decides whether Listen's page description should mention Crash Courses, and whether the Crash Courses index gets its own description (neither exists now; no copy was invented).
 - Real-embed check for the now spinning bar on the live site (see the now spinning bar section of TODO.md).
-- Apple Music links per mood (launch was Spotify-only; the toggle appears on its own once a mood has one).
+- ~~Apple Music links per mood.~~ **Done (Sarah, September 2026):** in place for every live mood; Hype has one too but isn't live. The other non-live moods get theirs when they go live.
 - Performance tuning based on real deployment.
 - Small copy trims based on actual layouts.
 - Mood icons on the selector labels, added all at once for every live mood (deferred from launch; PROJECT-SPEC §7 Mood selector).
