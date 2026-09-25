@@ -94,25 +94,23 @@
     };
   }
 
-  // Normalizes a raw Monthly Favorites CMS entry the same way, keeping
-  // its four structured sections intact under `sections` rather than
-  // collapsing them into a single body.
+  // Normalizes a Monthly Favs post (content/journal/monthly-favs/*.md
+  // front matter plus its slug, "october-2026") into the same card
+  // shape. Card summary: the Excerpt, else the Reflection, else none.
+  // Card image: the Card image, else the favorite song's art shown
+  // whole (it is square, the card frame is not).
   function normalizeMonthlyFavorite(raw) {
+    var song = (raw.highlights && raw.highlights.favorite_song) || {};
+    var cardImage = raw.card_image || null;
     return {
       type: 'monthly-fav',
       slug: raw.slug,
-      title: raw.title,
+      title: raw.month + ' Favs',
       date: raw.date,
       dateObj: toDateObject(raw.date),
-      excerpt: raw.excerpt || '',
-      image: raw.featured_image || null,
-      imageWhole: !!raw.featured_image_whole,
-      sections: {
-        newReleases: raw.new_releases || [],
-        favoriteSongs: raw.favorite_songs || [],
-        favoriteDiscoveries: raw.favorite_discoveries || [],
-        favoriteNeedledrops: raw.favorite_needledrops || []
-      }
+      excerpt: String(raw.excerpt || raw.reflection || '').trim(),
+      image: cardImage || song.art || null,
+      imageWhole: !cardImage && !!song.art
     };
   }
 
@@ -171,7 +169,7 @@
       '<div class="journal-card__meta">' + categoryLabel + ' &middot; ' + displayDate + '</div>' +
       '<h3 class="journal-card__title">' + escapeHtml(entry.title) + '</h3>' +
       '<div class="journal-card__divider"></div>' +
-      '<p class="journal-card__excerpt">' + escapeHtml(entry.excerpt) + '</p>' +
+      (entry.excerpt ? '<p class="journal-card__excerpt">' + escapeHtml(entry.excerpt) + '</p>' : '') +
       '<span class="journal-card__link">Read</span>' +
       '</a>'
     );
@@ -201,7 +199,7 @@
       '<div class="journal-featured__meta">' + categoryLabel + ' &middot; ' + displayDate + '</div>' +
       '<h2 class="journal-featured__title' + (String(entry.title).trim().length > 16 ? ' journal-featured__title--long' : '') + '">' + escapeHtml(entry.title) + '</h2>' +
       '<div class="journal-featured__divider"></div>' +
-      '<p class="journal-featured__excerpt">' + escapeHtml(entry.excerpt) + '</p>' +
+      (entry.excerpt ? '<p class="journal-featured__excerpt">' + escapeHtml(entry.excerpt) + '</p>' : '') +
       '<a class="journal-featured__link" href="/journal/' + encodeURIComponent(entry.slug) + '">Read</a>' +
       '</div>'
     );

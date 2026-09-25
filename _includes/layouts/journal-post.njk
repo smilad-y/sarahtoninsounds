@@ -7,7 +7,11 @@
     Excerpt (summary), and its Featured Image, falling back to the site
     share image when an entry has none. -#}
 {%- set metaTitle = (title | trim) + " | Sarahtonin Sounds" %}
-{%- set metaDescription = excerpt | trim %}
+{%- set metaDescription = (excerpt or reflection or "") | trim %}
+{#- Monthly Favs posts (layouts/monthly-favs.njk) render through this
+    same layout with their own title block and content in place of the
+    essay's. -#}
+{%- set isMonthlyFav = category == "Monthly Favs" %}
 {%- if featured_image %}
 {%- set shareImage = featured_image if (featured_image.indexOf("http") == 0) else "https://sarahtoninsounds.com" + featured_image %}
 {%- else %}
@@ -45,6 +49,10 @@
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/layout.css">
 <link rel="stylesheet" href="/css/journal-post.css">
+{%- if isMonthlyFav %}
+<link rel="stylesheet" href="/css/playlist.css">
+<link rel="stylesheet" href="/css/monthly-favs.css">
+{%- endif %}
 </head>
 <body class="page-journal-post">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -85,6 +93,9 @@
       </nav>
     </div>
 
+    {%- if isMonthlyFav %}
+    <div class="mf-page">{{ content | safe }}</div>
+    {%- else %}
     <div class="jp-title-block">
       <p class="jp-title-block__meta">{{ category }} &middot; {{ (postDate or date) | journalDate }}</p>
       <div class="jp-title-block__meta-rule" aria-hidden="true"></div>
@@ -151,6 +162,7 @@
       {% endif %}
 
     </div>
+    {%- endif %}
   </div>
 
   <!-- Mobile Journal Post (Header/Nav/Title Block/Polaroid Hero built;
@@ -180,6 +192,9 @@
       </ul>
     </nav>
 
+    {%- if isMonthlyFav %}
+    <div class="mf-page mf-page--mobile">{{ content | safe }}</div>
+    {%- else %}
     <div class="jpm-title-block">
       <p class="jpm-title-block__meta">{{ category }} &middot; {{ (postDate or date) | journalDate }}</p>
       <h1 class="jpm-title-block__title">{{ title }}</h1>
@@ -200,6 +215,7 @@
     {% endif %}
 
     <div class="jpm-body-copy">{{ content | safe }}</div>
+    {%- endif %}
 
     <div class="jpm-collage-footer" aria-hidden="true"></div>
 
@@ -210,5 +226,8 @@
 {% include "site-footer.njk" %}
 
 <script src="/js/site.js" defer></script>
+{%- if isMonthlyFav and (spotify_url | spotifyEmbedUrl) and (apple_music_url | appleEmbedUrl) %}
+<script src="/js/playlist-player.js" defer></script>
+{%- endif %}
 </body>
 </html>

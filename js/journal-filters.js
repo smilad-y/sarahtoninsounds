@@ -58,6 +58,13 @@
     });
   }
 
+  // A link can open the page pre-filtered, e.g. /journal.html?filter=monthly-fav
+  // (the "All Monthly Favs" link on Monthly Favs posts).
+  var requested = new URLSearchParams(window.location.search).get('filter');
+  if (requested && document.querySelector('.journal-filter[data-filter="' + requested.replace(/[^a-z-]/g, '') + '"]')) {
+    render(requested);
+  }
+
   Array.prototype.forEach.call(bars, function (bar) {
     bar.hidden = false;
     bar.addEventListener('click', function (event) {

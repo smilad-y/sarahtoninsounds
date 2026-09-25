@@ -56,31 +56,8 @@
       </div>
       {%- endif %}
 
-      {%- if spotifySrc or appleSrc %}
-      <div class="cc-player" data-cc-player>
-        {%- if spotifySrc and appleSrc %}
-        {#- Shown by js/crash-course.js; without it the page just plays Spotify. #}
-        <div class="cc-player__source" role="group" aria-label="Listen on" hidden>
-          <button type="button" class="cc-player__source-btn" data-source="spotify" aria-pressed="true">Spotify</button>
-          <button type="button" class="cc-player__source-btn" data-source="apple" aria-pressed="false">Apple Music</button>
-        </div>
-        {%- endif %}
-        {%- if spotifySrc %}
-        <div class="cc-player__embed" data-source="spotify">
-          <iframe src="{{ spotifySrc }}" title="Spotify player: {{ title }} playlist" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        {%- endif %}
-        {%- if appleSrc %}
-        {#- Built on demand by js/crash-course.js: removing an embed is the
-            only way to stop it, so the hidden one is never left playing. #}
-        <div class="cc-player__embed" data-source="apple" data-embed-src="{{ appleSrc }}" data-embed-title="Apple Music player: {{ title }} playlist"{% if spotifySrc %} hidden{% endif %}>
-          {%- if not spotifySrc %}
-          <iframe src="{{ appleSrc }}" title="Apple Music player: {{ title }} playlist" height="450" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" loading="lazy"></iframe>
-          {%- endif %}
-        </div>
-        {%- endif %}
-      </div>
-      {%- endif %}
+      {%- set playerTitle = title + " playlist" %}
+      {% include "partials/playlist-player.njk" %}
     </div>
   </div>
 
@@ -127,7 +104,7 @@
 <script src="/js/site.js" defer></script>
 
 {%- if spotifySrc and appleSrc %}
-<script src="/js/crash-course.js" defer></script>
+<script src="/js/playlist-player.js" defer></script>
 {%- endif %}
 </body>
 </html>

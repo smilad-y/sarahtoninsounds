@@ -25,11 +25,12 @@ Populated so far:
   not unified.
 - `journal/essays/*.md` — Journal essays (Phase 7), one file per entry,
   front matter + Markdown body.
-- `journal/monthly-favorites.json` — Monthly Favorites (Phase 7).
-  Deliberately still a single JSON file with a `list` widget, not a real
-  Eleventy collection or folder collection — that restructuring is
-  explicitly out of scope for this round (see the conversation record);
-  revisit once Essays-as-a-collection is proven out.
+- `journal/monthly-favs/*.md` — Monthly Favs posts (Phase 7), one file
+  per post, front matter only. Fields follow PROJECT-SPEC.md §8
+  "Monthly Favs post content". Title and URL come from Month and Year
+  (`monthly-favs.11tydata.js` in that folder).
+- `settings/tape-colors.json` — saved tape colors for Monthly Favs
+  highlights (CMS "Tape colors").
 - `journal/featured.json` — ordered, explicitly-curated Featured Journal
   selection (replaces automatic newest-entry behavior).
 

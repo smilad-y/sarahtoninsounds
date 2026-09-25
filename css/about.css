@@ -47,13 +47,12 @@
    flat fill behind the whole page, with .ab3-bg-foreground's real
    texture image simply painting on top of it wherever the header still
    shows it — no second element needing to start in exactly the right
-   place. The color itself is canvas-sampled from
-   Texture___Foreground_Paper.png (bottom band, center, and full-image
-   average all land within a couple of RGB values of each other:
-   240–241/223–225/196–198), not guessed — that same sampling is what
-   proved a flat match would be visually indistinguishable from the
-   real texture in the first place (see TODO.md). Verified at both the
-   current bio length and an 8x-length stress test: one continuous
+   place. The color is the sitewide paper #FFE6AC, and the texture on
+   top is a copy tinted to read as that same color
+   (Texture___Foreground_Paper-tinted.png, ASSET-MANIFEST.md §10), so
+   the flat fill and the texture still meet with no visible edge.
+   Earlier verified at both the current bio length and an 8x-length
+   stress test: one continuous
    fill, no band, seam, or color shift anywhere on the page. */
 .ab3-page {
   /* Width of the empty margin either side of the centered 1440px frame
@@ -62,7 +61,7 @@
   --ab3-gutter: max(0px, (100cqw - 1440px) / 2);
   width: 1440px;
   margin: 0 auto;
-  background-color: #f1e0c6;
+  background-color: #FFE6AC;
 }
 
 /* Between 1224px and 1440px the whole fixed composition is scaled down

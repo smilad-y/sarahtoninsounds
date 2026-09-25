@@ -141,7 +141,8 @@ The result should feel tactile, personal, whimsical, and music-obsessed — not 
 
 ### Palette
 Core:
-- warm cream/paper (established Journal background direction: `#ded7c1`)
+- warm paper: #FFE6AC, one paper color sitewide (decided, Sarah, September 2026; replaces both #ded7c1 and #f1e0c6, neither of which was the intended color)
+  - Exception (decided, Sarah, September 2026): the Listen page on desktop keeps its original paper texture (`listen/background-paper.webp`), untinted.
 - near-black
 - Sarahtonin gold/yellow
 - crimson
@@ -286,6 +287,7 @@ The turntable is a signature interaction, not decorative filler. A selected mood
 - Only courses with Live on appear anywhere on the site. With none live, Listen shows no Crash Courses section at all.
 - Listen shows a shelf of up to 4 live courses below the turntable (a swipe row on mobile). The shelf has no embeds; the now spinning bar stays the only player on Listen.
 - Each live course has its own page at `/listen/crash-courses/<slug>/` with its own playlist embed, and `/listen/crash-courses/` lists all live courses.
+- Each course's playlist embed has a Spotify / Apple Music toggle, following the same rule as Listen and Monthly Favs: Spotify link required, Apple Music optional, toggle appears only once an Apple Music link is added.
 
 Separate from mood playlists. Curated introductions to genres, artists, scenes, or sounds. Do not collapse Crash Courses into the mood taxonomy.
 
@@ -315,6 +317,8 @@ An indie music magazine / personal zine inside the larger Sarahtonin world. This
 - Reverse chronological content.
 - Filters: **All / Essays / Monthly Favs**.
 - Architecture should leave room for future formats such as reviews/interviews without adding them prematurely.
+
+Monthly Favs post content (decided, Sarah, September 2026): Each post has a month + year header; three numbered highlights (01 favorite song, 02 favorite album, 03 favorite needle drop, meaning a song Sarah heard in a TV show, ad, or movie, with where she heard it), each with title, artist, art, and a short note; and the month's playlist as a live embed plus a short "Start here" list of a few tracks, set up like Crash Course pages. The playlist embed has a Spotify / Apple Music toggle, following the Listen rule: Spotify link required, Apple Music optional, and the toggle only appears once an Apple Music link is added. Optional, shown only when filled: a short reflection blurb at the top (placement tentative), and photos with optional captions. Parked: watched / read / learned blocks, and a TV / Ad / Film tag on the needle drop. Each highlight has an optional tape color: a saved color from the CMS Tape colors list or a custom 6-digit hex, custom wins, default gold. Monthly Favs is its own Decap CMS collection that feeds the Journal and its Monthly Favs filter.
 
 ### Article pages
 - More breathing room than the landing page.

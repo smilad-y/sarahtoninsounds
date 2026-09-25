@@ -82,7 +82,7 @@
   bottom: 0;
   height: 160px;
   z-index: 4;
-  background: linear-gradient(to bottom, rgba(241, 224, 198, 0), var(--color-paper));
+  background: linear-gradient(to bottom, rgba(255, 230, 172, 0), var(--color-paper));
   pointer-events: none;
 }
 

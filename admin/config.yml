@@ -244,90 +244,117 @@ collections:
             summary: "{{type}} — {{slug}}"
             fields:
               - { label: "Type", name: type, widget: select, options: ["essay", "monthly-fav"] }
-              - { label: "Slug", name: slug, widget: string, hint: "Must exactly match that entry's own Slug field." }
+              - { label: "Slug", name: slug, widget: string, hint: "For an essay, its own Slug field. For Monthly Favs, the month and year in lowercase, like october-2026." }
 
-  # ── JOURNAL: MONTHLY FAVORITES ──
-  # Same publishing system as Journal Essays above, but keeps its own
-  # structured sections rather than a single markdown body.
-  - name: journal_monthly_favorites
-    label: "📓 Journal — Monthly Favorites"
+  # ── JOURNAL: MONTHLY FAVS ──
+  # One Markdown file per post in content/journal/monthly-favs/ (front
+  # matter only, no body). PROJECT-SPEC.md §8 "Monthly Favs post
+  # content". Title ("October Favs") and URL (/journal/october-2026/)
+  # come from Month and Year (content/journal/monthly-favs/
+  # monthly-favs.11tydata.js); posts join the Journal feed and its
+  # Monthly Favs filter. One post per month: two posts with the same
+  # Month and Year would share a URL and stop the site from building.
+  - name: monthly_favs
+    label: "📓 Monthly Favs"
+    label_singular: "Monthly Favs post"
+    folder: content/journal/monthly-favs
+    create: true
+    format: frontmatter
+    extension: md
+    identifier_field: month
+    slug: "{{fields.month}}-{{fields.year}}"
+    summary: "{{month}} {{year}} Favs"
+    sortable_fields: ["date", "year"]
+    fields:
+      - { label: "Month", name: month, widget: select, options: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], hint: "The month these favorites are from. The post is titled \"[Month] Favs\"." }
+      - { label: "Year", name: year, widget: number, value_type: int, min: 2020, max: 2100, hint: "The page URL is /journal/[month]-[year], like /journal/october-2026." }
+      - { label: "Publish date", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "Sets where the post sits in the Journal, newest first." }
+      - { label: "Excerpt (optional)", name: excerpt, widget: text, required: false, hint: "Up to 160 characters, shown on the Journal cards. Leave empty to use the reflection instead.", pattern: ['^[\s\S]{0,160}$', 'Keep the excerpt to 160 characters or fewer so it fits the Featured card.'] }
+      - { label: "Card image (optional)", name: card_image, widget: image, required: false, hint: "Landscape around 3:2, at least 1200 × 800 px. Leave empty to show the favorite song's art on the card instead." }
+      - { label: "Reflection (optional)", name: reflection, widget: text, required: false, hint: "A few sentences shown in italics at the top of the post. Leave empty to hide it." }
+      - label: "Highlights"
+        name: highlights
+        widget: object
+        collapsed: false
+        hint: "Always shown in this order: 01 song, 02 album, 03 needle drop."
+        fields:
+          - label: "01 Favorite song"
+            name: favorite_song
+            widget: object
+            fields:
+              - { label: "Song title", name: title, widget: string }
+              - { label: "Artist", name: artist, widget: string }
+              - { label: "Art", name: art, widget: image, hint: "Square, at least 800 × 800 px. Shown with a strip of tape across its top edge." }
+              - { label: "Art description", name: art_alt, widget: string, hint: "Describe the art for screen readers." }
+              - { label: "Note", name: note, widget: text }
+              - { label: "Saved tape color", name: tape_color, widget: relation, collection: tape_colors, file: tape_colors_list, search_fields: ["colors.*.name"], value_field: "colors.*.name", display_fields: ["colors.*.name"], required: false, hint: "Optional. Pick from your Tape colors list." }
+              - { label: "Custom tape hex", name: tape_hex, widget: string, required: false, pattern: ['^(#[0-9a-fA-F]{6})?$', 'Use a 6-digit hex code starting with #, like #9e1b22.'], hint: "Optional, like #9e1b22. Wins over the saved color. With neither, the tape is gold." }
+          - label: "02 Favorite album"
+            name: favorite_album
+            widget: object
+            fields:
+              - { label: "Album title", name: title, widget: string }
+              - { label: "Artist", name: artist, widget: string }
+              - { label: "Art", name: art, widget: image, hint: "Square, at least 800 × 800 px. Shown with a strip of tape across its top edge." }
+              - { label: "Art description", name: art_alt, widget: string, hint: "Describe the art for screen readers." }
+              - { label: "Note", name: note, widget: text }
+              - { label: "Saved tape color", name: tape_color, widget: relation, collection: tape_colors, file: tape_colors_list, search_fields: ["colors.*.name"], value_field: "colors.*.name", display_fields: ["colors.*.name"], required: false, hint: "Optional. Pick from your Tape colors list." }
+              - { label: "Custom tape hex", name: tape_hex, widget: string, required: false, pattern: ['^(#[0-9a-fA-F]{6})?$', 'Use a 6-digit hex code starting with #, like #9e1b22.'], hint: "Optional, like #9e1b22. Wins over the saved color. With neither, the tape is gold." }
+          - label: "03 Favorite needle drop"
+            name: needle_drop
+            widget: object
+            fields:
+              - { label: "Song title", name: title, widget: string }
+              - { label: "Artist", name: artist, widget: string }
+              - { label: "Heard in", name: heard_in, widget: string, hint: "The TV show, ad, or movie where you heard it." }
+              - { label: "Art", name: art, widget: image, hint: "Square, at least 800 × 800 px. Shown with a strip of tape across its top edge." }
+              - { label: "Art description", name: art_alt, widget: string, hint: "Describe the art for screen readers." }
+              - { label: "Note", name: note, widget: text }
+              - { label: "Saved tape color", name: tape_color, widget: relation, collection: tape_colors, file: tape_colors_list, search_fields: ["colors.*.name"], value_field: "colors.*.name", display_fields: ["colors.*.name"], required: false, hint: "Optional. Pick from your Tape colors list." }
+              - { label: "Custom tape hex", name: tape_hex, widget: string, required: false, pattern: ['^(#[0-9a-fA-F]{6})?$', 'Use a 6-digit hex code starting with #, like #9e1b22.'], hint: "Optional, like #9e1b22. Wins over the saved color. With neither, the tape is gold." }
+      - { label: "Spotify playlist URL", name: spotify_url, widget: string, pattern: ['^https://open\.spotify\.com/playlist/[A-Za-z0-9]+', 'Paste a Spotify playlist link, like https://open.spotify.com/playlist/...'], hint: "The month's playlist. Shown as a full player." }
+      - { label: "Apple Music playlist URL (optional)", name: apple_music_url, widget: string, required: false, pattern: ['^https://music\.apple\.com/', 'Paste an Apple Music playlist link, like https://music.apple.com/...'], hint: "When set, the player gets a Spotify / Apple Music switch." }
+      - label: "Start here"
+        name: start_here
+        widget: list
+        required: false
+        summary: "{{track}} by {{artist}}"
+        hint: "A few tracks from the playlist to start with."
+        fields:
+          - { label: "Song", name: track, widget: string }
+          - { label: "Artist", name: artist, widget: string }
+          - { label: "Note (optional)", name: note, widget: string, required: false, hint: "A short handwritten note beside the track." }
+      - label: "Photos (optional)"
+        name: photos
+        widget: list
+        required: false
+        summary: "{{alt}}"
+        hint: "Shown as tilted polaroids near the end of the post. Leave empty to hide the section."
+        fields:
+          - { label: "Image", name: image, widget: image }
+          - { label: "Description", name: alt, widget: string, hint: "Describe the photo for screen readers." }
+          - { label: "Caption (optional)", name: caption, widget: string, required: false, pattern: ['^.{0,40}$', 'Keep captions to 40 characters or fewer; they are handwritten.'], hint: "A few handwritten words under the photo." }
+
+  # ── TAPE COLORS ──
+  # Saved colors for the tape on Monthly Favs highlights. Posts store
+  # the color's name and look up its hex when the site builds, so
+  # editing a hex here updates every post that uses it.
+  - name: tape_colors
+    label: "🎨 Tape colors"
     files:
-      - name: monthly_favorites_list
-        label: "All Monthly Favorites"
-        file: content/journal/monthly-favorites.json
+      - name: tape_colors_list
+        label: "Tape colors"
+        file: content/settings/tape-colors.json
         format: json
         fields:
-          - label: "Monthly Favorites Entries"
-            name: entries
+          - label: "Saved colors"
+            name: colors
             widget: list
-            summary: "{{title}} — {{date}}"
+            summary: "{{name}} ({{hex}})"
+            hint: "Renaming a color resets posts using it to gold."
             fields:
-              - { label: "Title", name: title, widget: string, hint: "e.g. August Favorites. Up to 40 characters. Titles of 16 characters or fewer get the big headline size on the Featured card; longer ones step down a size and wrap to two or three lines.", pattern: ['^.{1,40}$', 'Keep the title to 40 characters or fewer so it fits the Featured card.'] }
-              - { label: "Slug", name: slug, widget: string, hint: "Used in the URL as /journal/<slug>. Lowercase, hyphenated, must be unique across both Essays and Monthly Favorites." }
-              - { label: "Date", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-              - { label: "Excerpt (summary)", name: excerpt, widget: text, hint: "One or two sentences, up to 160 characters (100 to 140 reads best). Shown on the Featured card and the Journal cards.", pattern: ['^[\s\S]{1,160}$', 'Keep the summary to 160 characters or fewer so it fits the Featured card.'] }
-              - { label: "Featured Image", name: featured_image, widget: image, required: false, hint: "Best as a landscape image around 3:2, at least 1200 × 800 px (1500 × 1000 is ideal). It is cropped a little differently on the Featured card, the Journal cards, and mobile, so keep the main subject near the center. Portrait images work too but lose some of the top and bottom unless Show the whole Featured Image is on. JPG under 500 KB loads fastest." }
-              - { label: "Show the whole Featured Image", name: featured_image_whole, widget: boolean, default: false, required: false, hint: "Turn on for polaroids and cut-outs so no edge gets cropped. Leave off for regular photos, which are cropped to fill the space." }
-              - label: "Hero Image (optional)"
-                name: hero
-                widget: object
-                required: false
-                collapsed: true
-                fields:
-                  - { label: "Image", name: image, widget: image, required: false, hint: "A wide banner above the post on desktop, cropped to about 2.6:1. Best at 2200 × 850 px, at least 1600 px wide. Mobile shows the whole image in a polaroid, so any shape works there. Use Image position to choose what stays visible when it is cropped." }
-                  - { label: "Image position", name: position, widget: select, options: ["top", "center", "bottom"], default: "center", required: false, hint: "Which part of the photo stays visible when it is cropped to fit. Use top for portraits so faces are not cut off." }
-                  - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
-                  - { label: "Caption", name: caption, widget: string, required: false }
-              - label: "Polaroid 1 (optional)"
-                name: polaroid1
-                widget: object
-                required: false
-                collapsed: true
-                fields:
-                  - { label: "Image", name: image, widget: image, required: false }
-                  - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
-                  - { label: "Caption", name: caption, widget: string, required: false }
-              - label: "Polaroid 2 (optional)"
-                name: polaroid2
-                widget: object
-                required: false
-                collapsed: true
-                fields:
-                  - { label: "Image", name: image, widget: image, required: false }
-                  - { label: "Alt text", name: alt, widget: string, required: false, hint: "Describe the photo for screen readers." }
-                  - { label: "Caption", name: caption, widget: string, required: false }
-              - label: "New Releases I Loved"
-                name: new_releases
-                widget: list
-                required: false
-                fields:
-                  - { label: "Song Title", name: title, widget: string }
-                  - { label: "Artist", name: artist, widget: string }
-                  - { label: "Note", name: note, widget: text, required: false }
-              - label: "Favorite Songs"
-                name: favorite_songs
-                widget: list
-                required: false
-                fields:
-                  - { label: "Song Title", name: title, widget: string }
-                  - { label: "Artist", name: artist, widget: string }
-                  - { label: "Note", name: note, widget: text, required: false }
-              - label: "Favorite Discoveries"
-                name: favorite_discoveries
-                widget: list
-                required: false
-                fields:
-                  - { label: "Song Title", name: title, widget: string }
-                  - { label: "Artist", name: artist, widget: string }
-                  - { label: "Note", name: note, widget: text, required: false }
-              - label: "Favorite Needledrops"
-                name: favorite_needledrops
-                widget: list
-                required: false
-                fields:
-                  - { label: "Song Title", name: title, widget: string }
-                  - { label: "Artist", name: artist, widget: string }
-                  - { label: "Note", name: note, widget: text, required: false }
+              - { label: "Name", name: name, widget: string }
+              - { label: "Hex", name: hex, widget: string, pattern: ['^#[0-9a-fA-F]{6}$', 'Use a 6-digit hex code starting with #, like #9e1b22.'] }
 
   # ── CRASH COURSES ──
   # Listen's Crash Courses (PROJECT-SPEC.md §7): curated introductions to

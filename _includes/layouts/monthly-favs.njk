@@ -1,0 +1,109 @@
+---
+layout: layouts/journal-post.njk
+---
+{#- One Monthly Favs post (content/journal/monthly-favs/*.md, front
+    matter only), PROJECT-SPEC.md §8 "Monthly Favs post content".
+    journal-post.njk places this markup twice, in its desktop and mobile
+    shells, and css/monthly-favs.css gives each its own layout, so there
+    are no ids here. Every optional section is left out entirely when
+    empty. -#}
+{%- set picks = [
+  { data: highlights.favorite_song, label: "Favorite song" },
+  { data: highlights.favorite_album, label: "Favorite album" },
+  { data: highlights.needle_drop, label: "Favorite needle drop" }
+] if highlights else [] %}
+{%- set spotifySrc = spotify_url | spotifyEmbedUrl %}
+{%- set appleSrc = apple_music_url | appleEmbedUrl %}
+{%- set tracks = start_here or [] %}
+{%- set prev = collections.monthlyFav | previousMonthlyFav(page.url) %}
+<article class="mf">
+  <p class="mf-back"><a href="/journal.html"><span class="arrow-line mf-back__arrow" aria-hidden="true"></span>Back to Journal</a></p>
+
+  <header class="mf-head">
+    <p class="mf-head__label">Monthly Favs</p>
+    <h1 class="mf-head__title"><span class="mf-head__month">{{ month }}</span> <span class="mf-head__year">{{ year }}</span></h1>
+    <div class="mf-head__rule" aria-hidden="true"></div>
+  </header>
+
+  {%- if (reflection or "") | trim %}
+  <p class="mf-reflection">{{ reflection | trim }}</p>
+  {%- endif %}
+
+  <ol class="mf-picks">
+    {%- for pick in picks %}
+    {%- if pick.data and pick.data.title %}
+    {%- set tape = pick.data | tapeColor(tapeColors) %}
+    <li class="mf-pick mf-pick--{{ loop.index }}">
+      <p class="mf-pick__number" aria-hidden="true">0{{ loop.index }}.</p>
+      <h2 class="mf-pick__label">{{ pick.label }}</h2>
+      {%- if pick.data.art %}
+      <div class="mf-pick__art"{% if tape %} style="--tape: {{ tape }}"{% endif %}>
+        <img src="{{ pick.data.art | imageSrc(800) }}"{% set artSrcset = pick.data.art | imageSrcset([400, 600, 800]) %}{% if artSrcset %} srcset="{{ artSrcset }}" sizes="(max-width: 599px) 80vw, 320px"{% endif %} alt="{{ pick.data.art_alt }}" width="800" height="800" loading="lazy" decoding="async">
+        <span class="mf-tape" aria-hidden="true"></span>
+      </div>
+      {%- endif %}
+      <p class="mf-pick__title">{{ pick.data.title }}</p>
+      <p class="mf-pick__artist">{{ pick.data.artist }}</p>
+      {%- if pick.data.heard_in %}
+      <p class="mf-pick__heard">Heard in: {{ pick.data.heard_in }}</p>
+      {%- endif %}
+      {%- if pick.data.note %}
+      <p class="mf-pick__note">{{ pick.data.note }}</p>
+      {%- endif %}
+    </li>
+    {%- endif %}
+    {%- endfor %}
+  </ol>
+
+  {%- if spotifySrc or appleSrc or tracks.length %}
+  <section class="mf-playlist">
+    <h2 class="mf-heading">The {{ month }} Playlist</h2>
+    <div class="mf-playlist__body">
+      {%- if tracks.length %}
+      <div class="mf-start">
+        <h3 class="mf-start__heading">Start here</h3>
+        <ol class="cc-start__list">
+          {%- for item in tracks %}
+          <li class="cc-start__item">
+            <span class="cc-start__number" aria-hidden="true">{{ loop.index }}</span>
+            <p class="cc-start__text">
+              <span class="cc-start__track">{{ item.track }}</span>
+              <span class="cc-start__artist">by {{ item.artist }}</span>
+              {%- if item.note %}
+              <span class="cc-start__note">{{ item.note }}</span>
+              {%- endif %}
+            </p>
+          </li>
+          {%- endfor %}
+        </ol>
+      </div>
+      {%- endif %}
+      {%- set playerTitle = title + " playlist" %}
+      {% include "partials/playlist-player.njk" %}
+    </div>
+  </section>
+  {%- endif %}
+
+  {%- set shownPhotos = (photos or []) | selectattr("image") %}
+  {%- if shownPhotos.length %}
+  <ul class="mf-photos" aria-label="Photos">
+    {%- for photo in shownPhotos %}
+    <li>
+      <figure class="mf-polaroid">
+        <img src="{{ photo.image | imageSrc(800) }}" alt="{{ photo.alt }}" loading="lazy" decoding="async">
+        {%- if photo.caption %}
+        <figcaption class="mf-polaroid__caption">{{ photo.caption }}</figcaption>
+        {%- endif %}
+      </figure>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
+  <nav class="mf-more" aria-label="More Monthly Favs">
+    {%- if prev %}
+    <a class="mf-more__link" href="{{ prev.url }}"><span class="arrow-line mf-more__arrow mf-more__arrow--back" aria-hidden="true"></span>Previous: {{ prev.data.title }}</a>
+    {%- endif %}
+    <a class="mf-more__link" href="/journal.html?filter=monthly-fav">All Monthly Favs<span class="arrow-line mf-more__arrow" aria-hidden="true"></span></a>
+  </nav>
+</article>
