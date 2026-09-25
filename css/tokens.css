@@ -63,8 +63,8 @@
 
 :root {
   /* Color — core palette */
-  --color-cream: #ded7c1;         /* confirmed: PROJECT-SPEC.md §4 Journal background direction */
-  --color-paper: #f1e0c6;         /* average of the warm paper textures; flat stand-in wherever the texture ends */
+  --color-cream: #FFE6AC;         /* confirmed: PROJECT-SPEC.md §4, the one paper color sitewide */
+  --color-paper: #FFE6AC;         /* same color as --color-cream; flat paper wherever the texture ends */
   --color-near-black: #1c1a16;    /* provisional */
   --color-gold: #c9a227;          /* provisional — confirm against wordmark asset */
   --color-crimson: #af3838;

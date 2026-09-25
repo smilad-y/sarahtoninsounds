@@ -31,7 +31,7 @@
   ]
 }
 ---
-{#- Post content per PROJECT-SPEC.md §8 "Monthly Favs posts". The layout
+{#- Post content per PROJECT-SPEC.md §8 "Monthly Favs post content". The layout
     renders this twice (desktop and mobile columns), so no ids here. -#}
 {%- set spotifySrc = fav.playlist and (fav.playlist.spotify_url | spotifyEmbedUrl) %}
 {%- set startHere = (fav.playlist and fav.playlist.start_here) or [] %}

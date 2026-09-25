@@ -248,7 +248,7 @@ collections:
 
   # ── JOURNAL: MONTHLY FAVORITES ──
   # Same publishing system as Journal Essays above, but keeps its own
-  # structured post content (PROJECT-SPEC.md §8, "Monthly Favs posts")
+  # structured post content (PROJECT-SPEC.md §8, "Monthly Favs post content")
   # rather than a markdown body. Photos are the optional Hero and
   # Polaroid blocks.
   - name: journal_monthly_favorites

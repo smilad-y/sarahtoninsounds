@@ -153,7 +153,7 @@ Useful reusable assets:
 
 **Rule:** These are a vocabulary, not a checklist. Every page does not need every treatment.
 
-**Shared mobile chrome (in use):** `assets/images/shared/mobile/paper.webp` (warm paper, 9 KB, flattened from About's mobile paper texture onto `--color-paper` #f1e0c6) and `stripe-band.webp` (red stripe, 1200px wide, ~160 KB, from About's desktop stripe texture). Every page's mobile layout uses them via `--m-paper` / `--m-band` in `css/layout.css`. The multi-MB source PNGs are unchanged.
+**Shared mobile chrome (in use):** `assets/images/shared/mobile/paper.webp` (warm paper, 9 KB, flattened from About's mobile paper texture onto `--color-paper` #FFE6AC) and `stripe-band.webp` (red stripe, 1200px wide, ~160 KB, from About's desktop stripe texture). Every page's mobile layout uses them via `--m-paper` / `--m-band` in `css/layout.css`. The multi-MB source PNGs are unchanged.
 
 ## 11. Fonts / Licensing
 - Perandory Semi-Condensed (self-hosted, `assets/fonts/Perandory-SemiCondensed.woff2`). **Open:** confirm its license covers commercial web use.

@@ -62,7 +62,7 @@
   --ab3-gutter: max(0px, (100cqw - 1440px) / 2);
   width: 1440px;
   margin: 0 auto;
-  background-color: #f1e0c6;
+  background-color: #FFE6AC;
 }
 
 /* Between 1224px and 1440px the whole fixed composition is scaled down

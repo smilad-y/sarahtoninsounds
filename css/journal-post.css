@@ -28,7 +28,7 @@
    that both are hidden/unused there and red-stripe is the only
    background asset the header actually needs — see the HTML comment
    on .jp-header's markup and TODO.md for the full history. #fbe6b2
-   does NOT map to var(--color-cream) (#ded7c1) — checked directly,
+   did NOT map to the old --color-cream (#ded7c1) — checked directly,
    not assumed: cream reads distinctly greyer/darker next to the
    red-stripe texture's own cream/red tone, so using the token would
    create a visible mismatch rather than the "no seam" this task asks
