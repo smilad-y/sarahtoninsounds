@@ -45,7 +45,11 @@
 **Rule:** Full vinyl appears after selection; mood selector itself remains colored record-label-style buttons.
 
 ### Mood label artwork
-**In use:** each color has a full art set in `assets/images/listen/`: circle (320px WebP; full-size originals in `archive/listen-circle-originals/`), colored vinyl, pre-composited record, and tape. Each mood's set is listed in `content/listen/moods.json`; a live mood always uses one color's complete set, never mixed. Sarah's paper center label (`sarahtonin sounds-record paper label .png`, September 2026, used exactly as supplied) sits on every mood's colored vinyl and spins with it; the pre-composited records already have a label printed on them and are not rendered.
+**In use:** each color has a full art set in `assets/images/listen/`: circle (320px WebP; full-size originals in `archive/listen-circle-originals/`), colored vinyl, pre-composited record, and tape. Each mood's set is listed in `content/listen/moods.json`; a live mood always uses one color's complete set, never mixed. Sarah's paper center label (September 2026) sits on every mood's colored vinyl and spins with it; the pre-composited records already have a label printed on them and are not rendered.
+
+### Record center label
+**In use:** `assets/images/listen/sarahtonin-sounds-record-paper-label.webp`, WebP (quality 82), 300×301. The label displays at most about 147 px wide (1440 px and up), so this is a 2× copy. Scaled down from the master only; not redrawn or recolored.  
+**Master:** `assets/images/listen/sarahtonin sounds-record paper label .png`, Sarah's upload (1025×1028), PRESERVE; not referenced by the page. Re-convert to WebP if the label changes.
 
 **Icons: deferred past launch (Sarah, September 2026).** Launch labels are the color circles with number, mood name, and descriptor only. Icons are added later, all at once for every live mood (BUILD-ROADMAP Phase 10). When they are made, preserve the original collage colors/textures.
 
