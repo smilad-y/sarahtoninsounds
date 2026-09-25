@@ -33,7 +33,7 @@ Populated so far:
 - `journal/featured.json` — ordered, explicitly-curated Featured Journal
   selection (replaces automatic newest-entry behavior).
 
-- `listen/moods.json` — Listen mood config (Phase 4/5): the 18 moods
+- `listen/moods.json` — Listen mood config (Phase 4/5): the 19 moods
   from `PROJECT-SPEC.md` §7 with name, color, icon, descriptor, art,
   Spotify and Apple Music URLs, and Sarah's Picks. Undecided values are
   `UNDECIDED`, missing links `PLACEHOLDER`; the notes at the top of the

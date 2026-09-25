@@ -76,7 +76,7 @@ The legacy song library is archive-only. There is no migration or remapping phas
 
 ## Phase 5 — Listen UI Foundation
 ### Must have
-- “Pick Your Mood” selector with the 18 moods (PROJECT-SPEC §7).
+- “Pick Your Mood” selector with the 19 moods (PROJECT-SPEC §7).
 - Colored circular record-label-style controls.
 - Live embed with Spotify / Apple Music toggle.
 - Sarah's Picks list.
@@ -102,6 +102,7 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - ~~Add Crash Courses as a clearly separate section.~~ **Moved to post-launch (Sarah, September 2026).** See Phase 10.
 - Launch with 6-8 live moods Sarah is confident in. Moods not yet live are hidden from the selector (not shown as locked), with a short handwritten note near the selector saying more are coming. Adding a mood later = flip its live flag in moods.json.
   - **Decided (Sarah, September 2026): 8 launch moods, in display order:** Chill, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant. Set live in `content/listen/moods.json`, with each one's Spotify link checked against the playlist it opens, and final descriptor, blurb, description, and Sarah's Picks in place. Still owed: Apple Music links.
+  - **Added after launch (Sarah, September 2026): Vibes**, a 19th mood, live in second place. Live order: Chill, Vibes, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant.
   - **Decided (Sarah, September 2026): launch is Spotify-only.** Apple Music is added later, mood by mood. The Spotify / Apple Music toggle in the now spinning bar is hidden for any mood without an Apple Music URL in `moods.json` and appears on its own once one is added; no code change needed.
 
 ### Nice to have
@@ -184,7 +185,7 @@ These are intentionally not finalized and should not be guessed:
 - Hopeful vs. At Peace; Playful vs. Cheeky
 - which of Electric (formerly Energized) / Hype gets the disco ball icon
 - remaining mood icons (not needed for launch; added all at once after launch), and descriptors for non-launch moods
-- colors for Hopeful/At Peace, Hypnotic, Cute, Audacious, Lost, and Hype; final hex values for all colors (current ones are provisional, sampled from the circle art)
+- colors for Hopeful/At Peace, Hypnotic, Cute, Audacious, Lost, Playful / Cheeky (gave berry to Vibes), and Hype; final hex values for all colors (current ones are provisional, sampled from the circle art)
 - "discover music!" note on Home
 - final Crash Course topics
 - final Journal production content
