@@ -499,18 +499,31 @@ html:has(body.page-listen) {
 
 /* The vinyl and turntable are separate transparent exports. The vinyl
    sits below the stationary deck/tonearm overlay so the whole record can
-   rotate without moving the hardware. */
+   rotate without moving the hardware. The paper center label sits on the
+   vinyl inside the same box, so the two spin together. */
 .tt-record .tt-vinyl {
   position: absolute;
   z-index: 2;
   left: 3.5%;
   top: 1%;
   width: 73%;
-  height: auto;
   aspect-ratio: 1;
-  object-fit: contain;
   transform-origin: 50% 50%;
   pointer-events: none;
+}
+
+.tt-record .tt-vinyl__disc {
+  position: absolute;
+  inset: 0;
+}
+
+/* 33% covers the blank center printed on every vinyl export. */
+.tt-record .tt-vinyl__label {
+  position: absolute;
+  left: 33.5%;
+  top: 33.5%;
+  width: 33%;
+  height: 33%;
 }
 
 .tt-record .tt-turntable-overlay {
