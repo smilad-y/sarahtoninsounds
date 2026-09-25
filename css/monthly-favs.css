@@ -1,0 +1,413 @@
+/* Monthly Favs post (_includes/layouts/monthly-favs.njk), inside the
+   Journal article shells from journal-post.njk. The same markup sits
+   in the desktop shell (.jp-page, 600px and up) and the mobile shell
+   (.jpm-page, below 600px); the rules after the shared block give each
+   its own layout. Calm and readable like the rest of the Journal: paper
+   background, IM Fell English body, Perandory headings, crimson
+   accents. Tape and polaroid frames are decoration only. */
+
+/* ── Shared ── */
+.mf {
+  color: var(--color-near-black);
+  font-family: var(--font-body);
+}
+
+.mf p {
+  margin: 0;
+}
+
+.mf-back a,
+.mf-more__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-near-black);
+  text-decoration: none;
+}
+
+.mf-back a:hover,
+.mf-more__link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-crimson);
+  text-underline-offset: 4px;
+}
+
+.mf-back__arrow,
+.mf-more__arrow--back {
+  transform: scaleX(-1);
+}
+
+.mf-head__label {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+}
+
+.mf-head__title {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.mf-head__month {
+  letter-spacing: 0.02em;
+}
+
+.mf-head__year {
+  font-family: var(--font-body);
+  color: var(--color-crimson);
+  letter-spacing: 0.04em;
+}
+
+.mf-head__rule {
+  height: 2px;
+  background-color: var(--color-crimson);
+}
+
+.mf-reflection {
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.mf-pick__number {
+  font-family: var(--font-display);
+  line-height: 1;
+  color: var(--color-crimson);
+}
+
+.mf-pick__label {
+  margin: 0.35rem 0 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  font-variant: small-caps;
+  text-transform: lowercase;
+}
+
+/* Square art with a strip of tape across its top edge. The tape is the
+   site's beige tape used as a shape (mask) and filled with the
+   highlight's color (--tape, set per highlight; gold by default). */
+.mf-pick__art {
+  position: relative;
+  margin: 0 0 1.25rem;
+  padding-top: 0.5rem;
+}
+
+.mf-pick__art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(54, 24, 6, 0.22);
+}
+
+.mf-tape {
+  position: absolute;
+  top: -0.35rem;
+  left: 50%;
+  width: 58%;
+  aspect-ratio: 2400 / 684;
+  background-color: var(--tape, var(--color-gold));
+  background-image: url('/assets/images/shared/tape/beige-tape.png');
+  background-size: 100% 100%;
+  background-blend-mode: soft-light;
+  opacity: 0.82;
+  -webkit-mask: url('/assets/images/shared/tape/beige-tape.png') no-repeat center / 100% 100%;
+  mask: url('/assets/images/shared/tape/beige-tape.png') no-repeat center / 100% 100%;
+  transform: translateX(-50%) rotate(var(--tape-tilt, -3deg));
+  pointer-events: none;
+}
+
+.mf-pick--2 .mf-tape { --tape-tilt: 2.5deg; }
+.mf-pick--3 .mf-tape { --tape-tilt: -1.2deg; }
+
+.mf-pick__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.mf-pick__artist {
+  margin-top: 0.2rem;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.mf-pick__heard {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border: 1.5px solid var(--color-near-black);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.mf-pick__note {
+  margin-top: 0.75rem;
+  line-height: 1.55;
+}
+
+.mf-heading {
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-crimson);
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mf-start__heading {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mf-playlist .cc-player {
+  margin-top: 0;
+}
+
+/* Polaroids: white frame, deeper bottom edge, slight tilt that varies. */
+.mf-photos {
+  display: grid;
+  align-items: start;
+}
+
+.mf-polaroid {
+  margin: 0;
+  padding: 0.6rem 0.6rem 0;
+  background: #fefcf5;
+  box-shadow: 0 4px 12px rgba(54, 24, 6, 0.25);
+  transform: rotate(var(--tilt, -2deg));
+}
+
+.mf-photos li:nth-child(3n + 2) .mf-polaroid { --tilt: 1.5deg; }
+.mf-photos li:nth-child(3n + 3) .mf-polaroid { --tilt: -0.8deg; }
+
+.mf-polaroid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.mf-polaroid__caption {
+  padding: 0.5rem 0.25rem 0.75rem;
+  font-family: var(--font-marginalia);
+  font-size: 1.3rem;
+  line-height: 1.15;
+  text-align: center;
+}
+
+/* No caption: keep the polaroid's deeper bottom edge. */
+.mf-polaroid img:last-child {
+  margin-bottom: 2.25rem;
+}
+
+.mf-more {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(28, 26, 22, 0.35);
+}
+
+/* "All Monthly Favs" stays right-aligned with or without "Previous". */
+.mf-more__link:last-child {
+  margin-left: auto;
+}
+
+/* ── Desktop (600px and up) ── */
+.mf-page:not(.mf-page--mobile) .mf {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem 4% 4rem;
+}
+
+.mf-page:not(.mf-page--mobile) .mf-head {
+  margin: 1.75rem 0 2.25rem;
+}
+
+.mf-page:not(.mf-page--mobile) .mf-head__month {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+}
+
+.mf-page:not(.mf-page--mobile) .mf-head__year {
+  margin-left: 0.35em;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+}
+
+.mf-page:not(.mf-page--mobile) .mf-head__rule {
+  margin-top: 1rem;
+}
+
+.mf-page:not(.mf-page--mobile) .mf-reflection {
+  max-width: 44rem;
+  margin: 0 0 3.5rem;
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+}
+
+.mf-page:not(.mf-page--mobile) .mf-picks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem clamp(1.5rem, 3.5vw, 3.5rem);
+  margin: 0 0 4.5rem;
+}
+
+.mf-page:not(.mf-page--mobile) .mf-pick__number {
+  font-size: clamp(3rem, 5vw, 4.25rem);
+}
+
+.mf-page:not(.mf-page--mobile) .mf-pick__note {
+  font-size: 1.1rem;
+}
+
+.mf-page:not(.mf-page--mobile) .mf-playlist {
+  margin: 0 0 4.5rem;
+}
+
+.mf-page:not(.mf-page--mobile) .mf-heading {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+}
+
+/* Start here beside the player; the player takes the full width when
+   there is no list. */
+.mf-page:not(.mf-page--mobile) .mf-playlist__body {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+.mf-page:not(.mf-page--mobile) .mf-playlist__body > .cc-player:only-child {
+  grid-column: 1 / -1;
+}
+
+.mf-page:not(.mf-page--mobile) .mf-photos {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem 3rem;
+  margin: 0 0 4.5rem;
+  padding: 0 1rem;
+}
+
+/* Narrow desktop windows: the three highlights stay in columns but the
+   playlist stacks, list first. */
+@media (min-width: 600px) and (max-width: 900px) {
+  .mf-page:not(.mf-page--mobile) .mf-playlist__body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .mf-page:not(.mf-page--mobile) .mf-pick__title {
+    font-size: 1.25rem;
+  }
+}
+
+/* ── Mobile (below 600px, inside the 390px mobile shell) ── */
+.mf-page--mobile .mf {
+  padding: 0.5rem 24px 2.5rem;
+}
+
+.mf-page--mobile .mf-head {
+  margin: 1.25rem 0 1.75rem;
+  text-align: center;
+}
+
+.mf-page--mobile .mf-head__month {
+  display: block;
+  font-size: 3.4rem;
+}
+
+.mf-page--mobile .mf-head__year {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 1.5rem;
+}
+
+.mf-page--mobile .mf-head__rule {
+  width: 60%;
+  margin: 1rem auto 0;
+}
+
+.mf-page--mobile .mf-reflection {
+  margin: 0 0 2.5rem;
+  font-size: 17px;
+}
+
+.mf-page--mobile .mf-picks {
+  display: grid;
+  gap: 3rem;
+  margin: 0 0 3.5rem;
+}
+
+.mf-page--mobile .mf-pick__number {
+  font-size: 3rem;
+}
+
+.mf-page--mobile .mf-pick__art {
+  width: 86%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mf-page--mobile .mf-pick__note {
+  font-size: 17px;
+}
+
+.mf-page--mobile .mf-playlist {
+  margin: 0 0 3.5rem;
+}
+
+.mf-page--mobile .mf-heading {
+  font-size: 1.9rem;
+}
+
+.mf-page--mobile .mf-start {
+  margin-bottom: 1.75rem;
+}
+
+.mf-page--mobile .cc-start__text {
+  font-size: 1.05rem;
+}
+
+.mf-page--mobile .mf-photos {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem 1.25rem;
+  margin: 0 0 3rem;
+}
+
+.mf-page--mobile .mf-polaroid {
+  padding: 0.4rem 0.4rem 0;
+}
+
+.mf-page--mobile .mf-polaroid__caption {
+  font-size: 1.1rem;
+}
+
+.mf-page--mobile .mf-more {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mf-page--mobile .mf-more__link:last-child {
+  margin-left: 0;
+}

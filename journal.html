@@ -39,7 +39,7 @@ templateEngineOverride: njk
 <body class="page-journal">
 <a class="skip-link" href="#main">Skip to content</a>
 
-{%- set feed = collections.journalEssay | journalFeed(journal.monthlyFavorites) -%}
+{%- set feed = collections.journalEssay | journalFeed(collections.monthlyFav) -%}
 {%- set featured = feed | resolveFeatured(journal.featured) -%}
 {%- set recent = feed | journalRecent(featured, 4) -%}
 {%- set journalTypes = feed | journalTypes -%}

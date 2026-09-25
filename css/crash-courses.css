@@ -259,47 +259,6 @@ li:nth-child(4n + 4) > .cc-card { --cc-tilt: 2.2deg; }
   text-underline-offset: 3px;
 }
 
-.cc-player {
-  margin-top: 2rem;
-}
-
-.cc-player__source {
-  display: flex;
-  gap: 0.375rem;
-  margin-bottom: 0.75rem;
-}
-
-.cc-player__source[hidden],
-.cc-player__embed[hidden] {
-  display: none;
-}
-
-/* Same pill buttons as the now spinning bar's toggle on Listen. */
-.cc-player__source-btn {
-  min-height: 2.5rem;
-  padding: 0.4rem 0.8rem;
-  border: 2px solid var(--color-near-black);
-  border-radius: 999px;
-  background: var(--color-cream);
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  line-height: 1;
-  color: var(--color-near-black);
-  cursor: pointer;
-}
-
-.cc-player__source-btn[aria-pressed='true'] {
-  background: var(--color-near-black);
-  color: var(--color-cream);
-}
-
-.cc-player__embed iframe {
-  display: block;
-  width: 100%;
-  border: 0;
-  border-radius: 12px;
-}
-
 .cc-course__bottom {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -318,43 +277,6 @@ li:nth-child(4n + 4) > .cc-card { --cc-tilt: 2.2deg; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-near-black);
-}
-
-.cc-start__item {
-  display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  gap: 0.75rem;
-  align-items: baseline;
-  padding: 0.75rem 0;
-  border-bottom: 1px dashed rgba(28, 26, 22, 0.3);
-}
-
-.cc-start__number {
-  font-family: var(--font-display);
-  font-size: 1.9rem;
-  line-height: 1;
-  color: var(--color-crimson);
-}
-
-.cc-start__text {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 1.2rem;
-  line-height: 1.4;
-}
-
-.cc-start__artist {
-  font-style: italic;
-}
-
-.cc-start__note {
-  display: inline-block;
-  margin-left: 0.6rem;
-  font-family: var(--font-marginalia);
-  font-size: 1.3rem;
-  line-height: 1.2;
-  color: var(--color-crimson);
-  transform: rotate(-1.5deg);
 }
 
 /* Sits beside Start here, so none of layout.css's section spacing. */

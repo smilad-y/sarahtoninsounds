@@ -119,7 +119,7 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - Reusable article card/content model.
 - Individual article template with strong long-form readability.
 - Populate real essay/Monthly Favs content as available.
-- Monthly Favs posts follow spec §8 "Monthly Favs post content" (built, September 2026, Spotify only; the Spotify / Apple Music toggle is not built yet).
+- Monthly Favs posts follow spec §8 "Monthly Favs post content" (built, September 2026: own CMS collection, Spotify / Apple Music toggle, tape colors).
 
 ### Nice to have
 - Selective editorial collage treatments per piece.

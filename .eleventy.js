@@ -54,16 +54,43 @@ module.exports = function (eleventyConfig) {
     });
   }
 
-  // Monthly Favorites deliberately stays on its current single-JSON
-  // shape this round (not a real Eleventy collection) — see the
-  // decisions recorded in conversation. `monthlyFavoritesData` is
-  // content/journal/monthly-favorites.json, exposed automatically as
-  // journal.monthlyFavorites via dir.data below.
-  eleventyConfig.addFilter("journalFeed", function (essayCollection, monthlyFavoritesData) {
+  // Monthly Favs posts (content/journal/monthly-favs/*.md, tag
+  // monthlyFav) join essays in the one Journal feed. Only posts that
+  // get a page (Month and Year set) are included.
+  function monthlyFavToEntry(item) {
+    return Journal.normalizeMonthlyFavorite(Object.assign({}, item.data, { slug: item.data.mfSlug }));
+  }
+
+  eleventyConfig.addFilter("journalFeed", function (essayCollection, monthlyFavCollection) {
     var essays = (essayCollection || []).map(essayToEntry);
-    var monthlyFavs = ((monthlyFavoritesData && monthlyFavoritesData.entries) || [])
-      .map(Journal.normalizeMonthlyFavorite);
+    var monthlyFavs = (monthlyFavCollection || [])
+      .filter(function (item) { return item.data.mfSlug; })
+      .map(monthlyFavToEntry);
     return Journal.sortEntriesByDateDesc(essays.concat(monthlyFavs));
+  });
+
+  // The next-older Monthly Favs post by publish date, for the post
+  // footer's "previous" link.
+  eleventyConfig.addFilter("previousMonthlyFav", function (collection, url) {
+    var posts = (collection || [])
+      .filter(function (item) { return item.data.mfSlug; })
+      .sort(function (a, b) { return b.date - a.date; });
+    var i = posts.findIndex(function (item) { return item.url === url; });
+    return i === -1 ? null : posts[i + 1] || null;
+  });
+
+  // Tape color for one Monthly Favs highlight: custom hex wins, then
+  // the saved color (looked up by name in content/settings/
+  // tape-colors.json), else null so the CSS default (gold) applies.
+  var HEX = /^#[0-9a-fA-F]{6}$/;
+  eleventyConfig.addFilter("tapeColor", function (highlight, tapeColors) {
+    if (!highlight) return null;
+    var custom = String(highlight.tape_hex || "").trim();
+    if (HEX.test(custom)) return custom;
+    var saved = ((tapeColors && tapeColors.colors) || []).filter(function (c) {
+      return c.name === highlight.tape_color;
+    })[0];
+    return saved && HEX.test(saved.hex) ? saved.hex : null;
   });
 
   eleventyConfig.addFilter("resolveFeatured", function (sortedEntries, featuredData) {
@@ -139,18 +166,6 @@ module.exports = function (eleventyConfig) {
     return (list || []).filter(function (item) { return item.url !== url; }).slice(0, n);
   });
 
-  // Monthly Favs "Month" field ("2026-08") as "August 2026", or just
-  // "August" without the year. Parsed by hand so the build's time zone
-  // can't shift it into the previous month.
-  eleventyConfig.addFilter("monthLabel", function (value, withYear) {
-    var match = typeof value === "string" && value.match(/^(\d{4})-(\d{2})/);
-    if (!match) return "";
-    var names = ["January", "February", "March", "April", "May", "June", "July",
-      "August", "September", "October", "November", "December"];
-    var name = names[Number(match[2]) - 1] || "";
-    return withYear ? name + " " + match[1] : name;
-  });
-
   // Same URL rules as js/listen.js's spotifyUri() / appleEmbedSrc(), so
   // a link that works for a mood works here too.
   eleventyConfig.addFilter("spotifyEmbedUrl", function (url) {
@@ -195,8 +210,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear());
   eleventyConfig.addGlobalData("home", () => require("./content/home.json"));
   eleventyConfig.addGlobalData("about", () => require("./content/about.json"));
+  eleventyConfig.addGlobalData("tapeColors", () => require("./content/settings/tape-colors.json"));
   eleventyConfig.addGlobalData("journal", () => ({
-    monthlyFavorites: require("./content/journal/monthly-favorites.json"),
     featured: require("./content/journal/featured.json")
   }));
 

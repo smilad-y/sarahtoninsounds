@@ -37,7 +37,7 @@ html:has(body.page-listen) {
 .page-listen {
   overflow-x: hidden;
   background-color: var(--color-paper);
-  background-image: url('/assets/images/listen/background-paper-tinted.webp');
+  background-image: url('/assets/images/listen/background-paper.webp');
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;

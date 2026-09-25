@@ -129,7 +129,7 @@ Per course (entered in the CMS, `🎧 Crash Courses`): title, card art (square, 
 
 ## 8. Journal Assets
 - Real essay titles, dates, excerpts, and article copy.
-- Monthly Favorites content and associated artwork/images. Per post (spec §8): the month, art for the favorite song, album, and needle drop (square, at least 600 × 600 px), the month's Spotify playlist URL, a few Start here tracks, and optionally a reflection and photos.
+- Monthly Favs art, photos, and alt text are entered per post in the CMS (`📓 Monthly Favs`). Per post (spec §8): the month, art for the favorite song, album, and needle drop (square, at least 600 × 600 px), the month's Spotify playlist URL, a few Start here tracks, and optionally a reflection and photos.
 - Legacy `essays/` JSON files may contain reusable editorial content.
 - Optional halftone/editorial imagery per article where meaningful.
 - Mockup placeholder titles/images are not final unless Sarah explicitly adopts them.
@@ -156,7 +156,8 @@ Useful reusable assets:
 **Shared mobile chrome (in use):** `assets/images/shared/mobile/paper.webp` (warm paper, 9 KB, flattened from About's mobile paper texture onto `--color-paper` #FFE6AC) and `stripe-band.webp` (red stripe, 1200px wide, ~160 KB, from About's desktop stripe texture). Every page's mobile layout uses them via `--m-paper` / `--m-band` in `css/layout.css`. The multi-MB source PNGs are unchanged.
 
 **Tinted paper textures (in use, September 2026):** each is a copy of an original texture with its color shifted so it reads as #FFE6AC (the grain is kept; alpha is untouched). The originals stay in place, unedited, as masters. To re-tint, start from the master, never from a `-tinted` file.
-- `assets/images/listen/background-paper-tinted.webp` (Listen page background; master `background-paper.webp`)
+- `assets/images/journal/post-mobile-paper-tinted.png` (Journal article pages on mobile; master `listen/sarahtonin_sounds-background_paper_2_1.png`, which Listen keeps using)
+- `assets/images/listen/background-paper-tinted.webp` (kept but not used: Listen stays on the original `background-paper.webp` by Sarah's choice)
 - `assets/images/journal/paper-tile-tinted.webp` (Listen now spinning bar; master `paper-tile.webp`)
 - `assets/images/journal/texture-foreground-paper-tinted.png` (Journal and Contact desktop; master `texture-foreground-paper.png`)
 - `assets/images/about/About Me-Desktop-Final Assets/Texture___Foreground_Paper-tinted.png` (About desktop; master `Texture___Foreground_Paper.png`)

@@ -142,6 +142,7 @@ The result should feel tactile, personal, whimsical, and music-obsessed — not 
 ### Palette
 Core:
 - warm paper: #FFE6AC, one paper color sitewide (decided, Sarah, September 2026; replaces both #ded7c1 and #f1e0c6, neither of which was the intended color)
+  - Exception (decided, Sarah, September 2026): the Listen page on desktop keeps its original paper texture (`listen/background-paper.webp`), untinted.
 - near-black
 - Sarahtonin gold/yellow
 - crimson
@@ -317,7 +318,7 @@ An indie music magazine / personal zine inside the larger Sarahtonin world. This
 - Filters: **All / Essays / Monthly Favs**.
 - Architecture should leave room for future formats such as reviews/interviews without adding them prematurely.
 
-Monthly Favs post content (decided, Sarah, September 2026): Each post has a month + year header; three numbered highlights (01 favorite song, 02 favorite album, 03 favorite needle drop, meaning a song Sarah heard in a TV show, ad, or movie, with where she heard it), each with title, artist, art, and a short note; and the month's playlist as a live embed plus a short "Start here" list of a few tracks, set up like Crash Course pages. The playlist embed has a Spotify / Apple Music toggle, following the Listen rule: Spotify link required, Apple Music optional, and the toggle only appears once an Apple Music link is added. Optional, shown only when filled: a short reflection blurb at the top (placement tentative), and photos with optional captions. Parked: watched / read / learned blocks, and a TV / Ad / Film tag on the needle drop.
+Monthly Favs post content (decided, Sarah, September 2026): Each post has a month + year header; three numbered highlights (01 favorite song, 02 favorite album, 03 favorite needle drop, meaning a song Sarah heard in a TV show, ad, or movie, with where she heard it), each with title, artist, art, and a short note; and the month's playlist as a live embed plus a short "Start here" list of a few tracks, set up like Crash Course pages. The playlist embed has a Spotify / Apple Music toggle, following the Listen rule: Spotify link required, Apple Music optional, and the toggle only appears once an Apple Music link is added. Optional, shown only when filled: a short reflection blurb at the top (placement tentative), and photos with optional captions. Parked: watched / read / learned blocks, and a TV / Ad / Film tag on the needle drop. Each highlight has an optional tape color: a saved color from the CMS Tape colors list or a custom 6-digit hex, custom wins, default gold. Monthly Favs is its own Decap CMS collection that feeds the Journal and its Monthly Favs filter.
 
 ### Article pages
 - More breathing room than the landing page.
