@@ -213,6 +213,8 @@ Expect a relatively small, hand-maintained set of curated playlists. Each needs 
 - Sarah's Picks list
 - optional display metadata as needed for the turntable/player experience
 
+**Where it lives (September 2026):** the descriptor, blurb, description, and Sarah's Picks are edited in the CMS ("Listen Moods") and stored in `content/listen/mood-words.json`. Everything else (names, colors, art, live flags, playlist URLs, order) stays in `content/listen/moods.json`, which is not in the CMS, so it can't be changed by accident. The page matches the two files by mood id.
+
 This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (§ below) can keep evolving without rewriting the page. Crash Courses are a separate curated playlist/content system — do not fold them into mood playlist data.
 
 ### Desktop flow

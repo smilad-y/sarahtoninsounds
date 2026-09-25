@@ -47,7 +47,8 @@ Do not begin by wiping the legacy repo.
 - Keep the hand-built HTML/CSS/JS design; Eleventy templates wrap it.
 - First collection: Journal.
 - Add About in the same pass if it fits; otherwise fast-follow.
-- Contact and Listen editability later.
+- Contact editability later.
+- ~~Listen editability.~~ **Done (September 2026):** each mood's descriptor, blurb, description, and Sarah's Picks are edited in the CMS ("Listen Moods"), stored in `content/listen/mood-words.json`. Colors, art, live flags, playlist URLs, and order stay in `moods.json`, outside the CMS.
 - Preserve legacy CMS config/content before replacing anything.
 
 ## Phase 2 — Home (done)

@@ -1,0 +1,279 @@
+{
+  "_about": [
+    "Listen mood words (PROJECT-SPEC.md §7), edited in the CMS under Listen Moods. The page matches each entry to content/listen/moods.json by id.",
+    "Only descriptor, blurb, description, and picks are read from here. Names, colors, art, live flags, playlist URLs, and order all come from moods.json; name is here only so the CMS can list each mood by name.",
+    "UNDECIDED or blank = the page shows nothing for that field rather than inventing copy.",
+    "Kept separate from moods.json because Decap CMS rewrites objects with more than eight keys in a scrambled key order. Keep each entry to these six keys."
+  ],
+  "moods": [
+    {
+      "id": "chill",
+      "name": "Chill",
+      "descriptor": "Ease, relaxation, low stakes.",
+      "blurb": "For taking it easy.",
+      "description": "Easygoing music for slowing down and settling into the moment. Nothing demanding, nothing to escape from.",
+      "picks": [
+        {
+          "title": "On the Level",
+          "artist": "Mac DeMarco"
+        },
+        {
+          "title": "Vibin' Out",
+          "artist": "FKJ"
+        },
+        {
+          "title": "Smoke Break (Interlude)",
+          "artist": "Flatbush Zombies"
+        }
+      ]
+    },
+    {
+      "id": "vibes",
+      "name": "Vibes",
+      "descriptor": "Laid-back grooves, mellow rhythms, effortless flow.",
+      "blurb": "For settling into a good groove.",
+      "description": "Warm basslines, relaxed rhythms, and easygoing energy. Music for when you want to move, but slowly.",
+      "picks": [
+        {
+          "title": "Coming Back",
+          "artist": "Domo Genesis ft. Mac Miller"
+        },
+        {
+          "title": "So Far to Go",
+          "artist": "J Dilla ft. Common & D'Angelo"
+        },
+        {
+          "title": "Little Q, Pt. 2",
+          "artist": "Little Simz"
+        }
+      ]
+    },
+    {
+      "id": "hazy",
+      "name": "Hazy",
+      "descriptor": "Immersive, blurred, transportive.",
+      "blurb": "For getting lost in the sound.",
+      "description": "Pulls you out of your surroundings. Floating melodies, washed-out textures, and atmospheres that feel removed from reality.",
+      "picks": [
+        {
+          "title": "Cherry-coloured Funk",
+          "artist": "Cocteau Twins"
+        },
+        {
+          "title": "Alison",
+          "artist": "Slowdive"
+        },
+        {
+          "title": "Butterfly Net",
+          "artist": "Caroline Polachek"
+        }
+      ]
+    },
+    {
+      "id": "tender",
+      "name": "Tender",
+      "descriptor": "Emotional intimacy, affection, vulnerability.",
+      "blurb": "For feeling close.",
+      "description": "Warmth, care, and emotional openness. Love in its quieter, more vulnerable forms.",
+      "picks": [
+        {
+          "title": "As",
+          "artist": "Stevie Wonder"
+        },
+        {
+          "title": "God Only Knows",
+          "artist": "The Beach Boys"
+        },
+        {
+          "title": "I Found a Reason",
+          "artist": "The Velvet Underground"
+        }
+      ]
+    },
+    {
+      "id": "sensual",
+      "name": "Sensual",
+      "descriptor": "Intimacy, attraction, tension.",
+      "blurb": "For feeling the chemistry.",
+      "description": "Seductive grooves, physical intimacy, and slow-building tension. Felt as much as heard.",
+      "picks": [
+        {
+          "title": "The First Taste",
+          "artist": "Fiona Apple"
+        },
+        {
+          "title": "Woosah",
+          "artist": "Jeremih, Juicy J, Twista"
+        },
+        {
+          "title": "When Eye Lay My Hands on U",
+          "artist": "Prince"
+        }
+      ]
+    },
+    {
+      "id": "euphoric",
+      "name": "Euphoric",
+      "descriptor": "Joy, release, emotional elevation.",
+      "blurb": "For feeling on top of the world.",
+      "description": "A sense of possibility, excitement, or emotional release. From quiet optimism to overwhelming joy.",
+      "picks": [
+        {
+          "title": "Cosmic Girl",
+          "artist": "Jamiroquai"
+        },
+        {
+          "title": "Love Is Everywhere",
+          "artist": "Pharoah Sanders"
+        },
+        {
+          "title": "Girlfriend",
+          "artist": "Hemlock Springs"
+        }
+      ]
+    },
+    {
+      "id": "electric",
+      "name": "Electric",
+      "descriptor": "Rhythm, movement, momentum.",
+      "blurb": "For when you need to move.",
+      "description": "Driven by rhythm and physical energy. The kind that makes staying still difficult.",
+      "picks": [
+        {
+          "title": "Be the One",
+          "artist": "Eli Brown"
+        },
+        {
+          "title": "Where's Your Head At",
+          "artist": "Basement Jaxx"
+        },
+        {
+          "title": "Around the Bend",
+          "artist": "Nia Archives"
+        }
+      ]
+    },
+    {
+      "id": "unleashed",
+      "name": "Unleashed",
+      "descriptor": "Catharsis, abandon, release.",
+      "blurb": "For letting it all out.",
+      "description": "Raw energy and unrestrained expression. A release for whatever has been building up.",
+      "picks": [
+        {
+          "title": "Stay",
+          "artist": "Angel Du$t"
+        },
+        {
+          "title": "The Obituaries",
+          "artist": "The Menzingers"
+        },
+        {
+          "title": "Shot Down",
+          "artist": "Scowl"
+        }
+      ]
+    },
+    {
+      "id": "defiant",
+      "name": "Defiant",
+      "descriptor": "Resistance, refusal, confrontation.",
+      "blurb": "For when you're not backing down.",
+      "description": "Something to push against. Rebellion, frustration, and the refusal to accept things as they are.",
+      "picks": [
+        {
+          "title": "Sick in the Head",
+          "artist": "Kneecap"
+        },
+        {
+          "title": "Killing in the Name",
+          "artist": "Rage Against the Machine"
+        },
+        {
+          "title": "Pledge",
+          "artist": "Mannequin Pussy"
+        }
+      ]
+    },
+    {
+      "id": "cute",
+      "name": "Cute",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "audacious",
+      "name": "Audacious",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "melancholy",
+      "name": "Melancholy",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "lost",
+      "name": "Lost",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "burdened",
+      "name": "Burdened",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "playful-cheeky",
+      "name": "Playful / Cheeky",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "hype",
+      "name": "Hype",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "nostalgic",
+      "name": "Nostalgic",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "hopeful-at-peace",
+      "name": "Hopeful / At Peace",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    },
+    {
+      "id": "hypnotic",
+      "name": "Hypnotic",
+      "descriptor": "UNDECIDED",
+      "blurb": "UNDECIDED",
+      "description": "UNDECIDED",
+      "picks": []
+    }
+  ]
+}

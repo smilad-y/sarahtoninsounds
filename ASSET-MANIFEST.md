@@ -109,9 +109,11 @@ All legacy content is PRESERVE by default. Nothing migrates to the current site 
 ## 6. Playlist / Track Data
 Populate only from Sarah's manually curated playlists, embedded live. Not from legacy song data. **Launch is Spotify-only;** the Spotify / Apple Music toggle appears for a mood once it has an Apple Music URL.
 
-Per mood, collect (stored in `content/listen/moods.json`):
+Per mood, collect. Playlist URLs are stored in `content/listen/moods.json` (not in the CMS):
 - Spotify playlist URL (in place for all 19 moods, each checked against the playlist it opens)
 - Apple Music playlist URL (added after launch; in place for every live mood as of September 2026. Hype has one too but isn't live.)
+
+Words and picks are stored in `content/listen/mood-words.json` and edited in the CMS ("Listen Moods"):
 - Sarah's Picks (small manual highlights list)
 - descriptor, blurb, and description (final for the 8 launch moods and Vibes)
 

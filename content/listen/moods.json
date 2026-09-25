@@ -1,6 +1,7 @@
 {
   "_about": [
-    "Listen mood config (PROJECT-SPEC.md §7). The page renders the selector, turntable, and now spinning bar from this file.",
+    "Listen mood config (PROJECT-SPEC.md §7). The page renders the selector, turntable, and now spinning bar from this file plus content/listen/mood-words.json.",
+    "Each mood's descriptor, blurb, description, and Sarah's Picks live in content/listen/mood-words.json (editable in the CMS), matched by id. This file is not in the CMS.",
     "live: true shows the mood in the selector; false hides it completely (not shown as locked). Going live later = flip it to true.",
     "UNDECIDED = not decided by Sarah yet; the page shows nothing for it rather than inventing copy.",
     "PLACEHOLDER = no real URL yet. With no Apple Music URL, the Spotify / Apple Music toggle is hidden for that mood (launch is Spotify-only); it appears once a real URL is added.",
@@ -40,7 +41,6 @@
       "live": true,
       "color": "light blue",
       "icon": "sun",
-      "descriptor": "Ease, relaxation, low stakes.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/light-blue-cirle.webp",
@@ -53,23 +53,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/chill/pl.u-GgA5yGzUbvKgrV"
-      },
-      "blurb": "For taking it easy.",
-      "description": "Easygoing music for slowing down and settling into the moment. Nothing demanding, nothing to escape from.",
-      "picks": [
-        {
-          "title": "On the Level",
-          "artist": "Mac DeMarco"
-        },
-        {
-          "title": "Vibin' Out",
-          "artist": "FKJ"
-        },
-        {
-          "title": "Smoke Break (Interlude)",
-          "artist": "Flatbush Zombies"
-        }
-      ]
+      }
     },
     {
       "id": "vibes",
@@ -77,7 +61,6 @@
       "live": true,
       "color": "berry",
       "icon": "UNDECIDED",
-      "descriptor": "Laid-back grooves, mellow rhythms, effortless flow.",
       "labelText": "light",
       "titleColor": "#ffffff",
       "art": {
@@ -91,23 +74,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/vibes/pl.u-8aAV731TNEKAZX"
-      },
-      "blurb": "For settling into a good groove.",
-      "description": "Warm basslines, relaxed rhythms, and easygoing energy. Music for when you want to move, but slowly.",
-      "picks": [
-        {
-          "title": "Coming Back",
-          "artist": "Domo Genesis ft. Mac Miller"
-        },
-        {
-          "title": "So Far to Go",
-          "artist": "J Dilla ft. Common & D'Angelo"
-        },
-        {
-          "title": "Little Q, Pt. 2",
-          "artist": "Little Simz"
-        }
-      ]
+      }
     },
     {
       "id": "hazy",
@@ -115,7 +82,6 @@
       "live": true,
       "color": "purple",
       "icon": "cloud",
-      "descriptor": "Immersive, blurred, transportive.",
       "labelText": "light",
       "titleColor": "#ffffff",
       "art": {
@@ -129,23 +95,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/dreamy-haze/pl.u-8aAVga6SNEKAZX"
-      },
-      "blurb": "For getting lost in the sound.",
-      "description": "Pulls you out of your surroundings. Floating melodies, washed-out textures, and atmospheres that feel removed from reality.",
-      "picks": [
-        {
-          "title": "Cherry-coloured Funk",
-          "artist": "Cocteau Twins"
-        },
-        {
-          "title": "Alison",
-          "artist": "Slowdive"
-        },
-        {
-          "title": "Butterfly Net",
-          "artist": "Caroline Polachek"
-        }
-      ]
+      }
     },
     {
       "id": "tender",
@@ -153,7 +103,6 @@
       "live": true,
       "color": "pink",
       "icon": "heart",
-      "descriptor": "Emotional intimacy, affection, vulnerability.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/pink-circle.webp",
@@ -166,23 +115,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/tender/pl.u-2aoq44ziVjgMo8"
-      },
-      "blurb": "For feeling close.",
-      "description": "Warmth, care, and emotional openness. Love in its quieter, more vulnerable forms.",
-      "picks": [
-        {
-          "title": "As",
-          "artist": "Stevie Wonder"
-        },
-        {
-          "title": "God Only Knows",
-          "artist": "The Beach Boys"
-        },
-        {
-          "title": "I Found a Reason",
-          "artist": "The Velvet Underground"
-        }
-      ]
+      }
     },
     {
       "id": "sensual",
@@ -190,7 +123,6 @@
       "live": true,
       "color": "red",
       "icon": "lips",
-      "descriptor": "Intimacy, attraction, tension.",
       "labelText": "light",
       "labelShadow": true,
       "art": {
@@ -204,23 +136,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/sultry-sensual/pl.u-xlyNDDdIXZPqEA"
-      },
-      "blurb": "For feeling the chemistry.",
-      "description": "Seductive grooves, physical intimacy, and slow-building tension. Felt as much as heard.",
-      "picks": [
-        {
-          "title": "The First Taste",
-          "artist": "Fiona Apple"
-        },
-        {
-          "title": "Woosah",
-          "artist": "Jeremih, Juicy J, Twista"
-        },
-        {
-          "title": "When Eye Lay My Hands on U",
-          "artist": "Prince"
-        }
-      ]
+      }
     },
     {
       "id": "euphoric",
@@ -228,7 +144,6 @@
       "live": true,
       "color": "orange",
       "icon": "UNDECIDED",
-      "descriptor": "Joy, release, emotional elevation.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/orange-circle.webp",
@@ -241,23 +156,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/euphoric/pl.u-oZylAd1TPm92X3"
-      },
-      "blurb": "For feeling on top of the world.",
-      "description": "A sense of possibility, excitement, or emotional release. From quiet optimism to overwhelming joy.",
-      "picks": [
-        {
-          "title": "Cosmic Girl",
-          "artist": "Jamiroquai"
-        },
-        {
-          "title": "Love Is Everywhere",
-          "artist": "Pharoah Sanders"
-        },
-        {
-          "title": "Girlfriend",
-          "artist": "Hemlock Springs"
-        }
-      ]
+      }
     },
     {
       "id": "electric",
@@ -265,7 +164,6 @@
       "live": true,
       "color": "yellow",
       "icon": "UNDECIDED",
-      "descriptor": "Rhythm, movement, momentum.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/yellow-circle.webp",
@@ -278,23 +176,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/electric/pl.u-KVXByKWIzp3JDv"
-      },
-      "blurb": "For when you need to move.",
-      "description": "Driven by rhythm and physical energy. The kind that makes staying still difficult.",
-      "picks": [
-        {
-          "title": "Be the One",
-          "artist": "Eli Brown"
-        },
-        {
-          "title": "Where's Your Head At",
-          "artist": "Basement Jaxx"
-        },
-        {
-          "title": "Around the Bend",
-          "artist": "Nia Archives"
-        }
-      ]
+      }
     },
     {
       "id": "unleashed",
@@ -302,7 +184,6 @@
       "live": true,
       "color": "dark green",
       "icon": "UNDECIDED",
-      "descriptor": "Catharsis, abandon, release.",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/dark-green-circle.webp",
@@ -315,23 +196,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/unleashed/pl.u-kv9lgrVIXM8mpv"
-      },
-      "blurb": "For letting it all out.",
-      "description": "Raw energy and unrestrained expression. A release for whatever has been building up.",
-      "picks": [
-        {
-          "title": "Stay",
-          "artist": "Angel Du$t"
-        },
-        {
-          "title": "The Obituaries",
-          "artist": "The Menzingers"
-        },
-        {
-          "title": "Shot Down",
-          "artist": "Scowl"
-        }
-      ]
+      }
     },
     {
       "id": "defiant",
@@ -339,7 +204,6 @@
       "live": true,
       "color": "black",
       "icon": "fist",
-      "descriptor": "Resistance, refusal, confrontation.",
       "labelText": "light",
       "titleColor": "#ffffff",
       "art": {
@@ -353,23 +217,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/defiant/pl.u-oZyl6Z9IPm92X3"
-      },
-      "blurb": "For when you're not backing down.",
-      "description": "Something to push against. Rebellion, frustration, and the refusal to accept things as they are.",
-      "picks": [
-        {
-          "title": "Sick in the Head",
-          "artist": "Kneecap"
-        },
-        {
-          "title": "Killing in the Name",
-          "artist": "Rage Against the Machine"
-        },
-        {
-          "title": "Pledge",
-          "artist": "Mannequin Pussy"
-        }
-      ]
+      }
     },
     {
       "id": "cute",
@@ -377,7 +225,6 @@
       "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
-      "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/pink-circle.webp",
@@ -390,10 +237,7 @@
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     },
     {
       "id": "audacious",
@@ -401,7 +245,6 @@
       "live": false,
       "color": "UNDECIDED",
       "icon": "sunglasses",
-      "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/orange-circle.webp",
@@ -414,10 +257,7 @@
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     },
     {
       "id": "melancholy",
@@ -425,7 +265,6 @@
       "live": false,
       "color": "lavender",
       "icon": "broken heart",
-      "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/lavendar-circle.webp",
@@ -438,10 +277,7 @@
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     },
     {
       "id": "lost",
@@ -449,7 +285,6 @@
       "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
-      "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
         "circle": "/assets/images/listen/brown_Circle.webp",
@@ -462,10 +297,7 @@
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     },
     {
       "id": "burdened",
@@ -473,7 +305,6 @@
       "live": false,
       "color": "dark blue",
       "icon": "scribble",
-      "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
         "circle": "/assets/images/listen/dark-blue-circle.webp",
@@ -486,10 +317,7 @@
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     },
     {
       "id": "playful-cheeky",
@@ -497,7 +325,6 @@
       "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
-      "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
         "circle": "/assets/images/listen/berry-circle.webp",
@@ -510,10 +337,7 @@
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     },
     {
       "id": "hype",
@@ -521,7 +345,6 @@
       "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
-      "descriptor": "UNDECIDED",
       "labelText": "light",
       "art": {
         "circle": "/assets/images/listen/purple-circle.webp",
@@ -534,10 +357,7 @@
       },
       "appleMusic": {
         "url": "https://music.apple.com/us/playlist/hype/pl.u-kv9lggmTXM8mpv"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     },
     {
       "id": "nostalgic",
@@ -545,7 +365,6 @@
       "live": false,
       "color": "peach",
       "icon": "camera",
-      "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/peach-cirlcle.webp",
@@ -558,10 +377,7 @@
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     },
     {
       "id": "hopeful-at-peace",
@@ -569,7 +385,6 @@
       "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
-      "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/forest green circle.webp",
@@ -582,10 +397,7 @@
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     },
     {
       "id": "hypnotic",
@@ -593,7 +405,6 @@
       "live": false,
       "color": "UNDECIDED",
       "icon": "UNDECIDED",
-      "descriptor": "UNDECIDED",
       "labelText": "dark",
       "art": {
         "circle": "/assets/images/listen/Silver Circle.webp",
@@ -606,10 +417,7 @@
       },
       "appleMusic": {
         "url": "PLACEHOLDER"
-      },
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      }
     }
   ]
 }

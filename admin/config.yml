@@ -370,6 +370,50 @@ collections:
       - { label: "Tags", name: tags, widget: hidden, default: "crashCourse" }
       - { label: "Layout", name: layout, widget: hidden, default: "layouts/crash-course.njk" }
 
+  # ── LISTEN MOODS ──
+  # content/listen/mood-words.json: each mood's descriptor, blurb,
+  # description, and Sarah's Picks (PROJECT-SPEC.md §7). Colors, art,
+  # live flags, playlist URLs, and order stay in moods.json, which is
+  # not in the CMS at all. They are separate files because Decap rewrites
+  # any object with more than eight keys in a scrambled key order; every
+  # object in mood-words.json stays under that. id and name are hidden:
+  # id links an entry to its mood, name labels it in the list. Moods
+  # can't be added, removed, or reordered here.
+  - name: listen
+    label: "🎧 Listen Moods"
+    editor: { preview: false }
+    files:
+      - name: moods
+        label: "Moods"
+        file: content/listen/mood-words.json
+        format: json
+        fields:
+          - label: "Moods"
+            name: moods
+            widget: list
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            collapsed: true
+            summary: "{{fields.name}}"
+            hint: "Click a mood to edit its words and picks. Colors, art, playlists, order, and which moods are live are not edited here."
+            fields:
+              - { label: "Mood ID", name: id, widget: hidden }
+              - { label: "Mood", name: name, widget: hidden }
+              - { label: "Descriptor", name: descriptor, widget: string, required: false, hint: "The short line on the mood's circle in the selector. UNDECIDED or blank shows nothing." }
+              - { label: "Blurb", name: blurb, widget: string, required: false, hint: "The handwritten line beside the turntable. UNDECIDED or blank shows nothing." }
+              - { label: "Description", name: description, widget: text, required: false, hint: "The paragraph under the blurb. UNDECIDED or blank shows nothing." }
+              - label: "Sarah's Picks"
+                name: picks
+                widget: list
+                required: false
+                label_singular: "pick"
+                summary: "{{fields.title}} - {{fields.artist}}"
+                hint: "Shown in this order on the Sarah's Picks note. Drag to reorder."
+                fields:
+                  - { label: "Song Title", name: title, widget: string }
+                  - { label: "Artist", name: artist, widget: string }
+
   # ── HOME (current site) ──
   # content/home.json. The ticker runs along the navy band on Home; the
   # site adds the ✶ between phrases and loops them.
