@@ -4,6 +4,7 @@ card_art: /assets/images/uploads/sarahtonin-sounds-listen_intro_arabic_collage.p
 card_art_alt: a collage of classic Arabic artists
 hook: You might already know a few of these songs. You just don't know it yet.
 spotify_url: https://open.spotify.com/playlist/1erPy5Z7Zyf9tGuvxW4V8L?si=7f5a34febf5548a4
+apple_music_url: https://music.apple.com/us/playlist/an-intro-to-arabic-music/pl.u-WabZdMaUWzD75E
 start_here:
   - track: Khosara
     artist: Abdel Halim Hafez
