@@ -158,7 +158,7 @@ Useful reusable assets:
 **Tinted paper textures (in use, September 2026):** each is a copy of an original texture with its color shifted so it reads as #FFE6AC (the grain is kept; alpha is untouched). The originals stay in place, unedited, as masters. To re-tint, start from the master, never from a `-tinted` file.
 - `assets/images/journal/post-mobile-paper-tinted.png` (Journal article pages on mobile; master `listen/sarahtonin_sounds-background_paper_2_1.png`, which Listen keeps using)
 - `assets/images/listen/background-paper-tinted.webp` (kept but not used: Listen stays on the original `background-paper.webp` by Sarah's choice)
-- `assets/images/journal/paper-tile-tinted.webp` (Listen now spinning bar; master `paper-tile.webp`)
+- `assets/images/journal/paper-tile-tinted.webp` (Listen now spinning bar on mobile only, where the page is on the shared #FFE6AC paper; desktop keeps the original `paper-tile.webp` to match Listen's original texture)
 - `assets/images/journal/texture-foreground-paper-tinted.png` (Journal and Contact desktop; master `texture-foreground-paper.png`)
 - `assets/images/about/About Me-Desktop-Final Assets/Texture___Foreground_Paper-tinted.png` (About desktop; master `Texture___Foreground_Paper.png`)
 

@@ -903,7 +903,7 @@ html:has(body.page-listen) {
   z-index: 50;
   border-top: 6px solid var(--mood-color, var(--color-near-black));
   background-color: var(--color-cream);
-  background-image: url('/assets/images/journal/paper-tile-tinted.webp');
+  background-image: url('/assets/images/journal/paper-tile.webp');
   background-size: 600px 600px;
   box-shadow: 0 -4px 14px rgba(28, 26, 22, 0.22);
 }
@@ -1031,6 +1031,13 @@ html:has(body.page-listen) {
 }
 
 @media (max-width: 760px) {
+  /* The page is on the shared #FFE6AC paper here, so the bar uses the
+     tinted tile to match it (desktop keeps the original tile, like the
+     page's original texture). */
+  .now-spinning {
+    background-image: url('/assets/images/journal/paper-tile-tinted.webp');
+  }
+
   .now-spinning__inner {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 0.5rem 0.75rem;
