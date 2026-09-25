@@ -445,6 +445,13 @@ html:has(body.page-listen) {
     gap: 2.383%;
   }
 
+  /* Phones swipe the row instead: no arrows, and the width they took
+     goes to a partial next label (js/listen.js). The labels keep their
+     own keyboard and screen-reader access; the arrows only scrolled. */
+  .listen-moods__arrow {
+    display: none;
+  }
+
   .listen-moods__row li {
     width: 7.5rem;
   }

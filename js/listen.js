@@ -151,10 +151,41 @@
     if (prevBtn) prevBtn.addEventListener('click', function () { row.scrollBy({ left: -240, behavior: behavior }); });
     if (nextBtn) nextBtn.addEventListener('click', function () { row.scrollBy({ left: 240, behavior: behavior }); });
 
+    // When the labels don't all fit, space them so the next one is cut
+    // off partway at the row's edge: a clearly partial label reads as
+    // "scroll for more", where a sliver looks like a label lost behind
+    // the arrow. Only the gap changes; label size stays as set in CSS.
+    var PEEK = 0.4;
+    var MIN_GAP = 16;   // keeps the selected ring clear of its neighbor
+    var MAX_GAP = 40;
+
+    function peekGap() {
+      var items = row.children;
+      if (items.length < 2) return null;
+      var label = items[0].getBoundingClientRect().width;
+      // Overflowing content shows through the right padding, so only the
+      // left padding comes off the visible width.
+      var visible = row.clientWidth - parseFloat(getComputedStyle(row).paddingLeft);
+      var best = null;
+      // Most whole labels first, so ties keep more of them in view. At
+      // least two stay whole; below that the CSS spacing is kept.
+      for (var n = items.length - 1; n >= 2; n--) {
+        var gap = Math.min(MAX_GAP, Math.max(MIN_GAP, (visible - (n + PEEK) * label) / n));
+        var peek = (visible - n * (label + gap)) / label;
+        if (peek > 0.2 && peek < 0.8 && (!best || Math.abs(peek - PEEK) < Math.abs(best.peek - PEEK))) {
+          best = { gap: gap, peek: peek };
+        }
+      }
+      return best && best.gap;
+    }
+
     // Labels are centered when they all fit; otherwise left-aligned with
-    // scroll arrows.
+    // scroll arrows and a partial label at the edge.
     function updateArrows() {
+      row.style.columnGap = '';
       var overflows = row.scrollWidth > row.clientWidth + 1;
+      var gap = overflows ? peekGap() : null;
+      if (gap !== null) row.style.columnGap = gap + 'px';
       row.classList.toggle('is-centered', !overflows);
       [prevBtn, nextBtn].forEach(function (btn) {
         if (btn) btn.style.visibility = overflows ? '' : 'hidden';
