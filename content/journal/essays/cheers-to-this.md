@@ -2,8 +2,8 @@
 title: "Cheers To This "
 slug: cheers-to-this
 date: 2026-09-23
-excerpt: On getting laid off, finally taking myself seriously, and figuring out
-  what I want this little corner of the internet to be.
+excerpt: On getting laid off, finally doing the thing I always said I was going
+  to do, and figuring out what I want this little corner of the internet to be..
 featured_image: /assets/images/uploads/cherrs.jpeg
 featured_image_whole: false
 category: Essay
