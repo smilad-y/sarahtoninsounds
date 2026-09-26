@@ -1,64 +1,106 @@
 {
   "_comment": "Current-site About copy only (PROJECT-SPEC.md §9). Distinct from legacy settings/about.json, which is PRESERVE-only and not a source for this file (CLAUDE.md). `bio` is the one bio shown on both desktop and mobile. bio_mobile and taste_mobile are the retired mobile-only copy, kept for reference but no longer rendered or editable in the CMS. The remaining _desktop/_mobile pairs (greeting, resume heading/dates) stay separately editable because the two layouts format them differently.",
-
-  "hero_desktop": {
-    "heading": "About",
-    "heading_sub": "me…more or less"
+  "footer_mobile": {
+    "tagline": "anything for a little extra Sarahtonin :)"
   },
-
-  "greeting_desktop": {
-    "line1": "Hi! I’m Sarah,",
-    "line2": "the girl behind Sarahtonin Sounds."
-  },
-
+  "bio": [
+    {
+      "kind": "paragraph",
+      "text": "Sarahtonin Sounds started back in 2019, when I decided to take my love for music a little more seriously. What began as a space to share songs I loved slowly turned into something I wanted to explore further."
+    },
+    {
+      "kind": "paragraph",
+      "text": "At the time, I was on a completely different path. I had plans to go to law school, but somewhere along the way, I realized that music was what I actually wanted to pursue. So, I changed direction and found my way into music supervision, where I get to combine my love for music with storytelling and the creative process."
+    },
+    {
+      "kind": "paragraph",
+      "text": "Over the years, music has become a part of my work, but Sarahtonin Sounds has always been my personal space to share what I love. From playlists and new discoveries to writing about the music that sticks with me, this is where I get to explore my taste without any rules."
+    },
+    {
+      "kind": "paragraph",
+      "text": "Growing up Egyptian, music was always a mix of different sounds and influences. Arabic music was a big part of my upbringing, but so was everything else I found myself drawn to. I grew up listening to music from different cultures, genres, and eras, and I think that curiosity has shaped the way I listen to music today."
+    },
+    {
+      "kind": "taste",
+      "text": "My taste is a little all over the place, in the best way. I can go from an Arabic classic to hip-hop, soul, electronic, or something completely unexpected without thinking twice about it. I love discovering new sounds, revisiting old favorites, and finding connections between music that might seem completely unrelated."
+    },
+    {
+      "kind": "paragraph",
+      "text": "I don’t think good music needs to fit into one genre, language, or era. If something catches my ear, I’m listening."
+    },
+    {
+      "kind": "paragraph",
+      "text": "And that’s really what Sarahtonin Sounds is about: sharing the music I love, introducing people to sounds they might not have discovered otherwise, and hopefully helping someone find their next favorite song."
+    },
+    {
+      "kind": "paragraph",
+      "text": "I’m finally giving this project the space to grow into something more, and I’m excited to see where it goes."
+    }
+  ],
   "greeting_mobile": {
     "line1": "Hi! I’m Sarah,",
     "line2": "the girl behind Sarahtonin Sounds"
   },
-
-  "bio": [
-    { "kind": "paragraph", "text": "Sarahtonin Sounds started back in 2019, when I decided to take my love for music a little more seriously. What began as a space to share songs I loved slowly turned into something I wanted to explore further." },
-    { "kind": "paragraph", "text": "At the time, I was on a completely different path. I had plans to go to law school, but somewhere along the way, I realized that music was what I actually wanted to pursue. So, I changed direction and found my way into music supervision, where I get to combine my love for music with storytelling and the creative process." },
-    { "kind": "paragraph", "text": "Over the years, music has become a part of my work, but Sarahtonin Sounds has always been my personal space to share what I love. From playlists and new discoveries to writing about the music that sticks with me, this is where I get to explore my taste without any rules." },
-    { "kind": "paragraph", "text": "Growing up Egyptian, music was always a mix of different sounds and influences. Arabic music was a big part of my upbringing, but so was everything else I found myself drawn to along the way. I grew up listening to music from different cultures, genres, and eras, and I think that curiosity has shaped the way I listen to music today." },
-    { "kind": "taste", "text": "My taste is a little all over the place, in the best way. I can go from an Arabic classic to hip-hop, soul, electronic, or something completely unexpected without thinking twice about it. I love discovering new sounds, revisiting old favorites, and finding connections between music that might seem completely unrelated." },
-    { "kind": "paragraph", "text": "I don’t think good music needs to fit into one genre, language, or era. If something catches my ear, I’m listening." },
-    { "kind": "paragraph", "text": "And that’s really what Sarahtonin Sounds is about: sharing the music I love, introducing people to sounds they might not have discovered otherwise, and hopefully helping someone find their next favorite song." },
-    { "kind": "paragraph", "text": "I’m finally giving this project the space to grow into something more, and I’m excited to see where it goes." }
-  ],
-
-  "bio_mobile": [
-    { "kind": "paragraph", "text": "Music has been a constant in my life for as long as I can remember. Being the youngest of three meant I was always absorbing whatever was playing around me, from my sisters’ pop punk and Jesse McCartney phases to the Arabic music and old standards my parents loved. Then came LimeWire, burned CDs, and trips to Tower Records, where I bought my first CD, AFI’s Decemberunderground, when I was around ten. Growing up in San Pedro, CA and around the South Bay’s punk history only added to it. I never really developed one musical lane. If something caught my ear, that was enough for me." },
-    { "kind": "divider" },
-    { "kind": "paragraph", "text": "What took me longer to figure out was that music could actually be my job. I’d gotten into law school and assumed that was the plan, but when the pandemic hit right as I got in, suddenly none of it felt right. I kept coming back to the thing that had always felt natural to me: music. Not just listening to it, but really knowing it. Researching artists, digging through catalogs, reading their stories, figuring out where a sound came from. I’d been doing some version of that my whole life. I’d just never thought of it as something I could build a career around." },
-    { "kind": "paragraph", "text": "Once I realized I could, music supervision was what I wanted to pursue. It brought together so much of what I already loved about music: discovery, research, curation, and finding the right song for the right moment. I started looking for ways into the industry, and a few early opportunities eventually led me to TMZ Productions, where I got to actually do it alongside my boss and mentor, Tony. Somewhere along the way, I stopped wondering whether skipping law school had been the wrong decision. Music wasn’t just the thing I loved anymore. It was my career." },
-    { "kind": "paragraph", "text": "But Sarahtonin Sounds had been there before any of it." },
-    { "kind": "paragraph", "text": "I started it as my own little curation project before I ever worked professionally in music. Sarahtonin was a dumb little Sarah + serotonin joke that somehow became the perfect name. Music has always been one of the things that makes me happiest, and sharing it with people makes it even better. Apparently I couldn’t resist a pun." },
-    { "kind": "paragraph", "text": "Then I got distracted by work, and Sarahtonin Sounds got put on the shelf for a while. After being laid off, resurrecting it and actually giving it the time and space to grow felt like the natural move. I don’t know exactly what it’ll turn into yet, and I kind of like that. This is where I get to keep music personal: the playlists, discoveries, writing, and all the things I can’t stop telling people about." },
-    { "kind": "paragraph", "text": "Music gets me in touch with emotion, sparks creativity, and makes me invent entire little scenes in my head when a song hits right. It connects me to people, too." }
-  ],
-
   "taste_mobile": {
     "badge": "My taste is all over the place.",
     "body": "Being Egyptian and growing up with Arabic music is a big part of my musical foundation, and it’s something I still love digging into. I love finding hidden gems, whether it’s an artist about to break or a song from sixty years ago that’s criminally slept on. There’s something really fun about finding a song I love and getting to share it with someone else."
   },
-
-  "photo_caption": "Me! Sarah Milad!",
-
-  "cta_desktop": {
-    "heading": "Let’s Work Together!",
-    "body": "I work across music supervision, licensing, curation, and music discovery, and I love collaborating with people on a good idea. If you think I could be a fit for something you’re working on, I’d love to hear about it."
-  },
-
   "resume": {
     "heading_desktop": "Selected Credits & Resume",
     "heading_mobile": "Selected Credits & Resume",
     "entries": [
-      { "title": "TMZ Productions", "role": "Senior Music Coordinator", "dates_desktop": "2023-2026", "dates_mobile": "2023 - 2026" }
+      {
+        "title": "TMZ Productions",
+        "role": "Senior Music Coordinator",
+        "dates_desktop": "2023-2026",
+        "dates_mobile": "2023 - 2026"
+      }
     ]
   },
-
-  "footer_mobile": {
-    "tagline": "anything for a little extra Sarahtonin :)"
-  }
+  "cta_desktop": {
+    "heading": "Let’s Work Together!",
+    "body": "I work across music supervision, licensing, curation, and music discovery, and I love collaborating with people on a good idea. If you think I could be a fit for something you’re working on, I’d love to hear about it."
+  },
+  "greeting_desktop": {
+    "line1": "Hi! I’m Sarah,",
+    "line2": "the girl behind Sarahtonin Sounds."
+  },
+  "hero_desktop": {
+    "heading": "About",
+    "heading_sub": "me…more or less"
+  },
+  "photo_caption": "Me! Sarah Milad!",
+  "bio_mobile": [
+    {
+      "kind": "paragraph",
+      "text": "Music has been a constant in my life for as long as I can remember. Being the youngest of three meant I was always absorbing whatever was playing around me, from my sisters’ pop punk and Jesse McCartney phases to the Arabic music and old standards my parents loved. Then came LimeWire, burned CDs, and trips to Tower Records, where I bought my first CD, AFI’s Decemberunderground, when I was around ten. Growing up in San Pedro, CA and around the South Bay’s punk history only added to it. I never really developed one musical lane. If something caught my ear, that was enough for me."
+    },
+    {
+      "kind": "divider"
+    },
+    {
+      "kind": "paragraph",
+      "text": "What took me longer to figure out was that music could actually be my job. I’d gotten into law school and assumed that was the plan, but when the pandemic hit right as I got in, suddenly none of it felt right. I kept coming back to the thing that had always felt natural to me: music. Not just listening to it, but really knowing it. Researching artists, digging through catalogs, reading their stories, figuring out where a sound came from. I’d been doing some version of that my whole life. I’d just never thought of it as something I could build a career around."
+    },
+    {
+      "kind": "paragraph",
+      "text": "Once I realized I could, music supervision was what I wanted to pursue. It brought together so much of what I already loved about music: discovery, research, curation, and finding the right song for the right moment. I started looking for ways into the industry, and a few early opportunities eventually led me to TMZ Productions, where I got to actually do it alongside my boss and mentor, Tony. Somewhere along the way, I stopped wondering whether skipping law school had been the wrong decision. Music wasn’t just the thing I loved anymore. It was my career."
+    },
+    {
+      "kind": "paragraph",
+      "text": "But Sarahtonin Sounds had been there before any of it."
+    },
+    {
+      "kind": "paragraph",
+      "text": "I started it as my own little curation project before I ever worked professionally in music. Sarahtonin was a dumb little Sarah + serotonin joke that somehow became the perfect name. Music has always been one of the things that makes me happiest, and sharing it with people makes it even better. Apparently I couldn’t resist a pun."
+    },
+    {
+      "kind": "paragraph",
+      "text": "Then I got distracted by work, and Sarahtonin Sounds got put on the shelf for a while. After being laid off, resurrecting it and actually giving it the time and space to grow felt like the natural move. I don’t know exactly what it’ll turn into yet, and I kind of like that. This is where I get to keep music personal: the playlists, discoveries, writing, and all the things I can’t stop telling people about."
+    },
+    {
+      "kind": "paragraph",
+      "text": "Music gets me in touch with emotion, sparks creativity, and makes me invent entire little scenes in my head when a song hits right. It connects me to people, too."
+    }
+  ]
 }
