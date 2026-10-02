@@ -1,6 +1,16 @@
 {
   "colors": [
-    { "name": "Gold", "hex": "#c9a227" },
-    { "name": "Crimson", "hex": "#af3838" }
+    {
+      "name": "Gold",
+      "hex": "#c9a227"
+    },
+    {
+      "name": "Crimson",
+      "hex": "#af3838"
+    },
+    {
+      "name": "dusty purple",
+      "hex": "#b68d98"
+    }
   ]
 }
