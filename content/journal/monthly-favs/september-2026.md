@@ -5,22 +5,19 @@ date: 2026-10-02
 excerpt: This site is officially live! Finishing it ate up most of my month, but
   these are the standouts. Lots of new drops, rediscoveries, and new-to-me
   finds!
-card_image: ""
+card_image: /assets/images/uploads/sept.jpg
 reflection: >-
-  September felt like a transitional month. Like I was tying up a bunch of loose
-  ends as summer came to a close.
+  September felt like a transitional month. Like I was tying up loose ends as
+  summer came to a close.
 
 
-  There was a weird breakup that wasn't really a breakup, which is about as fun and confusing as it sounds... but I'm not devastated by it. I think I responded by burying myself in this site, which, honestly, could've been worse. Sarahtonin Sounds gave me somewhere to put all of that energy, but bringing it to life also brought up a lot of my usual anxieties.
+  A lot of my energy went into finishing Sarahtonin Sounds and finally putting it out into the world, which brought up a lot of my usual anxieties. I've struggled with imposter syndrome and the fear of being perceived for a long time, and making something this personal really tested both.
 
 
-  I've struggled with imposter syndrome and the fear of being perceived for a long time, and putting something this personal out into the world really tested both. There were definitely moments when I wondered if I was doing too much, taking myself too seriously, or opening myself up in a way that made me uncomfortable.
+  I kept having to remind myself that the fear of being perceived isn't something I want holding me back anymore. And also... what's the big deal if people perceive me? Maybe I *should* be noticed. I made something I'm proud of. Of course I want people to see it.
 
 
-  I kept having to remind myself that the fear of being perceived isn't something I want holding me back anymore. And also... what's the big deal if people perceive me? Maybe I *should* be noticed. Maybe I need to get more comfortable with that instead of immediately wanting to shrink away from it. I made something I'm proud of. Of course I want people to see it.
-
-
-  I'm not suddenly cured of imposter syndrome, and I'm sure I'll have to give myself this exact pep talk again. But I'm glad I didn't let it win this time.
+  I'm sure I'll have to give myself that pep talk again, but I'm glad I didn't let it stop me this time.
 
 
   Besides that... there's been a little autumnal edging here, but not nearly enough considering we are officially in FALL and it is literally 90 degrees out as I'm writing this. We did get a Harvest Moon, so I guess that's autumnal.
@@ -29,7 +26,7 @@ reflection: >-
   More importantly, football is back, which I have been waiting for since last February. My fantasy team is called "To Do List," in case anyone was wondering... AND I got some hotties on there. They pass the pigskin good too.
 
 
-  So I think that's September. A little weird, a little uncomfortable, very transitional. Some things ended, other things finally started, and somewhere in between I made something I'd been scared to make and put it out into the world.
+  So I think that's September. A little weird, a little uncomfortable, very transitional. Some things shifted, other things finally started, and somewhere in between I made something I'd been scared to make and put it out into the world.
 
 
   Maybe that's enough for one month.
@@ -61,12 +58,13 @@ highlights:
     title: People
     artist: AJJ
     heard_in: "ADULTS "
-    note: 'first let me just say...I LOVE AJJ. One of the bands I have seen play
-      live multiple times in my life. So when Season 1 of ADULTS closed out the
-      season with "Brave As A Noun" by AJJ, I practically screamed at the first
-      guitar note shocked to hear one of my favorite songs ever. Then Season 2
-      ended, I was even more excited that they kept it consistent and played
-      "People" by AJJ. You can say I was very geeked and very happy. '
+    note: First let me just say... I LOVE AJJ. They're one of the few bands I've
+      seen live multiple times in my life. So when Season 1 of *Adults* closed
+      out with "Brave as a Noun," I practically screamed at the first guitar
+      note, shocked to hear one of my favorite songs ever, and reflexively
+      started singing before I even had time to process it. Then Season 2 ended
+      with "People" by AJJ, and I was even more excited that they kept it
+      consistent. You can say I was very geeked and very happy.
     tape_color: "bright yellow "
     art: /assets/images/uploads/adults.webp
     art_alt: "season 2 adults promo "
