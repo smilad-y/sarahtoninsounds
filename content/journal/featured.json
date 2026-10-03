@@ -4,6 +4,10 @@
     {
       "type": "essay",
       "slug": "cheers-to-this"
+    },
+    {
+      "type": "monthly-fav",
+      "slug": "september-2026"
     }
   ]
 }
