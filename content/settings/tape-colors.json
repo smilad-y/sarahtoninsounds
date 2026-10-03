@@ -11,6 +11,10 @@
     {
       "name": "dusty purple",
       "hex": "#b68d98"
+    },
+    {
+      "name": "black",
+      "hex": "#000000"
     }
   ]
 }
