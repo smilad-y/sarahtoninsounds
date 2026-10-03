@@ -5,7 +5,7 @@ date: 2026-10-02
 excerpt: This site is officially live! Finishing it ate up most of my month, but
   these are the standouts. Lots of new drops, rediscoveries, and new-to-me
   finds!
-card_image: /assets/images/uploads/_-1-.jpeg
+card_image: /assets/images/uploads/sept-.jpg
 reflection: >-
   September felt like a transitional month. Like I was tying up loose ends as
   summer came to a close.
