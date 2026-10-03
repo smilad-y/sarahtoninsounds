@@ -15,6 +15,10 @@
     {
       "name": "black",
       "hex": "#000000"
+    },
+    {
+      "name": "bright yellow ",
+      "hex": "#ffd21f"
     }
   ]
 }
