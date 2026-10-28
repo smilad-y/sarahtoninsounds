@@ -2,8 +2,8 @@
 title: "Stairway? Approved! "
 slug: stairway-approved
 date: 2026-10-27
-excerpt: "To all the Lonely Island fans out there...maybe we can get a Lazy
-  Sunday x Chronicles of Narnia crossover...MAYBE "
+excerpt: "Narnia got its Stairway and to all the Lonely Island fans out there:
+  maybe we can get a Lazy Sunday x Chronicles of Narnia crossover... MAYBE."
 featured_image: /assets/images/uploads/stairway-approved.jpg
 featured_image_whole: false
 category: Essay
@@ -12,6 +12,7 @@ layout: layouts/journal-post.njk
 permalink: /journal/{{slug}}/
 hero:
   position: center
+  image: /assets/images/uploads/stairway-approved.jpg
 ---
 The new *Narnia: The Magician’s Nephew* [trailer](https://www.youtube.com/watch?v=gDJ-ini7fF0) just dropped, and somehow, Greta Gerwig managed to get Led Zeppelin’s “Stairway to Heaven” cleared for it. Reportedly the first time the band has ever said yes to it on screen. EVER.
 
