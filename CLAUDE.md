@@ -50,7 +50,8 @@ Before removing legacy code/data:
 - Preserve Sarah's established Sarahtonin Sounds gold wordmark. Never redesign, reconstruct, or substitute it.
 - Launch navigation is: Home · About · Listen · Journal · Contact.
 - Guestbook is Phase 2/on hold. Do not add it to launch scope unless Sarah explicitly reactivates it.
-- Crash Courses are built and switched off; they appear only when Sarah sets a course live. Keep them separate from mood playlist data.
+- Crash Courses are live. One course is live so far (An Intro to Arabic Music); a course appears only when Sarah sets it live. Keep them separate from mood playlist data.
+- Playlist system (Sarah, October 2026): each mood has a private master playlist and a live playlist, capped at 50 songs, that the site embeds. Sarah refreshes the live playlists weekly from the masters, rotating a mood or two at a time, on both Spotify and Apple Music. Never change a live playlist URL in `moods.json` or swap in a master URL unless Sarah asks. Sarah's Picks are maintained by hand and can drift from the playlist, so do not assume a pick is still in it.
 - Plain HTML, CSS, and JavaScript, plus **Eleventy + Decap CMS** for content editing (a deliberate decision; see spec §1). No other framework without a concrete requirement.
 - Maintain "clean structure + weird/tactile decoration."
 - Intentional cream/paper negative space is part of the design. Do not fill empty areas automatically.

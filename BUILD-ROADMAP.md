@@ -1,5 +1,5 @@
 # Sarahtonin Sounds — Build & Migration Roadmap
-**Version:** v5 · September 24, 2026
+**Version:** v6 · October 28, 2026
 
 ## Launch Scope
 **Home · About · Listen · Journal · Contact**
@@ -157,9 +157,10 @@ Two mood names, the icons (deferred past launch), six colors, and the non-launch
 - 404 personality/microcopy.
 - Refined hover/motion details.
 - Additional Journal treatments.
-- ~~Crash Courses section, as a clearly separate section of Listen.~~ **Built (September 2026):** CMS collection, course pages, index, and Listen shelf. Switched off until Sarah adds a live course; the courses themselves are Sarah's.
-- Once the first Crash Course is live, check on the live site: the course page's Spotify (and Apple Music, if set) embed plays and switching between them stops the other, and the card art loads through Netlify's image resizing (`/.netlify/images`).
-- Once the first Crash Course is live, Sarah decides whether Listen's page description should mention Crash Courses, and whether the Crash Courses index gets its own description (neither exists now; no copy was invented).
+- ~~Crash Courses section, as a clearly separate section of Listen.~~ **Built (September 2026):** CMS collection, course pages, index, and Listen shelf. The first course (An Intro to Arabic Music) is live as of October 2026; the courses themselves are Sarah's.
+- Now that the first Crash Course is live, check on the live site: the course page's Spotify (and Apple Music, if set) embed plays and switching between them stops the other, and the card art loads through Netlify's image resizing (`/.netlify/images`).
+- Now that the first Crash Course is live, Sarah decides whether Listen's page description should mention Crash Courses, and whether the Crash Courses index gets its own description (neither exists now; no copy was invented).
+- Ongoing (Sarah, October 2026): weekly playlist refresh. Each mood has a private master and a live playlist capped at 50 songs; live URLs never change; one or two moods are refreshed per week on both Spotify and Apple Music. No code involved. Sarah's Picks are hand-maintained and can drift from the live playlist.
 - Real-embed check for the now spinning bar on the live site (see the now spinning bar section of TODO.md).
 - ~~Apple Music links per mood.~~ **Done (Sarah, September 2026):** in place for every live mood; Hype has one too but isn't live. The other non-live moods get theirs when they go live.
 - Performance tuning based on real deployment.

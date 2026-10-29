@@ -1,5 +1,5 @@
 # Sarahtonin Sounds — Asset & Data Manifest
-**Version:** v5 · September 24, 2026
+**Version:** v6 · October 28, 2026
 
 ## 1. Signature / Must Preserve
 ### Sarahtonin Sounds gold wordmark
@@ -119,8 +119,10 @@ Words and picks are stored in `content/listen/mood-words.json` and edited in the
 
 Do not invent playlist descriptions. Sarah writes them.
 
+**Master vs live (Sarah, October 2026):** each mood also has a private master playlist on each service (never embedded or linked). Only the live playlist, capped at 50 songs, goes in `moods.json`, and its URL stays fixed while Sarah refreshes it weekly.
+
 ## 7. Crash Courses
-**Status:** System built, switched off. Needs Sarah's real course topics and artwork.  
+**Status:** System built; first course live (An Intro to Arabic Music, October 2026). More courses need Sarah's real topics and artwork.  
 Keep separate from mood playlists.
 
 **Card art:** uploaded through the CMS (saved to `assets/images/uploads/`), square, 1200 × 1200 px or larger.
