@@ -1,5 +1,5 @@
 # Sarahtonin Sounds — Master Project Spec
-**Handoff version:** September 24, 2026 · v5 (post-launch)  
+**Handoff version:** October 28, 2026 · v6 (post-launch)  
 **Purpose:** Current source of truth for continuing the Sarahtonin Sounds website in Claude / Claude Code.
 
 ## 1. Project
@@ -201,7 +201,12 @@ The main interactive music-curation experience and signature functional page.
 
 **Playback (decided):** each mood's playlist uses a **live embed with a Spotify / Apple Music toggle**, not a static track list. Adding or removing songs on the actual playlists updates the site automatically.
 
-**Sarah's Picks (decided):** a small hand-picked highlights list per mood, maintained manually on top of the live embed.
+**Sarah's Picks (decided):** a small hand-picked highlights list per mood, maintained manually on top of the live embed. Because the live playlists are refreshed weekly (below), a pick can drop out of its playlist; picks are not auto-synced.
+
+**Playlist system (decided, Sarah, October 2026):** each mood has two playlists on each service (Spotify and Apple Music).
+- A **master** playlist: large, ongoing, private working copy. It is never embedded and never linked from the site.
+- A **live** playlist: capped at 50 songs, and the one the site embeds. It keeps the same URL and is edited in place, never replaced, so `moods.json` URLs do not change.
+- Sarah refreshes live playlists weekly from the masters, rotating one or two moods at a time. The refresh is also the basis for that week's social post.
 
 Expect a relatively small, hand-maintained set of curated playlists. Each needs metadata such as:
 - mood/category
@@ -283,7 +288,7 @@ Notes:
 The turntable is a signature interaction, not decorative filler. A selected mood should resolve into the full record/turntable experience.
 
 ### Crash Courses
-**Built after launch (September 2026), switched off until Sarah adds a live course.** Courses are managed in the CMS ("Crash Courses"). Each has a title, square card art with an art description, an optional hook, an optional intro, a Spotify playlist URL, an optional Apple Music URL, an optional "Start here" track list, a Live switch, and an Order number.
+**Built after launch (September 2026). Live as of October 2026 with one course, An Intro to Arabic Music; more appear as Sarah sets them live.** Courses are managed in the CMS ("Crash Courses"). Each has a title, square card art with an art description, an optional hook, an optional intro, a Spotify playlist URL, an optional Apple Music URL, an optional "Start here" track list, a Live switch, and an Order number.
 - Only courses with Live on appear anywhere on the site. With none live, Listen shows no Crash Courses section at all.
 - Listen shows a shelf of up to 4 live courses below the turntable (a swipe row on mobile). The shelf has no embeds; the now spinning bar stays the only player on Listen.
 - Each live course has its own page at `/listen/crash-courses/<slug>/` with its own playlist embed, and `/listen/crash-courses/` lists all live courses.
