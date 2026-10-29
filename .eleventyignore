@@ -30,3 +30,6 @@ _site/
 # Full-size source images kept out of the published site; the site uses
 # optimized exports (see archive/listen-circle-originals/README.md).
 archive/
+
+# Off-site tools (tools/social/ carousel generator), never part of the build.
+tools/

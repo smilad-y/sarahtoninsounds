@@ -1,0 +1,17 @@
+{
+  "name": "chill-sample",
+  "mood": "chill",
+  "songs": [
+    {
+      "title": "On the Level",
+      "artist": "Mac DeMarco",
+      "text": "Sample text so you can check the layout. Replace this with your own paragraph about the song. It can run a few sentences and the font shrinks a little if it gets long, so write what you actually want to say."
+    },
+    {
+      "title": "Vibin' Out",
+      "artist": "FKJ",
+      "text": "Second sample paragraph. Same deal, swap in your own words."
+    }
+  ],
+  "close_line": "Full playlist on Spotify and Apple Music. Link in bio."
+}
