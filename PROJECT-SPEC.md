@@ -240,7 +240,7 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 - A mood can set an optional `titleColor` in `moods.json` for its name on the turntable banner. Hazy, Defiant, and Vibes use white.
 
 ### Mood list (final, supersedes the earlier 12-mood working list)
-19 moods (18 colors):
+20 moods (18 colors):
 
 | # | Mood | Label color | Icon |
 |---|------|-------------|------|
@@ -263,6 +263,7 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 | 17 | Hypnotic | *undecided* | *undecided* |
 | 18 | Hype | *undecided* | *undecided* *(see note)* |
 | 19 | Vibes | berry | *undecided* |
+| 20 | Bittersweet | fuschia | *undecided* |
 
 Row numbers are for reference only. The launch display order is below; the order of moods added later is not decided.
 
@@ -273,9 +274,10 @@ Notes:
 - **Renamed (Sarah, September 2026):** Sultry is now **Sensual**, Energized is now **Electric**, Dreamy is now **Hazy**. Hazy keeps the cloud icon.
 - **Color reassignments (Sarah, September 2026):** the launch moods took pink (from Cute), purple (from Hype), orange (from Audacious), and light blue (from Dreamy, now Chill). Defiant is black (briefly brown, then changed back), and Unleashed is dark green, using the dark green art it already had. Cute, Hype, Audacious, and Lost have no color; their existing art is kept in the config unchanged. Brown is not used by any launch mood.
 - **Added (Sarah, September 2026):** Vibes, a 19th mood, took berry from Playful / Cheeky. With 19 moods and 18 colors, one mood will eventually need new art in a new color. Playful / Cheeky keeps its existing art in the config unchanged, like Cute, Hype, and Audacious.
-- **Unassigned colors:** fuschia, light green, brown, forest green, gold, silver. Cute, Audacious, Lost, Hopeful/At Peace, Playful / Cheeky, Hype, and Hypnotic have no color yet. Do not assign these without Sarah.
+- **Added (Sarah, November 2026):** Bittersweet, a 20th mood, fuschia, hidden (`live: false`) for now. It uses the existing fuschia art set. Its playlist URLs are PLACEHOLDER and its descriptor, blurb, description, and picks are UNDECIDED; Sarah writes them. This is a deliberate revision of the earlier 19-mood list. Melancholy, Nostalgic, and Tender sit close to it; whether it stays alongside them is Sarah's call. With 20 moods and 18 colors, two moods will eventually need new art in new colors.
+- **Unassigned colors:** light green, brown, forest green, gold, silver. Cute, Audacious, Lost, Hopeful/At Peace, Playful / Cheeky, Hype, and Hypnotic have no color yet. Do not assign these without Sarah.
 - **Disco ball:** originally confirmed for the combined "Energized / Hype" mood. Energized (now Electric) and Hype are separate moods, so which one keeps the disco ball is undecided. Electric is the likely candidate, not confirmed. Euphoric's icon is also undecided.
-- **Focus** from the earlier working list is not in the final 19.
+- **Focus** from the earlier working list is not in the final list.
 - Earlier combined names (Dreamy / Float Away, Tender / Romantic, Sultry / Sensual) became single words (Dreamy, Tender, Sultry), then Dreamy and Sultry were renamed Hazy and Sensual (see above).
 - The mood data is config-driven, so the list can still change without rewriting the page.
 
