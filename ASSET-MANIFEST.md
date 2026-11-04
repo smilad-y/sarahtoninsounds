@@ -73,6 +73,7 @@ Still need icon directions:
 - Unleashed
 - Cute
 - Hypnotic
+- Bittersweet
 - Vibes
 - whichever of Electric / Hype does not get the disco ball
 
@@ -110,7 +111,7 @@ All legacy content is PRESERVE by default. Nothing migrates to the current site 
 Populate only from Sarah's manually curated playlists, embedded live. Not from legacy song data. **Launch is Spotify-only;** the Spotify / Apple Music toggle appears for a mood once it has an Apple Music URL.
 
 Per mood, collect. Playlist URLs are stored in `content/listen/moods.json` (not in the CMS):
-- Spotify playlist URL (in place for all 19 moods, each checked against the playlist it opens)
+- Spotify playlist URL (in place for 19 of the 20 moods, each checked against the playlist it opens; Bittersweet is PLACEHOLDER until Sarah builds its playlist)
 - Apple Music playlist URL (added after launch; in place for every live mood as of September 2026. Hype has one too but isn't live.)
 
 Words and picks are stored in `content/listen/mood-words.json` and edited in the CMS ("Listen Moods"):
@@ -196,7 +197,7 @@ Old purple-gradient, petal, cursor, marquee, and related visuals may exist. Pres
 ## 14. Still To Resolve
 - Exact production filenames and `/assets/` directory organization.
 - Hopeful vs. At Peace; Playful vs. Cheeky.
-- Descriptors, blurbs, descriptions, and Sarah's Picks for the 10 non-launch moods.
+- Descriptors, blurbs, descriptions, and Sarah's Picks for the 11 non-live moods, Bittersweet included.
 - Mood icons (deferred past launch; see §3).
 - Colors for Hopeful/At Peace, Hypnotic, Cute, Audacious, Lost, Playful / Cheeky, and Hype; final hex values for all 18 colors (current ones are provisional).
 - Apple Music URLs for the non-live moods other than Hype (every live mood and Hype have one as of September 2026).

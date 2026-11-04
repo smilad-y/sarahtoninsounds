@@ -418,6 +418,26 @@
       "appleMusic": {
         "url": "PLACEHOLDER"
       }
+    },
+    {
+      "id": "bittersweet",
+      "name": "Bittersweet",
+      "live": false,
+      "color": "fuschia",
+      "icon": "UNDECIDED",
+      "labelText": "dark",
+      "art": {
+        "circle": "/assets/images/listen/Fuschia Circle.webp",
+        "vinyl": "/assets/images/listen/Record-fuschia.png",
+        "record": "/assets/images/listen/sarahtonin sounds-listen-record-fuschia.png",
+        "tape": "/assets/images/listen/Tape-Fuschia.png"
+      },
+      "spotify": {
+        "url": "PLACEHOLDER"
+      },
+      "appleMusic": {
+        "url": "PLACEHOLDER"
+      }
     }
   ]
 }
