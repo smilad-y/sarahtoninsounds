@@ -1,6 +1,14 @@
 # Fonts
 
-IM Fell English (Regular + Italic, the only two cuts that exist) is
+Newsreader (Regular + Italic) is the body font since November 2026. It is
+SIL Open Font License, locally hosted as `Newsreader-Regular.woff2` and
+`Newsreader-Italic.woff2` (latin subset from @fontsource/newsreader), and
+wired up in `css/tokens.css` with `size-adjust: 93%` so it matches the
+size IM Fell had. The IM Fell English files below are kept as archive and
+are no longer referenced.
+
+IM Fell English (Regular + Italic, the only two cuts that exist) was the
+previous body font and is
 openly licensed (SIL Open Font License) and locally hosted here as
 `IMFellEnglish-Regular.woff2` and `IMFellEnglish-Italic.woff2`, wired
 up in `css/tokens.css`. They are Google Fonts' own latin woff2 files

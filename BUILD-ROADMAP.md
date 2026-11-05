@@ -196,5 +196,5 @@ These are intentionally not finalized and should not be guessed:
 - placement of the optional Monthly Favs reflection blurb (tentatively at the top)
 - Monthly Favs parked blocks: watched / read / learned; TV / Ad / Film tag on the needle drop
 - final contact/social URLs
-- font licensing: confirm the Perandory Semi-Condensed license covers commercial web use, and whether Amoresa needs any license at all given the logo only ships as an image. (IM Fell English is SIL Open Font License, so self-hosting it is settled.)
+- font licensing: confirm the Perandory Semi-Condensed license covers commercial web use, and whether Amoresa needs any license at all given the logo only ships as an image. (Newsreader is SIL Open Font License, so self-hosting it is settled.)
 - Guestbook backend/moderation implementation, if Phase 2 is activated

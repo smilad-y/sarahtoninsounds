@@ -66,7 +66,7 @@ Before removing legacy code/data:
 
 ## Design hierarchy
 - Perandory Semi-Condensed for major display/editorial headings and nav.
-- IM Fell English for readable body/long-form editorial copy (decided; not switching to Playfair).
+- Newsreader for readable body/long-form editorial copy (Sarah, November 2026; replaced IM Fell English; not switching to Playfair).
 - Sue Ellen Francisco only for short annotations/marginalia.
 - Amoresa for the logo's calligraphic S only if appropriately licensed; Luxurious Script is fallback only.
 - Warm cream/paper + near-black + gold/yellow + crimson as the core palette.

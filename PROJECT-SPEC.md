@@ -157,8 +157,8 @@ Do not use all secondary colors simultaneously just because they exist in the pa
 
 ## 5. Typography
 - **Perandory Semi-Condensed** — primary display/editorial heading direction.
-- **IM Fell English Regular** — primary body/long-form editorial direction.
-- **IM Fell English Italic** — editorial italics, pull quotes, and appropriate asides.
+- **Newsreader Regular** — primary body/long-form editorial direction (decided, Sarah, November 2026; replaces IM Fell English, whose files are kept unreferenced as archive).
+- **Newsreader Italic** — editorial italics, pull quotes, and appropriate asides.
 - **Sue Ellen Francisco** — casual handwritten annotation font. Only for short marginalia/notes; never for body copy, essential instructions, major UI, or the logo.
 - **Sarahtonin Sounds logo S:** Amoresa is preferred, subject to appropriate licensing.
 - **Logo remainder:** Perandory Semicondensed.
@@ -330,7 +330,7 @@ Monthly Favs post content (decided, Sarah, September 2026): Each post has a mont
 ### Article pages
 - More breathing room than the landing page.
 - Avoid busy margins.
-- IM Fell English direction for readable long-form copy.
+- Newsreader direction for readable long-form copy.
 - Perandory Semi-Condensed direction for major editorial headings.
 - Handwritten notes, tape, stars, torn edges, halftones, and scribbles are accents, not required decoration.
 - Placeholder phrases/images from mockups are not finalized content.
