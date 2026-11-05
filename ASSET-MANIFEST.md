@@ -167,7 +167,8 @@ Useful reusable assets:
 
 ## 11. Fonts / Licensing
 - Perandory Semi-Condensed (self-hosted, `assets/fonts/Perandory-SemiCondensed.woff2`). **Open:** confirm its license covers commercial web use.
-- IM Fell English Regular + Italic (self-hosted, `assets/fonts/IMFellEnglish-*.woff2`). SIL Open Font License, so self-hosting is settled.
+- Newsreader Regular + Italic (self-hosted, `assets/fonts/Newsreader-*.woff2`, latin subset from @fontsource/newsreader). SIL Open Font License, so self-hosting is settled. Body font since November 2026.
+- IM Fell English Regular + Italic (`assets/fonts/IMFellEnglish-*.woff2`): the previous body font. Files kept as archive, not referenced by the site.
 - Sue Ellen Francisco (self-hosted, `assets/fonts/SueEllenFrancisco.woff2`). SIL Open Font License.
 - Amoresa for the logo S. **Open:** whether it needs any license at all, given the wordmark only ships as an image (`assets/images/wordmark-gold.svg`) and the font is never loaded on the site.
 - Luxurious Script only as fallback for the logo S if needed.

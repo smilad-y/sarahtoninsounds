@@ -61,6 +61,29 @@
   font-display: swap;
 }
 
+/* Newsreader (SIL Open Font License), Regular + Italic, latin subset.
+   Body font since November 2026, replacing IM Fell English. Self-hosted
+   from @fontsource/newsreader's woff2 files. size-adjust brings it to the
+   optical size IM Fell had, so existing sizes and layouts stay put.
+   The IM Fell files and rules above are kept (unreferenced) as archive. */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/assets/fonts/Newsreader-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 93%;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/assets/fonts/Newsreader-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 93%;
+}
+
 :root {
   /* Color — core palette */
   --color-cream: #FFE6AC;         /* confirmed: PROJECT-SPEC.md §4, the one paper color sitewide */
@@ -95,7 +118,7 @@
      unloaded/fallback-only — see assets/fonts/README.md — and are
      never used to reconstruct the wordmark itself. */
   --font-display: 'Perandory Semi-Condensed', 'Arial Narrow', sans-serif;
-  --font-body: 'IM Fell English', Georgia, serif;
+  --font-body: 'Newsreader', Georgia, serif;
   --font-marginalia: 'Sue Ellen Francisco', cursive;
   --font-logo-script: 'Amoresa', 'Luxurious Script', cursive; /* reserved — see note in assets/fonts/README.md; never used to reconstruct the wordmark itself */
 
