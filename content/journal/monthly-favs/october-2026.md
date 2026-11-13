@@ -101,6 +101,10 @@ start_here:
     artist: Becky and the Birds
     note: I also like the music video for this song! Excited for her new stuff
       coming out
+  - track: Thin Ice
+    artist: Megan the Stallion
+    note: "\"bitch they call me Tina Montana, when I walk into the club it's
+      Sno-wingg\""
 photos:
   - alt: Central Park
     caption: "Central Park! "
