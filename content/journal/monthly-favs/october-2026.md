@@ -97,8 +97,18 @@ start_here:
     note: 'really do love this album and this song caught me off guard with the
       production. On first listen I thought they were sampling an old Arabic
       song "Ya Habibi Taala" by Asmahan (1944).  '
+  - track: Should've Known Better
+    artist: Becky and the Birds
+    note: I also like the music video for this song! Excited for her new stuff
+      coming out
 photos:
   - alt: Central Park
     caption: "Central Park! "
     image: /assets/images/uploads/img_1797.jpeg
+  - image: /assets/images/uploads/img_1117.jpeg
+    alt: Hayley Williams Shadow
+    caption: Hayley Williams!
+  - image: /assets/images/uploads/img_1263.jpeg
+    alt: "A Lighthouse "
+    caption: Maine-Lighthouse
 ---
