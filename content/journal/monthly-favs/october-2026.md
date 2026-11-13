@@ -102,9 +102,9 @@ start_here:
     note: I also like the music video for this song! Excited for her new stuff
       coming out
   - track: Thin Ice
-    artist: Megan the Stallion
-    note: "\"bitch they call me Tina Montana, when I walk into the club it's
-      Sno-wingg\""
+    artist: Megan thee Stallion
+    note: "\"Bitch, they call me Tina Montana, I come in the club, it's snowing\" I
+      will forever look forward to a Tina Tuesday"
 photos:
   - alt: Central Park
     caption: "Central Park! "
