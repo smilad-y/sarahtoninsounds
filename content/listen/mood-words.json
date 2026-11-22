@@ -1,10 +1,4 @@
 {
-  "_about": [
-    "Listen mood words (PROJECT-SPEC.md §7), edited in the CMS under Listen Moods. The page matches each entry to content/listen/moods.json by id.",
-    "Only descriptor, blurb, description, and picks are read from here. Names, colors, art, live flags, playlist URLs, and order all come from moods.json; name is here only so the CMS can list each mood by name.",
-    "UNDECIDED or blank = the page shows nothing for that field rather than inventing copy.",
-    "Kept separate from moods.json because Decap CMS rewrites objects with more than eight keys in a scrambled key order. Keep each entry to these six keys."
-  ],
   "moods": [
     {
       "id": "chill",
@@ -14,16 +8,16 @@
       "description": "Easygoing music for slowing down and settling into the moment. Nothing demanding, nothing to escape from.",
       "picks": [
         {
-          "title": "On the Level",
-          "artist": "Mac DeMarco"
+          "title": "Bomb",
+          "artist": "Turnstile"
         },
         {
-          "title": "Vibin' Out",
-          "artist": "FKJ"
+          "title": "Playground Love",
+          "artist": "Air, Gordon Tracks"
         },
         {
-          "title": "Smoke Break (Interlude)",
-          "artist": "Flatbush Zombies"
+          "title": "Take Your Time",
+          "artist": "Al Green, Corinne Bailey Ray"
         }
       ]
     },
@@ -35,16 +29,16 @@
       "description": "Warm basslines, relaxed rhythms, and easygoing energy. Music for when you want to move, but slowly.",
       "picks": [
         {
-          "title": "Coming Back",
-          "artist": "Domo Genesis ft. Mac Miller"
+          "title": "4 Leaf Clover",
+          "artist": "Erykah Badu"
         },
         {
-          "title": "So Far to Go",
-          "artist": "J Dilla ft. Common & D'Angelo"
+          "title": "Pressha",
+          "artist": "Jill Scott"
         },
         {
-          "title": "Little Q, Pt. 2",
-          "artist": "Little Simz"
+          "title": "Small Talk",
+          "artist": "Ovrkast., Samara Cyn"
         }
       ]
     },
@@ -56,16 +50,16 @@
       "description": "Pulls you out of your surroundings. Floating melodies, washed-out textures, and atmospheres that feel removed from reality.",
       "picks": [
         {
-          "title": "Cherry-coloured Funk",
-          "artist": "Cocteau Twins"
+          "title": "Bleed",
+          "artist": "She's Green"
         },
         {
-          "title": "Alison",
-          "artist": "Slowdive"
+          "title": "Rocket ",
+          "artist": "Smashing Pumpkins"
         },
         {
-          "title": "Butterfly Net",
-          "artist": "Caroline Polachek"
+          "title": "Your Face",
+          "artist": "Wisp"
         }
       ]
     },
@@ -77,16 +71,16 @@
       "description": "Warmth, care, and emotional openness. Love in its quieter, more vulnerable forms.",
       "picks": [
         {
-          "title": "As",
-          "artist": "Stevie Wonder"
+          "title": "Supernova",
+          "artist": "Snoh Aalgra"
         },
         {
-          "title": "God Only Knows",
-          "artist": "The Beach Boys"
+          "title": "Amanda",
+          "artist": "Boston"
         },
         {
-          "title": "I Found a Reason",
-          "artist": "The Velvet Underground"
+          "title": "Not A Lot, Just Forever",
+          "artist": "Adrianne Lenker"
         }
       ]
     },
@@ -98,16 +92,16 @@
       "description": "Seductive grooves, physical intimacy, and slow-building tension. Felt as much as heard.",
       "picks": [
         {
-          "title": "The First Taste",
-          "artist": "Fiona Apple"
+          "title": "I'm Ready",
+          "artist": "Chase Shakur"
         },
         {
-          "title": "Woosah",
-          "artist": "Jeremih, Juicy J, Twista"
+          "title": "Digital Bath",
+          "artist": "Deftones"
         },
         {
-          "title": "When Eye Lay My Hands on U",
-          "artist": "Prince"
+          "title": "Butterflies",
+          "artist": "Michael Jackson"
         }
       ]
     },
@@ -119,16 +113,16 @@
       "description": "A sense of possibility, excitement, or emotional release. From quiet optimism to overwhelming joy.",
       "picks": [
         {
-          "title": "Cosmic Girl",
-          "artist": "Jamiroquai"
+          "title": "Do Your Thing",
+          "artist": "Basement Jaxx"
         },
         {
-          "title": "Love Is Everywhere",
-          "artist": "Pharoah Sanders"
+          "title": "Wig",
+          "artist": "B-52's"
         },
         {
-          "title": "Girlfriend",
-          "artist": "Hemlock Springs"
+          "title": "OH! TENGO SUERTE",
+          "artist": "Masayoshi Takanaka"
         }
       ]
     },
@@ -140,16 +134,16 @@
       "description": "Driven by rhythm and physical energy. The kind that makes staying still difficult.",
       "picks": [
         {
-          "title": "Be the One",
-          "artist": "Eli Brown"
+          "title": "I WANNA DANCE",
+          "artist": "PITCHBLACK"
         },
         {
-          "title": "Where's Your Head At",
-          "artist": "Basement Jaxx"
+          "title": "I Bring My Gun To The Function",
+          "artist": "Brutalismus 3000, Boys Noize"
         },
         {
-          "title": "Around the Bend",
-          "artist": "Nia Archives"
+          "title": "Computa ",
+          "artist": "B. Bad"
         }
       ]
     },
@@ -161,16 +155,16 @@
       "description": "Raw energy and unrestrained expression. A release for whatever has been building up.",
       "picks": [
         {
-          "title": "Stay",
-          "artist": "Angel Du$t"
+          "title": "***SKA",
+          "artist": "Jeff Rosenstock"
         },
         {
-          "title": "The Obituaries",
-          "artist": "The Menzingers"
+          "title": "Off It ",
+          "artist": "The Chats"
         },
         {
-          "title": "Shot Down",
-          "artist": "Scowl"
+          "title": "Molly",
+          "artist": "Ecca Vandal "
         }
       ]
     },
@@ -182,16 +176,16 @@
       "description": "Something to push against. Rebellion, frustration, and the refusal to accept things as they are.",
       "picks": [
         {
-          "title": "Sick in the Head",
-          "artist": "Kneecap"
+          "title": "Reincarnate",
+          "artist": "Witch Fever"
         },
         {
-          "title": "Killing in the Name",
-          "artist": "Rage Against the Machine"
+          "title": "Suggestion",
+          "artist": "Fugazi"
         },
         {
-          "title": "Pledge",
-          "artist": "Mannequin Pussy"
+          "title": "Weak Die First ",
+          "artist": "Sunami"
         }
       ]
     },
@@ -214,23 +208,10 @@
     {
       "id": "melancholy",
       "name": "Melancholy",
-      "descriptor": "Soft, vulnerable, wistful.",
+      "descriptor": "UNDECIDED",
       "blurb": "UNDECIDED",
-      "description": "Slow, wistful songs for the days you want to feel it all the way through.",
-      "picks": [
-        {
-          "title": "Miss Misery",
-          "artist": "Elliott Smith"
-        },
-        {
-          "title": "Hurt",
-          "artist": "Johnny Cash"
-        },
-        {
-          "title": "A Case of You",
-          "artist": "Joni Mitchell"
-        }
-      ]
+      "description": "UNDECIDED",
+      "picks": []
     },
     {
       "id": "lost",
@@ -296,5 +277,11 @@
       "description": "UNDECIDED",
       "picks": []
     }
+  ],
+  "_about": [
+    "Listen mood words (PROJECT-SPEC.md §7), edited in the CMS under Listen Moods. The page matches each entry to content/listen/moods.json by id.",
+    "Only descriptor, blurb, description, and picks are read from here. Names, colors, art, live flags, playlist URLs, and order all come from moods.json; name is here only so the CMS can list each mood by name.",
+    "UNDECIDED or blank = the page shows nothing for that field rather than inventing copy.",
+    "Kept separate from moods.json because Decap CMS rewrites objects with more than eight keys in a scrambled key order. Keep each entry to these six keys."
   ]
 }
