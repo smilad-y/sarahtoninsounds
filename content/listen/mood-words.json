@@ -208,10 +208,23 @@
     {
       "id": "melancholy",
       "name": "Melancholy",
-      "descriptor": "UNDECIDED",
-      "blurb": "UNDECIDED",
-      "description": "UNDECIDED",
-      "picks": []
+      "descriptor": "soft, vulnerable, wistful",
+      "blurb": "For when you want to sit with the ache",
+      "description": "Slow, wistful songs for the days you want to feel it all the way through.",
+      "picks": [
+        {
+          "title": "Miss Misery",
+          "artist": "Elliott Smith"
+        },
+        {
+          "title": "Hurt",
+          "artist": "Johnny Cash"
+        },
+        {
+          "title": "A Case of You",
+          "artist": "Joni Mitchell"
+        }
+      ]
     },
     {
       "id": "lost",
