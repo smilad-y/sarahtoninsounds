@@ -262,7 +262,7 @@
     {
       "id": "melancholy",
       "name": "Melancholy",
-      "live": false,
+      "live": true,
       "color": "lavender",
       "icon": "broken heart",
       "labelText": "dark",
@@ -276,7 +276,7 @@
         "url": "https://open.spotify.com/playlist/5BrpdG6D8ZWvZRpem1YUjK"
       },
       "appleMusic": {
-        "url": "PLACEHOLDER"
+        "url": "https://music.apple.com/us/playlist/sorrow-melancholy/pl.u-gxbljjJIW2o148"
       }
     },
     {
