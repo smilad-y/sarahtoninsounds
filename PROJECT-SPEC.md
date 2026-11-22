@@ -267,7 +267,7 @@ This metadata layer must be config-driven, not hardcoded, so the mood taxonomy (
 
 Row numbers are for reference only. The launch display order is below; the order of moods added later is not decided.
 
-**Live moods (Sarah, September 2026; Melancholy added November 2026):** 10 moods are live (`"live": true` in `content/listen/moods.json`), shown in this order: **Chill, Vibes, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant, Melancholy.** The 8 launch moods were the same list without Vibes. Melancholy went live with its descriptor, description, 3 Picks, and Spotify and Apple Music URLs; its blurb is still UNDECIDED. Its position in the order is not decided. The other 10 are hidden until Sarah flips them.
+**Live moods (Sarah, September 2026; Melancholy added November 2026):** 10 moods are live (`"live": true` in `content/listen/moods.json`), shown in this order: **Chill, Vibes, Hazy, Tender, Sensual, Euphoric, Electric, Unleashed, Defiant, Melancholy.** The 8 launch moods were the same list without Vibes. Melancholy went live with its descriptor, blurb, description, 3 Picks, and Spotify and Apple Music URLs;. Its position in the order is not decided. The other 10 are hidden until Sarah flips them.
 
 Notes:
 - **Hopeful / At Peace** and **Playful / Cheeky**: Sarah will keep one word from each pair. Both are placeholders until she picks.
